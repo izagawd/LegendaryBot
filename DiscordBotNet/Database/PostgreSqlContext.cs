@@ -109,6 +109,8 @@ public class PostgreSqlContext : DbContext
                         && !i.IsAbstract).ToArray();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder
+            .UsePropertyAccessMode(PropertyAccessMode.Property);
         foreach (var i in QuestTypes)
         {
             modelBuilder.Entity(i);
@@ -119,123 +121,124 @@ public class PostgreSqlContext : DbContext
         }
 
     
-        //makes sure the character id properties are not the same, even across tables
-        modelBuilder.Entity<CharacterBuild>()
-            .HasIndex(i => new { i.BuildName, i.CharacterId })
-            .IsUnique();
-     
-        modelBuilder.Entity<UserData>()
-            .Property(i => i.Color)
-            .HasConversion(i => i.ToString(), j => new DiscordColor(j)
-            );
-        modelBuilder.Entity<Entity>()
-            .HasKey(i => i.Id);
-        modelBuilder.Entity<Quote>()
-            .HasKey(i => i.Id);
-        modelBuilder.Entity<Quote>()
-            .Property(i => i.Id)
-            .ValueGeneratedOnAdd();
 
-        modelBuilder.Entity<Entity>()
-            .Property(i => i.Id)
-            .ValueGeneratedOnAdd();
+           
+        modelBuilder.Entity<UserData>(entity =>
+        {
+            entity.Property(i => i.Color)
+                .HasConversion(i => i.ToString(), j => new DiscordColor(j)
+                );
+            entity.HasMany(i => i.PlayerTeams)
+                .WithOne(i => i.UserData)
+                .HasForeignKey(i => i.UserDataId);
+                    
+            entity
+                .HasMany(i => i.Inventory)
+                .WithOne(i => i.UserData)
+                .HasForeignKey(i => i.UserDataId);
+            entity
+                .HasOne(i => i.EquippedPlayerTeam)
+                .WithOne()
+                .HasForeignKey<PlayerTeam>(i => i.EquippedUserDataId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            entity
+                .HasMany(i => i.Quests)
+                .WithOne()
+                .HasForeignKey(i => i.UserDataId);
+            entity
+                .HasMany(i => i.Quotes)
+                .WithOne(i => i.UserData)
+                .HasForeignKey(i => i.UserDataId);
+
+        });
+
+        modelBuilder.Entity<Entity>(entity =>
+        {
+            entity.HasKey(i => i.Id);
+            
+            entity
+                .Property(i => i.Id)
+                .ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<Quote>(entity =>
+        {
+            entity.HasKey(i => i.Id);
+            entity
+                .Property(i => i.Id)
+                .ValueGeneratedOnAdd();
+            entity.HasMany(i => i.QuoteReactions)
+                .WithOne(i => i.Quote)
+                .HasForeignKey(i => i.QuoteId);
+        });
+
+        modelBuilder.Entity<PlayerTeam>(entity =>
+        {
+            entity.Property(i => i.Id)
+                .ValueGeneratedOnAdd();
+            entity.HasIndex(i => new { i.UserDataId, i.TeamName })
+                .IsUnique();
+            entity    .Navigation(i => i.Characters)
+                .AutoInclude();
+            entity.HasKey(i => i.Id);
+            entity.HasMany<Character>(i => i.Characters)
+                .WithMany(i => i.PlayerTeams)
+                .UsingEntity<CharacterPlayerTeam>(i
+                    => i.HasOne<Character>().WithMany().HasForeignKey(j => j.CharacterId), i =>
+                    i.HasOne<PlayerTeam>().WithMany().HasForeignKey(j => j.PlayerTeamId), i =>
+                    i.HasKey(j => new { j.CharacterId, j.PlayerTeamId }));
+        });
+    
+
+
+        modelBuilder.Entity<Character>(entity =>
+        {
+            entity.HasOne(i => i.EquippedCharacterBuild)
+                .WithOne()
+                .HasForeignKey<CharacterBuild>(i => i.EquippedCharacterId);
+            entity.HasMany(i => i.CharacterBuilds)
+                .WithOne(i => i.Character)
+                .HasForeignKey(i => i.CharacterId);
+            entity .HasOne(i => i.Blessing)
+                .WithOne(i => i.Character)
+                .HasForeignKey<Blessing>(i => i.CharacterId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
+
+        modelBuilder.Entity<CharacterBuild>(entity =>
+        {
+            entity.Property(i => i.Id)
+                .ValueGeneratedOnAdd();
+            entity.HasIndex(i => new { i.BuildName, i.CharacterId })
+                .IsUnique();
+            entity.HasKey(i => i.Id);
+
+        });
+            
         
-        modelBuilder.Entity<PlayerTeam>()
-            .HasIndex(i => new { i.UserDataId, i.TeamName })
-            .IsUnique();
 
-        modelBuilder.Entity<PlayerTeam>()
-            .HasKey(i => i.Id);
-
-        modelBuilder.Entity<PlayerTeam>()
-            .Property(i => i.Id)
-            .ValueGeneratedOnAdd();
-        modelBuilder.Entity<UserData>()
-            .HasMany(i => i.PlayerTeams)
-            .WithOne(i => i.UserData)
-            .HasForeignKey(i => i.UserDataId);
-
-        modelBuilder.Entity<PlayerTeam>()
-            .HasMany<Character>(i => i.Characters)
-            .WithMany(i => i.PlayerTeams)
-            .UsingEntity<CharacterPlayerTeam>(i
-                => i.HasOne<Character>().WithMany().HasForeignKey(j => j.CharacterId), i =>
-                i.HasOne<PlayerTeam>().WithMany().HasForeignKey(j => j.PlayerTeamId), i =>
-                i.HasKey(j => new { j.CharacterId, j.PlayerTeamId }));
-        
-        
-        modelBuilder.Entity<UserData>()
-            .HasOne(i => i.EquippedPlayerTeam)
-            .WithOne()
-            .HasForeignKey<PlayerTeam>(i => i.EquippedUserDataId)
-            .OnDelete(DeleteBehavior.SetNull);
-        
-        
-        
-        modelBuilder
-            .UsePropertyAccessMode(PropertyAccessMode.Property);
-
-        modelBuilder.Entity<CharacterBuild>()
-            .HasKey(i => i.Id);
-
-        modelBuilder.Entity<Character>()
-            .HasOne(i => i.EquippedCharacterBuild)
-            .WithOne()
-            .HasForeignKey<CharacterBuild>(i => i.EquippedCharacterId);
-
-
-        modelBuilder.Entity<CharacterBuild>()
-            .Property(i => i.Id)
-            .ValueGeneratedOnAdd();
-
-        modelBuilder.Entity<Character>()
-            .HasMany(i => i.CharacterBuilds)
-            .WithOne(i => i.Character)
-            .HasForeignKey(i => i.CharacterId);
-        
-        modelBuilder.Entity<UserData>()
-            .HasMany(i => i.Inventory)
-            .WithOne(i => i.UserData)
-            .HasForeignKey(i => i.UserDataId);
         modelBuilder.Entity<Player>()
             .Property(i => i.Element)
-            .HasColumnName("Element");
-
-        modelBuilder.Entity<UserData>()
-            .HasMany(i => i.Quests)
-            .WithOne()
-            .HasForeignKey(i => i.UserDataId);
+            .HasColumnName(nameof(Player.Element));
 
 
 
 
+        modelBuilder.Entity<UserData>(entity =>
+        {
+            entity.HasMany(i => i.QuoteReactions)
+                .WithOne(i => i.UserData)
+                .HasForeignKey(i => i.UserDataId);
+            entity.HasKey(i => i.Id);
 
-        modelBuilder.Entity<UserData>()
-            .HasMany(i => i.Quotes)
-            .WithOne(i => i.UserData)
-            .HasForeignKey(i => i.UserDataId);
-        modelBuilder.Entity<Quote>()
-            .HasMany(i => i.QuoteReactions)
-            .WithOne(i => i.Quote)
-            .HasForeignKey(i => i.QuoteId);
-        modelBuilder.Entity<UserData>()
-            .HasMany(i => i.QuoteReactions)
-            .WithOne(i => i.UserData)
-            .HasForeignKey(i => i.UserDataId);
+        });
+       
 
-
-
-        modelBuilder.Entity<PlayerTeam>()
-            .Navigation(i => i.Characters)
-            .AutoInclude();
-        
-        modelBuilder.Entity<UserData>()
-            .HasKey(i => i.Id);
-        modelBuilder.Entity<Character>()
-            .HasOne(i => i.Blessing)
-            .WithOne(i => i.Character)
-            .HasForeignKey<Blessing>(i => i.CharacterId)
-            .OnDelete(DeleteBehavior.SetNull);
+  
+    
+           
         
     }
 }
