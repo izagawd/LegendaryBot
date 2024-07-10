@@ -103,5 +103,5 @@ public class Police : Character
 
 
 
-    public override Surge? Surge { get; }
+    public override Ultimate? Ultimate { get; }
 }

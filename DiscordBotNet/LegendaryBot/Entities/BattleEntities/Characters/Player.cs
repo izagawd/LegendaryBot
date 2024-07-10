@@ -80,7 +80,7 @@ public class FireBall : Skill
         };
     }
 }
-public class Ignite : Surge
+public class Ignite : Ultimate
 {
     public override int MaxCooldown => 4;
     public override string GetDescription(Character character) =>$"Ignites the enemy with 3 burns. {IgniteChance}% chance each";
@@ -132,7 +132,7 @@ public class Player : Character
     [NotMapped]
     public DiscordUser DiscordUser { get; set; }
     [NotMapped]
-    private Surge fireSurge { get; } = new Ignite();
+    private Ultimate FireUltimate { get; } = new Ignite();
     [NotMapped]
     private Skill fireSkill { get; } = new FireBall();
     public override Skill? Skill
@@ -153,16 +153,16 @@ public class Player : Character
     public override BasicAttack BasicAttack { get; } = new FourthWallBreaker();
 
 
-    public override Surge? Surge
+    public override Ultimate? Ultimate
     {
         get
         {
             switch (Element)
             {
                 case Element.Fire:
-                    return fireSurge;
+                    return FireUltimate;
                 default:
-                    return fireSurge;
+                    return FireUltimate;
             }
         }
 

@@ -76,7 +76,7 @@ public class BlowAway : Skill
 
 
 }
-public class VolcanicEruption : Surge
+public class VolcanicEruption : Ultimate
 {
     public override string GetDescription(Character character) => $"Makes the user charge up a very powerful explosion that hits all enemies for 4 turns!";
     
@@ -102,7 +102,7 @@ public class Blast : Character
 
     public override Element Element { get; protected set; } = Element.Fire;
 
-    public override Surge? Surge { get;  } = new VolcanicEruption();
+    public override Ultimate? Ultimate { get;  } = new VolcanicEruption();
     public override Skill? Skill { get; } = new BlowAway();
     public override BasicAttack BasicAttack { get; } = new MethaneSlap();
 }

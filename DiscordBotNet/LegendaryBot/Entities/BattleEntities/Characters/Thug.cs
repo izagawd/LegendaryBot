@@ -40,5 +40,5 @@ public class Thug : Character
 {
     public override BasicAttack BasicAttack { get; } = new ThugPunch();
     public override Skill? Skill { get;  }
-    public override Surge? Surge { get; }
+    public override Ultimate? Ultimate { get; }
 }

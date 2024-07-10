@@ -35,7 +35,7 @@ public class GigaPunch : BasicAttack
     }
 }
 
-public class MuscleFlex : Surge
+public class MuscleFlex : Ultimate
 {
   
     public override string GetDescription(Character character) => "Flexes muscles";
@@ -103,7 +103,7 @@ public class CoachChad : Character, IBattleEventListener
     public override BasicAttack BasicAttack { get; } = new GigaPunch();
 
     public override Skill? Skill { get;  } = new ThumbsUp();
-    public override Surge? Surge { get; } = new MuscleFlex();
+    public override Ultimate? Ultimate { get; } = new MuscleFlex();
 
     public override DiscordColor Color => DiscordColor.Purple;
 
@@ -115,8 +115,8 @@ public class CoachChad : Character, IBattleEventListener
         
         if(Skill.CanBeUsed())
             possibleDecisions.Add(BattleDecision.Skill);
-        if(Surge.CanBeUsed())
-            possibleDecisions.Add(BattleDecision.Surge);
+        if(Ultimate.CanBeUsed())
+            possibleDecisions.Add(BattleDecision.Ultimate);
         decision = BasicFunctionality.RandomChoice(possibleDecisions.AsEnumerable());
         target = BasicFunctionality.RandomChoice(BasicAttack.GetPossibleTargets());
 

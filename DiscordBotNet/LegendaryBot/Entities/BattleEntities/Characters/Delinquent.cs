@@ -40,5 +40,5 @@ public class Delinquent : Character
 {
     public override BasicAttack BasicAttack { get; } = new BaseballBatWhack();
     public override Skill? Skill { get; }
-    public override Surge? Surge { get; }
+    public override Ultimate? Ultimate { get; }
 }

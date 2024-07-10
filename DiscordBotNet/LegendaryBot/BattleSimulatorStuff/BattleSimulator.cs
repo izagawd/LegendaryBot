@@ -29,7 +29,7 @@ namespace DiscordBotNet.LegendaryBot;
 public enum BattleDecision
 {
     
-    Forfeit, Surge, BasicAttack, Skill, Info,Other
+    Forfeit, Ultimate, BasicAttack, Skill, Info,Other
 }
 
 
@@ -39,7 +39,7 @@ public class BattleSimulator
 
     public static DiscordButtonComponent basicAttackButton = new(ButtonStyle.Secondary, nameof(BasicAttack), null,emoji: new DiscordComponentEmoji("⚔️"));
     public static DiscordButtonComponent skillButton = new(ButtonStyle.Secondary, nameof(Skill), null, emoji: new DiscordComponentEmoji("🪄"));
-    public static DiscordButtonComponent surgeButton = new(ButtonStyle.Secondary, nameof(Surge), null, emoji: new DiscordComponentEmoji("⚡"));
+    public static DiscordButtonComponent ultimateButton = new(ButtonStyle.Secondary, nameof(Ultimate), null, emoji: new DiscordComponentEmoji("⚡"));
     public static DiscordButtonComponent forfeitButton = new(ButtonStyle.Danger, "Forfeit", "Forfeit");
 
     public static DiscordButtonComponent proceed = new(ButtonStyle.Success, "Proceed", "Proceed");
@@ -439,9 +439,9 @@ public class BattleSimulator
 
                 if (i is Skill)
                     moveTypeName = "Skill :magic_wand:";
-                else if (i is Surge)
+                else if (i is Ultimate)
                 {
-                    moveTypeName = "Surge :zap:";
+                    moveTypeName = "Ultimate :zap:";
                 }
 
                 descriptionStringBuilder.Append(
@@ -801,9 +801,9 @@ public class BattleSimulator
                 {
                     components.Add(skillButton);
                 }
-                if (ActiveCharacter.Surge is not null && ActiveCharacter.Surge.CanBeUsed())
+                if (ActiveCharacter.Ultimate is not null && ActiveCharacter.Ultimate.CanBeUsed())
                 {
-                    components.Add(surgeButton);
+                    components.Add(ultimateButton);
                 }
             }
             components.Add(forfeitButton);

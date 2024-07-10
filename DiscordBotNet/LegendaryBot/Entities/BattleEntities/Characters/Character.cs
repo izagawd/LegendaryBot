@@ -283,7 +283,7 @@ public abstract partial  class Character : BattleEntity, ISetup
         {
             yield return BasicAttack;
             if (Skill is not null) yield return Skill;
-            if (Surge is not null) yield return Surge;
+            if (Ultimate is not null) yield return Ultimate;
         }
     }
 
@@ -1044,8 +1044,8 @@ public abstract partial  class Character : BattleEntity, ISetup
 
         if(Skill is not null && Skill.CanBeUsed())
             possibleDecisions.Add(BattleDecision.Skill);
-        if(Surge is not null && Surge.CanBeUsed())
-            possibleDecisions.Add(BattleDecision.Surge);
+        if(Ultimate is not null && Ultimate.CanBeUsed())
+            possibleDecisions.Add(BattleDecision.Ultimate);
 
    
         Move move;
@@ -1072,8 +1072,8 @@ public abstract partial  class Character : BattleEntity, ISetup
             {
                 case BattleDecision.Skill:
                     return Skill;
-                case BattleDecision.Surge:
-                    return Surge;
+                case BattleDecision.Ultimate:
+                    return Ultimate;
                 case BattleDecision.BasicAttack:
                     return BasicAttack;
                 default:
@@ -1414,7 +1414,7 @@ public abstract partial  class Character : BattleEntity, ISetup
     /// The position of the player based on combat readiness
     /// </summary>
     public int Position => Array.IndexOf(CurrentBattle.Characters.OrderByDescending(i => i.CombatReadiness).ToArray(),this) +1;
-    [NotMapped] public virtual Surge? Surge { get; }
+    [NotMapped] public virtual Ultimate? Ultimate { get; }
     /// <summary>
     /// Checks if something overrides the player turn eg stun status effect preventing the player from doing anything
     /// </summary>

@@ -45,13 +45,13 @@ public static class Bot
     }
 
 
-    private static async Task DoShitAsync()
+    private static  Task DoShitAsync()
     {
- 
+        return new PostgreSqlContext().ResetDatabaseAsync();
     }
     private static async Task Main(string[] args)
     {
-
+        await DoShitAsync();
         var commandArrayType = AllAssemblyTypes.Where(t =>  t.IsSubclassOf(typeof(GeneralCommandClass))).ToArray();
         var stopwatch = new Stopwatch(); 
         Console.WriteLine("Making all users unoccupied...");

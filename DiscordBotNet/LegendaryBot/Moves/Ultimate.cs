@@ -1,6 +1,6 @@
 ﻿namespace DiscordBotNet.LegendaryBot.Moves;
 
-public abstract class Surge : Special
+public abstract class Ultimate : Special
 {
 
 }

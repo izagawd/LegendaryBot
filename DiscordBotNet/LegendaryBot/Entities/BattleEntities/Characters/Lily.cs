@@ -69,7 +69,7 @@ public class BlossomTouch : Skill
         };
     }
 }
-public class LilyOfTheValley : Surge
+public class LilyOfTheValley : Ultimate
 {
     public override int MaxCooldown  => 5;
 
@@ -124,10 +124,10 @@ public class Lily : Character
 
     public override void NonPlayerCharacterAi(ref Character target, ref BattleDecision decision)
     {
-        if (Surge.CanBeUsed())
+        if (Ultimate.CanBeUsed())
         {
-            decision = BattleDecision.Surge;
-            target = Surge.GetPossibleTargets().First();
+            decision = BattleDecision.Ultimate;
+            target = Ultimate.GetPossibleTargets().First();
             return;
         }
 
@@ -146,7 +146,7 @@ public class Lily : Character
     }
 
     public override Skill? Skill { get;  } = new BlossomTouch();
-    public override Surge? Surge { get; } = new LilyOfTheValley();
+    public override Ultimate? Ultimate { get; } = new LilyOfTheValley();
     public override BasicAttack BasicAttack { get; } = new ChamomileSachetWhack();
     public override Element Element => Element.Earth;
 

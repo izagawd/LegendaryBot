@@ -79,7 +79,7 @@ public class SimpleSlashOfPrecision : BasicAttack
         };
     }
 }
-public class ConsecutiveSlashesOfPrecision : Surge
+public class ConsecutiveSlashesOfPrecision : Ultimate
 {
 
     public override string GetDescription(Character character)
@@ -123,7 +123,7 @@ public class Slasher : Character
 
     public override Element Element { get; protected set; } = Element.Earth;
 
-    public override Surge? Surge { get; } = new ConsecutiveSlashesOfPrecision();
+    public override Ultimate? Ultimate { get; } = new ConsecutiveSlashesOfPrecision();
     public override Skill? Skill { get; } = new WindSlash();
     public override BasicAttack BasicAttack { get;  } = new SimpleSlashOfPrecision();
 }

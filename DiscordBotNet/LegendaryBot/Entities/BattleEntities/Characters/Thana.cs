@@ -72,7 +72,7 @@ public class YourLifeEnergyIsMine : Skill
 
     public override int MaxCooldown => 3;
 }
-public class Arise : Surge
+public class Arise : Ultimate
 {
 
     public override int MaxCooldown =>6;
@@ -125,5 +125,5 @@ public class Thana : Character
     public override BasicAttack BasicAttack { get; } = new SoulAttack();
 
     public override Skill? Skill { get; } = new YourLifeEnergyIsMine();
-    public override Surge? Surge { get; } = new Arise();
+    public override Ultimate? Ultimate { get; } = new Arise();
 }

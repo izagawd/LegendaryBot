@@ -64,7 +64,7 @@ public class  YouCanDoIt : Skill
     public override int MaxCooldown => 2;
 }
 
-public class YouCanMakeItEveryone : Surge
+public class YouCanMakeItEveryone : Ultimate
 {
     private int CombatIncreaseAmount => 30;
     public override string GetDescription(Character character)
@@ -121,5 +121,5 @@ public class Cheerleader : Character
 
     public override BasicAttack BasicAttack { get; } = new PomPomAttack();
     public override Skill? Skill { get; } = new YouCanDoIt();
-    public override Surge? Surge { get; } = new YouCanMakeItEveryone();
+    public override Ultimate? Ultimate { get; } = new YouCanMakeItEveryone();
 }

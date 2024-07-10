@@ -73,7 +73,7 @@ public class IWillBeYourShield : Skill
     }
 }
 
-public class IWillProtectUs : Surge
+public class IWillProtectUs : Ultimate
 {
     public override IEnumerable<Character> GetPossibleTargets()
     {
@@ -111,6 +111,6 @@ public class RoyalKnight : Character
 
     public override BasicAttack BasicAttack { get; } = new ShieldBash();
     public override Rarity Rarity => Rarity.ThreeStar;
-    public override Surge? Surge { get; } = new IWillProtectUs();
+    public override Ultimate? Ultimate { get; } = new IWillProtectUs();
     public override Skill? Skill { get;  } = new IWillBeYourShield();
 }

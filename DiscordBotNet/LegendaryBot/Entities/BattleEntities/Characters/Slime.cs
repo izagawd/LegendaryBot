@@ -62,6 +62,6 @@ public class Slime : Character
 
     public override BasicAttack BasicAttack { get; } = new GooeyStrike();
     public override Skill? Skill => null;
-    public override Surge? Surge  => null;
+    public override Ultimate? Ultimate  => null;
 
 }
