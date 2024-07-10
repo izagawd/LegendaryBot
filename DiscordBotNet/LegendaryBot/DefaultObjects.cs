@@ -7,7 +7,7 @@ namespace DiscordBotNet.LegendaryBot;
 public static class DefaultObjects
 {
 
-    private static Dictionary<Type, object> _defaultObjectsContainer;
+    private static Dictionary<Type, object> _defaultObjectsContainer =  new();
 
 
     public static readonly ImmutableArray<Type> AllAssemblyTypes;
@@ -16,9 +16,7 @@ public static class DefaultObjects
     
     static DefaultObjects()
     {
-        
-        _defaultObjectsContainer = new();
-
+     
         AllAssemblyTypes = Assembly.GetExecutingAssembly()
             .GetTypes().ToImmutableArray();
     }

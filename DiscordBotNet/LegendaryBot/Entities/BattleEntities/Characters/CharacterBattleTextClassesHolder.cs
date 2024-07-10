@@ -5,6 +5,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public partial class Character
 {
+    
     class StatusEffectInflictBattleText : AdditionalBattleText
     {
         private StatusEffectInflictResult _effectInflictResult;

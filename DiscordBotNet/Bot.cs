@@ -56,7 +56,6 @@ public static class Bot
     private static async Task Main(string[] args)
     {
 
-        var commandArrayType = DefaultObjects.AllAssemblyTypes.Where(t =>  t.IsSubclassOf(typeof(GeneralCommandClass))).ToArray();
         var stopwatch = new Stopwatch(); 
         Console.WriteLine("Making all users unoccupied...");
         stopwatch.Start();
