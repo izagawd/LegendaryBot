@@ -16,7 +16,7 @@ public class Help : GeneralCommandClass
         Dictionary<BotCommandType, StringBuilder> botCommandTypeBuilders = new();
         foreach (var i in Enum.GetValues<BotCommandType>())
             botCommandTypeBuilders[i] = new StringBuilder();
-        foreach (var i in Bot.CommandInstanceSamples)
+        foreach (var i in  DefaultObjects.GetDefaultObjectsThatSubclass<GeneralCommandClass>())
         {
             var slashCom = i.GetType().GetCustomAttribute<SlashCommandGroupAttribute>();
             if (slashCom is not null)
@@ -111,7 +111,7 @@ public class Help : GeneralCommandClass
     }
     private static void HandleCommandsInformations()
     {
-        foreach (var i in Bot.CommandInstanceSamples)
+        foreach (var i in DefaultObjects.GetDefaultObjectsThatSubclass<GeneralCommandClass>())
         {
             var group = i.GetType().GetCustomAttribute<SlashCommandGroupAttribute>();
             

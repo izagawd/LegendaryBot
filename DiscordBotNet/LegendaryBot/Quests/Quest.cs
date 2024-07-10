@@ -18,18 +18,9 @@ public abstract class Quest
     
     public bool Completed { get; set; } = false;
     public long Id { get; set; }
-    public static IEnumerable<Quest> QuestSampleInstances => _exampleQuests;
-    private static List<Quest> _exampleQuests;
-    static Quest()
-    {
 
-        _exampleQuests = new List<Quest>();
-        foreach (var  i in Assembly.GetExecutingAssembly().GetTypes().Where(i => i.IsSubclassOf(typeof(Quest)) && !i.IsAbstract))
-        {
-            _exampleQuests.Add((Quest)Activator.CreateInstance(i)!);
-            _questTypes.Add(i);
-        }
-    }
+
+
     [NotMapped]
     public Tier QuestTier { get; private set; } = Tier.Bronze;
 

@@ -66,4 +66,8 @@ public abstract class GeneralCommandClass : ApplicationCommandModule
 
 
 
+    protected GeneralCommandClass()
+    {
+        DatabaseContext = null!;
+    }
 }

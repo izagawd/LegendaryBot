@@ -47,7 +47,7 @@ public class PostgreSqlContext : DbContext
         if (user.LastTimeChecked.Date == rightNowUtc.Date) return;
         
         user.Quests.Clear();
-        var availableQuests = Quest.QuestSampleInstances
+        var availableQuests = DefaultObjects.GetDefaultObjectsThatSubclass<Quest>()
             .Where(i => i.QuestTier == user.Tier)
             .Select(i => i.GetType())
             .ToList();

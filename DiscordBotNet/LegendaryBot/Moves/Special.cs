@@ -35,9 +35,7 @@ public abstract class Special : Move
     {
         if (usageType == UsageType.NormalUsage)
         {
-
             Cooldown = MaxCooldown;
-
         }
         
         return base.Utilize(target, usageType);

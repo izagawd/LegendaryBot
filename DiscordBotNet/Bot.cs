@@ -10,7 +10,7 @@ using DiscordBotNet.Database;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.command;
-
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DSharpPlus;
 
 using DSharpPlus.EventArgs;
@@ -30,12 +30,7 @@ namespace DiscordBotNet;
 
 public static class Bot
 {
-    public static ImmutableArray<GeneralCommandClass> CommandInstanceSamples { get; private set; } = [];
-    private static readonly IEnumerable<Type> AllAssemblyTypes =
-        Assembly
-        .GetExecutingAssembly()
-        .GetTypes()
-        .ToImmutableArray();
+
     private static long SlenderId => 334412512919420928;
 
 
@@ -47,12 +42,21 @@ public static class Bot
 
     private static  Task DoShitAsync()
     {
+        IEnumerable<Type> idk = DefaultObjects.AllAssemblyTypes;
+      
+        var stop = new Stopwatch();
+
+        foreach (var i in idk)
+        {
+            
+        }
+        stop.Elapsed.TotalMicroseconds.Print();
         return new PostgreSqlContext().ResetDatabaseAsync();
     }
     private static async Task Main(string[] args)
     {
-        await DoShitAsync();
-        var commandArrayType = AllAssemblyTypes.Where(t =>  t.IsSubclassOf(typeof(GeneralCommandClass))).ToArray();
+
+        var commandArrayType = DefaultObjects.AllAssemblyTypes.Where(t =>  t.IsSubclassOf(typeof(GeneralCommandClass))).ToArray();
         var stopwatch = new Stopwatch(); 
         Console.WriteLine("Making all users unoccupied...");
         stopwatch.Start();
@@ -67,9 +71,7 @@ public static class Bot
             Console.WriteLine($"Took a total of {stopwatch.Elapsed.TotalMilliseconds}ms to make {count} users unoccupied");
         }
 
-        CommandInstanceSamples = commandArrayType
-            .Select(i => (GeneralCommandClass)Activator.CreateInstance(i)!)
-            .ToImmutableArray();
+
         Help.LoadHelpMenu();
         var config = new DiscordConfiguration
         {

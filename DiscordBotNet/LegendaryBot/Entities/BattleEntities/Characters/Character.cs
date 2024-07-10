@@ -38,63 +38,6 @@ public abstract partial  class Character : BattleEntity, ISetup
         
     [NotMapped]
     public int ExpIncreaseScale { get; set; } = 1;
-    public static Type[] CharacterTypes => _characterTypes.ToArray();
-    public static Character[] ThreeStarCharacterExamples => _threeStarCharacterExamples.ToArray();
-    public static Character[] OneStarCharacterExamples => _oneStarCharacterExamples.ToArray();
-    public static Character[] TwoStarCharacterExamples => _twoStarCharacterExamples.ToArray();
-    public static Character[] FourStarCharacterExamples => _fourStarCharacterExamples.ToArray();
-
-    public static Character[] FiveStarCharacterExamples => _fiveStarCharacterExamples.ToArray();
-
-
- 
-    private static List<Character> _oneStarCharacterExamples = [];
-    private static List<Character> _twoStarCharacterExamples = [];
-    private static List<Character> _threeStarCharacterExamples = [];
-    private static List<Character> _fourStarCharacterExamples = [];
-    private static List<Character> _fiveStarCharacterExamples = [];
-
-    public static Character[] CharacterExamples => _characterExamples.ToArray();
-
-    private static List<Character> _characterExamples = [];
-    static Character()
-    {
-
-        var types = CharacterTypes;
-        foreach (var i in types)
-        {
-           
-            var instance = Activator.CreateInstance(i);
-            if (instance is Character characterInstance)
-            {
-                _characterExamples.Add(characterInstance);
-            }
-        }
-
-
-        foreach (var character in _characterExamples)
-        {
-            switch (character.Rarity)
-            {
-                case Rarity.OneStar:
-                    _oneStarCharacterExamples.Add(character);
-                    break;
-                case Rarity.TwoStar:
-                    _twoStarCharacterExamples.Add(character);
-                    break;
-                case Rarity.ThreeStar:
-                    _threeStarCharacterExamples.Add(character);
-                    break;
-                case Rarity.FourStar:
-                    _fourStarCharacterExamples.Add(character);
-                    break;
-                case Rarity.FiveStar:
-                    _fiveStarCharacterExamples.Add(character);
-                    break;
-                // Add more cases if needed for higher rarities
-            }
-        }
-    }
 
 
     public void AddStatusEffects(IEnumerable<StatusEffect> statusEffects, int? effectiveness = null,
