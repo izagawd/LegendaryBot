@@ -47,7 +47,7 @@ public class InfoController : Controller
                     {
                         blessing = i.Inventory.OfType<Blessing>().FirstOrDefault(j =>j.Id == blessingId),
                         character = i.Inventory.OfType<Character>().FirstOrDefault(j => j.Id == characterId),
-                        charactersCurrentBlessing = i.Inventory.OfType<Blessing>().FirstOrDefault(j => j.CharacterBlessingEquipperId == characterId)
+                        charactersCurrentBlessing = i.Inventory.OfType<Blessing>().FirstOrDefault(j => j.BlessingWielderId == characterId)
                     });
 
 

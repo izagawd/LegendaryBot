@@ -10,5 +10,5 @@ public interface ICanBeLeveledUp
     public long GetRequiredExperienceToNextLevel(int level);
     public long GetRequiredExperienceToNextLevel();
 
-    public ExperienceGainResult IncreaseExp(long exp);
+    public ExperienceGainResult IncreaseExp(long experienceToGain);
 }

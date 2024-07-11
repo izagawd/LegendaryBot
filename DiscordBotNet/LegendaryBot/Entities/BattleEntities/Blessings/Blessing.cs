@@ -13,7 +13,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public abstract class Blessing : BattleEntity
 {
-    public Guid? CharacterBlessingEquipperId { get; set; }
+    public Guid? BlessingWielderId { get; set; }
     public virtual async Task<Image<Rgba32>> GetInfoAsync()
     {
         using var userImage = await BasicFunctionality.GetImageFromUrlAsync(ImageUrl);
@@ -79,12 +79,12 @@ public abstract class Blessing : BattleEntity
     [NotMapped]
     public bool IsInStandardBanner => true;
     public Character? Character { get; set; }
-    public override ExperienceGainResult IncreaseExp(long experience)
+    public override ExperienceGainResult IncreaseExp(long experienceToGain)
     {
         string expGainText = "";
 
         var levelBefore = Level;
-        Experience += experience;
+        Experience += experienceToGain;
         var nextLevelEXP = BattleFunctionality.NextLevelFormula(Level);
         while (Experience >= nextLevelEXP &&  Level < MaxLevel)
         {
@@ -98,7 +98,7 @@ public abstract class Blessing : BattleEntity
             excessExp = Experience - nextLevelEXP;
         }
 
-        expGainText += $"{this} gained {experience} exp";
+        expGainText += $"{this} gained {experienceToGain} exp";
         if (levelBefore != Level)
         {
             expGainText += $", and moved from level {levelBefore} to level {Level}";

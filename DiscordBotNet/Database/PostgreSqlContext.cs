@@ -4,9 +4,11 @@ using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Entities;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Artifacts;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using DiscordBotNet.LegendaryBot.Quests;
 
 using DSharpPlus.Entities;
@@ -68,14 +70,8 @@ public class PostgreSqlContext : DbContext
 
     }
 
-    private static readonly Type[] _assemblyTypes;
-    static PostgreSqlContext()
-    {
-        _assemblyTypes = Assembly.GetExecutingAssembly().GetTypes();
-        EntityClasses = _assemblyTypes
-            .Where(type => type.IsRelatedToType(typeof(Entity))).ToArray();
-
-    }
+   
+ 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -111,21 +107,23 @@ public class PostgreSqlContext : DbContext
     {
         modelBuilder
             .UsePropertyAccessMode(PropertyAccessMode.Property);
-        foreach (var i in QuestTypes)
+        foreach (var i in DefaultObjects.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Quest))))
         {
             modelBuilder.Entity(i);
         }
-        foreach (var entityType in EntityClasses)
+        foreach (var entityType in DefaultObjects.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Entity))))
         {
             modelBuilder.Entity(entityType);
         }
 
-        
-
-
-  
-
-
+        foreach (var i in DefaultObjects.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(GearStat))))
+        {
+            modelBuilder.Entity(i);
+        }
+        foreach (var i in DefaultObjects.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Gear))))
+        {
+            modelBuilder.Entity(i);
+        }
         modelBuilder
             .ApplyConfiguration(new UserDataDatabaseConfiguration())
             .ApplyConfiguration(new EntityDatabaseConfiguration())
@@ -133,7 +131,8 @@ public class PostgreSqlContext : DbContext
             .ApplyConfiguration(new PlayerTeamDatabaseConfiguration())
             .ApplyConfiguration(new CharacterDatabaseConfiguration())
             .ApplyConfiguration(new PlayerDatabaseConfiguration())
-            .ApplyConfiguration(new ArtifactDatabaseConfiguration());
+            .ApplyConfiguration(new GearDatabaseConfiguration())
+            .ApplyConfiguration(new ArtifactStatConfiguration());
 
 
 

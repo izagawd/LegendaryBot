@@ -1,5 +1,6 @@
 ﻿using DiscordBotNet.Database;
 using DiscordBotNet.Extensions;
+using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.DialogueNamespace;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Rewards;

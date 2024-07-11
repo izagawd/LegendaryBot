@@ -1,0 +1,8 @@
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
+
+namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+
+public class Helmet : Gear
+{
+    public sealed override IEnumerable<Type> PossibleMainStats => [GearStat.HealthFlatType];
+}

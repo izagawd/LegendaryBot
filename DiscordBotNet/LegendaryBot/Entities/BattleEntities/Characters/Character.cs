@@ -5,10 +5,10 @@ using System.Text;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
+using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.DialogueNamespace;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Artifacts;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
-
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
@@ -33,11 +33,11 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
     {
         entity.HasMany(i => i.Gears)
             .WithOne()
-            .HasForeignKey(i => i.CharacterGearEquipperId);
-
+            .HasForeignKey(i => i.ArtifactWielderId);
+        
         entity.HasOne(i => i.Blessing)
             .WithOne(i => i.Character)
-            .HasForeignKey<Blessing>(i => i.CharacterBlessingEquipperId)
+            .HasForeignKey<Blessing>(i => i.BlessingWielderId)
             .OnDelete(DeleteBehavior.SetNull);
     }
 }
@@ -303,10 +303,11 @@ public abstract partial  class Character : BattleEntity
             if (_health <= 0)
             {
                 _health = 0;
+         
                 CurrentBattle.AddAdditionalBattleText(new DeathBattleText(this));
                 _statusEffects.Clear();
                 CurrentBattle.InvokeBattleEvent(new CharacterDeathEventArgs(this));
-                
+            
             }
 
             if (_health > tempMaxHealth) _health = tempMaxHealth;
@@ -339,7 +340,7 @@ public abstract partial  class Character : BattleEntity
         
     }
 
-    public List<Artifact> Gears { get; set; } = [];
+    public List<Gear> Gears { get; set; } = [];
 
 
 
@@ -904,6 +905,17 @@ public abstract partial  class Character : BattleEntity
             TotalAttack += Blessing.Attack;
             TotalMaxHealth += Blessing.Health;
         }
+
+        foreach (var i in Gears)
+        {
+            foreach (var j in i.Substats)
+            {
+                j.AddStats(this);
+            }
+            i.MainStat.SetMainStatValue(i.Rarity,i.Level);
+            i.MainStat.AddStats(this);
+        }
+        Health = TotalMaxHealth.Round();
     }
     public sealed override  Task LoadAsync()
     {
@@ -917,13 +929,12 @@ public abstract partial  class Character : BattleEntity
     public virtual async Task LoadAsync(bool loadGear)
     {
         await base.LoadAsync();
-        
-        if(loadGear)
+
+        if (loadGear)
+        {
             LoadGear();
-
-        Health = TotalMaxHealth.Round();
-
-
+        }
+            
     }
 
     public void TakeDamageWhileConsideringShield(int damage)
@@ -1173,14 +1184,14 @@ public abstract partial  class Character : BattleEntity
 /// Increases the Exp of a character and returns useful text
 /// </summary>
 /// <returns></returns>
-    public override ExperienceGainResult IncreaseExp(long exp)
+    public override ExperienceGainResult IncreaseExp(long experienceToGain)
     {
         if (Level >= MaxLevel)
-            return new ExperienceGainResult() { ExcessExperience = exp, Text = $"{this} has already reached their max level!" };
+            return new ExperienceGainResult() { ExcessExperience = experienceToGain, Text = $"{this} has already reached their max level!" };
         string expGainText = "";
         
         var levelBefore = Level;
-        Experience += exp;
+        Experience += experienceToGain;
         var nextLevelEXP =GetRequiredExperienceToNextLevel(Level);
         while (Experience >= nextLevelEXP && Level < MaxLevel)
         {
@@ -1188,7 +1199,7 @@ public abstract partial  class Character : BattleEntity
             Level += 1;
             nextLevelEXP = GetRequiredExperienceToNextLevel(Level);
         }
-        expGainText += $"{this} gained {exp} exp";
+        expGainText += $"{this} gained {experienceToGain} exp";
         if (levelBefore != Level)
         {
             expGainText += $", and moved from level {levelBefore} to level {Level}";

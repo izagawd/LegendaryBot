@@ -3,10 +3,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using DiscordBotNet.Extensions;
-using DiscordBotNet.LegendaryBot.BattleEvents;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
-using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 using DiscordBotNet.LegendaryBot.Moves;
@@ -24,7 +21,7 @@ using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using UserExperienceReward = DiscordBotNet.LegendaryBot.Rewards.UserExperienceReward;
 
-namespace DiscordBotNet.LegendaryBot;
+namespace DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 
 public enum BattleDecision
 {

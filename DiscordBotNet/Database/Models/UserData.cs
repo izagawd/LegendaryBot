@@ -127,15 +127,15 @@ public class UserData :   ICanBeLeveledUp
     {
         return ReceiveRewards(name,rewards.ToArray());
     }
-    public ExperienceGainResult IncreaseExp(long exp)
+    public ExperienceGainResult IncreaseExp(long experienceToGain)
     {
         var maxLevel = 60;
         if (Level >= maxLevel)
-            return new ExperienceGainResult() { ExcessExperience = exp, Text = $"you have already reached max level!" };
+            return new ExperienceGainResult() { ExcessExperience = experienceToGain, Text = $"you have already reached max level!" };
         string expGainText = "";
         
         var levelBefore = Level;
-        Experience += exp;
+        Experience += experienceToGain;
 
 
         var nextLevelEXP =GetRequiredExperienceToNextLevel(Level);
@@ -146,7 +146,7 @@ public class UserData :   ICanBeLeveledUp
             nextLevelEXP = GetRequiredExperienceToNextLevel(Level);
         }
 
-        expGainText += $"you gained {exp} exp";
+        expGainText += $"you gained {experienceToGain} exp";
         if (levelBefore != Level)
         {
             expGainText += $", and moved from level {levelBefore} to level {Level}";
