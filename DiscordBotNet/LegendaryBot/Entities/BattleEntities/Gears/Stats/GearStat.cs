@@ -85,9 +85,10 @@ public abstract class GearStat
     /// and GetMinimum
     /// </summary>
     /// <param name="rarity"></param>
-    public void Increase(Rarity rarity)
+    public void Increase(Rarity rarity, bool incrementTimesIncreased = true)
     {
-        TimesIncreased += 1;
+        if (incrementTimesIncreased)
+            TimesIncreased++;
         Value += BasicFunctionality.GetRandomNumberInBetween(GetMinimumSubstatLevelIncrease(rarity),
             GetMaximumSubstatLevelIncrease(rarity));
     }

@@ -12,7 +12,7 @@ public class AttackPercentageGearStat : GearStat
     
     public override void AddStats(Character character)
     {
-        character.TotalAttack += Value * 0.01f * character.BaseAttack;
+        character.TotalAttack += Value * 0.01f * (character.BaseAttack + (character.Blessing?.Attack).GetValueOrDefault(0));
     }
 
     public override int GetMaximumSubstatLevelIncrease(Rarity rarity)

@@ -63,7 +63,6 @@ public class BattleSimulator
         {
             return characterImageToDraw.Clone();
         }
-
         characterImageToDraw = await BasicFunctionality.GetImageFromUrlAsync(url);
         characterImageToDraw.Mutate(mutator =>
         {
@@ -88,7 +87,7 @@ public class BattleSimulator
         int yOffset = 0;
         IImageProcessingContext imageCtx = null!;
         image.Mutate(ctx => imageCtx = ctx);
-
+ 
         foreach (var i in CharacterTeams)
         {
 
@@ -674,7 +673,7 @@ public class BattleSimulator
                 SetupCharacterForThisBattle(j);
             }
         }
-   
+        
         CharacterTeam? timedOut = null;
 
         
@@ -711,7 +710,7 @@ public class BattleSimulator
                     if(!j.IsDead) j.CombatReadiness +=  0.0025f * j.Speed;
                 }
             }
-
+            "yo".Print();
             if (!extraTurnGranted)
             {
                 ActiveCharacter = BasicFunctionality.RandomChoice(Characters.Where(i => i.CombatReadiness >= 100 && !i.IsDead));

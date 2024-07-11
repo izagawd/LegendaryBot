@@ -66,7 +66,7 @@
 
     foreach (var i in filteredCharactersList.OfType<Player>())
     {
-        await i.LoadAsync(User);
+        i.LoadPlayerData(User);
     }
     if (Model.Name.Length > 0)
     {

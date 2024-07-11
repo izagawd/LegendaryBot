@@ -44,26 +44,13 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-        var postgre = new PostgreSqlContext();
-        var iza = await postgre.UserData
-            .Include(i => i.Inventory)
-            .ThenInclude(i => (i as Gear).Stats)
-            .FirstAsync(i => i.Id == Izasid);
 
-        var resil = iza.Inventory.OfType<ResilientWatch>().First();
-        resil.IncreaseExp(500000);
-        resil.MainStat.SetMainStatValue(resil.Rarity,resil.Level);
-        foreach (var i in  resil.Stats)
-        {
-            i.Print();
-        }
-
-        await postgre.SaveChangesAsync();
+        
     }
     private static async Task Main(string[] args)
     {
         await DoShitAsync();
-        return;
+  
         var stopwatch = new Stopwatch(); 
         Console.WriteLine("Making all users unoccupied...");
         stopwatch.Start();

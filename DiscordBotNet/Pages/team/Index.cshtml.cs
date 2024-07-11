@@ -50,7 +50,7 @@ public class Index : PageModel
 
         foreach (var i in UserData.Inventory.OfType<Player>())
         {
-            await i.LoadAsync(User);
+            i.LoadPlayerData(User);
         }
     }
 

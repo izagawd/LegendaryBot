@@ -96,7 +96,7 @@ public class DirectionHelping : Quest
             .IncludeTeamWithAllEquipments()
             .FindOrCreateUserDataAsync((long)context.User.Id);
         var userTeam = userData.EquippedPlayerTeam;
-        await userTeam.LoadAsync(context.User);
+        await userTeam.LoadTeamGearWithPlayerDataAsync(context.User);
         var battle = new BattleSimulator(userTeam,blastTeam);
 
         var battleResult = await battle.StartAsync(dialogueResult.Message);

@@ -71,13 +71,13 @@ public class Hunt : GeneralCommandClass
             .WithDescription($"Wild {enemyTeam.First()}(s) have appeared!");
         await ctx.CreateResponseAsync(embedToBuild.Build());
         var message = await ctx.GetOriginalResponseAsync();
-        var userTeam = await userData.EquippedPlayerTeam.LoadAsync(author);
+        var userTeam = await userData.EquippedPlayerTeam.LoadTeamGearWithPlayerDataAsync(author);
         foreach (var i in enemyTeam)
         {
             i.SetLevel(userTeam.Select(i => i.Level).Average().Round());
         }
 
-        var simulator = new BattleSimulator(userTeam, await enemyTeam.LoadAsync());
+        var simulator = new BattleSimulator(userTeam, await enemyTeam.LoadTeamGearWithPlayerDataAsync(author));
 
  
 

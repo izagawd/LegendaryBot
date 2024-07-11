@@ -39,9 +39,10 @@ public class Index : PageModel
             return Redirect("/characters");
         }
 
-        Nullable<int> idk = 4;
+     
 
-        await Character.LoadAsync();
+        if (Character is Player player)
+            player.LoadPlayerData(User);
 
         
         return null;

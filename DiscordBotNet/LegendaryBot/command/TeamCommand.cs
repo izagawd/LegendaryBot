@@ -93,7 +93,7 @@ public class TeamCommand : GeneralCommandClass
         }
 
         if (character is Player player)
-            await player.LoadAsync(context.User,false);
+            await player.LoadPlayerDataAsync(context.User);
         if (!gottenTeam.Contains(character))
         {
             embed.WithDescription($"Character {character} is not in team {gottenTeam.TeamName}");
@@ -194,7 +194,7 @@ public class TeamCommand : GeneralCommandClass
 
         gottenTeam.Add(character);
         await DatabaseContext.SaveChangesAsync();
-        if (character is Player player) await player.LoadAsync(context.User, false);
+        if (character is Player player) await player.LoadPlayerDataAsync(context.User);
         embed.WithTitle("Success!").WithDescription($"{character} has been added to team {gottenTeam.TeamName}!");
         await context.CreateResponseAsync(embed);
 

@@ -29,10 +29,7 @@ public class EntityReward : Reward
     {
         var stringBuilder = new StringBuilder($"{name} got: \n");
         userData.Inventory.AddRange(EntitiesToReward);
-        foreach (var i in EntitiesToReward.OfType<ISetup>())
-        {
-            i.Setup();
-        }
+
 
         Dictionary<string, int> nameSorter = [];
         foreach (var i in EntitiesToReward)

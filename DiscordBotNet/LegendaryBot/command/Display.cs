@@ -45,7 +45,7 @@ public class Display : GeneralCommandClass
         foreach (var i in userData.Inventory.OfType<Character>())
         {
             if (i is Player player)
-                await player.LoadAsync(context.User, false);
+                await player.LoadPlayerDataAsync(context.User);
             if (count >= displaySectionLimit)
             {
                 currentList = new List<string>();
@@ -183,7 +183,7 @@ public class Display : GeneralCommandClass
             var stringToUse = $"Name: {i.Name};     Level: {i.Level};       Id: {i.Id}";
             if (i.Character is not null)
             {
-                if (i.Character is Player player) await player.LoadAsync(context.User, false);
+                if (i.Character is Player player) await player.LoadPlayerDataAsync(context.User);
                 stringToUse += $"\n     Character Name: {i.Character.Name}               Character Level: {i.Character.Level}";
             }
 
@@ -258,7 +258,7 @@ public class Display : GeneralCommandClass
 
         foreach (var i in userData.PlayerTeams.SelectMany(i => i).OfType<Player>())
         {
-            await i.LoadAsync(context.User,false);
+            await i.LoadPlayerDataAsync(context.User);
         }
   
         foreach (var i in userData.PlayerTeams)

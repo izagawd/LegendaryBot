@@ -42,8 +42,8 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
     }
 }
 /// <summary>
-/// Don't forget to load the character with LoadAsync before using it in combat.
-/// Characters can also be loaded at once if they are in a CharacterTeam and LoadAsync is called
+/// Don't forget to load the character with LoadTeamGearWithPlayerDataAsync before using it in combat.
+/// Characters can also be loaded at once if they are in a CharacterTeam and LoadTeamGearWithPlayerDataAsync is called
 /// from the CharacterTeam
 /// </summary>
 public abstract partial  class Character : BattleEntity
@@ -554,7 +554,7 @@ public abstract partial  class Character : BattleEntity
 
 
 
-    [NotMapped] public virtual int BaseMaxHealth { get; } = 100;
+    [NotMapped] public virtual int BaseMaxHealth => 100;
 
     public float MaxHealth
     {
@@ -581,10 +581,10 @@ public abstract partial  class Character : BattleEntity
         }
     }
 
-    [NotMapped] public  virtual int BaseDefense  { get; }
+    [NotMapped] public virtual int BaseDefense => 100;
     [NotMapped] public virtual Element Element { get; protected set; } = Element.Fire;
 
-    [NotMapped] public virtual int BaseSpeed { get;  }
+    [NotMapped] public virtual int BaseSpeed => 100;
     public float Speed
     {
         get
@@ -917,25 +917,9 @@ public abstract partial  class Character : BattleEntity
         }
         Health = TotalMaxHealth.Round();
     }
-    public sealed override  Task LoadAsync()
-    {
-  
-        return LoadAsync(true);
 
-
-
-    }
     
-    public virtual async Task LoadAsync(bool loadGear)
-    {
-        await base.LoadAsync();
 
-        if (loadGear)
-        {
-            LoadGear();
-        }
-            
-    }
 
     public void TakeDamageWhileConsideringShield(int damage)
     {

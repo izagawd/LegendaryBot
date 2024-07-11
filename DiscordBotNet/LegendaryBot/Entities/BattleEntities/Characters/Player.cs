@@ -6,6 +6,7 @@ using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Caching.Memory;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
@@ -129,15 +130,22 @@ public class PlayerDatabaseConfiguration : IEntityTypeConfiguration<Player>
     }
 }
 
+public struct PlayerCachedData
+{
+     string CharacterUrl;
+    string Name;
+}
+
 public class Player : Character
 {
-
 
 
     public override bool IsInStandardBanner => false;
     public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;
 
-    
+
+
+
     [NotMapped]
     public DiscordUser DiscordUser { get; set; }
     [NotMapped]
@@ -194,27 +202,16 @@ public class Player : Character
     }
     public async Task<Image<Rgba32>> GetDetailsImageAsync(DiscordUser? discordUser,bool loadBuild)
     {
-        await LoadAsync(discordUser, loadBuild);
+        await LoadPlayerDataAsync(discordUser);
         return await base.GetDetailsImageAsync(loadBuild);
     }
     public async Task<Image<Rgba32>> GetDetailsImageAsync(ClaimsPrincipal claimsUser,bool loadBuild)
     {
-        await LoadAsync(claimsUser, loadBuild);
+        LoadPlayerData(claimsUser);
         return await base.GetDetailsImageAsync(loadBuild);
     }
-    public async Task LoadAsync(ClaimsPrincipal claimsUser, bool build = true)
+    public async Task LoadPlayerDataAsync(DiscordUser? discordUser = null)
     {
-        await base.LoadAsync(build);
-        Name = claimsUser.GetDiscordUserName();
-        ImageUrl = claimsUser.GetDiscordUserAvatarUrl();
-        if (UserData is not null)
-        {
-            Color = UserData.Color;
-        }
-    }
-    public async Task LoadAsync(DiscordUser? discordUser, bool build = true)
-    {
-        await base.LoadAsync(build);
         if (discordUser is not null)
         {
             DiscordUser = discordUser;
@@ -222,7 +219,6 @@ public class Player : Character
         {
             DiscordUser = await Bot.Client.GetUserAsync((ulong)UserDataId);
         }
-
         Name = DiscordUser.Username;
         ImageUrl = DiscordUser.AvatarUrl;
         if (UserData is not null)
@@ -230,10 +226,17 @@ public class Player : Character
             Color = UserData.Color;
         } 
     }
-    public override Task LoadAsync(bool loadGear)
+    public void LoadPlayerData(ClaimsPrincipal claimsUser)
     {
-        return LoadAsync(discordUser: null,loadGear);
+        Name = claimsUser.GetDiscordUserName();
+        ImageUrl = claimsUser.GetDiscordUserAvatarUrl();
+        if (UserData is not null)
+        {
+            Color = UserData.Color;
+        }
     }
+
+
     public override string Name { get; protected set; }
 
 

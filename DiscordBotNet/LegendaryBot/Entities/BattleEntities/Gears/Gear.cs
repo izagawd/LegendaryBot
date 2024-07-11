@@ -73,7 +73,7 @@ public abstract class Gear : BattleEntity
             [..Stats.Select(i => i.GetType()),GearStat.SpeedPercentageType]);
         Type chosenType = BasicFunctionality.RandomChoice(typesToConsider);
         var created = (GearStat) Activator.CreateInstance(chosenType)!;
-        created.Increase(rarity);
+        created.Increase(rarity,false);
         return created;
     }
 

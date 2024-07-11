@@ -21,7 +21,7 @@ public abstract class Entity : ICloneable, IImageHaver
 
     }
 
-    public virtual Task LoadAsync() => Task.CompletedTask;
+
     object ICloneable.Clone()
     {
         return Clone();

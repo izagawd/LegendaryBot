@@ -36,7 +36,7 @@ public class Index : PageModel
         Entity entity = (Entity)Activator.CreateInstance(theType)!;
 
         entity.UserDataId = User.GetDiscordUserId();
-        if(entity is ISetup setup) setup.Setup();
+
         await DatabaseContext.Entity.AddAsync(entity);
 
 

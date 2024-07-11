@@ -40,47 +40,41 @@ public class CharacterTeam : ISet<Character>
     {
         return Characters.GetEnumerator();
     }
-    /// <summary>
-    /// when a character is gotten from a database, the stats are not set in response to it's level sometimes. this does the trick for every character in the team
-    /// </summary>
-    /// <returns></returns>
-    public virtual async Task<CharacterTeam> LoadAsync(bool build = true)
-    {
-        foreach (var i in Characters)
-        {
-            i.Team = this;
-            await i.LoadAsync(build);
-        }
-        
-        return this;
-    }
+ 
 
-    public async Task<CharacterTeam> LoadAsync(DiscordUser user)
+    public async Task<CharacterTeam> LoadTeamGearWithPlayerDataAsync(DiscordUser? user = null)
     {
         foreach (var i in Characters)
         {
             i.Team = this;
-            if (i is Player player) await player.LoadAsync(user);
-            else await i.LoadAsync();
+            if (i is Player player) await player.LoadPlayerDataAsync(user);
+            i.LoadGear();
         }
     
         return this;
     }
+    public CharacterTeam LoadTeam()
+    {
+        foreach (var i in Characters)
+        {
+            i.Team = this;
+            i.LoadGear();
+        }
 
+        return this;
 
-    public async Task<CharacterTeam> LoadAsync(ClaimsPrincipal user)
+    }
+
+    public CharacterTeam LoadTeamGearWithPlayerData(ClaimsPrincipal user)
     {
         foreach (var i in Characters)
         {
             i.Team = this;
             if (i is Player player)
             {
-                await player.LoadAsync(user);
+                player.LoadPlayerData(user);
             }
-            else
-            {
-                await i.LoadAsync();
-            }
+            i.LoadGear();
         }
 
 
