@@ -107,7 +107,7 @@ public class IWillProtectUs : Ultimate
 public class RoyalKnight : Character
 {
     public override DiscordColor Color => DiscordColor.Blue;
-    public override Element Element { get; protected set; } = Element.Ice;
+    public override Element Element => Element.Ice;
 
     public override BasicAttack BasicAttack { get; } = new ShieldBash();
     public override Rarity Rarity => Rarity.ThreeStar;

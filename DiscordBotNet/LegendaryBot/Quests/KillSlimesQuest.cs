@@ -17,7 +17,7 @@ public class KillSlimesQuest : Quest
         var slimeTeam = new CharacterTeam([new Slime(),new Slime()]);
         var userData = await databaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FindOrCreateAsync(UserDataId);
+            .FindOrCreateUserDataAsync(UserDataId);
         var embed = new DiscordEmbedBuilder()
             .WithUser(context.User)
             .WithColor(userData.Color)

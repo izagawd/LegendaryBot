@@ -121,7 +121,7 @@ public class Slasher : Character
     public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;
     public override DiscordColor Color { get; protected set; } = DiscordColor.Brown;
 
-    public override Element Element { get; protected set; } = Element.Earth;
+    public override Element Element => Element.Earth;
 
     public override Ultimate? Ultimate { get; } = new ConsecutiveSlashesOfPrecision();
     public override Skill? Skill { get; } = new WindSlash();

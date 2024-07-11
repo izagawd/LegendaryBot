@@ -26,10 +26,10 @@ public class Begin : GeneralCommandClass
             .Include(j => j.Inventory)
             .ThenInclude(j => (j as Character).Blessing)
             .Include(i => i.Inventory)
-            .ThenInclude(i => (i as Character).EquippedCharacterBuild)
+            .ThenInclude(i => (i as Character).Gears)
             .Include(i => i.EquippedPlayerTeam)
             .Include(i => i.Inventory.Where(j => j is Character))
-            .FindOrCreateAsync((long)author.Id);
+            .FindOrCreateUserDataAsync((long)author.Id);
 
         DiscordColor userColor = userData.Color;
         if (userData.IsOccupied)
@@ -64,7 +64,7 @@ public class Begin : GeneralCommandClass
         if (!userData.Inventory.Any(i => i is Player))
         {
             Player player = new Player();
-            player.Setup();
+
             player.SetElement(Element.Fire);
             userData.Inventory.Add(player);
             player.UserData = userData;
@@ -203,7 +203,7 @@ public class Begin : GeneralCommandClass
         };
 
 
-        userData.Tier = await DatabaseContext.UserData.FindOrCreateSelectAsync((long)author.Id, i => i.Tier);
+        userData.Tier = await DatabaseContext.UserData.FindOrCreateSelectUserDataAsync((long)author.Id, i => i.Tier);
 
         if (userData.Tier == Tier.Unranked)
         {

@@ -1,7 +1,7 @@
 ﻿
 namespace DiscordBotNet.Database.Models;
 
-public class GuildData : IDatabaseModel
+public class GuildData
 {
     public long Id { get; set; }
 

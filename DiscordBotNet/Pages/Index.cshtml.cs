@@ -24,7 +24,7 @@ public class IndexModel : PageModel
     {
 
         await using var databaseContext = new PostgreSqlContext();
-        UserData = await databaseContext.UserData.FindOrCreateAsync(User.GetDiscordUserId());
+        UserData = await databaseContext.UserData.FindOrCreateUserDataAsync(User.GetDiscordUserId());
     }
 
 }

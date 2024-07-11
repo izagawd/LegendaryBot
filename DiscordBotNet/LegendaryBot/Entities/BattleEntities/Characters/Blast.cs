@@ -100,9 +100,7 @@ public class Blast : Character
     public override Rarity Rarity { get; protected set; } = Rarity.FourStar;
     public override DiscordColor Color { get; protected set; } = DiscordColor.Brown;
 
-    
-    
-    public override Element Element { get; protected set; } = Element.Fire;
+
 
     public override Ultimate? Ultimate { get;  } = new VolcanicEruption();
     public override Skill? Skill { get; } = new BlowAway();

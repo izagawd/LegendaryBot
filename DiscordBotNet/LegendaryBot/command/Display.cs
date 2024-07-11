@@ -27,63 +27,14 @@ public class Display : GeneralCommandClass
     
     protected static DiscordButtonComponent First = new DiscordButtonComponent(ButtonStyle.Primary, "first", "FIRST");
     
-    [SlashCommand("character", "shows the details of a single character you own by their name")]
-    public async Task ExecuteDisplayACharacter(InteractionContext ctx,
-        [Option("character_name","The name of the character")] string characterName)
-    {
-        var embedBuilder = new DiscordEmbedBuilder()
-            .WithUser(ctx.User)
-            .WithTitle("Hmm")
-            .WithDescription("Invalid id");
 
-        var simplifiedCharacterName = characterName.ToLower().Replace(" ", "");
-        Expression<Func<UserData, IEnumerable<Entity>>> navigation = i => i.Inventory.Where(j =>
-            EF.Property<string>(j, "Discriminator").ToLower() == simplifiedCharacterName
-            && j is Character);
-        var userData = await DatabaseContext.UserData
-            .Include(navigation)
-            .ThenInclude((Entity entity) => (entity as Character).Blessing)
-            .Include(navigation)
-            .ThenInclude((Entity entity) => (entity as Character).CharacterBuilds)
-            .FindOrCreateAsync((long)ctx.User.Id);
-        embedBuilder.WithColor(userData.Color);
-        var character = userData.Inventory.OfType<Character>().FirstOrDefault(i => 
-            i.GetType().Name.ToLower() == simplifiedCharacterName);
-        if (character is null)
-        {
-            embedBuilder.WithDescription($"You do not have any character with the name {characterName}");
-            await ctx.CreateResponseAsync(embedBuilder);
-            return;
-        }
-
-        if (character is Player player) await player.LoadAsync(ctx.User, false);
-
-        
-        await using var stream = new MemoryStream();
-        await (await character.GetDetailsImageAsync()).SaveAsPngAsync(stream);
-        stream.Position = 0;
-        embedBuilder.WithImageUrl("attachment://description.png");
-        var descriptionString = $"Name: {character}";
-        if (character.Blessing is not null)
-            descriptionString += $"\nBlessing Id: {character.Blessing.Id}";
-        embedBuilder
-            .WithTitle("Here you go!")
-            .WithDescription(descriptionString);
-        DiscordInteractionResponseBuilder builder = new DiscordInteractionResponseBuilder()
-            .AddFile("description.png", stream)
-            .WithTitle("Detail")
-            .AddEmbed(embedBuilder.Build());
-        await ctx.CreateResponseAsync(builder);
-   
-    }
-    
     [SlashCommand("characters", "display all your owned characters")]
     public async Task ExecuteDisplayCharacters(InteractionContext context)
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j is Character))
             .ThenInclude((Entity i) => (i as Character).Blessing)
-            .FindOrCreateAsync((long)context.User.Id);
+            .FindOrCreateUserDataAsync((long)context.User.Id);
 
         List<List<string>> displayList = [];
         var count = 0;
@@ -166,18 +117,20 @@ public class Display : GeneralCommandClass
     }
     [SlashCommand("blessing", "shows the details of a single blessing you own by their id")]
     public async Task ExecuteDisplayABlessing(InteractionContext ctx,
-        [Option("blessing_id","The id of the blessing you want to get details about")] long blessingId)
+        [Option("blessing_id","The id of the blessing you want to get details about")] string blessingIdString)
     {
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
             .WithTitle("Hmm")
             .WithDescription("Invalid id");
 
-  
+        
+        if(!Guid.TryParse(blessingIdString, out Guid blessingId)) 
+            return;
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j.Id == blessingId && j is Blessing))
             .ThenInclude((Entity entity) => (entity as Blessing).Character)
-            .FindOrCreateAsync((long)ctx.User.Id);
+            .FindOrCreateUserDataAsync((long)ctx.User.Id);
         embedBuilder.WithColor(userData.Color);
         var blessing = userData.Inventory.OfType<Blessing>().FirstOrDefault(i => i.Id == blessingId);
         if (blessing is null)
@@ -211,7 +164,7 @@ public class Display : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j is Blessing))
             .ThenInclude((Entity i) => (i as Blessing).Character)
-            .FindOrCreateAsync((long)context.User.Id);
+            .FindOrCreateUserDataAsync((long)context.User.Id);
 
         List<List<string>> displayList = [];
         var count = 0;
@@ -298,7 +251,7 @@ public class Display : GeneralCommandClass
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
-            .FindOrCreateAsync((long)context.User.Id);
+            .FindOrCreateUserDataAsync((long)context.User.Id);
 
         var teamStringBuilder = new StringBuilder();
         var count = 0;

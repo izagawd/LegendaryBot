@@ -23,15 +23,15 @@ public class Index : PageModel
     }
     public async Task<IActionResult> OnGetAsync(string characterId)
     {
-        var didParse = long.TryParse(characterId, out long id);
-        if (!didParse) return Redirect("/characters");
+   
+        if (!Guid.TryParse(characterId, out Guid id)) return Redirect("/characters");
         UserData = await DatabaseContext.UserData
             .Include(j => j.Inventory.Where(k => k is Blessing || k.Id == id))
             .Include(j => j.Inventory)
             .ThenInclude(i => (i as Blessing).Character)
             .Include(j => j.Inventory)
-            .ThenInclude(j => (j as Character).EquippedCharacterBuild)
-            .FindOrCreateAsync(User.GetDiscordUserId());
+            .ThenInclude(j => (j as Character).Gears)
+            .FindOrCreateUserDataAsync(User.GetDiscordUserId());
         Character = UserData.Inventory.OfType<Character>().FirstOrDefault(k => k.Id == id);
         Blessings = UserData.Inventory.OfType<Blessing>().ToArray();
         if (Character is null)

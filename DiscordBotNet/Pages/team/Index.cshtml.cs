@@ -42,7 +42,7 @@ public class Index : PageModel
             .Include(i => i.EquippedPlayerTeam)
             .Include(j => j.Inventory.Where(k => k is Character))
             
-            .FindOrCreateSelectAsync(User.GetDiscordUserId(),
+            .FindOrCreateSelectUserDataAsync(User.GetDiscordUserId(),
                 i => new{UserData = i,TeamNames= i.PlayerTeams.Select(j => j.TeamName)});
         UserData = anonymous.UserData;
         TeamNames = anonymous.TeamNames.ToArray();

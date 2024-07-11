@@ -113,15 +113,11 @@ public class Arise : Ultimate
 }
 public class Thana : Character
 {
-    public override float GetSpeedValue(int points)
-    {
-        return (base.GetSpeedValue(points) * 1.1).Round();
-    }
 
     public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;
     public override DiscordColor Color { get; protected set; } = DiscordColor.Brown;
 
-    public override Element Element { get; protected set; } = Element.Earth;
+    public override Element Element => Element.Earth;
     public override BasicAttack BasicAttack { get; } = new SoulAttack();
 
     public override Skill? Skill { get; } = new YourLifeEnergyIsMine();

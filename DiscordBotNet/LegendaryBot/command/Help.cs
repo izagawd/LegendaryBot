@@ -155,7 +155,7 @@ public class Help : GeneralCommandClass
 
         DiscordColor color = await DatabaseContext
             .UserData
-            .FindOrCreateSelectAsync((long)author.Id, 
+            .FindOrCreateSelectUserDataAsync((long)author.Id, 
                 i => i.Color);
 
         DiscordEmbedBuilder embedToBuild = new DiscordEmbedBuilder()

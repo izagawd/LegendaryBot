@@ -69,13 +69,13 @@ public static class PostgreExtension
             .ThenInclude(i => i.Blessing);
     }
 
-    public static IQueryable<UserData> IncludeTeamWithBuild
+    public static IQueryable<UserData> IncludeTeamWithGears
         (this IQueryable<UserData> queryable)
     {
         return queryable
             .Include(i => i.EquippedPlayerTeam)
             .ThenInclude(i => i!.Characters)
-            .ThenInclude(i => i.EquippedCharacterBuild);
+            .ThenInclude(i => i.Gears);
     }
 
     public static IQueryable<UserData> IncludeTeamWithAllEquipments
@@ -84,7 +84,7 @@ public static class PostgreExtension
 
         return queryable
             .IncludeTeamWithBlessing()
-            .IncludeTeamWithBuild();
+            .IncludeTeamWithGears();
 
     }
 
@@ -99,76 +99,11 @@ public static class PostgreExtension
 
 
 
-    public async static Task<List<T>> FindOrCreateManyAsync<T>(this IQueryable<T> queryable,
-        IEnumerable<long> ids) 
-        where T : class, IDatabaseModel, new()
-    {
-        List<T> data;
-        var idsAsArray = ids.ToArray();
-
-            data = await queryable
-                .Where(i => idsAsArray.Contains(i.Id))
-                .ToListAsync();
-   
-        if (data.Count != idsAsArray.Length)
-        {
-            var existingIds = await queryable
-                .Where(i => idsAsArray.Contains(i.Id))
-                .Select(u => u.Id)
-                .ToArrayAsync();
-            var missingIds = idsAsArray.Except(existingIds);
-            List<T> missingInstances = [];
-            foreach (var i in missingIds)
-            {
-                var missingInstance = new T { Id = i };
-                data.Add(missingInstance);
-                missingInstances.Add(missingInstance);
-            }
-
-            await queryable.GetDbContext().Set<T>().AddRangeAsync(missingInstances);
-
-        }
-        return data;
-    }
 
 
 
-    public async static Task<List<TExpression>> FindOrCreateManySelectAsync<T, TExpression>(this IQueryable<T> queryable,
-        IEnumerable<long> ids,
-         Expression<Func<T, TExpression>> selectExpression) where T :class, IDatabaseModel, new()
-    {
-        List<TExpression> data;
-        var idsAsArray = ids.ToArray();
-        
-            data = await queryable
-                .Where(i => idsAsArray.Contains(i.Id))
-                .Select(selectExpression)
-                .ToListAsync();
-          
-        
-   
-        if (data.Count != idsAsArray.Length)
-        {
-            var existingIds = await queryable
-                .Where(i => idsAsArray.Contains(i.Id))
-                .Select(u => u.Id)
-                .ToArrayAsync();
-            var missingIds = idsAsArray.Except(existingIds);
-            List<T> missingInstances = [];
-            foreach (var i in missingIds)
-            {
-                var missingInstance = new T{ Id = i };
-                data.Add(missingInstance.Map(selectExpression));
-                missingInstances.Add(missingInstance);
-            }
-
-            await queryable.GetDbContext().Set<T>().AddRangeAsync(missingInstances);
-        }
-        return data;
-    }
-
-    public async static Task<TExpression> FindOrCreateSelectAsync<T, TExpression>(this IQueryable<T> queryable, long id,
-         Expression<Func<T,TExpression>> selectExpression) where T : IDatabaseModel,new()
+    public async static Task<TExpression> FindOrCreateSelectUserDataAsync<T, TExpression>(this IQueryable<T> queryable, long id,
+         Expression<Func<T,TExpression>> selectExpression) where T : UserData,new()
     {
         TExpression? data = await queryable
                 .Where(i => i.Id == id)
@@ -193,7 +128,8 @@ public static class PostgreExtension
     /// <param name="includableQueryableFunc">If you want to include some shit use this</param>
     /// <typeparam name="T">The instance/row type</typeparam>
     /// <returns></returns>
-    public async static Task<T> FindOrCreateAsync<T>(this IQueryable<T> set, long id) where T : class, IDatabaseModel, new()
+    public async static Task<T> FindOrCreateUserDataAsync<T>(this IQueryable<T> set, long id) 
+        where T : UserData, new()
     {
         T? data = await set
                 .FirstOrDefaultAsync(i => i.Id == id);

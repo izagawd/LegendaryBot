@@ -1,6 +1,6 @@
 ﻿namespace DiscordBotNet.Database.Models;
 
-public interface ISetup : IDatabaseModel
+public interface ISetup
 {
 
     /// <summary>

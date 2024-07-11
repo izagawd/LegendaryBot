@@ -21,7 +21,7 @@ public class Avatar: GeneralCommandClass
         }
         
         DiscordColor color = await DatabaseContext.UserData
-            .FindOrCreateSelectAsync((long)user.Id, i => i.Color);
+            .FindOrCreateSelectUserDataAsync((long)user.Id, i => i.Color);
         DiscordEmbedBuilder embed = new DiscordEmbedBuilder()
             .WithTitle($"**{user.Username}'s avatar**")
             .WithAuthor(ctx.User.Username, iconUrl: ctx.User.AvatarUrl)

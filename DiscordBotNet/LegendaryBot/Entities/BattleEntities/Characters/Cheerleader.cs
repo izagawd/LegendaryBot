@@ -109,15 +109,11 @@ public class YouCanMakeItEveryone : Ultimate
 }
 public class Cheerleader : Character
 {
-    public override float GetSpeedValue(int points)
-    {
-        return base.GetSpeedValue(points) * 1.2f;
-    }
 
-    public override float GetMaxHealthValue(int points)
-    {
-        return base.GetMaxHealthValue(points) * 1.2f;
-    }
+
+
+   
+
 
     public override BasicAttack BasicAttack { get; } = new PomPomAttack();
     public override Skill? Skill { get; } = new YouCanDoIt();

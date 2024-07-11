@@ -13,7 +13,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public abstract class Blessing : BattleEntity
 {
-    public long? CharacterId { get; set; }
+    public Guid? CharacterBlessingEquipperId { get; set; }
     public virtual async Task<Image<Rgba32>> GetInfoAsync()
     {
         using var userImage = await BasicFunctionality.GetImageFromUrlAsync(ImageUrl);

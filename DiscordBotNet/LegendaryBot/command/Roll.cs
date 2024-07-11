@@ -13,7 +13,7 @@ public class Roll :  GeneralCommandClass
     {
         
         DiscordColor color = await DatabaseContext.UserData
-            .FindOrCreateSelectAsync((long)ctx.User.Id, i => i.Color);
+            .FindOrCreateSelectUserDataAsync((long)ctx.User.Id, i => i.Color);
         var random = new Random();
         DiscordEmbedBuilder embed = new DiscordEmbedBuilder()
             .WithTitle("**Roll**")

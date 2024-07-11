@@ -19,8 +19,8 @@ public class InfoController : Controller
     [HttpPost]
     public async Task<IActionResult> RemoveBlessingAsync([FromBody] string characterId)
     {
-        var didParse = long.TryParse(characterId, out long characterGuid);
-        if (!didParse) return Ok();
+   
+        if (!Guid.TryParse(characterId, out Guid characterGuid)) return Ok();
         var character = await DatabaseContext.Entity
             .OfType<Character>()
             .Where(i => i.Id == characterGuid)
@@ -38,16 +38,16 @@ public class InfoController : Controller
     {
         var blessingIdString = element.GetProperty("blessingId").GetString();
         var characterIdString = element.GetProperty("characterId").GetString();
-        var characterId = long.Parse(characterIdString!);
-        var blessingId = long.Parse(blessingIdString!);
+        var characterId = Guid.Parse(characterIdString!);
+        var blessingId = Guid.Parse(blessingIdString!);
         var entityAnonymous = await DatabaseContext.UserData
-            .FindOrCreateSelectAsync(User.GetDiscordUserId(),
+            .FindOrCreateSelectUserDataAsync(User.GetDiscordUserId(),
                 i =>
                     new
                     {
                         blessing = i.Inventory.OfType<Blessing>().FirstOrDefault(j =>j.Id == blessingId),
                         character = i.Inventory.OfType<Character>().FirstOrDefault(j => j.Id == characterId),
-                        charactersCurrentBlessing = i.Inventory.OfType<Blessing>().FirstOrDefault(j => j.CharacterId == characterId)
+                        charactersCurrentBlessing = i.Inventory.OfType<Blessing>().FirstOrDefault(j => j.CharacterBlessingEquipperId == characterId)
                     });
 
 

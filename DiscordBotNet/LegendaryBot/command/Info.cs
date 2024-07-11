@@ -17,7 +17,7 @@ public class Info : GeneralCommandClass
             
         if(author is null) author = ctx.User;
         
-        var userData = await DatabaseContext.UserData.FindOrCreateAsync((long)author.Id);
+        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync((long)author.Id);
   
         DiscordEmbedBuilder embedBuilder = new DiscordEmbedBuilder()
             .WithTitle("Info")

@@ -120,10 +120,8 @@ public class Ignite : Ultimate
 }
 public class Player : Character
 {
-    public override float GetSpeedValue(int points)
-    {
-        return base.GetSpeedValue(points) * 1.15f;
-    }
+
+
 
     public override bool IsInStandardBanner => false;
     public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;
@@ -176,10 +174,11 @@ public class Player : Character
             CurrentBattle.SetupCharacterForThisBattle(this);
     }
 
+ 
     public override string ImageUrl { get; protected set; }
     public override Task<Image<Rgba32>> GetDetailsImageAsync(bool loadBuild)
     {
-    
+        
         return GetDetailsImageAsync(discordUser: null,loadBuild);
     }
     public async Task<Image<Rgba32>> GetDetailsImageAsync(DiscordUser? discordUser,bool loadBuild)
@@ -220,9 +219,9 @@ public class Player : Character
             Color = UserData.Color;
         } 
     }
-    public override Task LoadAsync(bool build)
+    public override Task LoadAsync(bool loadGear)
     {
-        return LoadAsync(discordUser: null,build);
+        return LoadAsync(discordUser: null,loadGear);
     }
     public override string Name { get; protected set; }
 

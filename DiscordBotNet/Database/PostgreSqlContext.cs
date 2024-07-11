@@ -6,7 +6,7 @@ using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Quests;
 
 using DSharpPlus.Entities;
@@ -42,7 +42,7 @@ public class PostgreSqlContext : DbContext
 
         var user = await UserData
             .Include(i => i.Quests)
-            .FindOrCreateAsync(userId);
+            .FindOrCreateUserDataAsync(userId);
         var rightNowUtc = DateTime.UtcNow;
         if (user.LastTimeChecked.Date == rightNowUtc.Date) return;
         
@@ -120,9 +120,13 @@ public class PostgreSqlContext : DbContext
             modelBuilder.Entity(entityType);
         }
 
-    
 
-           
+
+        modelBuilder.Entity<Gear>(entity =>
+            {
+                
+            });
+       
         modelBuilder.Entity<UserData>(entity =>
         {
             entity.Property(i => i.Color)
@@ -191,33 +195,20 @@ public class PostgreSqlContext : DbContext
         });
     
 
-
+            
         modelBuilder.Entity<Character>(entity =>
         {
-            entity.HasOne(i => i.EquippedCharacterBuild)
+            entity.HasMany(i => i.Gears)
                 .WithOne()
-                .HasForeignKey<CharacterBuild>(i => i.EquippedCharacterId);
-            entity.HasMany(i => i.CharacterBuilds)
-                .WithOne(i => i.Character)
-                .HasForeignKey(i => i.CharacterId);
+                .HasForeignKey(i => i.CharacterGearEquipperId);
+
             entity .HasOne(i => i.Blessing)
                 .WithOne(i => i.Character)
-                .HasForeignKey<Blessing>(i => i.CharacterId)
+                .HasForeignKey<Blessing>(i => i.CharacterBlessingEquipperId)
                 .OnDelete(DeleteBehavior.SetNull);
         });
 
 
-        modelBuilder.Entity<CharacterBuild>(entity =>
-        {
-            entity.Property(i => i.Id)
-                .ValueGeneratedOnAdd();
-            entity.HasIndex(i => new { i.BuildName, i.CharacterId })
-                .IsUnique();
-            entity.HasKey(i => i.Id);
-
-        });
-            
-        
 
         modelBuilder.Entity<Player>()
             .Property(i => i.Element)

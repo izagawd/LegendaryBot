@@ -19,10 +19,10 @@ public class TeamController : Controller
     [HttpPost]
     public async Task<IActionResult> RemoveFromTeamAsync([FromBody]string idString)
     {
-        long id = long.Parse(idString);
+        var id = Guid.Parse(idString);
         var UserData = await DatabaseContext.UserData
             .IncludeTeam()
-            .FindOrCreateAsync(User.GetDiscordUserId());
+            .FindOrCreateUserDataAsync(User.GetDiscordUserId());
 
         var userTeam = UserData.EquippedPlayerTeam;
         if (userTeam.Count <= 1) return Ok();
@@ -40,10 +40,10 @@ public class TeamController : Controller
     [HttpPost]
     public async Task<IActionResult> AddToTeamAsync([FromBody]string idString)
     {
-        long id = long.Parse(idString);
+        var id = Guid.Parse(idString);
         var userData = await DatabaseContext.UserData
             .Include(j => j.Inventory.Where(k => k.Id == id)).IncludeTeam()
-            .FindOrCreateAsync(User.GetDiscordUserId());
+            .FindOrCreateUserDataAsync(User.GetDiscordUserId());
         var character = userData.Inventory.OfType<Character>().FirstOrDefault(i => i.Id == id);
         
         if (character is not null)

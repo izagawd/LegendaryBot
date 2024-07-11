@@ -23,7 +23,7 @@ public class Color : GeneralCommandClass
     {
         DiscordUser author = ctx.User;
 
-        var userData = await DatabaseContext.UserData.FindOrCreateAsync((long)author.Id);
+        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync((long)author.Id);
   
 
         

@@ -39,7 +39,7 @@ public class Index : PageModel
 
         var userData = await DatabaseContext.UserData
             .Include(j => j.Inventory.Where(k => k is Blessing))
-            .FindOrCreateAsync(User.GetDiscordUserId());
+            .FindOrCreateUserDataAsync(User.GetDiscordUserId());
 
         Blessings = userData.Inventory.OfType<Blessing>().ToArray();
 

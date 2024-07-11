@@ -11,7 +11,7 @@ public class Daily : GeneralCommandClass
     AdditionalSlashCommand("/daily",BotCommandType.Battle)]
     public async Task Execute(InteractionContext ctx)
     {
-        var userData =await  DatabaseContext.UserData.FindOrCreateAsync((long)ctx.User.Id);
+        var userData =await  DatabaseContext.UserData.FindOrCreateUserDataAsync((long)ctx.User.Id);
         var embed = new DiscordEmbedBuilder()
             .WithColor(userData.Color)
             .WithUser(ctx.User)

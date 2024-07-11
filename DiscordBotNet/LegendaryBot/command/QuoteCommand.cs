@@ -127,7 +127,7 @@ public class QuoteCommand : GeneralCommandClass
     AdditionalSlashCommand("/write Be good and good will come",BotCommandType.Fun)]
     public async Task Write(InteractionContext ctx, [Option("text", "the quote")] string text)
     {
-        var userData = await DatabaseContext.UserData.FindOrCreateAsync((long)ctx.User.Id);
+        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync((long)ctx.User.Id);
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
             .WithColor(userData.Color);

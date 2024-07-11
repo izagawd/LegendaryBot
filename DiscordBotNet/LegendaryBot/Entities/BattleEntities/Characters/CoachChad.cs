@@ -90,15 +90,6 @@ public class ThumbsUp : Skill
 }
 public class CoachChad : Character, IBattleEventListener
 {
-    public override float GetResistanceValue(int points)
-    {
-        return 50;
-    }
-
-    public override float GetSpeedValue(int points)
-    {
-        return (base.GetSpeedValue(points) * 1.02f).Round();
-    }
 
     public override BasicAttack BasicAttack { get; } = new GigaPunch();
 

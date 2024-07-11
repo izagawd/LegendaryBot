@@ -24,7 +24,7 @@ public class Challenge :GeneralCommandClass
 
         var player1User = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FindOrCreateAsync((long)player1.Id);
+            .FindOrCreateUserDataAsync((long)player1.Id);
         DiscordEmbedBuilder embedToBuild;
         if (player1User.IsOccupied)
         {
@@ -51,7 +51,7 @@ public class Challenge :GeneralCommandClass
 
         var player2User = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FindOrCreateAsync((long)player2.Id);
+            .FindOrCreateUserDataAsync((long)player2.Id);
         if (player2User.IsOccupied)
         {
             embedToBuild = new DiscordEmbedBuilder()

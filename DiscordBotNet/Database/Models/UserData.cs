@@ -15,7 +15,7 @@ using SixLabors.ImageSharp.PixelFormats;
 namespace DiscordBotNet.Database.Models;
 
 
-public class UserData : IDatabaseModel,  ICanBeLeveledUp
+public class UserData :   ICanBeLeveledUp
 {
     public long Id { get; set; }
     

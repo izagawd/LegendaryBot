@@ -39,16 +39,7 @@ public class GooeyStrike : BasicAttack
 }
 public class Slime : Character
 {
-    public override float GetSpeedValue(int points)
-    {
-        return (base.GetSpeedValue(points) * 0.8).Round();
-    }
 
-    public override float GetAttackValue(int points)
-    {
-        return (base.GetAttackValue(points) * 0.7).Round();
-    }
-    
     public override IEnumerable<Reward> DroppedRewards
     {
         get

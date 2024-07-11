@@ -55,7 +55,7 @@ public static class Bot
     }
     private static async Task Main(string[] args)
     {
-
+        await DoShitAsync();
         var stopwatch = new Stopwatch(); 
         Console.WriteLine("Making all users unoccupied...");
         stopwatch.Start();
@@ -131,7 +131,7 @@ public static class Bot
         await databaseContext.UserData
             .Where(i => involvedIds.Contains((ulong)i.Id))
             .ForEachAsync(i => i.IsOccupied = false);
-        var color = await databaseContext.UserData.FindOrCreateSelectAsync((long)ev.Context.User.Id, i => i.Color);
+        var color = await databaseContext.UserData.FindOrCreateSelectUserDataAsync((long)ev.Context.User.Id, i => i.Color);
         await databaseContext.SaveChangesAsync();
         
         

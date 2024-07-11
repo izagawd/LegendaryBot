@@ -19,8 +19,7 @@ using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using Barrier = DiscordBotNet.LegendaryBot.StatusEffects.Barrier;
-
-
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 /// <summary>
@@ -28,7 +27,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 /// Characters can also be loaded at once if they are in a CharacterTeam and LoadAsync is called
 /// from the CharacterTeam
 /// </summary>
-public abstract partial  class Character : BattleEntity, ISetup
+public abstract partial  class Character : BattleEntity
 {
         private static Type[] _characterTypes = Assembly.GetExecutingAssembly().GetTypes()
         .Where(i => i.IsSubclassOf(typeof(Character)) && !i.IsAbstract).ToArray();
@@ -318,57 +317,11 @@ public abstract partial  class Character : BattleEntity, ISetup
         }
         
     }
-    public CharacterBuild EquippedCharacterBuild { get;  set; }
-    
 
-    public List<CharacterBuild> CharacterBuilds { get; protected set; } = [];
-    public virtual float GetMaxHealthValue(int points)
-    {
-        return CalculateStat(3000, 20000, points);
-    }
-    public virtual float GetAttackValue(int points)
-    {
-        return CalculateStat(700, 5000, points);
-    }
-
-    public virtual float GetSpeedValue(int points)
-    {
-        return CalculateStat(100, 300, points);
-    }
-
-    public virtual float GetEffectivenessValue(int points)
-    {
-
-        return CalculateStat(0, 300, points);
-    }
-    public virtual float GetResistanceValue(int points)
-    {
-        return CalculateStat(0, 300, points);
-    }
-    public virtual float GetCriticalChanceValue(int points)
-    {
-        return CalculateStat(20, 100, points);
-    }
-    public virtual float GetCriticalDamageValue(int points)
-    {
-        return CalculateStat(150, 350, points);
-    }
-    public virtual float GetDefenseValue(int points)
-    {
-        return CalculateStat(300, 2000, points);
-    }
+    public List<Gears.Gear> Gears { get; set; } = [];
 
 
 
-    public void Setup()
-    {
-        EquippedCharacterBuild = new CharacterBuild(){BuildName = "Build 1"};
-        CharacterBuilds.Add(EquippedCharacterBuild);
-        CharacterBuilds.Add(new CharacterBuild(){BuildName = "Build 2"});
-        CharacterBuilds.Add(new CharacterBuild(){BuildName = "Build 3"});
-        CharacterBuilds.Add(new CharacterBuild(){BuildName = "Build 4"});
-
-    }
     /// <summary>
     /// Grants a character an extra turn
     /// </summary>
@@ -429,105 +382,11 @@ public abstract partial  class Character : BattleEntity, ISetup
     {
         using var characterImageInfo = await GetInfoAsync();
         if(loadBuild)
-            LoadBuild();
+            LoadGear();
         
         var image = new Image<Rgba32>(850, 900);
         
-        characterImageInfo.Mutate(i => i.Resize(500,150));
-        var characterImageSize = characterImageInfo.Size;
-        IImageProcessingContext imageCtx = null!;
-        image.Mutate(i => imageCtx = i);
-        var characterBuild = EquippedCharacterBuild;
-        if (characterBuild is null)
-        {
-            characterBuild = new CharacterBuild
-            {
-                Character = this
-            };
-        }
-
-        var nameRichText = new RichTextOptions(SystemFonts.CreateFont(Bot.GlobalFontName, 30));
-        var textSize = TextMeasurer.MeasureSize(characterBuild.BuildName, nameRichText);
-        nameRichText.Origin = new Vector2((image.Width / 2.0 - textSize.Width / 2.0).Round(), 20 + characterImageSize.Height);
-        imageCtx.DrawText(nameRichText,characterBuild.BuildName,
-            SixLabors.ImageSharp.Color.Black);
-        
-        int yOffSet = characterImageSize.Height + 25;
-        yOffSet +=(int) textSize.Height;
-         
-        RichTextOptions options = new RichTextOptions(SystemFonts.CreateFont(Bot.GlobalFontName, 25)){WrappingLength = 500};
-        var color = SixLabors.ImageSharp.Color.Black;
-
        
-        foreach (var i in MoveList)
-        {
-            using var moveImage = await i.GetImageForCombatAsync();
-            moveImage.Mutate(j => j
-                .Resize(50,50)
-            );
-            int xOffset = 150;
-
-            var description = i.GetDescription(this);
-            if (i is Special special)
-                description += $" (Cooldown: {special.MaxCooldown} turns)";
-            imageCtx.DrawImage(moveImage, new Point(xOffset, yOffSet), new GraphicsOptions());
-    
-           
-            options.Origin = new Vector2(60 + xOffset,   yOffSet);
-
-            var fontRectangle = TextMeasurer.MeasureSize(description, options);
-
-            imageCtx.DrawText(options, description,color );
- 
-            var max = float.Max(moveImage.Height, fontRectangle.Height);
-            yOffSet += (15 + max).Round();
-            
-        }
-
-        yOffSet += 20;
-        options.Font = SystemFonts.CreateFont(Bot.GlobalFontName, 25);
-        options.Origin = new Vector2(150, yOffSet);
-        var statsStringBuilder = new StringBuilder();
-        foreach (var i in Enum.GetValues<StatType>())
-        {
-            statsStringBuilder.Append($"{BasicFunctionality.Englishify(i.ToString())}: {GetStatFromType(i)}\n");
-        }
-
-        imageCtx.DrawText(options, statsStringBuilder.ToString() , color);
-
-        options.Origin = new Vector2(500, yOffSet);
-
-        
-        var buildString = characterBuild.ToString();
-        imageCtx.DrawText(options,  buildString, color);
-        imageCtx.BackgroundColor(Color.ToImageSharpColor());
-        var characterXOffset = 30;
-        if (Blessing is null)
-            characterXOffset = 250;
-        imageCtx.DrawImage(characterImageInfo, new Point(characterXOffset, 20),new GraphicsOptions());
-        
-        if (Blessing is not null)
-        {
-            using var blessingImageInfo = await Blessing.GetInfoAsync();
-           blessingImageInfo.Mutate(i => i.Resize(characterImageSize));
-
-           imageCtx.DrawImage(blessingImageInfo, new Point(characterXOffset + characterImageSize.Width - 90 , 20),
-               new GraphicsOptions());
-
-        }
-
-        var height = (yOffSet + TextMeasurer.MeasureSize(buildString, options).Height + 50).Round();
-        if (height > image.Height) height = image.Height;
-        var width = image.Width;
-        var x = 0;
-        var y = 0;
-        if (Blessing is null)
-        {
-            width = 720;
-            x = 90;
-        }
-        imageCtx.Crop(new Rectangle(x,y,width,height));
-    
         return image;
     }
     public sealed override   Task<Image<Rgba32>> GetDetailsImageAsync()
@@ -673,14 +532,7 @@ public abstract partial  class Character : BattleEntity, ISetup
 
 
 
-    [NotMapped] public int BaseMaxHealth    { get
-        {
-            var points = EquippedCharacterBuild?.MaxHealthPoints;
-
-            return GetMaxHealthValue(points.GetValueOrDefault(0)).Round();
-
-        }
-    }
+    [NotMapped] public virtual int BaseMaxHealth { get; } = 100;
 
     public int MaxHealth
     {
@@ -718,24 +570,10 @@ public abstract partial  class Character : BattleEntity, ISetup
         }
     }
 
-    [NotMapped] public  int BaseDefense    { get
-        {
-            var points = EquippedCharacterBuild?.DefensePoints;
-
-            return GetDefenseValue(points.GetValueOrDefault(0)).Round();
-
-        }
-    }
+    [NotMapped] public  virtual int BaseDefense  { get; }
     [NotMapped] public virtual Element Element { get; protected set; } = Element.Fire;
 
-    [NotMapped] public int BaseSpeed    { get
-        {
-            var points = EquippedCharacterBuild?.SpeedPoints;
-
-            return GetSpeedValue(points.GetValueOrDefault(0)).Round();
-
-        }
-    }
+    [NotMapped] public virtual int BaseSpeed { get;  }
     public float Speed
     {
         get
@@ -805,17 +643,7 @@ public abstract partial  class Character : BattleEntity, ISetup
     }
 
     [NotMapped]
-    public int BaseAttack
-    {
-        get
-        {
-            var points = EquippedCharacterBuild?.AttackPoints;
-            
-            return GetAttackValue(points.GetValueOrDefault(0)).Round();
-
-        }
-    }
-
+    public virtual int BaseAttack { get;  }
 
 
     public float Attack { 
@@ -853,15 +681,7 @@ public abstract partial  class Character : BattleEntity, ISetup
     }
 
     [NotMapped]
-    public  int BaseCriticalDamage  
-    { get
-        {
-            var points = EquippedCharacterBuild?.CriticalDamagePoints;
-
-            return GetCriticalDamageValue(points.GetValueOrDefault(0)).Round();
-
-        }
-    }
+    public  virtual int BaseCriticalDamage  { get; }
 
     public float CriticalDamage {
         get
@@ -888,14 +708,7 @@ public abstract partial  class Character : BattleEntity, ISetup
     }
 
     [NotMapped]
-    public  int BaseEffectiveness    { get
-        {
-            var points = EquippedCharacterBuild?.EffectivenessPoints;
-
-            return GetEffectivenessValue(points.GetValueOrDefault(0)).Round();
-
-        }
-    }
+    public  virtual int BaseEffectiveness { get;}
     [NotMapped]
     public int Resistance {
         get
@@ -1065,14 +878,7 @@ public abstract partial  class Character : BattleEntity, ISetup
         }
     }
 
-    [NotMapped] public  int BaseResistance    { get
-        {
-            var points = EquippedCharacterBuild?.ResistancePoints;
-
-            return GetResistanceValue(points.GetValueOrDefault(0)).Round();
-
-        }
-    }
+    [NotMapped] public  virtual int BaseResistance  { get;}
 
 
     [NotMapped]
@@ -1105,14 +911,7 @@ public abstract partial  class Character : BattleEntity, ISetup
 
 
     [NotMapped]
-    public  int BaseCriticalChance    { get
-        {
-            var points = EquippedCharacterBuild?.CriticalChancePoints;
-
-            return GetCriticalChanceValue(points.GetValueOrDefault(0)).Round();
-
-        }
-    }
+    public  virtual int BaseCriticalChance { get;  }
 
     [NotMapped] public BattleSimulator CurrentBattle => Team?.CurrentBattle!;
 
@@ -1121,23 +920,7 @@ public abstract partial  class Character : BattleEntity, ISetup
     public override int MaxLevel => 120;
     
     
-    public static float CalculateStat(int initialValue,  int maxValue, int points)
-    {
-        var maxPoints = CharacterBuild.MaxPointsPerStat;
-        // Ensure points are within the valid range (0 to maxPoints)
-        points = Math.Clamp(points, 0, maxPoints);
 
-        // Calculate the increase per point
-        float increasePerPoint = (float)(maxValue - initialValue) / maxPoints;
-
-        // Calculate the final stat value
-        var finalStatValue = initialValue + (points * increasePerPoint);
-
-        // Ensure the final value doesn't exceed the maxValue
-        finalStatValue = Math.Min(finalStatValue, maxValue);
-
-        return finalStatValue;
-    }
     public void SetLevel(int level)
     {
         if (level > MaxLevel) level = MaxLevel;
@@ -1165,7 +948,7 @@ public abstract partial  class Character : BattleEntity, ISetup
     /// change the Total properties, and avoid calling this method. its called in load async unless u set thee
     /// bool param to false
     /// </summary>
-    public virtual void LoadBuild()
+    public virtual void LoadGear()
     {
         TotalAttack = BaseAttack;
         TotalDefense = BaseDefense;
@@ -1181,23 +964,23 @@ public abstract partial  class Character : BattleEntity, ISetup
             TotalMaxHealth += Blessing.Health;
         }
     }
-    public sealed override async Task LoadAsync()
+    public sealed override  Task LoadAsync()
     {
   
-        await LoadAsync(true);
+        return LoadAsync(true);
 
 
 
     }
     
-    public virtual async Task LoadAsync(bool loadBuild)
+    public virtual async Task LoadAsync(bool loadGear)
     {
         await base.LoadAsync();
         
-        if(loadBuild)
-            LoadBuild();
-        if(TotalMaxHealth != 0)
-            Health = TotalMaxHealth.Round();
+        if(loadGear)
+            LoadGear();
+
+        Health = TotalMaxHealth.Round();
 
 
     }

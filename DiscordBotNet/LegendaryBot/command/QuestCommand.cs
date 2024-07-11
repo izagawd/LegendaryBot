@@ -23,7 +23,7 @@ public class QuestCommand : GeneralCommandClass
         await DatabaseContext.SaveChangesAsync();
         var userData = await DatabaseContext.UserData
             .Include(i => i.Quests)
-            .FindOrCreateAsync((long)author.Id);
+            .FindOrCreateUserDataAsync((long)author.Id);
         var questString = "";
         var embed = new DiscordEmbedBuilder()
             .WithUser(author)

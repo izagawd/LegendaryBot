@@ -43,7 +43,7 @@ public class PlayerTeam : CharacterTeam
     {
         
     }
-    public long Id { get; set; } 
+    public Guid Id { get; set; } 
     public long UserDataId { get; set; }
     
 }
