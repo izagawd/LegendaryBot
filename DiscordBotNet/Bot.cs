@@ -47,8 +47,7 @@ public static class Bot
         IEnumerable<Type> idk = DefaultObjects.AllAssemblyTypes;
         var postgr = new PostgreSqlContext();
    
-        postgr.SaveChanges();
-        return;
+ 
          await new PostgreSqlContext().ResetDatabaseAsync();
     }
     private static async Task Main(string[] args)
