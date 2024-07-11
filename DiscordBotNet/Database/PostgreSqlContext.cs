@@ -29,7 +29,7 @@ public class PostgreSqlContext : DbContext
     public DbSet<UserData> UserData { get; set; }
     public DbSet<GuildData> GuildData { get; set; }
     public DbSet<Entity> Entity { get; set; }
-    public DbSet<Quest> Quests { get; set; }
+
 
     public DbSet<Quote> Quote { get; set; }
 
@@ -124,18 +124,7 @@ public class PostgreSqlContext : DbContext
 
 
   
-        modelBuilder.Entity<Artifact>(entity =>
-        {
 
-            entity.HasOne(i => i.MainStat)
-                .WithOne()
-                .HasForeignKey<ArtifactStat>(i => i.IsMainStat);
-            entity.HasMany(i => i.Stats)
-                .WithOne(i => i.Artifact)
-                .HasForeignKey(i => i.GearId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-        });
 
         modelBuilder
             .ApplyConfiguration(new UserDataDatabaseConfiguration())
