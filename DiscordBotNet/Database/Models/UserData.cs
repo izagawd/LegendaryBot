@@ -8,6 +8,8 @@ using DiscordBotNet.LegendaryBot.Quests;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
@@ -175,4 +177,42 @@ public class UserData :   ICanBeLeveledUp
     public string Language { get; set; } = "english";
     public List<Entity> Inventory { get; protected set; } = [];
 
+
+
+}
+public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
+{
+    public void Configure(EntityTypeBuilder<UserData> builder)
+    {
+        builder.Property(i => i.Color)
+            .HasConversion(i => i.ToString(), j => new DiscordColor(j)
+            );
+        builder.HasMany(i => i.PlayerTeams)
+            .WithOne(i => i.UserData)
+            .HasForeignKey(i => i.UserDataId);
+                    
+        builder
+            .HasMany(i => i.Inventory)
+            .WithOne(i => i.UserData)
+            .HasForeignKey(i => i.UserDataId);
+        builder
+            .HasOne(i => i.EquippedPlayerTeam)
+            .WithOne()
+            .HasForeignKey<PlayerTeam>(i => i.IsEquipped)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        builder
+            .HasMany(i => i.Quests)
+            .WithOne()
+            .HasForeignKey(i => i.UserDataId);
+        builder
+            .HasMany(i => i.Quotes)
+            .WithOne(i => i.UserData)
+            .HasForeignKey(i => i.UserDataId);
+        builder.HasMany(i => i.QuoteReactions)
+            .WithOne(i => i.UserData)
+            .HasForeignKey(i => i.UserDataId);
+        builder.HasKey(i => i.Id);
+
+    }
 }

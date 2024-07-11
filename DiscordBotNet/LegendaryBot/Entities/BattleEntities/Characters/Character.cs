@@ -6,6 +6,7 @@ using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.DialogueNamespace;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Artifacts;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 using DiscordBotNet.LegendaryBot.ModifierInterfaces;
@@ -14,14 +15,32 @@ using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Caching.Memory;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using Barrier = DiscordBotNet.LegendaryBot.StatusEffects.Barrier;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
+
+
+public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character>
+{
+    public void Configure(EntityTypeBuilder<Character> entity)
+    {
+        entity.HasMany(i => i.Gears)
+            .WithOne()
+            .HasForeignKey(i => i.CharacterGearEquipperId);
+
+        entity.HasOne(i => i.Blessing)
+            .WithOne(i => i.Character)
+            .HasForeignKey<Blessing>(i => i.CharacterBlessingEquipperId)
+            .OnDelete(DeleteBehavior.SetNull);
+    }
+}
 /// <summary>
 /// Don't forget to load the character with LoadAsync before using it in combat.
 /// Characters can also be loaded at once if they are in a CharacterTeam and LoadAsync is called
@@ -320,7 +339,7 @@ public abstract partial  class Character : BattleEntity
         
     }
 
-    public List<Gears.Gear> Gears { get; set; } = [];
+    public List<Artifact> Gears { get; set; } = [];
 
 
 

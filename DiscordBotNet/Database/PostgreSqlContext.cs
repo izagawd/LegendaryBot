@@ -4,9 +4,9 @@ using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Entities;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Artifacts;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Quests;
 
 using DSharpPlus.Entities;
@@ -120,125 +120,36 @@ public class PostgreSqlContext : DbContext
             modelBuilder.Entity(entityType);
         }
 
+        
 
 
   
-        modelBuilder.Entity<Gear>(entity =>
+        modelBuilder.Entity<Artifact>(entity =>
         {
 
             entity.HasOne(i => i.MainStat)
                 .WithOne()
-                .HasForeignKey<GearStat>(i => i.IsMainStat);
+                .HasForeignKey<ArtifactStat>(i => i.IsMainStat);
             entity.HasMany(i => i.Stats)
-                .WithOne(i => i.Gear)
+                .WithOne(i => i.Artifact)
                 .HasForeignKey(i => i.GearId)
                 .OnDelete(DeleteBehavior.Cascade);
 
         });
-       
-        modelBuilder.Entity<UserData>(entity =>
-        {
-            entity.Property(i => i.Color)
-                .HasConversion(i => i.ToString(), j => new DiscordColor(j)
-                );
-            entity.HasMany(i => i.PlayerTeams)
-                .WithOne(i => i.UserData)
-                .HasForeignKey(i => i.UserDataId);
-                    
-            entity
-                .HasMany(i => i.Inventory)
-                .WithOne(i => i.UserData)
-                .HasForeignKey(i => i.UserDataId);
-            entity
-                .HasOne(i => i.EquippedPlayerTeam)
-                .WithOne()
-                .HasForeignKey<PlayerTeam>(i => i.IsEquipped)
-                .OnDelete(DeleteBehavior.SetNull);
 
-            entity
-                .HasMany(i => i.Quests)
-                .WithOne()
-                .HasForeignKey(i => i.UserDataId);
-            entity
-                .HasMany(i => i.Quotes)
-                .WithOne(i => i.UserData)
-                .HasForeignKey(i => i.UserDataId);
-
-        });
-
-        modelBuilder.Entity<Entity>(entity =>
-        {
-            entity.HasKey(i => i.Id);
-            
-            entity
-                .Property(i => i.Id)
-                .ValueGeneratedOnAdd();
-        });
-
-        modelBuilder.Entity<Quote>(entity =>
-        {
-            entity.HasKey(i => i.Id);
-            entity
-                .Property(i => i.Id)
-                .ValueGeneratedOnAdd();
-            entity.HasMany(i => i.QuoteReactions)
-                .WithOne(i => i.Quote)
-                .HasForeignKey(i => i.QuoteId);
-        });
-
-        modelBuilder.Entity<PlayerTeam>(entity =>
-        {
-            entity.Property(i => i.Id)
-                .ValueGeneratedOnAdd();
-            entity.HasIndex(i => new { i.UserDataId, i.TeamName })
-                .IsUnique();
-            entity    .Navigation(i => i.Characters)
-                .AutoInclude();
-            entity.HasKey(i => i.Id);
-            entity.HasMany<Character>(i => i.Characters)
-                .WithMany(i => i.PlayerTeams)
-                .UsingEntity<CharacterPlayerTeam>(i
-                    => i.HasOne<Character>().WithMany().HasForeignKey(j => j.CharacterId), i =>
-                    i.HasOne<PlayerTeam>().WithMany().HasForeignKey(j => j.PlayerTeamId), i =>
-                    i.HasKey(j => new { j.CharacterId, j.PlayerTeamId }));
-        });
-    
-
-            
-        modelBuilder.Entity<Character>(entity =>
-        {
-            entity.HasMany(i => i.Gears)
-                .WithOne()
-                .HasForeignKey(i => i.CharacterGearEquipperId);
-
-            entity .HasOne(i => i.Blessing)
-                .WithOne(i => i.Character)
-                .HasForeignKey<Blessing>(i => i.CharacterBlessingEquipperId)
-                .OnDelete(DeleteBehavior.SetNull);
-        });
-
-
-
-        modelBuilder.Entity<Player>()
-            .Property(i => i.Element)
-            .HasColumnName(nameof(Player.Element));
+        modelBuilder
+            .ApplyConfiguration(new UserDataDatabaseConfiguration())
+            .ApplyConfiguration(new EntityDatabaseConfiguration())
+            .ApplyConfiguration(new QuoteDatabaseConfiguration())
+            .ApplyConfiguration(new PlayerTeamDatabaseConfiguration())
+            .ApplyConfiguration(new CharacterDatabaseConfiguration())
+            .ApplyConfiguration(new PlayerDatabaseConfiguration())
+            .ApplyConfiguration(new ArtifactDatabaseConfiguration());
 
 
 
 
-        modelBuilder.Entity<UserData>(entity =>
-        {
-            entity.HasMany(i => i.QuoteReactions)
-                .WithOne(i => i.UserData)
-                .HasForeignKey(i => i.UserDataId);
-            entity.HasKey(i => i.Id);
 
-        });
-       
 
-  
-    
-           
-        
     }
 }

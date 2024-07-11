@@ -1,11 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.Database.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace DiscordBotNet.LegendaryBot.Entities;
 
 public abstract class Entity : ICloneable, IImageHaver
 {
+    
+   
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
     public override string ToString()
     {
@@ -60,5 +64,16 @@ public abstract class Entity : ICloneable, IImageHaver
     public IEnumerable<string> ImageUrls
     {
         get { yield return ImageUrl; }
+    }
+}
+public class  EntityDatabaseConfiguration : IEntityTypeConfiguration<Entity>
+{
+    public void Configure(EntityTypeBuilder<Entity> builder)
+    {
+        builder.HasKey(i => i.Id);
+        
+        builder
+            .Property(i => i.Id)
+            .ValueGeneratedOnAdd();
     }
 }

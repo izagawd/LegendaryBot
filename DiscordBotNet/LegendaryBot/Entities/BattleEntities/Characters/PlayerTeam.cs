@@ -1,9 +1,31 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using DiscordBotNet.Database.ManyToManyInstances;
 using DiscordBotNet.Database.Models;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
+public class PlayerTeamDatabaseConfiguration : IEntityTypeConfiguration<PlayerTeam>
+{
+    public void Configure(EntityTypeBuilder<PlayerTeam> entity)
+    {
+        entity.Property(i => i.Id)
+            .ValueGeneratedOnAdd();
+        entity.HasIndex(i => new { i.UserDataId, i.TeamName })
+            .IsUnique();
+        entity    .Navigation(i => i.Characters)
+            .AutoInclude();
+        entity.HasKey(i => i.Id);
+        entity.HasMany<Character>(i => i.Characters)
+            .WithMany(i => i.PlayerTeams)
+            .UsingEntity<CharacterPlayerTeam>(i
+                => i.HasOne<Character>().WithMany().HasForeignKey(j => j.CharacterId), i =>
+                i.HasOne<PlayerTeam>().WithMany().HasForeignKey(j => j.PlayerTeamId), i =>
+                i.HasKey(j => new { j.CharacterId, j.PlayerTeamId }));
+    }
+}
 public class PlayerTeam : CharacterTeam
 {
     [NotMapped]

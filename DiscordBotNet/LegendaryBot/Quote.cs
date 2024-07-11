@@ -1,4 +1,6 @@
 ﻿using DiscordBotNet.Database.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DiscordBotNet.LegendaryBot;
 
@@ -23,8 +25,23 @@ public class QuoteReaction
 
     public UserData UserData { get; set; }
 }
+
+public class QuoteDatabaseConfiguration : IEntityTypeConfiguration<Quote>
+{
+    public void Configure(EntityTypeBuilder<Quote> entity)
+    {
+        entity.HasKey(i => i.Id);
+        entity
+            .Property(i => i.Id)
+            .ValueGeneratedOnAdd();
+        entity.HasMany(i => i.QuoteReactions)
+            .WithOne(i => i.Quote)
+            .HasForeignKey(i => i.QuoteId);
+    }
+}
 public class Quote 
 {
+    
     public Guid Id { get; set; } 
     public bool IsApproved { get; set; } 
     public long UserDataId { get; set; }

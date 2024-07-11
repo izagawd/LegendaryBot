@@ -12,7 +12,6 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.command;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DSharpPlus;
 
 using DSharpPlus.EventArgs;

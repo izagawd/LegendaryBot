@@ -4,6 +4,8 @@ using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
@@ -118,6 +120,15 @@ public class Ignite : Ultimate
     }
     
 }
+public class PlayerDatabaseConfiguration : IEntityTypeConfiguration<Player>
+{
+    public void Configure(EntityTypeBuilder<Player> builder)
+    {
+        builder.Property(i => i.Element)
+            .HasColumnName(nameof(Player.Element));
+    }
+}
+
 public class Player : Character
 {
 
