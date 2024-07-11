@@ -11,7 +11,6 @@ public abstract class StatsModifierArgs
 
     public required Character CharacterToAffect { get; init; }
  
-    public bool WorksAfterGearCalculation { get; init; } = true;
 
-
+    
 }

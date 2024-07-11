@@ -25,7 +25,7 @@ public class DefenseBuff: StatusEffect, IStatsModifier
             {
                 CharacterToAffect = Affected,
                 ValueToChangeWith = -50,
-                WorksAfterGearCalculation = true
+       
             };
     }
 }

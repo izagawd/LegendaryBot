@@ -39,7 +39,7 @@ public abstract partial  class Character : BattleEntity
     public int ExpIncreaseScale { get; set; } = 1;
 
 
-    public void AddStatusEffects(IEnumerable<StatusEffect> statusEffects, int? effectiveness = null,
+    public void AddStatusEffects(IEnumerable<StatusEffect> statusEffects, float? effectiveness = null,
         bool announce = true)
     {
   
@@ -90,7 +90,7 @@ public abstract partial  class Character : BattleEntity
     /// <param name="statusEffect">The status effect to add</param>
     /// <param name="effectiveness">the effectiveness of the caster. Null to ignore effect resistance</param>
     /// <returns>true if the status effect was successfully added</returns>
-    public StatusEffectInflictResult AddStatusEffect(StatusEffect statusEffect,int? effectiveness = null, bool announce =  true)
+    public StatusEffectInflictResult AddStatusEffect(StatusEffect statusEffect,float? effectiveness = null, bool announce =  true)
     {
         var inflictResult = StatusEffectInflictResult.Failed;
         if (statusEffect is null) return StatusEffectInflictResult.Failed;
@@ -249,11 +249,12 @@ public abstract partial  class Character : BattleEntity
     
 
     [NotMapped]
-    private int _health = 1;
+    private float _health = 1;
     [NotMapped]
     private float _combatReadiness;
     
     public bool IsDead => Health <= 0;
+    
     [NotMapped]
     public CharacterTeam Team { get; set; }
     [NotMapped]
@@ -269,7 +270,7 @@ public abstract partial  class Character : BattleEntity
     } 
 
     [NotMapped]
-    public virtual int Health { 
+    public virtual float Health { 
         get => _health;
         set
         {
@@ -288,7 +289,8 @@ public abstract partial  class Character : BattleEntity
                 CurrentBattle.InvokeBattleEvent(new CharacterDeathEventArgs(this));
                 
             }
-            if(_health > tempMaxHealth) _health = tempMaxHealth;
+
+            if (_health > tempMaxHealth) _health = tempMaxHealth;
         }
     }
 
@@ -534,39 +536,28 @@ public abstract partial  class Character : BattleEntity
 
     [NotMapped] public virtual int BaseMaxHealth { get; } = 100;
 
-    public int MaxHealth
+    public float MaxHealth
     {
         get
         {
-
             float percentage = 100;
-            float originalMaxHealth = TotalMaxHealth;
-            var modifiedStats =
-                GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-            foreach (var i in modifiedStats.Where(i => !i.WorksAfterGearCalculation).OfType<MaxHealthPercentageModifierArgs>())
-            {
-                originalMaxHealth += originalMaxHealth * 0.01f * i.ValueToChangeWith;
-            }
-            foreach (var i in modifiedStats.Where(i => !i.WorksAfterGearCalculation).OfType<MaxHealthFlatModifierArgs>())
-            {
-                originalMaxHealth += i.ValueToChangeWith;
-            }
+            var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
+
             float flat = 0;
 
-            foreach (var i in modifiedStats.Where(i => i.WorksAfterGearCalculation).OfType<MaxHealthPercentageModifierArgs>())
+            foreach (var i in modifiedStats.OfType<MaxHealthPercentageModifierArgs>())
             {
-                percentage +=i.ValueToChangeWith;
+                percentage += i.ValueToChangeWith;
             }
-            foreach (var i in modifiedStats.Where(i => i.WorksAfterGearCalculation).OfType<MaxHealthFlatModifierArgs>())
+            foreach (var i in modifiedStats.OfType<MaxHealthPercentageModifierArgs>())
             {
                 flat += i.ValueToChangeWith;
             }
 
-            float newMaxHealth = originalMaxHealth  * percentage * 0.01f;
+            float newMaxHealth = TotalMaxHealth * percentage * 0.01f;
             newMaxHealth += flat;
             if (newMaxHealth < 0) newMaxHealth = 0;
-
-            return newMaxHealth.Round();
+            return newMaxHealth;
         }
     }
 
@@ -579,33 +570,22 @@ public abstract partial  class Character : BattleEntity
         get
         {
             float percentage = 100;
-            float originalSpeed = TotalSpeed;
-
             var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-            foreach (var i in modifiedStats.Where(i => !i.WorksAfterGearCalculation).OfType<SpeedPercentageModifierArgs>())
-            {
-                originalSpeed += originalSpeed * 0.01f * i.ValueToChangeWith;
-            }
-            foreach (var i in modifiedStats.Where(i => !i.WorksAfterGearCalculation).OfType<SpeedFlatModifierArgs>())
-            {
-                originalSpeed += i.ValueToChangeWith;
-            }
+
             float flat = 0;
 
-
-            foreach (var i in modifiedStats.Where(i => i.WorksAfterGearCalculation).OfType<SpeedPercentageModifierArgs>())
+            foreach (var i in modifiedStats.OfType<SpeedPercentageModifierArgs>())
             {
-                percentage +=i.ValueToChangeWith;
+                percentage += i.ValueToChangeWith;
             }
-            foreach (var i in modifiedStats.Where(i => i.WorksAfterGearCalculation).OfType<SpeedFlatModifierArgs>())
+            foreach (var i in modifiedStats.OfType<SpeedFlatModifierArgs>())
             {
                 flat += i.ValueToChangeWith;
             }
 
-            float newSpeed = originalSpeed  * percentage * 0.01f;
+            float newSpeed = TotalSpeed * percentage * 0.01f;
             newSpeed += flat;
             if (newSpeed < 0) newSpeed = 0;
-
             return newSpeed;
         }
     }
@@ -614,28 +594,20 @@ public abstract partial  class Character : BattleEntity
         get
         {
             float percentage = 100;
-            float originalDefense = TotalDefense;
             var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-            foreach (var i in modifiedStats.Where(i => !i.WorksAfterGearCalculation).OfType<DefensePercentageModifierArgs>())
-            {
-                originalDefense += originalDefense * 0.01f * i.ValueToChangeWith;
-            }
-            foreach (var i in modifiedStats.Where(i => !i.WorksAfterGearCalculation).OfType<DefenseFlatModifierArgs>())
-            {
-                originalDefense += i.ValueToChangeWith;
-            }
+
             float flat = 0;
 
-            foreach (var i in modifiedStats.Where(i => i.WorksAfterGearCalculation).OfType<DefensePercentageModifierArgs>())
+            foreach (var i in modifiedStats.OfType<DefensePercentageModifierArgs>())
             {
-                percentage +=i.ValueToChangeWith;
+                percentage += i.ValueToChangeWith;
             }
-            foreach (var i in modifiedStats.Where(i => i.WorksAfterGearCalculation).OfType<DefenseFlatModifierArgs>())
+            foreach (var i in modifiedStats.OfType<DefenseFlatModifierArgs>())
             {
                 flat += i.ValueToChangeWith;
             }
 
-            float newDefense = originalDefense  * percentage * 0.01f;
+            float newDefense = TotalDefense * percentage * 0.01f;
             newDefense += flat;
             if (newDefense < 0) newDefense = 0;
             return newDefense;
@@ -649,33 +621,23 @@ public abstract partial  class Character : BattleEntity
     public float Attack { 
         get     
         {
-         
             float percentage = 100;
-            float originalAttack = TotalAttack;
             var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-            foreach (var i in modifiedStats.Where(i => !i.WorksAfterGearCalculation).OfType<AttackPercentageModifierArgs>())
-            {
-                originalAttack += originalAttack * 0.01f * i.ValueToChangeWith;
-            }
-            foreach (var i in modifiedStats.Where(i => !i.WorksAfterGearCalculation).OfType<AttackFlatModifierArgs>())
-            {
-                originalAttack += i.ValueToChangeWith;
-            }
+
             float flat = 0;
-            foreach (var i in modifiedStats.Where(i => i.WorksAfterGearCalculation).OfType<AttackPercentageModifierArgs>())
+
+            foreach (var i in modifiedStats.OfType<AttackPercentageModifierArgs>())
             {
-       
                 percentage += i.ValueToChangeWith;
             }
-
-            foreach (var i in modifiedStats.Where(i => i.WorksAfterGearCalculation).OfType<AttackFlatModifierArgs>())
+            foreach (var i in modifiedStats.OfType<AttackFlatModifierArgs>())
             {
                 flat += i.ValueToChangeWith;
             }
-            float newAttack = originalAttack  * percentage * 0.01f;
+
+            float newAttack = TotalAttack * percentage * 0.01f;
             newAttack += flat;
             if (newAttack < 0) newAttack = 0;
-
             return newAttack;
         } 
     }
@@ -686,51 +648,32 @@ public abstract partial  class Character : BattleEntity
     public float CriticalDamage {
         get
         {
-            float percentage = 0;
-            float originalCriticalDamage = TotalCriticalDamage;
+       
+            float percentage = TotalCriticalDamage;
             var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-            foreach (var i in modifiedStats.Where(i => !i.WorksAfterGearCalculation).OfType<CriticalDamageModifierArgs>())
+            foreach (var i in modifiedStats.OfType<CriticalDamageModifierArgs>())
             {
-                originalCriticalDamage += i.ValueToChangeWith;
+                percentage += i.ValueToChangeWith;
             }
-            
-            foreach (CriticalDamageModifierArgs i in modifiedStats.Where(i => i.WorksAfterGearCalculation).OfType<CriticalDamageModifierArgs>())
-            {
-                percentage +=i.ValueToChangeWith;
-            }
-
-
-            float newCriticalDamage = originalCriticalDamage + percentage;
-
-            if (newCriticalDamage < 0) newCriticalDamage = 0;
-            return newCriticalDamage;
+            return percentage;
         }
     }
 
     [NotMapped]
     public  virtual int BaseEffectiveness { get;}
     [NotMapped]
-    public int Resistance {
+    public float Resistance {
         get
         {
+        
+            float percentage = TotalResistance;
+            var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
+            foreach (var i in modifiedStats.OfType<ResistanceModifierArgs>())
             {
-                float percentage = 0;
-                float originalResistance = TotalResistance;
-                var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-                foreach (var i in modifiedStats.Where(i => !i.WorksAfterGearCalculation).OfType<ResistanceModifierArgs>())
-                {
-                    originalResistance += i.ValueToChangeWith;
-                }
-
-                foreach (ResistanceModifierArgs i in modifiedStats.Where(i => i.WorksAfterGearCalculation).OfType<ResistanceModifierArgs>())
-                {
-                    percentage +=i.ValueToChangeWith;
-                }
-                float newResistance = originalResistance + percentage;
-
-                if (newResistance < 0) newResistance = 0;
-                return newResistance.Round();
+                percentage += i.ValueToChangeWith;
             }
+            return percentage;
+            
         } 
     }
     /// <summary>
@@ -855,26 +798,18 @@ public abstract partial  class Character : BattleEntity
     [NotMapped] public virtual DiscordColor Color { get; protected set; } = DiscordColor.Green;
 
     [NotMapped]
-    public int Effectiveness
+    public float Effectiveness
     {
         get
         {
-            float percentage =0;
-            float originalEffectiveness = TotalEffectiveness;
+       
+            float percentage = TotalEffectiveness;
             var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-            foreach (var i in modifiedStats.Where(i => !i.WorksAfterGearCalculation).OfType<EffectivenessModifierArgs>())
+            foreach (var i in modifiedStats.OfType<EffectivenessModifierArgs>())
             {
-                originalEffectiveness += i.ValueToChangeWith;
+                percentage += i.ValueToChangeWith;
             }
-
-            foreach (EffectivenessModifierArgs i in modifiedStats.Where(i => i.WorksAfterGearCalculation).OfType<EffectivenessModifierArgs>())
-            {
-                percentage +=i.ValueToChangeWith;
-            }
-            float newEffectiveness = originalEffectiveness  +percentage;
-
-            if (newEffectiveness < 0) newEffectiveness = 0;
-            return newEffectiveness.Round();
+            return percentage;
         }
     }
 
@@ -885,26 +820,13 @@ public abstract partial  class Character : BattleEntity
     public float CriticalChance {
         get
         {
+            float percentage = TotalCriticalChance;
+            var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
+            foreach (var i in modifiedStats.OfType<CriticalChanceModifierArgs>())
             {
-                float percentage = 0;
-                float originalCriticalChance = TotalCriticalChance;
-                var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-                foreach (var i in modifiedStats.Where(i => !i.WorksAfterGearCalculation).OfType<CriticalChanceModifierArgs>())
-                {
-                    originalCriticalChance += i.ValueToChangeWith;
-                }
-
-                foreach (CriticalChanceModifierArgs i in modifiedStats.Where(i => i.WorksAfterGearCalculation).OfType<CriticalChanceModifierArgs>())
-                {
-                    percentage +=i.ValueToChangeWith;
-                }
-
-
-                float newCriticalChance = originalCriticalChance  + percentage;
-
-                if (newCriticalChance < 0) newCriticalChance = 0;
-                return newCriticalChance;
+                percentage += i.ValueToChangeWith;
             }
+            return percentage;
         }
         
     }

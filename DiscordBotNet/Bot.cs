@@ -7,10 +7,12 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using DiscordBotNet.Database;
+using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.command;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DSharpPlus;
 
 using DSharpPlus.EventArgs;
@@ -40,18 +42,14 @@ public static class Bot
     }
 
 
-    private static  Task DoShitAsync()
+    private static async Task DoShitAsync()
     {
         IEnumerable<Type> idk = DefaultObjects.AllAssemblyTypes;
-      
-        var stop = new Stopwatch();
-
-        foreach (var i in idk)
-        {
-            
-        }
-        stop.Elapsed.TotalMicroseconds.Print();
-        return new PostgreSqlContext().ResetDatabaseAsync();
+        var postgr = new PostgreSqlContext();
+   
+        postgr.SaveChanges();
+        return;
+         await new PostgreSqlContext().ResetDatabaseAsync();
     }
     private static async Task Main(string[] args)
     {

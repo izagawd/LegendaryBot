@@ -122,10 +122,19 @@ public class PostgreSqlContext : DbContext
 
 
 
+  
         modelBuilder.Entity<Gear>(entity =>
-            {
-                
-            });
+        {
+
+            entity.HasOne(i => i.MainStat)
+                .WithOne()
+                .HasForeignKey<GearStat>(i => i.IsMainStat);
+            entity.HasMany(i => i.Stats)
+                .WithOne(i => i.Gear)
+                .HasForeignKey(i => i.GearId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+        });
        
         modelBuilder.Entity<UserData>(entity =>
         {
@@ -143,7 +152,7 @@ public class PostgreSqlContext : DbContext
             entity
                 .HasOne(i => i.EquippedPlayerTeam)
                 .WithOne()
-                .HasForeignKey<PlayerTeam>(i => i.EquippedUserDataId)
+                .HasForeignKey<PlayerTeam>(i => i.IsEquipped)
                 .OnDelete(DeleteBehavior.SetNull);
 
             entity

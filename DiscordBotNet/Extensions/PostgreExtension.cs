@@ -69,13 +69,18 @@ public static class PostgreExtension
             .ThenInclude(i => i.Blessing);
     }
 
+    /// <summary>
+    /// Note: this also includes their gear stats
+    /// </summary>
+
     public static IQueryable<UserData> IncludeTeamWithGears
         (this IQueryable<UserData> queryable)
     {
         return queryable
             .Include(i => i.EquippedPlayerTeam)
             .ThenInclude(i => i!.Characters)
-            .ThenInclude(i => i.Gears);
+            .ThenInclude(i => i.Gears)
+            .ThenInclude(i => i.Stats);
     }
 
     public static IQueryable<UserData> IncludeTeamWithAllEquipments

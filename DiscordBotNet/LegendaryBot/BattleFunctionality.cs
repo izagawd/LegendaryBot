@@ -29,7 +29,7 @@ public static  class BattleFunctionality
         return (long)Math.Floor(expGain / 10) + 1;
     }
 
-    public static bool CheckForResist(int effectiveness, int resistance)
+    public static bool CheckForResist(float effectiveness, float resistance)
     {
         var percentToResistance = resistance - effectiveness;
         if (percentToResistance < 0) percentToResistance = 0;

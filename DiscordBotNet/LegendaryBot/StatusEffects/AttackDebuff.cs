@@ -27,7 +27,7 @@ public class AttackDebuff : StatusEffect, IStatsModifier
         {
             CharacterToAffect = Affected,
             ValueToChangeWith = -50,
-            WorksAfterGearCalculation = true
+
         };
     }
 

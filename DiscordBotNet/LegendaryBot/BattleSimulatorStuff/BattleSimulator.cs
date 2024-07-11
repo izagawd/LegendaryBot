@@ -160,17 +160,6 @@ public class BattleSimulator
         return image;
     }
 
-    struct EntityAndOwnerPair<T>
-    {
-        public T Entity { get; }
-        public Character Owner { get; }
-
-        public EntityAndOwnerPair(T entity, Character User)
-        {
-            Entity = entity;
-            Owner = User;
-        }
-    }
 
 
     static BattleSimulator()
@@ -180,8 +169,6 @@ public class BattleSimulator
             _methodsCache[i] = i.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 .Where(j => j.GetCustomAttribute<BattleEventListenerMethodAttribute>() is not null)
                 .ToDictionary(j => j, j => j.GetCustomAttribute<BattleEventListenerMethodAttribute>())!;
-            
-            
         }
 
         List<MethodInfo> invalidMethods = [];

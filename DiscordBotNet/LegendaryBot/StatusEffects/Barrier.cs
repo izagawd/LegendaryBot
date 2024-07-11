@@ -7,13 +7,13 @@ public class Barrier : StatusEffect
     public override string Description => "Protects the caster with a barrier";
     public override int MaxStacks => 1;
     public override StatusEffectType EffectType => StatusEffectType.Buff;
-    private int _shieldValue;
+    private float _shieldValue;
     /// <summary>
     /// using this method makes sure the shield isnt more than the max health
     /// </summary>
     /// <param name="owner"></param>
     /// <returns></returns>
-    public int GetShieldValue(Character User)
+    public float GetShieldValue(Character User)
     {
         var maxHealth = User.MaxHealth;
         if (_shieldValue <= maxHealth)
@@ -25,7 +25,7 @@ public class Barrier : StatusEffect
         return maxHealth;
     }
 
-    public void SetShieldValue(int value)
+    public void SetShieldValue(float value)
     {
         if (value <= 0)
         {
