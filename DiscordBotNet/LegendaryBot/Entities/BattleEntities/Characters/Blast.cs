@@ -96,14 +96,25 @@ public class VolcanicEruption : Ultimate
         return new UsageResult(this){UsageType = usageType, TargetType = TargetType.AOE, User = User, Text = "What's this?"};
     }
 }
-public class Blast : CharacterPartials.Character
+public class Blast : Character
 {
     public override Rarity Rarity { get; protected set; } = Rarity.FourStar;
     public override DiscordColor Color { get; protected set; } = DiscordColor.Brown;
 
+    protected override float BaseSpeedMultiplier => 1.1f;
+    protected override float BaseAttackMultiplier => 1.05f;
 
 
-    public override Ultimate? Ultimate { get;  } = new VolcanicEruption();
-    public override Skill? Skill { get; } = new BlowAway();
-    public override BasicAttack BasicAttack { get; } = new MethaneSlap();
+
+
+    public Blast()
+    {
+        Ultimate = new VolcanicEruption(){User = this};
+        Skill = new BlowAway(){User = this};
+        BasicAttack = new MethaneSlap(){User = this};
+      
+    }
+    
+
+
 }

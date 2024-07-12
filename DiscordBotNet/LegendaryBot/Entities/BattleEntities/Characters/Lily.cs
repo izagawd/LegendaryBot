@@ -116,10 +116,9 @@ public class LilyOfTheValley : Ultimate
 }
 public class Lily : CharacterPartials.Character
 {
+    protected override float BaseSpeedMultiplier => 1.15f;
 
 
-
-    
     public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;
     public override DiscordColor Color { get; protected set; } = DiscordColor.HotPink;
 
@@ -146,9 +145,15 @@ public class Lily : CharacterPartials.Character
 
     }
 
-    public override Skill? Skill { get;  } = new BlossomTouch();
-    public override Ultimate? Ultimate { get; } = new LilyOfTheValley();
-    public override BasicAttack BasicAttack { get; } = new ChamomileSachetWhack();
+
+    public Lily()
+    { 
+        Skill = new BlossomTouch(){User = this};
+        Ultimate  = new LilyOfTheValley(){User = this};
+        BasicAttack = new ChamomileSachetWhack(){User = this};
+        
+    }
+
     public override Element Element => Element.Earth;
 
 

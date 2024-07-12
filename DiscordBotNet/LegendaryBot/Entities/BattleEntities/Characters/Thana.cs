@@ -118,8 +118,14 @@ public class Thana : CharacterPartials.Character
     public override DiscordColor Color { get; protected set; } = DiscordColor.Brown;
 
     public override Element Element => Element.Earth;
-    public override BasicAttack BasicAttack { get; } = new SoulAttack();
 
-    public override Skill? Skill { get; } = new YourLifeEnergyIsMine();
-    public override Ultimate? Ultimate { get; } = new Arise();
+
+    public Thana()
+    {
+        BasicAttack = new SoulAttack(){User = this};
+        Skill = new YourLifeEnergyIsMine(){User = this};
+        Ultimate = new Arise(){User = this};
+        
+    }
+
 }

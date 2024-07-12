@@ -112,10 +112,13 @@ public class Cheerleader : CharacterPartials.Character
 
 
 
-   
 
+    public Cheerleader()
+    {
+        BasicAttack = new PomPomAttack(){User = this};
+        Skill = new YouCanDoIt(){User = this};
+        Ultimate = new YouCanMakeItEveryone(){User = this};
+       
+    }
 
-    public override BasicAttack BasicAttack { get; } = new PomPomAttack();
-    public override Skill? Skill { get; } = new YouCanDoIt();
-    public override Ultimate? Ultimate { get; } = new YouCanMakeItEveryone();
 }

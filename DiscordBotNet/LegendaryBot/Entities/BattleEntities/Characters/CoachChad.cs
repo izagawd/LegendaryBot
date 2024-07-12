@@ -90,11 +90,14 @@ public class ThumbsUp : Skill
 }
 public class CoachChad : CharacterPartials.Character, IBattleEventListener
 {
-
-    public override BasicAttack BasicAttack { get; } = new GigaPunch();
-
-    public override Skill? Skill { get;  } = new ThumbsUp();
-    public override Ultimate? Ultimate { get; } = new MuscleFlex();
+    public CoachChad()
+    {
+        BasicAttack = new GigaPunch(){User = this};
+        Skill = new ThumbsUp(){User = this};
+        Ultimate  = new MuscleFlex(){User = this};
+      
+    }
+ 
 
     public override DiscordColor Color => DiscordColor.Purple;
 

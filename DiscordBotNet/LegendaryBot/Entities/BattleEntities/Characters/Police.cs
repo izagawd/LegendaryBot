@@ -83,7 +83,7 @@ public class IAmShooting : Skill
 }
 public class Police : CharacterPartials.Character
 {
-    public override Rarity Rarity { get; protected set; } = Rarity.TwoStar;
+    public override Rarity Rarity => Rarity.TwoStar;
 
     public override IEnumerable<Reward> DroppedRewards
     {
@@ -97,11 +97,12 @@ public class Police : CharacterPartials.Character
         }
     }
 
+    public Police()
+    {
+        BasicAttack = new DoNotResist(){User = this};
+        Skill = new IAmShooting(){User = this};
+     
+    }
 
-    public override BasicAttack BasicAttack => new DoNotResist();
-    public override Skill? Skill => new IAmShooting();
 
-
-
-    public override Ultimate? Ultimate { get; }
 }

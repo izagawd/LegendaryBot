@@ -4,6 +4,7 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Quests;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.Rewards;
@@ -19,6 +20,21 @@ namespace DiscordBotNet.Database.Models;
 
 public class UserData :   ICanBeLeveledUp
 {
+
+    public void MergeItemStacks()
+    {
+        Dictionary<Type, Item> items = [];
+        foreach (var i in Inventory.OfType<Item>().ToArray())
+        {
+            if (!items.ContainsKey(i.GetType()))
+                items[i.GetType()] = i;
+            else
+            {
+                Inventory.Remove(i);
+                items[i.GetType()].Stacks += i.Stacks;
+            }
+        }
+    }
     public long Id { get; set; }
     
     public UserData(long id) : this()
@@ -64,7 +80,7 @@ public class UserData :   ICanBeLeveledUp
             ctx.Draw(SixLabors.ImageSharp.Color.Black, 3, new RectangleF(130, levelBarY, levelBarMaxLevelWidth, 30));
             var font = SystemFonts.CreateFont("Arial", 25);
             ctx.DrawText($"{Experience}/{GetRequiredExperienceToNextLevel()}",font,SixLabors.ImageSharp.Color.Black,new PointF(140,levelBarY));
-            ctx.DrawText($"Level {Level}",font,SixLabors.ImageSharp.Color.Black,new PointF(140,levelBarY - 33));
+            ctx.DrawText($"AdventurerLevel {AdventurerLevel}",font,SixLabors.ImageSharp.Color.Black,new PointF(140,levelBarY - 33));
         });
 
         return image;
@@ -95,7 +111,7 @@ public class UserData :   ICanBeLeveledUp
     }
     public long GetRequiredExperienceToNextLevel()
     {
-        return GetRequiredExperienceToNextLevel(Level);
+        return GetRequiredExperienceToNextLevel(AdventurerLevel);
     }
     /// <summary>
     /// Receives rewards
@@ -130,26 +146,26 @@ public class UserData :   ICanBeLeveledUp
     public ExperienceGainResult IncreaseExp(long experienceToGain)
     {
         var maxLevel = 60;
-        if (Level >= maxLevel)
+        if (AdventurerLevel >= maxLevel)
             return new ExperienceGainResult() { ExcessExperience = experienceToGain, Text = $"you have already reached max level!" };
         string expGainText = "";
         
-        var levelBefore = Level;
+        var levelBefore = AdventurerLevel;
         Experience += experienceToGain;
 
 
-        var nextLevelEXP =GetRequiredExperienceToNextLevel(Level);
-        while (Experience >= nextLevelEXP && Level < maxLevel)
+        var nextLevelEXP =GetRequiredExperienceToNextLevel(AdventurerLevel);
+        while (Experience >= nextLevelEXP && AdventurerLevel < maxLevel)
         {
             Experience -= nextLevelEXP;
-            Level += 1;
-            nextLevelEXP = GetRequiredExperienceToNextLevel(Level);
+            AdventurerLevel += 1;
+            nextLevelEXP = GetRequiredExperienceToNextLevel(AdventurerLevel);
         }
 
         expGainText += $"you gained {experienceToGain} exp";
-        if (levelBefore != Level)
+        if (levelBefore != AdventurerLevel)
         {
-            expGainText += $", and moved from level {levelBefore} to level {Level}";
+            expGainText += $", and moved from level {levelBefore} to level {AdventurerLevel}";
         }
         long excessExp = 0;
         if (Experience > nextLevelEXP)
@@ -172,7 +188,10 @@ public class UserData :   ICanBeLeveledUp
 
 
     public Tier Tier { get; set; } = Tier.Unranked;
-    public int Level { get; set; } = 1;
+
+    
+    int ICanBeLeveledUp.Level => AdventurerLevel;
+    public int AdventurerLevel { get; set; } = 1;
     public DiscordColor Color { get; set; } = DiscordColor.Green;
     public string Language { get; set; } = "english";
     public List<Entity> Inventory { get; protected set; } = [];

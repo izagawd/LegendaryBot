@@ -10,9 +10,8 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities;
 public abstract class BattleEntity : Entity, ICanBeLeveledUp
 {
     
-    public virtual int Level { get; protected set; } = 1;
-    [NotMapped]
-    public virtual int MaxLevel { get; }
+    public int Level { get; protected set; } = 1;
+    [NotMapped] public virtual int MaxLevel => 1;
     public virtual ExperienceGainResult  IncreaseExp(long experienceToGain)
     {
         return new ExperienceGainResult();

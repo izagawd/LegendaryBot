@@ -78,8 +78,7 @@ public abstract class Gear : BattleEntity
     }
 
 
-    [NotMapped]
-    public virtual IEnumerable<Type> PossibleMainStats { get; }
+    [NotMapped] public virtual IEnumerable<Type> PossibleMainStats => [];
 
 
     public Gear(Rarity rarity) : this()

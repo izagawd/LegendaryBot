@@ -41,13 +41,25 @@ public static class Bot
         return new PostgreSqlContext().ResetDatabaseAsync();
     }
 
+    public class Nigga
+    {
+        public virtual int Die { get; set; } = 5;
+        
+        
+    }
+    public class Nigga2 : Nigga
+    {
+        public override int Die { get; set; } = 10;
 
+        public Nigga2()
+        {
+
+        }
+    }
     private static async Task DoShitAsync()
     {
-        var player = new Player();
-        player.SetLevel(1);
-        player.BaseAttack.Print();
-
+        await new PostgreSqlContext().ResetDatabaseAsync();
+       
     }
     private static async Task Main(string[] args)
     {

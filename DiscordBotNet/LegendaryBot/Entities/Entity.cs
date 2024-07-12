@@ -26,8 +26,8 @@ public abstract class Entity : ICloneable, IImageHaver
     {
         return Clone();
     }
-    [NotMapped]
-    public virtual string Description { get; protected set; } = "";
+
+    [NotMapped] public virtual string Description => "";
     [NotMapped] public virtual Rarity Rarity { get; protected set; } = Rarity.OneStar;
     public Entity Clone()
     {
@@ -36,12 +36,8 @@ public abstract class Entity : ICloneable, IImageHaver
         return clone;
     }
 
-    [NotMapped]
-    public virtual string Name
-    {
-        get => BasicFunctionality.Englishify(GetType().Name);
-        protected set {}
-    }
+    [NotMapped] public virtual string Name => BasicFunctionality.Englishify(GetType().Name);
+ 
     public static IEnumerable<Entity> operator *(Entity a, int number)
     {
         if (number <= 0)
@@ -56,8 +52,7 @@ public abstract class Entity : ICloneable, IImageHaver
     }
     public UserData? UserData { get; set; }
 
-    [NotMapped]
-    public virtual string ImageUrl { get; protected set; }
+    [NotMapped] public virtual string ImageUrl => null!;
 
     public Guid Id { get;  set; } 
     public long UserDataId { get; set; }

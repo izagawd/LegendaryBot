@@ -38,7 +38,9 @@ public class BaseballBatWhack : BasicAttack
 
 public class Delinquent : CharacterPartials.Character
 {
-    public override BasicAttack BasicAttack { get; } = new BaseballBatWhack();
-    public override Skill? Skill { get; }
-    public override Ultimate? Ultimate { get; }
+    public Delinquent()
+    {
+        BasicAttack = new BaseballBatWhack(){User = this};
+     
+    }
 }

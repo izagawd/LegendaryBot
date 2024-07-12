@@ -136,65 +136,42 @@ public struct PlayerCachedData
     string Name;
 }
 
+
+
 public class Player : CharacterPartials.Character
 {
 
-
+    protected override IEnumerable<StatType> AscensionStatIncrease =>
+        [StatType.Attack, StatType.Attack, StatType.Speed, StatType.CriticalChance, StatType.CriticalDamage];
     public override bool IsInStandardBanner => false;
     public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;
 
 
-
+    protected override float BaseSpeedMultiplier => 1.1f;
 
     [NotMapped]
     public DiscordUser DiscordUser { get; set; }
-    [NotMapped]
-    private Ultimate FireUltimate { get; } = new Ignite();
-    [NotMapped]
-    private Skill fireSkill { get; } = new FireBall();
-    public override Skill? Skill
-    {
-        get
-        {
-            switch (Element)
-            {
-                case Element.Fire:
-                    return fireSkill;
-                default:
-                    return fireSkill;
-            }
-        }
 
+
+
+    public Player()
+    {
+        Element = Element.Fire;
+        BasicAttack = new FourthWallBreaker(){User = this};
+        Skill = new FireBall(){User = this};
+        Ultimate = new Ignite(){User = this};
+      
     }
 
-    public override BasicAttack BasicAttack { get; } = new FourthWallBreaker();
-
-
-    public override Ultimate? Ultimate
-    {
-        get
-        {
-            switch (Element)
-            {
-                case Element.Fire:
-                    return FireUltimate;
-                default:
-                    return FireUltimate;
-            }
-        }
-
-    }
 
 
     public void SetElement(Element element)
     {
         Element = element;
-        if (CurrentBattle is not null) 
-            CurrentBattle.SetupCharacterForThisBattle(this);
     }
 
- 
-    public override string ImageUrl { get; protected set; }
+    private string _imageUrl;
+    public override string ImageUrl => _imageUrl;
     public override Task<Image<Rgba32>> GetDetailsImageAsync(bool loadBuild)
     {
         
@@ -219,8 +196,8 @@ public class Player : CharacterPartials.Character
         {
             DiscordUser = await Bot.Client.GetUserAsync((ulong)UserDataId);
         }
-        Name = DiscordUser.Username;
-        ImageUrl = DiscordUser.AvatarUrl;
+        _name = DiscordUser.Username;
+        _imageUrl = DiscordUser.AvatarUrl;
         if (UserData is not null)
         {
             Color = UserData.Color;
@@ -228,8 +205,8 @@ public class Player : CharacterPartials.Character
     }
     public void LoadPlayerData(ClaimsPrincipal claimsUser)
     {
-        Name = claimsUser.GetDiscordUserName();
-        ImageUrl = claimsUser.GetDiscordUserAvatarUrl();
+        _name = claimsUser.GetDiscordUserName();
+        _imageUrl = claimsUser.GetDiscordUserAvatarUrl();
         if (UserData is not null)
         {
             Color = UserData.Color;
@@ -237,7 +214,8 @@ public class Player : CharacterPartials.Character
     }
 
 
-    public override string Name { get; protected set; }
+    private string _name = "player";
+    public override string Name => _name;
 
 
 

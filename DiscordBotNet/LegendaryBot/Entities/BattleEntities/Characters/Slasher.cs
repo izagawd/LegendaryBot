@@ -123,7 +123,12 @@ public class Slasher : CharacterPartials.Character
 
     public override Element Element => Element.Earth;
 
-    public override Ultimate? Ultimate { get; } = new ConsecutiveSlashesOfPrecision();
-    public override Skill? Skill { get; } = new WindSlash();
-    public override BasicAttack BasicAttack { get;  } = new SimpleSlashOfPrecision();
+    public Slasher()
+    {
+        Ultimate = new ConsecutiveSlashesOfPrecision(){User = this};
+        Skill = new WindSlash(){User = this};
+        BasicAttack = new SimpleSlashOfPrecision(){User = this};
+       
+    }
+
 }

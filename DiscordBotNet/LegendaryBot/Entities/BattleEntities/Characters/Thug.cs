@@ -38,7 +38,10 @@ public class ThugPunch : BasicAttack
 
 public class Thug : CharacterPartials.Character
 {
-    public override BasicAttack BasicAttack { get; } = new ThugPunch();
-    public override Skill? Skill { get;  }
-    public override Ultimate? Ultimate { get; }
+    public Thug()
+    {
+        BasicAttack = new ThugPunch(){User = this};
+        
+    }
+
 }

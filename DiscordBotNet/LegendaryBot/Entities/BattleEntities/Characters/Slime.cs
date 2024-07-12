@@ -51,8 +51,12 @@ public class Slime : CharacterPartials.Character
 
     public override Rarity Rarity { get; protected set; } = Rarity.TwoStar;
 
-    public override BasicAttack BasicAttack { get; } = new GooeyStrike();
-    public override Skill? Skill => null;
-    public override Ultimate? Ultimate  => null;
+
+    public Slime()
+    {
+        BasicAttack = new GooeyStrike(){User = this};
+        
+    }
+
 
 }

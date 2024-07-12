@@ -56,7 +56,7 @@ public partial class Character
         return toCompute * BaseAttackMultiplier;
     }
 
-    // Implement similar methods for other stats
+ 
     public float GetBaseEffectiveness(int level, int ascension)
     {
         float toCompute = 100;
@@ -105,7 +105,7 @@ public partial class Character
 
     public float GetBaseDefense(int level, int ascension)
     {
-        float toCompute = 60 + ((level - 1) * 7.5f);
+        float toCompute = 70 + ((level - 1) * 8.5f);
         var count = GetStatsToIncreaseBasedOnAscension(ascension).Count(i => i == StatType.Defense);
         var percentageToUse = count * 4;
 

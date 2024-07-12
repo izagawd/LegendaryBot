@@ -239,7 +239,8 @@ public abstract partial  class Character : BattleEntity
     {
         get
         {
-            yield return BasicAttack;
+            if (BasicAttack is not null) yield return BasicAttack;
+       
             if (Skill is not null) yield return Skill;
             if (Ultimate is not null) yield return Ultimate;
         }
@@ -584,7 +585,7 @@ public abstract partial  class Character : BattleEntity
     /// </summary>
     protected virtual IEnumerable<StatType> AscensionStatIncrease =>
     [
-        StatType.Attack, StatType.Defense,
+        StatType.Defense, StatType.Defense,
         StatType.CriticalChance, StatType.CriticalDamage, StatType.Effectiveness
     ];
 
@@ -599,11 +600,14 @@ public abstract partial  class Character : BattleEntity
             yield return i;
         }
     }
+
     [NotMapped] public virtual Element Element { get; protected set; } = Element.Fire;
 
 
-    public int Ascension { get; private set; } = 1;
 
+    public int Ascension { get;  set; } = 1;
+
+  
     public float Speed
     {
         get
@@ -936,7 +940,7 @@ public abstract partial  class Character : BattleEntity
     
 
     [NotMapped]
-    public abstract BasicAttack BasicAttack { get; }
+    public   BasicAttack BasicAttack { get; protected set; }
     
     public string GetNameWithAlphabetIdentifier(bool isEnemy)
     {
@@ -949,12 +953,12 @@ public abstract partial  class Character : BattleEntity
     }
     
     public string NameWithAlphabetIdentifier => $"{Name} ({AlphabetIdentifier})";
-    [NotMapped] public virtual Skill? Skill { get; } 
+    [NotMapped] public  Skill? Skill { get; protected set; } 
     /// <summary>
     /// The position of the player based on combat readiness
     /// </summary>
     public int Position => Array.IndexOf(CurrentBattle.Characters.OrderByDescending(i => i.CombatReadiness).ToArray(),this) +1;
-    [NotMapped] public virtual Ultimate? Ultimate { get; }
+    [NotMapped] public  Ultimate? Ultimate { get; protected set; }
     /// <summary>
     /// Checks if something overrides the player turn eg stun status effect preventing the player from doing anything
     /// </summary>

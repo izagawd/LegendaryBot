@@ -69,7 +69,7 @@ public abstract class Move
     /// <summary>
     /// The character who owns this move
     /// </summary>
-    public Character User { get; set; }
+    public  Character User { get; set; }
 
 
     /// <summary>
