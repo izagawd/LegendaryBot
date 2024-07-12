@@ -1,8 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Numerics;
 using System.Reflection;
-using System.Text;
-using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
@@ -23,7 +20,7 @@ using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using Barrier = DiscordBotNet.LegendaryBot.StatusEffects.Barrier;
 
-namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 
 
@@ -96,13 +93,13 @@ public abstract partial  class Character : BattleEntity
         
         
         if(succeeded.Count > 0)
-            CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded
+            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded
                 ,succeeded.ToArray()));
         if(resisted.Count > 0)
-            CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Resisted
+            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,StatusEffectInflictResult.Resisted
                 ,resisted.ToArray()));
         if(failed.Count > 0)
-            CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Failed
+            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,StatusEffectInflictResult.Failed
                 ,failed.ToArray()));
         
     }
@@ -143,7 +140,7 @@ public abstract partial  class Character : BattleEntity
                 inflictResult =  StatusEffectInflictResult.Succeeded;
             if (announce)
             {
-                CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,inflictResult, statusEffect));
+                CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,inflictResult, statusEffect));
             }
             return inflictResult;
 
@@ -154,7 +151,7 @@ public abstract partial  class Character : BattleEntity
             var onlyStatus = arrayOfType.First();
 
             onlyStatus.OptimizeWith(statusEffect);
-            CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded, statusEffect));
+            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded, statusEffect));
 
 
             return StatusEffectInflictResult.Succeeded;
@@ -162,7 +159,7 @@ public abstract partial  class Character : BattleEntity
         inflictResult = StatusEffectInflictResult.Failed;
         if (announce)
         {
-            CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,inflictResult, statusEffect));
+            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,inflictResult, statusEffect));
         }
         return inflictResult;
     }
@@ -198,7 +195,7 @@ public abstract partial  class Character : BattleEntity
         if (increaseAmount < 0) throw new ArgumentException("Increase amount should be at least 0");
         CombatReadiness += increaseAmount;
         if(announceIncrease && increaseAmount > 0)
-            CurrentBattle.AddAdditionalBattleText(new CombatReadinessChangeBattleText(this, increaseAmount));
+            CurrentBattle.AddAdditionalBattleText(new Character.CombatReadinessChangeBattleText(this, increaseAmount));
         return increaseAmount;
     }
 
@@ -286,7 +283,8 @@ public abstract partial  class Character : BattleEntity
             if (_combatReadiness > 100) _combatReadiness = 100;
             if (_combatReadiness < 0) _combatReadiness = 0;
         }
-    } 
+    }
+
 
     [NotMapped]
     public virtual float Health { 
@@ -304,7 +302,7 @@ public abstract partial  class Character : BattleEntity
             {
                 _health = 0;
          
-                CurrentBattle.AddAdditionalBattleText(new DeathBattleText(this));
+                CurrentBattle.AddAdditionalBattleText(new Character.DeathBattleText(this));
                 _statusEffects.Clear();
                 CurrentBattle.InvokeBattleEvent(new CharacterDeathEventArgs(this));
             
@@ -321,7 +319,7 @@ public abstract partial  class Character : BattleEntity
     {
         if(!IsDead) return;
         _health = 1;
-        CurrentBattle.AddAdditionalBattleText(new ReviveBattleText(this));
+        CurrentBattle.AddAdditionalBattleText(new Character.ReviveBattleText(this));
         CurrentBattle.InvokeBattleEvent(new CharacterReviveEventArgs(this));
     }
 
@@ -351,7 +349,7 @@ public abstract partial  class Character : BattleEntity
     {
         if(IsDead) return;
         _shouldTakeExtraTurn = true;
-        CurrentBattle.AddAdditionalBattleText(new ExtraTurnBattleText(this));
+        CurrentBattle.AddAdditionalBattleText(new Character.ExtraTurnBattleText(this));
     }
     public override string ImageUrl =>$"{Website.DomainName}/battle_images/characters/{GetType().Name}.png";
     public float ShieldPercentage
@@ -554,7 +552,7 @@ public abstract partial  class Character : BattleEntity
 
 
 
-    [NotMapped] public virtual int BaseMaxHealth => 100;
+   
 
     public float MaxHealth
     {
@@ -581,10 +579,31 @@ public abstract partial  class Character : BattleEntity
         }
     }
 
-    [NotMapped] public virtual int BaseDefense => 100;
+    /// <summary>
+    /// Stats to increase when ascending percentage wise. order matters in this case, and it should be exactly 5
+    /// </summary>
+    protected virtual IEnumerable<StatType> AscensionStatIncrease =>
+    [
+        StatType.Attack, StatType.Defense,
+        StatType.CriticalChance, StatType.CriticalDamage, StatType.Effectiveness
+    ];
+
+
+    protected IEnumerable<StatType> GetStatsToIncreaseBasedOnAscension(int ascension)
+    {
+        
+        foreach (var i in AscensionStatIncrease)
+        {
+            ascension--;
+            if(ascension <= 0) yield break;
+            yield return i;
+        }
+    }
     [NotMapped] public virtual Element Element { get; protected set; } = Element.Fire;
 
-    [NotMapped] public virtual int BaseSpeed => 100;
+
+    public int Ascension { get; private set; } = 1;
+
     public float Speed
     {
         get
@@ -634,9 +653,6 @@ public abstract partial  class Character : BattleEntity
         } 
     }
 
-    [NotMapped]
-    public virtual int BaseAttack { get;  }
-
 
     public float Attack { 
         get     
@@ -662,8 +678,6 @@ public abstract partial  class Character : BattleEntity
         } 
     }
 
-    [NotMapped]
-    public  virtual int BaseCriticalDamage  { get; }
 
     public float CriticalDamage {
         get
@@ -679,8 +693,7 @@ public abstract partial  class Character : BattleEntity
         }
     }
 
-    [NotMapped]
-    public  virtual int BaseEffectiveness { get;}
+ 
     [NotMapped]
     public float Resistance {
         get
@@ -833,8 +846,7 @@ public abstract partial  class Character : BattleEntity
         }
     }
 
-    [NotMapped] public  virtual int BaseResistance  { get;}
-
+ 
 
     [NotMapped]
     public float CriticalChance {
@@ -852,16 +864,20 @@ public abstract partial  class Character : BattleEntity
     }
 
 
-    [NotMapped]
-    public  virtual int BaseCriticalChance { get;  }
 
     [NotMapped] public BattleSimulator CurrentBattle => Team?.CurrentBattle!;
 
     public bool RemoveStatusEffect(StatusEffect statusEffect) => _statusEffects.Remove(statusEffect);
 
-    public override int MaxLevel => 120;
-    
-    
+    public override int MaxLevel
+    {
+        get
+        {
+            return Ascension * 10;
+        }
+    }
+
+
 
     public void SetLevel(int level)
     {
@@ -917,145 +933,7 @@ public abstract partial  class Character : BattleEntity
         }
         Health = TotalMaxHealth.Round();
     }
-
     
-
-
-    public void TakeDamageWhileConsideringShield(int damage)
-    {
-        var shield = Shield;
-
-        if (shield is null)
-        {
-            Health -= damage;
-            return;
-        }
-
-        var shieldValue = shield.GetShieldValue(this);
-        // Check if the shield can absorb some of the damage
-        if (shieldValue > 0)
-        {
-            shieldValue -= damage;
-            if (shieldValue < 0)
-            {
-                Health += shieldValue;
-                shieldValue = 0;
-            }
-        }
-        else
-        {
-            // If no shield, damage affects health directly
-            Health -= damage;
-        }
-        shield.SetShieldValue(shieldValue);
-    }
-    public static float DamageFormula(float potentialDamage, float defense)
-    {
-        return (potentialDamage * 375) / (300 + defense);
-    }
-    /// <summary>
-    /// Used to damage this character
-    /// </summary>
-    /// <param name="damage">The potential damage</param>
-    /// <param name="damageText">if there is a text for the damage, then use this. Use $ in the string and it will be replaced with the damage dealt</param>
-    /// <param name="caster">The character causing the damage</param>
-    /// <param name="canCrit">Whether the damage can cause a critical hit or not</param>
-    /// <param name="damageElement">The element of the damage</param>
-    /// <returns>The results of the damage</returns>
-    public  DamageResult Damage(DamageArgs damageArgs)
-    {
-        if (IsDead) throw new Exception("Cannot damage dead character");
-        CurrentBattle.InvokeBattleEvent(new CharacterPreDamageEventArgs(damageArgs));
-        var didCrit = false;
-        var defenseToIgnore = Math.Clamp(damageArgs.DefenseToIgnore,0,100);
-        var defenseToUse = (100 - defenseToIgnore) * 0.01f * Defense;
-        var damageModifyPercentage = 0;
-        
-        var damage = DamageFormula(damageArgs.Damage, defenseToUse);
-
-        var advantageLevel = ElementalAdvantage.Neutral;
-        if(damageArgs.ElementToDamageWith is not null)
-            advantageLevel = BattleFunctionality.GetAdvantageLevel(damageArgs.ElementToDamageWith.Value, Element);
-
-        switch (advantageLevel){
-            case ElementalAdvantage.Disadvantage:
-                damageModifyPercentage -= 30;
-                break;
-            case ElementalAdvantage.Advantage:
-                damageModifyPercentage += 30;
-                break;
-        }
-    
-
-
-        damage = (damage * 0.01f * (damageModifyPercentage + 100));
-        var chance = damageArgs.CriticalChance;
-        if (damageArgs.AlwaysCrits)
-        {
-            chance = 100;
-        }
-        if (BasicFunctionality.RandomChance(chance) && damageArgs.CanCrit)
-        {
-
-            damage *= damageArgs.CriticalDamage / 100.0f;
-            didCrit = true;
-        }
-
-        int actualDamage = damage.Round();
-        var damageText = damageArgs.DamageText;
-        if (damageText is null)
-        {
-            damageText = $"{damageArgs.Caster} dealt {actualDamage} damage to {this}!";
-        }
-
-        damageText = damageText.Replace("$", actualDamage.ToString());
-
-        switch (advantageLevel)
-        {
-            case ElementalAdvantage.Advantage:
-                damageText = "It's super effective! " + damageText;
-                break;
-            case ElementalAdvantage.Disadvantage:
-                damageText = "It's not that effective... " + damageText;
-                break;
-        }
-    
-
-        if (didCrit)
-            damageText = "A critical hit! " + damageText;
-
-    
-        CurrentBattle.AddAdditionalBattleText(damageText);
-        
-        TakeDamageWhileConsideringShield(actualDamage);
-        DamageResult damageResult;
-        if (damageArgs.Move is not null)
-        {
-            damageResult = new DamageResult(damageArgs.Move)
-            {
-                WasCrit = didCrit,
-                Damage = actualDamage,
-                DamageDealer = damageArgs.Caster,
-                DamageReceiver = this,
-                CanBeCountered = damageArgs.CanBeCountered
-            };
-        }
-        else
-        {
-            damageResult = new DamageResult(damageArgs.StatusEffect)
-            {
-                
-                WasCrit = didCrit,
-                Damage = actualDamage,
-                DamageDealer = damageArgs.Caster,
-                DamageReceiver = this,
-                CanBeCountered = damageArgs.CanBeCountered
-            };
-        }
-        CurrentBattle.InvokeBattleEvent(new CharacterPostDamageEventArgs(damageResult));
-        return damageResult;
-    }
-
 
     [NotMapped]
     public abstract BasicAttack BasicAttack { get; }
@@ -1087,73 +965,9 @@ public abstract partial  class Character : BattleEntity
             return _statusEffects.Any(i => i.OverrideTurnType > 0);
         }
     }
-    /// <param name="damageText">if there is a text for the damage, then use this. Use $ in the string and it will be replaced with the damage dealt</param>
-  /// <param name="caster">The character causing the damage</param>
-/// <param name="damage">The potential damage</param>
-    public DamageResult? FixedDamage(DamageArgs damageArgs)
-    {
-        if (IsDead) return null;
-        var damageText = damageArgs.DamageText;
-        var damage = damageArgs.Damage;
-        var caster = damageArgs.Caster;
-        var canBeCountered = damageArgs.CanBeCountered;
-        if (damageText is null)
-        {
-            damageText = $"{this} took $ fixed damage!";
-        }
-        CurrentBattle.AddAdditionalBattleText(damageText.Replace("$", damage.Round().ToString()));
-        TakeDamageWhileConsideringShield(damage.Round());
-        DamageResult damageResult;
-        if (damageArgs.Move is not null)
-        {
-            damageResult = new DamageResult(damageArgs.Move)
-            {
-              
-                WasCrit = false,
-                Damage = damage.Round(),
-                DamageDealer = caster, 
-                DamageReceiver = this,
-                CanBeCountered = canBeCountered
-            };
-        }
-        else
-        {
-            damageResult = new DamageResult(damageArgs.StatusEffect)
-            {
-              
-                WasCrit = false,
-                Damage = damage.Round(),
-                DamageDealer = caster, 
-                DamageReceiver = this,
-                CanBeCountered = canBeCountered
-            };
-        }
-            
-        CurrentBattle.InvokeBattleEvent(new CharacterPostDamageEventArgs(damageResult));
-        return damageResult;
-    }
+
 
     public List<PlayerTeam> PlayerTeams { get; protected set; } = [];
-    /// <summary>
-    /// Recovers the health of this character
-    /// </summary>
-    /// <param name="toRecover">Amount to recover</param>
-    /// <param name="recoveryText">text to say when health recovered. use $ to represent health recovered</param>
-    /// <returns>Amount recovered</returns>
-    public virtual int RecoverHealth(float toRecover,
-        string? recoveryText = null, bool announceHealing = true)
-    {
-        if (IsDead) return 0;
-        var healthToRecover = toRecover.Round();
-
-        Health += healthToRecover;
-        if (recoveryText is null)
-            recoveryText = $"{this} recovered $ health!";
-        if(announceHealing)
-            CurrentBattle.AddAdditionalBattleText(recoveryText.Replace("$",healthToRecover.ToString()));
-        
-        return healthToRecover;
-    }
 
 
 
@@ -1165,9 +979,9 @@ public abstract partial  class Character : BattleEntity
     }
 
     /// <summary>
-/// Increases the Exp of a character and returns useful text
-/// </summary>
-/// <returns></returns>
+    /// Increases the Exp of a character and returns useful text
+    /// </summary>
+    /// <returns></returns>
     public override ExperienceGainResult IncreaseExp(long experienceToGain)
     {
         if (Level >= MaxLevel)
@@ -1176,12 +990,12 @@ public abstract partial  class Character : BattleEntity
         
         var levelBefore = Level;
         Experience += experienceToGain;
-        var nextLevelEXP =GetRequiredExperienceToNextLevel(Level);
-        while (Experience >= nextLevelEXP && Level < MaxLevel)
+        var nextLevelExp =GetRequiredExperienceToNextLevel(Level);
+        while (Experience >= nextLevelExp && Level < MaxLevel)
         {
-            Experience -= nextLevelEXP;
+            Experience -= nextLevelExp;
             Level += 1;
-            nextLevelEXP = GetRequiredExperienceToNextLevel(Level);
+            nextLevelExp = GetRequiredExperienceToNextLevel(Level);
         }
         expGainText += $"{this} gained {experienceToGain} exp";
         if (levelBefore != Level)
@@ -1189,9 +1003,9 @@ public abstract partial  class Character : BattleEntity
             expGainText += $", and moved from level {levelBefore} to level {Level}";
         }
         long excessExp = 0;
-        if (Experience > nextLevelEXP)
+        if (Experience > nextLevelExp)
         {
-            excessExp = Experience - nextLevelEXP;
+            excessExp = Experience - nextLevelExp;
         }
         expGainText += "!";
         return new ExperienceGainResult(){ExcessExperience = excessExp, Text = expGainText};

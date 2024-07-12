@@ -7,8 +7,8 @@ using DSharpPlus.Entities;
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class SoulAttack : BasicAttack
 {
-    public override string GetDescription(Character character) => "Uses the souls of the dead to attack, with a 25% chance to sleep!";
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    public override string GetDescription(CharacterPartials.Character character) => "Uses the souls of the dead to attack, with a 25% chance to sleep!";
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -37,12 +37,12 @@ public class YourLifeEnergyIsMine : Skill
 {
 
 
-    public override string GetDescription(Character character) => "Sucks the life energy out of the enemy, recovering 20% of damage dealt as hp";
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override string GetDescription(CharacterPartials.Character character) => "Sucks the life energy out of the enemy, recovering 20% of damage dealt as hp";
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -77,14 +77,14 @@ public class Arise : Ultimate
 
     public override int MaxCooldown =>6;
 
-    public override string GetDescription(Character character) =>
+    public override string GetDescription(CharacterPartials.Character character) =>
         $"Grants all allies immortality, increases the caster's attack for 2 turns, and grants her an extra turn";
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.Team;
     }
     
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         User.CurrentBattle.AddAdditionalBattleText($"With her necromancy powers, {User.NameWithAlphabetIdentifier} attempts to bring back all her dead allies!");
 
@@ -111,7 +111,7 @@ public class Arise : Ultimate
         };
     }
 }
-public class Thana : Character
+public class Thana : CharacterPartials.Character
 {
 
     public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;

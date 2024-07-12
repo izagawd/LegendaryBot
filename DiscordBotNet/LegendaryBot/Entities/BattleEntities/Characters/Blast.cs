@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.LegendaryBot.Moves;
+﻿using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
@@ -7,11 +8,11 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class MethaneSlap : BasicAttack
 {
-    public override string GetDescription(Character character) => $"Slaps the enemy, " +
+    public override string GetDescription(CharacterPartials.Character character) => $"Slaps the enemy, " +
                                                                   $"producing methane around the enemy, with a " +
                                                                   $"{DetonateChance}% chance to detonate all the bombs the target has";
     public int DetonateChance => 75;
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -44,15 +45,15 @@ public class BlowAway : Skill
 {
     
     public override int MaxCooldown => 4;
-    public override string GetDescription(Character character) => $"Throws multiple bombs at the enemy, with a {BombInflictChance} each to inflict Bomb status effect";
+    public override string GetDescription(CharacterPartials.Character character) => $"Throws multiple bombs at the enemy, with a {BombInflictChance} each to inflict Bomb status effect";
 
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
     public int BombInflictChance => 100;
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
                 
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} threw multiple bombs at the opposing team!");
@@ -78,16 +79,16 @@ public class BlowAway : Skill
 }
 public class VolcanicEruption : Ultimate
 {
-    public override string GetDescription(Character character) => $"Makes the user charge up a very powerful explosion that hits all enemies for 4 turns!";
+    public override string GetDescription(CharacterPartials.Character character) => $"Makes the user charge up a very powerful explosion that hits all enemies for 4 turns!";
     
 
     public override int MaxCooldown  => 6;
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         var isCharging = User.AddStatusEffect(new VolcanicEruptionCharging(User){Duration = 3});
         if(isCharging == StatusEffectInflictResult.Succeeded)
@@ -95,7 +96,7 @@ public class VolcanicEruption : Ultimate
         return new UsageResult(this){UsageType = usageType, TargetType = TargetType.AOE, User = User, Text = "What's this?"};
     }
 }
-public class Blast : Character
+public class Blast : CharacterPartials.Character
 {
     public override Rarity Rarity { get; protected set; } = Rarity.FourStar;
     public override DiscordColor Color { get; protected set; } = DiscordColor.Brown;

@@ -7,12 +7,12 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class ThugPunch : BasicAttack
 {
-    public override string GetDescription(Character character)
+    public override string GetDescription(CharacterPartials.Character character)
     {
         return "Punches the enemy in a thug way";
     }
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         return new UsageResult(this)
         {
@@ -36,7 +36,7 @@ public class ThugPunch : BasicAttack
     }
 }
 
-public class Thug : Character
+public class Thug : CharacterPartials.Character
 {
     public override BasicAttack BasicAttack { get; } = new ThugPunch();
     public override Skill? Skill { get;  }

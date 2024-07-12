@@ -1,7 +1,7 @@
 ﻿using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 
-namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 public partial class Character
 {
@@ -59,7 +59,7 @@ public partial class Character
             }
         }
 
-        public StatusEffectInflictBattleText(Character character, StatusEffectInflictResult effectInflictResult, params StatusEffect[] statusEffects)
+        public StatusEffectInflictBattleText(CharacterPartials.Character character, StatusEffectInflictResult effectInflictResult, params StatusEffect[] statusEffects)
         {
             _affectedCharacters = [character];
             _statusEffects = [..statusEffects];
@@ -90,8 +90,8 @@ public partial class Character
 
 
         private int _combatReadinessChangeAmount;
-        private List<Character> _affectedCharacters;
-        public CombatReadinessChangeBattleText(Character character,int increaseAmount)
+        private List<CharacterPartials.Character> _affectedCharacters;
+        public CombatReadinessChangeBattleText(CharacterPartials.Character character,int increaseAmount)
         {
             _affectedCharacters = [character];
             _combatReadinessChangeAmount = increaseAmount;
@@ -135,7 +135,7 @@ public partial class Character
     }
     class  ExtraTurnBattleText : AdditionalBattleText
     {
-        private List<Character> _extraTurners;
+        private List<CharacterPartials.Character> _extraTurners;
         public override string Text {             get
         {
             var noun = "has";
@@ -148,7 +148,7 @@ public partial class Character
         
         }
 
-        public ExtraTurnBattleText(Character extraTurnCharacter)
+        public ExtraTurnBattleText(CharacterPartials.Character extraTurnCharacter)
         {
             _extraTurners = [extraTurnCharacter];
         }
@@ -168,7 +168,7 @@ public partial class Character
     }
     class  ReviveBattleText : AdditionalBattleText
     {
-        private List<Character> _revivedCharacters;
+        private List<CharacterPartials.Character> _revivedCharacters;
 
         public override string Text
         {
@@ -183,7 +183,7 @@ public partial class Character
             }
         }
 
-        public ReviveBattleText(Character revivedCharacter)
+        public ReviveBattleText(CharacterPartials.Character revivedCharacter)
         {
             _revivedCharacters = [revivedCharacter];
             
@@ -214,8 +214,8 @@ public partial class Character
         }
 
 
-        private List<Character> _deadCharacters;
-        public DeathBattleText(Character deadCharacter)
+        private List<CharacterPartials.Character> _deadCharacters;
+        public DeathBattleText(CharacterPartials.Character deadCharacter)
         {
             _deadCharacters = [deadCharacter];
         }

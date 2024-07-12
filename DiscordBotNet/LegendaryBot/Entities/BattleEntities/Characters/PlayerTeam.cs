@@ -18,10 +18,10 @@ public class PlayerTeamDatabaseConfiguration : IEntityTypeConfiguration<PlayerTe
         entity    .Navigation(i => i.Characters)
             .AutoInclude();
         entity.HasKey(i => i.Id);
-        entity.HasMany<Character>(i => i.Characters)
+        entity.HasMany<CharacterPartials.Character>(i => i.Characters)
             .WithMany(i => i.PlayerTeams)
             .UsingEntity<CharacterPlayerTeam>(i
-                => i.HasOne<Character>().WithMany().HasForeignKey(j => j.CharacterId), i =>
+                => i.HasOne<CharacterPartials.Character>().WithMany().HasForeignKey(j => j.CharacterId), i =>
                 i.HasOne<PlayerTeam>().WithMany().HasForeignKey(j => j.PlayerTeamId), i =>
                 i.HasKey(j => new { j.CharacterId, j.PlayerTeamId }));
     }
@@ -38,7 +38,7 @@ public class PlayerTeam : CharacterTeam
     /// Will be set to userdata 
     /// </summary>
     public long? IsEquipped { get;  set; }
-    public override bool Add(Character character)
+    public override bool Add(CharacterPartials.Character character)
     {
         if (Count >= 4) return false;
  
@@ -49,16 +49,16 @@ public class PlayerTeam : CharacterTeam
     }
 
 
-    public PlayerTeam(long userDataId, params Character[] characters) : base(characters)
+    public PlayerTeam(long userDataId, params CharacterPartials.Character[] characters) : base(characters)
     {
         UserDataId = userDataId;
         
     }
-    public PlayerTeam(DiscordUser user,params Character[] characters) : this((long)user.Id,characters)
+    public PlayerTeam(DiscordUser user,params CharacterPartials.Character[] characters) : this((long)user.Id,characters)
     {
 
     }
-    public PlayerTeam(params Character[] characters) : base(characters)
+    public PlayerTeam(params CharacterPartials.Character[] characters) : base(characters)
     {
 
     }

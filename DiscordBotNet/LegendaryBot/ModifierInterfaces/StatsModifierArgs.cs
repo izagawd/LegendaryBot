@@ -1,4 +1,5 @@
 ﻿using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.ModifierInterfaces;
 

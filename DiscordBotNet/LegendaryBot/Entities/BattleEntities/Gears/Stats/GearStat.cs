@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 

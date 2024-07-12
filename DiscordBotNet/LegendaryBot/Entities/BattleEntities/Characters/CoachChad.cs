@@ -8,9 +8,9 @@ using DSharpPlus.Entities;
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class GigaPunch : BasicAttack
 {
-    public override string GetDescription(Character character) => "Punch is thrown gigaly";
+    public override string GetDescription(CharacterPartials.Character character) => "Punch is thrown gigaly";
     
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         return new UsageResult(this)
         {
@@ -38,15 +38,15 @@ public class GigaPunch : BasicAttack
 public class MuscleFlex : Ultimate
 {
   
-    public override string GetDescription(Character character) => "Flexes muscles";
+    public override string GetDescription(CharacterPartials.Character character) => "Flexes muscles";
     
 
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         yield return User;
     }
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier}... flexed his muscles?");
         return new UsageResult(this)
@@ -65,15 +65,15 @@ public class MuscleFlex : Ultimate
 public class ThumbsUp : Skill
 {
 
-    public override string GetDescription(Character character) => "Gives the enemy a thumbs up!";
+    public override string GetDescription(CharacterPartials.Character character) => "Gives the enemy a thumbs up!";
     
 
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} is cheering {target.NameWithAlphabetIdentifier} on!");
         return new UsageResult(this)
@@ -88,7 +88,7 @@ public class ThumbsUp : Skill
 
     public override int MaxCooldown => 1;
 }
-public class CoachChad : Character, IBattleEventListener
+public class CoachChad : CharacterPartials.Character, IBattleEventListener
 {
 
     public override BasicAttack BasicAttack { get; } = new GigaPunch();
@@ -99,7 +99,7 @@ public class CoachChad : Character, IBattleEventListener
     public override DiscordColor Color => DiscordColor.Purple;
 
 
-    public override void NonPlayerCharacterAi(ref Character target, ref BattleDecision decision)
+    public override void NonPlayerCharacterAi(ref CharacterPartials.Character target, ref BattleDecision decision)
     {
         List<BattleDecision> possibleDecisions = [BattleDecision.BasicAttack];
         

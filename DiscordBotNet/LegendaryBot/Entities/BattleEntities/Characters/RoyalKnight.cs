@@ -8,11 +8,11 @@ using Barrier = DiscordBotNet.LegendaryBot.StatusEffects.Barrier;
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class ShieldBash : BasicAttack
 {
-    public override string GetDescription(Character character) => $"Bashes the shield to the enemy, with a {ShieldStunChanceByBash}% chance to stun"!;
+    public override string GetDescription(CharacterPartials.Character character) => $"Bashes the shield to the enemy, with a {ShieldStunChanceByBash}% chance to stun"!;
 
 
     public int ShieldStunChanceByBash => 10;
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         var usageResult =  new UsageResult(this)
         {
@@ -48,17 +48,17 @@ public class IWillBeYourShield : Skill
 {
     public override int MaxCooldown => 4;
 
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.Team.Where(i =>!i.IsDead);
     }
 
   
-    public override string GetDescription(Character character) => "gives a shield to the target and caster for 3 turns. Shield strength is proportional to the caster's defense";
+    public override string GetDescription(CharacterPartials.Character character) => "gives a shield to the target and caster for 3 turns. Shield strength is proportional to the caster's defense";
 
 
     public int ShieldBasedOnDefense => 300;
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         target.AddStatusEffect(new Barrier(User, (ShieldBasedOnDefense * 0.01 * User.Defense).Round()){Duration = 3});
 
@@ -75,7 +75,7 @@ public class IWillBeYourShield : Skill
 
 public class IWillProtectUs : Ultimate
 {
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.Team.Where(i => !i.IsDead);
     }
@@ -83,10 +83,10 @@ public class IWillProtectUs : Ultimate
     public override int MaxCooldown => 5;
   
 
-    public override string GetDescription(Character character) => "Increases the defense of all allies for 3 turns";
+    public override string GetDescription(CharacterPartials.Character character) => "Increases the defense of all allies for 3 turns";
     
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         foreach (var i in GetPossibleTargets())
         {
@@ -104,7 +104,7 @@ public class IWillProtectUs : Ultimate
     }
 }
 
-public class RoyalKnight : Character
+public class RoyalKnight : CharacterPartials.Character
 {
     public override DiscordColor Color => DiscordColor.Blue;
     public override Element Element => Element.Ice;

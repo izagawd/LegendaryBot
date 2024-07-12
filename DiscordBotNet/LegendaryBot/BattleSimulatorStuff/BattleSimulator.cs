@@ -19,6 +19,7 @@ using Microsoft.Extensions.Caching.Memory;
 using SixLabors.ImageSharp.Drawing;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 using UserExperienceReward = DiscordBotNet.LegendaryBot.Rewards.UserExperienceReward;
 
 namespace DiscordBotNet.LegendaryBot.BattleSimulatorStuff;

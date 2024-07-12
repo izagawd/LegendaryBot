@@ -6,7 +6,7 @@ using DSharpPlus.Entities;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
-public class CharacterTeam : ISet<Character>
+public class CharacterTeam : ISet<CharacterPartials.Character>
 {
 
     /// <summary>
@@ -35,8 +35,8 @@ public class CharacterTeam : ISet<Character>
     [NotMapped]
     public BattleSimulator CurrentBattle { get; set; }
 
-    public HashSet<Character> Characters { get; set; } = [];
-    public IEnumerator<Character> GetEnumerator()
+    public HashSet<CharacterPartials.Character> Characters { get; set; } = [];
+    public IEnumerator<CharacterPartials.Character> GetEnumerator()
     {
         return Characters.GetEnumerator();
     }
@@ -91,13 +91,13 @@ public class CharacterTeam : ISet<Character>
 
         /// <returns></returns>
 
-    public virtual bool Add(Character character)
+    public virtual bool Add(CharacterPartials.Character character)
     {
         character.Team = this;
         return Characters.Add(character);
     }
 
-    public void AddRange(IEnumerable<Character> characters)
+    public void AddRange(IEnumerable<CharacterPartials.Character> characters)
     {
         
         foreach (var i in Characters)
@@ -106,58 +106,58 @@ public class CharacterTeam : ISet<Character>
             Add(i);
         }
     }
-    public void ExceptWith(IEnumerable<Character> other)
+    public void ExceptWith(IEnumerable<CharacterPartials.Character> other)
     {
         Characters.ExceptWith(other);
     }
 
-    public void IntersectWith(IEnumerable<Character> other)
+    public void IntersectWith(IEnumerable<CharacterPartials.Character> other)
     {
         Characters.IntersectWith(other);
     }
 
-    public bool IsProperSubsetOf(IEnumerable<Character> other)
+    public bool IsProperSubsetOf(IEnumerable<CharacterPartials.Character> other)
     {
         return Characters.IsProperSubsetOf(other);
     }
 
-    public bool IsProperSupersetOf(IEnumerable<Character> other)
+    public bool IsProperSupersetOf(IEnumerable<CharacterPartials.Character> other)
     {
         return Characters.IsProperSupersetOf(other);
     }
 
-    public bool IsSubsetOf(IEnumerable<Character> other)
+    public bool IsSubsetOf(IEnumerable<CharacterPartials.Character> other)
     {
         return Characters.IsSubsetOf(other);
     }
 
-    public bool IsSupersetOf(IEnumerable<Character> other)
+    public bool IsSupersetOf(IEnumerable<CharacterPartials.Character> other)
     {
         return Characters.IsSupersetOf(other);
     }
 
-    public bool Overlaps(IEnumerable<Character> other)
+    public bool Overlaps(IEnumerable<CharacterPartials.Character> other)
     {
         return Characters.Overlaps(other);
     }
 
-    public bool SetEquals(IEnumerable<Character> other)
+    public bool SetEquals(IEnumerable<CharacterPartials.Character> other)
     {
         return Characters.SetEquals(other);
     }
 
-    public void SymmetricExceptWith(IEnumerable<Character> other)
+    public void SymmetricExceptWith(IEnumerable<CharacterPartials.Character> other)
     {
         Characters.SymmetricExceptWith(other);
     }
 
-    public void UnionWith(IEnumerable<Character> other)
+    public void UnionWith(IEnumerable<CharacterPartials.Character> other)
     {
         Characters.UnionWith(other);
     }
 
 
-    void ICollection<Character>.Add(Character item)
+    void ICollection<CharacterPartials.Character>.Add(CharacterPartials.Character item)
     {
         Add(item);
     }
@@ -167,7 +167,7 @@ public class CharacterTeam : ISet<Character>
         Characters.Clear();
     }
 
-    public CharacterTeam(params Character[] characters)
+    public CharacterTeam(params CharacterPartials.Character[] characters)
     {
 
         Characters = characters.ToHashSet();
@@ -177,17 +177,17 @@ public class CharacterTeam : ISet<Character>
 
 
 
-    public bool Contains(Character character)
+    public bool Contains(CharacterPartials.Character character)
     {
         return Characters.Contains(character);
     }
 
-    public void CopyTo(Character[] array, int arrayIndex)
+    public void CopyTo(CharacterPartials.Character[] array, int arrayIndex)
     {
         Characters.CopyTo(array,arrayIndex);
     }
 
-    public bool Remove(Character character)
+    public bool Remove(CharacterPartials.Character character)
     {
         return Characters.Remove(character);
     }

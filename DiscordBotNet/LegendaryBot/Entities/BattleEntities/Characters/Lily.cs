@@ -9,12 +9,12 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class ChamomileSachetWhack : BasicAttack
 {
-    public override string GetDescription(Character character) => 
+    public override string GetDescription(CharacterPartials.Character character) => 
         $"With the power of Chamomile, whacks an enemy with a sack filled with Chamomile, with a {SleepChance}% chance of making the enemy sleep";
     
 
     public int SleepChance => 40;
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -48,17 +48,17 @@ public class BlossomTouch : Skill
 {
     public override int MaxCooldown => 3;
 
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.Team.Where(i =>!i.IsDead);
     }
 
     public int HealthHealScaling => 30;
   
-    public override string GetDescription(Character character) =>  $"With the power of flowers, recovers the hp of an ally with {HealthHealScaling}% of the caster's max health, dispelling one debuff";
+    public override string GetDescription(CharacterPartials.Character character) =>  $"With the power of flowers, recovers the hp of an ally with {HealthHealScaling}% of the caster's max health, dispelling one debuff";
     
  
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         target.RecoverHealth((User.MaxHealth *HealthHealScaling* 0.01).Round());
         return new UsageResult(this)
@@ -74,7 +74,7 @@ public class LilyOfTheValley : Ultimate
 {
     public override int MaxCooldown  => 5;
 
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
@@ -83,10 +83,10 @@ public class LilyOfTheValley : Ultimate
     public int PoisonInflictChance => 100;
 
     public int StunInflictChance => 50;
-    public override  string GetDescription(Character character) => $"Releases a poisonous gas to all enemies, with an {StunInflictChance}% chance of inflicting stun for 1 turn and a {PoisonInflictChance}% chance of inflicting poison for one turn";
+    public override  string GetDescription(CharacterPartials.Character character) => $"Releases a poisonous gas to all enemies, with an {StunInflictChance}% chance of inflicting stun for 1 turn and a {PoisonInflictChance}% chance of inflicting poison for one turn";
     
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         List<StatusEffect> statusEffects = [];
         var effectiveness = User.Effectiveness;
@@ -114,7 +114,7 @@ public class LilyOfTheValley : Ultimate
         };
     }
 }
-public class Lily : Character
+public class Lily : CharacterPartials.Character
 {
 
 
@@ -123,7 +123,7 @@ public class Lily : Character
     public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;
     public override DiscordColor Color { get; protected set; } = DiscordColor.HotPink;
 
-    public override void NonPlayerCharacterAi(ref Character target, ref BattleDecision decision)
+    public override void NonPlayerCharacterAi(ref CharacterPartials.Character target, ref BattleDecision decision)
     {
         if (Ultimate.CanBeUsed())
         {

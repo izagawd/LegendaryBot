@@ -8,15 +8,15 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class WindSlash : Skill
 {
 
-    public override string GetDescription(Character character) => "Attacks all enemies with a sharp wind";
+    public override string GetDescription(CharacterPartials.Character character) => "Attacks all enemies with a sharp wind";
     
 
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team);
     }
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         List<DamageResult> damageResults = [];
         foreach (var i in GetPossibleTargets())
@@ -51,10 +51,10 @@ public class WindSlash : Skill
 public class SimpleSlashOfPrecision : BasicAttack
 {
     private int BleedChance => 50;
-    public override string GetDescription(Character character) =>$"Does a simple slash. Always lands a critical hit, with a {BleedChance}% chance to cause bleed for 2 turns";
+    public override string GetDescription(CharacterPartials.Character character) =>$"Does a simple slash. Always lands a critical hit, with a {BleedChance}% chance to cause bleed for 2 turns";
     
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -82,15 +82,15 @@ public class SimpleSlashOfPrecision : BasicAttack
 public class ConsecutiveSlashesOfPrecision : Ultimate
 {
 
-    public override string GetDescription(Character character)
+    public override string GetDescription(CharacterPartials.Character character)
         =>"Slashes the enemy many times, dealing crazy damage. This attack will always deal a critical hit";
 
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult =target.Damage(new DamageArgs(this)
         {
@@ -116,7 +116,7 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
 
     public override int MaxCooldown => 5;
 }
-public class Slasher : Character
+public class Slasher : CharacterPartials.Character
 {
     public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;
     public override DiscordColor Color { get; protected set; } = DiscordColor.Brown;

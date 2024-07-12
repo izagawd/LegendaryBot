@@ -6,12 +6,12 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class PomPomAttack : BasicAttack
 {
-    public override string GetDescription(Character character)
+    public override string GetDescription(CharacterPartials.Character character)
     {
         return "Caster hits the enemy with a pom-pom... and that it";
     }
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
 
         return new UsageResult(this)
@@ -37,18 +37,18 @@ public class PomPomAttack : BasicAttack
 
 public class  YouCanDoIt : Skill
 {
-    public override string GetDescription(Character character)
+    public override string GetDescription(CharacterPartials.Character character)
     {
         return "Increases the combat readiness of a single target by 100%, increasing their attack for 2 turns. " +
                "Cannot be used on self";
     }
 
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.Team.Where(i => !i.IsDead && i != User);
     }
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} wants {target.NameWithAlphabetIdentifier} to prevail!");
         target.IncreaseCombatReadiness(100);
@@ -67,17 +67,17 @@ public class  YouCanDoIt : Skill
 public class YouCanMakeItEveryone : Ultimate
 {
     private int CombatIncreaseAmount => 30;
-    public override string GetDescription(Character character)
+    public override string GetDescription(CharacterPartials.Character character)
     {
         return $"Encourages all allies, increasing their combat readiness by {CombatIncreaseAmount}%, and increases their attack for 2 turns";
     }
 
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.Team.Where(i => !i.IsDead);
     }
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} encourages her allies!");
 
@@ -107,7 +107,7 @@ public class YouCanMakeItEveryone : Ultimate
 
     public override int MaxCooldown => 4;
 }
-public class Cheerleader : Character
+public class Cheerleader : CharacterPartials.Character
 {
 
 

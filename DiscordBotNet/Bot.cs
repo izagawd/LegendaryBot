@@ -44,13 +44,15 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
+        var player = new Player();
+        player.SetLevel(1);
+        player.BaseAttack.Print();
 
-        
     }
     private static async Task Main(string[] args)
     {
         await DoShitAsync();
-  
+        return;
         var stopwatch = new Stopwatch(); 
         Console.WriteLine("Making all users unoccupied...");
         stopwatch.Start();

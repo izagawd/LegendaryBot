@@ -11,8 +11,8 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class GooeyStrike : BasicAttack
 {
     
-    public override string GetDescription(Character character) => "Slams it's body on the enemy, with a 10% chance to inflict poison";
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    public override string GetDescription(CharacterPartials.Character character) => "Slams it's body on the enemy, with a 10% chance to inflict poison";
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -37,7 +37,7 @@ public class GooeyStrike : BasicAttack
         };
     }
 }
-public class Slime : Character
+public class Slime : CharacterPartials.Character
 {
 
     public override IEnumerable<Reward> DroppedRewards

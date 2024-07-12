@@ -1,6 +1,6 @@
 ﻿namespace DiscordBotNet.LegendaryBot;
 
-public enum Rarity
+public enum Rarity : short
 {
-    OneStar, TwoStar, ThreeStar, FourStar, FiveStar
+    OneStar = 1, TwoStar, ThreeStar, FourStar, FiveStar
 }

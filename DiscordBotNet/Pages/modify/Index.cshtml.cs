@@ -8,6 +8,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.Pages.modify;
 [Authorize]

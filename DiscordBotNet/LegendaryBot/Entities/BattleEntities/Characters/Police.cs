@@ -10,12 +10,12 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class DoNotResist : BasicAttack
 {
-    public override string GetDescription(Character character)
+    public override string GetDescription(CharacterPartials.Character character)
     {
         return "Tases the enemy, with a 15% chance to stun for one turn";
     }
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult= target.Damage(new DamageArgs(this)
         {
@@ -45,16 +45,16 @@ public class DoNotResist : BasicAttack
 
 public class IAmShooting : Skill
 {
-    public override string GetDescription(Character character)
+    public override string GetDescription(CharacterPartials.Character character)
     {
         return "Shoots the enemy twice, causing two bleed effects for two turns";
     }
-    public override IEnumerable<Character> GetPossibleTargets()
+    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -81,7 +81,7 @@ public class IAmShooting : Skill
 
     public override int MaxCooldown => 3;
 }
-public class Police : Character
+public class Police : CharacterPartials.Character
 {
     public override Rarity Rarity { get; protected set; } = Rarity.TwoStar;
 
