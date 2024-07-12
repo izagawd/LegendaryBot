@@ -14,7 +14,7 @@ public class ChamomileSachetWhack : BasicAttack
     
 
     public int SleepChance => 40;
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -58,7 +58,7 @@ public class BlossomTouch : Skill
     public override string GetDescription(CharacterPartials.Character character) =>  $"With the power of flowers, recovers the hp of an ally with {HealthHealScaling}% of the caster's max health, dispelling one debuff";
     
  
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         target.RecoverHealth((User.MaxHealth *HealthHealScaling* 0.01).Round());
         return new UsageResult(this)
@@ -86,7 +86,7 @@ public class LilyOfTheValley : Ultimate
     public override  string GetDescription(CharacterPartials.Character character) => $"Releases a poisonous gas to all enemies, with an {StunInflictChance}% chance of inflicting stun for 1 turn and a {PoisonInflictChance}% chance of inflicting poison for one turn";
     
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         List<StatusEffect> statusEffects = [];
         var effectiveness = User.Effectiveness;

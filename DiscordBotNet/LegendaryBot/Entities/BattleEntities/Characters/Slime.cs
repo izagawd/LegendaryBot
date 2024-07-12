@@ -12,7 +12,7 @@ public class GooeyStrike : BasicAttack
 {
     
     public override string GetDescription(CharacterPartials.Character character) => "Slams it's body on the enemy, with a 10% chance to inflict poison";
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {

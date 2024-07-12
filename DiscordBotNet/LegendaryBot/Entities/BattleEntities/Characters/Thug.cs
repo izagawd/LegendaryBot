@@ -12,7 +12,7 @@ public class ThugPunch : BasicAttack
         return "Punches the enemy in a thug way";
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         return new UsageResult(this)
         {

@@ -15,7 +15,7 @@ public class DoNotResist : BasicAttack
         return "Tases the enemy, with a 15% chance to stun for one turn";
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult= target.Damage(new DamageArgs(this)
         {
@@ -54,7 +54,7 @@ public class IAmShooting : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {

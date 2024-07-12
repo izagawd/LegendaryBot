@@ -11,7 +11,7 @@ public class PomPomAttack : BasicAttack
         return "Caster hits the enemy with a pom-pom... and that it";
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
 
         return new UsageResult(this)
@@ -48,7 +48,7 @@ public class  YouCanDoIt : Skill
         return User.Team.Where(i => !i.IsDead && i != User);
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} wants {target.NameWithAlphabetIdentifier} to prevail!");
         target.IncreaseCombatReadiness(100);
@@ -77,7 +77,7 @@ public class YouCanMakeItEveryone : Ultimate
         return User.Team.Where(i => !i.IsDead);
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} encourages her allies!");
 

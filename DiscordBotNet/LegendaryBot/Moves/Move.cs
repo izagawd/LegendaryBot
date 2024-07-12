@@ -84,16 +84,16 @@ public abstract class Move
     /// </summary>
     /// <param name="target">The target</param>
     /// <param name="usageType">What type of usage this is</param>
-    protected abstract UsageResult HiddenUtilize(Character target, UsageType usageType);
+    protected abstract UsageResult UtilizeImplementation(Character target, UsageType usageType);
 
     /// <summary>
-    /// This is where the general functionality of a move is done. It does some checks before HiddenUtilize is called
+    /// This is where the general functionality of a move is done. It does some checks before UtilizeImplementation is called
     /// </summary>
     /// <param name="target">The target</param>
     /// <param name="usageType">What type of usage this is</param>
     public virtual UsageResult Utilize(Character target, UsageType usageType)
     {
-        var temp = HiddenUtilize(target, usageType);
+        var temp = UtilizeImplementation(target, usageType);
         CurrentBattle.InvokeBattleEvent(new CharacterUseMoveEventArgs(temp));
         return temp;
     }

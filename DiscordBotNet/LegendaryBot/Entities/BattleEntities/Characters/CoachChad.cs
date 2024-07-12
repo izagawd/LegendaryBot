@@ -10,7 +10,7 @@ public class GigaPunch : BasicAttack
 {
     public override string GetDescription(CharacterPartials.Character character) => "Punch is thrown gigaly";
     
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         return new UsageResult(this)
         {
@@ -46,7 +46,7 @@ public class MuscleFlex : Ultimate
         yield return User;
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier}... flexed his muscles?");
         return new UsageResult(this)
@@ -73,7 +73,7 @@ public class ThumbsUp : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} is cheering {target.NameWithAlphabetIdentifier} on!");
         return new UsageResult(this)

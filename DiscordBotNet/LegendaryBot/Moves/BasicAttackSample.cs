@@ -10,7 +10,7 @@ public class BasicAttackSample : BasicAttack
 {
     public override string GetDescription(Character character) => "Take that!";
     
-    protected  override UsageResult HiddenUtilize(Character target, UsageType usageType)
+    protected  override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
  
         DamageResult? damageResult = target.Damage(       new DamageArgs(this)

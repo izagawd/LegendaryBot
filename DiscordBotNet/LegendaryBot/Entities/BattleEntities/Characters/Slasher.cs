@@ -16,7 +16,7 @@ public class WindSlash : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team);
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         List<DamageResult> damageResults = [];
         foreach (var i in GetPossibleTargets())
@@ -54,7 +54,7 @@ public class SimpleSlashOfPrecision : BasicAttack
     public override string GetDescription(CharacterPartials.Character character) =>$"Does a simple slash. Always lands a critical hit, with a {BleedChance}% chance to cause bleed for 2 turns";
     
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -90,7 +90,7 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult =target.Damage(new DamageArgs(this)
         {

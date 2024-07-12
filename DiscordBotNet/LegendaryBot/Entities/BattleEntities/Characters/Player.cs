@@ -15,7 +15,7 @@ public class FourthWallBreaker: BasicAttack
     public override string GetDescription(CharacterPartials.Character character) =>  "Damages the enemy by breaking the fourth wall";
     
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         return new UsageResult(this)
         {
@@ -53,7 +53,7 @@ public class FireBall : Skill
 
     public override int MaxCooldown=> 2;
   
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         DamageResult? damageResult;
         using (User.CurrentBattle.PauseBattleEventScope)
@@ -95,7 +95,7 @@ public class Ignite : Ultimate
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} " +
                

@@ -12,7 +12,7 @@ public class MethaneSlap : BasicAttack
                                                                   $"producing methane around the enemy, with a " +
                                                                   $"{DetonateChance}% chance to detonate all the bombs the target has";
     public int DetonateChance => 75;
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -53,7 +53,7 @@ public class BlowAway : Skill
     }
 
     public int BombInflictChance => 100;
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
                 
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} threw multiple bombs at the opposing team!");
@@ -88,7 +88,7 @@ public class VolcanicEruption : Ultimate
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var isCharging = User.AddStatusEffect(new VolcanicEruptionCharging(User){Duration = 3});
         if(isCharging == StatusEffectInflictResult.Succeeded)

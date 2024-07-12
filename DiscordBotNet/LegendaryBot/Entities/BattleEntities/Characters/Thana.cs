@@ -8,7 +8,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class SoulAttack : BasicAttack
 {
     public override string GetDescription(CharacterPartials.Character character) => "Uses the souls of the dead to attack, with a 25% chance to sleep!";
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -42,7 +42,7 @@ public class YourLifeEnergyIsMine : Skill
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -84,7 +84,7 @@ public class Arise : Ultimate
         return User.Team;
     }
     
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         User.CurrentBattle.AddAdditionalBattleText($"With her necromancy powers, {User.NameWithAlphabetIdentifier} attempts to bring back all her dead allies!");
 

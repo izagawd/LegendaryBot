@@ -12,7 +12,7 @@ public class ShieldBash : BasicAttack
 
 
     public int ShieldStunChanceByBash => 10;
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var usageResult =  new UsageResult(this)
         {
@@ -58,7 +58,7 @@ public class IWillBeYourShield : Skill
 
 
     public int ShieldBasedOnDefense => 300;
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         target.AddStatusEffect(new Barrier(User, (ShieldBasedOnDefense * 0.01 * User.Defense).Round()){Duration = 3});
 
@@ -86,7 +86,7 @@ public class IWillProtectUs : Ultimate
     public override string GetDescription(CharacterPartials.Character character) => "Increases the defense of all allies for 3 turns";
     
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         foreach (var i in GetPossibleTargets())
         {

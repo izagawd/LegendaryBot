@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations.Schema;
 using DSharpPlus.Entities;
 using System.Diagnostics;
+using System.Numerics;
 using System.Reflection;
 using System.Text;
 using DiscordBotNet.Database;
@@ -38,33 +39,31 @@ public static class Bot
 
     private static  Task FirstTimeSetupAsync()
     {
+
         return new PostgreSqlContext().ResetDatabaseAsync();
     }
 
-    public class Nigga
-    {
-        public virtual int Die { get; set; } = 5;
-        
-        
-    }
-    public class Nigga2 : Nigga
-    {
-        public override int Die { get; set; } = 10;
 
-        public Nigga2()
+    private static Task DoShitAsync()
+    {
+        void bruh()
         {
-
+            var stop = new Stopwatch(); stop.Start();
+            var player = new Ignite();
+            stop.Elapsed.TotalMicroseconds.Print();
+            player.Print();
         }
-    }
-    private static async Task DoShitAsync()
-    {
-        await new PostgreSqlContext().ResetDatabaseAsync();
-       
+        bruh();
+        bruh();
+        bruh();
+        bruh();
+        bruh();
+        return new PostgreSqlContext().ResetDatabaseAsync();
+
     }
     private static async Task Main(string[] args)
     {
         await DoShitAsync();
-        return;
         var stopwatch = new Stopwatch(); 
         Console.WriteLine("Making all users unoccupied...");
         stopwatch.Start();

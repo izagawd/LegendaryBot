@@ -15,7 +15,9 @@ using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
+using DSharpPlus.SlashCommands;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Primitives;
 using SixLabors.ImageSharp.Drawing;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
@@ -270,17 +272,25 @@ public class BattleSimulator
     /// <typeparam name="T">the type of argument of the battle event</typeparam>
     public void InvokeBattleEvent<T>(T eventArgs) where T : BattleEventArgs
     {
+        
         if (IsEventsPaused)
         {
             _queuedBattleEvents.Add(eventArgs);
             return;
         }
+
+
+            
         foreach (var i in GetAllEventMethods()
                      .Where(k => eventArgs.GetType().IsRelatedToType(k.MethodInfo.GetParameters()[0].ParameterType))
                      .OrderByDescending(j => j.Attribute.Priority))
         {
+            
             i.MethodInfo.Invoke(i.Entity, [eventArgs]);
+           
         }
+
+        
     }
 
 
@@ -468,7 +478,26 @@ public class BattleSimulator
                         $"Name: {effect}. Type: {effect.EffectType} Count: {i.Value}\nDescription: {effect.Description}\n\n");
                 }
             }
-
+            descriptionStringBuilder
+                .Append("Stats\n");
+            bool shouldNewLine = false;
+            foreach (var i in Enum.GetValues<StatType>())
+            {
+                descriptionStringBuilder.Append(
+                    $"{BasicFunctionality.Englishify(i.ToString())}: {characterToDisplayBattleInfo.GetStatFromType(i)}");
+                if (shouldNewLine)
+                {
+                    descriptionStringBuilder.Append("\n");
+                    shouldNewLine = false;
+                }
+                else
+                {
+                    descriptionStringBuilder.Append(" | ");
+                    shouldNewLine = true;
+                }
+                
+            }
+          
 
             var embed = new DiscordEmbedBuilder()
                 .WithAuthor(characterToDisplayBattleInfo.NameWithAlphabetIdentifier, iconUrl: characterToDisplayBattleInfo.ImageUrl)
@@ -525,6 +554,7 @@ public class BattleSimulator
             }
 
             await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage);
+      
         }
         catch(Exception e)
         {
@@ -711,7 +741,7 @@ public class BattleSimulator
                     if(!j.IsDead) j.CombatReadiness +=  0.0025f * j.Speed;
                 }
             }
-            "yo".Print();
+            
             if (!extraTurnGranted)
             {
                 ActiveCharacter = BasicFunctionality.RandomChoice(Characters.Where(i => i.CombatReadiness >= 100 && !i.IsDead));

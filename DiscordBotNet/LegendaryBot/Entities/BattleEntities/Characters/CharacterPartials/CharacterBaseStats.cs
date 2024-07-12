@@ -59,7 +59,7 @@ public partial class Character
  
     public float GetBaseEffectiveness(int level, int ascension)
     {
-        float toCompute = 100;
+        float toCompute = 0;
 
         var count = GetStatsToIncreaseBasedOnAscension(ascension).Count(i => i == StatType.Effectiveness);
         toCompute += count * 10;
@@ -78,7 +78,7 @@ public partial class Character
 
     public float GetBaseResistance(int level, int ascension)
     {
-        float toCompute = 100;
+        float toCompute = 0;
 
         var count = GetStatsToIncreaseBasedOnAscension(ascension).Count(i => i == StatType.Resistance);
         toCompute += count * 10;
@@ -87,7 +87,7 @@ public partial class Character
 
     public float GetBaseCriticalChance(int level, int ascension)
     {
-        float toCompute = 100;
+        float toCompute = 15;
 
         var count = GetStatsToIncreaseBasedOnAscension(ascension).Count(i => i == StatType.CriticalChance);
         toCompute += count * 6;
@@ -96,7 +96,7 @@ public partial class Character
 
     public float GetBaseCriticalDamage(int level, int ascension)
     {
-        float toCompute = 100;
+        float toCompute = 150;
 
         var count = GetStatsToIncreaseBasedOnAscension(ascension).Count(i => i == StatType.CriticalDamage);
         toCompute += count * 10;

@@ -12,7 +12,7 @@ public class BaseballBatWhack : BasicAttack
         return "Swings a baseball bat at the enemy, causing solid  damage";
     }
 
-    protected override UsageResult HiddenUtilize(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         return new UsageResult(this)
         {
