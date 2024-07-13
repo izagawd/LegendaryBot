@@ -9,7 +9,7 @@ public class Memory : GeneralCommandClass
     public async Task ExecuteGetTotalMemoryUsedInBytes(InteractionContext context)
     {
         Process currentProcess = Process.GetCurrentProcess();
-
+        
         // Get the memory usage in bytes
         long memoryUsageBytes = currentProcess.WorkingSet64;
         await context.CreateResponseAsync($"Memory Usage: {memoryUsageBytes} bytes");

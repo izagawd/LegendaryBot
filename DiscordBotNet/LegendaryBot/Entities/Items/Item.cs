@@ -56,7 +56,7 @@ public abstract class Item : Entity
             if (stacksString.Length > 1)
             {
                 x = 0;
-                xOffset = 3 * (theMin/25.0f);
+                xOffset = (stacksString.Length - 1)* 3 * (theMin/25.0f);
             }
             ctx.Fill(Color.Black, new RectangleF(0, 0, size+xOffset, size));
             var font = SystemFonts.CreateFont(Bot.GlobalFontName, size, FontStyle.Bold);
