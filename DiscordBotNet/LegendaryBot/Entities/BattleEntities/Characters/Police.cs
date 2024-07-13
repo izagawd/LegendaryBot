@@ -1,5 +1,4 @@
-﻿using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
-using DiscordBotNet.LegendaryBot.Moves;
+﻿using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DiscordBotNet.LegendaryBot.StatusEffects;

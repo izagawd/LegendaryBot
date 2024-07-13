@@ -1,12 +1,7 @@
 ﻿using System.Collections.Concurrent;
-using System.ComponentModel.DataAnnotations.Schema;
-using DiscordBotNet.LegendaryBot.BattleEvents;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 using DiscordBotNet.LegendaryBot.Results;
-using Microsoft.Extensions.Caching.Memory;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
@@ -28,7 +23,7 @@ public abstract class Move
     public async Task<Image<Rgba32>> GetImageForCombatAsync()
     {
         var url = IconUrl;
-        if (!_croppedCombatImages.TryGetValue(url, out Image<Rgba32> image))
+        if (!_croppedCombatImages.TryGetValue(url, out var image))
         {
             image = await BasicFunctionality.GetImageFromUrlAsync(IconUrl);
             image.Mutate(i => i

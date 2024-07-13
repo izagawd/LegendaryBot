@@ -1,10 +1,9 @@
 ﻿using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Quests;
 using DiscordBotNet.LegendaryBot.Rewards;
-using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.command;
@@ -13,9 +12,9 @@ public class QuestCommand : GeneralCommandClass
 {
 
 
-    [SlashCommand("quest", "do a daily quest"),
-    AdditionalSlashCommand("/quest",BotCommandType.Battle)]
-    public async Task Execute(InteractionContext ctx)
+    [Command("quest"),
+    AdditionalCommand("/quest",BotCommandType.Battle)]
+    public async ValueTask Execute(CommandContext ctx)
     {
         var author = ctx.User;
 
@@ -34,13 +33,13 @@ public class QuestCommand : GeneralCommandClass
         {
             
             embed.WithDescription("Use the begin command before doing any quests");
-            await ctx.CreateResponseAsync(embed);
+            await ctx.RespondAsync(embed);
             return;
         }
 
         if (userData.Quests.Count <= 0)
         {
-           await ctx.CreateResponseAsync(embed);
+           await ctx.RespondAsync(embed);
            return;
         }
 
@@ -57,19 +56,19 @@ public class QuestCommand : GeneralCommandClass
         var questsShouldDisable = userData.Quests.Select(i => i.Completed).ToList();
         while(questsShouldDisable.Count < 4)
             questsShouldDisable.Add(true);
-        DiscordButtonComponent one = new DiscordButtonComponent(ButtonStyle.Primary, "1", "1",
+        var one = new DiscordButtonComponent(DiscordButtonStyle.Primary, "1", "1",
             questsShouldDisable[0]);
-        DiscordButtonComponent two = new DiscordButtonComponent(ButtonStyle.Primary, "2", "2",questsShouldDisable[1]);
-        DiscordButtonComponent three = new DiscordButtonComponent(ButtonStyle.Primary, "3", "3",questsShouldDisable[2]);
-        DiscordButtonComponent four = new DiscordButtonComponent(ButtonStyle.Primary, "4", "4",questsShouldDisable[3]);
+        var two = new DiscordButtonComponent(DiscordButtonStyle.Primary, "2", "2",questsShouldDisable[1]);
+        var three = new DiscordButtonComponent(DiscordButtonStyle.Primary, "3", "3",questsShouldDisable[2]);
+        var four = new DiscordButtonComponent(DiscordButtonStyle.Primary, "4", "4",questsShouldDisable[3]);
         embed
             .WithTitle("These are your available quests")
             .WithDescription(questString);
-        await ctx.CreateResponseAsync(new DiscordInteractionResponseBuilder()
+        await ctx.RespondAsync(new DiscordInteractionResponseBuilder()
             .AddComponents([one, two, three, four])
             .AddEmbed(embed));
         IEnumerable<string> possibleCustomIds = ["1", "2", "3", "4"];
-        var message =await ctx.GetOriginalResponseAsync();
+        var message =await ctx.GetResponseAsync();
         
         Quest quest = null;
         var buttonResult = await message.WaitForButtonAsync(i =>
@@ -86,7 +85,7 @@ public class QuestCommand : GeneralCommandClass
 
         await buttonResult.Result
             .Interaction
-            .CreateResponseAsync(InteractionResponseType.DeferredMessageUpdate);
+            .CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
         var succeeded = await quest.StartQuest(DatabaseContext, ctx, message);
         
         if (succeeded)
@@ -120,13 +119,13 @@ public class QuestCommand : GeneralCommandClass
                 .WithTitle("Nice!!")
                 .WithDescription("You completed the quest!\n" +rewardString);
             await DatabaseContext.SaveChangesAsync();
-            await message.ModifyAsync(new DiscordMessageBuilder() { Embed = embed });
+            await message.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embed));
             return;
         }
         embed
             .WithTitle("Damn")
             .WithDescription("You failed");
-        await message.ModifyAsync(new DiscordMessageBuilder() { Embed = embed });
+        await message.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embed));
        
     }
 }

@@ -1,6 +1,6 @@
 ﻿using DiscordBotNet.Extensions;
 using DSharpPlus.Entities;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 
 namespace DiscordBotNet.LegendaryBot.command;
 
@@ -9,9 +9,9 @@ public class Info : GeneralCommandClass
 
 
  
-    [SlashCommand("info", "Shows basic information about your progress, or someone else's progress"),
-    AdditionalSlashCommand("/info\n/info @user",BotCommandType.Battle)]
-    public async Task Execute(InteractionContext ctx,[Option("user","the user you want to check info about")]DiscordUser? author = null)
+    [Command("info"),
+    AdditionalCommand("/info\n/info @user",BotCommandType.Battle)]
+    public async ValueTask Execute(CommandContext ctx,[Parameter("user")]DiscordUser? author = null)
     {  
 
             
@@ -19,7 +19,7 @@ public class Info : GeneralCommandClass
         
         var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync((long)author.Id);
   
-        DiscordEmbedBuilder embedBuilder = new DiscordEmbedBuilder()
+        var embedBuilder = new DiscordEmbedBuilder()
             .WithTitle("Info")
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
             .WithColor(userData.Color)
@@ -38,7 +38,7 @@ public class Info : GeneralCommandClass
         var response = new DiscordInteractionResponseBuilder()
             .AddEmbed(embedBuilder)
             .AddFile("info.png", stream);
-        await ctx.CreateResponseAsync(response);
+        await ctx.RespondAsync(response);
 
 
 

@@ -1,23 +1,23 @@
 namespace DiscordBotNet.LegendaryBot.command;
 
-public class AdditionalSlashCommandAttribute : Attribute
+public class AdditionalCommandAttribute : Attribute
 {
     public string? Example { get; }
     public BotCommandType BotCommandType { get; }
-    public AdditionalSlashCommandAttribute(string example, BotCommandType botCommandType)
+    public AdditionalCommandAttribute(string example, BotCommandType botCommandType)
     {
         Example = example;
         BotCommandType = botCommandType;
     }
 
-    public AdditionalSlashCommandAttribute(string example)
+    public AdditionalCommandAttribute(string example)
     {
         Example = example;
         BotCommandType = BotCommandType.Other;
     }
-    public AdditionalSlashCommandAttribute(BotCommandType botCommandType, string example)
+    public AdditionalCommandAttribute(BotCommandType botCommandType, string example)
         : this(example, botCommandType){}
-    public AdditionalSlashCommandAttribute(BotCommandType botCommandType)
+    public AdditionalCommandAttribute(BotCommandType botCommandType)
     {
   
         BotCommandType = botCommandType;

@@ -1,15 +1,16 @@
-﻿using DiscordBotNet.Extensions;
+﻿using System.ComponentModel;
+using DiscordBotNet.Extensions;
 using DSharpPlus.Entities;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 
 namespace DiscordBotNet.LegendaryBot.command;
 
 public class Daily : GeneralCommandClass
 {
 
-    [SlashCommand("daily", "Gets daily rewards"),
-    AdditionalSlashCommand("/daily",BotCommandType.Battle)]
-    public async Task Execute(InteractionContext ctx)
+    [Command("daily"), Description("Use this everyday to collect daily rewards"),
+    AdditionalCommand("/daily",BotCommandType.Battle)]
+    public async ValueTask Execute(CommandContext ctx)
     {
         var userData =await  DatabaseContext.UserData.FindOrCreateUserDataAsync((long)ctx.User.Id);
         var embed = new DiscordEmbedBuilder()
@@ -18,13 +19,13 @@ public class Daily : GeneralCommandClass
             .WithTitle("Hmm");
         if (userData.Tier == Tier.Unranked)
         {
-            await ctx.CreateResponseAsync(embed.WithDescription("Use the begin command first"));
+            await ctx.RespondAsync(embed.WithDescription("Use the begin command first"));
             return;
         }
 
         if (!userData.DailyPending)
         {
-            await ctx.CreateResponseAsync(embed.WithDescription("You have already collected your dailies"));
+            await ctx.RespondAsync(embed.WithDescription("You have already collected your dailies"));
             return;
         }
 
@@ -32,7 +33,7 @@ public class Daily : GeneralCommandClass
         userData.LastTimeDailyWasChecked = DateTime.UtcNow;
         userData.Coins += 10000;
         await DatabaseContext.SaveChangesAsync();
-        await ctx.CreateResponseAsync(embed.WithTitle("Nice!!")
+        await ctx.RespondAsync(embed.WithTitle("Nice!!")
             .WithDescription($"You gained 100 {nameof(userData.ShardsOfTheGods).Englishify()} and 10,000 coins!"));
     }
 }

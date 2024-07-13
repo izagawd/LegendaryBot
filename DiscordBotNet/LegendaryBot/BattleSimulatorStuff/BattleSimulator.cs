@@ -8,21 +8,15 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
-using DiscordBotNet.LegendaryBot.Rewards;
 using DiscordBotNet.LegendaryBot.StatusEffects;
-using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.SlashCommands;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Primitives;
 using SixLabors.ImageSharp.Drawing;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
-using UserExperienceReward = DiscordBotNet.LegendaryBot.Rewards.UserExperienceReward;
 
 namespace DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 
@@ -37,12 +31,12 @@ public class BattleSimulator
 {
 
 
-    public static DiscordButtonComponent basicAttackButton = new(ButtonStyle.Secondary, nameof(BasicAttack), null,emoji: new DiscordComponentEmoji("⚔️"));
-    public static DiscordButtonComponent skillButton = new(ButtonStyle.Secondary, nameof(Skill), null, emoji: new DiscordComponentEmoji("🪄"));
-    public static DiscordButtonComponent ultimateButton = new(ButtonStyle.Secondary, nameof(Ultimate), null, emoji: new DiscordComponentEmoji("⚡"));
-    public static DiscordButtonComponent forfeitButton = new(ButtonStyle.Danger, "Forfeit", "Forfeit");
+    public static DiscordButtonComponent basicAttackButton = new(DiscordButtonStyle.Secondary, nameof(BasicAttack), null,emoji: new DiscordComponentEmoji("⚔️"));
+    public static DiscordButtonComponent skillButton = new(DiscordButtonStyle.Secondary, nameof(Skill), null, emoji: new DiscordComponentEmoji("🪄"));
+    public static DiscordButtonComponent ultimateButton = new(DiscordButtonStyle.Secondary, nameof(Ultimate), null, emoji: new DiscordComponentEmoji("⚡"));
+    public static DiscordButtonComponent forfeitButton = new(DiscordButtonStyle.Danger, "Forfeit", "Forfeit");
 
-    public static DiscordButtonComponent proceed = new(ButtonStyle.Success, "Proceed", "Proceed");
+    public static DiscordButtonComponent proceed = new(DiscordButtonStyle.Success, "Proceed", "Proceed");
 
 
     protected static ConcurrentDictionary<string,Image<Rgba32>> _cachedResizedForAvatars = new();
@@ -53,7 +47,7 @@ public class BattleSimulator
     private bool _battleBegun = false;
     private  async Task<Image<Rgba32>> GetAvatarAsync(string url)
     {
-        if(_cachedResizedForAvatars.TryGetValue(url, out Image<Rgba32> characterImageToDraw))
+        if(_cachedResizedForAvatars.TryGetValue(url, out var characterImageToDraw))
         {
             return characterImageToDraw.Clone();
         }
@@ -73,10 +67,10 @@ public class BattleSimulator
         var stop = new Stopwatch(); stop.Start();
         var heightToUse = CharacterTeams.Select(i => i.Count).Max() * 160;
         var image = new Image<Rgba32>(500, heightToUse);
-        int xOffSet = 70;
-        int widest = 0;
-        int length = 0;
-        int yOffset = 0;
+        var xOffSet = 70;
+        var widest = 0;
+        var length = 0;
+        var yOffset = 0;
         IImageProcessingContext imageCtx = null!;
         image.Mutate(ctx => imageCtx = ctx);
  
@@ -403,7 +397,7 @@ public class BattleSimulator
         return toSelect.ToArray();
     }
 
-    private async Task HandleDisplayBattleInfoAsync( ComponentInteractionCreateEventArgs interactionCreateEventArgs)
+    private async Task HandleDisplayBattleInfoAsync( ComponentInteractionCreatedEventArgs interactionCreateEventArgs)
     {
         try
         {
@@ -469,7 +463,7 @@ public class BattleSimulator
             }
             descriptionStringBuilder
                 .Append("Stats\n");
-            bool shouldNewLine = false;
+            var shouldNewLine = false;
             foreach (var i in Enum.GetValues<StatType>())
             {
                 descriptionStringBuilder.Append(
@@ -496,7 +490,7 @@ public class BattleSimulator
 
 
 
-            await interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource,
+            await interaction.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource,
                 new DiscordInteractionResponseBuilder()
                     .AddEmbed(embed)
                     .AsEphemeral());
@@ -510,9 +504,9 @@ public class BattleSimulator
     }
 
 
-    protected static DiscordButtonComponent yes = new DiscordButtonComponent(ButtonStyle.Success, "yes", "YES");
+    protected static DiscordButtonComponent yes = new DiscordButtonComponent(DiscordButtonStyle.Success, "yes", "YES");
     
-    protected static DiscordButtonComponent no = new DiscordButtonComponent(ButtonStyle.Success, "no", "NO");
+    protected static DiscordButtonComponent no = new DiscordButtonComponent(DiscordButtonStyle.Success, "no", "NO");
     private async Task HandleForfeitAsync(DiscordInteraction interaction)
     {
         
@@ -525,7 +519,7 @@ public class BattleSimulator
                 .WithColor(DiscordColor.Blue)
                 .WithDescription("Are you sure you want to forfeit?");
 
-            await interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource,
+            await interaction.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource,
                 new DiscordInteractionResponseBuilder()
                     .AddEmbed(embed)
                     .AsEphemeral()
@@ -542,7 +536,7 @@ public class BattleSimulator
 
             }
 
-            await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage);
+            await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage);
       
         }
         catch(Exception e)
@@ -625,7 +619,7 @@ public class BattleSimulator
                 return false;
             }, CancellationTokenSource);
             if(interactivityResult.TimedOut) return;
-            await interactivityResult.Result.Interaction.CreateResponseAsync(InteractionResponseType.DeferredMessageUpdate);
+            await interactivityResult.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
         }
     }
     public int Turn { get; set; } = 0;
@@ -712,7 +706,7 @@ public class BattleSimulator
                 _battleBegun = true;
                 InvokeBattleEvent(new BattleBeginEventArgs());
             }
-            bool extraTurnGranted = false;
+            var extraTurnGranted = false;
             var extraTurners =
                 Characters.Where(i => i.ShouldTakeExtraTurn)
                     .ToArray();
@@ -772,7 +766,7 @@ public class BattleSimulator
             else if (additionalText.Length > 1024)
                 additionalText = additionalText.Substring(0, 1021) + "...";
 
-            DiscordEmbedBuilder embedToEdit = new DiscordEmbedBuilder()
+            var embedToEdit = new DiscordEmbedBuilder()
                 .WithTitle("**BATTLE!!!**")
                 .WithAuthor($"{ActiveCharacter.Name} [{ActiveCharacter.AlphabetIdentifier}]", iconUrl: ActiveCharacter.ImageUrl)
                 .WithColor(ActiveCharacter.Color)
@@ -822,7 +816,7 @@ public class BattleSimulator
                 
                 if (editInteraction)
                 {
-                    await interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage,
+                    await interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
                         new DiscordInteractionResponseBuilder(messageBuilder));
                     _message = await interaction.GetOriginalResponseAsync();
                 }
@@ -872,7 +866,7 @@ public class BattleSimulator
             else if ( mostPowerfulStatusEffect is not null &&  mostPowerfulStatusEffect.OverrideTurnType > 0 )
             {
 
-                UsageResult overridenUsage  = mostPowerfulStatusEffect.OverridenUsage(ActiveCharacter,ref target!, ref battleDecision, UsageType.NormalUsage);
+                var overridenUsage  = mostPowerfulStatusEffect.OverridenUsage(ActiveCharacter,ref target!, ref battleDecision, UsageType.NormalUsage);
                 if (overridenUsage.Text is not null) _mainText = overridenUsage.Text;
                 await CheckForForfeitOrInfoAsync();
             }
@@ -884,7 +878,7 @@ public class BattleSimulator
             }
             else
             {
-                InteractivityResult<ComponentInteractionCreateEventArgs> results;
+                InteractivityResult<ComponentInteractionCreatedEventArgs> results;
                 using (CancellationTokenSource = new CancellationTokenSource(TimeOutTimeSpan))
                 {
                     results = await _message.WaitForAnyComponentInteractionAsync(e =>
@@ -934,7 +928,7 @@ public class BattleSimulator
                     possibleTargets.AddRange(theMove.GetPossibleTargets());
                     foreach (var i in possibleTargets)
                     {
-                        bool isEnemy = i.Team != ActiveCharacter.Team;
+                        var isEnemy = i.Team != ActiveCharacter.Team;
                         enemiesToSelect.Add(new DiscordSelectComponentOption(i.GetNameWithAlphabetIdentifier(isEnemy), i.GetNameWithAlphabetIdentifier(isEnemy)));
                     }
                         
@@ -949,11 +943,11 @@ public class BattleSimulator
                         .AddComponents(forfeitButton)
                         .AddEmbed(embedToEdit);
                     await results.Result.Interaction.CreateResponseAsync(
-                        InteractionResponseType.UpdateMessage,
+                        DiscordInteractionResponseType.UpdateMessage,
                         responseBuilder);
                     _message = await results.Result.Interaction.GetOriginalResponseAsync();
 
-                    InteractivityResult<ComponentInteractionCreateEventArgs> interactivityResult;
+                    InteractivityResult<ComponentInteractionCreatedEventArgs> interactivityResult;
                     using (CancellationTokenSource = new CancellationTokenSource(TimeOutTimeSpan))
                     {
                         interactivityResult = await  _message.WaitForAnyComponentInteractionAsync(e =>

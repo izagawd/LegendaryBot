@@ -3,7 +3,7 @@ using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Entities;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.command;
@@ -12,11 +12,11 @@ public class Hunt : GeneralCommandClass
 {
     
 
-    [SlashCommand("hunt", "Hunt for mobs to get materials and be stronger!"),
-    AdditionalSlashCommand("/hunt Coach Chad",BotCommandType.Battle)]
-    public async Task Execute(InteractionContext ctx,
-        [Option("mob_name", "The name of the mob you want to hunt")] string characterName,
-        [Option("enemy_count","number of enemies")] long enemyCount = 1 )
+    [Command("hunt"),
+    AdditionalCommand("/hunt Coach Chad",BotCommandType.Battle)]
+    public async ValueTask Execute(CommandContext ctx,
+        [Parameter("mob_name")] string characterName,
+        [Parameter("enemy_count")] long enemyCount = 1 )
     {
         var author = ctx.User;
         var userData = await DatabaseContext.UserData
@@ -32,7 +32,7 @@ public class Hunt : GeneralCommandClass
         if (enemyCount < 1)
         {
             embedToBuild.WithDescription("There must be at least one enemy");
-            await ctx.CreateResponseAsync(embedToBuild);
+            await ctx.RespondAsync(embedToBuild);
             return;
         }
 
@@ -40,13 +40,13 @@ public class Hunt : GeneralCommandClass
         {
             embedToBuild
                 .WithDescription("You are occupied!");
-            await ctx.CreateResponseAsync(embedToBuild);
+            await ctx.RespondAsync(embedToBuild);
             return;
         }
 
         if (userData.Tier == Tier.Unranked)
         {
-            await ctx.CreateResponseAsync(embedToBuild.Build());
+            await ctx.RespondAsync(embedToBuild.Build());
             return;
         }
         
@@ -56,13 +56,13 @@ public class Hunt : GeneralCommandClass
         {
             embedToBuild =
                 embedToBuild.WithDescription($"Mob {characterName} does not exist!");
-            await ctx.CreateResponseAsync(embedToBuild.Build());
+            await ctx.RespondAsync(embedToBuild.Build());
             return;
         }
 
         await MakeOccupiedAsync(userData);
-        CharacterTeam enemyTeam = new CharacterTeam();
-        foreach (var i in Enumerable.Range(0,(int) enemyCount))
+        var enemyTeam = new CharacterTeam();
+        foreach (var _ in Enumerable.Range(0,(int) enemyCount))
         {
             enemyTeam.Add((Character)Activator.CreateInstance(characterType)!);
         }
@@ -71,19 +71,19 @@ public class Hunt : GeneralCommandClass
         embedToBuild = embedToBuild
             .WithTitle($"Keep your guard up!")
             .WithDescription($"Wild {enemyTeam.First()}(s) have appeared!");
-        await ctx.CreateResponseAsync(embedToBuild.Build());
-        var message = await ctx.GetOriginalResponseAsync();
-        var userTeam = userData.EquippedPlayerTeam.LoadTeamEquipment();
+        await ctx.RespondAsync(embedToBuild.Build());
+        var message =  await ctx.GetResponseAsync();
+        var userTeam = userData.EquippedPlayerTeam!.LoadTeamEquipment();
         foreach (var i in enemyTeam)
         {
-            i.SetLevel(userTeam.Select(i => i.Level).Average().Round());
+            i.SetLevel(userTeam.Select(j => j.Level).Average().Round());
         }
 
         var simulator = new BattleSimulator(userTeam,  enemyTeam.LoadTeamEquipment());
 
  
 
-        var battleResult = await simulator.StartAsync(message);
+        var battleResult = await simulator.StartAsync(message!);
 
 
 
@@ -96,7 +96,7 @@ public class Hunt : GeneralCommandClass
         }
       
         
-        string expGainText = userTeam.IncreaseExp(expToGain);
+        var expGainText = userTeam.IncreaseExp(expToGain);
         
            
         if (battleResult.Winners == userTeam)
@@ -108,11 +108,11 @@ public class Hunt : GeneralCommandClass
                 .WithDescription($"You won!\n{expGainText}\n{rewardText}")
                 .WithImageUrl("");
 
-            await message.ModifyAsync(new DiscordMessageBuilder(){Embed = embedToBuild.Build() });
+            await message!.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embedToBuild));
         }
         else
         {
-            string additionalString = "";
+            var additionalString = "";
             if (battleResult.TimedOut is not null)
                 additionalString += "timed out\n";
             if (battleResult.Forfeited is not null)
@@ -121,7 +121,7 @@ public class Hunt : GeneralCommandClass
             embedToBuild
                 .WithTitle($"Ah, too bad\n"+additionalString)
                 .WithDescription($"You lost boii\n"+expGainText);
-            await message.ModifyAsync(new DiscordMessageBuilder(){Embed = embedToBuild.Build()});
+            await message!.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embedToBuild));
             
         }
 

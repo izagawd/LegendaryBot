@@ -2,7 +2,6 @@
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -25,7 +24,7 @@ public class Index : PageModel
     public async Task<IActionResult> OnGetAsync(string characterId)
     {
    
-        if (!Guid.TryParse(characterId, out Guid id)) return Redirect("/characters");
+        if (!Guid.TryParse(characterId, out var id)) return Redirect("/characters");
         UserData = await DatabaseContext.UserData
             .Include(j => j.Inventory.Where(k => k is Blessing || k.Id == id))
             .Include(j => j.Inventory)

@@ -1,12 +1,6 @@
 using System.Collections.Concurrent;
-using System.Text;
 using DiscordBotNet.Extensions;
-using DiscordBotNet.LegendaryBot.Entities.Items;
-using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DiscordBotNet.LegendaryBot.Moves;
-using DSharpPlus.Entities;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Primitives;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
@@ -44,106 +38,13 @@ public partial class Character
     /// </summary>
     private static ConcurrentDictionary<string,Image<Rgba32>> _cachedCombatCroppedImages = new();
 
-    private static ConcurrentDictionary<string,Image<Rgba32>> _cachedLevelUpCroppedImages = new();
 
-
-
-
-    private static ConcurrentDictionary<string, Image<Rgba32>> _resizedBlessingsLevelUpImageCache = new();
-    public async Task<Image<Rgba32>> GetImageForLevelUpAndAscensionAsync()
-    {
-        var image = new Image<Rgba32>(495, 300);
-        var url = ImageUrl;
-        if (!_cachedLevelUpCroppedImages.TryGetValue(url, out Image<Rgba32> characterImage))
-        {
-            characterImage = await BasicFunctionality.GetImageFromUrlAsync(url);
-            characterImage.Mutate(ctx => ctx
-                .Resize(new Size(105, 105)));
-
-            _cachedLevelUpCroppedImages[url] = characterImage;
-        }
-        
-        image.Mutate(ctx =>
-            {
-                var font = SystemFonts.CreateFont(Bot.GlobalFontName, 20);
-                var expFont = SystemFonts.CreateFont(Bot.GlobalFontName, 25);
-                var requiredExpNextLevel = GetRequiredExperienceToNextLevel();
-                var statsFont = SystemFonts.CreateFont(Bot.GlobalFontName, 15);
-                var statsStringBuilder = new StringBuilder();
-               
-                
-                foreach (var i in Enum.GetValues<StatType>())
-                {
-                    statsStringBuilder.Append($"{BasicFunctionality.Englishify(i.ToString())}: {GetStatFromType(i)}\n");
-                    
-                }
-
-                ctx.DrawImage(characterImage,
-                        new Point(15, 15), new GraphicsOptions())
-                    .BackgroundColor(DiscordColor.Gray.ToImageSharpColor())
-                    .Fill(SixLabors.ImageSharp.Color.Blue,
-                        new RectangleF(new PointF(135, 80),
-                            new SizeF(300 * ((Experience * 1.0f) / requiredExpNextLevel), 35)))
-                    .Draw(SixLabors.ImageSharp.Color.Black, 4f, new RectangleF(new PointF(135, 80),
-                        new SizeF(300, 35)))
-                    .DrawText($"Name: {Name}\nLevel: {Level}/{MaxLevel}",
-                        font,
-                        SixLabors.ImageSharp.Color.Black, new PointF(135, 30))
-                    .DrawText($"{Experience}/{requiredExpNextLevel}", expFont, SixLabors.ImageSharp.Color.Black,
-                        new PointF(160, 85))
-                    .DrawText(statsStringBuilder.ToString(), statsFont, SixLabors.ImageSharp.Color.Black,
-                        new PointF(10, 130));
-       
-            }
-        );
-        if (Blessing is not null)
-        {
-            if (!_resizedBlessingsLevelUpImageCache.TryGetValue(Blessing.ImageUrl,
-                    out Image<Rgba32> gottenBlessingImage))
-            {
-                gottenBlessingImage = await BasicFunctionality.GetImageFromUrlAsync(Blessing.ImageUrl);
-                gottenBlessingImage.Mutate(ctx =>
-                {
-                    ctx.Resize(new Size(100, 100));
-                });
-                _resizedBlessingsLevelUpImageCache[Blessing.ImageUrl] = gottenBlessingImage;
-            }
-            image.Mutate(ctx =>
-            {
-                ctx.DrawImage(gottenBlessingImage, new Point(image.Width - 100, image.Height - 100),
-                    new GraphicsOptions());
-            });
-        }
-
-        if (UserData is not null)
-        {
-            var expUpgradeMat = UserData.Inventory.OfType<CharacterExpMaterial>()
-                .MergeItems()
-                .OrderBy(i => i.ExpToIncrease);
-            var ascensionMats = UserData.Inventory.OfType<AscensionMaterial>().MergeItems();
-            var sum = expUpgradeMat.Cast<Item>().Union(ascensionMats);
-            var xOffset = 200;
-            foreach (var i in sum)
-            {
-                var imageToDraw = await i.GetImageAsync();
-                imageToDraw.Mutate(j => j.Resize(new Size(60,60)));
-                image.Mutate(j =>
-                    {
-                        j.DrawImage(imageToDraw, new Point(xOffset, 130),new GraphicsOptions());
-                    });
-
-                xOffset += 70;
-            }
-        }
-
-        return image;
-    }
     public async Task<Image<Rgba32>> GetImageForCombatAsync()
     {
 
         var image = new Image<Rgba32>(190, 150);
         var url = ImageUrl;
-        if (!_cachedCombatCroppedImages.TryGetValue(url, out Image<Rgba32> characterImage))
+        if (!_cachedCombatCroppedImages.TryGetValue(url, out var characterImage))
         {
             characterImage = await BasicFunctionality.GetImageFromUrlAsync(url);
             characterImage.Mutate(ctx =>
@@ -170,15 +71,15 @@ public partial class Character
         new RectangleF(52.5f, 35, 115, 12.5f));
 
         var healthPercentage = HealthPercentage;
-        int width = 175;
+        var width = 175;
         var shieldPercentage = ShieldPercentage;
-        int filledWidth = (width * healthPercentage / 100.0).Round();
-        int filledShieldWidth = (width * shieldPercentage / 100).Round();
-        int barHeight = 16; 
+        var filledWidth = (width * healthPercentage / 100.0).Round();
+        var filledShieldWidth = (width * shieldPercentage / 100).Round();
+        var barHeight = 16; 
         if(healthPercentage < 100)
             ctx.Fill(SixLabors.ImageSharp.Color.Red, new Rectangle(0, 50, width, barHeight));
         ctx.Fill(SixLabors.ImageSharp.Color.Green, new Rectangle(0, 50, filledWidth, barHeight));
-        int shieldXPosition =  filledWidth;
+        var shieldXPosition =  filledWidth;
         if (shieldXPosition + filledShieldWidth > width)
         {
             shieldXPosition = width - filledShieldWidth;
@@ -191,10 +92,10 @@ public partial class Character
         ctx.DrawText($"{Health.Round()}/{MaxHealth.Round()}", SystemFonts.CreateFont(Bot.GlobalFontName, 14),
         SixLabors.ImageSharp.Color.Black, new PointF(2.5f, 51.5f));
 
-        int xOffSet = 0;
-        int yOffSet = 50 + barHeight + 5;
+        var xOffSet = 0;
+        var yOffSet = 50 + barHeight + 5;
 
-        int moveLength = 25; 
+        var moveLength = 25; 
 
         foreach (var i in MoveList)
         {
@@ -203,7 +104,7 @@ public partial class Character
             using var moveImage = await i.GetImageForCombatAsync();
             ctx.DrawImage(moveImage, new Point(xOffSet, yOffSet), new GraphicsOptions());
             xOffSet += moveLength;
-            int cooldown = 0;
+            var cooldown = 0;
             if (i is Special special)
             {
                 cooldown = special.Cooldown;

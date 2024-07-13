@@ -40,15 +40,15 @@
           "dependencies": {
             "AspNet.Security.OAuth.Discord": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.1.0, )"
             },
             "DSharpPlus": {
               "target": "Package",
-              "version": "[5.0.0-nightly-01918, )"
+              "version": "[5.0.0-nightly-02313, )"
             },
-            "DSharpPlus.CommandsNext": {
+            "DSharpPlus.Commands": {
               "target": "Package",
-              "version": "[5.0.0-nightly-01918, )"
+              "version": "[5.0.0-nightly-02313, )"
             },
             "DSharpPlus.Core": {
               "target": "Package",
@@ -56,23 +56,19 @@
             },
             "DSharpPlus.Interactivity": {
               "target": "Package",
-              "version": "[5.0.0-nightly-01918, )"
+              "version": "[5.0.0-nightly-02313, )"
             },
             "DSharpPlus.Lavalink": {
               "target": "Package",
-              "version": "[5.0.0-nightly-01918, )"
+              "version": "[5.0.0-nightly-02313, )"
             },
             "DSharpPlus.Rest": {
               "target": "Package",
-              "version": "[5.0.0-nightly-01918, )"
-            },
-            "DSharpPlus.SlashCommands": {
-              "target": "Package",
-              "version": "[5.0.0-nightly-01918, )"
+              "version": "[5.0.0-nightly-02313, )"
             },
             "DSharpPlus.VoiceNext": {
               "target": "Package",
-              "version": "[5.0.0-nightly-01918, )"
+              "version": "[5.0.0-nightly-02313, )"
             },
             "Microsoft.AspNetCore.Authentication.Certificate": {
               "target": "Package",
@@ -88,19 +84,19 @@
             },
             "SixLabors.Fonts": {
               "target": "Package",
-              "version": "[2.0.2, )"
+              "version": "[2.0.4, )"
             },
             "SixLabors.ImageSharp": {
               "target": "Package",
-              "version": "[3.1.3, )"
+              "version": "[3.1.4, )"
             },
             "SixLabors.ImageSharp.Drawing": {
               "target": "Package",
-              "version": "[2.1.2, )"
+              "version": "[2.1.3, )"
             },
             "SixLabors.ImageSharp.Web": {
               "target": "Package",
-              "version": "[3.1.1, )"
+              "version": "[3.1.2, )"
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",

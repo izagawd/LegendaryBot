@@ -1,11 +1,8 @@
 ﻿using System.Reflection;
 using DiscordBotNet.Database;
-using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
@@ -33,8 +30,8 @@ public class Index : PageModel
     public async Task OnPostAddAsync(string? type)
     {
 
-        Type theType = AddableTypes.First(i => i.Name == type);
-        Entity entity = (Entity)Activator.CreateInstance(theType)!;
+        var theType = AddableTypes.First(i => i.Name == type);
+        var entity = (Entity)Activator.CreateInstance(theType)!;
 
         entity.UserDataId = User.GetDiscordUserId();
 

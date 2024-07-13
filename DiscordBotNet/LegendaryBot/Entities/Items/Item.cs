@@ -1,5 +1,4 @@
-﻿using DiscordBotNet.LegendaryBot.StatusEffects;
-using SixLabors.Fonts;
+﻿using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 

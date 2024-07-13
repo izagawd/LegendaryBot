@@ -5,14 +5,14 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPar
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 
 namespace DiscordBotNet.LegendaryBot.command;
 
 public class ListAllEntities : GeneralCommandClass
 {
-    [SlashCommand("list_all_entities", "lists all the possible entities you can have in your inventory")]
-    public async Task ExecuteGetTotalMemoryUsedInBytes(InteractionContext context)
+    [Command("list_all_entities")]
+    public async ValueTask ExecuteGetTotalMemoryUsedInBytes(CommandContext context)
     {
         var builder = new StringBuilder();
         foreach (var i in DefaultObjects.GetDefaultObjectsThatSubclass<Entity>()
@@ -37,6 +37,6 @@ public class ListAllEntities : GeneralCommandClass
             builder.Append($"{i.entity.Name} ({i.type.Name})\n");
         }
 
-        await context.CreateResponseAsync(builder.ToString());
+        await context.RespondAsync(builder.ToString());
     }
 }

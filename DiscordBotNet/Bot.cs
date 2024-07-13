@@ -1,27 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Immutable;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel;
 using DSharpPlus.Entities;
 using System.Diagnostics;
-using System.Numerics;
 using System.Reflection;
-using System.Text;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.command;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DSharpPlus;
-
+using DSharpPlus.Commands;
+using DSharpPlus.Commands.EventArgs;
+using DSharpPlus.Commands.Processors.MessageCommands;
+using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.SlashCommands;
-using DSharpPlus.SlashCommands.EventArgs;
+using DSharpPlus.Commands.Processors.TextCommands;
+using DSharpPlus.Commands.Processors.TextCommands.Parsing;
+using DSharpPlus.Commands.Processors.UserCommands;
+using DSharpPlus.Commands.Trees;
+using DSharpPlus.Net.Models;
 using DSharpPlus.VoiceNext;
 using Microsoft.EntityFrameworkCore;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
@@ -46,6 +45,64 @@ public static class Bot
 
 
 
+    private static async Task StartDiscordBotAsync()
+    {
+      
+        
+        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["BotToken"]!,
+            DiscordIntents.All)
+            .ConfigureEventHandlers(i => i.HandleSocketOpened(OnReady))
+            .Build();
+
+        var commandsExtension = Client.UseCommands();
+        var slashCommandProcessor = new SlashCommandProcessor();
+    
+        slashCommandProcessor.AddConverters(typeof(Bot).Assembly);
+        
+        await commandsExtension.AddProcessorAsync(slashCommandProcessor);
+        TextCommandProcessor textCommandProcessor = new(new()
+        {
+            
+            // The default behavior is that the bot reacts to direct mentions
+            // and to the "!" prefix.
+            // If you want to change it, you first set if the bot should react to mentions
+            // and then you can provide as many prefixes as you want.
+            PrefixResolver = new DefaultPrefixResolver(true, "?", "&").ResolvePrefixAsync,
+            IgnoreBots = true,
+        });
+        
+        
+        textCommandProcessor.AddConverters(typeof(Bot).Assembly);
+        await commandsExtension.AddProcessorAsync(textCommandProcessor);
+        DefaultCommandExecutor idk;
+
+        commandsExtension.CommandExecuted += OnCommandsExtensionOnCommandExecuted;
+        
+        commandsExtension.AddCommands(typeof(Bot).Assembly);
+   
+        commandsExtension.CommandErrored += OnCommandError;
+        
+        Client.UseVoiceNext(new VoiceNextConfiguration { AudioFormat = AudioFormat.Default});
+        var interactivityConfiguration = new InteractivityConfiguration
+        {
+            Timeout = TimeSpan.FromMinutes(2),
+        };
+        Interactivity = Client.UseInteractivity(interactivityConfiguration);
+     
+       
+        await Client.ConnectAsync();
+    }
+
+    private static  Task OnCommandsExtensionOnCommandExecuted(CommandsExtension sender, CommandExecutedEventArgs args)
+    {
+        if (args.CommandObject is GeneralCommandClass generalCommandClass)
+        {
+            return generalCommandClass.AfterSlashExecutionAsync(args.Context);
+        }
+
+        return Task.CompletedTask;
+    }
+
     private static Task DoShitAsync()
     {
         var idk = new Player();
@@ -68,7 +125,6 @@ public static class Bot
         var stopwatch = new Stopwatch(); 
         Console.WriteLine("Making all users unoccupied...");
         stopwatch.Start();
-
         await using (var ctx = new PostgreSqlContext())
         {
             await ctx.UserData
@@ -78,37 +134,12 @@ public static class Bot
 
             Console.WriteLine($"Took a total of {stopwatch.Elapsed.TotalMilliseconds}ms to make {count} users unoccupied");
         }
-
-
-        Help.LoadHelpMenu();
-        var config = new DiscordConfiguration
-        {
-            Token = ConfigurationManager.AppSettings["BotToken"]!,
-            Intents = DiscordIntents.All,
-            AutoReconnect = true,
-        };
-        
-        
-        Client = new DiscordClient(config);
-        
-        var slashCommandsExtension = Client.UseSlashCommands();
-        slashCommandsExtension.RegisterCommands(Assembly.GetExecutingAssembly());
-        
-        slashCommandsExtension.SlashCommandErrored += OnSlashCommandError;
-        Client.UseVoiceNext(new VoiceNextConfiguration { AudioFormat = AudioFormat.Default});
-        var interactivityConfiguration = new InteractivityConfiguration
-        {
-            Timeout = TimeSpan.FromMinutes(2),
-        };
-        Interactivity = Client.UseInteractivity(interactivityConfiguration);
-        Client.SocketOpened += OnReady;
-       
-        await Client.ConnectAsync();
-     
+        await StartDiscordBotAsync();
         await Website.StartAsync(args);
 
 
     }
+
 
     public static InteractivityExtension Interactivity { get; private set; } = null!;
 
@@ -129,27 +160,30 @@ public static class Bot
     public static string GlobalFontName => "Arial";
 
     
-    private static async  Task OnSlashCommandError(SlashCommandsExtension extension,SlashCommandErrorEventArgs ev)
+    private static async  Task OnCommandError(CommandsExtension extension,CommandErroredEventArgs args)
     {
-        Console.WriteLine(ev.Exception);
+        Console.WriteLine(args.Exception);
 
-        List<DiscordUser> involvedUsers = [ev.Context.User];
-        if (ev.Context.ResolvedUserMentions is not null) involvedUsers.AddRange(ev.Context.ResolvedUserMentions);
-        var involvedIds = involvedUsers.Select(i => i.Id).ToArray();
-        await using var databaseContext = new PostgreSqlContext();
-        await databaseContext.UserData
-            .Where(i => involvedIds.Contains((ulong)i.Id))
-            .ForEachAsync(i => i.IsOccupied = false);
-        var color = await databaseContext.UserData.FindOrCreateSelectUserDataAsync((long)ev.Context.User.Id, i => i.Color);
-        await databaseContext.SaveChangesAsync();
-        
+
+        DiscordColor color;
+        var commandClass = args.CommandObject as GeneralCommandClass;
+        if (commandClass is not null)
+        {
+            color = await commandClass.DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(
+                (long)args.Context.User.Id, i => i.Color);
+            await commandClass.AfterSlashExecutionAsync(args.Context);
+        }
+        else
+        {
+            color = DefaultObjects.GetDefaultObject<UserData>().Color;
+        }
         
         var embed = new DiscordEmbedBuilder()
             .WithColor(color)
             .WithTitle("hmm")
             .WithDescription("Something went wrong").Build();
 
-        await ev.Context.Channel.SendMessageAsync(embed);
+        await args.Context.Channel.SendMessageAsync(embed);
     }
     
 

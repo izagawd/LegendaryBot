@@ -1,8 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using DiscordBotNet.LegendaryBot.BattleEvents;
-using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 using DiscordBotNet.LegendaryBot.Results;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities;

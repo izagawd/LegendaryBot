@@ -1,12 +1,10 @@
-using System.Linq.Expressions;
-using DiscordBotNet.Database.Models;
+using System.ComponentModel;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.Items;
-using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.command;
@@ -14,30 +12,31 @@ namespace DiscordBotNet.LegendaryBot.command;
 public class GiveMe : GeneralCommandClass
 {
 
-    [SlashCommand("give_me", "Gets daily rewards"),
-     AdditionalSlashCommand("/give_me", BotCommandType.Battle)]
-    public async Task Execute(InteractionContext ctx,[Option("entity_name","the name of entity you want")]
-        string entityName,[Option("entity_amount","the amount")] long amount = 1)
+    [Command("give_me"),
+     AdditionalCommand("/give_me", BotCommandType.Battle)]
+    public async ValueTask Execute(CommandContext ctx,[Parameter("entity_name")]
+        string entityName,[Parameter("entity_amount"), 
+                           Description("The amount you want of the supplied item")] long amount = 1)
     {
         var simplifiedEntityName = entityName.ToLower().Replace(" ", "");
         var type =DefaultObjects.AllAssemblyTypes.FirstOrDefault(i => i.IsSubclassOf(typeof(Entity)) && !i.IsAbstract
             && i.Name.ToLower() == simplifiedEntityName);
         if (type is null)
         {
-            await ctx.CreateResponseAsync("invalid item inputted");
+            await ctx.RespondAsync("invalid item inputted");
         } else if (amount < 1)
         {
-            await ctx.CreateResponseAsync("amount must be at least 1");
+            await ctx.RespondAsync("amount must be at least 1");
         }
         else
         {
             var userData = await DatabaseContext.UserData
                 .Include(i => i.Inventory)
                 .FindOrCreateUserDataAsync((long)ctx.User.Id);
-            Entity createdType = ((Entity)DefaultObjects.GetDefaultObject(type)).Clone();
+            var createdType = ((Entity)DefaultObjects.GetDefaultObject(type)).Clone();
             if (createdType is Character && userData.Inventory.Any(i => i.GetType() == type))
             {
-                await ctx.CreateResponseAsync("sorry, cant have dupe characters");
+                await ctx.RespondAsync("sorry, cant have dupe characters");
                 return;
             } 
             if (createdType is Item item)
@@ -61,7 +60,7 @@ public class GiveMe : GeneralCommandClass
             }
 
             await DatabaseContext.SaveChangesAsync();
-            await ctx.CreateResponseAsync("Done!");
+            await ctx.RespondAsync("Done!");
         }
     }
 }

@@ -2,14 +2,14 @@
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Results;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 
 namespace DiscordBotNet.LegendaryBot.command;
 
 public class SimulateBattle : GeneralCommandClass
 {
-    [SlashCommand("simulate_battle","simulates a set number of battles")]
-    public async Task Execute(InteractionContext context,[Option("battle_count","the battle count")] long battleCount = 1)
+    [Command("simulate_battle")]
+    public async ValueTask Execute(CommandContext context,[Parameter("battle_count")] long battleCount = 1)
     {
         List<Task<BattleResult>> pendingBattleResults = [];
         foreach (var i in Enumerable.Range(0,(int)battleCount))

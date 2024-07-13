@@ -18,16 +18,19 @@ public static class BasicExtension
         return Color.ParseHex(color.ToString());
     }
 
-    public static Task<InteractivityResult<ComponentInteractionCreateEventArgs>> WaitForAnyComponentInteractionAsync(this DiscordMessage message, Func<ComponentInteractionCreateEventArgs,bool> predicate,
+
+
+    public static Task<InteractivityResult<ComponentInteractionCreatedEventArgs>> WaitForAnyComponentInteractionAsync(this DiscordMessage message, Func<ComponentInteractionCreatedEventArgs,bool> predicate,
         TimeSpan? timeoutOverride = null)
     {
 
-        return Bot.Interactivity.WaitForEventArgsAsync<ComponentInteractionCreateEventArgs>
+       
+        return Bot.Interactivity.WaitForEventArgsAsync<ComponentInteractionCreatedEventArgs>
             (i => i.Message == message && predicate(i),timeoutOverride);
     }
-    public static async Task<InteractivityResult<ComponentInteractionCreateEventArgs>> WaitForAnyComponentInteractionAsync(this DiscordMessage message, Func<ComponentInteractionCreateEventArgs,bool> predicate, CancellationTokenSource token)
+    public static async Task<InteractivityResult<ComponentInteractionCreatedEventArgs>> WaitForAnyComponentInteractionAsync(this DiscordMessage message, Func<ComponentInteractionCreatedEventArgs,bool> predicate, CancellationTokenSource token)
     {
-        IEnumerable<Task<InteractivityResult<ComponentInteractionCreateEventArgs>>> tasks=
+        IEnumerable<Task<InteractivityResult<ComponentInteractionCreatedEventArgs>>> tasks=
         [
             message.WaitForButtonAsync(predicate, token.Token),
             message.WaitForSelectAsync(predicate, token.Token)

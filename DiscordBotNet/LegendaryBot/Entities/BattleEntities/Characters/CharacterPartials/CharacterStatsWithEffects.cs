@@ -25,7 +25,7 @@ public partial class Character
                 flat += i.ValueToChangeWith;
             }
 
-            float newSpeed = TotalSpeed * percentage * 0.01f;
+            var newSpeed = TotalSpeed * percentage * 0.01f;
             newSpeed += flat;
             if (newSpeed < 0) newSpeed = 0;
             return newSpeed;
@@ -49,7 +49,7 @@ public partial class Character
                 flat += i.ValueToChangeWith;
             }
 
-            float newDefense = TotalDefense * percentage * 0.01f;
+            var newDefense = TotalDefense * percentage * 0.01f;
             newDefense += flat;
             if (newDefense < 0) newDefense = 0;
             return newDefense;
@@ -74,7 +74,7 @@ public partial class Character
                 flat += i.ValueToChangeWith;
             }
 
-            float newAttack = TotalAttack * percentage * 0.01f;
+            var newAttack = TotalAttack * percentage * 0.01f;
             newAttack += flat;
             if (newAttack < 0) newAttack = 0;
             return newAttack;
@@ -86,7 +86,7 @@ public partial class Character
         get
         {
        
-            float percentage = TotalCriticalDamage;
+            var percentage = TotalCriticalDamage;
 
             foreach (var i in GetAllStatsModifierArgs<CriticalDamageModifierArgs>())
             {
@@ -103,7 +103,7 @@ public partial class Character
         get
         {
        
-            float percentage = TotalEffectiveness;
+            var percentage = TotalEffectiveness;
             var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
             foreach (var i in modifiedStats.OfType<EffectivenessModifierArgs>())
             {
@@ -137,7 +137,7 @@ public partial class Character
     public float CriticalChance {
         get
         {
-            float percentage = TotalCriticalChance;
+            var percentage = TotalCriticalChance;
             foreach (var i  in GetAllStatsModifierArgs<CriticalChanceModifierArgs>())
             {
                 percentage += i.ValueToChangeWith;
@@ -150,7 +150,7 @@ public partial class Character
     public float Resistance {
         get
         {
-            float percentage = TotalResistance;
+            var percentage = TotalResistance;
             foreach (var i in GetAllStatsModifierArgs<ResistanceModifierArgs>())
             {
                 percentage += i.ValueToChangeWith;

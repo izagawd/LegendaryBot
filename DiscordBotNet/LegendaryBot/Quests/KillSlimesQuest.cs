@@ -5,7 +5,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Entities;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 
 namespace DiscordBotNet.LegendaryBot.Quests;
 
@@ -13,9 +13,10 @@ public class KillSlimesQuest : Quest
 {
     public override string Description => "Simple quest. Defeat the slimes that are attacking a village";
 
-    public override async Task<bool> StartQuest(PostgreSqlContext databaseContext, InteractionContext context,
-        DiscordMessage? message = null)
+    public override async Task<bool> StartQuest(PostgreSqlContext databaseContext, CommandContext context,
+        DiscordMessage message)
     {
+       
         var slimeTeam = new CharacterTeam([new Slime(),new Slime()]);
         var userData = await databaseContext.UserData
             .IncludeTeamWithAllEquipments()
@@ -31,7 +32,7 @@ public class KillSlimesQuest : Quest
         }
         else
         {
-            message = await message.ModifyAsync(new DiscordMessageBuilder {Embed = embed});
+            message = await message.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embed));
         }
         await Task.Delay(2000);
         var playerTeam = userData.EquippedPlayerTeam.LoadTeamEquipment();

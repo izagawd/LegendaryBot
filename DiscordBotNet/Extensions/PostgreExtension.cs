@@ -110,7 +110,7 @@ public static class PostgreExtension
     public async static Task<TExpression> FindOrCreateSelectUserDataAsync<T, TExpression>(this IQueryable<T> queryable, long id,
          Expression<Func<T,TExpression>> selectExpression) where T : UserData,new()
     {
-        TExpression? data = await queryable
+        var data = await queryable
                 .Where(i => i.Id == id)
                 .Select(selectExpression)
                 .FirstOrDefaultAsync();
@@ -136,7 +136,7 @@ public static class PostgreExtension
     public async static Task<T> FindOrCreateUserDataAsync<T>(this IQueryable<T> set, long id) 
         where T : UserData, new()
     {
-        T? data = await set
+        var data = await set
                 .FirstOrDefaultAsync(i => i.Id == id);
      
 

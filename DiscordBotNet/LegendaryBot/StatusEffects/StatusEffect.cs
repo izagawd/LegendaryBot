@@ -1,11 +1,6 @@
 ﻿using System.Collections.Concurrent;
-using DiscordBotNet.LegendaryBot.BattleEvents;
-using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 using DiscordBotNet.LegendaryBot.Results;
-using Microsoft.Extensions.Caching.Memory;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
@@ -44,7 +39,7 @@ public abstract class StatusEffect : ICloneable
     {
         var url = IconUrl;
 
-        if (!_cachedResizedCombatImages.TryGetValue(url, out Image<Rgba32> image))
+        if (!_cachedResizedCombatImages.TryGetValue(url, out var image))
         {
             
             image = await BasicFunctionality.GetImageFromUrlAsync(IconUrl);

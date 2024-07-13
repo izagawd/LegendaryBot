@@ -1,36 +1,32 @@
-﻿using System.Linq.Expressions;
-using System.Text;
-using DiscordBotNet.Database.Models;
+﻿using System.Text;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 using Microsoft.EntityFrameworkCore;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.command;
 
-[SlashCommandGroup("display", "Display stuff from your inventory")]
+[Command("display")]
 public class Display : GeneralCommandClass
 {
-    protected static DiscordButtonComponent Next = new DiscordButtonComponent(ButtonStyle.Success, "next", "NEXT");
-    protected static DiscordButtonComponent Previous = new DiscordButtonComponent(ButtonStyle.Primary, "previous", "PREVIOUS");
+    protected static DiscordButtonComponent Next = new DiscordButtonComponent(DiscordButtonStyle.Success, "next", "NEXT");
+    protected static DiscordButtonComponent Previous = new DiscordButtonComponent(DiscordButtonStyle.Primary, "previous", "PREVIOUS");
 
 // Last Button
-    protected static DiscordButtonComponent Last = new DiscordButtonComponent(ButtonStyle.Primary, "last", "LAST");
+    protected static DiscordButtonComponent Last = new DiscordButtonComponent(DiscordButtonStyle.Primary, "last", "LAST");
 
     
     
     
-    protected static DiscordButtonComponent First = new DiscordButtonComponent(ButtonStyle.Primary, "first", "FIRST");
+    protected static DiscordButtonComponent First = new DiscordButtonComponent(DiscordButtonStyle.Primary, "first", "FIRST");
     
 
-    [SlashCommand("characters", "display all your owned characters")]
-    public async Task ExecuteDisplayCharacters(InteractionContext context)
+    [Command("characters")]
+    public async ValueTask ExecuteDisplayCharacters(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j is Character))
@@ -76,13 +72,13 @@ public class Display : GeneralCommandClass
                 .WithDescription(displayList[index].Join("\n\n"));
             var messageBuilder = new DiscordMessageBuilder()
                 .AddComponents(First,Previous,Next,Last)
-                .WithEmbed(embed);
+                .AddEmbed(embed);
             
             if (message is null)
             {
                 var response = new DiscordInteractionResponseBuilder(messageBuilder);
-                await context.CreateResponseAsync(response);
-                message = await context.GetOriginalResponseAsync();
+                await context.RespondAsync(response);
+                message = await context.GetResponseAsync();
             }
             else
             {
@@ -92,7 +88,7 @@ public class Display : GeneralCommandClass
             var result = await message.WaitForButtonAsync(context.User);
             
             if(result.TimedOut) break;
-            await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.DeferredMessageUpdate);
+            await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
             switch (result.Result.Id.ToLower())
             {
                 case "next":
@@ -115,9 +111,9 @@ public class Display : GeneralCommandClass
         
 
     }
-    [SlashCommand("blessing", "shows the details of a single blessing you own by their id")]
-    public async Task ExecuteDisplayABlessing(InteractionContext ctx,
-        [Option("blessing_id","The id of the blessing you want to get details about")] string blessingIdString)
+    [Command("blessing")]
+    public async ValueTask ExecuteDisplayABlessing(CommandContext ctx,
+        [Parameter("blessing_id")] string blessingIdString)
     {
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
@@ -125,7 +121,7 @@ public class Display : GeneralCommandClass
             .WithDescription("Invalid id");
 
         
-        if(!Guid.TryParse(blessingIdString, out Guid blessingId)) 
+        if(!Guid.TryParse(blessingIdString, out var blessingId)) 
             blessingId = Guid.Empty;
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j.Id == blessingId && j is Blessing))
@@ -144,7 +140,7 @@ public class Display : GeneralCommandClass
                 embedBuilder.WithDescription($"You do not have any blessing with the id {blessingId}");
             }
             
-            await ctx.CreateResponseAsync(embedBuilder);
+            await ctx.RespondAsync(embedBuilder);
             return;
         }
 
@@ -159,15 +155,15 @@ public class Display : GeneralCommandClass
         embedBuilder
             .WithTitle("Here you go!")
             .WithDescription($"Name: {blessing}\nId: {blessing.Id}");
-        DiscordInteractionResponseBuilder builder = new DiscordInteractionResponseBuilder()
+        var builder = new DiscordInteractionResponseBuilder()
             .AddFile("description.png", stream)
             .WithTitle("Detail")
             .AddEmbed(embedBuilder.Build());
-        await ctx.CreateResponseAsync(builder);
+        await ctx.RespondAsync(builder);
    
     }
-    [SlashCommand("blessings", "display all your owned blessings")]
-    public async Task ExecuteDisplayBlessings(InteractionContext context)
+    [Command("blessings")]
+    public async ValueTask ExecuteDisplayBlessings(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j is Blessing))
@@ -215,13 +211,14 @@ public class Display : GeneralCommandClass
                 .WithDescription(displayList[index].Join("\n\n"));
             var messageBuilder = new DiscordMessageBuilder()
                 .AddComponents(First,Previous,Next,Last)
-                .WithEmbed(embed);
+                .AddEmbed(embed);
             
             if (message is null)
             {
                 var response = new DiscordInteractionResponseBuilder(messageBuilder);
-                await context.CreateResponseAsync(response);
-                message = await context.GetOriginalResponseAsync();
+                await context.RespondAsync(response);
+                
+                message = await context.GetResponseAsync();
             }
             else
             {
@@ -231,7 +228,7 @@ public class Display : GeneralCommandClass
             var result = await message.WaitForButtonAsync(context.User);
             
             if(result.TimedOut) break;
-            await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.DeferredMessageUpdate);
+            await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
             switch (result.Result.Id.ToLower())
             {
                 case "next":
@@ -254,8 +251,8 @@ public class Display : GeneralCommandClass
         
 
     }
-    [SlashCommand("teams","displays all your teams")]
-    public async Task ExecuteDisplayTeams(InteractionContext context)
+    [Command("teams")]
+    public async ValueTask ExecuteDisplayTeams(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
@@ -287,7 +284,7 @@ public class Display : GeneralCommandClass
             .WithColor(userData.Color)
             .WithDescription(teamStringBuilder.ToString());
 
-        await context.CreateResponseAsync(embed);
+        await context.RespondAsync(embed);
     }
 
 }

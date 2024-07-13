@@ -1,6 +1,5 @@
 using System.Collections.Immutable;
 using System.Reflection;
-using DiscordBotNet.Extensions;
 
 namespace DiscordBotNet.LegendaryBot;
 

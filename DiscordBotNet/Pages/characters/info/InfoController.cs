@@ -2,7 +2,6 @@
 using DiscordBotNet.Database;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
@@ -21,7 +20,7 @@ public class InfoController : Controller
     public async Task<IActionResult> RemoveBlessingAsync([FromBody] string characterId)
     {
    
-        if (!Guid.TryParse(characterId, out Guid characterGuid)) return Ok();
+        if (!Guid.TryParse(characterId, out var characterGuid)) return Ok();
         var character = await DatabaseContext.Entity
             .OfType<Character>()
             .Where(i => i.Id == characterGuid)

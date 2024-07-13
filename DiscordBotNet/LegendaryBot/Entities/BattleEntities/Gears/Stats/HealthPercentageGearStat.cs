@@ -1,5 +1,4 @@
 ﻿using DiscordBotNet.Extensions;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;

@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
 using DiscordBotNet.Database;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Entities;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 
 namespace DiscordBotNet.LegendaryBot.Quests;
 
@@ -20,13 +19,12 @@ public abstract class Quest
     public Guid Id { get; set; }
 
 
-
     /// <param name="databaseContext"></param>
     /// <param name="context"></param>
     /// <param name="messageToEdit"> if not null, should edit that message instead of adding a new message to the channel</param>
     /// <returns>True if quest was successfully completed</returns>
-    public abstract Task<bool> StartQuest(PostgreSqlContext databaseContext, InteractionContext context,
-        DiscordMessage? messageToEdit = null);
+    public abstract Task<bool> StartQuest(PostgreSqlContext databaseContext, CommandContext context,
+        DiscordMessage messageToEdit);
 
     [NotMapped]
     public abstract IEnumerable<Reward> QuestRewards { get; protected set; }

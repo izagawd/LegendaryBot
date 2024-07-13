@@ -1,13 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Claims;
-using DiscordBotNet.LegendaryBot.Moves;
+﻿using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
-using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.Extensions.Caching.Memory;
-using SixLabors.ImageSharp.PixelFormats;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class FourthWallBreaker: BasicAttack
@@ -102,7 +97,7 @@ public class Ignite : Ultimate
                                                     $"attempts to make a human torch out of {target.NameWithAlphabetIdentifier}!");
 
         List<StatusEffect> burns = [];
-        for (int i = 0; i < 3; i++)
+        for (var i = 0; i < 3; i++)
         {
             if (BasicFunctionality.RandomChance(IgniteChance))
             {

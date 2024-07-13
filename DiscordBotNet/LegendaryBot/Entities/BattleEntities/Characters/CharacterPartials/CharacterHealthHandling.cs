@@ -152,7 +152,7 @@ public partial class Character
             didCrit = true;
         }
 
-        int actualDamage = damage.Round();
+        var actualDamage = damage.Round();
         var damageText = damageArgs.DamageText;
         if (damageText is null)
         {

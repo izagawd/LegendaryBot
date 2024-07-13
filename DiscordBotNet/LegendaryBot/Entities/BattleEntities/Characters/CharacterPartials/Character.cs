@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
@@ -14,7 +13,6 @@ using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.Extensions.Caching.Memory;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
@@ -266,7 +264,7 @@ public abstract partial  class Character : BattleEntity
                 flat += i.ValueToChangeWith;
             }
 
-            float newMaxHealth = TotalMaxHealth * percentage * 0.01f;
+            var newMaxHealth = TotalMaxHealth * percentage * 0.01f;
             newMaxHealth += flat;
             if (newMaxHealth < 0) newMaxHealth = 0;
             return newMaxHealth;
@@ -298,6 +296,7 @@ public abstract partial  class Character : BattleEntity
 
 
 
+    public const int MaxAscensionLevel = 6;
     public int Ascension { get; set; } = 1;
 
     /// <summary>
@@ -331,14 +330,7 @@ public abstract partial  class Character : BattleEntity
     public int RequiredAscensionMaterialsToAscend => Ascension * 5;
 
 
-    public bool CanAscend => Ascension <= 5 && Level >= MaxLevel;
-    public bool Ascend()
-    {
-        if (!CanAscend) return false;
-        Ascension++;
-        return true;
-    }
-   
+
     public static long GetCoinsBasedOnCharacters(IEnumerable<Character> characters)
     {
         return characters.Select(i => i.CoinsToGainWhenKilled).Sum();
@@ -410,11 +402,11 @@ public abstract partial  class Character : BattleEntity
 
    
         Move move;
-        BattleDecision moveDecision = BattleDecision.BasicAttack;
+        var moveDecision = BattleDecision.BasicAttack;
 
         moveDecision =BasicFunctionality.RandomChoice<BattleDecision>(possibleDecisions);
         move = this[moveDecision]!;
-        Character[] possibleTargets = move.GetPossibleTargets().ToArray();
+        var possibleTargets = move.GetPossibleTargets().ToArray();
         possibleDecisions.Remove(moveDecision);
     
 
@@ -530,7 +522,7 @@ public abstract partial  class Character : BattleEntity
     
     public string GetNameWithAlphabetIdentifier(bool isEnemy)
     {
-        string side = "enemy";
+        var side = "enemy";
         if (!isEnemy)
         {
             side = "team mate";
@@ -576,7 +568,7 @@ public abstract partial  class Character : BattleEntity
     {
         if (Level >= MaxLevel)
             return new ExperienceGainResult() { ExcessExperience = experienceToGain, Text = $"{this} has already reached their max level!" };
-        string expGainText = "";
+        var expGainText = "";
         
         var levelBefore = Level;
         Experience += experienceToGain;

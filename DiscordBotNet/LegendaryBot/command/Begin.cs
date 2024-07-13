@@ -1,14 +1,14 @@
-﻿using DiscordBotNet.Database.Models;
+﻿using System.ComponentModel;
+using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.DialogueNamespace;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 using DiscordBotNet.LegendaryBot.Results;
-using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 using Microsoft.EntityFrameworkCore;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
@@ -19,22 +19,23 @@ public class Begin : GeneralCommandClass
 {
 
 
-    private static TextInputComponent _askForName = new("What is your name?",
+    private static DiscordTextInputComponent _askForName = new("What is your name?",
         "name", DefaultObjects.GetDefaultObject<Player>().Name,
         DefaultObjects.GetDefaultObject<Player>().Name, min_length: 3, max_length: 15);
-    
-    
-    private static TextInputComponent _askForGender = new("What's your gender?",
+
+    private static DiscordButtonComponent _yes = new DiscordButtonComponent(DiscordButtonStyle.Primary, "yes", "Yes");
+    private static DiscordButtonComponent _no = new DiscordButtonComponent(DiscordButtonStyle.Primary, "no", "No");
+    private static DiscordTextInputComponent _askForGender = new("What's your gender?",
         "gender", Gender.Male.ToString(),
         Gender.Male.ToString());
-    [SlashCommand("begin", "Begin your journey by playing the tutorial!"),
-    AdditionalSlashCommand("/begin",BotCommandType.Battle)]
-    public async Task Execute(InteractionContext ctx)
+    [Command("begin"),
+    AdditionalCommand("/begin",BotCommandType.Battle), Description("Use this command to begin your journey")]
+    public async ValueTask Execute(CommandContext ctx)
     {
         DiscordEmbedBuilder embedToBuild = new();
-        DiscordUser author = ctx.User;
+        var author = ctx.User;
 
-        UserData userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.UserData
             .Include(j => j.Inventory)
             .ThenInclude(j => (j as Character).Blessing)
             .Include(i => i.Inventory)
@@ -43,7 +44,10 @@ public class Begin : GeneralCommandClass
             .Include(i => i.Inventory.Where(j => j is Character))
             .FindOrCreateUserDataAsync((long)author.Id);
 
-        DiscordColor userColor = userData.Color;
+        var userColor = userData.Color;
+        embedToBuild
+            .WithUser(ctx.User)
+            .WithColor(userColor);
         if (userData.IsOccupied)
         {
            
@@ -53,27 +57,50 @@ public class Begin : GeneralCommandClass
                 .WithDescription("`You are occupied`")
                 .WithColor(userColor);
 
-            await ctx.CreateResponseAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedToBuild.Build()));
+            await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedToBuild.Build()));
             return;
         }
 
 
         if (userData.Tier != Tier.Unranked)
         {
-            
+
             embedToBuild
                 .WithTitle("Hmm")
-                .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
-                .WithDescription("`You have already begun`")
-                .WithColor(userColor);
+                .WithDescription("`You have already begun`");
+     
 
-            await ctx.CreateResponseAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedToBuild.Build()));
+            await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedToBuild.Build()));
             return;
         }
     
+        
         await MakeOccupiedAsync(userData);
+        embedToBuild.WithTitle($"{ctx.User.Username}, ")
+            .WithDescription("Are you ready to embark on this journey?");
+        await ctx.RespondAsync(new DiscordMessageBuilder()
+            .AddEmbed(embedToBuild)
+            .AddComponents([_yes,_no])
+        );
+        var message =(await ctx.GetResponseAsync())!;
+        var interactionResult = await message.WaitForButtonAsync(ctx.User, new TimeSpan(0, 10, 0));
+        if (interactionResult.TimedOut)
+        {
+            embedToBuild.WithDescription("Time out");
+            await message.ModifyAsync(embedToBuild.Build());
+            return;
+        }
+
+        if (interactionResult.Result.Id == "no")
+        {
+            embedToBuild.WithDescription("I see...");
+            await interactionResult.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+                new DiscordInteractionResponseBuilder().AddEmbed(embedToBuild));
+            return;
+        }
         var modalId = "begin_input_name_modal";
-        await ctx.CreateResponseAsync(InteractionResponseType.Modal,
+        await interactionResult.Result.Interaction.CreateResponseAsync(
+            DiscordInteractionResponseType.Modal,
             new DiscordInteractionResponseBuilder()
                 .WithTitle("Start of your journey, o powerful one")
                 .AddComponents( (IEnumerable<DiscordActionRowComponent>) 
@@ -91,7 +118,7 @@ public class Begin : GeneralCommandClass
         var interactionToRespondTo = done.Result.Interaction;
         if (!Enum.TryParse(done.Result.Values["gender"], true, out Gender gottenGender))
         {
-            await interactionToRespondTo.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource,
+            await interactionToRespondTo.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource,
                 new DiscordInteractionResponseBuilder().WithContent("You can only input male or female for gender"));
             return;
         }
@@ -100,7 +127,7 @@ public class Begin : GeneralCommandClass
         
         if (!userData.Inventory.Any(i => i is Player))
         {
-            Player player = new Player();
+            var player = new Player();
 
             player.SetElement(Element.Fire);
             userData.Inventory.Add(player);
@@ -168,7 +195,7 @@ public class Begin : GeneralCommandClass
             RespondInteraction = true,
 
         };
-        DialogueResult result = await theDialogue.LoadAsync(interactionToRespondTo);
+        var result = await theDialogue.LoadAsync(ctx.User, interactionToRespondTo);
 
         if (result.TimedOut)
         {
@@ -189,7 +216,7 @@ public class Begin : GeneralCommandClass
             };
 
 
-            await theDialogue.LoadAsync(ctx.Interaction,result.Message);
+            await theDialogue.LoadAsync(ctx.User,result.Message);
             return;
         }
 
@@ -200,7 +227,7 @@ public class Begin : GeneralCommandClass
         coachChad.TotalDefense = 100;
         coachChad.TotalAttack = 1;
         coachChad.TotalSpeed = 100;
-        BattleResult battleResult = await new BattleSimulator(userTeam.LoadTeamEquipment(), 
+        var battleResult = await new BattleSimulator(userTeam.LoadTeamEquipment(), 
             new CharacterTeam(characters: coachChad).LoadTeamEquipment()).StartAsync(result.Message);
 
         if (battleResult.TimedOut is not null)
@@ -221,7 +248,7 @@ public class Begin : GeneralCommandClass
     
             
 
-            await theDialogue.LoadAsync(ctx, result.Message);
+            await theDialogue.LoadAsync(ctx.User, result.Message);
             return;
         }
 
@@ -259,7 +286,7 @@ public class Begin : GeneralCommandClass
       
 
       
-        result =  await theDialogue.LoadAsync(ctx, result.Message);
+        result =  await theDialogue.LoadAsync(ctx.User, result.Message);
         if (result.TimedOut)
         {
             theDialogue = new Dialogue
@@ -282,13 +309,13 @@ public class Begin : GeneralCommandClass
             };
                 
 
-            await theDialogue.LoadAsync(ctx, result.Message);
+            await theDialogue.LoadAsync(ctx.User, result.Message);
         }
         if (result.Skipped)
         {
             await result.Message.ModifyAsync(
                 new DiscordMessageBuilder()
-                    .WithEmbed(result.Message.Embeds.First()));
+                    .AddEmbed(result.Message.Embeds.First()));
         }
 
     }

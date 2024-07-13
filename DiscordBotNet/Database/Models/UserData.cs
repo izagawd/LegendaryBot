@@ -148,6 +148,7 @@ public class UserData :   ICanBeLeveledUp
         return ReceiveRewards(name,rewards.ToArray());
     }
 
+    
     public bool CanAscendCharactersTo(int newAscensionLevel)
     {
         if (newAscensionLevel >= 7) return false;
@@ -159,7 +160,7 @@ public class UserData :   ICanBeLeveledUp
         var maxLevel = 60;
         if (AdventurerLevel >= maxLevel)
             return new ExperienceGainResult() { ExcessExperience = experienceToGain, Text = $"you have already reached max level!" };
-        string expGainText = "";
+        var expGainText = "";
         
         var levelBefore = AdventurerLevel;
         Experience += experienceToGain;

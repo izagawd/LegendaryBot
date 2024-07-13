@@ -1,22 +1,22 @@
 ﻿
+using System.ComponentModel;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
-using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace DiscordBotNet.LegendaryBot.command;
-[SlashCommandGroup("Quote", "Post a quote or send a quote")]
+[Command("Quote")]
 public class QuoteCommand : GeneralCommandClass
 {
 
-    [SlashCommand("read", "gets a random quote"),
-    AdditionalSlashCommand("/read",BotCommandType.Fun)]
-    public async Task Read(InteractionContext ctx)
+    [Command("read"), Description("Read a random quote"),
+    AdditionalCommand("/read",BotCommandType.Fun)]
+    public async Task Read(CommandContext ctx)
     {
         var anon = await DatabaseContext.Quote
             .Where(i => i.IsApproved)
@@ -31,15 +31,15 @@ public class QuoteCommand : GeneralCommandClass
             .RandomOrDefaultAsync();
         if (anon is null)
         {
-            await ctx.CreateResponseAsync("damn");
+            await ctx.RespondAsync("damn");
             return;
         }
 
         var counts = new { anon.likes, anon.dislikes };
         var randomQuote = anon.quote;
 
-        DiscordButtonComponent like = new(ButtonStyle.Primary,"like",null,false,new DiscordComponentEmoji("👍"));
-        DiscordButtonComponent dislike = new(ButtonStyle.Primary, "dislike",null,false,new DiscordComponentEmoji("👎"));
+        DiscordButtonComponent like = new(DiscordButtonStyle.Primary,"like",null,false,new DiscordComponentEmoji("👍"));
+        DiscordButtonComponent dislike = new(DiscordButtonStyle.Primary, "dislike",null,false,new DiscordComponentEmoji("👎"));
         var ownerOfQuote = await ctx.Client.GetUserAsync((ulong) randomQuote.UserDataId);
         var quoteDate = randomQuote.DateCreated;
         
@@ -49,8 +49,8 @@ public class QuoteCommand : GeneralCommandClass
             .WithTitle($"{ownerOfQuote.Username}'s quote")
             .WithDescription(randomQuote.QuoteValue)
             .WithFooter($"Date and Time Created: {quoteDate:MM/dd/yyyy HH:mm:ss}\nLikes: {counts.likes} Dislikes: {counts.dislikes}");
-        await ctx.CreateResponseAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder).AddComponents(like,dislike));
-        var message = await ctx.GetOriginalResponseAsync();
+        await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder).AddComponents(like,dislike));
+        var message = await ctx.GetResponseAsync();
 
         while (true)
         {
@@ -112,7 +112,7 @@ public class QuoteCommand : GeneralCommandClass
                 .WithFooter(
                     $"Date and Time Created: {quoteDate:MM/dd/yyyy HH:mm:ss}\nLikes: {localCounts.likes} Dislikes: {localCounts.dislikes}");
 
-            await interactivityResult.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage,
+            await interactivityResult.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
                 new DiscordInteractionResponseBuilder()
 
                     .AddEmbed(embedBuilder)
@@ -123,9 +123,9 @@ public class QuoteCommand : GeneralCommandClass
         }
 
     }
-    [SlashCommand("write", "creates a quote"),
-    AdditionalSlashCommand("/write Be good and good will come",BotCommandType.Fun)]
-    public async Task Write(InteractionContext ctx, [Option("text", "the quote")] string text)
+    [Command("write"), Description("write a quote for everyone to see!"),
+    AdditionalCommand("/write Be good and good will come",BotCommandType.Fun)]
+    public async Task Write(CommandContext ctx, [Parameter("text")] string text)
     {
         var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync((long)ctx.User.Id);
         var embedBuilder = new DiscordEmbedBuilder()
@@ -137,7 +137,7 @@ public class QuoteCommand : GeneralCommandClass
                 .WithTitle("Hmm")
                 .WithDescription("Quote length should be shorter than 200 characters");
 
-            await ctx.CreateResponseAsync(embedBuilder);
+            await ctx.RespondAsync(embedBuilder);
             return;
         } 
         if (text.Length <= 0)
@@ -145,7 +145,7 @@ public class QuoteCommand : GeneralCommandClass
             embedBuilder
                 .WithTitle("bruh")
                 .WithDescription("Write something in the quote!");
-            await ctx.CreateResponseAsync(embedBuilder);
+            await ctx.RespondAsync(embedBuilder);
             return;
         }
         userData.Quotes.Add(new LegendaryBot.Quote{QuoteValue = text});
@@ -154,6 +154,6 @@ public class QuoteCommand : GeneralCommandClass
             .WithTitle("Success!")
             .WithDescription("Your quote has been saved, and is waiting to be approved!")
             .AddField("Your quote was: ", text);
-        await ctx.CreateResponseAsync(embedBuilder);
+        await ctx.RespondAsync(embedBuilder);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using DiscordBotNet.Database;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;

@@ -1,43 +1,58 @@
-﻿using System.Reflection;
-using DiscordBotNet.Database;
+﻿using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
-using DSharpPlus.SlashCommands;
+using DiscordBotNet.Extensions;
+using DSharpPlus.Commands;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.command;
 
-public abstract class GeneralCommandClass : ApplicationCommandModule
+public abstract class GeneralCommandClass 
 {
 
- 
 
 
-    public override Task<bool> BeforeSlashExecutionAsync(InteractionContext ctx)
+
+
+    public GeneralCommandClass()
     {
         DatabaseContext = new PostgreSqlContext();
-        
-        
-        return Task.FromResult(true);
     }
 
-    public override async Task AfterSlashExecutionAsync(InteractionContext ctx)
+
+    
+    public  async Task AfterSlashExecutionAsync(CommandContext ctx)
     {
 
-        if(OccupiedUserDatasIds.Count > 0)
+        if(_occupiedUserDatasIds.Count > 0)
         {
          
             await using var tempCtx = new PostgreSqlContext();
             await tempCtx.UserData
-                .Where(i => OccupiedUserDatasIds.Contains(i.Id))
+                .Where(i => _occupiedUserDatasIds.Contains(i.Id))
                 .ForEachAsync(i => i.IsOccupied = false);
             await tempCtx.SaveChangesAsync();
  
         }
         await DatabaseContext.DisposeAsync();
+        "DOOOOONE".Print();
     }
 
-    private List<long> OccupiedUserDatasIds { get; } = new();
+    private List<long> _occupiedUserDatasIds  = new();
 
+
+    public IEnumerable<long> OccupiedUserDataIds
+    {
+        get
+        {
+            foreach (var i in _occupiedUserDatasIds)
+            {
+                yield return i;
+            }
+        }
+    }
+ 
+    
     protected async Task MakeOccupiedAsync(params long[] userDataIds)
     {
 
@@ -46,7 +61,7 @@ public abstract class GeneralCommandClass : ApplicationCommandModule
             .Where(i => userDataIds.Contains(i.Id))
             .ForEachAsync(i => i.IsOccupied = true);
         
-        OccupiedUserDatasIds.AddRange(userDataIds);
+        _occupiedUserDatasIds.AddRange(userDataIds);
         await tempCtx.SaveChangesAsync();
     }
     protected Task MakeOccupiedAsync(params UserData[] userDatas)
@@ -61,12 +76,8 @@ public abstract class GeneralCommandClass : ApplicationCommandModule
     /// <summary>
     /// This exists cuz it's disposed at the end of a slash command and cuz I tend to forget to dispose disposable stuff
     /// </summary>
-    protected PostgreSqlContext DatabaseContext { get; private set; }
+    public PostgreSqlContext DatabaseContext { get; private set; }
 
 
-
-    protected GeneralCommandClass()
-    {
-        DatabaseContext = null!;
-    }
+  
 }

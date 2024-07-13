@@ -40,7 +40,7 @@ public partial class Character
 
                 var statusEffectsString = BasicFunctionality.CommaConcatenator(countTracker.Select(i =>
                 {
-                    string toUse = i.Key.Name;
+                    var toUse = i.Key.Name;
                     if (i.Value > 1) toUse += $" x{i.Value}";
                     return toUse;
                 }));
@@ -105,7 +105,7 @@ public partial class Character
 
                 if (_affectedCharacters.Count > 1)
                     noun = "have";
-                string thingDone = "decreased";
+                var thingDone = "decreased";
 
                 if (_combatReadinessChangeAmount >= 0)
                 {

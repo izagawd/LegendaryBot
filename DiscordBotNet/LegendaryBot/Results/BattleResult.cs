@@ -1,5 +1,4 @@
 ﻿using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Entities;
 
 namespace DiscordBotNet.LegendaryBot.Results;

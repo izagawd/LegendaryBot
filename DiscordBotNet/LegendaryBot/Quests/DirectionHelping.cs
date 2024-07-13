@@ -5,17 +5,16 @@ using DiscordBotNet.LegendaryBot.DialogueNamespace;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Rewards;
-using DSharpPlus;
 using DSharpPlus.Entities;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 
 namespace DiscordBotNet.LegendaryBot.Quests;
 
 public class DirectionHelping : Quest
 {
     public override string Description => "You are tasked with giving people directions";
-    public override async Task<bool> StartQuest(PostgreSqlContext databaseContext, InteractionContext context,
-        DiscordMessage? messageToEdit = null)
+    public override async Task<bool> StartQuest(PostgreSqlContext databaseContext, CommandContext context,
+        DiscordMessage messageToEdit)
     {
         var blast = new Blast();
         var profile = blast.DialogueProfile;
@@ -26,10 +25,10 @@ public class DirectionHelping : Quest
             ActionRows =
             [
                 new DiscordActionRowComponent([
-                    new DiscordButtonComponent(ButtonStyle.Primary,
+                    new DiscordButtonComponent(DiscordButtonStyle.Primary,
                         "right",
                         "(Point Right)"),
-                    new DiscordButtonComponent(ButtonStyle.Danger,
+                    new DiscordButtonComponent(DiscordButtonStyle.Danger,
                         "left",
                         "(Point Left)")
                 ])
@@ -44,7 +43,8 @@ public class DirectionHelping : Quest
             Skippable = false
         };
 
-        var dialogueResult = await dialogue.LoadAsync(context, messageToEdit);
+        
+        var dialogueResult = await dialogue.LoadAsync(context.User, messageToEdit);
 
         var userData = await databaseContext.UserData
             .IncludeTeamWithAllEquipments()
@@ -66,7 +66,7 @@ public class DirectionHelping : Quest
                     }
                 ]
             };
-            await dialogue.LoadAsync(context, dialogueResult.Message);
+            await dialogue.LoadAsync(context.User, dialogueResult.Message);
             return true;
         }
         dialogue = new Dialogue()
@@ -83,7 +83,7 @@ public class DirectionHelping : Quest
             ]
         };
 
-        dialogueResult = await dialogue.LoadAsync(context, dialogueResult.Message);
+        dialogueResult = await dialogue.LoadAsync(context.User, dialogueResult.Message);
         var blastTeam = new CharacterTeam(blast);
 
         blast.Level =60;
@@ -122,7 +122,7 @@ public class DirectionHelping : Quest
                     }
                 ]
             };
-             await dialogue.LoadAsync(context, battleResult.Message);
+             await dialogue.LoadAsync(context.User, battleResult.Message);
             QuestRewards = [new TextReward(userTeam.IncreaseExp(Character.GetExpBasedOnDefeatedCharacters(blastTeam))),
                     new CoinsReward(Character.GetCoinsBasedOnCharacters(blastTeam))];
             
@@ -145,7 +145,7 @@ public class DirectionHelping : Quest
                 }
             ]
         };
-         await dialogue.LoadAsync(context, battleResult.Message);
+         await dialogue.LoadAsync(context.User, battleResult.Message);
 
         
         return false;

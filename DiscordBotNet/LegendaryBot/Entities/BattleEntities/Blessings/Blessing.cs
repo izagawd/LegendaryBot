@@ -1,9 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Numerics;
-using System.Reflection;
 using DiscordBotNet.Extensions;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 using DiscordBotNet.LegendaryBot.Results;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
@@ -82,7 +79,7 @@ public abstract class Blessing : BattleEntity
     public Character? Character { get; set; }
     public override ExperienceGainResult IncreaseExp(long experienceToGain)
     {
-        string expGainText = "";
+        var expGainText = "";
 
         var levelBefore = Level;
         Experience += experienceToGain;

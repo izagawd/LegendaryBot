@@ -67,7 +67,7 @@ public partial class Character
         statusEffect.Affected = this;
         if (arrayOfType.Length < statusEffect.MaxStacks)
         {
-            bool added = false;
+            var added = false;
             if (effectiveness is not null && statusEffect.EffectType == StatusEffectType.Debuff)
             {
                 var percentToResistance =Resistance -effectiveness;

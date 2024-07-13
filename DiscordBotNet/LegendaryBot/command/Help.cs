@@ -1,9 +1,9 @@
-﻿using System.Reflection;
+﻿using System.ComponentModel;
+using System.Reflection;
 using System.Text;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Entities;
-using DSharpPlus.SlashCommands;
-using Microsoft.Extensions.Primitives;
+using DSharpPlus.Commands;
 
 namespace DiscordBotNet.LegendaryBot.command;
 
@@ -18,11 +18,11 @@ public class Help : GeneralCommandClass
             botCommandTypeBuilders[i] = new StringBuilder();
         foreach (var i in  DefaultObjects.GetDefaultObjectsThatSubclass<GeneralCommandClass>())
         {
-            var slashCom = i.GetType().GetCustomAttribute<SlashCommandGroupAttribute>();
+            var slashCom = i.GetType().GetCustomAttribute<CommandAttribute>();
             if (slashCom is not null)
             {
-                var additional = i.GetType().GetCustomAttribute<AdditionalSlashCommandAttribute>();
-                BotCommandType type = BotCommandType.Other;
+                var additional = i.GetType().GetCustomAttribute<AdditionalCommandAttribute>();
+                var type = BotCommandType.Other;
                 if (additional is not null)
                     type = additional.BotCommandType;
                 botCommandTypeBuilders[type].Append($"{slashCom.Name}  ");
@@ -30,12 +30,12 @@ public class Help : GeneralCommandClass
             else
             {
                 var selected = i.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Public  | BindingFlags.Instance)
-                    .Select(j =>new{Additional= j.GetCustomAttribute<AdditionalSlashCommandAttribute>(),
-                        Default = j.GetCustomAttribute<SlashCommandAttribute>()});
+                    .Select(j =>new{Additional= j.GetCustomAttribute<AdditionalCommandAttribute>(),
+                        Default = j.GetCustomAttribute<CommandAttribute>()});
                 foreach (var j in selected)
                 {
                     if(j.Default is null) continue;
-                    BotCommandType type = BotCommandType.Other;
+                    var type = BotCommandType.Other;
                     if (j.Additional is not null)
                         type = j.Additional.BotCommandType;
                     botCommandTypeBuilders[type].Append($"{j.Default.Name}  ");
@@ -45,15 +45,13 @@ public class Help : GeneralCommandClass
         foreach(var i in Enum.GetValues<BotCommandType>())
             _botCommandTypeDic[i] = botCommandTypeBuilders[i].ToString();
     }
-    /// <summary>
-    /// Must be called at start of program
-    /// </summary>
-    public static void LoadHelpMenu()
+
+
+    static Help()
     {
         HandleDefaultHelp();
         HandleCommandsInformations();
     }
-
     private class CommandStuffHolder
     {
         public string? Example;
@@ -75,7 +73,7 @@ public class Help : GeneralCommandClass
     private static List<Holder> _holderList = new();
 
     private static void Recurse(GeneralCommandClass genComClass,
-        SlashCommandGroupAttribute attribute, List<CommandStuffHolder> stuffHolders, Type currentType = null, string? concatenator = null)
+        CommandAttribute attribute, List<CommandStuffHolder> stuffHolders, Type currentType = null, string? concatenator = null)
     {
         if (currentType == null) currentType = genComClass.GetType();
         if (concatenator is null) concatenator = $"{attribute.Name} ";
@@ -83,7 +81,7 @@ public class Help : GeneralCommandClass
                                                               BindingFlags.Public | BindingFlags.Instance))
         {
 
-            var locAttribute = nestedType.GetCustomAttribute<SlashCommandGroupAttribute>();
+            var locAttribute = nestedType.GetCustomAttribute<CommandAttribute>();
             if(locAttribute is not null)
                 Recurse(genComClass, locAttribute,
                     stuffHolders, nestedType ,concatenator + $"{locAttribute.Name} ");
@@ -95,17 +93,21 @@ public class Help : GeneralCommandClass
                 
         foreach (var j in methods)
         {
-            var slashCom = j.GetCustomAttribute<SlashCommandAttribute>();
-            if(slashCom is null) continue;
-            var additional = j.GetCustomAttribute<AdditionalSlashCommandAttribute>();
-            var stuffHolder = new CommandStuffHolder();
-            if (additional is not null)
+            var slashCom = j.GetCustomAttribute<CommandAttribute>();
+            if (slashCom is not null)
             {
-                stuffHolder.Example = additional.Example;
+                var additional = j.GetCustomAttribute<AdditionalCommandAttribute>();
+                var descr = j.GetCustomAttribute<DescriptionAttribute>();
+                var stuffHolder = new CommandStuffHolder();
+                if (additional is not null)
+                {
+                    stuffHolder.Example = additional.Example;
+                }
+                stuffHolder.Name = concatenator + slashCom.Name;
+                stuffHolder.Description = descr is not null ? descr.Description : "";
+                stuffHolders.Add(stuffHolder);
             }
-            stuffHolder.Name = concatenator + slashCom.Name;
-            stuffHolder.Description = slashCom.Description;
-            stuffHolders.Add(stuffHolder);
+
         }
 
     }
@@ -113,14 +115,17 @@ public class Help : GeneralCommandClass
     {
         foreach (var i in DefaultObjects.GetDefaultObjectsThatSubclass<GeneralCommandClass>())
         {
-            var group = i.GetType().GetCustomAttribute<SlashCommandGroupAttribute>();
+            var group = i.GetType().GetCustomAttribute<CommandAttribute>();
             
-          
+        
             if (group is not null)
             {
                 var holder = new Holder();
+       
+                
                 holder.Name = group.Name;
-                holder.Description = group.Description;
+                var description = i.GetType().GetCustomAttribute<DescriptionAttribute>();
+                holder.Description = description is not null ? description.Description : "";
                 Recurse(i,group,holder.CommandStuffHolders);
                 _holderList.Add(holder);
             }
@@ -130,12 +135,13 @@ public class Help : GeneralCommandClass
 
                 foreach (var j in methods)
                 {
-                    var command = j.GetCustomAttribute<SlashCommandAttribute>();
+                    var command = j.GetCustomAttribute<CommandAttribute>();
                     if(command is null) continue;
                     var holder = new Holder();
                     holder.Name = command.Name;
-                    holder.Description = command.Description;
-                    var additional = j.GetCustomAttribute<AdditionalSlashCommandAttribute>();
+                    var description = j.GetType().GetCustomAttribute<DescriptionAttribute>();
+                    holder.Description = description is not null ? description.Description : "";
+                    var additional = j.GetCustomAttribute<AdditionalCommandAttribute>();
                     if (additional is not null)
                         holder.Example = additional.Example;
                     _holderList.Add(holder);
@@ -145,20 +151,20 @@ public class Help : GeneralCommandClass
         }
     }
     private static Dictionary<BotCommandType, string> _botCommandTypeDic = new();
-    [SlashCommand("help","the help"),
-     AdditionalSlashCommand("/help\n/help command_name",BotCommandType.Other)]
-    public async Task Execute(InteractionContext ctx,
-    [Option("command","put if you want to check information about a command")] string? cmd = null)
+    [Command("help"),
+     AdditionalCommand("/help\n/help command_name",BotCommandType.Other)]
+    public async ValueTask Execute(CommandContext ctx,
+    [Parameter("command")] string? cmd = null)
     {
         
-        DiscordUser author = ctx.User;
+        var author = ctx.User;
 
-        DiscordColor color = await DatabaseContext
+        var color = await DatabaseContext
             .UserData
             .FindOrCreateSelectUserDataAsync((long)author.Id, 
                 i => i.Color);
 
-        DiscordEmbedBuilder embedToBuild = new DiscordEmbedBuilder()
+        var embedToBuild = new DiscordEmbedBuilder()
             .WithTitle("Help")
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
             .WithColor(color)
@@ -191,7 +197,7 @@ public class Help : GeneralCommandClass
             }
         }
         
-        await ctx.CreateResponseAsync(embed: embedToBuild.Build());
+        await ctx.RespondAsync(embed: embedToBuild.Build());
 
             
     }

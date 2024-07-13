@@ -2,7 +2,6 @@
 @using System.Web
 @using DiscordBotNet.Database
 @using DiscordBotNet.LegendaryBot
-@using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character
 
@@ -32,7 +31,7 @@
         <input type="text" name="name" value="@Model.Name"/>
         <select name="element">
             <option value="null"> -- Select Element --</option>
-            @foreach (Element element in Enum.GetValues<Element>())
+            @foreach (var element in Enum.GetValues<Element>())
             {
                 var selected = "";
                 if (Model.Element == element)
@@ -57,7 +56,7 @@
 
 @{
 
-    string color = "white";
+    var color = "white";
     IEnumerable<Character> filteredCharactersList = Model.Characters;
     if (Model.Element is not null)
     {

@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using DiscordBotNet.Extensions;
 using Microsoft.Extensions.Caching.Memory;
 using SixLabors.ImageSharp.PixelFormats;
 using Image = SixLabors.ImageSharp.Image;
@@ -11,12 +10,12 @@ public static class BasicFunctionality
     public static string CommaConcatenator(IEnumerable<string> values)
     {
         var valuesArray = values.ToArray();
-        int length = valuesArray.Length;
+        var length = valuesArray.Length;
         if (length == 0) return "";
         if (length == 1) return valuesArray[0];
         if (length == 2) return $"{valuesArray[0]} and {valuesArray[1]}";
         var resultBuilder = new StringBuilder($"{valuesArray[0]}, {valuesArray[1]}");
-        for (int i = 2; i < length - 1; i++)
+        for (var i = 2; i < length - 1; i++)
         {
             resultBuilder.Append($", {valuesArray[i]}");
         }
@@ -106,7 +105,7 @@ public static class BasicFunctionality
         if (elements.Length <= 0)
             throw new Exception("There is no element in the input");
         Random random = new();
-        int index = random.Next(elements.Length);
+        var index = random.Next(elements.Length);
         return elements[index];
     }
     /// <returns>
@@ -129,9 +128,9 @@ public static class BasicFunctionality
         
         if(chances.Select(i => i.Value).Sum() != 100.0) 
             throw new Exception("Sum of dictionary values must be 100");
-        double totalWeight = chances.Sum(kv => kv.Value);
+        var totalWeight = chances.Sum(kv => kv.Value);
       
-        double randomValue = new Random().NextDouble() * totalWeight;
+        var randomValue = new Random().NextDouble() * totalWeight;
         foreach (var kvp in chances)
         {
             if (randomValue < kvp.Value)
@@ -151,8 +150,8 @@ public static class BasicFunctionality
 
     public static string FirstLetterCapital(string stringToCapitalize)
     {
-        string[] arr = stringToCapitalize.Split(" ");
-        for (int i = 0; i < arr.Length; i++)
+        var arr = stringToCapitalize.Split(" ");
+        for (var i = 0; i < arr.Length; i++)
         {
             arr[i] =char.ToUpper(arr[i][0]) + arr[i].Substring(1);
         }
@@ -181,7 +180,7 @@ public static class BasicFunctionality
         } else
         {
             var tempStringBuilder = new StringBuilder();
-            for(int i = 0; i < stringToEnglishify.Length; i++)
+            for(var i = 0; i < stringToEnglishify.Length; i++)
             {
                 tempStringBuilder.Append(stringToEnglishify[i]);
                 if (stringToEnglishify.Length > i + 1 &&  char.IsUpper(stringToEnglishify[i + 1]))
@@ -200,7 +199,7 @@ public static class BasicFunctionality
     ///<returns>The amount of time till the next day as a string</returns>
     public static string TimeTillNextDay()
     {
-        DateTime now = DateTime.UtcNow;
+        var now = DateTime.UtcNow;
         int hours = 0, minutes = 0, seconds = 0;
         hours = (24 - now.Hour) - 1;
         minutes = (60 - now.Minute) - 1;

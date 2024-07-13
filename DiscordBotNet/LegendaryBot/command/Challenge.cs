@@ -1,23 +1,23 @@
 ﻿
+using System.ComponentModel;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
-using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 
 namespace DiscordBotNet.LegendaryBot.command;
 
 public class Challenge :GeneralCommandClass
 {   
 
-    private static readonly DiscordButtonComponent yes = new(ButtonStyle.Primary, "yes", "YES");
-    private static readonly DiscordButtonComponent no = new(ButtonStyle.Primary, "no", "NO");
+    private static readonly DiscordButtonComponent yes = new(DiscordButtonStyle.Primary, "yes", "YES");
+    private static readonly DiscordButtonComponent no = new(DiscordButtonStyle.Primary, "no", "NO");
 
-    [SlashCommand("challenge", "Challenge other players to a duel!"),
-    AdditionalSlashCommand("/challenge @user",BotCommandType.Battle)]
-    public async Task Execute(InteractionContext ctx,[Option("user", "User to challenge")] DiscordUser opponent)
+    [Command("challenge"), Description("Use this command to fight other players"),
+    AdditionalCommand("/challenge @user",BotCommandType.Battle)]
+    public async ValueTask Execute(CommandContext ctx, [Description("The player you want to fight")] DiscordUser opponent)
     {
         
         var player1 = ctx.User;
@@ -34,7 +34,7 @@ public class Challenge :GeneralCommandClass
                 .WithColor(player1User.Color)
                 .WithAuthor(player1.Username, iconUrl: player1.AvatarUrl)
                 .WithDescription("You are occupied");
-            await ctx.CreateResponseAsync(embedToBuild.Build());
+            await ctx.RespondAsync(embedToBuild.Build());
             return;
         }
         embedToBuild = new DiscordEmbedBuilder()
@@ -45,7 +45,7 @@ public class Challenge :GeneralCommandClass
 
         if (player1.Id == player2.Id)
         {
-            await ctx.CreateResponseAsync(embedToBuild.Build());
+            await ctx.RespondAsync(embedToBuild.Build());
             return;
             
         }
@@ -60,7 +60,7 @@ public class Challenge :GeneralCommandClass
                 .WithColor(player1User.Color)
                 .WithAuthor(player1.Username, iconUrl: player1.AvatarUrl)
                 .WithDescription($"{player2.Username} is occupied");
-            await ctx.CreateResponseAsync(embedToBuild.Build());
+            await ctx.RespondAsync(embedToBuild.Build());
             return;
         }
         if (player2User.Tier == Tier.Unranked || player1User.Tier == Tier.Unranked)
@@ -68,7 +68,7 @@ public class Challenge :GeneralCommandClass
             embedToBuild = embedToBuild
                 .WithTitle($"Hmm")
                 .WithDescription("One of you have not begun your journey with /begin");
-            await ctx.CreateResponseAsync(embedToBuild.Build());
+            await ctx.RespondAsync(embedToBuild.Build());
             return;
             
         }
@@ -80,8 +80,9 @@ public class Challenge :GeneralCommandClass
         var response = new DiscordInteractionResponseBuilder()
             .AddEmbed(embedToBuild.Build())
             .AddComponents(yes, no);
-        await ctx.CreateResponseAsync(response);
-        var message = await ctx.GetOriginalResponseAsync();
+        await ctx.RespondAsync(response);
+        var message = await ctx.GetResponseAsync();
+
         string? decision = null;
         var interactivityResult = await message.WaitForButtonAsync(player2);
         if (!interactivityResult.TimedOut)
@@ -91,7 +92,7 @@ public class Challenge :GeneralCommandClass
         else
         {
             await message.ModifyAsync(new DiscordMessageBuilder()
-                .WithEmbed(new DiscordEmbedBuilder()
+                .AddEmbed(new DiscordEmbedBuilder()
                     .WithTitle("Hmm")
                     .WithUser(player1)
                     .WithDescription("Time out")
@@ -108,12 +109,12 @@ public class Challenge :GeneralCommandClass
                     .WithColor(player1User.Color)
                     .WithUser(player1)
                     .Build());
-            await interactivityResult.Result.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage,
+            await interactivityResult.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
                 responseBuilder);
             return;
         }
 
-        await interactivityResult.Result.Interaction.CreateResponseAsync(InteractionResponseType.DeferredMessageUpdate);
+        await interactivityResult.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
         await MakeOccupiedAsync(player2User);
         var player1Team = player1User.EquippedPlayerTeam!.LoadTeamEquipment();
         var player2Team = player2User.EquippedPlayerTeam!.LoadTeamEquipment();
@@ -131,15 +132,14 @@ public class Challenge :GeneralCommandClass
             winnerDiscord = player2;
             winnerUserData = player2User;
         }
-
+      
 
         await DatabaseContext.SaveChangesAsync();
         await message.ModifyAsync(new DiscordMessageBuilder()
-        {
-            Embed = new DiscordEmbedBuilder()
+            .AddEmbed(new DiscordEmbedBuilder()
                 .WithColor(winnerUserData.Color)
                 .WithTitle("Battle Ended")
-                .WithDescription($"{winnerDiscord.Username} won the battle! ")
-        });
+                .WithDescription($"{winnerDiscord.Username} won the battle! ").Build()));
+
     }
 }

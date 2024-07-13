@@ -1,7 +1,10 @@
 ﻿
+using System.ComponentModel;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Entities;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
+using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
+using DSharpPlus.Commands.Trees;
 
 
 namespace DiscordBotNet.LegendaryBot.command;
@@ -9,25 +12,34 @@ namespace DiscordBotNet.LegendaryBot.command;
 public class Color : GeneralCommandClass
 {
 
-
-    [SlashCommand("color", "Changes the color of the embed messages I send to you"),
-    AdditionalSlashCommand("/color Blue",BotCommandType.Other)]
-    public async Task Execute(InteractionContext ctx,
-        [Choice("Blue","blue")]
-        [Choice("Red","red")]
-        [Choice("Green","green")]
-        [Choice("Orange","orange")]
-        [Choice("Purple","purple")]
-        [Choice("Green","green")]
-        [Option("name","The name of the color you want to change to")] string colorName)
+    private class ColorChoice : IChoiceProvider
     {
-        DiscordUser author = ctx.User;
+        private static readonly IReadOnlyDictionary<string, object> _choices = new Dictionary<string, object>
+        {
+            ["Blue"] = "blue",
+            ["Red"] = "red",
+            ["Green"] = "green",
+            ["Orange"] = "orange",
+            ["Purple"] = "purple",
+        };
+
+        public ValueTask<IReadOnlyDictionary<string, object>> ProvideAsync(CommandParameter parameter) => 
+            ValueTask.FromResult(_choices);
+    }
+    [Command("color"),Description("Use this to change your color"),
+    AdditionalCommand("/color Blue",BotCommandType.Other)]
+    public async ValueTask Execute(CommandContext ctx,
+        [SlashChoiceProvider<ColorChoice>]
+        
+        [Parameter("name")] string colorName)
+    {
+        var author = ctx.User;
 
         var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync((long)author.Id);
   
 
         
-        bool colorIsValid = true;
+        var colorIsValid = true;
         DiscordColor newColor;
         switch (colorName.ToLower())
         {
@@ -52,7 +64,7 @@ public class Color : GeneralCommandClass
                 break;
 
         }
-        DiscordEmbedBuilder embed = new DiscordEmbedBuilder()
+        var embed = new DiscordEmbedBuilder()
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
             .WithColor(newColor)
             .WithTimestamp(DateTime.Now);
@@ -69,7 +81,7 @@ public class Color : GeneralCommandClass
             embed.WithTitle("**Hmm**");
             embed.WithDescription("`That color is not available`");
         }
-        await ctx.CreateResponseAsync(embed: embed.Build());
+        await ctx.RespondAsync(embed: embed.Build());
           
     }
        

@@ -1,11 +1,8 @@
 ﻿using DiscordBotNet.LegendaryBot.Results;
-using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.SlashCommands;
-using Microsoft.VisualBasic;
 
 namespace DiscordBotNet.LegendaryBot.DialogueNamespace;
 
@@ -33,8 +30,8 @@ public class Dialogue
     /// </summary>
     public bool RespondInteraction { get; init; }
 
-    private DiscordMessage _message = null!;
-    private DiscordInteraction _interaction= null!;
+    private DiscordMessage? _message = null!;
+    private DiscordInteraction? _interaction;
     private DiscordEmbedBuilder _embedBuilder= null!;
     
     private bool _timedOut = false;
@@ -45,8 +42,8 @@ public class Dialogue
     /// is the last thing that happens in a command
     /// </summary>
     public bool RemoveButtonsAtEnd { get; init; } 
-    private static readonly DiscordButtonComponent Next = new(ButtonStyle.Success, "next", "NEXT");
-    private static readonly DiscordButtonComponent Skip = new(ButtonStyle.Success, "skip", "SKIP");
+    private static readonly DiscordButtonComponent Next = new(DiscordButtonStyle.Success, "next", "NEXT");
+    private static readonly DiscordButtonComponent Skip = new(DiscordButtonStyle.Success, "skip", "SKIP");
 
 
     private async Task HandleArgumentDisplay(string text, bool isLast,
@@ -77,7 +74,7 @@ public class Dialogue
         }
 
         _embedBuilder.WithDescription(text);
-        DiscordMessageBuilder messageBuilder = new DiscordMessageBuilder()
+        var messageBuilder = new DiscordMessageBuilder()
             .AddEmbed(_embedBuilder)
             .AddComponents(discordActionRows.AsEnumerable());
         
@@ -87,8 +84,8 @@ public class Dialogue
           
         }
 
-        var interaction = _interaction;
-        if (RespondInteraction && _message is null)
+        
+        if (_interaction is not null && _message is null)
         {
             var responseBuilder = new DiscordInteractionResponseBuilder()
                 .AddEmbed(_embedBuilder.Build()).AddComponents(Next, Skip);
@@ -98,23 +95,27 @@ public class Dialogue
                 responseBuilder.ClearComponents();
             }
 
-            await interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource,
+            await _interaction.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource,
                 responseBuilder);
 
-            _message = await interaction.GetOriginalResponseAsync();
+            _message = await _interaction.GetOriginalResponseAsync();
         }
-        else if (_message is null)
+        else if (_message is null && _channel is not null)
         {
-            _message = await interaction.Channel.SendMessageAsync(messageBuilder); 
+            _message = await _channel.SendMessageAsync(messageBuilder); 
         } else if(_lastInteraction is not null)
         {
             await _lastInteraction
-                .CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder(messageBuilder));
-            _message =await _lastInteraction.GetOriginalResponseAsync();
+                .CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder(messageBuilder));
+            _message = await _lastInteraction.GetOriginalResponseAsync();
+        }
+        else if(_message is not null)
+        {
+            _message = await _message.ModifyAsync(messageBuilder);
         }
         else
         {
-            _message= await _message.ModifyAsync(messageBuilder);
+            throw new Exception("wtf");
         }
 
         _lastInteraction = null;
@@ -122,7 +123,7 @@ public class Dialogue
 
     private DiscordInteraction? _lastInteraction = null;
 
-    private void HandleInteractionResult(InteractivityResult<ComponentInteractionCreateEventArgs> args)
+    private void HandleInteractionResult(InteractivityResult<ComponentInteractionCreatedEventArgs> args)
     {
         
         var answer = args.Result.Id;
@@ -143,33 +144,50 @@ public class Dialogue
         }
     }
 
-    public Task<DialogueResult> LoadAsync(InteractionContext context, DiscordMessage? message = null)
+    public Task<DialogueResult> LoadAsync(DiscordUser user, DiscordInteraction interaction)
     {
-        return LoadAsync(context.Interaction, message);
+        if (interaction is null)
+            throw new ArgumentNullException(nameof(interaction));
+        return LoadAsync(user,interaction: interaction);
     }
+    public Task<DialogueResult> LoadAsync(DiscordUser user, DiscordMessage message)
+    {
+        if (message is null)
+            throw new ArgumentNullException(nameof(message));
+        return LoadAsync(user,message: message);
+    }
+    public Task<DialogueResult> LoadAsync(DiscordUser user, DiscordChannel channel)
+    {
+        if (channel is null)
+            throw new ArgumentNullException(nameof(channel));
+        return LoadAsync(user,channel: channel);
+    }
+    
+    private DiscordChannel? _channel;
     /// <summary>
     /// Initiates the dialogue of a character
     /// </summary>
     /// <param name="context">The context of the interaction</param>
     /// <param name="message">if not null, will edit the message provided with the dialogue</param>
     /// <returns></returns>
-    public async Task<DialogueResult> LoadAsync(DiscordInteraction interaction,DiscordMessage? message = null)
+    private async Task<DialogueResult> LoadAsync(DiscordUser user,DiscordInteraction? interaction,  DiscordMessage? message = null,
+        DiscordChannel? channel = null)
     {
         if (!NormalArguments.Any() && DecisionArgument is null)
         {
             throw new Exception("There is no decision argument provided");
         }
 
-        _interaction = interaction;
 
 
         _message = message!;
-
+        _channel = channel;
+        _interaction = interaction;
         var loadedDialogueArguments = NormalArguments.ToArray();
         _embedBuilder = new DiscordEmbedBuilder()
             .WithTitle(Title);
 
-        for(int i = 0; i < loadedDialogueArguments.Length; i++)
+        for(var i = 0; i < loadedDialogueArguments.Length; i++)
         {
             _embedBuilder
                 .WithAuthor(loadedDialogueArguments[i].CharacterName, iconUrl: loadedDialogueArguments[i].CharacterUrl)
@@ -178,7 +196,7 @@ public class Dialogue
       
 
             var dialogueTexts = normalArgument.DialogueTexts.ToArray();
-            for(int j = 0; j < dialogueTexts.Length;   j++)
+            for(var j = 0; j < dialogueTexts.Length;   j++)
             {
                 var isLast = i == loadedDialogueArguments.Length
                     - 1 && j == dialogueTexts.Length - 1;
@@ -188,7 +206,7 @@ public class Dialogue
                 
                 if(isLast && RemoveButtonsAtEnd && DecisionArgument is null) break;
                 var result = await _message
-                    .WaitForButtonAsync(e => e.User == _interaction.User);
+                    .WaitForButtonAsync(e => e.User == user);
                 _lastInteraction = result.Result.Interaction;
                 HandleInteractionResult(result);
                 if (isLast && DecisionArgument is null) _finished = true;
@@ -198,7 +216,7 @@ public class Dialogue
             }
             if (_finished && _lastInteraction is not null)
             {
-                await _lastInteraction.CreateResponseAsync(InteractionResponseType.UpdateMessage);
+                await _lastInteraction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage);
                 break;
             }
     
@@ -213,7 +231,7 @@ public class Dialogue
             await HandleArgumentDisplay(DecisionArgument.DialogueText, true,
                 DecisionArgument.ActionRows.ToArray());
             var result = await _message.WaitForButtonAsync(e
-                => e.User == _interaction.User);
+                => e.User == user);
             _lastInteraction = result.Result.Interaction;
             decision = result.Result.Id;
             var defer = true;
@@ -222,14 +240,14 @@ public class Dialogue
             {
                 var messageBuilder = new DiscordMessageBuilder(_message);
                 messageBuilder.ClearComponents();
-                await _lastInteraction.CreateResponseAsync(InteractionResponseType.UpdateMessage,
+                await _lastInteraction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
                     new DiscordInteractionResponseBuilder(messageBuilder));
 
                 defer = false;
             }
 
             if (defer)
-                await _lastInteraction.CreateResponseAsync(InteractionResponseType.DeferredMessageUpdate);
+                await _lastInteraction.CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
             HandleInteractionResult(result);
         }
         return new DialogueResult

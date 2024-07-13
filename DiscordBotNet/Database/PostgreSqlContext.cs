@@ -1,18 +1,13 @@
 ﻿using System.Reflection;
-using DiscordBotNet.Database.ManyToManyInstances;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Entities;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using DiscordBotNet.LegendaryBot.Quests;
-
-using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 

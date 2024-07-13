@@ -1,18 +1,18 @@
 ﻿using System.Diagnostics;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 
 namespace DiscordBotNet.LegendaryBot.command;
-[SlashCommandGroup("memory","commands for memory consumptiom")]
+[Command("memory")]
 public class Memory : GeneralCommandClass
 {
-    [SlashCommand("usage","gets memory usage in bytes")]
-    public async Task ExecuteGetTotalMemoryUsedInBytes(InteractionContext context)
+    [Command("usage")]
+    public async ValueTask ExecuteGetTotalMemoryUsedInBytes(CommandContext context)
     {
-        Process currentProcess = Process.GetCurrentProcess();
+        var currentProcess = Process.GetCurrentProcess();
         
         // Get the memory usage in bytes
-        long memoryUsageBytes = currentProcess.WorkingSet64;
-        await context.CreateResponseAsync($"Memory Usage: {memoryUsageBytes} bytes");
+        var memoryUsageBytes = currentProcess.WorkingSet64;
+        await context.RespondAsync($"Memory Usage: {memoryUsageBytes} bytes");
 
     }
 }   

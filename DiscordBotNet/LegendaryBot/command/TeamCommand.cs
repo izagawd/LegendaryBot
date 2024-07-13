@@ -1,12 +1,13 @@
-﻿using DiscordBotNet.Extensions;
+﻿using System.ComponentModel;
+using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DSharpPlus.Entities;
-using DSharpPlus.SlashCommands;
+using DSharpPlus.Commands;
 using Microsoft.EntityFrameworkCore;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.command;
-[SlashCommandGroup("team","teams related command")]
+[Command("team")]
 public class TeamCommand : GeneralCommandClass
 {
     
@@ -18,9 +19,9 @@ public class TeamCommand : GeneralCommandClass
 
 
 
-    [SlashCommand("equip_team", "Changes your equipped team")]
-    public async Task ExecuteEquip(InteractionContext context,
-        [Option("team_name", "the name of the team")] string teamName)
+    [Command("equip_team"), Description("Use this command to change teams")]
+    public async ValueTask ExecuteEquip(CommandContext context,
+        [Parameter("team_name")] string teamName)
     {
         var anon = await DatabaseContext.UserData
             .Include(i => i.EquippedPlayerTeam)
@@ -35,7 +36,7 @@ public class TeamCommand : GeneralCommandClass
             .WithDescription("Team does not seem to exist");
         if (anon.team is null)
         {
-            await context.CreateResponseAsync(embed);
+            await context.RespondAsync(embed);
             return;
         }
 
@@ -44,15 +45,15 @@ public class TeamCommand : GeneralCommandClass
         await DatabaseContext.SaveChangesAsync();
         embed.WithTitle("Success!")
             .WithDescription($"Team {anon.team.TeamName} is now equipped!");
-        await context.CreateResponseAsync(embed);
+        await context.RespondAsync(embed);
 
     }
 
-    [SlashCommand("remove_character", "removes a character from a team")]
-    [AdditionalSlashCommand("/remove_character player",BotCommandType.Battle)]
-    public async Task ExecuteRemoveFromTeam(InteractionContext context,
-        [Option("character_name", "The name of the character")] string characterName,
-        [Option("team_name", "the name of the team.")]
+    [Command("remove_character")]
+    [AdditionalCommand("/remove_character player",BotCommandType.Battle)]
+    public async ValueTask ExecuteRemoveFromTeam(CommandContext context,
+        [Parameter("character_name")] string characterName,
+        [Parameter("team_name"),  Description("Name of team you want to remove character from")]
         string teamName)
     {
     
@@ -64,7 +65,7 @@ public class TeamCommand : GeneralCommandClass
             .Include(i => i.Inventory.Where(j => j is Character
                                                  && EF.Property<string>(j, "Discriminator").ToLower() == simplifiedCharacterName))
             .FindOrCreateUserDataAsync((long)context.User.Id);
-        PlayerTeam? gottenTeam =  userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName.ToLower());
+        var gottenTeam =  userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName.ToLower());
         
 
         var embed = new DiscordEmbedBuilder()
@@ -74,14 +75,14 @@ public class TeamCommand : GeneralCommandClass
             .WithDescription($"Team with name {teamName} does not exist");
         if (gottenTeam is null)
         {
-            await context.CreateResponseAsync(embed);
+            await context.RespondAsync(embed);
             return;
         }
 
         if (gottenTeam.Count <= 1)
         {
             embed.WithDescription("There should be at least one character in a team");
-            await context.CreateResponseAsync(embed);
+            await context.RespondAsync(embed);
             return;
         }
         var character = userData.Inventory
@@ -90,7 +91,7 @@ public class TeamCommand : GeneralCommandClass
         if (character is null)
         {
             embed.WithDescription($"Character with name {characterName} could not be found");
-            await context.CreateResponseAsync(embed);
+            await context.RespondAsync(embed);
             return;
         }
 
@@ -106,17 +107,17 @@ public class TeamCommand : GeneralCommandClass
         await DatabaseContext.SaveChangesAsync();
 
         embed.WithTitle("Success!").WithDescription($"{character} has been removed from team {gottenTeam.TeamName}!");
-        await context.CreateResponseAsync(embed);
+        await context.RespondAsync(embed);
 
     }
 
-    [SlashCommand("rename_team", "renames team")]
+    [Command("rename_team")]
 
     
-    public async Task ExecuteRenameTeam(InteractionContext context,
-        [Option("team_name", "the name of the team you want to rename")]
+    public async ValueTask ExecuteRenameTeam(CommandContext context,
+        [Parameter("team_name")]
         string teamName,
-        [Option("new_name", "The new name of the team you want to remain. ")]
+        [Parameter("new_name")]
         string newName)
     {
         var userData = await DatabaseContext.UserData
@@ -131,14 +132,14 @@ public class TeamCommand : GeneralCommandClass
         var team = userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName);
         if (team is null)
         {
-            await context.CreateResponseAsync(embed);
+            await context.RespondAsync(embed);
             return;
         }
 
         if (userData.PlayerTeams.Except([team]).Any(i => i.TeamName.ToLower() == newName.ToLower()))
         {
             embed.WithDescription($"You already have a team with the name {newName}");
-            await context.CreateResponseAsync(embed);
+            await context.RespondAsync(embed);
             return;
         }
 
@@ -147,12 +148,12 @@ public class TeamCommand : GeneralCommandClass
         embed.WithTitle("Success!")
             .WithDescription($"Team {teamName} is now {newName!}");
 
-        await context.CreateResponseAsync(embed);
+        await context.RespondAsync(embed);
 
     }
-    [SlashCommand("add_character", "adds a character to a team")]
-    public async Task ExecuteAddToTeam(InteractionContext context, [Option("character_name","The name of the character")] string characterName,
-        [Option("team_name","the name of the team.")] string teamName)
+    [Command("add_character"), Description("adds a character to a team!")]
+    public async ValueTask ExecuteAddToTeam(CommandContext context, [Parameter("character_name"), Description("Name of team you want to add character to")] string characterName,
+        [Parameter("team_name")] string teamName)
     {
 
 
@@ -163,7 +164,7 @@ public class TeamCommand : GeneralCommandClass
             .Include(i => i.Inventory.Where(i => i is Character
                                                  && EF.Property<string>(i, "Discriminator").ToLower() == simplifiedCharacterName))
             .FindOrCreateUserDataAsync((long)context.User.Id);
-        PlayerTeam? gottenTeam = userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName.ToLower());
+        var gottenTeam = userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName.ToLower());
         
 
         var embed = new DiscordEmbedBuilder()
@@ -173,14 +174,14 @@ public class TeamCommand : GeneralCommandClass
             .WithDescription($"Team with name {teamName} does not exist");
         if (gottenTeam is null)
         {
-            await context.CreateResponseAsync(embed);
+            await context.RespondAsync(embed);
             return;
         }
 
         if (gottenTeam.IsFull)
         {
             embed.WithDescription("The provided team is full");
-            await context.CreateResponseAsync(embed);
+            await context.RespondAsync(embed);
             return;
         }
         var character = userData.Inventory
@@ -189,7 +190,7 @@ public class TeamCommand : GeneralCommandClass
         if (character is null)
         {
             embed.WithDescription($"Character with name {characterName} could not be found");
-            await context.CreateResponseAsync(embed);
+            await context.RespondAsync(embed);
             return;
         }
 
@@ -197,7 +198,7 @@ public class TeamCommand : GeneralCommandClass
         await DatabaseContext.SaveChangesAsync();
 
         embed.WithTitle("Success!").WithDescription($"{character} has been added to team {gottenTeam.TeamName}!");
-        await context.CreateResponseAsync(embed);
+        await context.RespondAsync(embed);
 
     }
 }

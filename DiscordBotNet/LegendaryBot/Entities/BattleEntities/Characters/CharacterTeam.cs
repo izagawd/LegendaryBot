@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Claims;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
-using DSharpPlus.Entities;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 

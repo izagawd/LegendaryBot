@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
@@ -106,7 +105,7 @@ public partial class Character
 
     public float GetBaseDefense(int level, int ascension)
     {
-        float toCompute = 70 + ((level - 1) * 8.5f);
+        var toCompute = 70 + ((level - 1) * 8.5f);
         var count = GetStatsToIncreaseBasedOnAscension(ascension).Count(i => i == StatType.Defense);
         var percentageToUse = count * 4;
 
