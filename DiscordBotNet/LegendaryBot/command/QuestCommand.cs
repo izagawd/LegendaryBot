@@ -110,7 +110,10 @@ public class QuestCommand : GeneralCommandClass
                 case Tier.Diamond:
                     expToAdd = 6400;
                     break;
-            }
+                case Tier.Divine:
+                    expToAdd = 12800;
+                    break;
+                }
             var rewards = quest.QuestRewards.Append(new UserExperienceReward((long)expToAdd));
             var rewardString = userData.ReceiveRewards(ctx.User.Username, rewards);
             embed

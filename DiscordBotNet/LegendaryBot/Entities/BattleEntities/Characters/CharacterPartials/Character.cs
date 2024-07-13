@@ -298,7 +298,7 @@ public abstract partial  class Character : BattleEntity
 
 
 
-    public int Ascension { get; protected set; } = 1;
+    public int Ascension { get; set; } = 1;
 
     /// <summary>
     /// Derives dialogue profile from character properties

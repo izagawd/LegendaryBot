@@ -103,9 +103,9 @@ public class UserData :   ICanBeLeveledUp
 
     public List<Quest> Quests { get; set; } = [];
     /// <summary>
-    /// This is used to refresh stuff like daily quests
+    /// This is used to refresh quest 
     /// </summary>
-    public DateTime LastTimeChecked { get; set; } = DateTime.UtcNow.AddDays(-1);
+    public DateTime LastTimeQuestWasChecked { get; set; } = DateTime.UtcNow.AddDays(-1);
     public List<Quote> Quotes { get; protected set; } = new();
     public bool IsOccupied { get; set; } = false;
     public long Experience { get; protected set; }

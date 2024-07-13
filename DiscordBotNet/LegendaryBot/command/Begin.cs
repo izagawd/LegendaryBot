@@ -251,7 +251,7 @@ public class Begin : GeneralCommandClass
         if (userData.Tier == Tier.Unranked)
         {
             userData.Tier = Tier.Bronze;
-            userData.LastTimeChecked = DateTime.UtcNow.AddDays(-1);
+            userData.LastTimeQuestWasChecked = DateTime.UtcNow.AddDays(-1);
         };
         userTeam.Remove(lily);
 

@@ -35,7 +35,7 @@ public class DirectionHelping : Quest
                 ])
             ],
             DialogueText 
-                = "Yo, bronze tier human, do you know where I can find the nearest restaurant? I think it's right but I'm not sure"
+                = "Yo, human, do you know where I can find the nearest restaurant? I think it's right but I'm not sure"
         };
         var dialogue = new Dialogue
         {
@@ -60,8 +60,8 @@ public class DirectionHelping : Quest
                     new DialogueNormalArgument()
                     {
                         DialogueProfile = profile,
-                        DialogueTexts = ["Guess I don't have to make an explosion out of you",
-                        "I knew the direction, I just wanted to see if bronze tiers were smart",
+                        DialogueTexts = [$"Guess I don't have to make an explosion out of you",
+                        $"I knew the direction, I just wanted to see if {userData.Tier} tiers were smart",
                         $"Get stronger so trying to detonate you will be more interesting, {userData.Name}."]
                     }
                 ]

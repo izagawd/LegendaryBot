@@ -21,9 +21,6 @@ public abstract class Quest
 
 
 
-    [NotMapped]
-    public Tier QuestTier { get; private set; } = Tier.Bronze;
-
     /// <param name="databaseContext"></param>
     /// <param name="context"></param>
     /// <param name="messageToEdit"> if not null, should edit that message instead of adding a new message to the channel</param>

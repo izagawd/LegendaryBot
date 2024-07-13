@@ -47,26 +47,23 @@ public class PostgreSqlContext : DbContext
             .Include(i => i.Quests)
             .FindOrCreateUserDataAsync(userId);
         var rightNowUtc = DateTime.UtcNow;
-        if (user.LastTimeChecked.Date == rightNowUtc.Date) return;
+        if (user.LastTimeQuestWasChecked.Date == rightNowUtc.Date) return;
         
         user.Quests.Clear();
         var availableQuests = DefaultObjects.GetDefaultObjectsThatSubclass<Quest>()
-            .Where(i => i.QuestTier == user.Tier)
             .Select(i => i.GetType())
-            .ToList();
+            .Where(i => !i.IsAbstract)
+            .OrderBy(_ => BasicFunctionality.GetRandomNumberInBetween(0, 100))
+            .Take(4);
 
-        while (user.Quests.Count < 4)
+        foreach (var i in availableQuests)
         {
-            if(availableQuests.Count <= 0) break;
-            var randomQuestType = BasicFunctionality.RandomChoice(availableQuests.AsEnumerable());
-            availableQuests.Remove(randomQuestType);
-            if (user.Quests.Any(j => j.GetType() == randomQuestType)) continue;
-            user.Quests.Add((Quest) Activator.CreateInstance(randomQuestType)!);
-            
+            user.Quests.Add((Quest) Activator.CreateInstance(i)!);
         }
+   
 
         
-        user.LastTimeChecked = DateTime.UtcNow;
+        user.LastTimeQuestWasChecked = DateTime.UtcNow;
 
 
     }

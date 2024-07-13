@@ -60,7 +60,7 @@ public class IWillBeYourShield : Skill
     public int ShieldBasedOnDefense => 300;
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        target.AddStatusEffect(new Barrier(User, (ShieldBasedOnDefense * 0.01 * User.Defense).Round()){Duration = 3});
+        target.AddStatusEffect(new Barrier(User, (ShieldBasedOnDefense * 0.008 * User.Defense).Round()){Duration = 3});
 
 
         return new UsageResult(this)
@@ -106,6 +106,9 @@ public class IWillProtectUs : Ultimate
 
 public class RoyalKnight : CharacterPartials.Character
 {
+    protected override float BaseAttackMultiplier => 0.85f;
+    protected override float BaseMaxHealthMultiplier => 1.125f;
+    protected override float BaseDefenseMultiplier => 1.15f;
     public override DiscordColor Color => DiscordColor.Blue;
     public override Element Element => Element.Ice;
 

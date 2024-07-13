@@ -52,7 +52,10 @@ public static class Bot
 
 
 
-        idk.Level = 50;
+        idk.Level = 60;
+        idk.Ascension = 6;
+        idk.LoadGear();
+        idk.Defense.Print();
         idk.ExpToGainWhenKilled.Print();
         idk.GetRequiredExperienceToNextLevel().Print();
 
