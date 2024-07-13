@@ -45,13 +45,10 @@ public static class Bot
     }
 
 
-    public class idk : Character
-    {
-        public override Rarity Rarity => Rarity.ThreeStar;
-    }
+
     private static Task DoShitAsync()
     {
-        var idk = new idk();
+        var idk = new Player();
 
 
 

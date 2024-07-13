@@ -1,6 +1,6 @@
 namespace DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 
-public class CharacterExpMaterial : ExpIncreaseMaterial
+public abstract class CharacterExpMaterial : ExpIncreaseMaterial
 {
     
 }

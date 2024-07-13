@@ -4,6 +4,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.Items;
+using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DSharpPlus.SlashCommands;
 
 namespace DiscordBotNet.LegendaryBot.command;
@@ -22,6 +23,8 @@ public class ListAllEntities : GeneralCommandClass
                              type = typeof(Character);
                          else if (i is Gear)
                              type = typeof(Gear);
+                         else if (i is CharacterExpMaterial)
+                             type = typeof(CharacterExpMaterial);
                          else if (i is Item)
                              type = typeof(Item);
                          else if (i is Blessing)
