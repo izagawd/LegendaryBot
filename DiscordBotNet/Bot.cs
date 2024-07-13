@@ -47,16 +47,18 @@ public static class Bot
 
     public class idk : Character
     {
-        public override Rarity Rarity => Rarity.FiveStar;
+        public override Rarity Rarity => Rarity.ThreeStar;
     }
     private static Task DoShitAsync()
     {
         var idk = new idk();
 
-        idk.Ascension = 100;
-        idk.SetLevel(2);
+
+
+        idk.Level = 50;
         idk.ExpToGainWhenKilled.Print();
         idk.GetRequiredExperienceToNextLevel().Print();
+
         return Task.CompletedTask;
 
     }

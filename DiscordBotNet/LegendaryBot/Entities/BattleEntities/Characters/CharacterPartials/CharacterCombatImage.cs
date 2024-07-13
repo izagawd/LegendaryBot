@@ -1,6 +1,8 @@
 using System.Collections.Concurrent;
 using System.Text;
 using DiscordBotNet.Extensions;
+using DiscordBotNet.LegendaryBot.Entities.Items;
+using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DiscordBotNet.LegendaryBot.Moves;
 using DSharpPlus.Entities;
 using Microsoft.Extensions.Caching.Memory;
@@ -46,15 +48,6 @@ public partial class Character
 
 
 
-    private static async Task<Image<Rgba32>> CombatImageCacheProcessLogicCropped(string imageUrl)
-    {
-        var characterImage = await  BasicFunctionality.GetImageFromUrlAsync(imageUrl);
-        characterImage.Mutate(ctx =>
-        {
-            ctx.Resize(new Size(50, 50));
-        });
-        return characterImage;
-    }
 
     private static ConcurrentDictionary<string, Image<Rgba32>> _resizedBlessingsLevelUpImageCache = new();
     public async Task<Image<Rgba32>> GetImageForLevelUpAndAscensionAsync()
@@ -111,15 +104,36 @@ public partial class Character
                 gottenBlessingImage = await BasicFunctionality.GetImageFromUrlAsync(Blessing.ImageUrl);
                 gottenBlessingImage.Mutate(ctx =>
                 {
-                    ctx.Resize(new Size(50, 50));
+                    ctx.Resize(new Size(100, 100));
                 });
                 _resizedBlessingsLevelUpImageCache[Blessing.ImageUrl] = gottenBlessingImage;
             }
             image.Mutate(ctx =>
             {
-                ctx.DrawImage(gottenBlessingImage, new Point(image.Width - 50, image.Height - 50),
+                ctx.DrawImage(gottenBlessingImage, new Point(image.Width - 100, image.Height - 100),
                     new GraphicsOptions());
             });
+        }
+
+        if (UserData is not null)
+        {
+            var expUpgradeMat = UserData.Inventory.OfType<CharacterExpMaterial>()
+                .MergeItems()
+                .OrderBy(i => i.ExpToIncrease);
+            var ascensionMats = UserData.Inventory.OfType<AscensionMaterial>().MergeItems();
+            var sum = expUpgradeMat.Cast<Item>().Union(ascensionMats);
+            var xOffset = 200;
+            foreach (var i in sum)
+            {
+                var imageToDraw = await i.GetImageAsync();
+                imageToDraw.Mutate(j => j.Resize(new Size(60,60)));
+                image.Mutate(j =>
+                    {
+                        j.DrawImage(imageToDraw, new Point(xOffset, 130),new GraphicsOptions());
+                    });
+
+                xOffset += 70;
+            }
         }
 
         return image;

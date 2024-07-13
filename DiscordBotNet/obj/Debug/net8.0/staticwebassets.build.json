@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KS8T274/8qKvxJihjz/Al5l9Ni41zPpa95uP+QxkKz8=",
+  "Hash": "pfqAwxUG4J6Z+xRQ82BTRPHooSQPgD0Szd8Bm7Hjsck=",
   "Source": "DiscordBotNet",
   "BasePath": "_content/DiscordBotNet",
   "Mode": "Default",
@@ -319,6 +319,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\Thug.png"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\items\\bruh.png",
+      "SourceId": "DiscordBotNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
+      "BasePath": "_content/DiscordBotNet",
+      "RelativePath": "battle_images/items/bruh.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\battle_images\\items\\bruh.png"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\moves\\DancingFlames.jpg",

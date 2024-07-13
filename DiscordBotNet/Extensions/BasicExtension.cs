@@ -62,6 +62,11 @@ public static class BasicExtension
         return (int) Math.Round(theDouble);
   
     }
+    public static long RoundLong(this float theDouble)
+    {
+        return (long) Math.Round(theDouble);
+  
+    }
     public static long RoundLong(this double theDouble)
     {
         return (long) Math.Round(theDouble);

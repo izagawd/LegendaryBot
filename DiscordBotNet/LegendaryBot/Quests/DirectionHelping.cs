@@ -85,8 +85,8 @@ public class DirectionHelping : Quest
 
         dialogueResult = await dialogue.LoadAsync(context, dialogueResult.Message);
         var blastTeam = new CharacterTeam(blast);
-        blast.Ascension = 10;
-        blast.SetLevel(60);
+
+        blast.Level =60;
         blast.TotalAttack = 2500;
         blast.TotalSpeed = 150;
         blast.TotalMaxHealth = 50000;

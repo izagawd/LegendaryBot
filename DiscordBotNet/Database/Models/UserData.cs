@@ -147,6 +147,13 @@ public class UserData :   ICanBeLeveledUp
     {
         return ReceiveRewards(name,rewards.ToArray());
     }
+
+    public bool CanAscendCharactersTo(int newAscensionLevel)
+    {
+        if (newAscensionLevel >= 7) return false;
+        return (int)Tier  >= newAscensionLevel;
+        
+    }
     public ExperienceGainResult IncreaseExp(long experienceToGain)
     {
         var maxLevel = 60;

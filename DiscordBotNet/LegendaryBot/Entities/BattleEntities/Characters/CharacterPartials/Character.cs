@@ -298,7 +298,7 @@ public abstract partial  class Character : BattleEntity
 
 
 
-    public int Ascension { get;  set; } = 1;
+    public int Ascension { get; protected set; } = 1;
 
     /// <summary>
     /// Derives dialogue profile from character properties
@@ -317,14 +317,27 @@ public abstract partial  class Character : BattleEntity
     {
         get
         {
-            var averageFormulaTillNextLevel = BattleFunctionality.NextLevelFormula(Level);
+            
+            var averageFormulaTillNextLevel = GetRequiredExperienceToNextLevel();
+            
             var powCalculator = Math.Pow(1.05f, Level);
             var rarityMuliplier = 1 + ((int)Rarity * 0.2);
-            
-            return ((averageFormulaTillNextLevel / powCalculator) * rarityMuliplier).RoundLong();
+            var computed = ((averageFormulaTillNextLevel / powCalculator) * rarityMuliplier * 0.75f).RoundLong();
+            return computed;
+
         }
     }
 
+    public int RequiredAscensionMaterialsToAscend => Ascension * 5;
+
+
+    public bool CanAscend => Ascension <= 5 && Level >= MaxLevel;
+    public bool Ascend()
+    {
+        if (!CanAscend) return false;
+        Ascension++;
+        return true;
+    }
    
     public static long GetCoinsBasedOnCharacters(IEnumerable<Character> characters)
     {
@@ -458,7 +471,6 @@ public abstract partial  class Character : BattleEntity
 
     public void SetLevel(int level)
     {
-        if (level > MaxLevel) level = MaxLevel;
         Level = level;
     }
     [NotMapped]
@@ -551,7 +563,7 @@ public abstract partial  class Character : BattleEntity
 
 
  
-    public override long GetRequiredExperienceToNextLevel(int level)
+    public sealed override long GetRequiredExperienceToNextLevel(int level)
     {
        return BattleFunctionality.NextLevelFormula(Level);
     }
@@ -584,7 +596,15 @@ public abstract partial  class Character : BattleEntity
         if (Experience > nextLevelExp)
         {
             excessExp = Experience - nextLevelExp;
+            Experience = 0;
         }
+
+        if (Level >= MaxLevel)
+        {
+            excessExp += Experience;
+            Experience = 0;
+        }
+   
         expGainText += "!";
         return new ExperienceGainResult(){ExcessExperience = excessExp, Text = expGainText};
     }

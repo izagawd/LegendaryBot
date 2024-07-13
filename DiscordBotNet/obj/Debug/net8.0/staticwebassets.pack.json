@@ -61,6 +61,10 @@
       "PackagePath": "staticwebassets\\battle_images\\characters\\Thug.png"
     },
     {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\items\\bruh.png",
+      "PackagePath": "staticwebassets\\battle_images\\items\\bruh.png"
+    },
+    {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\moves\\DancingFlames.jpg",
       "PackagePath": "staticwebassets\\battle_images\\moves\\DancingFlames.jpg"
     },
