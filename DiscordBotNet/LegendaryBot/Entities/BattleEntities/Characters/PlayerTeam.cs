@@ -30,7 +30,7 @@ public class PlayerTeam : CharacterTeam
 {
     [NotMapped]
     public bool IsFull => Count >= 4;
-    public string TeamName { get;  set; } = "default";
+    public string TeamName { get;  set; } = "Team1";
 
     public UserData UserData { get; protected set; }
     

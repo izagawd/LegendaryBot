@@ -107,21 +107,27 @@ public class Begin : GeneralCommandClass
             player.UserData = userData;
             player.UserDataId = userData.Id;
         }
-
+        var thePlayer = userData.Inventory.OfType<Player>().First();
         if (userData.EquippedPlayerTeam is null)
         {
             var playerTeam = new PlayerTeam();
             
             userData.EquippedPlayerTeam = playerTeam;
+            userData.PlayerTeams.AddRange([playerTeam, new PlayerTeam(){TeamName = "Team2"},new PlayerTeam(){TeamName = "Team3"},new PlayerTeam(){TeamName = "Team4"}]);
+        
             playerTeam.UserDataId = userData.Id;
-            userData.PlayerTeams.Add(playerTeam);
+            
+            
+
+            foreach (var i in userData.PlayerTeams)
+            {
+                i.Add(thePlayer);
+            }
         }
 
-        
-        
         if (!userData.EquippedPlayerTeam.Any())
         {
-            userData.EquippedPlayerTeam.Add(userData.Inventory.OfType<Player>().First());
+            userData.EquippedPlayerTeam.Add(thePlayer);
         }
         var coachChad = new CoachChad();
     
