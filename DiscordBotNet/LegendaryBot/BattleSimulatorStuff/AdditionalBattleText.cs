@@ -2,6 +2,7 @@
 
 public class AdditionalBattleText
 {
+ 
     public static implicit operator AdditionalBattleText(string text) => new(text);
     public virtual string Text { get; } 
 

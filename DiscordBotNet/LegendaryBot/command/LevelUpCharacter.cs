@@ -158,6 +158,7 @@ public class LevelUpCharacter : GeneralCommandClass
 
                 async Task StopAsync()
                 {
+                    character.LoadGear();
                     using var localLevelUpImage = await character.GetImageForLevelUpAndAscensionAsync();
                     await using var localStream = new MemoryStream();
                     await localLevelUpImage.SaveAsPngAsync(localStream);
@@ -240,6 +241,7 @@ public class LevelUpCharacter : GeneralCommandClass
 
                 
                 await DatabaseContext.SaveChangesAsync();
+                character.LoadGear();
                 using var localLevelUpImage = await character.GetImageForLevelUpAndAscensionAsync();
                 await using var localStream = new MemoryStream();
                 await localLevelUpImage.SaveAsPngAsync(localStream);

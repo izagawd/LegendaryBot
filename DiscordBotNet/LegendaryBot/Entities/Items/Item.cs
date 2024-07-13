@@ -33,7 +33,8 @@ public static class ItemExtensions
 }
 public abstract class Item : Entity
 {
-    public override string ImageUrl => $"{Website.DomainName}/battle_images/items/bruh.png";
+
+    public override string ImageUrl => $"{Website.DomainName}/battle_images/items/{GetType().Name}.png";
 
     public async Task<Image<Rgba32>> GetImageAsync(int? stacks = null)
     {

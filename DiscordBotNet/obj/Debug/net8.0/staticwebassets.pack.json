@@ -61,8 +61,16 @@
       "PackagePath": "staticwebassets\\battle_images\\characters\\Thug.png"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\items\\bruh.png",
-      "PackagePath": "staticwebassets\\battle_images\\items\\bruh.png"
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\items\\AdventurersKnowledge.png",
+      "PackagePath": "staticwebassets\\battle_images\\items\\AdventurersKnowledge.png"
+    },
+    {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\items\\DivineKnowledge.png",
+      "PackagePath": "staticwebassets\\battle_images\\items\\DivineKnowledge.png"
+    },
+    {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\items\\HerosKnowledge.png",
+      "PackagePath": "staticwebassets\\battle_images\\items\\HerosKnowledge.png"
     },
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\moves\\DancingFlames.jpg",
