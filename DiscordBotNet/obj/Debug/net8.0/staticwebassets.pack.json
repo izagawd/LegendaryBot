@@ -29,6 +29,14 @@
       "PackagePath": "staticwebassets\\battle_images\\characters\\Lily.png"
     },
     {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\PlayerFemale.png",
+      "PackagePath": "staticwebassets\\battle_images\\characters\\PlayerFemale.png"
+    },
+    {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\PlayerMale.png",
+      "PackagePath": "staticwebassets\\battle_images\\characters\\PlayerMale.png"
+    },
+    {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Police.png",
       "PackagePath": "staticwebassets\\battle_images\\characters\\Police.png"
     },

@@ -9,7 +9,7 @@ public class Avatar: GeneralCommandClass
 {
 
 
-    public override string Example => $"/avatar\n/avatar @Izagawd";
+
 
     [SlashCommand("avatar", "Displays your avatar, or someone elses avatar"),
     AdditionalSlashCommand("/avatar\n/avatar @user",BotCommandType.Fun)]

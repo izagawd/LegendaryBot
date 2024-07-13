@@ -65,10 +65,7 @@
 
     }
 
-    foreach (var i in filteredCharactersList.OfType<Player>())
-    {
-        i.LoadPlayerData(User);
-    }
+
     if (Model.Name.Length > 0)
     {
         filteredCharactersList = filteredCharactersList

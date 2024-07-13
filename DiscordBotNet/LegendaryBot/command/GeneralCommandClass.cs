@@ -10,8 +10,7 @@ public abstract class GeneralCommandClass : ApplicationCommandModule
 {
 
  
- 
-    public virtual string Example => "None";
+
 
     public override Task<bool> BeforeSlashExecutionAsync(InteractionContext ctx)
     {

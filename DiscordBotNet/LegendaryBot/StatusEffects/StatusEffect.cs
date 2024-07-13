@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.LegendaryBot.BattleEvents;
+﻿using System.Collections.Concurrent;
+using DiscordBotNet.LegendaryBot.BattleEvents;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
@@ -34,18 +35,9 @@ public abstract class StatusEffect : ICloneable
     /// </summary>
     public bool IsStackable => MaxStacks > 1;
 
-    private static MemoryCache _cachedResizedCombatImages = new MemoryCache(new MemoryCacheOptions());
+    private static ConcurrentDictionary<string,Image<Rgba32>> _cachedResizedCombatImages = new();
     
-    protected static MemoryCacheEntryOptions EntryOptions { get; } = new()
-    {
-        SlidingExpiration = new TimeSpan(0,30,0),
-        PostEvictionCallbacks = { new PostEvictionCallbackRegistration(){EvictionCallback = BasicFunctionality.DisposeEvictionCallback} }
-    };
-    protected static MemoryCacheEntryOptions ExpiredEntryOptions { get; } = new()
-    {
-        SlidingExpiration = new TimeSpan(0,30,0),
-        PostEvictionCallbacks = { new PostEvictionCallbackRegistration(){EvictionCallback = BasicFunctionality.DisposeEvictionCallback} }
-    };
+
 
 
     public async Task<Image<Rgba32>> GetImageForCombatAsync()
@@ -67,10 +59,8 @@ public abstract class StatusEffect : ICloneable
                 ctx.BackgroundColor(backgroundColor);
                 ctx.Resize(new Size(20, 20));
             });
-
-            var entry = EntryOptions;
-            if (!url.Contains(Website.DomainName)) entry = ExpiredEntryOptions;
-            _cachedResizedCombatImages.Set(url, image, entry);
+            
+            _cachedResizedCombatImages[url] = image;
 
         }
         image = image.Clone();

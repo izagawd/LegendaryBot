@@ -45,142 +45,10 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
 /// </summary>
 public abstract partial  class Character : BattleEntity
 {
-        private static Type[] _characterTypes = Assembly.GetExecutingAssembly().GetTypes()
-        .Where(i => i.IsSubclassOf(typeof(Character)) && !i.IsAbstract).ToArray();
-        
-        
-        
-        
-    [NotMapped]
-    public int ExpIncreaseScale { get; set; } = 1;
 
 
-    public void AddStatusEffects(IEnumerable<StatusEffect> statusEffects, float? effectiveness = null,
-        bool announce = true)
-    {
-  
-        var statusEffectsAsArray = statusEffects.ToArray();
-        if (!announce)
-        {
-            foreach (var i in statusEffects)
-            {
-                AddStatusEffect(i, effectiveness, false);
-            }
-            return;
-        }
-
-        List<StatusEffect> resisted = [];
-        List<StatusEffect> succeeded = [];
-        List<StatusEffect> failed = [];
-
-        foreach (var i in statusEffectsAsArray)
-        {
-            var result = AddStatusEffect(i, effectiveness, false);
-            switch (result)
-            {
-                case StatusEffectInflictResult.Resisted:
-                    resisted.Add(i);
-                    break;
-                case StatusEffectInflictResult.Succeeded:
-                    succeeded.Add(i);
-                    break;
-                default:
-                    failed.Add(i);
-                    break;
-            }
-        }
-        
-        
-        
-        if(succeeded.Count > 0)
-            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded
-                ,succeeded.ToArray()));
-        if(resisted.Count > 0)
-            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,StatusEffectInflictResult.Resisted
-                ,resisted.ToArray()));
-        if(failed.Count > 0)
-            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,StatusEffectInflictResult.Failed
-                ,failed.ToArray()));
-        
-    }
-    /// <param name="statusEffect">The status effect to add</param>
-    /// <param name="effectiveness">the effectiveness of the caster. Null to ignore effect resistance</param>
-    /// <returns>true if the status effect was successfully added</returns>
-    public StatusEffectInflictResult AddStatusEffect(StatusEffect statusEffect,float? effectiveness = null, bool announce =  true)
-    {
-        var inflictResult = StatusEffectInflictResult.Failed;
-        if (statusEffect is null) return StatusEffectInflictResult.Failed;
-        if (IsDead) return StatusEffectInflictResult.Failed;
-        var arrayOfType =
-            _statusEffects.Where(i => i.GetType() == statusEffect.GetType())
-                .ToArray();
-        statusEffect.Affected = this;
-        if (arrayOfType.Length < statusEffect.MaxStacks)
-        {
-            bool added = false;
-            if (effectiveness is not null && statusEffect.EffectType == StatusEffectType.Debuff)
-            {
-                var percentToResistance =Resistance -effectiveness;
-                
-                if (percentToResistance < 0) percentToResistance = 0;
-                if (!BasicFunctionality.RandomChance((int)percentToResistance))
-                {
-                    added = _statusEffects.Add(statusEffect);
-                    
-                }
-                
-            }
-            else
-            {
-                added = _statusEffects.Add(statusEffect);
-                
-            }
-            inflictResult = StatusEffectInflictResult.Resisted;
-            if (added) 
-                inflictResult =  StatusEffectInflictResult.Succeeded;
-            if (announce)
-            {
-                CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,inflictResult, statusEffect));
-            }
-            return inflictResult;
 
 
-        }
-        if (!statusEffect.IsStackable && arrayOfType.Any())
-        {
-            var onlyStatus = arrayOfType.First();
-
-            onlyStatus.OptimizeWith(statusEffect);
-            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded, statusEffect));
-
-
-            return StatusEffectInflictResult.Succeeded;
-        }
-        inflictResult = StatusEffectInflictResult.Failed;
-        if (announce)
-        {
-            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,inflictResult, statusEffect));
-        }
-        return inflictResult;
-    }
-    /// <summary>
-    /// Dispells (removes) a debuff from the character
-    /// </summary>
-    /// <param name="statusEffect">The status effect to remove</param>
-    /// <param name="effectiveness">If not null, will do some rng based on effectiveness to see whether or not to dispell debuff</param>
-    /// <returns>true if status effect was successfully dispelled</returns>
-    public bool DispellStatusEffect(StatusEffect statusEffect, int? effectiveness = null)
-    {
-        if (effectiveness is null || statusEffect.EffectType == StatusEffectType.Debuff)
-            return _statusEffects.Remove(statusEffect);
-
-        if (!BattleFunctionality.CheckForResist(effectiveness.Value,Resistance))
-        {
-            return _statusEffects.Remove(statusEffect);
-        }
-        return false;
-        
-    }
     [NotMapped]
     public virtual bool IsInStandardBanner => true;
 
@@ -246,24 +114,6 @@ public abstract partial  class Character : BattleEntity
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="T">the type of stats modifier you want</typeparam>
-    public IEnumerable<T> GetAllStatsModifierArgs<T>() where T : StatsModifierArgs
-    {
-       
-        if (CurrentBattle is not null)
-        {
-            return CurrentBattle
-                .GetAllStatsModifierArgsInBattle()
-                .OfType<T>()
-                .Where(i => i.CharacterToAffect == this);
-        }
-
-        return [];
-    }
-    
 
     [NotMapped]
     private float _health = 1;
@@ -392,163 +242,6 @@ public abstract partial  class Character : BattleEntity
     [NotMapped]
     public Alphabet AlphabetIdentifier => CurrentBattle.GetAlphabetIdentifier(this);
     public float HealthPercentage => (float)(Health * 1.0 / MaxHealth * 100.0);
-    
-    /// <summary>
-    /// Load build if this character isnt already loaded, or dont load the build if u set stats manually <br/>
-    /// eg TotalAttack = 5000;
-    /// </summary>
-    /// <param name="loadBuild"></param>
-    /// <returns></returns>
-    public virtual async Task<Image<Rgba32>> GetDetailsImageAsync(bool loadBuild)
-    {
-        using var characterImageInfo = await GetInfoAsync();
-        if(loadBuild)
-            LoadGear();
-        
-        var image = new Image<Rgba32>(850, 900);
-        
-       
-        return image;
-    }
-    public sealed override   Task<Image<Rgba32>> GetDetailsImageAsync()
-    {
-        return GetDetailsImageAsync(true);
-    }
-
-
-    /// <summary>
-    /// Caches the cropped combat images, since cropping takes time
-    /// </summary>
-    private static MemoryCache _cachedCombatCroppedImages = new(new MemoryCacheOptions());
-
-    private static readonly MemoryCacheEntryOptions EntryOptionsExpiry = new()
-    {
-        SlidingExpiration = new TimeSpan(0,30,0),
-        PostEvictionCallbacks =
-            { new PostEvictionCallbackRegistration() { EvictionCallback= BasicFunctionality.DisposeEvictionCallback } }
-    };
-    private static readonly MemoryCacheEntryOptions EntryOptions = new()
-    {
-        PostEvictionCallbacks =
-            { new PostEvictionCallbackRegistration() { EvictionCallback= BasicFunctionality.DisposeEvictionCallback } }
-    };
-    public async Task<Image<Rgba32>> GetImageForCombatAsync()
-    {
-
-        var image = new Image<Rgba32>(190, 150);
-        var url = ImageUrl;
-        if (!_cachedCombatCroppedImages.TryGetValue(url, out Image<Rgba32> characterImage))
-        {
-            characterImage = await  BasicFunctionality.GetImageFromUrlAsync(url);
-            characterImage.Mutate(ctx =>
-            {
-                ctx.Resize(new Size(50, 50));
-            });
-            var entryOptions = EntryOptions;
-            
-            //any image outside of the domain will n=be removed after a certain amount of time using this entry option
-            if (!url.Contains(Website.DomainName)) entryOptions = EntryOptionsExpiry;
-            _cachedCombatCroppedImages.Set(url,characterImage,entryOptions);
-        }
- 
-        IImageProcessingContext ctx = null!;
-        image.Mutate(idk => ctx = idk);
-       
-        ctx
-            .DrawImage(characterImage, new Point(0, 0), new GraphicsOptions())
-            .Draw(SixLabors.ImageSharp.Color.Black, 1, new Rectangle(new Point(0, 0), new Size(50, 50)))
-            .DrawText($"Lvl {Level}", SystemFonts.CreateFont(Bot.GlobalFontName, 10),
-        SixLabors.ImageSharp.Color.Black, new PointF(55, 21.5f))
-            .Draw(SixLabors.ImageSharp.Color.Black, 1,
-        new RectangleF(52.5f, 20, 70, 11.5f))
-            .DrawText(Name + $" [{AlphabetIdentifier}] [{Position}]", SystemFonts.CreateFont(Bot.GlobalFontName, 11),
-        SixLabors.ImageSharp.Color.Black, new PointF(55, 36.2f))
-            .Draw(SixLabors.ImageSharp.Color.Black, 1,
-        new RectangleF(52.5f, 35, 115, 12.5f));
-
-        var healthPercentage = HealthPercentage;
-        int width = 175;
-        var shieldPercentage = ShieldPercentage;
-        int filledWidth = (width * healthPercentage / 100.0).Round();
-        int filledShieldWidth = (width * shieldPercentage / 100).Round();
-        int barHeight = 16; 
-        if(healthPercentage < 100)
-            ctx.Fill(SixLabors.ImageSharp.Color.Red, new Rectangle(0, 50, width, barHeight));
-        ctx.Fill(SixLabors.ImageSharp.Color.Green, new Rectangle(0, 50, filledWidth, barHeight));
-        int shieldXPosition =  filledWidth;
-        if (shieldXPosition + filledShieldWidth > width)
-        {
-            shieldXPosition = width - filledShieldWidth;
-        }
-        if(shieldPercentage > 0)
-            ctx.Fill(SixLabors.ImageSharp.Color.White, new RectangleF(shieldXPosition, 50, filledShieldWidth, barHeight));
-
-        // Creates a border for the health bar
-        ctx.Draw(SixLabors.ImageSharp.Color.Black, 0.5f, new Rectangle(0, 50, width, barHeight));
-        ctx.DrawText($"{Health}/{MaxHealth}", SystemFonts.CreateFont(Bot.GlobalFontName, 14),
-        SixLabors.ImageSharp.Color.Black, new PointF(2.5f, 51.5f));
-
-        int xOffSet = 0;
-        int yOffSet = 50 + barHeight + 5;
-
-        int moveLength = 25; 
-
-        foreach (var i in MoveList)
-        {
-            //do not change size of the move image here.
-            //do it in the method that gets the image
-            using var moveImage = await i.GetImageForCombatAsync();
-            ctx.DrawImage(moveImage, new Point(xOffSet, yOffSet), new GraphicsOptions());
-            xOffSet += moveLength;
-            int cooldown = 0;
-            if (i is Special special)
-            {
-                cooldown = special.Cooldown;
-            }
-
-            var cooldownString = ""; 
-            if (cooldown > 0)
-            {
-                cooldownString = cooldown.ToString();
-            }
-            ctx.DrawText(cooldownString, SystemFonts.CreateFont(Bot.GlobalFontName, moveLength),
-                SixLabors.ImageSharp.Color.Black, new PointF(xOffSet + 5, yOffSet));
-            xOffSet += moveLength;
-        }
-     
-
-        xOffSet = 0;
-        yOffSet += moveLength + 5;
-
-      
-        
-        foreach (var i in _statusEffects.Take(16))
-        {
-            
-            //do not change size of the status effect image here.
-            //do it in the method that gets the image
-            using var statusImage = await i.GetImageForCombatAsync();
-            var statusLength = statusImage.Size.Width;
-            if (xOffSet + statusLength + 2 >= 185)
-            {
-                xOffSet = 0;
-                yOffSet += statusLength + 2;
-            }
-            ctx.DrawImage(statusImage, new Point(xOffSet, yOffSet), new GraphicsOptions());
-            xOffSet += statusLength + 2;
-        }
-       
-        if (IsDead)
-        {
-            ctx.Opacity(0.5f);
-        }
-
-        ctx.EntropyCrop(0.05f);
-     
-
-        return image;
-    }
-
 
 
 
@@ -607,112 +300,6 @@ public abstract partial  class Character : BattleEntity
 
     public int Ascension { get;  set; } = 1;
 
-  
-    public float Speed
-    {
-        get
-        {
-            float percentage = 100;
-            var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-
-            float flat = 0;
-
-            foreach (var i in modifiedStats.OfType<SpeedPercentageModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            foreach (var i in modifiedStats.OfType<SpeedFlatModifierArgs>())
-            {
-                flat += i.ValueToChangeWith;
-            }
-
-            float newSpeed = TotalSpeed * percentage * 0.01f;
-            newSpeed += flat;
-            if (newSpeed < 0) newSpeed = 0;
-            return newSpeed;
-        }
-    }
-
-    public float Defense { 
-        get
-        {
-            float percentage = 100;
-            var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-
-            float flat = 0;
-
-            foreach (var i in modifiedStats.OfType<DefensePercentageModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            foreach (var i in modifiedStats.OfType<DefenseFlatModifierArgs>())
-            {
-                flat += i.ValueToChangeWith;
-            }
-
-            float newDefense = TotalDefense * percentage * 0.01f;
-            newDefense += flat;
-            if (newDefense < 0) newDefense = 0;
-            return newDefense;
-        } 
-    }
-
-
-    public float Attack { 
-        get     
-        {
-            float percentage = 100;
-            var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-
-            float flat = 0;
-
-            foreach (var i in modifiedStats.OfType<AttackPercentageModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            foreach (var i in modifiedStats.OfType<AttackFlatModifierArgs>())
-            {
-                flat += i.ValueToChangeWith;
-            }
-
-            float newAttack = TotalAttack * percentage * 0.01f;
-            newAttack += flat;
-            if (newAttack < 0) newAttack = 0;
-            return newAttack;
-        } 
-    }
-
-
-    public float CriticalDamage {
-        get
-        {
-       
-            float percentage = TotalCriticalDamage;
-            var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-            foreach (var i in modifiedStats.OfType<CriticalDamageModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            return percentage;
-        }
-    }
-
- 
-    [NotMapped]
-    public float Resistance {
-        get
-        {
-        
-            float percentage = TotalResistance;
-            var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-            foreach (var i in modifiedStats.OfType<ResistanceModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            return percentage;
-            
-        } 
-    }
     /// <summary>
     /// Derives dialogue profile from character properties
     /// </summary>
@@ -724,6 +311,31 @@ public abstract partial  class Character : BattleEntity
             CharacterUrl = ImageUrl
         };
 
+    public virtual long CoinsToGainWhenKilled => (Level + 50) * (int) Rarity;
+
+    public virtual long ExpToGainWhenKilled
+    {
+        get
+        {
+            var averageFormulaTillNextLevel = BattleFunctionality.NextLevelFormula(Level);
+            var powCalculator = Math.Pow(1.05f, Level);
+            var rarityMuliplier = 1 + ((int)Rarity * 0.2);
+            
+            return ((averageFormulaTillNextLevel / powCalculator) * rarityMuliplier).RoundLong();
+        }
+    }
+
+   
+    public static long GetCoinsBasedOnCharacters(IEnumerable<Character> characters)
+    {
+        return characters.Select(i => i.CoinsToGainWhenKilled).Sum();
+    }
+    [NotMapped]
+    public int ExpIncreaseScale { get; set; } = 1;
+    public static long GetExpBasedOnDefeatedCharacters(IEnumerable<Character> characters)
+    {
+        return characters.Select(i => i.ExpToGainWhenKilled).Sum();
+    }
     /// <summary>
     /// this will be used to get the items this character will drop if killed
     /// </summary>
@@ -834,38 +446,6 @@ public abstract partial  class Character : BattleEntity
 
     [NotMapped] public virtual DiscordColor Color { get; protected set; } = DiscordColor.Green;
 
-    [NotMapped]
-    public float Effectiveness
-    {
-        get
-        {
-       
-            float percentage = TotalEffectiveness;
-            var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-            foreach (var i in modifiedStats.OfType<EffectivenessModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            return percentage;
-        }
-    }
-
- 
-
-    [NotMapped]
-    public float CriticalChance {
-        get
-        {
-            float percentage = TotalCriticalChance;
-            var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-            foreach (var i in modifiedStats.OfType<CriticalChanceModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            return percentage;
-        }
-        
-    }
 
 
 
@@ -873,14 +453,7 @@ public abstract partial  class Character : BattleEntity
 
     public bool RemoveStatusEffect(StatusEffect statusEffect) => _statusEffects.Remove(statusEffect);
 
-    public override int MaxLevel
-    {
-        get
-        {
-            return Ascension * 10;
-        }
-    }
-
+    public sealed override int MaxLevel => Ascension * 10;
 
 
     public void SetLevel(int level)
@@ -935,7 +508,8 @@ public abstract partial  class Character : BattleEntity
             i.MainStat.SetMainStatValue(i.Rarity,i.Level);
             i.MainStat.AddStats(this);
         }
-        Health = TotalMaxHealth.Round();
+
+        Health = TotalMaxHealth;
     }
     
 

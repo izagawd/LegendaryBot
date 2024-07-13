@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
@@ -23,10 +24,10 @@ public partial class Character
     public float BaseCriticalDamage => GetBaseCriticalDamage(Level, Ascension);
 
     [NotMapped]
-    public virtual float BaseDefense => GetBaseDefense(Level,Ascension);
+    public  float BaseDefense => GetBaseDefense(Level,Ascension);
 
     [NotMapped]
-    public virtual float BaseMaxHealth => GetBaseMaxHealth(Level,Ascension);
+    public  float BaseMaxHealth => GetBaseMaxHealth(Level,Ascension);
 
     
     [NotMapped]

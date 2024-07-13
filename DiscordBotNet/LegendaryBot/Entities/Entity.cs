@@ -50,6 +50,8 @@ public abstract class Entity : ICloneable, IImageHaver
             yield return a.Clone();
         }
     }
+
+
     public UserData? UserData { get; set; }
 
     [NotMapped] public virtual string ImageUrl => null!;

@@ -42,8 +42,7 @@ public class Index : PageModel
 
      
 
-        if (Character is Player player)
-            player.LoadPlayerData(User);
+
 
         
         return null;

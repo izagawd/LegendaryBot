@@ -42,18 +42,8 @@ public class CharacterTeam : ISet<CharacterPartials.Character>
     }
  
 
-    public async Task<CharacterTeam> LoadTeamGearWithPlayerDataAsync(DiscordUser? user = null)
-    {
-        foreach (var i in Characters)
-        {
-            i.Team = this;
-            if (i is Player player) await player.LoadPlayerDataAsync(user);
-            i.LoadGear();
-        }
-    
-        return this;
-    }
-    public CharacterTeam LoadTeam()
+
+    public CharacterTeam LoadTeamEquipment()
     {
         foreach (var i in Characters)
         {
@@ -65,21 +55,7 @@ public class CharacterTeam : ISet<CharacterPartials.Character>
 
     }
 
-    public CharacterTeam LoadTeamGearWithPlayerData(ClaimsPrincipal user)
-    {
-        foreach (var i in Characters)
-        {
-            i.Team = this;
-            if (i is Player player)
-            {
-                player.LoadPlayerData(user);
-            }
-            i.LoadGear();
-        }
 
-
-        return this;
-    }
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();

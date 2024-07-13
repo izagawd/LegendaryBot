@@ -17,10 +17,14 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace DiscordBotNet.Database.Models;
 
-
+public enum Gender : short
+{
+    Male, Female
+}
 public class UserData :   ICanBeLeveledUp
 {
-
+    public Gender Gender { get; set; }
+    public string Name { get; set; } = "Aether";
     public void MergeItemStacks()
     {
         Dictionary<Type, Item> items = [];

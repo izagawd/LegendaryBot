@@ -49,6 +49,7 @@ public class TeamCommand : GeneralCommandClass
     }
 
     [SlashCommand("remove_character", "removes a character from a team")]
+    [AdditionalSlashCommand("/remove_character player",BotCommandType.Battle)]
     public async Task ExecuteRemoveFromTeam(InteractionContext context,
         [Option("character_name", "The name of the character")] string characterName,
         [Option("team_name", "the name of the team.")]
@@ -93,8 +94,7 @@ public class TeamCommand : GeneralCommandClass
             return;
         }
 
-        if (character is Player player)
-            await player.LoadPlayerDataAsync(context.User);
+
         if (!gottenTeam.Contains(character))
         {
             embed.WithDescription($"Character {character} is not in team {gottenTeam.TeamName}");
@@ -195,7 +195,7 @@ public class TeamCommand : GeneralCommandClass
 
         gottenTeam.Add(character);
         await DatabaseContext.SaveChangesAsync();
-        if (character is Player player) await player.LoadPlayerDataAsync(context.User);
+
         embed.WithTitle("Success!").WithDescription($"{character} has been added to team {gottenTeam.TeamName}!");
         await context.CreateResponseAsync(embed);
 

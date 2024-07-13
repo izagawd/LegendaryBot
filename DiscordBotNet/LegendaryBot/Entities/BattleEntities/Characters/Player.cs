@@ -127,6 +127,7 @@ public class PlayerDatabaseConfiguration : IEntityTypeConfiguration<Player>
     {
         builder.Property(i => i.Element)
             .HasColumnName(nameof(Player.Element));
+
     }
 }
 
@@ -141,6 +142,7 @@ public struct PlayerCachedData
 public class Player : CharacterPartials.Character
 {
 
+    
     protected override IEnumerable<StatType> AscensionStatIncrease =>
         [StatType.Attack, StatType.Attack, StatType.Speed, StatType.CriticalChance, StatType.CriticalDamage];
     public override bool IsInStandardBanner => false;
@@ -149,8 +151,7 @@ public class Player : CharacterPartials.Character
 
     protected override float BaseSpeedMultiplier => 1.1f;
 
-    [NotMapped]
-    public DiscordUser DiscordUser { get; set; }
+
 
 
 
@@ -170,52 +171,14 @@ public class Player : CharacterPartials.Character
         Element = element;
     }
 
+    
     private string _imageUrl;
-    public override string ImageUrl => _imageUrl;
-    public override Task<Image<Rgba32>> GetDetailsImageAsync(bool loadBuild)
-    {
-        
-        return GetDetailsImageAsync(discordUser: null,loadBuild);
-    }
-    public async Task<Image<Rgba32>> GetDetailsImageAsync(DiscordUser? discordUser,bool loadBuild)
-    {
-        await LoadPlayerDataAsync(discordUser);
-        return await base.GetDetailsImageAsync(loadBuild);
-    }
-    public async Task<Image<Rgba32>> GetDetailsImageAsync(ClaimsPrincipal claimsUser,bool loadBuild)
-    {
-        LoadPlayerData(claimsUser);
-        return await base.GetDetailsImageAsync(loadBuild);
-    }
-    public async Task LoadPlayerDataAsync(DiscordUser? discordUser = null)
-    {
-        if (discordUser is not null)
-        {
-            DiscordUser = discordUser;
-        } else if (DiscordUser is null)
-        {
-            DiscordUser = await Bot.Client.GetUserAsync((ulong)UserDataId);
-        }
-        _name = DiscordUser.Username;
-        _imageUrl = DiscordUser.AvatarUrl;
-        if (UserData is not null)
-        {
-            Color = UserData.Color;
-        } 
-    }
-    public void LoadPlayerData(ClaimsPrincipal claimsUser)
-    {
-        _name = claimsUser.GetDiscordUserName();
-        _imageUrl = claimsUser.GetDiscordUserAvatarUrl();
-        if (UserData is not null)
-        {
-            Color = UserData.Color;
-        }
-    }
+
+    
+    public override string ImageUrl => $"{Website.DomainName}/battle_images/characters/Player{UserData.Gender}.png";
 
 
-    private string _name = "player";
-    public override string Name => _name;
+    public override string Name => UserData?.Name!;
 
 
 

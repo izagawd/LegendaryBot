@@ -39,7 +39,9 @@ public class GooeyStrike : BasicAttack
 }
 public class Slime : CharacterPartials.Character
 {
-
+    protected override float BaseSpeedMultiplier => 0.8f;
+    protected override float BaseMaxHealthMultiplier => 0.7f;
+    protected override float BaseAttackMultiplier => 0.4f;
     public override IEnumerable<Reward> DroppedRewards
     {
         get

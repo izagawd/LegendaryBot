@@ -8,12 +8,9 @@ public class BattleResult
 {
     
     public bool Stopped { get; init; }
-    /// <summary>
-    /// Exp To Gain for each character
-    /// </summary>
-    public required long ExpToGain { get; init; }
+
     public required DiscordMessage Message { get; init; }
-    public required IEnumerable<Reward> BattleRewards { get; init; } = [];
+
 
     public required CharacterTeam Winners { get; init; }
 

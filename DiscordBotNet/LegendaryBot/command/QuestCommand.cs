@@ -49,7 +49,7 @@ public class QuestCommand : GeneralCommandClass
         {
             var preparedString = $"{count}. {i.Title}: {i.Description}.";
             if (i.Completed)
-                preparedString += " Completed.";
+                preparedString += " (Completed)";
             questString += $"{preparedString}\n";
             count++;
         }
@@ -100,6 +100,15 @@ public class QuestCommand : GeneralCommandClass
                     break;
                 case Tier.Silver:
                     expToAdd = 800;
+                    break;
+                case Tier.Gold:
+                    expToAdd = 1600;
+                    break;
+                case Tier.Platinum:
+                    expToAdd = 3200;
+                    break;
+                case Tier.Diamond:
+                    expToAdd = 6400;
                     break;
             }
             var rewards = quest.QuestRewards.Append(new UserExperienceReward((long)expToAdd));

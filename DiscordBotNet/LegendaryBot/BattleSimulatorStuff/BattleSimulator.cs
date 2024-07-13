@@ -45,24 +45,15 @@ public class BattleSimulator
     public static DiscordButtonComponent proceed = new(ButtonStyle.Success, "Proceed", "Proceed");
 
 
-    protected static MemoryCache _cachedResizedForAvatarsMemoryCache = new(new MemoryCacheOptions());
+    protected static ConcurrentDictionary<string,Image<Rgba32>> _cachedResizedForAvatars = new();
     
     
-    protected static MemoryCacheEntryOptions EntryOptions { get; } = new()
-    {
-        SlidingExpiration = new TimeSpan(0,30,0),
-        PostEvictionCallbacks = { new PostEvictionCallbackRegistration(){EvictionCallback = BasicFunctionality.DisposeEvictionCallback} }
-    };
-    protected static MemoryCacheEntryOptions ExpiredEntryOptions { get; } = new()
-    {
-        SlidingExpiration = new TimeSpan(0,30,0),
-        PostEvictionCallbacks = { new PostEvictionCallbackRegistration(){EvictionCallback = BasicFunctionality.DisposeEvictionCallback} }
-    };
+
 
     private bool _battleBegun = false;
     private  async Task<Image<Rgba32>> GetAvatarAsync(string url)
     {
-        if(_cachedResizedForAvatarsMemoryCache.TryGetValue(url, out Image<Rgba32> characterImageToDraw))
+        if(_cachedResizedForAvatars.TryGetValue(url, out Image<Rgba32> characterImageToDraw))
         {
             return characterImageToDraw.Clone();
         }
@@ -71,9 +62,7 @@ public class BattleSimulator
         {
             mutator.Resize(30, 30);
         });
-        var entryOptions = EntryOptions;
-        if (!url.Contains(Website.DomainName)) entryOptions = ExpiredEntryOptions;
-        _cachedResizedForAvatarsMemoryCache.Set(url, characterImageToDraw, entryOptions);
+        _cachedResizedForAvatars[url] = characterImageToDraw;
         return characterImageToDraw.Clone();
     }
 
@@ -1066,23 +1055,13 @@ public class BattleSimulator
 
         var losers = CharacterTeams.First(i => i != _winners);
        
-       
-        var expToGain= losers.Sum(i =>BattleFunctionality.ExpGainFormula(i.Level) * i.ExpIncreaseScale);
-        var coinsToGain = losers.Sum(i => (i.Level + 60) * 100)/_winners.Count;
-
-        List<Reward> rewards = [new CoinsReward(coinsToGain), new UserExperienceReward(expToGain)];
-        foreach (var i in losers)
-        {
-            if (i.IsDead) rewards.AddRange(i.DroppedRewards);
-        }
-        
-
+      
 
         return new BattleResult
         {
             Stopped = _stopped,
-            ExpToGain = expToGain,
-            BattleRewards = rewards,
+           
+
             Turns = Turn,
             Forfeited = _forfeited,
             Winners = _winners,

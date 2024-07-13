@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Concurrent;
+using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.LegendaryBot.BattleEvents;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
@@ -21,31 +22,19 @@ public abstract class Move
     
     public virtual string IconUrl => $"{Website.DomainName}/battle_images/moves/{GetType().Name}.png";
 
-    protected static MemoryCache _croppedCombatImagesMemoryCache { get; } = new(new MemoryCacheOptions());
+    protected static ConcurrentDictionary<string, Image<Rgba32>> _croppedCombatImages { get; } = new();
 
-    protected static MemoryCacheEntryOptions ExpireEntryOptions { get; } = new()
-    {
-        SlidingExpiration = new TimeSpan(0,30,0),
-        PostEvictionCallbacks = { new PostEvictionCallbackRegistration(){EvictionCallback = BasicFunctionality.DisposeEvictionCallback} }
-    };
-    protected static MemoryCacheEntryOptions EntryOptions { get; } = new()
-    {
-        SlidingExpiration = new TimeSpan(0,30,0),
-        PostEvictionCallbacks = { new PostEvictionCallbackRegistration(){EvictionCallback = BasicFunctionality.DisposeEvictionCallback} }
-    };
+
     public async Task<Image<Rgba32>> GetImageForCombatAsync()
     {
         var url = IconUrl;
-        if (!_croppedCombatImagesMemoryCache.TryGetValue(url, out Image<Rgba32> image))
+        if (!_croppedCombatImages.TryGetValue(url, out Image<Rgba32> image))
         {
             image = await BasicFunctionality.GetImageFromUrlAsync(IconUrl);
             image.Mutate(i => i
                 .Resize(25, 25)
                 .Draw(Color.Black, 3, new RectangleF(0, 0, 24,24)));
-            var entryOption = EntryOptions;
-            if (!url.Contains(Website.DomainName))
-                entryOption = ExpireEntryOptions;
-            _croppedCombatImagesMemoryCache.Set(url, image, entryOption);
+            _croppedCombatImages[url] = image;
         }
 
 

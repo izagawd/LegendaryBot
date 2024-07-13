@@ -5,6 +5,7 @@ using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
+using Microsoft.VisualBasic;
 
 namespace DiscordBotNet.LegendaryBot.DialogueNamespace;
 
@@ -33,7 +34,7 @@ public class Dialogue
     public bool RespondInteraction { get; init; }
 
     private DiscordMessage _message = null!;
-    private InteractionContext _interactionContext= null!;
+    private DiscordInteraction _interaction= null!;
     private DiscordEmbedBuilder _embedBuilder= null!;
     
     private bool _timedOut = false;
@@ -86,7 +87,7 @@ public class Dialogue
           
         }
 
-        var interaction = _interactionContext.Interaction;
+        var interaction = _interaction;
         if (RespondInteraction && _message is null)
         {
             var responseBuilder = new DiscordInteractionResponseBuilder()
@@ -141,19 +142,25 @@ public class Dialogue
 
         }
     }
+
+    public Task<DialogueResult> LoadAsync(InteractionContext context, DiscordMessage? message = null)
+    {
+        return LoadAsync(context.Interaction, message);
+    }
     /// <summary>
     /// Initiates the dialogue of a character
     /// </summary>
     /// <param name="context">The context of the interaction</param>
     /// <param name="message">if not null, will edit the message provided with the dialogue</param>
     /// <returns></returns>
-    public async Task<DialogueResult> LoadAsync(InteractionContext context,DiscordMessage? message = null)
+    public async Task<DialogueResult> LoadAsync(DiscordInteraction interaction,DiscordMessage? message = null)
     {
-        if (NormalArguments.Count() <= 0 && DecisionArgument is null)
+        if (!NormalArguments.Any() && DecisionArgument is null)
         {
             throw new Exception("There is no decision argument provided");
         }
-        _interactionContext = context;
+
+        _interaction = interaction;
 
 
         _message = message!;
@@ -181,7 +188,7 @@ public class Dialogue
                 
                 if(isLast && RemoveButtonsAtEnd && DecisionArgument is null) break;
                 var result = await _message
-                    .WaitForButtonAsync(e => e.User == _interactionContext.User);
+                    .WaitForButtonAsync(e => e.User == _interaction.User);
                 _lastInteraction = result.Result.Interaction;
                 HandleInteractionResult(result);
                 if (isLast && DecisionArgument is null) _finished = true;
@@ -206,7 +213,7 @@ public class Dialogue
             await HandleArgumentDisplay(DecisionArgument.DialogueText, true,
                 DecisionArgument.ActionRows.ToArray());
             var result = await _message.WaitForButtonAsync(e
-                => e.User == _interactionContext.User);
+                => e.User == _interaction.User);
             _lastInteraction = result.Result.Interaction;
             decision = result.Result.Id;
             var defer = true;

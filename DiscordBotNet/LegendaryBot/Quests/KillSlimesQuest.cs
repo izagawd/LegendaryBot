@@ -2,6 +2,7 @@
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
@@ -33,16 +34,20 @@ public class KillSlimesQuest : Quest
             message = await message.ModifyAsync(new DiscordMessageBuilder {Embed = embed});
         }
         await Task.Delay(2000);
-        var playerTeam = await userData.EquippedPlayerTeam.LoadTeamGearWithPlayerDataAsync(context.User);
+        var playerTeam = userData.EquippedPlayerTeam.LoadTeamEquipment();
 
-        var battleSimulator = new BattleSimulator(playerTeam,slimeTeam.LoadTeam());
+        var battleSimulator = new BattleSimulator(playerTeam,slimeTeam.LoadTeamEquipment());
         var result = await battleSimulator.StartAsync(message);
+
+
+
+
+        if (result.Winners == playerTeam)
+        {
+            var str = playerTeam.IncreaseExp(Character.GetExpBasedOnDefeatedCharacters(slimeTeam));
+            QuestRewards = [new TextReward(str)];
+        }
         
-       
-
-
-        var str = playerTeam.IncreaseExp(result.ExpToGain);
-        QuestRewards = result.BattleRewards.Append(new TextReward(str));
         return result.Winners == playerTeam;
         
     }

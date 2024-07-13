@@ -45,8 +45,7 @@ public class Display : GeneralCommandClass
         var displaySectionLimit = 10;
         foreach (var i in userData.Inventory.OfType<Character>())
         {
-            if (i is Player player)
-                await player.LoadPlayerDataAsync(context.User);
+     
             if (count >= displaySectionLimit)
             {
                 currentList = new List<string>();
@@ -54,7 +53,7 @@ public class Display : GeneralCommandClass
                 count = 0;
             }
 
-            var stringToUse = $"Name: {i.Name};     Level: {i.Level}";
+            var stringToUse = $"Name: {i.Name} |     Level: {i.Level}";
             if (i.Blessing is not null)
                 stringToUse += $"\n     Blessing Name: {i.Blessing.Name}               Blessing Level: {i.Blessing.Level}\n" +
                                $"Blessing Id: {i.Blessing.Id}";
@@ -127,7 +126,7 @@ public class Display : GeneralCommandClass
 
         
         if(!Guid.TryParse(blessingIdString, out Guid blessingId)) 
-            return;
+            blessingId = Guid.Empty;
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j.Id == blessingId && j is Blessing))
             .ThenInclude((Entity entity) => (entity as Blessing).Character)
@@ -136,7 +135,15 @@ public class Display : GeneralCommandClass
         var blessing = userData.Inventory.OfType<Blessing>().FirstOrDefault(i => i.Id == blessingId);
         if (blessing is null)
         {
-            embedBuilder.WithDescription($"You do not have any blessing with the id {blessingId}");
+            if (blessingId == Guid.Empty)
+            {
+                embedBuilder.WithDescription("Invalid Id");
+            }
+            else
+            {
+                embedBuilder.WithDescription($"You do not have any blessing with the id {blessingId}");
+            }
+            
             await ctx.CreateResponseAsync(embedBuilder);
             return;
         }
@@ -181,11 +188,11 @@ public class Display : GeneralCommandClass
                 displayList.Add(currentList);
                 count = 0;
             }
-            var stringToUse = $"Name: {i.Name};     Level: {i.Level};       Id: {i.Id}";
+            var stringToUse = $"Name: {i.Name} |     Level: {i.Level} |     Id: {i.Id}";
             if (i.Character is not null)
             {
-                if (i.Character is Player player) await player.LoadPlayerDataAsync(context.User);
-                stringToUse += $"\n     Character Name: {i.Character.Name}               Character Level: {i.Character.Level}";
+
+                stringToUse += $"\n     Character Name: {i.Character.Name} | Character Level: {i.Character.Level}";
             }
 
   
@@ -257,10 +264,7 @@ public class Display : GeneralCommandClass
         var teamStringBuilder = new StringBuilder();
         var count = 0;
 
-        foreach (var i in userData.PlayerTeams.SelectMany(i => i).OfType<Player>())
-        {
-            await i.LoadPlayerDataAsync(context.User);
-        }
+
   
         foreach (var i in userData.PlayerTeams)
         {

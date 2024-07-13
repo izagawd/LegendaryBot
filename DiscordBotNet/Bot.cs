@@ -13,6 +13,7 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.command;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DSharpPlus;
 
@@ -44,21 +45,19 @@ public static class Bot
     }
 
 
+    public class idk : Character
+    {
+        public override Rarity Rarity => Rarity.FiveStar;
+    }
     private static Task DoShitAsync()
     {
-        void bruh()
-        {
-            var stop = new Stopwatch(); stop.Start();
-            var player = new Ignite();
-            stop.Elapsed.TotalMicroseconds.Print();
-            player.Print();
-        }
-        bruh();
-        bruh();
-        bruh();
-        bruh();
-        bruh();
-        return new PostgreSqlContext().ResetDatabaseAsync();
+        var idk = new idk();
+
+        idk.Ascension = 100;
+        idk.SetLevel(2);
+        idk.ExpToGainWhenKilled.Print();
+        idk.GetRequiredExperienceToNextLevel().Print();
+        return Task.CompletedTask;
 
     }
     private static async Task Main(string[] args)

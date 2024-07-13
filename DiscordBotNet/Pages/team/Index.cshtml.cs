@@ -49,10 +49,7 @@ public class Index : PageModel
         TeamNames = anonymous.TeamNames.ToArray();
 
 
-        foreach (var i in UserData.Inventory.OfType<Player>())
-        {
-            i.LoadPlayerData(User);
-        }
+
     }
 
 

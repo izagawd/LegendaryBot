@@ -3,6 +3,7 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.DialogueNamespace;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus;
 using DSharpPlus.Entities;
@@ -44,7 +45,10 @@ public class DirectionHelping : Quest
         };
 
         var dialogueResult = await dialogue.LoadAsync(context, messageToEdit);
-        var buttonDecisionId = dialogueResult.Decision;
+
+        var userData = await databaseContext.UserData
+            .IncludeTeamWithAllEquipments()
+            .FindOrCreateUserDataAsync((long)context.User.Id);
         if (dialogueResult.Decision == "right")
         {
             dialogue = new Dialogue()
@@ -58,7 +62,7 @@ public class DirectionHelping : Quest
                         DialogueProfile = profile,
                         DialogueTexts = ["Guess I don't have to make an explosion out of you",
                         "I knew the direction, I just wanted to see if bronze tiers were smart",
-                        $"Get stronger so trying to detonate you will be more interesting, {context.User.Username}."]
+                        $"Get stronger so trying to detonate you will be more interesting, {userData.Name}."]
                     }
                 ]
             };
@@ -81,6 +85,7 @@ public class DirectionHelping : Quest
 
         dialogueResult = await dialogue.LoadAsync(context, dialogueResult.Message);
         var blastTeam = new CharacterTeam(blast);
+        blast.Ascension = 10;
         blast.SetLevel(60);
         blast.TotalAttack = 2500;
         blast.TotalSpeed = 150;
@@ -92,11 +97,8 @@ public class DirectionHelping : Quest
         blast.Health = 40000;
         
 
-        var userData = await databaseContext.UserData
-            .IncludeTeamWithAllEquipments()
-            .FindOrCreateUserDataAsync((long)context.User.Id);
         var userTeam = userData.EquippedPlayerTeam;
-        await userTeam.LoadTeamGearWithPlayerDataAsync(context.User);
+        userTeam.LoadTeamEquipment();
         var battle = new BattleSimulator(userTeam,blastTeam);
 
         var battleResult = await battle.StartAsync(dialogueResult.Message);
@@ -121,8 +123,8 @@ public class DirectionHelping : Quest
                 ]
             };
              await dialogue.LoadAsync(context, battleResult.Message);
-            QuestRewards = battleResult.BattleRewards.Append(
-                new TextReward(userTeam.IncreaseExp(battleResult.ExpToGain)));
+            QuestRewards = [new TextReward(userTeam.IncreaseExp(Character.GetExpBasedOnDefeatedCharacters(blastTeam))),
+                    new CoinsReward(Character.GetCoinsBasedOnCharacters(blastTeam))];
             
             return true;
         }

@@ -1,6 +1,7 @@
 ﻿using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
@@ -72,13 +73,13 @@ public class Hunt : GeneralCommandClass
             .WithDescription($"Wild {enemyTeam.First()}(s) have appeared!");
         await ctx.CreateResponseAsync(embedToBuild.Build());
         var message = await ctx.GetOriginalResponseAsync();
-        var userTeam = await userData.EquippedPlayerTeam.LoadTeamGearWithPlayerDataAsync(author);
+        var userTeam = userData.EquippedPlayerTeam.LoadTeamEquipment();
         foreach (var i in enemyTeam)
         {
             i.SetLevel(userTeam.Select(i => i.Level).Average().Round());
         }
 
-        var simulator = new BattleSimulator(userTeam, await enemyTeam.LoadTeamGearWithPlayerDataAsync(author));
+        var simulator = new BattleSimulator(userTeam,  enemyTeam.LoadTeamEquipment());
 
  
 
@@ -86,19 +87,25 @@ public class Hunt : GeneralCommandClass
 
 
 
-        var expToGain = battleResult.ExpToGain;
+        var expToGain = Character.GetExpBasedOnDefeatedCharacters(enemyTeam);
+        var coinsToGain = Character.GetCoinsBasedOnCharacters(enemyTeam);
         if (battleResult.Winners != userTeam)
         {
-            expToGain /= 2;
+            expToGain = (expToGain/5)+1;
+     
         }
+      
+        
         string expGainText = userTeam.IncreaseExp(expToGain);
         
+           
         if (battleResult.Winners == userTeam)
         {
-            var rewardText = userData.ReceiveRewards(author.Username, battleResult.BattleRewards);
+            var rewardText = userData.ReceiveRewards(author.Username, [new CoinsReward(coinsToGain),
+                ..enemyTeam.SelectMany(i => i.DroppedRewards)]);
             embedToBuild
                 .WithTitle($"Nice going bud!")
-                .WithDescription("You won!\n" + expGainText  +$"\n{rewardText}")
+                .WithDescription($"You won!\n{expGainText}\n{rewardText}")
                 .WithImageUrl("");
 
             await message.ModifyAsync(new DiscordMessageBuilder(){Embed = embedToBuild.Build() });
