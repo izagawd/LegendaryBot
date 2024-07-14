@@ -10,7 +10,7 @@ public class CharacterTeam : ISet<CharacterPartials.Character>
     /// <summary>
     /// If the owner of the team is a real person, this should be their discord id
     /// </summary>
-    public long? TryGetUserDataId => (this as PlayerTeam)?.UserDataId;
+    public ulong? TryGetUserDataId => (this as PlayerTeam)?.UserDataId;
 
     public bool IsPlayerTeam => TryGetUserDataId is not null;
 

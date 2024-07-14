@@ -57,7 +57,7 @@ public abstract class Entity : ICloneable, IImageHaver
     [NotMapped] public virtual string ImageUrl => null!;
 
     public Guid Id { get;  set; } 
-    public long UserDataId { get; set; }
+    public ulong UserDataId { get; set; }
     public IEnumerable<string> ImageUrls
     {
         get { yield return ImageUrl; }

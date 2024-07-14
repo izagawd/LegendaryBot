@@ -107,7 +107,7 @@ public static class PostgreExtension
 
 
 
-    public async static Task<TExpression> FindOrCreateSelectUserDataAsync<T, TExpression>(this IQueryable<T> queryable, long id,
+    public async static Task<TExpression> FindOrCreateSelectUserDataAsync<T, TExpression>(this IQueryable<T> queryable, ulong id,
          Expression<Func<T,TExpression>> selectExpression) where T : UserData,new()
     {
         var data = await queryable
@@ -133,7 +133,7 @@ public static class PostgreExtension
     /// <param name="includableQueryableFunc">If you want to include some shit use this</param>
     /// <typeparam name="T">The instance/row type</typeparam>
     /// <returns></returns>
-    public async static Task<T> FindOrCreateUserDataAsync<T>(this IQueryable<T> set, long id) 
+    public async static Task<T> FindOrCreateUserDataAsync<T>(this IQueryable<T> set, ulong id) 
         where T : UserData, new()
     {
         var data = await set

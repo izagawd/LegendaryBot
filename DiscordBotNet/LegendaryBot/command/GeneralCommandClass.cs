@@ -2,7 +2,7 @@
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
-
+using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.command;
@@ -20,7 +20,22 @@ public abstract class GeneralCommandClass
     }
 
 
+    public Task<bool> HandleIsOccupied(IEnumerable<UserData> userDatas, CommandContext context, string? occupiedText = null)
+    {
+        return HandleIsOccupied(userDatas.Select(i => i.Id),context);
+    }
     
+    public async Task<bool> HandleIsOccupied(IEnumerable<ulong> userDatas, CommandContext context, string? occupiedText = null)
+    {
+        if ((await DatabaseContext.UserData.AnyAsync(i => i.IsOccupied)))
+        {
+            var userData = await DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(context.User.Id, i => i.Color);
+            
+        }
+
+        return false;
+    }
+
     public  async Task AfterSlashExecutionAsync(CommandContext ctx)
     {
 
@@ -35,13 +50,13 @@ public abstract class GeneralCommandClass
  
         }
         await DatabaseContext.DisposeAsync();
-        "DOOOOONE".Print();
+       
     }
 
-    private List<long> _occupiedUserDatasIds  = new();
+    private List<ulong> _occupiedUserDatasIds  = new();
 
 
-    public IEnumerable<long> OccupiedUserDataIds
+    public IEnumerable<ulong> OccupiedUserDataIds
     {
         get
         {
@@ -53,7 +68,7 @@ public abstract class GeneralCommandClass
     }
  
     
-    protected async Task MakeOccupiedAsync(params long[] userDataIds)
+    protected async Task MakeOccupiedAsync(params ulong[] userDataIds)
     {
 
         await using var tempCtx = new PostgreSqlContext();
@@ -73,6 +88,8 @@ public abstract class GeneralCommandClass
 
         return MakeOccupiedAsync(userDatas.Select(i => i.Id).ToArray());
     }
+
+
     /// <summary>
     /// This exists cuz it's disposed at the end of a slash command and cuz I tend to forget to dispose disposable stuff
     /// </summary>

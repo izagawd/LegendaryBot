@@ -14,7 +14,7 @@ public class Roll :  GeneralCommandClass
     {
         
         var color = await DatabaseContext.UserData
-            .FindOrCreateSelectUserDataAsync((long)ctx.User.Id, i => i.Color);
+            .FindOrCreateSelectUserDataAsync(ctx.User.Id, i => i.Color);
         var random = new Random();
         var embed = new DiscordEmbedBuilder()
             .WithTitle("**Roll**")

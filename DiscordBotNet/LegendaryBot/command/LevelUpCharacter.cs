@@ -1,6 +1,9 @@
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Linq.Expressions;
+using System.Numerics;
 using System.Text;
+using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
@@ -39,14 +42,14 @@ public class LevelUpCharacter : GeneralCommandClass
 
             _cachedLevelUpCroppedImages[url] = characterImage;
         }
-        
+        var font = SystemFonts.CreateFont(Bot.GlobalFontName, 20);
+        var expFont = SystemFonts.CreateFont(Bot.GlobalFontName, 25);
+        var requiredExpNextLevel = character.GetRequiredExperienceToNextLevel();
+        var statsFont = SystemFonts.CreateFont(Bot.GlobalFontName, 15);
+        var statsStringBuilder = new StringBuilder();
         image.Mutate(ctx =>
             {
-                var font = SystemFonts.CreateFont(Bot.GlobalFontName, 20);
-                var expFont = SystemFonts.CreateFont(Bot.GlobalFontName, 25);
-                var requiredExpNextLevel = character.GetRequiredExperienceToNextLevel();
-                var statsFont = SystemFonts.CreateFont(Bot.GlobalFontName, 15);
-                var statsStringBuilder = new StringBuilder();
+
                
                 
                 foreach (var i in Enum.GetValues<StatType>())
@@ -96,9 +99,8 @@ public class LevelUpCharacter : GeneralCommandClass
         {
             
             var expUpgradeMat = character.UserData.Inventory.OfType<CharacterExpMaterial>()
-                .MergeItems()
                 .OrderBy(i => i.ExpToIncrease);
-            var ascensionMats = character.UserData.Inventory.OfType<AscensionMaterial>().MergeItems();
+            var ascensionMats = character.UserData.Inventory.OfType<AscensionMaterial>();
             var sum = expUpgradeMat.Cast<Item>().Union(ascensionMats);
             var xOffset = 200;
             foreach (var i in sum)
@@ -112,17 +114,76 @@ public class LevelUpCharacter : GeneralCommandClass
 
                 xOffset += 70;
             }
+
+            string? text = null;
+            if (character.Level < character.MaxLevel)
+            {
+                if (character.UserData.Inventory.OfType<CharacterExpMaterial>().Select(i => i.Stacks).Sum() <= 0)
+                {
+                    text = "You do not have any EXP material";
+                }
+            }
+            else
+            {
+                text = GetCannotAscendReasonText(character);
+            }
+         
+            if (text is not null)
+            {
+                var options = new RichTextOptions(statsFont)
+                {
+                    WrappingLength = 350,
+                    Origin = new Vector2(10,260)
+                };
+                image.Mutate(i => i.DrawText(options,text,SixLabors.ImageSharp.Color.Black));
+            }
         }
 
         return image;
     }
-    private static readonly string totalAscensionStuff = "Cannot upgrade your character because you cannot ascend," +
-                                 "nor level up your character. ensure you have EXP materials and you the character hasnt reached max level," +
-                                 "or you are max level, and have enough ascension materials, and your tier is also sufficient enough to ascend." +
-                                 "(silver to ascend to max level 20, gold to ascend to max level 30, platinum to ascend to max level 40, " +
-                                 $"diamond ot ascend to max level 50, {Tier.Divine.ToString().ToLower()} to ascend to max level 60";
+    static bool CanAscend(Character character)
+    {
+        return GetCannotAscendReasonText(character) is  null && character.Level < character.MaxLevel;
+    }
+    static bool CanLevelUp(Character character)
+    {
+        var gottenUserData = character.UserData!;
+        var itemsInInventory = gottenUserData.Inventory.OfType<CharacterExpMaterial>();
 
+                
+        return character.Level < character.MaxLevel &&
+               itemsInInventory.Any(i => i.Stacks > 0);
 
+    }
+
+    static bool ConditionsAreMet(Character character)
+    {
+        return CanAscend(character) || CanLevelUp(character);
+    }
+    public static string? GetCannotAscendReasonText(Character character)
+    {
+        string? failureText = null;
+        var gottenUserData = character.UserData;
+
+        if (character.Ascension >= Character.MaxAscensionLevel)
+        {
+            failureText = $"Max ascension reached. Cannot ascend any further";
+        }
+        else if((gottenUserData?.Inventory.GetItemStacks<AscensionMaterial>()).GetValueOrDefault(0) < character.RequiredAscensionMaterialsToAscend)
+        {
+            failureText = $"You do not have enough character ascension materials to ascend (you need {character.RequiredAscensionMaterialsToAscend})";
+        }
+        else if(!Character.TierCanAscendCharacterInto((gottenUserData?.Tier).GetValueOrDefault(Tier.Unranked),
+                    character.Ascension + 1))
+        {
+            failureText = $"You need to be at least " +
+                          $"{Character.GetMinimumTierToAscendCharacterTo(character.Ascension + 1).ToString().Englishify()}" +
+                          $" to ascend this character";
+        }
+
+        return failureText;
+    }
+    
     [Command("level_up"),
      AdditionalCommand("/level_up player",BotCommandType.Battle)]
     public async Task LevelUp(CommandContext ctx,
@@ -134,16 +195,17 @@ public class LevelUpCharacter : GeneralCommandClass
                                  && EF.Property<string>(j, "Discriminator").ToLower() == simplifiedCharacterName) || j is CharacterExpMaterial
             || j is AscensionMaterial);
 
+      
 
-
+        
         var gottenUserData =await  DatabaseContext.UserData
 
             .Include(includeLambda)
-            .ThenInclude((Entity i) => (i as Character).Gears)
+            .ThenInclude((Entity i) => (i as Character)!.Gears)
             .ThenInclude(i => i.Stats)
             .Include(includeLambda)
-            .ThenInclude((Entity i) => (i as Character).Blessing)
-            .FindOrCreateUserDataAsync((long)ctx.User.Id);
+            .ThenInclude((Entity i) => (i as Character)!.Blessing)
+            .FindOrCreateUserDataAsync(ctx.User.Id);
         var character = gottenUserData.Inventory.OfType<Character>().FirstOrDefault();
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
@@ -160,7 +222,7 @@ public class LevelUpCharacter : GeneralCommandClass
         }
         else
         {
-
+            
             character.LoadGear();
             embedBuilder.WithTitle($"{character.Name}'s level up process");
             using var levelUpImage = await GetImageForLevelUpAndAscensionAsync(character);
@@ -178,37 +240,18 @@ public class LevelUpCharacter : GeneralCommandClass
                 .AddEmbed(embedBuilder.Build())
                 .AddFile("levelupimage.png", stream);
 
-            bool CanAscend()
-            {
-                var itemsInInventory = gottenUserData.Inventory.OfType<Item>().ToArray();
 
-                var ascensionMat = itemsInInventory.OfType<AscensionMaterial>()
-                    .MergeItems().FirstOrDefault();
-                
-                return
-                    character.Level < character.MaxLevel  && character.Ascension < Character.MaxAscensionLevel &&  gottenUserData.CanAscendCharactersTo(character.Ascension + 1)
-                                        && ascensionMat is not null &&  ascensionMat.Stacks >= character.RequiredAscensionMaterialsToAscend;
-            }
             
-            bool CanLevelUp()
-            {
-                var itemsInInventory = gottenUserData.Inventory.OfType<Item>().ToArray();
-
-                
-                return character.Level < character.MaxLevel &&
-                                 itemsInInventory.OfType<CharacterExpMaterial>().Any(i => i.Stacks > 0);
-
-            }
 
             void SetupComponents()
             {
-                if (!CanAscend())
+                if (!CanAscend(character))
                     ascend.Disable();
                 else
                 {
                     ascend.Enable();
                 }
-                if (!CanLevelUp())
+                if (!CanLevelUp(character))
                 {
                     levelUp.Disable();
                     levelToMax.Disable();
@@ -219,13 +262,9 @@ public class LevelUpCharacter : GeneralCommandClass
                     levelToMax.Enable();
                 }
             }
-            bool ConditionsAreMet()
-            {
+     
 
-                return CanLevelUp() || CanAscend();
-            }
-
-            var shouldContinue = ConditionsAreMet();
+            var shouldContinue = ConditionsAreMet(character);
             if (shouldContinue)
             {
                 SetupComponents();
@@ -236,31 +275,59 @@ public class LevelUpCharacter : GeneralCommandClass
             
             if (!shouldContinue)
             {
-                await ctx.FollowupAsync(new DiscordFollowupMessageBuilder()
-                    .WithContent(totalAscensionStuff)
-                    .AsEphemeral());
-            
                 return;
             }
 
-          
             await MakeOccupiedAsync(gottenUserData);
-            var message = await ctx.GetResponseAsync();
+            
+            var message = (await ctx.GetResponseAsync())!;
             DiscordInteraction lastInteraction = null!;
+
+            async Task StopAsync()
+            {
+                character.LoadGear();
+                using var localLevelUpImage = await GetImageForLevelUpAndAscensionAsync(character);
+                await using var localStream = new MemoryStream();
+                await localLevelUpImage.SaveAsPngAsync(localStream);
+                localStream.Position = 0;
+                if (lastInteraction.ResponseState != DiscordInteractionResponseState.Replied)
+                {
+                    await lastInteraction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+                        new DiscordInteractionResponseBuilder()
+                            .WithTitle("Hmm")
+                            .AddFile("levelupimage.png", localStream)
+                            .AddEmbed(embedBuilder.Build()));
+                }
+                else
+                {
+                    await message.ModifyAsync(new DiscordMessageBuilder()
+                        .AddEmbed(embedBuilder.Build())
+                        .AddFile("levelupimage.png", localStream));
+                }
+            }
+
             while (true)
             {
                 
-                if(!ConditionsAreMet())
+                if(!ConditionsAreMet(character))
                 {
                     
                     await StopAsync();
-                    await lastInteraction.CreateFollowupMessageAsync(new DiscordFollowupMessageBuilder()
-                        .AsEphemeral()
-                        .WithContent(totalAscensionStuff));
+
                     break;
                 }
-                var result = await message.WaitForButtonAsync(ctx.User,new TimeSpan(0,5,0));
-         
+                var result = await message!.WaitForButtonAsync(ctx.User,new TimeSpan(0,5,0));
+
+
+
+                await DatabaseContext.Entry(gottenUserData).ReloadAsync();
+                foreach (var i in DatabaseContext
+                             .Entity
+                             .Where(i => i is CharacterExpMaterial || i is AscensionMaterial)
+                             .ToArray())
+                {
+                    await DatabaseContext.Entry(i).ReloadAsync();
+                }
                 if (result.TimedOut)
                 {
              
@@ -269,63 +336,36 @@ public class LevelUpCharacter : GeneralCommandClass
                     return;
                 }
                 lastInteraction = result.Result.Interaction;
-                if (!ConditionsAreMet())
+                if (!ConditionsAreMet(character))
                 {
                     await StopAsync();
-                    await lastInteraction.CreateFollowupMessageAsync(new DiscordFollowupMessageBuilder()
-                        .AsEphemeral()
-                        .WithContent(totalAscensionStuff));
                     return;
                 }
                 var decision = result.Result.Interaction.Data.CustomId;
 
-                async Task StopAsync()
-                {
-                    character.LoadGear();
-                    using var localLevelUpImage = await GetImageForLevelUpAndAscensionAsync(character);
-                    await using var localStream = new MemoryStream();
-                    await localLevelUpImage.SaveAsPngAsync(localStream);
-                    localStream.Position = 0;
-                    if (lastInteraction.ResponseState == DiscordInteractionResponseState.Replied)
-                    {
-                        await lastInteraction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
-                            new DiscordInteractionResponseBuilder()
-                                .WithTitle("Hmm")
-                                .AddFile("levelupimage.png", localStream)
-                                .AddEmbed(embedBuilder.Build()));
-                    }
-                    else
-                    {
-                        await message.ModifyAsync(new DiscordMessageBuilder()
-                            .AddEmbed(embedBuilder.Build())
-                            .AddFile("levelupimage.png", localStream));
-                    }
-                }
-                var ascensionMaterial = gottenUserData.Inventory.OfType<AscensionMaterial>().MergeItems().FirstOrDefault(new AscensionMaterial(){Stacks = 0});
-                var expUpgradeMaterials = gottenUserData.Inventory.OfType<ExpIncreaseMaterial>().MergeItems()
-                    .OrderBy(i => i.ExpToIncrease)
-                    .ToList();
-                string failureText = null;
+
+
+                var expUpgradeMaterials = gottenUserData.Inventory.OfType<CharacterExpMaterial>()
+                    .Where(i => i.Stacks > 0)
+                    .OrderBy(i => i.Rarity).ToList();
                 switch (decision)
                 {
                     case "stop":
                         await StopAsync();
                         return;
                     case "ascend":
-                        if (CanAscend() && ascensionMaterial.Stacks >= character.RequiredAscensionMaterialsToAscend)
+        
+                        if (CanAscend(character))
                         {
                             var requiredMats = character.RequiredAscensionMaterialsToAscend;
-                            ascensionMaterial.Stacks -= requiredMats;
+                            gottenUserData.Inventory.RemoveItemStacks<AscensionMaterial>(requiredMats);
+                            character.Ascension++;
                         }
-                        else
-                        {
-                            failureText =
-                                $"Cannot ascend character. character must reach max level (in this case, it's {character.Level})  and you need ascension materials";
-                        }
+
                         break;
                     case "level_up":
                         var previousLevel = character.Level;
-                        var expIncreasedAtLeastOnce = false;
+                
                         while (true)
                         {
                             if(character.Level > previousLevel || character.Level >= character.MaxLevel)
@@ -338,23 +378,18 @@ public class LevelUpCharacter : GeneralCommandClass
                             {
                                 expUpgradeMaterials.Remove(firstExpUpgrade);
                                 continue;
-                                
                             }
-
                             character.IncreaseExp(firstExpUpgrade.ExpToIncrease);
-                            firstExpUpgrade.Stacks--;
-                            expIncreasedAtLeastOnce = true;
+                            gottenUserData.Inventory.RemoveItemStacks(firstExpUpgrade.GetType(),1);
+                            
+                          
                         }
 
-                        if (!expIncreasedAtLeastOnce)
-                        {
-                            failureText =
-                                "Cannot increase exp of character. ensure character hasnt reached max level, and you have exp upgrade materials";
-                        }
+       
                         
                         break;
                     case "level_to_max":
-                        expIncreasedAtLeastOnce = false;
+         
                         while (true)
                         {
                             if(character.Level >= character.MaxLevel)
@@ -368,16 +403,10 @@ public class LevelUpCharacter : GeneralCommandClass
                                 expUpgradeMaterials.Remove(firstExpUpgrade);
                                 continue;
                             }
-
-                            expIncreasedAtLeastOnce = true;
                             character.IncreaseExp(firstExpUpgrade.ExpToIncrease);
-                            firstExpUpgrade.Stacks--;
+                            gottenUserData.Inventory.RemoveItemStacks(firstExpUpgrade.GetType(),1);
                         }
-                        if (!expIncreasedAtLeastOnce)
-                        {
-                            failureText =
-                                "Cannot increase exp of character. ensure character hasnt reached max level, and you have exp upgrade materials";
-                        }
+            
                         break;
                 }
 
@@ -396,6 +425,7 @@ public class LevelUpCharacter : GeneralCommandClass
                     .AddEmbed(embedBuilder.Build());
                 
                 await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage, messageBuilder);
+
 
 
             }

@@ -148,19 +148,19 @@ public class Dialogue
     {
         if (interaction is null)
             throw new ArgumentNullException(nameof(interaction));
-        return LoadAsync(user,interaction: interaction);
+        return LoadAsync(user,interaction,null,null);
     }
     public Task<DialogueResult> LoadAsync(DiscordUser user, DiscordMessage message)
     {
         if (message is null)
             throw new ArgumentNullException(nameof(message));
-        return LoadAsync(user,message: message);
+        return LoadAsync(user,null,message);
     }
     public Task<DialogueResult> LoadAsync(DiscordUser user, DiscordChannel channel)
     {
         if (channel is null)
             throw new ArgumentNullException(nameof(channel));
-        return LoadAsync(user,channel: channel);
+        return LoadAsync(user,null,null,channel);
     }
     
     private DiscordChannel? _channel;

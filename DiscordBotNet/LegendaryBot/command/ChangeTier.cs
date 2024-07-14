@@ -10,7 +10,7 @@ public class MakeMeDivine : GeneralCommandClass
      AdditionalCommand("/make_me_divine", BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx)
     {
-        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync((long) ctx.User.Id);
+        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync(ctx.User.Id);
         if (userData.Tier == Tier.Divine)
         {
             await ctx.RespondAsync("you are already divine");

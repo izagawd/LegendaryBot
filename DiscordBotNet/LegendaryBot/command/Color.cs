@@ -35,7 +35,7 @@ public class Color : GeneralCommandClass
     {
         var author = ctx.User;
 
-        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync((long)author.Id);
+        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync(author.Id);
   
 
         

@@ -18,14 +18,14 @@ public class Help : GeneralCommandClass
             botCommandTypeBuilders[i] = new StringBuilder();
         foreach (var i in  DefaultObjects.GetDefaultObjectsThatSubclass<GeneralCommandClass>())
         {
-            var slashCom = i.GetType().GetCustomAttribute<CommandAttribute>();
-            if (slashCom is not null)
+            var com = i.GetType().GetCustomAttribute<CommandAttribute>();
+            if (com is not null)
             {
                 var additional = i.GetType().GetCustomAttribute<AdditionalCommandAttribute>();
                 var type = BotCommandType.Other;
                 if (additional is not null)
                     type = additional.BotCommandType;
-                botCommandTypeBuilders[type].Append($"{slashCom.Name}  ");
+                botCommandTypeBuilders[type].Append($"{com.Name}  ");
             }
             else
             {
@@ -139,7 +139,7 @@ public class Help : GeneralCommandClass
                     if(command is null) continue;
                     var holder = new Holder();
                     holder.Name = command.Name;
-                    var description = j.GetType().GetCustomAttribute<DescriptionAttribute>();
+                    var description = j.GetCustomAttribute<DescriptionAttribute>();
                     holder.Description = description is not null ? description.Description : "";
                     var additional = j.GetCustomAttribute<AdditionalCommandAttribute>();
                     if (additional is not null)
@@ -161,7 +161,7 @@ public class Help : GeneralCommandClass
 
         var color = await DatabaseContext
             .UserData
-            .FindOrCreateSelectUserDataAsync((long)author.Id, 
+            .FindOrCreateSelectUserDataAsync(author.Id, 
                 i => i.Color);
 
         var embedToBuild = new DiscordEmbedBuilder()
@@ -180,20 +180,29 @@ public class Help : GeneralCommandClass
         else
         {
             var holder = _holderList.FirstOrDefault(i => i.Name.ToLower() == cmd.ToLower());
-            if(holder is null) return;
-            embedToBuild
-                .WithTitle(holder.Name)
-                .WithDescription(holder.Description);
-            if (holder.Example is not null)
-                embedToBuild.AddField("Example: ", holder.Example);
-            foreach (var i in holder.CommandStuffHolders)
+            if (holder is null)
             {
-                var stringToUse = $"{i.Description}";
-                if (i.Example is not null && i.Example.Length > 0)
+                embedToBuild
+                    .WithTitle("Hmm")
+                    .WithDescription("Inputted command not found");
+            }
+            else
+            {
+                embedToBuild
+                    .WithTitle(holder.Name)
+                    .WithDescription(holder.Description);
+                if (holder.Example is not null)
+                    embedToBuild.AddField("Example: ", holder.Example);
+                foreach (var i in holder.CommandStuffHolders)
                 {
-                    stringToUse += $"\nExamples:\n{i.Example}";
+                    var stringToUse = $"{i.Description}";
+                    if (i.Example is not null && i.Example.Length > 0)
+                    {
+                        stringToUse += $"\nExamples:\n{i.Example}";
+                    }
+                    if(stringToUse.Length > 0)
+                        embedToBuild.AddField(i.Name,stringToUse );
                 }
-                embedToBuild.AddField(i.Name,stringToUse );
             }
         }
         

@@ -31,7 +31,7 @@ public class Display : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j is Character))
             .ThenInclude((Entity i) => (i as Character).Blessing)
-            .FindOrCreateUserDataAsync((long)context.User.Id);
+            .FindOrCreateUserDataAsync(context.User.Id);
 
         List<List<string>> displayList = [];
         var count = 0;
@@ -113,7 +113,7 @@ public class Display : GeneralCommandClass
     }
     [Command("blessing")]
     public async ValueTask ExecuteDisplayABlessing(CommandContext ctx,
-        [Parameter("blessing_id")] string blessingIdString)
+        [Parameter("blessing_id")] Guid blessingId)
     {
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
@@ -121,12 +121,11 @@ public class Display : GeneralCommandClass
             .WithDescription("Invalid id");
 
         
-        if(!Guid.TryParse(blessingIdString, out var blessingId)) 
-            blessingId = Guid.Empty;
+     
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j.Id == blessingId && j is Blessing))
-            .ThenInclude((Entity entity) => (entity as Blessing).Character)
-            .FindOrCreateUserDataAsync((long)ctx.User.Id);
+            .ThenInclude((Entity entity) => (entity as Blessing)!.Character)
+            .FindOrCreateUserDataAsync(ctx.User.Id);
         embedBuilder.WithColor(userData.Color);
         var blessing = userData.Inventory.OfType<Blessing>().FirstOrDefault(i => i.Id == blessingId);
         if (blessing is null)
@@ -168,7 +167,7 @@ public class Display : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j is Blessing))
             .ThenInclude((Entity i) => (i as Blessing).Character)
-            .FindOrCreateUserDataAsync((long)context.User.Id);
+            .FindOrCreateUserDataAsync(context.User.Id);
 
         List<List<string>> displayList = [];
         var count = 0;
@@ -256,7 +255,7 @@ public class Display : GeneralCommandClass
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
-            .FindOrCreateUserDataAsync((long)context.User.Id);
+            .FindOrCreateUserDataAsync(context.User.Id);
 
         var teamStringBuilder = new StringBuilder();
         var count = 0;

@@ -48,7 +48,7 @@ public class DirectionHelping : Quest
 
         var userData = await databaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FindOrCreateUserDataAsync((long)context.User.Id);
+            .FindOrCreateUserDataAsync(context.User.Id);
         if (dialogueResult.Decision == "right")
         {
             dialogue = new Dialogue()

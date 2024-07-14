@@ -12,7 +12,7 @@ public class Daily : GeneralCommandClass
     AdditionalCommand("/daily",BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx)
     {
-        var userData =await  DatabaseContext.UserData.FindOrCreateUserDataAsync((long)ctx.User.Id);
+        var userData =await  DatabaseContext.UserData.FindOrCreateUserDataAsync(ctx.User.Id);
         var embed = new DiscordEmbedBuilder()
             .WithColor(userData.Color)
             .WithUser(ctx.User)

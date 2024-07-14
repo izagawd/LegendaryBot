@@ -513,7 +513,7 @@ public class BattleSimulator
         try
         {
             var team = CharacterTeams
-                .OfType<PlayerTeam>().First(i => i.UserDataId == (long)interaction.User.Id);
+                .OfType<PlayerTeam>().First(i => i.UserDataId == interaction.User.Id);
             var embed = new DiscordEmbedBuilder()
                 .WithTitle("For real?")
                 .WithColor(DiscordColor.Blue)
@@ -599,7 +599,7 @@ public class BattleSimulator
         {
             var interactivityResult = await _message.WaitForAnyComponentInteractionAsync(e =>
             {
-                if (!CharacterTeams.Any(i => i.TryGetUserDataId == (long)e.User.Id)) return false;
+                if (!CharacterTeams.Any(i => i.TryGetUserDataId == e.User.Id)) return false;
                 BattleDecision localDecision;
                 var didParse = Enum.TryParse(e.Id, out localDecision);
                 if (!didParse) return false;
@@ -883,7 +883,7 @@ public class BattleSimulator
                 {
                     results = await _message.WaitForAnyComponentInteractionAsync(e =>
                     {
-                        if (!CharacterTeams.Any(i => i.TryGetUserDataId == (long)e.User.Id)) return false;
+                        if (!CharacterTeams.Any(i => i.TryGetUserDataId == e.User.Id)) return false;
                         BattleDecision localDecision;
                         var didParse = Enum.TryParse(e.Id, out localDecision);
                         if (!didParse) return false;
@@ -898,7 +898,7 @@ public class BattleSimulator
                             Task.Run(() => HandleDisplayBattleInfoAsync(e));
                             return false;
                         }
-                        if ((long)e.User.Id == ActiveCharacter.Team.TryGetUserDataId)
+                        if (e.User.Id == ActiveCharacter.Team.TryGetUserDataId)
                         {
                             battleDecision = localDecision;
                             return true;
@@ -952,14 +952,14 @@ public class BattleSimulator
                     {
                         interactivityResult = await  _message.WaitForAnyComponentInteractionAsync(e =>
                         {
-                            if ((long) e.User.Id == ActiveCharacter.Team.TryGetUserDataId 
+                            if ( e.User.Id == ActiveCharacter.Team.TryGetUserDataId 
                                 && e.Id == selectMoveTarget.CustomId)
                             {
                                 target = Characters
                                     .First(i => i.GetNameWithAlphabetIdentifier(i.Team != ActiveCharacter.Team) == e.Values.First().ToString());
                                 return true;
                             }
-                            if (!CharacterTeams.Any(i => i.TryGetUserDataId == (long)e.User.Id)) return false;
+                            if (!CharacterTeams.Any(i => i.TryGetUserDataId == e.User.Id)) return false;
                             var localDecision = BattleDecision.Other;
                             var didParse = Enum.TryParse(e.Id, out localDecision);
                             if (!didParse) return false;

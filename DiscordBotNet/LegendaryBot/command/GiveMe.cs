@@ -32,7 +32,7 @@ public class GiveMe : GeneralCommandClass
         {
             var userData = await DatabaseContext.UserData
                 .Include(i => i.Inventory)
-                .FindOrCreateUserDataAsync((long)ctx.User.Id);
+                .FindOrCreateUserDataAsync(ctx.User.Id);
             var createdType = ((Entity)DefaultObjects.GetDefaultObject(type)).Clone();
             if (createdType is Character && userData.Inventory.Any(i => i.GetType() == type))
             {

@@ -25,7 +25,7 @@ public class Challenge :GeneralCommandClass
 
         var player1User = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FindOrCreateUserDataAsync((long)player1.Id);
+            .FindOrCreateUserDataAsync(player1.Id);
         DiscordEmbedBuilder embedToBuild;
         if (player1User.IsOccupied)
         {
@@ -52,7 +52,7 @@ public class Challenge :GeneralCommandClass
 
         var player2User = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FindOrCreateUserDataAsync((long)player2.Id);
+            .FindOrCreateUserDataAsync(player2.Id);
         if (player2User.IsOccupied)
         {
             embedToBuild = new DiscordEmbedBuilder()
@@ -122,7 +122,7 @@ public class Challenge :GeneralCommandClass
         var battleResult = await simulator.StartAsync(message);
         DiscordUser winnerDiscord;
         UserData winnerUserData;
-        if (battleResult.Winners.TryGetUserDataId.GetValueOrDefault(0) == (long)player1.Id)
+        if (battleResult.Winners.TryGetUserDataId.GetValueOrDefault(0) == player1.Id)
         {
             winnerDiscord = player1;
             winnerUserData = player1User;

@@ -3,11 +3,14 @@ using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DiscordBotNet.Extensions;
 
 public static class BasicExtension
 {
+
     public static string Join(this IEnumerable<string> enumerable, string seperator)
     {
         return string.Join(seperator, enumerable);

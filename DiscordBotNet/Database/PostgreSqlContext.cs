@@ -7,6 +7,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
+using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Quests;
 using Microsoft.EntityFrameworkCore;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
@@ -35,7 +36,7 @@ public class PostgreSqlContext : DbContext
     /// this should be called before any query if u want to ever use this method
     /// </summary>
     /// <param name="userId"> the user id u want  to refresh to a new day</param>
-    public  async Task CheckForNewDayAsync(long userId)
+    public  async Task CheckForNewDayAsync(ulong userId)
     {
 
         var user = await UserData
@@ -91,6 +92,7 @@ public class PostgreSqlContext : DbContext
 
 
 
+
     private static readonly IEnumerable<Type> QuestTypes =
         Assembly.GetExecutingAssembly()
             .GetTypes()
@@ -98,6 +100,7 @@ public class PostgreSqlContext : DbContext
                         && !i.IsAbstract).ToArray();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+       
         modelBuilder
             .UsePropertyAccessMode(PropertyAccessMode.Property);
         foreach (var i in DefaultObjects.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Quest))))

@@ -42,7 +42,7 @@ public class Begin : GeneralCommandClass
             .ThenInclude(i => (i as Character).Gears)
             .Include(i => i.EquippedPlayerTeam)
             .Include(i => i.Inventory.Where(j => j is Character))
-            .FindOrCreateUserDataAsync((long)author.Id);
+            .FindOrCreateUserDataAsync(author.Id);
 
         var userColor = userData.Color;
         embedToBuild
@@ -273,7 +273,7 @@ public class Begin : GeneralCommandClass
         };
 
 
-        userData.Tier = await DatabaseContext.UserData.FindOrCreateSelectUserDataAsync((long)author.Id, i => i.Tier);
+        userData.Tier = await DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(author.Id, i => i.Tier);
 
         if (userData.Tier == Tier.Unranked)
         {

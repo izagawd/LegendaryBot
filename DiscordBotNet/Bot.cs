@@ -7,6 +7,7 @@ using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.command;
+using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DSharpPlus;
 using DSharpPlus.Commands;
@@ -34,7 +35,7 @@ namespace DiscordBotNet;
 public static class Bot
 {
 
-    private static long SlenderId => 334412512919420928;
+    private static ulong SlenderId => 334412512919420928;
 
 
     private static  Task FirstTimeSetupAsync()
@@ -105,16 +106,8 @@ public static class Bot
 
     private static Task DoShitAsync()
     {
-        var idk = new Player();
 
 
-
-        idk.Level = 60;
-        idk.Ascension = 6;
-        idk.LoadGear();
-        idk.Defense.Print();
-        idk.ExpToGainWhenKilled.Print();
-        idk.GetRequiredExperienceToNextLevel().Print();
 
         return Task.CompletedTask;
 
@@ -146,13 +139,13 @@ public static class Bot
     /// <summary>
     /// This is my discord user Id because it's too long to memorize
     /// </summary>
-    public static long Izasid => 216230858783326209;
+    public static ulong Izasid => 216230858783326209;
     /// <summary>
     /// this is the discord user Id of another account of mine that i use to test stuff
     /// </summary>
-    public static long Testersid => 266157684380663809;
+    public static ulong Testersid => 266157684380663809;
 
-    public static long Surjidid => 1025325026955767849;
+    public static ulong Surjidid => 1025325026955767849;
     public static DiscordClient Client { get; private set; }
 
 
@@ -170,7 +163,7 @@ public static class Bot
         if (commandClass is not null)
         {
             color = await commandClass.DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(
-                (long)args.Context.User.Id, i => i.Color);
+                args.Context.User.Id, i => i.Color);
             await commandClass.AfterSlashExecutionAsync(args.Context);
         }
         else

@@ -25,23 +25,13 @@ public class UserData :   ICanBeLeveledUp
 {
     public Gender Gender { get; set; }
     public string Name { get; set; } = "Aether";
-    public void MergeItemStacks()
-    {
-        Dictionary<Type, Item> items = [];
-        foreach (var i in Inventory.OfType<Item>().ToArray())
-        {
-            if (!items.ContainsKey(i.GetType()))
-                items[i.GetType()] = i;
-            else
-            {
-                Inventory.Remove(i);
-                items[i.GetType()].Stacks += i.Stacks;
-            }
-        }
-    }
-    public long Id { get; set; }
+
+
+
+
+    public ulong Id { get; set; }
     
-    public UserData(long id) : this()
+    public UserData(ulong id) : this()
     {
         Id = id;
     }
@@ -61,9 +51,9 @@ public class UserData :   ICanBeLeveledUp
     {
         if (user is null)
         {
-            user = await Bot.Client.GetUserAsync((ulong) Id);
+            user = await Bot.Client.GetUserAsync(Id);
         } 
-        else if ((long)user.Id != Id)
+        else if (user.Id != Id)
         {
             throw new Exception("discord user's ID does not match user data's id");
         }
@@ -149,12 +139,7 @@ public class UserData :   ICanBeLeveledUp
     }
 
     
-    public bool CanAscendCharactersTo(int newAscensionLevel)
-    {
-        if (newAscensionLevel >= 7) return false;
-        return (int)Tier  >= newAscensionLevel;
-        
-    }
+ 
     public ExperienceGainResult IncreaseExp(long experienceToGain)
     {
         var maxLevel = 60;
@@ -206,7 +191,7 @@ public class UserData :   ICanBeLeveledUp
     public int AdventurerLevel { get; set; } = 1;
     public DiscordColor Color { get; set; } = DiscordColor.Green;
     public string Language { get; set; } = "english";
-    public List<Entity> Inventory { get; protected set; } = [];
+    public Inventory Inventory { get; protected set; } = [];
 
 
 

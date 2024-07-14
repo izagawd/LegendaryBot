@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.command;
-[Command("team")]
+[Command("team"), Description("idk")]
 public class TeamCommand : GeneralCommandClass
 {
     
@@ -25,7 +25,7 @@ public class TeamCommand : GeneralCommandClass
     {
         var anon = await DatabaseContext.UserData
             .Include(i => i.EquippedPlayerTeam)
-            .FindOrCreateSelectUserDataAsync((long)context.User.Id,
+            .FindOrCreateSelectUserDataAsync(context.User.Id,
                 i => new { team = i.PlayerTeams.FirstOrDefault(j => j.TeamName.ToLower() == teamName.ToLower()), userData = i });
 
         var userData = anon.userData;
@@ -64,7 +64,7 @@ public class TeamCommand : GeneralCommandClass
             .Include(i => i.EquippedPlayerTeam)
             .Include(i => i.Inventory.Where(j => j is Character
                                                  && EF.Property<string>(j, "Discriminator").ToLower() == simplifiedCharacterName))
-            .FindOrCreateUserDataAsync((long)context.User.Id);
+            .FindOrCreateUserDataAsync(context.User.Id);
         var gottenTeam =  userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName.ToLower());
         
 
@@ -122,7 +122,7 @@ public class TeamCommand : GeneralCommandClass
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
-            .FindOrCreateUserDataAsync((long)context.User.Id);
+            .FindOrCreateUserDataAsync(context.User.Id);
 
         var embed = new DiscordEmbedBuilder()
             .WithColor(userData.Color)
@@ -163,7 +163,7 @@ public class TeamCommand : GeneralCommandClass
             .Include(i => i.EquippedPlayerTeam)
             .Include(i => i.Inventory.Where(i => i is Character
                                                  && EF.Property<string>(i, "Discriminator").ToLower() == simplifiedCharacterName))
-            .FindOrCreateUserDataAsync((long)context.User.Id);
+            .FindOrCreateUserDataAsync(context.User.Id);
         var gottenTeam = userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName.ToLower());
         
 

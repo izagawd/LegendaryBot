@@ -40,7 +40,7 @@ public class QuoteCommand : GeneralCommandClass
 
         DiscordButtonComponent like = new(DiscordButtonStyle.Primary,"like",null,false,new DiscordComponentEmoji("👍"));
         DiscordButtonComponent dislike = new(DiscordButtonStyle.Primary, "dislike",null,false,new DiscordComponentEmoji("👎"));
-        var ownerOfQuote = await ctx.Client.GetUserAsync((ulong) randomQuote.UserDataId);
+        var ownerOfQuote = await ctx.Client.GetUserAsync( randomQuote.UserDataId);
         var quoteDate = randomQuote.DateCreated;
         
         var embedBuilder = new DiscordEmbedBuilder()
@@ -61,7 +61,7 @@ public class QuoteCommand : GeneralCommandClass
             if (!new[] { "like", "dislike" }.Contains(choice)) return;
             await using var newDbContext = new PostgreSqlContext();
             var anonymous = await newDbContext.Set<QuoteReaction>()
-                .Where(j => j.QuoteId == randomQuote.Id && j.UserDataId ==(long) interactivityResult.User.Id)
+                .Where(j => j.QuoteId == randomQuote.Id && j.UserDataId == interactivityResult.User.Id)
                 .Select(j => new
                 {
                     quote = j.Quote, quoteReaction = j,
@@ -79,12 +79,12 @@ public class QuoteCommand : GeneralCommandClass
                 await newDbContext.Set<QuoteReaction>().AddAsync(quoteReaction);
                 //assigning it to id instead of instance cuz instance might not be of the same dbcontext as newDbContext
                 quoteReaction.QuoteId = randomQuote.Id;
-                quoteReaction.UserDataId = (long)interactivityResult.User.Id;
+                quoteReaction.UserDataId = interactivityResult.User.Id;
                 isNew = true;
             }
 
-            if (!await newDbContext.UserData.AnyAsync(j => j.Id ==(long) interactivityResult.User.Id))
-                await newDbContext.UserData.AddAsync(new UserData((long)interactivityResult.User.Id));
+            if (!await newDbContext.UserData.AnyAsync(j => j.Id == interactivityResult.User.Id))
+                await newDbContext.UserData.AddAsync(new UserData(interactivityResult.User.Id));
             if (!isNew &&
                 ((choice == "like" && quoteReaction.IsLike) || (choice == "dislike" && !quoteReaction.IsLike)))
             {
@@ -127,7 +127,7 @@ public class QuoteCommand : GeneralCommandClass
     AdditionalCommand("/write Be good and good will come",BotCommandType.Fun)]
     public async Task Write(CommandContext ctx, [Parameter("text")] string text)
     {
-        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync((long)ctx.User.Id);
+        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync(ctx.User.Id);
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
             .WithColor(userData.Color);

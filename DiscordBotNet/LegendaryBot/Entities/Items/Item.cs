@@ -6,30 +6,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.Items;
 
 
 
-public static class ItemExtensions
-{
 
-    public static IEnumerable<TItem> MergeItems<TItem>(this IEnumerable<TItem> items) where TItem : Item
-    {
-        Dictionary<Type, TItem> dictionary = new();
-        foreach (var i in items)
-        {
-            if(i.Stacks <= 0) continue;
-            if (!dictionary.ContainsKey(i.GetType()))
-            {
-                dictionary[i.GetType()] = i;
-            }
-            else
-            {
-                dictionary[i.GetType()].Stacks += i.Stacks;
-            }
-        }
-        foreach (var i in dictionary.Values)
-        {
-            yield return i;
-        }
-    }
-}
 public abstract class Item : Entity
 {
 

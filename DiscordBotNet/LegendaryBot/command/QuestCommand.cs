@@ -18,11 +18,11 @@ public class QuestCommand : GeneralCommandClass
     {
         var author = ctx.User;
 
-        await DatabaseContext.CheckForNewDayAsync((long)author.Id);
+        await DatabaseContext.CheckForNewDayAsync(author.Id);
         await DatabaseContext.SaveChangesAsync();
         var userData = await DatabaseContext.UserData
             .Include(i => i.Quests)
-            .FindOrCreateUserDataAsync((long)author.Id);
+            .FindOrCreateUserDataAsync(author.Id);
         var questString = "";
         var embed = new DiscordEmbedBuilder()
             .WithUser(author)
@@ -91,7 +91,7 @@ public class QuestCommand : GeneralCommandClass
         if (succeeded)
         {
             quest.Completed = true;
-            var expToAdd = 40ul;
+            var expToAdd = 40l;
             switch (userData.Tier)
             {
                 case Tier.Bronze:
@@ -113,7 +113,7 @@ public class QuestCommand : GeneralCommandClass
                     expToAdd = 12800;
                     break;
                 }
-            var rewards = quest.QuestRewards.Append(new UserExperienceReward((long)expToAdd));
+            var rewards = quest.QuestRewards.Append(new UserExperienceReward(expToAdd));
             var rewardString = userData.ReceiveRewards(ctx.User.Username, rewards);
             embed
                 .WithTitle("Nice!!")

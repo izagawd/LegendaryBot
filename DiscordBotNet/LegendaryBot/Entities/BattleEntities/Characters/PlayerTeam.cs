@@ -37,7 +37,7 @@ public class PlayerTeam : CharacterTeam
     /// <summary>
     /// Will be set to userdata 
     /// </summary>
-    public long? IsEquipped { get;  set; }
+    public ulong? IsEquipped { get;  set; }
     public override bool Add(CharacterPartials.Character character)
     {
         if (Count >= 4) return false;
@@ -49,12 +49,12 @@ public class PlayerTeam : CharacterTeam
     }
 
 
-    public PlayerTeam(long userDataId, params CharacterPartials.Character[] characters) : base(characters)
+    public PlayerTeam(ulong userDataId, params CharacterPartials.Character[] characters) : base(characters)
     {
         UserDataId = userDataId;
         
     }
-    public PlayerTeam(DiscordUser user,params CharacterPartials.Character[] characters) : this((long)user.Id,characters)
+    public PlayerTeam(DiscordUser user,params CharacterPartials.Character[] characters) : this(user.Id,characters)
     {
 
     }
@@ -68,6 +68,6 @@ public class PlayerTeam : CharacterTeam
         
     }
     public Guid Id { get; set; } 
-    public long UserDataId { get; set; }
+    public ulong UserDataId { get; set; }
     
 }

@@ -65,7 +65,31 @@ public abstract partial  class Character : BattleEntity
         return increaseAmount;
     }
 
-    
+    public static bool TierCanAscendCharacterInto(Tier tier, int newAscension)
+    {
+        if (newAscension > MaxAscensionLevel) return false;
+        return (int)tier >= (int) GetMinimumTierToAscendCharacterTo(newAscension);
+    }
+    public static Tier GetMinimumTierToAscendCharacterTo(int newAscension)
+    {
+        switch (newAscension)
+        {
+            case 1:
+                return Tier.Bronze;
+            case 2:
+                return Tier.Silver;
+            case 3:
+                return Tier.Gold;
+            case 4:
+                return Tier.Platinum;
+            case 5:
+                return Tier.Diamond;
+            case 6:
+                return Tier.Divine;
+            default:
+                throw new ArgumentException($"Tier {newAscension} doesnt exist bruh");
+        }
+    }
     /// <param name="decreaseAmount">amount to decrease</param>
     /// <param name="effectiveness">Use if it is resistable</param>
     /// <param name="announceDecrease">Whether or not to announce the fact that combat readiness was decreased</param>
