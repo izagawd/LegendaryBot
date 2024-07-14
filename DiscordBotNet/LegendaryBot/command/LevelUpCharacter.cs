@@ -178,7 +178,7 @@ public class LevelUpCharacter : GeneralCommandClass
         {
             failureText = $"You need to be at least " +
                           $"{Character.GetMinimumTierToAscendCharacterTo(character.Ascension + 1).ToString().Englishify()}" +
-                          $" to ascend this character";
+                          $" tier to ascend this character";
         }
 
         return failureText;

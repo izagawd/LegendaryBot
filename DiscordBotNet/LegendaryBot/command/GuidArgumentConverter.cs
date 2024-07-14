@@ -21,9 +21,9 @@ public class GuidArgumentConverter : ITextArgumentConverter<Guid>, ISlashArgumen
             return Task.FromResult(Optional.FromValue(guid));
         }
 
-          
-        return Task.FromResult(Optional.FromNoValue<Guid>());
-            
+
+        return Task.FromResult(Optional.FromValue(Guid.Empty));
+
     }
 
     public string ReadableName => "Guid";

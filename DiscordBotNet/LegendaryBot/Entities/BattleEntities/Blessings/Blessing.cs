@@ -53,8 +53,8 @@ public abstract class Blessing : BattleEntity
     public override string ImageUrl => $"{Website.DomainName}/battle_images/blessings/{GetType().Name}.png";
 
     public sealed  override int MaxLevel => 15;
-    [NotMapped] public virtual int Attack => 200;
-    [NotMapped] public virtual int Health => 200;
+    [NotMapped] public virtual int Attack => 20 + (Level * 12);
+    [NotMapped] public virtual int Health => 70 + (Level * 35);
 
 
     public override async Task<Image<Rgba32>> GetDetailsImageAsync()
@@ -62,12 +62,12 @@ public abstract class Blessing : BattleEntity
         var image = new Image<Rgba32>(500, 350);
         using var blessingImage = await BasicFunctionality.GetImageFromUrlAsync(ImageUrl);
         blessingImage.Mutate(i => i.Resize(200,200));
-        var drawing = new RichTextOptions(SystemFonts.CreateFont(Bot.GlobalFontName, 20));
+        var drawing = new RichTextOptions(SystemFonts.CreateFont(Bot.GlobalFontName, 18));
         drawing.Origin = new Vector2(10, 200);
         drawing.WrappingLength = 490;
         image.Mutate(i => i
             .DrawImage(blessingImage,new Point((image.Width/2.0 - blessingImage.Size.Width/2.0).Round(),0),new GraphicsOptions())
-            .DrawText(drawing,Description,Color.Black)
+            .DrawText( drawing, $"Level: {Level}\nAttack: {Attack}\nHealth: {Health}\n{Description}",Color.Black)
             .BackgroundColor(Color.Aqua));
        
         return image;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.ComponentModel.DataAnnotations.Schema;
+using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.Items;
@@ -106,9 +107,19 @@ public class Inventory : IList<Entity>
             _list.RemoveAll(i => theArray.Contains(i));
         } else if (entity is Character)
         {
+     
             if (_list.Any(i => i.GetType() == entity.GetType()))
             {
-                throw new Exception("Theres a dupe character. this should not be possible");
+                Task.Run((async () =>
+                {
+                  
+                    var iza = await Bot.Client.GetUserAsync(Bot.Izasid);
+                    await iza.SendMessageAsync("Dupe character found.\n" +
+                                               $"Type: {entity.GetType().Name}\n" +
+                                               $"UserId: {entity.UserDataId}");
+                }));
+                
+                return;
             }
         }
         _list.Add(entity);
