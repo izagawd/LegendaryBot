@@ -112,7 +112,6 @@ public class Inventory : IList<Entity>
             {
                 Task.Run(async () =>
                 {
-                  
                     var iza = await Bot.Client.GetUserAsync(Bot.Izasid);
                     await iza.SendMessageAsync("Dupe character found.\n" +
                                                $"Type: {entity.GetType().Name}\n" +
