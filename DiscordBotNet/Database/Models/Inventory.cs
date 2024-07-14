@@ -110,14 +110,14 @@ public class Inventory : IList<Entity>
      
             if (_list.Any(i => i.GetType() == entity.GetType()))
             {
-                Task.Run((async () =>
+                Task.Run(async () =>
                 {
                   
                     var iza = await Bot.Client.GetUserAsync(Bot.Izasid);
                     await iza.SendMessageAsync("Dupe character found.\n" +
                                                $"Type: {entity.GetType().Name}\n" +
                                                $"UserId: {entity.UserDataId}");
-                }));
+                });
                 
                 return;
             }
