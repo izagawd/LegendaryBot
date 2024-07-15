@@ -20,7 +20,7 @@ public partial class Character
     {
         using var characterImageInfo = await GetInfoAsync();
         if(loadBuild)
-            LoadGear();
+            LoadStats();
         
         var image = new Image<Rgba32>(850, 900);
         

@@ -7,7 +7,7 @@ using DiscordBotNet.LegendaryBot.Entities.Items;
 
 namespace DiscordBotNet.Database.Models;
 
-public class Inventory : IList<Entity>
+public class EntityContainer : IList<Entity>
 {
     [NotMapped] private List<Entity> _list = new();
     public IEnumerator<Entity> GetEnumerator()
@@ -15,7 +15,12 @@ public class Inventory : IList<Entity>
         return _list.GetEnumerator();
     }
 
+    public EntityContainer(){}
 
+    public EntityContainer(IEnumerable<Entity> entities)
+    {
+        AddRange(entities);
+    }
 
     public void AddRange(IEnumerable<Entity> enumerable)
     {

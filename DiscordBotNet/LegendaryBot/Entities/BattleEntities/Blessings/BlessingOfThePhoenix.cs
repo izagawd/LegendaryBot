@@ -15,13 +15,13 @@ public class BlessingOfThePhoenix : Blessing, IBattleEventListener
         if (level >= 9) return 8;
         if (level >= 6) return 7;
         if (level >= 3) return 6;
-        return 5;
+        return 2;
     }
     [BattleEventListenerMethod]
-    public  void HealOnDamage(CharacterPostDamageEventArgs eventArgs)
+    public  void HealOnTurnBegin(TurnStartEventArgs eventArgs)
     {
     
-        if (eventArgs.DamageResult.DamageReceiver != Character) return;
+        if (eventArgs.Character != Character) return;
 
          Character!.RecoverHealth((GetHealthPercentRecovering(Level) *  0.01 * Character.MaxHealth).Round(),$"{Character.NameWithAlphabetIdentifier} recovered $ health via the blessing of the phoenix");
   
@@ -30,6 +30,6 @@ public class BlessingOfThePhoenix : Blessing, IBattleEventListener
 
     public override string GetDescription(int level)
     {
-        return $"Everytime the owner is hit, they recover {GetHealthPercentRecovering(level)}% of their hp";
+        return $"At the start of the character's turn, they recover {GetHealthPercentRecovering(level)}% of their health";
     }
 }

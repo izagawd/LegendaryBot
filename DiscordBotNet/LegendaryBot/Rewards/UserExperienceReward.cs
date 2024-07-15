@@ -18,7 +18,7 @@ public class UserExperienceReward : Reward
         return new UserExperienceReward(Experience + experienceReward.Experience);
     }
 
-    public override string GiveRewardTo(UserData userData, string name)
+    public override string GiveRewardTo(UserData userData)
     {
         return userData.IncreaseExp(Experience).Text;
     }

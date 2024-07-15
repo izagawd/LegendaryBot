@@ -19,7 +19,7 @@ public class SimulateBattle : GeneralCommandClass
                 [new CoachChad(), new CoachChad(), new CoachChad(), new CoachChad()]);
             foreach (var j in battleSim.CharacterTeams)
             {
-                 j.LoadTeamEquipment();
+                 j.LoadTeamStats();
             }
 
             Task.Run(async () =>

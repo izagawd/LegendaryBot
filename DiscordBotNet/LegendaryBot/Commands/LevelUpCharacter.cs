@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Numerics;
@@ -7,7 +8,10 @@ using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DSharpPlus.Entities;
@@ -21,6 +25,7 @@ using DiscordInteractionResponseBuilder = DSharpPlus.Entities.DiscordInteraction
 
 namespace DiscordBotNet.LegendaryBot.command;
 
+[Command("level-up")]
 public class LevelUpCharacter : GeneralCommandClass
 {
     private static ConcurrentDictionary<string,Image<Rgba32>> _cachedLevelUpCroppedImages = new();
@@ -170,6 +175,8 @@ public class LevelUpCharacter : GeneralCommandClass
     {
         return CanAscend(character) || CanLevelUp(character);
     }
+
+
     public static string? GetCannotAscendReasonText(Character character)
     {
         string? failureText = null;
@@ -194,8 +201,8 @@ public class LevelUpCharacter : GeneralCommandClass
         return failureText;
     }
     
-    [Command("level-up"),
-     AdditionalCommand("/level-up player",BotCommandType.Battle)]
+    [Command("character"), Description("used to level up a character"),
+     AdditionalCommand("/level-up character player",BotCommandType.Battle)]
     public async Task LevelUp(CommandContext ctx,
         [Parameter("character-name")] string characterName)
     {
@@ -233,7 +240,7 @@ public class LevelUpCharacter : GeneralCommandClass
         else
         {
             
-            character.LoadGear();
+            character.LoadStats();
             embedBuilder.WithTitle($"{character.Name}'s level up process");
             using var levelUpImage = await GetImageForLevelUpAndAscensionAsync(character);
             await using var stream = new MemoryStream();
@@ -295,7 +302,7 @@ public class LevelUpCharacter : GeneralCommandClass
 
             async Task StopAsync()
             {
-                character.LoadGear();
+                character.LoadStats();
                 using var localLevelUpImage = await GetImageForLevelUpAndAscensionAsync(character);
                 await using var localStream = new MemoryStream();
                 await localLevelUpImage.SaveAsPngAsync(localStream);
@@ -423,7 +430,7 @@ public class LevelUpCharacter : GeneralCommandClass
                 
                 await DatabaseContext.SaveChangesAsync();
                 UpdateEmbed(embedBuilder,character);
-                character.LoadGear();
+                character.LoadStats();
                 using var localLevelUpImage = await GetImageForLevelUpAndAscensionAsync(character);
                 await using var localStream = new MemoryStream();
                 await localLevelUpImage.SaveAsPngAsync(localStream);

@@ -28,7 +28,9 @@ public abstract class GeneralCommandClass
     
     public async Task<bool> HandleIsOccupiedAsync(IEnumerable<ulong> userDatas, CommandContext context, string? occupiedText = null)
     {
-        if ((await DatabaseContext.UserData.AnyAsync(i => i.IsOccupied)))
+        var arrayLongs = userDatas.ToArray();
+        if ((await DatabaseContext.UserData
+                .AnyAsync(i => arrayLongs.Contains(i.Id) &&  i.IsOccupied)))
         {
             return true;
         }
@@ -50,9 +52,15 @@ public abstract class GeneralCommandClass
  
         }
         await DatabaseContext.DisposeAsync();
-       
+        DatabaseContext = null!;
+
     }
 
+    ~GeneralCommandClass()
+    {
+        if(DatabaseContext is not null)
+            DatabaseContext.Dispose();
+    }
     private List<ulong> _occupiedUserDatasIds  = new();
 
 

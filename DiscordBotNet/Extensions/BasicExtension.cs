@@ -21,7 +21,29 @@ public static class BasicExtension
         return Color.ParseHex(color.ToString());
     }
 
-
+    public static void CancelIfNotDisposed(this CancellationTokenSource cancellationTokenSource)
+    {
+        try
+        {
+            cancellationTokenSource.Cancel();
+        }
+        catch (ObjectDisposedException)
+        {
+            
+        }
+    }
+    public static Task CancelIfNotDisposedAsync(this CancellationTokenSource cancellationTokenSource)
+    {
+        try
+        {
+            return cancellationTokenSource.CancelAsync();
+        }
+        catch (ObjectDisposedException)
+        {
+            return Task.CompletedTask;
+            ;
+        }
+    }
 
     public static Task<InteractivityResult<ComponentInteractionCreatedEventArgs>> WaitForAnyComponentInteractionAsync(this DiscordMessage message, Func<ComponentInteractionCreatedEventArgs,bool> predicate,
         TimeSpan? timeoutOverride = null)

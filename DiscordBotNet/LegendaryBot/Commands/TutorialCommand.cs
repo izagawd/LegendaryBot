@@ -17,7 +17,7 @@ public class TutorialCommand : GeneralCommandClass
             "\nTo battle a friend, use `/challenge @user`." +
             "\nNote: even though you have an option to name your character, I will not recognize your name when" +
             "querying for characters. i will only recognize \"player\"\n" +
-            "eg: `/level-up jack` will not be recognized, but `level-up player` will be recognized\n" +
+            "eg: `/level-up character jack` will not be recognized, but `level-up character player` will be recognized\n" +
             "If you want to see what things you can get, use `/list-all-entities\n`" +
             "say you want to add character `lily` to your inventory, you can use" +
             "\n`give-me lily 1` which gives you one copy of lily" +

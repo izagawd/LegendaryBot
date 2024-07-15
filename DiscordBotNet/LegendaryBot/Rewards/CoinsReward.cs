@@ -20,9 +20,9 @@ public class CoinsReward : Reward
         Coins = coins;
     }
 
-    public override string GiveRewardTo(UserData userData, string name)
+    public override string GiveRewardTo(UserData userData)
     {
         userData.Coins += Coins;
-        return $"{name} Gained {Coins} coins!";
+        return $"{userData.Name} Gained {Coins} coins!";
     }
 }

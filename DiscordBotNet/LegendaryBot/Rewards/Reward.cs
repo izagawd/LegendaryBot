@@ -52,7 +52,7 @@ public abstract class Reward : IComparable<Reward>
     /// <returns></returns>
     public abstract Reward MergeWith(Reward reward);
     public virtual bool IsValid => true;
-    public abstract string GiveRewardTo(UserData userData, string name);
+    public abstract string GiveRewardTo(UserData userData);
 
     public int CompareTo(Reward? other)
     {

@@ -10,6 +10,7 @@ using DiscordBotNet.LegendaryBot.command;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.EventArgs;
@@ -106,11 +107,11 @@ public static class Bot
         return Task.CompletedTask;
     }
 
-    private static Task DoShitAsync()
+    private async static Task DoShitAsync()
     {
         var post = new PostgreSqlContext();
 
-        return Task.CompletedTask;
+
 
     }
     private static async Task Main(string[] args)

@@ -45,7 +45,7 @@ public class BlowAway : Skill
 {
     
     public override int MaxCooldown => 4;
-    public override string GetDescription(CharacterPartials.Character character) => $"Throws multiple bombs at the enemy, with a {BombInflictChance} each to inflict Bomb status effect";
+    public override string GetDescription(CharacterPartials.Character character) => $"Throws multiple bombs at the enemy, with a {BombInflictChance}% chance each to inflict Bomb status effect";
 
     public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {

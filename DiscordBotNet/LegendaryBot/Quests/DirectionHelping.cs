@@ -98,7 +98,7 @@ public class DirectionHelping : Quest
         
 
         var userTeam = userData.EquippedPlayerTeam;
-        userTeam.LoadTeamEquipment();
+        userTeam.LoadTeamStats();
         var battle = new BattleSimulator(userTeam,blastTeam);
 
         var battleResult = await battle.StartAsync(dialogueResult.Message);

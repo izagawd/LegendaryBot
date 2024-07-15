@@ -2,6 +2,8 @@
 using System.Numerics;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Results;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
@@ -9,8 +11,26 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
-public abstract class Blessing : BattleEntity
+public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
 {
+    public void Configure(EntityTypeBuilder<Blessing> builder)
+    {
+        builder.Property(i => i.Level)
+            .HasColumnName(nameof(Blessing.Level));
+        builder.Property(i => i.Experience)
+            .HasColumnName(nameof(Blessing.Experience));
+    }
+}
+public abstract class Blessing : Entity, ICanBeLeveledUp
+{
+    public long Experience { get; set; }
+    public long GetRequiredExperienceToNextLevel(int level)
+    {
+        return BattleFunctionality.NextLevelFormula(level);
+    }
+
+    public int Level { get; set; } = 1;
+    public override Type TypeGroup => typeof(Blessing);
     public Guid? BlessingWielderId { get; set; }
     public virtual async Task<Image<Rgba32>> GetInfoAsync()
     {
@@ -19,7 +39,7 @@ public abstract class Blessing : BattleEntity
         userImage.Mutate(ctx => ctx.Resize(new Size(100,100)));
         var userImagePoint = new Point(20, 20);
         var levelBarMaxLevelWidth = 250L;
-        var gottenExp = levelBarMaxLevelWidth * (Experience/(GetRequiredExperienceToNextLevel() * 1.0f));
+        var gottenExp = levelBarMaxLevelWidth * (Experience/(GetRequiredExperienceToNextLevel(Level) * 1.0f));
         var levelBarY = userImage.Height - 30 + userImagePoint.Y;
         var font = SystemFonts.CreateFont(Bot.GlobalFontName, 25);
         var xPos = 135;
@@ -31,7 +51,7 @@ public abstract class Blessing : BattleEntity
                 .Fill(Color.Gray, new RectangleF(130, levelBarY, levelBarMaxLevelWidth, 30))
                 .Fill(Color.Green, new RectangleF(130, levelBarY, gottenExp, 30))
                 .Draw(Color.Black, 3, new RectangleF(130, levelBarY, levelBarMaxLevelWidth, 30))
-                .DrawText($"{Experience}/{GetRequiredExperienceToNextLevel()}",font,Color.Black,new PointF(xPos,levelBarY+2))
+                .DrawText($"{Experience}/{GetRequiredExperienceToNextLevel(Level)}",font,Color.Black,new PointF(xPos,levelBarY+2))
                 .DrawText($"Name: {Name}", font, Color.Black, new PointF(xPos, levelBarY -57))
                 .DrawText($"Level: {Level}",font,Color.Black,new PointF(xPos,levelBarY - 30))
                 .Resize(1000, 300));
@@ -52,7 +72,7 @@ public abstract class Blessing : BattleEntity
     public sealed override string Description => GetDescription(Level);
     public override string ImageUrl => $"{Website.DomainName}/battle_images/blessings/{GetType().Name}.png";
 
-    public sealed  override int MaxLevel => 15;
+    public  int MaxLevel => 15;
     [NotMapped] public virtual int Attack => 20 + (Level * 12);
     [NotMapped] public virtual int Health => 70 + (Level * 35);
 
@@ -77,7 +97,7 @@ public abstract class Blessing : BattleEntity
     [NotMapped]
     public bool IsInStandardBanner => true;
     public Character? Character { get; set; }
-    public override ExperienceGainResult IncreaseExp(long experienceToGain)
+    public  ExperienceGainResult IncreaseExp(long experienceToGain)
     {
         var expGainText = "";
 

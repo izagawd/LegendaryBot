@@ -5,9 +5,9 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 
 public class DefenseFlatGearStat: GearStat
 {
-    public override int GetMainStatValue(Rarity rarity, int level)
+    public override int GetMainStatValue(Rarity rarity)
     {
-        return (((int) rarity + 1) * (level / 15.0) * 50).Round() + 50;
+        return ((int) rarity  * 50) + 50;
     }
 
     public override void AddStats(Character character)

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.ComponentModel;
+using System.Text;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
@@ -25,7 +26,7 @@ public class Display : GeneralCommandClass
     protected static DiscordButtonComponent First = new DiscordButtonComponent(DiscordButtonStyle.Primary, "first", "FIRST");
     
 
-    [Command("characters")]
+    [Command("characters"),Description("Displays all the characters you have")]
     public async ValueTask ExecuteDisplayCharacters(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
@@ -111,7 +112,7 @@ public class Display : GeneralCommandClass
         
 
     }
-    [Command("blessing")]
+    [Command("blessing"),Description("Displays a blessing you have by inputting their id")]
     public async ValueTask ExecuteDisplayABlessing(CommandContext ctx,
         [Parameter("blessing-id")] Guid blessingId)
     {
@@ -161,7 +162,7 @@ public class Display : GeneralCommandClass
         await ctx.RespondAsync(builder);
    
     }
-    [Command("blessings")]
+    [Command("blessings"),Description("Displays all the blessings you have")]
     public async ValueTask ExecuteDisplayBlessings(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
@@ -250,7 +251,7 @@ public class Display : GeneralCommandClass
         
 
     }
-    [Command("teams")]
+    [Command("teams"), Description("Displays all the teams you have and the characters in them")]
     public async ValueTask ExecuteDisplayTeams(CommandContext context)
     {
         var userData = await DatabaseContext.UserData

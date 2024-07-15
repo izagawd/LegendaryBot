@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.Extensions;
+﻿using System.ComponentModel;
+using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Rewards;
@@ -12,10 +13,10 @@ public class Hunt : GeneralCommandClass
 {
     
 
-    [Command("hunt"),
+    [Command("hunt"), Description("Use this command to fight any character"),
     AdditionalCommand("/hunt Coach Chad",BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx,
-        [Parameter("mob-name")] string characterName,
+        [Parameter("character-name")] string characterName,
         [Parameter("enemy-count")] long enemyCount = 1 )
     {
         var author = ctx.User;
@@ -73,13 +74,13 @@ public class Hunt : GeneralCommandClass
             .WithDescription($"Wild {enemyTeam.First()}(s) have appeared!");
         await ctx.RespondAsync(embedToBuild.Build());
         var message =  await ctx.GetResponseAsync();
-        var userTeam = userData.EquippedPlayerTeam!.LoadTeamEquipment();
+        var userTeam = userData.EquippedPlayerTeam!.LoadTeamStats();
         foreach (var i in enemyTeam)
         {
             i.SetLevel(userTeam.Select(j => j.Level).Average().Round());
         }
 
-        var simulator = new BattleSimulator(userTeam,  enemyTeam.LoadTeamEquipment());
+        var simulator = new BattleSimulator(userTeam,  enemyTeam.LoadTeamStats());
 
  
 
@@ -101,7 +102,7 @@ public class Hunt : GeneralCommandClass
            
         if (battleResult.Winners == userTeam)
         {
-            var rewardText = userData.ReceiveRewards(author.Username, [new CoinsReward(coinsToGain),
+            var rewardText = userData.ReceiveRewards([new CoinsReward(coinsToGain),
                 ..enemyTeam.SelectMany(i => i.DroppedRewards)]);
             embedToBuild
                 .WithTitle($"Nice going bud!")

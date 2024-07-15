@@ -114,7 +114,7 @@ public class QuestCommand : GeneralCommandClass
                     break;
                 }
             var rewards = quest.QuestRewards.Append(new UserExperienceReward(expToAdd));
-            var rewardString = userData.ReceiveRewards(ctx.User.Username, rewards);
+            var rewardString = userData.ReceiveRewards(rewards);
             embed
                 .WithTitle("Nice!!")
                 .WithDescription("You completed the quest!\n" +rewardString);

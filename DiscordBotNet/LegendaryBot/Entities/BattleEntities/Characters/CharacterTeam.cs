@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
@@ -41,12 +42,12 @@ public class CharacterTeam : ISet<CharacterPartials.Character>
  
 
 
-    public CharacterTeam LoadTeamEquipment()
+    public CharacterTeam LoadTeamStats()
     {
         foreach (var i in Characters)
         {
             i.Team = this;
-            i.LoadGear();
+            i.LoadStats();
         }
 
         return this;
@@ -148,7 +149,10 @@ public class CharacterTeam : ISet<CharacterPartials.Character>
     }
 
 
-
+    public CharacterTeam(IEnumerable<Character> characters) : this(characters.ToArray())
+    {
+        
+    }
 
 
     public bool Contains(CharacterPartials.Character character)

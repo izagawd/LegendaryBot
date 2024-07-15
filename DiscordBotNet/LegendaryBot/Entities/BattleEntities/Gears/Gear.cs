@@ -6,66 +6,29 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
-public abstract class Gear : BattleEntity
+public abstract class Gear : Entity
 {
-
-
+    public override Type TypeGroup => typeof(Gear);
     [NotMapped] public IEnumerable<GearStat> Substats => Stats.Except([MainStat]);
-    public sealed override int MaxLevel => 15;
-    public sealed override ExperienceGainResult IncreaseExp(long experienceToGain)
-    {
-        if (Level >= MaxLevel) return new ExperienceGainResult { ExcessExperience = experienceToGain };
-        Experience += experienceToGain;
-        var expToNextLevel = GetRequiredExperienceToNextLevel();
-        while (Experience >= expToNextLevel && Level < MaxLevel)
-        {
-            
-            Experience -= expToNextLevel;
-            Level++;
-            expToNextLevel = GetRequiredExperienceToNextLevel();
-            if (Level == 3 || Level == 6 || Level == 9 || Level == 12 || Level == 15)
-            {
-                if (Stats.Count < 6)
-                {
-                    Stats.Add(GenerateArtifactPossibleSubStat(Rarity));
-                }
-                else
-                {
-                    var randomSubstat = BasicFunctionality.RandomChoice(Substats);
-                    randomSubstat.Increase(Rarity);
-                }
-            }
-        }
 
-        var expRes = new ExperienceGainResult();
-        if (Level >= MaxLevel)
+    
+    
+    
+
+    private void AddSubstat()
+    {
+        if (Stats.Count < 6)
         {
-            expRes.ExcessExperience = Experience;
-            Experience = 0;
+            Stats.Add(GenerateArtifactPossibleSubStat(Rarity));
         }
-        return expRes;
+        else
+        {
+            var randomSubstat = BasicFunctionality.RandomChoice(Substats);
+            randomSubstat.Increase(Rarity);
+        }
     }
 
-    public override long GetRequiredExperienceToNextLevel(int level)
-    {
-        var requiredExp = base.GetRequiredExperienceToNextLevel(level);
-        switch (Rarity)
-        {
-            case Rarity.OneStar:
-                return requiredExp;
-               
-            case Rarity.TwoStar:
-                return requiredExp * 2;
-            case Rarity.ThreeStar:
-                return requiredExp * 3;
-            case Rarity.FourStar:
-                return requiredExp * 4;
-            case Rarity.FiveStar:
-                return requiredExp * 5;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
+
 
     private GearStat GenerateArtifactPossibleSubStat(Rarity rarity)
     {
@@ -73,7 +36,7 @@ public abstract class Gear : BattleEntity
             [..Stats.Select(i => i.GetType()),GearStat.SpeedPercentageType]);
         var chosenType = BasicFunctionality.RandomChoice(typesToConsider);
         var created = (GearStat) Activator.CreateInstance(chosenType)!;
-        created.Increase(rarity,false);
+        created.Increase(rarity);
         return created;
     }
 
@@ -81,14 +44,11 @@ public abstract class Gear : BattleEntity
     [NotMapped] public virtual IEnumerable<Type> PossibleMainStats => [];
 
 
-    public Gear(Rarity rarity) : this()
-    {
-        Rarity = rarity;
-    }
+
     public Gear(){}
-    public void Initialize(Rarity rarity, Type? desiredMainStat = null) 
+    public void Initialize(Rarity rarity, Type? desiredMainStat = null)
     {
-        if(Stats.Count != 0) return;
+        if (Stats.Count != 0) return;
         Rarity = rarity;
         if (desiredMainStat is null)
         {
@@ -97,28 +57,34 @@ public abstract class Gear : BattleEntity
         {
             throw new Exception("Inputted desired main stat not possible for this artifact type");
         }
-
         MainStat = (GearStat)Activator.CreateInstance(desiredMainStat)!;
         Stats.Add(MainStat);
  
         switch (Rarity)
         {
             case Rarity.FiveStar:
-                Stats.Add(GenerateArtifactPossibleSubStat(Rarity));
+                AddSubstat();
                 goto case Rarity.FourStar;
             case Rarity.FourStar:
-                Stats.Add(GenerateArtifactPossibleSubStat(Rarity));
+                AddSubstat();
                 goto case Rarity.ThreeStar;
             case Rarity.ThreeStar:
-                Stats.Add(GenerateArtifactPossibleSubStat(Rarity));
+                AddSubstat();
                 goto case Rarity.TwoStar;
             case Rarity.TwoStar:
-                Stats.Add(GenerateArtifactPossibleSubStat(Rarity));
+                AddSubstat();
                 goto case Rarity.OneStar;
             case Rarity.OneStar:
-                Stats.Add(GenerateArtifactPossibleSubStat(Rarity));
+                AddSubstat();
                 break;
         }
+
+        foreach (var _ in Enumerable.Range(0,6))
+        {
+            AddSubstat();
+        }
+        MainStat.SetMainStatValue(Rarity);
+       
     }
 
 

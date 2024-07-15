@@ -494,7 +494,10 @@ public class BattleSimulator
         }
 
     }
-
+    /// <summary>
+    /// whether or not to set health to max health for all characters at start of battle
+    /// </summary>
+    public bool SetToMaxHealthAtStart { get; set; } = true;
 
     protected static DiscordButtonComponent yes = new DiscordButtonComponent(DiscordButtonStyle.Success, "yes", "YES");
     
@@ -528,15 +531,9 @@ public class BattleSimulator
                     _forfeited = team;
                 if (_interruptionCancellationTokenSource is not null && !_interruptionCancellationTokenSource.IsCancellationRequested)
                 {
-                    try
-                    {
-                        await _interruptionCancellationTokenSource.CancelAsync();
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        
-                    }
-                         
+
+                    await _interruptionCancellationTokenSource.CancelIfNotDisposedAsync();
+
                 }
       
 
@@ -683,14 +680,10 @@ public class BattleSimulator
         // so it won't be chilling in the heap
         if (_gameCancellationTokenSource is not null)
         {
-            try
-            {
-                _gameCancellationTokenSource.Cancel();
-            }
-            catch(ObjectDisposedException)
-            {
-                // ignored
-            }
+            
+            _gameCancellationTokenSource.CancelIfNotDisposed();
+           
+  
             _gameCancellationTokenSource.Dispose();
         }
     }
@@ -707,14 +700,9 @@ public class BattleSimulator
         //this code just in case
         if (_gameCancellationTokenSource is not null)
         {
-            try
-            {
-                await _gameCancellationTokenSource.CancelAsync();
-            }
-            catch (ObjectDisposedException)
-            {
-                
-            }
+
+            await _gameCancellationTokenSource.CancelIfNotDisposedAsync();
+     
                 
             _gameCancellationTokenSource.Dispose();
         }
@@ -730,6 +718,8 @@ public class BattleSimulator
             foreach (var j in i)
             {
                 j.Team = i;
+                if (SetToMaxHealthAtStart)
+                    j.Health = j.MaxHealth;
                 SetupCharacterForThisBattle(j);
             }
         }

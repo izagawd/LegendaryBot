@@ -8,8 +8,8 @@ namespace DiscordBotNet.LegendaryBot.Entities;
 
 public abstract class Entity : ICloneable, IImageHaver
 {
-    
-   
+
+    public virtual Type TypeGroup => typeof(Entity);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
     public override string ToString()
     {

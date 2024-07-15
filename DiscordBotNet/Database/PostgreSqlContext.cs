@@ -3,6 +3,7 @@ using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Entities;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
@@ -120,6 +121,7 @@ public class PostgreSqlContext : DbContext
         {
             modelBuilder.Entity(i);
         }
+
         modelBuilder
             .ApplyConfiguration(new UserDataDatabaseConfiguration())
             .ApplyConfiguration(new EntityDatabaseConfiguration())
@@ -128,7 +130,8 @@ public class PostgreSqlContext : DbContext
             .ApplyConfiguration(new CharacterDatabaseConfiguration())
             .ApplyConfiguration(new PlayerDatabaseConfiguration())
             .ApplyConfiguration(new GearDatabaseConfiguration())
-            .ApplyConfiguration(new ArtifactStatConfiguration());
+            .ApplyConfiguration(new ArtifactStatDatabaseConfiguration())
+            .ApplyConfiguration(new BlessingDatabaseConfiguration());
 
 
 

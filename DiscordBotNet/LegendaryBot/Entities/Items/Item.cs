@@ -9,7 +9,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.Items;
 
 public abstract class Item : Entity
 {
-
+    public override Type TypeGroup => typeof(Item);
     public override string ImageUrl => $"{Website.DomainName}/battle_images/items/{GetType().Name}.png";
 
     public async Task<Image<Rgba32>> GetImageAsync(int? stacks = null)

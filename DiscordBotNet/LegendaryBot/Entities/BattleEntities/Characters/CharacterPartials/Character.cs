@@ -35,6 +35,10 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
             .WithOne(i => i.Character)
             .HasForeignKey<Blessing>(i => i.BlessingWielderId)
             .OnDelete(DeleteBehavior.SetNull);
+        entity.Property(i => i.Level)
+            .HasColumnName(nameof(Character.Level));
+        entity.Property(i => i.Experience)
+            .HasColumnName(nameof(Blessing.Experience));
     }
 }
 /// <summary>
@@ -42,11 +46,15 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
 /// Characters can also be loaded at once if they are in a CharacterTeam and LoadTeamGearWithPlayerDataAsync is called
 /// from the CharacterTeam
 /// </summary>
-public abstract partial  class Character : BattleEntity
+public abstract partial  class Character : Entity, ICanBeLeveledUp
 {
 
 
 
+    public long GetRequiredExperienceToNextLevel()
+    {
+        return GetRequiredExperienceToNextLevel(Level);
+    }
 
     [NotMapped]
     public virtual bool IsInStandardBanner => true;
@@ -335,6 +343,7 @@ public abstract partial  class Character : BattleEntity
             CharacterUrl = ImageUrl
         };
 
+    public int Level { get; set; } = 1;
     public virtual long CoinsToGainWhenKilled => (Level + 50) * (int) Rarity;
 
     public virtual long ExpToGainWhenKilled
@@ -342,7 +351,7 @@ public abstract partial  class Character : BattleEntity
         get
         {
             
-            var averageFormulaTillNextLevel = GetRequiredExperienceToNextLevel();
+            var averageFormulaTillNextLevel = GetRequiredExperienceToNextLevel(Level);
             
             var powCalculator = Math.Pow(1.05f, Level);
             var rarityMuliplier = 1 + ((int)Rarity * 0.2);
@@ -386,7 +395,7 @@ public abstract partial  class Character : BattleEntity
         userImage.Mutate(ctx => ctx.Resize(new Size(100,100)));
         var userImagePoint = new Point(20, 20);
         var levelBarMaxLevelWidth = 250ul;
-        var gottenExp = levelBarMaxLevelWidth * (Experience/(GetRequiredExperienceToNextLevel() * 1.0f));
+        var gottenExp = levelBarMaxLevelWidth * (Experience/(GetRequiredExperienceToNextLevel(Level) * 1.0f));
         var levelBarY = userImage.Height - 30 + userImagePoint.Y;
         var font = SystemFonts.CreateFont(Bot.GlobalFontName, 25);
         var xPos = 135;
@@ -398,7 +407,7 @@ public abstract partial  class Character : BattleEntity
                 .Fill(SixLabors.ImageSharp.Color.Gray, new RectangleF(130, levelBarY, levelBarMaxLevelWidth, 30))
                .Fill(SixLabors.ImageSharp.Color.Green, new RectangleF(130, levelBarY, gottenExp, 30))
                .Draw(SixLabors.ImageSharp.Color.Black, 3, new RectangleF(130, levelBarY, levelBarMaxLevelWidth, 30))
-                .DrawText($"{Experience}/{GetRequiredExperienceToNextLevel()}",font,SixLabors.ImageSharp.Color.Black,new PointF(xPos,levelBarY+2))
+                .DrawText($"{Experience}/{GetRequiredExperienceToNextLevel(Level)}",font,SixLabors.ImageSharp.Color.Black,new PointF(xPos,levelBarY+2))
             .DrawText($"Name: {Name}", font, SixLabors.ImageSharp.Color.Black, new PointF(xPos, levelBarY -57))
             .DrawText($"Level: {Level}",font,SixLabors.ImageSharp.Color.Black,new PointF(xPos,levelBarY - 30))
             .Resize(1000, 300));
@@ -462,6 +471,7 @@ public abstract partial  class Character : BattleEntity
 
     [NotMapped] private readonly HashSet<StatusEffect> _statusEffects = [];
 
+
     [NotMapped] public IEnumerable<StatusEffect> StatusEffects => _statusEffects.ToImmutableArray();
 
     [NotMapped] public virtual DiscordColor Color { get; protected set; } = DiscordColor.Green;
@@ -473,7 +483,7 @@ public abstract partial  class Character : BattleEntity
 
     public bool RemoveStatusEffect(StatusEffect statusEffect) => _statusEffects.Remove(statusEffect);
 
-    public sealed override int MaxLevel => Ascension * 10;
+    public  int MaxLevel => Ascension * 10;
 
 
     public void SetLevel(int level)
@@ -497,12 +507,14 @@ public abstract partial  class Character : BattleEntity
     [NotMapped]
     public float TotalResistance { get; set; }
 
+    
+   
     /// <summary>
     /// Use this to load the build (stats) of the character. if u want to manually set the stats of this character, just
     /// change the Total properties, and avoid calling this method. its called in load async unless u set thee
     /// bool param to false
     /// </summary>
-    public virtual void LoadGear()
+    public virtual void LoadStats()
     {
         TotalAttack = BaseAttack;
         TotalDefense = BaseDefense;
@@ -524,14 +536,13 @@ public abstract partial  class Character : BattleEntity
             {
                 j.AddStats(this);
             }
-            i.MainStat.SetMainStatValue(i.Rarity,i.Level);
+            i.MainStat.SetMainStatValue(i.Rarity);
             i.MainStat.AddStats(this);
         }
-
-        Health = TotalMaxHealth;
+        
     }
     
-
+    public override Type TypeGroup => typeof(Character);
     [NotMapped]
     public   BasicAttack BasicAttack { get; protected set; }
     
@@ -570,16 +581,19 @@ public abstract partial  class Character : BattleEntity
 
 
  
-    public sealed override long GetRequiredExperienceToNextLevel(int level)
+    public long GetRequiredExperienceToNextLevel(int level)
     {
        return BattleFunctionality.NextLevelFormula(Level);
     }
 
+
+
+    public long Experience { get; set; }
     /// <summary>
     /// Increases the Exp of a character and returns useful text
     /// </summary>
     /// <returns></returns>
-    public override ExperienceGainResult IncreaseExp(long experienceToGain)
+    public ExperienceGainResult IncreaseExp(long experienceToGain)
     {
         if (Level >= MaxLevel)
             return new ExperienceGainResult() { ExcessExperience = experienceToGain, Text = $"{this} has already reached their max level!" };

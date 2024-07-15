@@ -8,7 +8,11 @@ public interface ICanBeLeveledUp
     public long Experience { get; }
 
     public long GetRequiredExperienceToNextLevel(int level);
-    public long GetRequiredExperienceToNextLevel();
+
+    public long GetRequiredExperienceToNextLevel()
+    {
+       return GetRequiredExperienceToNextLevel(Level);
+    }
 
     public ExperienceGainResult IncreaseExp(long experienceToGain);
 }

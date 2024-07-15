@@ -16,7 +16,7 @@ public class TextReward : Reward
     {
         Text = text;
     }
-    public override string GiveRewardTo(UserData userData, string name)
+    public override string GiveRewardTo(UserData userData)
     {
         return Text;
     }

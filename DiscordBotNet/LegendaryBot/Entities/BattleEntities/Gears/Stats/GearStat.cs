@@ -6,7 +6,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 
-public class ArtifactStatConfiguration : IEntityTypeConfiguration<GearStat>
+public class ArtifactStatDatabaseConfiguration : IEntityTypeConfiguration<GearStat>
 {
     public void Configure(EntityTypeBuilder<GearStat> builder)
     {
@@ -35,10 +35,9 @@ public abstract class GearStat
     /// the rarity and the level of the gear
     /// </summary>
     /// <param name="rarity"></param>
-    /// <param name="level"></param>
-    public  void SetMainStatValue(Rarity rarity, int level)
+    public void SetMainStatValue(Rarity rarity)
     {
-        Value = GetMainStatValue(rarity, level);
+        Value = GetMainStatValue(rarity);
     }
 
     
@@ -53,11 +52,8 @@ public abstract class GearStat
     
     
     
-    public abstract int GetMainStatValue(Rarity rarity, int level);
-/// <summary>
-/// the amount of times a substat has been increased, if this GearStat is a substat
-/// </summary>
-    public int TimesIncreased { get; private set; }
+    public abstract int GetMainStatValue(Rarity rarity);
+
     /// <summary>
     /// the value of the stat
     /// </summary>
@@ -68,6 +64,7 @@ public abstract class GearStat
     public abstract void AddStats(Character character);
 
  
+    
     [NotMapped]
     public static IEnumerable<Type> AllGearStatTypes { get; }
 
@@ -76,19 +73,20 @@ public abstract class GearStat
         AllGearStatTypes = DefaultObjects.AllAssemblyTypes.Where(i => !i.IsAbstract && i.IsSubclassOf(typeof(GearStat))).ToImmutableArray();
     }
     
+    public string Name => $"{BasicFunctionality.Englishify(GetType().Name.Replace("GearStat",""))}";
+    
     public override string ToString()
     {
-        return $"{BasicFunctionality.Englishify(GetType().Name.Replace("GearStat",""))}: {Value}";
+        return Name + $": {Value}";
     }
     /// <summary>
     /// Increases the value of the substat by a random amount between GetMaximumSubstatLevelIncrease
     /// and GetMinimum
     /// </summary>
     /// <param name="rarity"></param>
-    public void Increase(Rarity rarity, bool incrementTimesIncreased = true)
+    public void Increase(Rarity rarity)
     {
-        if (incrementTimesIncreased)
-            TimesIncreased++;
+    
         Value += BasicFunctionality.GetRandomNumberInBetween(GetMinimumSubstatLevelIncrease(rarity),
             GetMaximumSubstatLevelIncrease(rarity));
     }

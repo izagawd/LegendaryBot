@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.LegendaryBot.Entities;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using Microsoft.Extensions.Primitives;
 
 namespace DiscordBotNet.LegendaryBot.Rewards;
 /// <summary>
@@ -17,29 +19,45 @@ public class EntityReward : Reward
     }
 
     public override bool IsValid => EntitiesToReward.Count() > 0;
-    public IEnumerable<Entity> EntitiesToReward { get;  }
+    public EntityContainer EntitiesToReward { get;  }
     public EntityReward(IEnumerable<Entity> entitiesToReward)
     {
-        EntitiesToReward = entitiesToReward
-            .Where(i => i is not null)
-            .ToArray();
+        EntitiesToReward = new EntityContainer(entitiesToReward
+            .Where(i => i is not null));
+
+
     }
 
-    public override string GiveRewardTo(UserData userData, string name)
+    public override string GiveRewardTo(UserData userData)
     {
-        var stringBuilder = new StringBuilder($"{name} got: \n");
+        var stringBuilder = new StringBuilder($"{userData.Name} got: ");
         userData.Inventory.AddRange(EntitiesToReward);
 
 
         Dictionary<string, int> nameSorter = [];
         foreach (var i in EntitiesToReward)
         {
-            var asString = i.Name;
-            if(nameSorter.ContainsKey(asString)) nameSorter[asString]++;
-            else nameSorter[asString] = 1;
+            stringBuilder.Append($"\nName: {i.Name} | Type : {BasicFunctionality.Englishify(i.TypeGroup.Name)} | Rarity : {i.Rarity}");
+            
+            if (i is Gear gear)
+            {
+      
+                gear.MainStat.SetMainStatValue(gear.Rarity);
+                stringBuilder.Append($"\n\nMainStat = {gear.MainStat.Name}: {gear.MainStat.Value}");
+                if (gear.Substats.Any())
+                {
+                    stringBuilder.Append("\nSubstats: ");
+                    foreach (var j in gear.Substats)
+                    {
+                        stringBuilder.Append($"\n{j.Name}: {j.Value}");
+                    }
+                }
+
+                stringBuilder.Append("\n");
+            }
         }
 
-        stringBuilder.AppendJoin('\n', nameSorter.Select(i => $"{i.Key}: {i.Value}"));
+    
 
         return stringBuilder.ToString();
 

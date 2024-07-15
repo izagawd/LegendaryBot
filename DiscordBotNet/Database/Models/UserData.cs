@@ -74,8 +74,8 @@ public class UserData :   ICanBeLeveledUp
             ctx.Fill(SixLabors.ImageSharp.Color.Green, new RectangleF(130, levelBarY, gottenExp, 30));
             ctx.Draw(SixLabors.ImageSharp.Color.Black, 3, new RectangleF(130, levelBarY, levelBarMaxLevelWidth, 30));
             var font = SystemFonts.CreateFont("Arial", 25);
-            ctx.DrawText($"{Experience}/{GetRequiredExperienceToNextLevel()}",font,SixLabors.ImageSharp.Color.Black,new PointF(140,levelBarY));
-            ctx.DrawText($"AdventurerLevel {AdventurerLevel}",font,SixLabors.ImageSharp.Color.Black,new PointF(140,levelBarY - 33));
+            ctx.DrawText($"{Experience}/{GetRequiredExperienceToNextLevel()}",font,SixLabors.ImageSharp.Color.Black,new PointF(140,levelBarY+2));
+            ctx.DrawText($"Adventurer Level {AdventurerLevel}",font,SixLabors.ImageSharp.Color.Black,new PointF(140,levelBarY - 33));
         });
 
         return image;
@@ -108,13 +108,13 @@ public class UserData :   ICanBeLeveledUp
     {
         return GetRequiredExperienceToNextLevel(AdventurerLevel);
     }
+
     /// <summary>
     /// Receives rewards
     /// </summary>
-    /// <param name="name">the name of the user</param>
     /// <param name="rewards">the rewards</param>
     /// <returns>the receive rewards text</returns>
-    public string ReceiveRewards(string name, params Reward[] rewards)
+    public string ReceiveRewards(params Reward[] rewards)
     {
         var rewardStringBuilder = new StringBuilder("");
         var mergedRewards = Reward.MergeAllRewards(rewards)
@@ -123,20 +123,20 @@ public class UserData :   ICanBeLeveledUp
         foreach (var i in mergedRewards)
         {
             if(!i.IsValid) continue;
-            rewardStringBuilder.Append($"{i.GiveRewardTo(this, name)}\n");
+            rewardStringBuilder.Append($"{i.GiveRewardTo(this)}\n");
         }
 
         return rewardStringBuilder.ToString();
     }
+
     /// <summary>
     /// Receives rewards
     /// </summary>
-    /// <param name="name">the name of the user</param>
     /// <param name="rewards">the rewards</param>
     /// <returns>the receive rewards text</returns>
-    public string ReceiveRewards(string name,IEnumerable<Reward> rewards)
+    public string ReceiveRewards(IEnumerable<Reward> rewards)
     {
-        return ReceiveRewards(name,rewards.ToArray());
+        return ReceiveRewards(rewards.ToArray());
     }
 
     
@@ -192,7 +192,7 @@ public class UserData :   ICanBeLeveledUp
     public int AdventurerLevel { get; set; } = 1;
     public DiscordColor Color { get; set; } = DiscordColor.Green;
     public string Language { get; set; } = "english";
-    public Inventory Inventory { get; protected set; } = [];
+    public EntityContainer Inventory { get; protected set; } = [];
 
 
 
