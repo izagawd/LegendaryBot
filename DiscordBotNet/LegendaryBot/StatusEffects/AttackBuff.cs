@@ -14,10 +14,6 @@ public class AttackBuff : StatusEffect, IStatsModifier
 
     public override StatusEffectType EffectType => StatusEffectType.Buff;
 
-    public AttackBuff(Character caster) : base(caster)
-    {
-
-    }
 
 
 

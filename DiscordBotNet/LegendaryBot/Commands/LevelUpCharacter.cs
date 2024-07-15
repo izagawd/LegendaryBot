@@ -194,10 +194,10 @@ public class LevelUpCharacter : GeneralCommandClass
         return failureText;
     }
     
-    [Command("level_up"),
-     AdditionalCommand("/level_up player",BotCommandType.Battle)]
+    [Command("level-up"),
+     AdditionalCommand("/level-up player",BotCommandType.Battle)]
     public async Task LevelUp(CommandContext ctx,
-        [Parameter("character_name")] string characterName)
+        [Parameter("character-name")] string characterName)
     {
         var simplifiedCharacterName = characterName.ToLower().Replace(" ", "");
 

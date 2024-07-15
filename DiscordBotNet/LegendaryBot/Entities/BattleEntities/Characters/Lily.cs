@@ -39,7 +39,7 @@ public class ChamomileSachetWhack : BasicAttack
 
         if (BasicFunctionality.RandomChance(SleepChance))
         {
-            target.AddStatusEffect(new Sleep(User), User.Effectiveness);
+            target.AddStatusEffect(new Sleep(){Caster = User}, User.Effectiveness);
         }
         return result;
     }
@@ -95,11 +95,11 @@ public class LilyOfTheValley : Ultimate
             
             if (BasicFunctionality.RandomChance(PoisonInflictChance))
             {
-                statusEffects.Add(new Poison(User){Duration = 2});
+                statusEffects.Add(new Poison(){Duration = 2,Caster = User});
             }
             if (BasicFunctionality.RandomChance(StunInflictChance))
             {
-                statusEffects.Add(new Stun(User){Duration = 2});
+                statusEffects.Add(new Stun{Duration = 2, Caster = User});
             }
             if(statusEffects.Any()) i.AddStatusEffects(statusEffects,effectiveness);
             statusEffects.Clear();

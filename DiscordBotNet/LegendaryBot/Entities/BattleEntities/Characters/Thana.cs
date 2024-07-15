@@ -20,7 +20,7 @@ public class SoulAttack : BasicAttack
         });
         if (BasicFunctionality.RandomChance(25))
         {
-            target.AddStatusEffect(new Sleep(User));
+            target.AddStatusEffect(new Sleep(){Caster = User});
         }
         return new UsageResult(this)
         {
@@ -97,9 +97,9 @@ public class Arise : Ultimate
             {
                 duration = 3;
             }
-            i.AddStatusEffect(new Immortality(User){Duration = duration});
+            i.AddStatusEffect(new Immortality(){Duration = duration, Caster = User});
         }
-        User.AddStatusEffect(new AttackBuff(User) { Duration = 3 });
+        User.AddStatusEffect(new AttackBuff() { Duration = 3 , Caster = User});
         User.GrantExtraTurn();
         return new UsageResult(this)
         {

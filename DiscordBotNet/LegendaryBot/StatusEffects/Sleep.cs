@@ -7,14 +7,12 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Sleep: StatusEffect, IBattleEventListener
 {
+
     public override string Description =>
         "Makes affected not able to move. Is dispelled when affected takes damage from a move";
     public override int MaxStacks => 1;
 
-    public Sleep(Character caster) : base(caster)
-    {
-        
-    }
+
     public override OverrideTurnType OverrideTurnType => OverrideTurnType.CannotMove;
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
 

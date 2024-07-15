@@ -19,9 +19,9 @@ public class TeamCommand : GeneralCommandClass
 
 
 
-    [Command("equip_team"), Description("Use this Commands to change teams")]
+    [Command("equip-team"), Description("Use this Commands to change teams")]
     public async ValueTask ExecuteEquip(CommandContext context,
-        [Parameter("team_name")] string teamName)
+        [Parameter("team-name")] string teamName)
     {
         var anon = await DatabaseContext.UserData
             .Include(i => i.EquippedPlayerTeam)
@@ -49,11 +49,11 @@ public class TeamCommand : GeneralCommandClass
 
     }
 
-    [Command("remove_character")]
-    [AdditionalCommand("/remove_character player",BotCommandType.Battle)]
+    [Command("remove-character")]
+    [AdditionalCommand("/remove-character player",BotCommandType.Battle)]
     public async ValueTask ExecuteRemoveFromTeam(CommandContext context,
-        [Parameter("character_name")] string characterName,
-        [Parameter("team_name"),  Description("Name of team you want to remove character from")]
+        [Parameter("character-name")] string characterName,
+        [Parameter("team-name"),  Description("Name of team you want to remove character from")]
         string teamName)
     {
     
@@ -111,13 +111,13 @@ public class TeamCommand : GeneralCommandClass
 
     }
 
-    [Command("rename_team")]
+    [Command("rename-team")]
 
     
     public async ValueTask ExecuteRenameTeam(CommandContext context,
-        [Parameter("team_name")]
+        [Parameter("team-name")]
         string teamName,
-        [Parameter("new_name")]
+        [Parameter("new-name")]
         string newName)
     {
         var userData = await DatabaseContext.UserData
@@ -151,9 +151,9 @@ public class TeamCommand : GeneralCommandClass
         await context.RespondAsync(embed);
 
     }
-    [Command("add_character"), Description("adds a character to a team!")]
-    public async ValueTask ExecuteAddToTeam(CommandContext context, [Parameter("character_name"), Description("Name of team you want to add character to")] string characterName,
-        [Parameter("team_name")] string teamName)
+    [Command("add-character"), Description("adds a character to a team!")]
+    public async ValueTask ExecuteAddToTeam(CommandContext context, [Parameter("character-name"), Description("Name of team you want to add character to")] string characterName,
+        [Parameter("team-name")] string teamName)
     {
 
 

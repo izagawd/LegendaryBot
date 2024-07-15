@@ -12,10 +12,10 @@ namespace DiscordBotNet.LegendaryBot.command;
 public class GiveMe : GeneralCommandClass
 {
 
-    [Command("give_me"),
-     AdditionalCommand("/give_me", BotCommandType.Battle)]
-    public async ValueTask Execute(CommandContext ctx,[Parameter("entity_name")]
-        string entityName,[Parameter("entity_amount"), 
+    [Command("give-me"),
+     AdditionalCommand("/give-me", BotCommandType.Battle)]
+    public async ValueTask Execute(CommandContext ctx,[Parameter("entity-name")]
+        string entityName,[Parameter("entity-amount"), 
                            Description("The amount you want of the supplied item")] long amount = 1)
     {
         var simplifiedEntityName = entityName.ToLower().Replace(" ", "");

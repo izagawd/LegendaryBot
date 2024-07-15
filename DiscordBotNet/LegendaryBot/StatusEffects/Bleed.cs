@@ -5,10 +5,11 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Bleed : StatusEffect, IDetonatable
 {
+ 
     public override string Description => "Does damage proportional to the caster's attack to the affected at the start of the affected's turn." +
                                           " Ignores 70% of the affecteed's defense";
     public override bool ExecuteStatusEffectAfterTurn => false;
-    public float Attack { get;  }
+    public float Attack { get; private set; }
     public DamageResult? Detonate( Character detonator)
     {
         var removed =Affected.RemoveStatusEffect(this);
@@ -35,8 +36,11 @@ public class Bleed : StatusEffect, IDetonatable
         DoDamage();
     }
 
-    public Bleed(Character caster) : base(caster)
+    public override void OnAdded()
     {
-        Attack = caster.Attack;
+        base.OnAdded();
+        Attack = Caster.Attack;
     }
+
+
 }

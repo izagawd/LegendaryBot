@@ -15,8 +15,8 @@ public class Hunt : GeneralCommandClass
     [Command("hunt"),
     AdditionalCommand("/hunt Coach Chad",BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx,
-        [Parameter("mob_name")] string characterName,
-        [Parameter("enemy_count")] long enemyCount = 1 )
+        [Parameter("mob-name")] string characterName,
+        [Parameter("enemy-count")] long enemyCount = 1 )
     {
         var author = ctx.User;
         var userData = await DatabaseContext.UserData

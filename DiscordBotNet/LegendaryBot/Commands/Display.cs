@@ -113,7 +113,7 @@ public class Display : GeneralCommandClass
     }
     [Command("blessing")]
     public async ValueTask ExecuteDisplayABlessing(CommandContext ctx,
-        [Parameter("blessing_id")] Guid blessingId)
+        [Parameter("blessing-id")] Guid blessingId)
     {
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)

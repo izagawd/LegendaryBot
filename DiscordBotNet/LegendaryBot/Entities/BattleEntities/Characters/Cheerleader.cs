@@ -52,7 +52,7 @@ public class  YouCanDoIt : Skill
     {
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} wants {target.NameWithAlphabetIdentifier} to prevail!");
         target.IncreaseCombatReadiness(100);
-        target.AddStatusEffect(new AttackBuff(User) { Duration = 2 });
+        target.AddStatusEffect(new AttackBuff() { Duration = 2 , Caster = User});
 
         return new UsageResult(this)
         {
@@ -91,7 +91,7 @@ public class YouCanMakeItEveryone : Ultimate
             }
             foreach (var i in targets)
             {
-                i.AddStatusEffect(new AttackBuff(User) { Duration = 2 });
+                i.AddStatusEffect(new AttackBuff() { Duration = 2, Caster = User});
             }
 
         }

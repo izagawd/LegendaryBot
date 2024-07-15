@@ -5,15 +5,17 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Bomb : StatusEffect, IDetonatable
 {
-    
+    public override void OnAdded()
+    {
+        base.OnAdded();
+        Attack = Caster.Attack;
+    }
+
     public override string Description => "Detonates on the affected when the duration of this status effect finishes." +
                                           " Detonation damage is proportional to the caster's attack. After detonation, the affected gets stunned";
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
-    public float Attack { get; }
-    public Bomb(Character caster) : base(caster)
-    {
-        Attack = caster.Attack;
-    }
+    public float Attack { get; private set; }
+
 
     public override void PassTurn()
     {
@@ -27,7 +29,7 @@ public class Bomb : StatusEffect, IDetonatable
     public DamageResult? Detonate( Character detonator)
     {
         Affected.RemoveStatusEffect(this);
-        Affected.AddStatusEffect(new Stun(detonator));
+        Affected.AddStatusEffect(new Stun(){Caster = detonator});
         return Affected.Damage(        new DamageArgs(this)
         {
             ElementToDamageWith = null,

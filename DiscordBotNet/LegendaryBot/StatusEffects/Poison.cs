@@ -5,14 +5,12 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Poison : StatusEffect, IDetonatable
 {
+
     public override string Description => "Deals damage equivalent to 5% of the affected's max health";
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
 
     public override bool ExecuteStatusEffectAfterTurn => false;
-    public Poison( Character caster) : base(caster)
-    {
 
-    }
 
 
     public override void PassTurn()

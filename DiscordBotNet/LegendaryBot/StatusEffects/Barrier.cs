@@ -4,6 +4,7 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Barrier : StatusEffect
 {
+
     public override string Description => "Protects the caster with a barrier";
     public override int MaxStacks => 1;
     public override StatusEffectType EffectType => StatusEffectType.Buff;
@@ -35,11 +36,8 @@ public class Barrier : StatusEffect
         _shieldValue = value;
         
     }
-    public Barrier(Character caster) : base(caster)
-    {
-        
-    }
-    public Barrier(Character caster, int shieldValue) : this(caster)
+ 
+    public Barrier(int shieldValue) 
     {
         _shieldValue = shieldValue;
     }

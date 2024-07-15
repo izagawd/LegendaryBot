@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Immutable;
+using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
@@ -461,17 +462,7 @@ public abstract partial  class Character : BattleEntity
 
     [NotMapped] private readonly HashSet<StatusEffect> _statusEffects = [];
 
-    [NotMapped]
-    public IEnumerable<StatusEffect> StatusEffects
-    {
-        get
-        {
-            foreach (var i in _statusEffects)
-            {
-                yield return i;
-            }
-        }
-    }
+    [NotMapped] public IEnumerable<StatusEffect> StatusEffects => _statusEffects.ToImmutableArray();
 
     [NotMapped] public virtual DiscordColor Color { get; protected set; } = DiscordColor.Green;
 

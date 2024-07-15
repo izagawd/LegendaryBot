@@ -6,14 +6,12 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class VolcanicEruptionCharging : StatusEffect
 {
+
     public override string Description =>
         "Makes the affected charge up a powerful attack that's released at the end of the effect's duration";
 
 
-    public VolcanicEruptionCharging( Character caster) : base(caster)
-    {
-     
-    }
+
     public override StatusEffectType EffectType => StatusEffectType.Buff;
     public override OverrideTurnType OverrideTurnType => OverrideTurnType.ControlDecision;
     public override int MaxStacks => 1;

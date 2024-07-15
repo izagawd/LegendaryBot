@@ -8,10 +8,7 @@ public class Frozen : StatusEffect
 {
     public override string Description => "Makes affected not able to move";
 
-
-    public Frozen(Character caster) : base( caster)
-    {
-    }
+    
 
 
     public override StatusEffectType EffectType => StatusEffectType.Debuff;

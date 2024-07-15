@@ -8,15 +8,12 @@ public class DefenseDebuff: StatusEffect, IStatsModifier
 
 
 
-
+   
     public override int MaxStacks => 1;
 
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
 
-    public DefenseDebuff( Character caster) : base( caster)
-    {
-
-    }
+ 
     public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
     {
         yield return

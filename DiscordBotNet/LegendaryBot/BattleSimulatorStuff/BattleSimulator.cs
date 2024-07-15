@@ -13,6 +13,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
+using Microsoft.Extensions.Primitives;
 using SixLabors.ImageSharp.Drawing;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
@@ -440,32 +441,17 @@ public class BattleSimulator
             }
 
             var statusEffectsCopy = characterToDisplayBattleInfo.StatusEffects;
-            if (characterToDisplayBattleInfo.StatusEffects.Any())
+            if (statusEffectsCopy.Any())
             {
                 descriptionStringBuilder.Append("Status Effects\n\n");
 
-                Dictionary<StatusEffect, int> statusCounts = [];
-                foreach (var i in statusEffectsCopy)
+                foreach (var effect in statusEffectsCopy)
                 {
-                    var instance = statusCounts.Keys
-                        .FirstOrDefault(j => j.GetType() == i.GetType());
-                    if (instance is null)
-                    {
-                        instance = i;
-                        statusCounts[i] = 1;
-                    }
-                    else
-                    {
-                        statusCounts[instance]++;
-                    }
+                    descriptionStringBuilder.Append(
+                        $"Name: {effect} | Type: {effect.EffectType} | Duration: {effect.Duration}\n");
                 }
 
-                foreach (var i in statusCounts)
-                {
-                    var effect = i.Key;
-                    descriptionStringBuilder.Append(
-                        $"Name: {effect}. Type: {effect.EffectType} Count: {i.Value}\nDescription: {effect.Description}\n\n");
-                }
+                descriptionStringBuilder.Append('\n');
             }
             descriptionStringBuilder
                 .Append("Stats\n");
@@ -877,6 +863,7 @@ public class BattleSimulator
                 {
                     message = await interaction.CreateFollowupMessageAsync(new DiscordFollowupMessageBuilder(messageBuilder));
                 }
+                interaction = null;
             }
             else if (message is not null)
             {
@@ -922,7 +909,7 @@ public class BattleSimulator
             if (copy.Any())
                 mostPowerfulStatusEffect = copy.OrderByDescending(i => i.OverrideTurnType).First();
 
-            interaction = null;
+            
             
 
             if (!shouldDoTurn)

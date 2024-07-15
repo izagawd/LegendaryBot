@@ -65,7 +65,7 @@ public class BlowAway : Skill
                 if (BasicFunctionality.RandomChance(BombInflictChance))
                 {
                                 
-                    i.AddStatusEffect(new Bomb(User){Duration = 2}, User.Effectiveness);
+                    i.AddStatusEffect(new Bomb(){Duration = 2, Caster = User}, User.Effectiveness);
                 }
             }
 
@@ -90,7 +90,7 @@ public class VolcanicEruption : Ultimate
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        var isCharging = User.AddStatusEffect(new VolcanicEruptionCharging(User){Duration = 3});
+        var isCharging = User.AddStatusEffect(new VolcanicEruptionCharging(){Duration = 3, Caster = User});
         if(isCharging == StatusEffectInflictResult.Succeeded)
             User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} is charging up a very powerful attack!");
         return new UsageResult(this){UsageType = usageType, TargetType = TargetType.AOE, User = User, Text = "What's this?"};

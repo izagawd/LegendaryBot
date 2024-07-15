@@ -67,7 +67,7 @@ public class SimpleSlashOfPrecision : BasicAttack
         });
         if (BasicFunctionality.RandomChance(BleedChance))
         {
-            target.AddStatusEffect(new Bleed(User));
+            target.AddStatusEffect(new Bleed(){Caster = User});
         }
         return new UsageResult(this)
         {

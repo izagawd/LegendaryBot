@@ -27,7 +27,7 @@ public class DoNotResist : BasicAttack
         });
         if (BasicFunctionality.RandomChance(15))
         {
-            target.AddStatusEffect(new Stun(User){Duration = 1}, User.Effectiveness);
+            target.AddStatusEffect(new Stun(){Duration = 1, Caster = User}, User.Effectiveness);
         }
 
         return new UsageResult(this)
@@ -66,7 +66,7 @@ public class IAmShooting : Skill
         });
         foreach (var _ in Enumerable.Range(0,2))
         {
-            target.AddStatusEffect(new Bleed(User), User.Effectiveness);
+            target.AddStatusEffect(new Bleed(){ Caster = User}, User.Effectiveness);
         }
         return new UsageResult(this)
         {

@@ -20,17 +20,17 @@ public abstract class GeneralCommandClass
     }
 
 
-    public Task<bool> HandleIsOccupied(IEnumerable<UserData> userDatas, CommandContext context, string? occupiedText = null)
+    public Task<bool> HandleIsOccupiedAsync(IEnumerable<UserData> userDatas, CommandContext context,
+        string? occupiedText = null)
     {
-        return HandleIsOccupied(userDatas.Select(i => i.Id),context);
+        return HandleIsOccupiedAsync(userDatas.Select(i => i.Id),context, occupiedText);
     }
     
-    public async Task<bool> HandleIsOccupied(IEnumerable<ulong> userDatas, CommandContext context, string? occupiedText = null)
+    public async Task<bool> HandleIsOccupiedAsync(IEnumerable<ulong> userDatas, CommandContext context, string? occupiedText = null)
     {
         if ((await DatabaseContext.UserData.AnyAsync(i => i.IsOccupied)))
         {
-            var userData = await DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(context.User.Id, i => i.Color);
-            
+            return true;
         }
 
         return false;

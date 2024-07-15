@@ -8,8 +8,8 @@ namespace DiscordBotNet.LegendaryBot.command;
 
 public class SimulateBattle : GeneralCommandClass
 {
-    [Command("simulate_battle")]
-    public async ValueTask Execute(CommandContext context,[Parameter("battle_count")] long battleCount = 1)
+    [Command("simulate-battle")]
+    public async ValueTask Execute(CommandContext context,[Parameter("battle-count")] long battleCount = 1)
     {
         List<Task<BattleResult>> pendingBattleResults = [];
         foreach (var i in Enumerable.Range(0,(int)battleCount))

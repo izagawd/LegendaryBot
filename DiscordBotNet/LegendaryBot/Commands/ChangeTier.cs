@@ -6,8 +6,8 @@ namespace DiscordBotNet.LegendaryBot.command;
 
 public class MakeMeDivine : GeneralCommandClass
 {
-    [Command("make_me_divine"), Description("Use this to give yourself highest tier"),
-     AdditionalCommand("/make_me_divine", BotCommandType.Battle)]
+    [Command("make-me-divine"), Description("Use this to give yourself highest tier"),
+     AdditionalCommand("/make-me-divine", BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx)
     {
         var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync(ctx.User.Id);

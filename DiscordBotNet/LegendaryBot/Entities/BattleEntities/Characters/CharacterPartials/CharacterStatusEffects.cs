@@ -12,7 +12,7 @@ public partial class Character
         var statusEffectsAsArray = statusEffects.ToArray();
         if (!announce)
         {
-            foreach (var i in statusEffects)
+            foreach (var i in statusEffectsAsArray)
             {
                 AddStatusEffect(i, effectiveness, false);
             }
@@ -86,8 +86,12 @@ public partial class Character
                 
             }
             inflictResult = StatusEffectInflictResult.Resisted;
-            if (added) 
+            if (added)
+            {
                 inflictResult =  StatusEffectInflictResult.Succeeded;
+                statusEffect.OnAdded();
+            }
+                
             if (announce)
             {
                 CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,inflictResult, statusEffect));

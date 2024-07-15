@@ -65,7 +65,7 @@ public class FireBall : Skill
             });
             if (BasicFunctionality.RandomChance(10))
             {
-                target.AddStatusEffect(new Burn(User),User.Effectiveness);
+                target.AddStatusEffect(new Burn(){Caster = User},User.Effectiveness);
             }
         }
 
@@ -101,7 +101,7 @@ public class Ignite : Ultimate
         {
             if (BasicFunctionality.RandomChance(IgniteChance))
             {
-                burns.Add(new Burn(User));
+                burns.Add(new Burn(){ Caster = User});
             }
         }
 

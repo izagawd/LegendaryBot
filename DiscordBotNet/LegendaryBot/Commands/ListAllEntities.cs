@@ -43,7 +43,7 @@ public class ListAllEntities : GeneralCommandClass
         listed = builder.ToString();
 
     }
-    [Command("list_all_entities")]
+    [Command("listallentities")]
     public async ValueTask ExecuteGetTotalMemoryUsedInBytes(CommandContext ctx)
     {
         var embed = new DiscordEmbedBuilder()

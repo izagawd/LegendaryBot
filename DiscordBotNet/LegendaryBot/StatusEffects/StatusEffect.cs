@@ -10,6 +10,16 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public abstract class StatusEffect : ICloneable 
 {
+    public StatusEffect(){}
+
+    /// <summary>
+    /// Called when this status effect has been added to a character. use this instead of constructor
+    /// before this method is called, the <see cref="Affected"/> and <see cref="Caster"/> variables would have been set
+    /// </summary>
+    public virtual void OnAdded()
+    {
+        
+    }
     /// <summary>
     /// The character currently affected by the status effect
     /// </summary>
@@ -105,7 +115,7 @@ public abstract class StatusEffect : ICloneable
     /// <summary>
     /// The person who casted the status effect
     /// </summary>
-    public Character Caster { get; set; }
+    public required Character Caster { get; set; }
     /// <summary>
     /// The name of the status effect
     /// </summary>
@@ -131,11 +141,6 @@ public abstract class StatusEffect : ICloneable
 
     }
 
-    /// <param name="caster">The one who casted the status effect</param>
-    public StatusEffect(Character caster)
-    {
-        Caster = caster;
-    }
 
 
 
