@@ -32,7 +32,7 @@ public class QuestCommand : GeneralCommandClass
         if (userData.Tier == Tier.Unranked)
         {
             
-            embed.WithDescription("Use the begin command before doing any quests");
+            embed.WithDescription("Use the begin Commands before doing any quests");
             await ctx.RespondAsync(embed);
             return;
         }

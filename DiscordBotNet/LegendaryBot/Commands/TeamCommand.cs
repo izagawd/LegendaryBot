@@ -19,7 +19,7 @@ public class TeamCommand : GeneralCommandClass
 
 
 
-    [Command("equip_team"), Description("Use this command to change teams")]
+    [Command("equip_team"), Description("Use this Commands to change teams")]
     public async ValueTask ExecuteEquip(CommandContext context,
         [Parameter("team_name")] string teamName)
     {

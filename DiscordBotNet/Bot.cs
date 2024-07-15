@@ -9,6 +9,7 @@ using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.command;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.EventArgs;
@@ -41,6 +42,8 @@ public static class Bot
     private static  Task FirstTimeSetupAsync()
     {
 
+
+
         return new PostgreSqlContext().ResetDatabaseAsync();
     }
 
@@ -48,7 +51,6 @@ public static class Bot
 
     private static async Task StartDiscordBotAsync()
     {
-      
         
         Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["BotToken"]!,
             DiscordIntents.All)
@@ -106,8 +108,7 @@ public static class Bot
 
     private static Task DoShitAsync()
     {
-
-
+        var post = new PostgreSqlContext();
 
         return Task.CompletedTask;
 
@@ -128,6 +129,7 @@ public static class Bot
             Console.WriteLine($"Took a total of {stopwatch.Elapsed.TotalMilliseconds}ms to make {count} users unoccupied");
         }
         await StartDiscordBotAsync();
+        await DoShitAsync();
         await Website.StartAsync(args);
 
 

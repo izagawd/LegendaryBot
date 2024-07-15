@@ -30,6 +30,16 @@ public class LevelUpCharacter : GeneralCommandClass
 
     private static ConcurrentDictionary<string, Image<Rgba32>> _resizedBlessingsLevelUpImageCache = new();
 
+    public static void UpdateEmbed(DiscordEmbedBuilder builder, Character character)
+    {
+        var description = "";
+        foreach (var i in DefaultObjects.GetDefaultObjectsThatSubclass<CharacterExpMaterial>())
+        {
+            description += $"{i.Name}: {character.UserData.Inventory.GetItemStacks(i.GetType())}\n";
+        }
+
+        builder.WithDescription(description);
+    }
     public static async Task<Image<Rgba32>> GetImageForLevelUpAndAscensionAsync( Character character)
     {
         var image = new Image<Rgba32>(495, 300);
@@ -270,7 +280,7 @@ public class LevelUpCharacter : GeneralCommandClass
                 SetupComponents();
                 messageBuilder.AddComponents(components);
             }
-            
+            UpdateEmbed(embedBuilder,character);
             await ctx.RespondAsync(messageBuilder);
             
             if (!shouldContinue)
@@ -412,6 +422,7 @@ public class LevelUpCharacter : GeneralCommandClass
 
                 
                 await DatabaseContext.SaveChangesAsync();
+                UpdateEmbed(embedBuilder,character);
                 character.LoadGear();
                 using var localLevelUpImage = await GetImageForLevelUpAndAscensionAsync(character);
                 await using var localStream = new MemoryStream();

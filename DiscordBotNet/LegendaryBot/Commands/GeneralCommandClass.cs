@@ -91,7 +91,7 @@ public abstract class GeneralCommandClass
 
 
     /// <summary>
-    /// This exists cuz it's disposed at the end of a slash command and cuz I tend to forget to dispose disposable stuff
+    /// This exists cuz it's disposed at the end of a slash Commands and cuz I tend to forget to dispose disposable stuff
     /// </summary>
     public PostgreSqlContext DatabaseContext { get; private set; }
 

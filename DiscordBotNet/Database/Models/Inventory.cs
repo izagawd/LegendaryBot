@@ -95,6 +95,8 @@ public class Inventory : IList<Entity>
                 break;
         }
     }
+
+    private Entity idk = null;
     public void Add(Entity entity)
     {
         if (entity is Item item)
@@ -107,7 +109,7 @@ public class Inventory : IList<Entity>
             _list.RemoveAll(i => theArray.Contains(i));
         } else if (entity is Character)
         {
-     
+        
             if (_list.Any(i => i.GetType() == entity.GetType()))
             {
                 Task.Run(async () =>

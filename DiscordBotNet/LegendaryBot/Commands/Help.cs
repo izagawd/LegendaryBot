@@ -154,7 +154,7 @@ public class Help : GeneralCommandClass
     [Command("help"),
      AdditionalCommand("/help\n/help command_name",BotCommandType.Other)]
     public async ValueTask Execute(CommandContext ctx,
-    [Parameter("command")] string? cmd = null)
+    [Parameter("Commands")] string? cmd = null)
     {
         
         var author = ctx.User;
@@ -184,7 +184,7 @@ public class Help : GeneralCommandClass
             {
                 embedToBuild
                     .WithTitle("Hmm")
-                    .WithDescription("Inputted command not found");
+                    .WithDescription("Inputted Commands not found");
             }
             else
             {

@@ -29,7 +29,7 @@ public class Begin : GeneralCommandClass
         "gender", Gender.Male.ToString(),
         Gender.Male.ToString());
     [Command("begin"),
-    AdditionalCommand("/begin",BotCommandType.Battle), Description("Use this command to begin your journey")]
+    AdditionalCommand("/begin",BotCommandType.Battle), Description("Use this Commands to begin your journey")]
     public async ValueTask Execute(CommandContext ctx)
     {
         DiscordEmbedBuilder embedToBuild = new();
@@ -114,7 +114,7 @@ public class Begin : GeneralCommandClass
             return;
         }
         userData.Name = done.Result.Values["name"];
-        userData.Name.Print();
+
         var interactionToRespondTo = done.Result.Interaction;
         if (!Enum.TryParse(done.Result.Values["gender"], true, out Gender gottenGender))
         {

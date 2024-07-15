@@ -42,6 +42,17 @@ public static class BasicFunctionality
     }
 
 
+    public static async Task DelayWithTokenNoError(int milliseconds, CancellationToken token)
+    {
+        try
+        {
+            await Task.Delay(milliseconds, token);
+        }
+        catch (TaskCanceledException)
+        {
+            
+        }
+    }
     /// <summary>
      /// Gets the image as sixlabors image from the url provided, caches it, and returns it
      /// </summary>

@@ -27,21 +27,11 @@ public static class BasicExtension
         TimeSpan? timeoutOverride = null)
     {
 
-       
+
         return Bot.Interactivity.WaitForEventArgsAsync<ComponentInteractionCreatedEventArgs>
             (i => i.Message == message && predicate(i),timeoutOverride);
     }
-    public static async Task<InteractivityResult<ComponentInteractionCreatedEventArgs>> WaitForAnyComponentInteractionAsync(this DiscordMessage message, Func<ComponentInteractionCreatedEventArgs,bool> predicate, CancellationTokenSource token)
-    {
-        IEnumerable<Task<InteractivityResult<ComponentInteractionCreatedEventArgs>>> tasks=
-        [
-            message.WaitForButtonAsync(predicate, token.Token),
-            message.WaitForSelectAsync(predicate, token.Token)
-        ];
-        var result = await await Task.WhenAny(tasks);
-        await token.CancelAsync();
-        return result;
-    }
+
     public static DiscordEmbedBuilder WithUser(this DiscordEmbedBuilder embedBuilder, DiscordUser user)
     {
         return embedBuilder.WithAuthor(user.Username, iconUrl: user.AvatarUrl);

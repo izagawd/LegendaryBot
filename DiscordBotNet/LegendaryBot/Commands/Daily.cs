@@ -19,7 +19,7 @@ public class Daily : GeneralCommandClass
             .WithTitle("Hmm");
         if (userData.Tier == Tier.Unranked)
         {
-            await ctx.RespondAsync(embed.WithDescription("Use the begin command first"));
+            await ctx.RespondAsync(embed.WithDescription("Use the begin Commands first"));
             return;
         }
 

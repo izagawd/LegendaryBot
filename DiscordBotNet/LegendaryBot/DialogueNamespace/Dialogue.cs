@@ -25,7 +25,7 @@ public class Dialogue
     public DialogueDecisionArgument? DecisionArgument { get; init; }
 
     /// <summary>
-    /// Responds to the interaction of the provided context if true. Used if the command is being responded to
+    /// Responds to the interaction of the provided context if true. Used if the Commands is being responded to
     /// with a dialogue
     /// </summary>
     public bool RespondInteraction { get; init; }
@@ -39,7 +39,7 @@ public class Dialogue
     private bool _finished = false;
     /// <summary>
     /// Whether or not to remove all buttons at the end of dialogue. should be used if the last dialogue text
-    /// is the last thing that happens in a command
+    /// is the last thing that happens in a Commands
     /// </summary>
     public bool RemoveButtonsAtEnd { get; init; } 
     private static readonly DiscordButtonComponent Next = new(DiscordButtonStyle.Success, "next", "NEXT");

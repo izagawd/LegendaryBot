@@ -39,26 +39,9 @@ public class GiveMe : GeneralCommandClass
                 await ctx.RespondAsync("sorry, cant have dupe characters");
                 return;
             } 
-            if (createdType is Item item)
-            {
-                item.Stacks =(int) amount;
-                if(userData.Inventory.Any(i => i.GetType() == type))
-                {
-                    var gottenItem = userData.Inventory.OfType<Item>().First(i => i.GetType() == type);
-                    gottenItem.Stacks += (int) amount;
-                }
-                else
-                {
-                    userData.Inventory.Add(item);
-                }
-            }
-            else
-            {
-                if(createdType is Gear gear)
+            if(createdType is Gear gear)
                     gear.Initialize(Rarity.FiveStar);
-                userData.Inventory.Add(createdType);
-            }
-
+            userData.Inventory.Add(createdType);
             await DatabaseContext.SaveChangesAsync();
             await ctx.RespondAsync("Done!");
         }

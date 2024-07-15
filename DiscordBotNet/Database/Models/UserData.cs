@@ -23,6 +23,7 @@ public enum Gender : short
 }
 public class UserData :   ICanBeLeveledUp
 {
+    
     public Gender Gender { get; set; }
     public string Name { get; set; } = "Aether";
 
@@ -38,7 +39,7 @@ public class UserData :   ICanBeLeveledUp
 
     public UserData()
     {
-    
+   
     }
 
     public PlayerTeam? EquippedPlayerTeam { get; set; }
