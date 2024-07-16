@@ -118,23 +118,29 @@ public static class Bot
     {
         var post = new PostgreSqlContext();
 
-      
+        
 
     }
     private static async Task Main(string[] args)
     {
-        await DoShitAsync();
-        var stopwatch = new Stopwatch(); 
-        Console.WriteLine("Making all users unoccupied...");
-        stopwatch.Start();
+   
+      
         await using (var ctx = new PostgreSqlContext())
         {
+            if (args.Length > 0 && args[0] == "reset-database")
+            {
+                Console.WriteLine("Resetting database...");
+                await ctx.ResetDatabaseAsync();
+                Console.WriteLine("Database reset!");
+            }
+            var stopwatch = new Stopwatch(); 
+            Console.WriteLine("Making all users unoccupied...");
+            stopwatch.Start();
             await ctx.UserData
                 .ForEachAsync(i => i.IsOccupied = false);
             var count = await ctx.UserData.CountAsync();
             await ctx.SaveChangesAsync();
-
-            Console.WriteLine($"Took a total of {stopwatch.Elapsed.TotalMilliseconds}ms to make {count} users unoccupied");
+            Console.WriteLine($"made all users unoccupied!");
         }
         await StartDiscordBotAsync();
         await DoShitAsync();

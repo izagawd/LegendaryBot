@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7ykj7O9a946ix0Tu1TMdtWP/sbeWzp9ZSbxfE1W9ZsM=",
+  "Hash": "4IPxUsKyByDfiXmQndpN21WBP9W4v+qaabOGcMGVlvs=",
   "Source": "DiscordBotNet",
   "BasePath": "_content/DiscordBotNet",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "DiscordBotNet\\wwwroot",
       "Source": "DiscordBotNet",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "DiscordBotNet.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css"
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "DiscordBotNet.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\blessings\\BlessingOfThePhoenix.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\blessings\\BlessingOfThePhoenix.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/blessings/BlessingOfThePhoenix.png",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\blessings\\BlessingOfThePhoenix.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Blast.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Blast.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/characters/Blast.png",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\Blast.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Cheerleader.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Cheerleader.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/characters/Cheerleader.png",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\Cheerleader.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\characters\\CoachChad.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\CoachChad.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/characters/CoachChad.png",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\CoachChad.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Delinquent.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Delinquent.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/characters/Delinquent.png",
       "AssetKind": "All",
@@ -150,10 +150,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\Delinquent.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Lily.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Lily.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/characters/Lily.png",
       "AssetKind": "All",
@@ -169,10 +169,48 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\Lily.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Police.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\PlayerFemale.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
+      "BasePath": "_content/DiscordBotNet",
+      "RelativePath": "battle_images/characters/PlayerFemale.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\battle_images\\characters\\PlayerFemale.png"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\PlayerMale.png",
+      "SourceId": "DiscordBotNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
+      "BasePath": "_content/DiscordBotNet",
+      "RelativePath": "battle_images/characters/PlayerMale.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\battle_images\\characters\\PlayerMale.png"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Police.png",
+      "SourceId": "DiscordBotNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/characters/Police.png",
       "AssetKind": "All",
@@ -188,10 +226,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\Police.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\characters\\RoyalKnight.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\RoyalKnight.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/characters/RoyalKnight.png",
       "AssetKind": "All",
@@ -207,10 +245,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\RoyalKnight.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Slasher.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Slasher.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/characters/Slasher.png",
       "AssetKind": "All",
@@ -226,10 +264,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\Slasher.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Slime.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Slime.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/characters/Slime.png",
       "AssetKind": "All",
@@ -245,10 +283,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\Slime.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Thana.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Thana.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/characters/Thana.png",
       "AssetKind": "All",
@@ -264,10 +302,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\Thana.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Thug.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Thug.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/characters/Thug.png",
       "AssetKind": "All",
@@ -283,10 +321,67 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\Thug.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\moves\\DancingFlames.jpg",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\items\\AdventurersKnowledge.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
+      "BasePath": "_content/DiscordBotNet",
+      "RelativePath": "battle_images/items/AdventurersKnowledge.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\battle_images\\items\\AdventurersKnowledge.png"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\items\\DivineKnowledge.png",
+      "SourceId": "DiscordBotNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
+      "BasePath": "_content/DiscordBotNet",
+      "RelativePath": "battle_images/items/DivineKnowledge.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\battle_images\\items\\DivineKnowledge.png"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\items\\HerosKnowledge.png",
+      "SourceId": "DiscordBotNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
+      "BasePath": "_content/DiscordBotNet",
+      "RelativePath": "battle_images/items/HerosKnowledge.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\battle_images\\items\\HerosKnowledge.png"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\moves\\DancingFlames.jpg",
+      "SourceId": "DiscordBotNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/moves/DancingFlames.jpg",
       "AssetKind": "All",
@@ -302,10 +397,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\moves\\DancingFlames.jpg"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\moves\\GooeyStrike.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\moves\\GooeyStrike.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/moves/GooeyStrike.png",
       "AssetKind": "All",
@@ -321,10 +416,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\moves\\GooeyStrike.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\moves\\guilotine.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\moves\\guilotine.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/moves/guilotine.png",
       "AssetKind": "All",
@@ -340,10 +435,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\moves\\guilotine.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\moves\\VolcanicEruption.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\moves\\VolcanicEruption.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/moves/VolcanicEruption.png",
       "AssetKind": "All",
@@ -359,10 +454,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\moves\\VolcanicEruption.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\AttackBuff.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\AttackBuff.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/status_effects/AttackBuff.png",
       "AssetKind": "All",
@@ -378,10 +473,29 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\status_effects\\AttackBuff.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\Bomb.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\AttackDebuff.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
+      "BasePath": "_content/DiscordBotNet",
+      "RelativePath": "battle_images/status_effects/AttackDebuff.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\battle_images\\status_effects\\AttackDebuff.png"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\Bomb.png",
+      "SourceId": "DiscordBotNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/status_effects/Bomb.png",
       "AssetKind": "All",
@@ -397,10 +511,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\status_effects\\Bomb.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\Burn.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\Burn.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/status_effects/Burn.png",
       "AssetKind": "All",
@@ -416,10 +530,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\status_effects\\Burn.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\Immortality.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\Immortality.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/status_effects/Immortality.png",
       "AssetKind": "All",
@@ -435,10 +549,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\status_effects\\Immortality.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\Poison.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\Poison.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/status_effects/Poison.png",
       "AssetKind": "All",
@@ -454,10 +568,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\status_effects\\Poison.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\Sleep.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\Sleep.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/status_effects/Sleep.png",
       "AssetKind": "All",
@@ -473,10 +587,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\status_effects\\Sleep.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\Stun.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\status_effects\\Stun.png",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "battle_images/status_effects/Stun.png",
       "AssetKind": "All",
@@ -492,10 +606,10 @@
       "OriginalItemSpec": "wwwroot\\battle_images\\status_effects\\Stun.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\css\\CharacterInfo.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\CharacterInfo.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "css/CharacterInfo.css",
       "AssetKind": "All",
@@ -511,10 +625,10 @@
       "OriginalItemSpec": "wwwroot\\css\\CharacterInfo.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\css\\CharactersnBlessings.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\CharactersnBlessings.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "css/CharactersnBlessings.css",
       "AssetKind": "All",
@@ -530,10 +644,10 @@
       "OriginalItemSpec": "wwwroot\\css\\CharactersnBlessings.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\css\\Home.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\Home.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "css/Home.css",
       "AssetKind": "All",
@@ -549,10 +663,10 @@
       "OriginalItemSpec": "wwwroot\\css\\Home.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\css\\Navigation.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\Navigation.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "css/Navigation.css",
       "AssetKind": "All",
@@ -568,10 +682,10 @@
       "OriginalItemSpec": "wwwroot\\css\\Navigation.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\css\\NeutralHref.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\NeutralHref.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "css/NeutralHref.css",
       "AssetKind": "All",
@@ -587,10 +701,10 @@
       "OriginalItemSpec": "wwwroot\\css\\NeutralHref.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\site.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -606,10 +720,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\css\\Team.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\Team.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "css/Team.css",
       "AssetKind": "All",
@@ -625,10 +739,10 @@
       "OriginalItemSpec": "wwwroot\\css\\Team.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\favicon.ico",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -644,10 +758,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\js\\info.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\js\\info.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "js/info.js",
       "AssetKind": "All",
@@ -663,10 +777,10 @@
       "OriginalItemSpec": "wwwroot\\js\\info.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\js\\site.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\js\\site.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "js/site.js",
       "AssetKind": "All",
@@ -682,10 +796,10 @@
       "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\js\\team.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\js\\team.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "js/team.js",
       "AssetKind": "All",
@@ -701,10 +815,10 @@
       "OriginalItemSpec": "wwwroot\\js\\team.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css",
       "AssetKind": "All",
@@ -720,10 +834,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "AssetKind": "All",
@@ -739,10 +853,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "AssetKind": "All",
@@ -758,10 +872,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "AssetKind": "All",
@@ -777,10 +891,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "AssetKind": "All",
@@ -796,10 +910,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "AssetKind": "All",
@@ -815,10 +929,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "AssetKind": "All",
@@ -834,10 +948,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "AssetKind": "All",
@@ -853,10 +967,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css",
       "AssetKind": "All",
@@ -872,10 +986,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "AssetKind": "All",
@@ -891,10 +1005,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "AssetKind": "All",
@@ -910,10 +1024,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "AssetKind": "All",
@@ -929,10 +1043,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "AssetKind": "All",
@@ -948,10 +1062,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "AssetKind": "All",
@@ -967,10 +1081,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "AssetKind": "All",
@@ -986,10 +1100,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "AssetKind": "All",
@@ -1005,10 +1119,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css",
       "AssetKind": "All",
@@ -1024,10 +1138,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "AssetKind": "All",
@@ -1043,10 +1157,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "AssetKind": "All",
@@ -1062,10 +1176,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "AssetKind": "All",
@@ -1081,10 +1195,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "AssetKind": "All",
@@ -1100,10 +1214,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "AssetKind": "All",
@@ -1119,10 +1233,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "AssetKind": "All",
@@ -1138,10 +1252,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "AssetKind": "All",
@@ -1157,10 +1271,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css",
       "AssetKind": "All",
@@ -1176,10 +1290,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css.map",
       "AssetKind": "All",
@@ -1195,10 +1309,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css",
       "AssetKind": "All",
@@ -1214,10 +1328,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -1233,10 +1347,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css",
       "AssetKind": "All",
@@ -1252,10 +1366,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "AssetKind": "All",
@@ -1271,10 +1385,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "AssetKind": "All",
@@ -1290,10 +1404,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "AssetKind": "All",
@@ -1309,10 +1423,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js",
       "AssetKind": "All",
@@ -1328,10 +1442,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "AssetKind": "All",
@@ -1347,10 +1461,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "AssetKind": "All",
@@ -1366,10 +1480,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "AssetKind": "All",
@@ -1385,10 +1499,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js",
       "AssetKind": "All",
@@ -1404,10 +1518,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "AssetKind": "All",
@@ -1423,10 +1537,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "AssetKind": "All",
@@ -1442,10 +1556,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "AssetKind": "All",
@@ -1461,10 +1575,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js",
       "AssetKind": "All",
@@ -1480,10 +1594,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js.map",
       "AssetKind": "All",
@@ -1499,10 +1613,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js",
       "AssetKind": "All",
@@ -1518,10 +1632,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js.map",
       "AssetKind": "All",
@@ -1537,10 +1651,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\LICENSE",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/bootstrap/LICENSE",
       "AssetKind": "All",
@@ -1556,10 +1670,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "AssetKind": "All",
@@ -1575,10 +1689,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "AssetKind": "All",
@@ -1594,10 +1708,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE.txt",
       "AssetKind": "All",
@@ -1613,10 +1727,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.js",
       "AssetKind": "All",
@@ -1632,10 +1746,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.min.js",
       "AssetKind": "All",
@@ -1651,10 +1765,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.js",
       "AssetKind": "All",
@@ -1670,10 +1784,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.min.js",
       "AssetKind": "All",
@@ -1689,10 +1803,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/jquery-validation/LICENSE.md",
       "AssetKind": "All",
@@ -1708,10 +1822,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/jquery/dist/jquery.js",
       "AssetKind": "All",
@@ -1727,10 +1841,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/jquery/dist/jquery.min.js",
       "AssetKind": "All",
@@ -1746,10 +1860,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/jquery/dist/jquery.min.map",
       "AssetKind": "All",
@@ -1765,10 +1879,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Identity": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\OneDrive\\Documents\\coding\\CS-Workspace\\DiscordBotNet\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
       "BasePath": "_content/DiscordBotNet",
       "RelativePath": "lib/jquery/LICENSE.txt",
       "AssetKind": "All",
