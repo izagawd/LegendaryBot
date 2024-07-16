@@ -122,7 +122,7 @@ public class Dialogue
         _lastInteraction = null;
     }
 
-    public TimeSpan TimeoutTimespan => new TimeSpan(0, 0, 5);
+    public TimeSpan TimeoutTimespan => new TimeSpan(0, 1, 0);
     private DiscordInteraction? _lastInteraction = null;
 
     private void HandleInteractionResult(InteractivityResult<ComponentInteractionCreatedEventArgs> args)
