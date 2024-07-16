@@ -163,7 +163,6 @@ public class Help : GeneralCommandClass
             .UserData
             .FindOrCreateSelectUserDataAsync(author.Id, 
                 i => i.Color);
-
         var embedToBuild = new DiscordEmbedBuilder()
             .WithTitle("Help")
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)

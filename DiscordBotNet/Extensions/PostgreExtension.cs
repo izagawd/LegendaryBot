@@ -121,19 +121,22 @@ public static class PostgreExtension
     public async static Task<TExpression> FindOrCreateSelectUserDataAsync<T, TExpression>(this IQueryable<T> queryable, ulong id,
          Expression<Func<T,TExpression>> selectExpression) where T : UserData,new()
     {
-        var data = await queryable
-                .Where(i => i.Id == id)
-                .Select(selectExpression)
-                .FirstOrDefaultAsync();
+        var array  = await queryable
+            .Where(i => i.Id == id)
+            .Select(selectExpression)
+            .ToArrayAsync();
+        // take 1 instead of firstordefault because returned value may be struct, which cant be null
+        //, making it harder to see if the user was actually found in the database
         
-
-        if (data is null)
+        if (array.Length == 0)
         {
+        
             var tempData = new T { Id = id };
             await queryable.GetDbContext().AddRangeAsync(tempData);
-            data = tempData.Map(selectExpression);
+            return tempData.Map(selectExpression);
         }
-        return data;
+        return array[0];
+        
     }
 
     /// <summary>

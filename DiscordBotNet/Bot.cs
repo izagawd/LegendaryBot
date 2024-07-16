@@ -117,8 +117,8 @@ public static class Bot
     private async static Task DoShitAsync()
     {
         var post = new PostgreSqlContext();
-        
-        await post.ResetDatabaseAsync();
+
+        (await post.UserData.FindOrCreateSelectUserDataAsync(4, i => i.Coins)).Print();
 
     }
     private static async Task Main(string[] args)
