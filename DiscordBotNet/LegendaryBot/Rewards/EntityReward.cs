@@ -24,15 +24,16 @@ public class EntityReward : Reward
     {
         EntitiesToReward = new EntityContainer(entitiesToReward
             .Where(i => i is not null));
-
+        EntitiesToReward.Arrange();
 
     }
 
     public override string GiveRewardTo(UserData userData)
     {
         var stringBuilder = new StringBuilder($"{userData.Name} got: ");
+        EntitiesToReward.Arrange();
         userData.Inventory.AddRange(EntitiesToReward);
-
+        userData.Inventory.Arrange();
 
         Dictionary<string, int> nameSorter = [];
         foreach (var i in EntitiesToReward)
@@ -41,7 +42,6 @@ public class EntityReward : Reward
             
             if (i is Gear gear)
             {
-      
                 gear.MainStat.SetMainStatValue(gear.Rarity);
                 stringBuilder.Append($"\n\nMainStat = {gear.MainStat.Name}: {gear.MainStat.Value}");
                 if (gear.Substats.Any())
@@ -49,7 +49,7 @@ public class EntityReward : Reward
                     stringBuilder.Append("\nSubstats: ");
                     foreach (var j in gear.Substats)
                     {
-                        stringBuilder.Append($"\n{j.Name}: {j.Value}");
+                        stringBuilder.Append($"\n{j.AsNameAndValue()}");
                     }
                 }
 

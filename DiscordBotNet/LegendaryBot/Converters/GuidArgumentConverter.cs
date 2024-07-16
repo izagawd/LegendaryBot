@@ -3,7 +3,7 @@ using DSharpPlus.Commands.Processors.TextCommands;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Converters;
 
 public class GuidArgumentConverter : ITextArgumentConverter<Guid>, ISlashArgumentConverter<Guid>
 {

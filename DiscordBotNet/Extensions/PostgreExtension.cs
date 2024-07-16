@@ -5,6 +5,7 @@ using DiscordBotNet.Database.Models;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -17,7 +18,17 @@ public static class PostgreExtension
     {
        return queryable.OrderBy(i => EF.Functions.Random()).FirstOrDefaultAsync();
     }
-
+    public static void Reload(this CollectionEntry source)
+    {
+        if (source.CurrentValue != null)
+        {
+            foreach (var item in source.CurrentValue)
+                source.EntityEntry.Context.Entry(item).State = EntityState.Detached;
+            source.CurrentValue = null;
+        }
+        source.IsLoaded = false;
+        source.Load();
+    }
     public static T? RandomOrDefault<T>(this IQueryable<T> queryable)
     {
         return queryable.OrderBy(i => EF.Functions.Random()).FirstOrDefault();

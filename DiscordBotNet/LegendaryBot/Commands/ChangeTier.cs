@@ -2,7 +2,7 @@ using System.ComponentModel;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class MakeMeDivine : GeneralCommandClass
 {

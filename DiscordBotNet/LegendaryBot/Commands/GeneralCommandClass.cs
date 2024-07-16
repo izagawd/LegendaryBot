@@ -1,11 +1,9 @@
 ﻿using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
-using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
-using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public abstract class GeneralCommandClass 
 {
@@ -38,21 +36,31 @@ public abstract class GeneralCommandClass
         return false;
     }
 
-    public  async Task AfterSlashExecutionAsync(CommandContext ctx)
+    public  async Task AfterExecutionAsync(CommandContext ctx)
     {
 
-        if(_occupiedUserDatasIds.Count > 0)
+        try
         {
+            await PostgreSqlContext.ArrangeUserInventoriesAsync([ctx.User.Id]);
+            if(_occupiedUserDatasIds.Count > 0)
+            {
          
-            await using var tempCtx = new PostgreSqlContext();
-            await tempCtx.UserData
-                .Where(i => _occupiedUserDatasIds.Contains(i.Id))
-                .ForEachAsync(i => i.IsOccupied = false);
-            await tempCtx.SaveChangesAsync();
+                await using var tempCtx = new PostgreSqlContext();
+                await tempCtx.UserData
+                    .Where(i => _occupiedUserDatasIds.Contains(i.Id))
+                    .ForEachAsync(i => i.IsOccupied = false);
+                await tempCtx.SaveChangesAsync();
  
+            }
+            await DatabaseContext.DisposeAsync();
+            DatabaseContext = null!;
         }
-        await DatabaseContext.DisposeAsync();
-        DatabaseContext = null!;
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
 
     }
 

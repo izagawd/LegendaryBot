@@ -73,11 +73,17 @@ public abstract class GearStat
         AllGearStatTypes = DefaultObjects.AllAssemblyTypes.Where(i => !i.IsAbstract && i.IsSubclassOf(typeof(GearStat))).ToImmutableArray();
     }
     
-    public string Name => $"{BasicFunctionality.Englishify(GetType().Name.Replace("GearStat",""))}";
+    [NotMapped]
+    public abstract string Name { get; }
     
-    public override string ToString()
+    [NotMapped]
+    public abstract bool IsPercentage { get; }
+    public  string AsNameAndValue()
     {
-        return Name + $": {Value}";
+        var asString = $"{Name}: {Value}";
+        if (IsPercentage)
+            asString += "%";
+        return asString;
     }
     /// <summary>
     /// Increases the value of the substat by a random amount between GetMaximumSubstatLevelIncrease

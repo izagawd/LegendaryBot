@@ -4,7 +4,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Results;
 using DSharpPlus.Commands;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class SimulateBattle : GeneralCommandClass
 {

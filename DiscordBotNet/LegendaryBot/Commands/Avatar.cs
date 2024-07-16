@@ -3,8 +3,7 @@ using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 
-
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class Avatar: GeneralCommandClass
 {

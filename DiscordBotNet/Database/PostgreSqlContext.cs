@@ -92,7 +92,20 @@ public class PostgreSqlContext : DbContext
     }
 
 
-
+    public static async Task ArrangeUserInventoriesAsync(IEnumerable<ulong> userIds)
+    {
+        await using var post = new PostgreSqlContext();
+        var asArray = userIds.ToArray();
+        var users = await post.UserData
+            .Where(i => asArray.Contains(i.Id))
+            .Include(i => i.Inventory.Where(j => j is Item || j is Character))
+            .ToArrayAsync();
+        foreach (var i in users)
+        {
+           i.Inventory.Arrange();
+        }
+        await post.SaveChangesAsync();
+    }
 
     private static readonly IEnumerable<Type> QuestTypes =
         Assembly.GetExecutingAssembly()

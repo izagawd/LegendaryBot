@@ -7,6 +7,8 @@ using DiscordBotNet.LegendaryBot.Entities.Items;
 
 namespace DiscordBotNet.Database.Models;
 
+
+
 public class EntityContainer : IList<Entity>
 {
     [NotMapped] private List<Entity> _list = new();
@@ -19,16 +21,12 @@ public class EntityContainer : IList<Entity>
 
     public EntityContainer(IEnumerable<Entity> entities)
     {
-        AddRange(entities);
+         AddRange(entities);
     }
 
     public void AddRange(IEnumerable<Entity> enumerable)
     {
-        foreach(var i in enumerable)
-        {
-            Add(i);
-        }
-        
+       _list.AddRange(enumerable);
     }
     
     IEnumerator IEnumerable.GetEnumerator()
@@ -101,36 +99,55 @@ public class EntityContainer : IList<Entity>
         }
     }
 
-    private Entity idk = null;
+ 
     public void Add(Entity entity)
     {
-        if (entity is Item item)
-        {
-            var theArray = _list.Where(i => i.GetType() == item.GetType()).ToArray();
-            foreach (var i in theArray)
-            {
-                item.Stacks += ((Item)i).Stacks;
-            }
-            _list.RemoveAll(i => theArray.Contains(i));
-        } else if (entity is Character)
-        {
+       _list.Add(entity);
         
-            if (_list.Any(i => i.GetType() == entity.GetType()))
-            {
-                Task.Run(async () =>
-                {
-                    var iza = await Bot.Client.GetUserAsync(Bot.Izasid);
-                    await iza.SendMessageAsync("Dupe character found.\n" +
-                                               $"Type: {entity.GetType().Name}\n" +
-                                               $"UserId: {entity.UserDataId}");
-                });
-                
-                return;
-            }
-        }
-        _list.Add(entity);
+    }
+    
+    public void Arrange()
+    {
+        ArrangeItemStacks();
+        ArrangeDupeCharacters();
     }
 
+    public void ArrangeDupeCharacters()
+    {
+        var characters = _list.OfType<Character>()
+            .ToArray();
+        _list.RemoveAll(i => characters.Contains(i));
+        foreach (var i in characters)
+        {
+            var already = (Character?) _list.FirstOrDefault(j => j.GetType() == i.GetType());
+            if (already is not null)
+            {
+                already.DupeCount += i.DupeCount + 1;
+            }
+            else
+            {
+                Add(i);
+            }
+        }
+    }
+    public void ArrangeItemStacks()
+    {
+        var items = _list.OfType<Item>()
+            .ToArray();
+        _list.RemoveAll(i => items.Contains(i));
+        foreach (var i in items)
+        {
+            var already = (Item?) _list.FirstOrDefault(j => j.GetType() == i.GetType());
+            if (already is not null)
+            {
+                already.Stacks += i.Stacks;
+            }
+            else
+            {
+                Add(i);
+            }
+        }
+    }
     public void Clear()
     {
         _list.Clear();

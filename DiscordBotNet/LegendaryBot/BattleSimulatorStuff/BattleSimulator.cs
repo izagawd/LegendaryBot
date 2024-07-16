@@ -460,6 +460,18 @@ public class BattleSimulator
             {
                 descriptionStringBuilder.Append(
                     $"{BasicFunctionality.Englishify(i.ToString())}: {characterToDisplayBattleInfo.GetStatFromType(i)}");
+                
+                
+                switch (i)
+                {
+                    case StatType.CriticalChance:
+                    case StatType.CriticalDamage:
+                    case StatType.Resistance:
+                    case StatType.Effectiveness:
+                        descriptionStringBuilder.Append("%");
+                        break;
+               
+                }
                 if (shouldNewLine)
                 {
                     descriptionStringBuilder.Append("\n");

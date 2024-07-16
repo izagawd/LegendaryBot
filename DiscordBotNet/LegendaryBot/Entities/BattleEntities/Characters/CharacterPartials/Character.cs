@@ -6,6 +6,7 @@ using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.DialogueNamespace;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
@@ -28,7 +29,7 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
     public void Configure(EntityTypeBuilder<Character> entity)
     {
         entity.HasMany(i => i.Gears)
-            .WithOne()
+            .WithOne(i => i.Character)
             .HasForeignKey(i => i.ArtifactWielderId);
         
         entity.HasOne(i => i.Blessing)
@@ -38,7 +39,7 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
         entity.Property(i => i.Level)
             .HasColumnName(nameof(Character.Level));
         entity.Property(i => i.Experience)
-            .HasColumnName(nameof(Blessing.Experience));
+            .HasColumnName(nameof(Character.Experience));
     }
 }
 /// <summary>
@@ -57,7 +58,18 @@ public abstract partial  class Character : Entity, ICanBeLeveledUp
     }
 
     [NotMapped]
-    public virtual bool IsInStandardBanner => true;
+    public virtual Type StatToIncreaseOnDupe => GearStat.AttackPercentageType;
+    private int _dupeCount = 0;
+    public int DupeCount
+    {
+        get => _dupeCount;
+        set
+        {
+            _dupeCount = value;
+            if (_dupeCount > 6)
+                _dupeCount = 6;
+        } 
+    }
 
     /// <summary>
     /// Increases combat readiness
@@ -65,7 +77,7 @@ public abstract partial  class Character : Entity, ICanBeLeveledUp
     /// <param name="increaseAmount"> the amount to increase</param>
     /// <param name="announceIncrease">whetheer or not to announce the fact that combat readiness was increased</param>
     /// <returns>The amount of combat readiness increased</returns>
-    public int IncreaseCombatReadiness(int increaseAmount, bool announceIncrease = true)
+    public float IncreaseCombatReadiness(float increaseAmount, bool announceIncrease = true)
     {
         if (increaseAmount < 0) throw new ArgumentException("Increase amount should be at least 0");
         CombatReadiness += increaseAmount;

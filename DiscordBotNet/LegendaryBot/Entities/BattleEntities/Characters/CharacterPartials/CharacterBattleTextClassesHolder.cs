@@ -89,9 +89,9 @@ public partial class Character
     {
 
 
-        private int _combatReadinessChangeAmount;
+        private float _combatReadinessChangeAmount;
         private List<CharacterPartials.Character> _affectedCharacters;
-        public CombatReadinessChangeBattleText(CharacterPartials.Character character,int increaseAmount)
+        public CombatReadinessChangeBattleText(CharacterPartials.Character character,float increaseAmount)
         {
             _affectedCharacters = [character];
             _combatReadinessChangeAmount = increaseAmount;

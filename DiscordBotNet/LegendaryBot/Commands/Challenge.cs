@@ -1,13 +1,12 @@
-﻿
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
+using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.Commands;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class Challenge :GeneralCommandClass
 {   

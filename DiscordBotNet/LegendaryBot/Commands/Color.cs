@@ -1,13 +1,11 @@
-﻿
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using DiscordBotNet.Extensions;
-using DSharpPlus.Entities;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Commands.Trees;
+using DSharpPlus.Entities;
 
-
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class Color : GeneralCommandClass
 {

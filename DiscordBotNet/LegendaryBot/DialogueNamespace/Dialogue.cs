@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.LegendaryBot.Results;
+﻿using DiscordBotNet.Extensions;
+using DiscordBotNet.LegendaryBot.Results;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
@@ -121,22 +122,23 @@ public class Dialogue
         _lastInteraction = null;
     }
 
+    public TimeSpan TimeoutTimespan => new TimeSpan(0, 0, 5);
     private DiscordInteraction? _lastInteraction = null;
 
     private void HandleInteractionResult(InteractivityResult<ComponentInteractionCreatedEventArgs> args)
     {
-        
-        var answer = args.Result.Id;
-        if (answer == "skip")
-        {
-            _skipped = true;
-        }
         if(args.TimedOut)
         {
             _timedOut = true;
             _finished = true;
             return;
         }
+        var answer = args.Result.Id;
+        if (answer == "skip")
+        {
+            _skipped = true;
+        }
+
         if (_skipped)
         {
             _finished = true;
@@ -206,17 +208,19 @@ public class Dialogue
                 
                 if(isLast && RemoveButtonsAtEnd && DecisionArgument is null) break;
                 var result = await _message
-                    .WaitForButtonAsync(e => e.User == user);
-                _lastInteraction = result.Result.Interaction;
+                    .WaitForButtonAsync(e => e.User == user, TimeoutTimespan);
+          
+                _lastInteraction = result.Result?.Interaction;
                 HandleInteractionResult(result);
                 if (isLast && DecisionArgument is null) _finished = true;
                 if(_finished) break;
-
                 
+
             }
-            if (_finished && _lastInteraction is not null)
+            if (_finished)
             {
-                await _lastInteraction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage);
+                if(_lastInteraction is not null) 
+                    await _lastInteraction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage);
                 break;
             }
     
@@ -231,7 +235,7 @@ public class Dialogue
             await HandleArgumentDisplay(DecisionArgument.DialogueText, true,
                 DecisionArgument.ActionRows.ToArray());
             var result = await _message.WaitForButtonAsync(e
-                => e.User == user);
+                => e.User == user, TimeoutTimespan);
             _lastInteraction = result.Result.Interaction;
             decision = result.Result.Id;
             var defer = true;

@@ -1,12 +1,12 @@
 ﻿using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Quests;
 using DiscordBotNet.LegendaryBot.Rewards;
+using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.Commands;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class QuestCommand : GeneralCommandClass
 {

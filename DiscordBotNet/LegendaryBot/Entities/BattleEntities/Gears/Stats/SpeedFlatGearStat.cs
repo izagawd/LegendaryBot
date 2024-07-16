@@ -9,7 +9,8 @@ public class SpeedFlatGearStat : GearStat
     {
         return ((int) rarity   * 7) + 10;
     }
-
+    public override string Name => "Speed";
+    public override bool IsPercentage => false;
     public override void AddStats(Character character)
     {
         character.TotalSpeed += Value;

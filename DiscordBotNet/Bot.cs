@@ -6,7 +6,7 @@ using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
-using DiscordBotNet.LegendaryBot.command;
+using DiscordBotNet.LegendaryBot.Commands;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
@@ -78,7 +78,6 @@ public static class Bot
         
         textCommandProcessor.AddConverters(typeof(Bot).Assembly);
         await commandsExtension.AddProcessorAsync(textCommandProcessor);
-        DefaultCommandExecutor idk;
 
         commandsExtension.CommandExecuted += OnCommandsExtensionOnCommandExecuted;
         
@@ -99,10 +98,18 @@ public static class Bot
 
     private static  Task OnCommandsExtensionOnCommandExecuted(CommandsExtension sender, CommandExecutedEventArgs args)
     {
-        if (args.CommandObject is GeneralCommandClass generalCommandClass)
+        try
         {
-            return generalCommandClass.AfterSlashExecutionAsync(args.Context);
+            if (args.CommandObject is GeneralCommandClass generalCommandClass)
+            {
+                return generalCommandClass.AfterExecutionAsync(args.Context);
+            }
         }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
 
         return Task.CompletedTask;
     }
@@ -110,8 +117,8 @@ public static class Bot
     private async static Task DoShitAsync()
     {
         var post = new PostgreSqlContext();
-
-
+        
+        await post.ResetDatabaseAsync();
 
     }
     private static async Task Main(string[] args)
@@ -161,25 +168,33 @@ public static class Bot
         Console.WriteLine(args.Exception);
 
 
-        DiscordColor color;
-        var commandClass = args.CommandObject as GeneralCommandClass;
-        if (commandClass is not null)
+        try
         {
-            color = await commandClass.DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(
-                args.Context.User.Id, i => i.Color);
-            await commandClass.AfterSlashExecutionAsync(args.Context);
-        }
-        else
-        {
-            color = DefaultObjects.GetDefaultObject<UserData>().Color;
-        }
-        
-        var embed = new DiscordEmbedBuilder()
-            .WithColor(color)
-            .WithTitle("hmm")
-            .WithDescription("Something went wrong").Build();
+            DiscordColor color;
+            var commandClass = args.CommandObject as GeneralCommandClass;
+            if (commandClass is not null)
+            {
+                color = await commandClass.DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(
+                    args.Context.User.Id, i => i.Color);
+                await commandClass.AfterExecutionAsync(args.Context);
+            }
+            else
+            {
+                color = DefaultObjects.GetDefaultObject<UserData>().Color;
+            }
+            
+            var embed = new DiscordEmbedBuilder()
+                .WithColor(color)
+                .WithTitle("hmm")
+                .WithDescription("Something went wrong").Build();
 
-        await args.Context.Channel.SendMessageAsync(embed);
+                await args.Context.Channel.SendMessageAsync(embed);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+       
     }
     
 

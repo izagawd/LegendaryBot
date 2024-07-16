@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using DiscordBotNet.LegendaryBot.Results;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,7 @@ public abstract class Gear : Entity
     [NotMapped] public virtual IEnumerable<Type> PossibleMainStats => [];
 
 
+    public Character Character { get; set; }
 
     public Gear(){}
     public void Initialize(Rarity rarity, Type? desiredMainStat = null)

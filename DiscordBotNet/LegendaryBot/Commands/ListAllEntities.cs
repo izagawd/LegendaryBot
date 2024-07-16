@@ -7,10 +7,9 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DSharpPlus.Commands;
-using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Entities;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class ListAllEntities : GeneralCommandClass
 {
@@ -43,7 +42,7 @@ public class ListAllEntities : GeneralCommandClass
         listed = builder.ToString();
 
     }
-    [Command("listallentities")]
+    [Command("list-all-entities")]
     public async ValueTask ExecuteGetTotalMemoryUsedInBytes(CommandContext ctx)
     {
         var embed = new DiscordEmbedBuilder()

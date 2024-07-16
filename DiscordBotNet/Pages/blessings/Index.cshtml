@@ -27,7 +27,7 @@
         <input type="text" name="name" value="@Model.Name"/>
 
         <select name="sort">
-            <option value="level" selected>Level</option>
+
             <option value="name">Name</option>
             <option value="element">Element</option>
         </select>
@@ -53,9 +53,7 @@
         case "name":
             filteredBlessingsEnumerable = filteredBlessingsEnumerable.OrderBy(i => i.Name);
             break;
-        default:
-            filteredBlessingsEnumerable = filteredBlessingsEnumerable.OrderBy(i => i.Level);
-            break;
+ 
 
     }
     var filteredBlessings = filteredBlessingsEnumerable.ToArray();
@@ -79,7 +77,6 @@
 
                     <div style="position: relative; margin-left: 20px;">
                         <p style="position: relative; ">Name: @blessing.Name</p>
-                        <p> Level: @blessing.Level</p>
                     </div>
 
                 </div>

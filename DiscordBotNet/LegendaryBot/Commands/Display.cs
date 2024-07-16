@@ -3,13 +3,14 @@ using System.Text;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.Commands;
 using Microsoft.EntityFrameworkCore;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 [Command("display")]
 public class Display : GeneralCommandClass
@@ -24,7 +25,99 @@ public class Display : GeneralCommandClass
     
     
     protected static DiscordButtonComponent First = new DiscordButtonComponent(DiscordButtonStyle.Primary, "first", "FIRST");
+        [Command("gears"),Description("Displays all the egars you have")]
+    public async ValueTask ExecuteDisplayGear(CommandContext context)
+    {
+        var userData = await DatabaseContext.UserData
+            .Include(i => i.Inventory.Where(j => j is Gear))
+            .ThenInclude((Entity i) => (i as Gear).Character)
+            .Include(i => i.Inventory.Where(j => j is Gear))
+            .ThenInclude((Entity i) =>  (i as Gear).Stats)
+            .FindOrCreateUserDataAsync(context.User.Id);
+
+        List<List<string>> displayList = [];
+        var count = 0;
+        List<string> currentList = [];
+        
+        displayList.Add(currentList);
+        var displaySectionLimit = 3;
+        foreach (var i in userData.Inventory.OfType<Gear>())
+        {
+     
+            if (count >= displaySectionLimit)
+            {
+                currentList = new List<string>();
+                displayList.Add(currentList);
+                count = 0;
+            }
+            i.MainStat.SetMainStatValue(i.Rarity);
+            
+            var stringToUse =new StringBuilder($"{i.Name} | Id: {i.Id} \nMain Stat = {i.MainStat.AsNameAndValue()}\nSubstats:");
+            foreach (var j in i.Substats)
+            {
+                stringToUse.Append($"\n{j.AsNameAndValue()}");
+            }
+
+            if (i.Character is not null)
+                stringToUse.Append($"Equipped By: {i.Character.Name}");
+            currentList.Add(stringToUse.ToString());
+            count++;
+        }
+
+        var index = 0;
+
+        DiscordMessage? message = null;
+
     
+        while (true)
+        {
+        
+            var embed = new DiscordEmbedBuilder()
+                .WithUser(context.User)
+                .WithColor(userData.Color)
+                .WithTitle($"Page {index + 1}/{displayList.Count} (Gear)")
+                .WithDescription(displayList[index].Join("\n\n"));
+            var messageBuilder = new DiscordMessageBuilder()
+                .AddComponents(First,Previous,Next,Last)
+                .AddEmbed(embed);
+            
+            if (message is null)
+            {
+                var response = new DiscordInteractionResponseBuilder(messageBuilder);
+                await context.RespondAsync(response);
+                message = await context.GetResponseAsync();
+            }
+            else
+            {
+                message = await message.ModifyAsync(messageBuilder);
+            }
+
+            var result = await message.WaitForButtonAsync(context.User);
+            
+            if(result.TimedOut) break;
+            await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
+            switch (result.Result.Id.ToLower())
+            {
+                case "next":
+                    index++;
+                    break;
+                case "previous":
+                    index--;
+                    break;
+                case "last":
+                    index = displayList.Count - 1;
+                    break;
+                case "first":
+                    index = 0;
+                    break;
+            }
+
+            if (index < 0) index = 0;
+            if (index > displayList.Count - 1) index = displayList.Count - 1;
+        }
+        
+
+    }
 
     [Command("characters"),Description("Displays all the characters you have")]
     public async ValueTask ExecuteDisplayCharacters(CommandContext context)
@@ -50,9 +143,10 @@ public class Display : GeneralCommandClass
                 count = 0;
             }
 
-            var stringToUse = $"Name: {i.Name} |     Level: {i.Level}";
+            var stringToUse = $"Name: {i.Name} |  Level: {i.Level} | Element: \n{i.Element} | Rarity: {i.Rarity} " +
+                              $"{nameof(Character.DupeCount)}: | {i.DupeCount}";
             if (i.Blessing is not null)
-                stringToUse += $"\n     Blessing Name: {i.Blessing.Name}               Blessing Level: {i.Blessing.Level}\n" +
+                stringToUse += $"\n     Blessing Name: {i.Blessing.Name}  \n" +
                                $"Blessing Id: {i.Blessing.Id}";
             currentList.Add(stringToUse);
             count++;
@@ -69,7 +163,7 @@ public class Display : GeneralCommandClass
             var embed = new DiscordEmbedBuilder()
                 .WithUser(context.User)
                 .WithColor(userData.Color)
-                .WithTitle($"Page {index + 1}")
+                .WithTitle($"Page {index + 1}/{displayList.Count} (Characters)")
                 .WithDescription(displayList[index].Join("\n\n"));
             var messageBuilder = new DiscordMessageBuilder()
                 .AddComponents(First,Previous,Next,Last)
@@ -184,7 +278,7 @@ public class Display : GeneralCommandClass
                 displayList.Add(currentList);
                 count = 0;
             }
-            var stringToUse = $"Name: {i.Name} |     Level: {i.Level} |     Id: {i.Id}";
+            var stringToUse = $"Name: {i.Name}  | Rarity: {i.Rarity} |\n Id: {i.Id}";
             if (i.Character is not null)
             {
 
@@ -207,7 +301,7 @@ public class Display : GeneralCommandClass
             var embed = new DiscordEmbedBuilder()
                 .WithUser(context.User)
                 .WithColor(userData.Color)
-                .WithTitle($"Page {index + 1}")
+                .WithTitle($"Page {index + 1}/{displayList.Count} (Blessings)")
                 .WithDescription(displayList[index].Join("\n\n"));
             var messageBuilder = new DiscordMessageBuilder()
                 .AddComponents(First,Previous,Next,Last)

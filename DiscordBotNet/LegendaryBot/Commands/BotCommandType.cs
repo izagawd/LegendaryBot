@@ -1,4 +1,4 @@
-﻿namespace DiscordBotNet.LegendaryBot.command;
+﻿namespace DiscordBotNet.LegendaryBot.Commands;
 
 public enum BotCommandType
 {

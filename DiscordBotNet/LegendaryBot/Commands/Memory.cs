@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using DSharpPlus.Commands;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 [Command("memory")]
 public class Memory : GeneralCommandClass
 {

@@ -2,10 +2,10 @@
 using System.Reflection;
 using System.Text;
 using DiscordBotNet.Extensions;
-using DSharpPlus.Entities;
 using DSharpPlus.Commands;
+using DSharpPlus.Entities;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class Help : GeneralCommandClass
 {

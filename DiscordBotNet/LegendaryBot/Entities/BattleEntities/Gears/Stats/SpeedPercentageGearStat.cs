@@ -8,7 +8,8 @@ public class SpeedPercentageGearStat : GearStat
     {
         throw new Exception("Speed percentage should never be a mainstat");
     }
-
+    public override string Name => "Speed";
+    public override bool IsPercentage => true;
     public override void AddStats(Character character)
     {
         character.TotalSpeed += Value * 0.01f * character.BaseSpeed;

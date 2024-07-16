@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel;
 using DiscordBotNet.Extensions;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-using DSharpPlus.Entities;
 using DSharpPlus.Commands;
+using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 [Command("team"), Description("idk")]
 public class TeamCommand : GeneralCommandClass
 {

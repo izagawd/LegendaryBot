@@ -14,7 +14,8 @@ public class ResistanceGearStat : GearStat
     {
         character.TotalResistance += Value;
     }
-
+    public override string Name => "Resistance";
+    public override bool IsPercentage => true;
     public override int GetMaximumSubstatLevelIncrease(Rarity rarity)
     {
         switch (rarity)

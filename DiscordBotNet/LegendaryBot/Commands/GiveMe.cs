@@ -1,13 +1,13 @@
 using System.ComponentModel;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
-using DiscordBotNet.LegendaryBot.Entities.Items;
+using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
+using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class GiveMe : GeneralCommandClass
 {
@@ -33,17 +33,24 @@ public class GiveMe : GeneralCommandClass
             var userData = await DatabaseContext.UserData
                 .Include(i => i.Inventory)
                 .FindOrCreateUserDataAsync(ctx.User.Id);
-            var createdType = ((Entity)DefaultObjects.GetDefaultObject(type)).Clone();
-            if (createdType is Character && userData.Inventory.Any(i => i.GetType() == type))
+            List<EntityReward> rewards = [];
+            foreach (var i in Enumerable.Range(0,(int) amount))
             {
-                await ctx.RespondAsync("sorry, cant have dupe characters");
-                return;
-            } 
-            if(createdType is Gear gear)
+                var createdType = (Entity) Activator.CreateInstance(type)!;
+                if(createdType is Gear gear)
                     gear.Initialize(Rarity.FiveStar);
-            userData.Inventory.Add(createdType);
+                rewards.Add(new EntityReward([createdType]));
+                
+            }
+            var result = userData.ReceiveRewards(rewards);
             await DatabaseContext.SaveChangesAsync();
-            await ctx.RespondAsync("Done!");
+            var embed = new DiscordEmbedBuilder()
+                .WithUser(ctx.User)
+                .WithColor(userData.Color)
+                .WithTitle("Success!")
+                .WithDescription(result);
+            await ctx.RespondAsync(embed);
+            
         }
     }
 }

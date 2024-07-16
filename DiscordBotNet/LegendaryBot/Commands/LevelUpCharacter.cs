@@ -1,29 +1,24 @@
 using System.Collections.Concurrent;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Text;
-using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
+using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.Commands;
 using Microsoft.EntityFrameworkCore;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using DiscordInteractionResponseBuilder = DSharpPlus.Entities.DiscordInteractionResponseBuilder;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 [Command("level-up")]
 public class LevelUpCharacter : GeneralCommandClass
@@ -73,6 +68,7 @@ public class LevelUpCharacter : GeneralCommandClass
                     
                 }
 
+                statsStringBuilder.Append($"{nameof(Character.DupeCount).Englishify()}: {character.DupeCount}");
                 ctx.DrawImage(characterImage,
                         new Point(15, 15), new GraphicsOptions())
                     .BackgroundColor(DiscordColor.Gray.ToImageSharpColor())
@@ -84,11 +80,12 @@ public class LevelUpCharacter : GeneralCommandClass
                     .DrawText($"Name: {character.Name}\nLevel: {character.Level}/{character.MaxLevel}",
                         font,
                         SixLabors.ImageSharp.Color.Black, new PointF(135, 30))
-                    .DrawText($"{character.Experience}/{requiredExpNextLevel}", expFont, SixLabors.ImageSharp.Color.Black,
+                    .DrawText($"{character.Experience}/{requiredExpNextLevel}", expFont,
+                        SixLabors.ImageSharp.Color.Black,
                         new PointF(160, 85))
                     .DrawText(statsStringBuilder.ToString(), statsFont, SixLabors.ImageSharp.Color.Black,
                         new PointF(10, 130));
-       
+
             }
         );
         if (character.Blessing is not null)
@@ -148,7 +145,7 @@ public class LevelUpCharacter : GeneralCommandClass
                 var options = new RichTextOptions(statsFont)
                 {
                     WrappingLength = 350,
-                    Origin = new Vector2(10,260)
+                    Origin = new Vector2(10,265)
                 };
                 image.Mutate(i => i.DrawText(options,text,SixLabors.ImageSharp.Color.Black));
             }
@@ -223,6 +220,7 @@ public class LevelUpCharacter : GeneralCommandClass
             .Include(includeLambda)
             .ThenInclude((Entity i) => (i as Character)!.Blessing)
             .FindOrCreateUserDataAsync(ctx.User.Id);
+        gottenUserData.Inventory.ArrangeItemStacks();
         var character = gottenUserData.Inventory.OfType<Character>().FirstOrDefault();
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
@@ -336,7 +334,7 @@ public class LevelUpCharacter : GeneralCommandClass
                 var result = await message!.WaitForButtonAsync(ctx.User,new TimeSpan(0,5,0));
 
 
-
+   
                 await DatabaseContext.Entry(gottenUserData).ReloadAsync();
                 foreach (var i in DatabaseContext
                              .Entity
@@ -345,6 +343,8 @@ public class LevelUpCharacter : GeneralCommandClass
                 {
                     await DatabaseContext.Entry(i).ReloadAsync();
                 }
+                
+        
                 if (result.TimedOut)
                 {
              

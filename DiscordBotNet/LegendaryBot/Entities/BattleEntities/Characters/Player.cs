@@ -140,7 +140,7 @@ public class Player : CharacterPartials.Character
     
     protected override IEnumerable<StatType> AscensionStatIncrease =>
         [StatType.Attack, StatType.Attack, StatType.Speed, StatType.CriticalChance, StatType.CriticalDamage];
-    public override bool IsInStandardBanner => false;
+
     public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;
 
 

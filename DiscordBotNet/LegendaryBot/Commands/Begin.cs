@@ -4,16 +4,14 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.DialogueNamespace;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-
-using DiscordBotNet.LegendaryBot.Results;
+using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.Commands;
 using Microsoft.EntityFrameworkCore;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class Begin : GeneralCommandClass
 {
@@ -119,7 +117,9 @@ public class Begin : GeneralCommandClass
         if (!Enum.TryParse(done.Result.Values["gender"], true, out Gender gottenGender))
         {
             await interactionToRespondTo.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource,
-                new DiscordInteractionResponseBuilder().WithContent("You can only input male or female for gender"));
+                new DiscordInteractionResponseBuilder()
+                    .AsEphemeral()
+                    .WithContent("You can only input male or female for gender"));
             return;
         }
         userData.Gender = gottenGender;
@@ -157,8 +157,8 @@ public class Begin : GeneralCommandClass
             userData.EquippedPlayerTeam.Add(thePlayer);
         }
         var coachChad = new CoachChad();
-    
-        coachChad.SetLevel(100);
+
+        coachChad.Level = 5;
         var coachChadProfile = new DialogueProfile
         {
             CharacterColor = coachChad.Color, CharacterName = coachChad.Name,
@@ -223,12 +223,12 @@ public class Begin : GeneralCommandClass
 
         var userTeam = userData.EquippedPlayerTeam;
         userTeam.Add(lily);
-        coachChad.TotalMaxHealth = 9000;
-        coachChad.TotalDefense = 100;
+        coachChad.TotalMaxHealth = 900;
+        coachChad.TotalDefense = 20;
         coachChad.TotalAttack = 1;
         coachChad.TotalSpeed = 100;
         var battleResult = await new BattleSimulator(userTeam.LoadTeamStats(), 
-            new CharacterTeam(characters: coachChad).LoadTeamStats()).StartAsync(result.Message);
+            new CharacterTeam(characters: coachChad)).StartAsync(result.Message);
 
         if (battleResult.TimedOut is not null)
         {

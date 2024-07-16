@@ -3,7 +3,7 @@ using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class TutorialCommand : GeneralCommandClass
 {
@@ -21,7 +21,8 @@ public class TutorialCommand : GeneralCommandClass
             "If you want to see what things you can get, use `/list-all-entities\n`" +
             "say you want to add character `lily` to your inventory, you can use" +
             "\n`give-me lily 1` which gives you one copy of lily" +
-            "\n to fight against any character, you can use the /hunt command";
+            "\n to fight against any character, you can use the /hunt command" +
+            "\nNote: a blessing is like a weapon from genshin, or you could say a lightcone from honkai star rail";
         var embed = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
             .WithTitle("Bot guide")

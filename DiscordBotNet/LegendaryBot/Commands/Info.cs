@@ -1,8 +1,8 @@
 ﻿using DiscordBotNet.Extensions;
-using DSharpPlus.Entities;
 using DSharpPlus.Commands;
+using DSharpPlus.Entities;
 
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class Info : GeneralCommandClass
 {

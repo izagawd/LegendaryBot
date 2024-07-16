@@ -1,15 +1,13 @@
-﻿
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
+using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.Commands;
 using Microsoft.EntityFrameworkCore;
 
-
-namespace DiscordBotNet.LegendaryBot.command;
+namespace DiscordBotNet.LegendaryBot.Commands;
 [Command("Quote")]
 public class QuoteCommand : GeneralCommandClass
 {
