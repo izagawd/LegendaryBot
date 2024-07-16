@@ -204,7 +204,7 @@ public class Dialogue
                     - 1 && j == dialogueTexts.Length - 1;
                 await HandleArgumentDisplay(dialogueTexts[j], isLast,
                     [new DiscordActionRowComponent([Next])]);
-
+ 
                 
                 if(isLast && RemoveButtonsAtEnd && DecisionArgument is null) break;
                 var result = await _message

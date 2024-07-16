@@ -25,7 +25,7 @@ public class Help : GeneralCommandClass
                 var type = BotCommandType.Other;
                 if (additional is not null)
                     type = additional.BotCommandType;
-                botCommandTypeBuilders[type].Append($"{com.Name}  ");
+                botCommandTypeBuilders[type].Append($"`{com.Name}`  ");
             }
             else
             {
