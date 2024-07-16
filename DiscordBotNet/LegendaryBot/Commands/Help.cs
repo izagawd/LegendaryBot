@@ -38,7 +38,7 @@ public class Help : GeneralCommandClass
                     var type = BotCommandType.Other;
                     if (j.Additional is not null)
                         type = j.Additional.BotCommandType;
-                    botCommandTypeBuilders[type].Append($"{j.Default.Name}  ");
+                    botCommandTypeBuilders[type].Append($"`{j.Default.Name}`  ");
                 }
             }
         }
