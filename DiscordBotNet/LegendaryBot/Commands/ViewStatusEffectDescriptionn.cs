@@ -14,26 +14,30 @@ public class ViewDescription : GeneralCommandClass
     public async ValueTask Execute(CommandContext context, [Parameter("entity-name")] string entityName)
     {
         var simplifiedName = entityName.Replace(" ", "").ToLower();
-        var zaObject = DefaultObjects.GetDefaultObjectsThatSubclass<Entity>()
+        object? zaObject = DefaultObjects.GetDefaultObjectsThatSubclass<Entity>()
             .FirstOrDefault(i => i.GetType().Name.ToLower() == simplifiedName);
-
+        if (zaObject is null)
+        {
+            zaObject = DefaultObjects.GetDefaultObjectsThatSubclass<StatusEffect>()
+                .FirstOrDefault(i => i.GetType().Name.ToLower() == simplifiedName);
+        }
         var zaColor = await DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(context.User.Id, i => i.Color);
         var builder = new DiscordEmbedBuilder()
             .WithUser(context.User)
             .WithTitle("Entity description")
             .WithColor(zaColor);
-        if (zaObject is not null)
+        if (zaObject is Entity zaEntity)
         {
-            var zaDescription = $"{zaObject.Name}.\nRarity: {zaObject.Rarity}";
-            if (zaObject is Character characterr)
+            var zaDescription = $"{zaEntity.Name}.\nRarity: {zaEntity.Rarity}";
+            if (zaEntity is Character z)
             {
-                zaDescription += $" | Element: {characterr.Element}";
+                zaDescription += $" | Element: {z.Element}";
                 
             }
 
-            zaDescription += $"\n{zaObject.Description}";
+            zaDescription += $"\n{zaEntity.Description}";
             builder.WithDescription(zaDescription);
-            if (zaObject is Character character)
+            if (zaEntity is Character character)
             {
                 builder.AddField($"Basic Attack :crossed_swords:", character.BasicAttack.GetDescription(character));
                 if(character.Skill is not null)
@@ -41,6 +45,9 @@ public class ViewDescription : GeneralCommandClass
                 if (character.Ultimate is not null)
                     builder.AddField("Ultimate :zap:", character.Ultimate.GetDescription(character));
             }
+        } else if (zaObject is StatusEffect statusEffect)
+        {
+            builder.WithDescription($"Name: {statusEffect.Name} | Type: {statusEffect.EffectType}\n{statusEffect.Description}");
         }
         else
         {

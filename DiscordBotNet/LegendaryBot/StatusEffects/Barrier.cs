@@ -36,7 +36,11 @@ public class Barrier : StatusEffect
         _shieldValue = value;
         
     }
- 
+
+    public Barrier() : this(0)
+    {
+        
+    }
     public Barrier(int shieldValue) 
     {
         _shieldValue = shieldValue;
