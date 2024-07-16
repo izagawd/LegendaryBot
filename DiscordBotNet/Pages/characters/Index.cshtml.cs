@@ -46,6 +46,11 @@ public class Index : PageModel
             .Include(j => j.Inventory.Where(k => k is Character))
             .FirstOrDefaultAsync(i => i.Id == User.GetDiscordUserId());
 
+        if (userData is null)
+        {
+            Redirect("/Index");
+            return;
+        }
         Characters = userData.Inventory.OfType<Character>().ToArray();
 
     }

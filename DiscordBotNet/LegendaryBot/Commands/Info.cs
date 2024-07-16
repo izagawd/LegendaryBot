@@ -19,7 +19,12 @@ public class Info : GeneralCommandClass
         if(author is null) author = ctx.User;
         
         var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
-  
+
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(ctx);
+            return;
+        }
         var embedBuilder = new DiscordEmbedBuilder()
             .WithTitle("Info")
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
