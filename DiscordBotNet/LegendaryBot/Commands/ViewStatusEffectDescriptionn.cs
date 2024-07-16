@@ -5,6 +5,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPar
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
@@ -21,7 +22,11 @@ public class ViewDescription : GeneralCommandClass
             zaObject = DefaultObjects.GetDefaultObjectsThatSubclass<StatusEffect>()
                 .FirstOrDefault(i => i.GetType().Name.ToLower() == simplifiedName);
         }
-        var zaColor = await DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(context.User.Id, i => i.Color);
+
+        var zaColor = await DatabaseContext.UserData
+            .Where(i => i.Id == context.User.Id)
+            .Select(i => i.Color)
+            .FirstOrDefaultAsync();
         var builder = new DiscordEmbedBuilder()
             .WithUser(context.User)
             .WithTitle("Entity description")

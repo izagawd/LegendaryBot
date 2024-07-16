@@ -106,60 +106,11 @@ public static class PostgreExtension
 
 
 
-    /// <summary>
-    /// this not only includes all the gears of the characters, but the stats as well
-    /// </summary>
-
- 
 
 
 
 
 
 
-
-    public async static Task<TExpression> FindOrCreateSelectUserDataAsync<T, TExpression>(this IQueryable<T> queryable, ulong id,
-         Expression<Func<T,TExpression>> selectExpression) where T : UserData,new()
-    {
-        var array  = await queryable
-            .Where(i => i.Id == id)
-            .Select(selectExpression)
-            .ToArrayAsync();
-        // take 1 instead of firstordefault because returned value may be struct, which cant be null
-        //, making it harder to see if the user was actually found in the database
-        
-        if (array.Length == 0)
-        {
-        
-            var tempData = new T { Id = id };
-            await queryable.GetDbContext().AddRangeAsync(tempData);
-            return tempData.Map(selectExpression);
-        }
-        return array[0];
-        
-    }
-
-    /// <summary>
-    /// Gets a row/instance from the database. if not found, returns a new row/instance and adds it to the database when the DatabaseContext of this dbset is saved
-    /// </summary>
-    /// <param name="set"></param>
-    /// <param name="id">The Id of the row/instance</param>
-    /// <param name="includableQueryableFunc">If you want to include some shit use this</param>
-    /// <typeparam name="T">The instance/row type</typeparam>
-    /// <returns></returns>
-    public async static Task<T> FindOrCreateUserDataAsync<T>(this IQueryable<T> set, ulong id) 
-        where T : UserData, new()
-    {
-        var data = await set
-                .FirstOrDefaultAsync(i => i.Id == id);
-     
-
-        if (data is null)
-        {
-            data = new T { Id = id };
-            await set.GetDbContext().Set<T>().AddAsync(data);
-        }
-        return data;
-    }
 
 }

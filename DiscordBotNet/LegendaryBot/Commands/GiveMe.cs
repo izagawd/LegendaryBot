@@ -32,7 +32,12 @@ public class GiveMe : GeneralCommandClass
         {
             var userData = await DatabaseContext.UserData
                 .Include(i => i.Inventory)
-                .FindOrCreateUserDataAsync(ctx.User.Id);
+                .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+            if (userData is null)
+            {
+                await AskToDoBeginAsync(ctx);
+                return;
+            }
             List<EntityReward> rewards = [];
             foreach (var i in Enumerable.Range(0,(int) amount))
             {

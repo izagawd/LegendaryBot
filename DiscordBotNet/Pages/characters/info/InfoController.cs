@@ -26,9 +26,13 @@ public class InfoController : Controller
             .Where(i => i.Id == characterGuid)
             .Include(i => i.Blessing)
             .FirstOrDefaultAsync();
-        
-        
-        if (character is null) return Ok();
+
+
+        if (character is null)
+        {
+            Redirect("");
+            return Ok();
+        }
         character.Blessing = null;
         await DatabaseContext.SaveChangesAsync();
         return Ok();
@@ -41,15 +45,21 @@ public class InfoController : Controller
         var characterId = Guid.Parse(characterIdString!);
         var blessingId = Guid.Parse(blessingIdString!);
         var entityAnonymous = await DatabaseContext.UserData
-            .FindOrCreateSelectUserDataAsync(User.GetDiscordUserId(),
-                i =>
-                    new
-                    {
-                        blessing = i.Inventory.OfType<Blessing>().FirstOrDefault(j =>j.Id == blessingId),
-                        character = i.Inventory.OfType<Character>().FirstOrDefault(j => j.Id == characterId),
-                        charactersCurrentBlessing = i.Inventory.OfType<Blessing>().FirstOrDefault(j => j.BlessingWielderId == characterId)
-                    });
-
+            .Where(i => i.Id == User.GetDiscordUserId())
+            .Select(i =>
+                new
+                {
+                    blessing = i.Inventory.OfType<Blessing>().FirstOrDefault(j => j.Id == blessingId),
+                    character = i.Inventory.OfType<Character>().FirstOrDefault(j => j.Id == characterId),
+                    charactersCurrentBlessing = i.Inventory.OfType<Blessing>()
+                        .FirstOrDefault(j => j.BlessingWielderId == characterId)
+                })
+            .FirstOrDefaultAsync();
+        if (entityAnonymous is null)
+        {
+            Redirect("");
+            return Ok();
+        }
 
         var character = entityAnonymous.character;
         if (character is null) return Ok();

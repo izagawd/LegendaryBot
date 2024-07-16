@@ -44,7 +44,7 @@ public class Index : PageModel
 
         var userData = await DatabaseContext.UserData
             .Include(j => j.Inventory.Where(k => k is Character))
-            .FindOrCreateUserDataAsync(User.GetDiscordUserId());
+            .FirstOrDefaultAsync(i => i.Id == User.GetDiscordUserId());
 
         Characters = userData.Inventory.OfType<Character>().ToArray();
 

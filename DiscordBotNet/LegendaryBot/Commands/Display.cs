@@ -33,8 +33,12 @@ public class Display : GeneralCommandClass
             .ThenInclude((Entity i) => (i as Gear).Character)
             .Include(i => i.Inventory.Where(j => j is Gear))
             .ThenInclude((Entity i) =>  (i as Gear).Stats)
-            .FindOrCreateUserDataAsync(context.User.Id);
-
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
         List<List<string>> displayList = [];
         var count = 0;
         List<string> currentList = [];
@@ -125,8 +129,12 @@ public class Display : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j is Character))
             .ThenInclude((Entity i) => (i as Character).Blessing)
-            .FindOrCreateUserDataAsync(context.User.Id);
-
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
         List<List<string>> displayList = [];
         var count = 0;
         List<string> currentList = [];
@@ -220,7 +228,12 @@ public class Display : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j.Id == blessingId && j is Blessing))
             .ThenInclude((Entity entity) => (entity as Blessing)!.Character)
-            .FindOrCreateUserDataAsync(ctx.User.Id);
+            .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(ctx);
+            return;
+        }
         embedBuilder.WithColor(userData.Color);
         var blessing = userData.Inventory.OfType<Blessing>().FirstOrDefault(i => i.Id == blessingId);
         if (blessing is null)
@@ -262,8 +275,12 @@ public class Display : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.Inventory.Where(j => j is Blessing))
             .ThenInclude((Entity i) => (i as Blessing).Character)
-            .FindOrCreateUserDataAsync(context.User.Id);
-
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
         List<List<string>> displayList = [];
         var count = 0;
         List<string> currentList = [];
@@ -350,8 +367,12 @@ public class Display : GeneralCommandClass
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
-            .FindOrCreateUserDataAsync(context.User.Id);
-
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
         var teamStringBuilder = new StringBuilder();
         var count = 0;
 

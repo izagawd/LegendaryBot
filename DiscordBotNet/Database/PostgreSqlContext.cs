@@ -31,6 +31,7 @@ public class PostgreSqlContext : DbContext
     public DbSet<Entity> Entity { get; set; }
 
 
+
     public DbSet<Quote> Quote { get; set; }
 
     /// <summary>
@@ -42,7 +43,9 @@ public class PostgreSqlContext : DbContext
 
         var user = await UserData
             .Include(i => i.Quests)
-            .FindOrCreateUserDataAsync(userId);
+            .FirstOrDefaultAsync(i => i.Id == userId);
+        if(user is null)
+            return;
         var rightNowUtc = DateTime.UtcNow;
         if (user.LastTimeQuestWasChecked.Date == rightNowUtc.Date) return;
         

@@ -9,7 +9,7 @@ using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-
+using Microsoft.EntityFrameworkCore;
 
 
 namespace DiscordBotNet.LegendaryBot.Commands;
@@ -23,8 +23,12 @@ public class FarmGear : GeneralCommandClass
     public async ValueTask Execute(CommandContext ctx)
     {
         var userData = await DatabaseContext.UserData.IncludeTeamWithAllEquipments()
-            .FindOrCreateUserDataAsync(ctx.User.Id);
-
+            .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(ctx);
+            return;
+        }
         var embed = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
             .WithColor(userData.Color)

@@ -6,6 +6,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPar
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Entities;
 using DSharpPlus.Commands;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Quests;
 
@@ -20,7 +21,7 @@ public class KillSlimesQuest : Quest
         var slimeTeam = new CharacterTeam([new Slime(),new Slime()]);
         var userData = await databaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FindOrCreateUserDataAsync(UserDataId);
+            .FirstAsync(i => i.Id == UserDataId);
         var embed = new DiscordEmbedBuilder()
             .WithUser(context.User)
             .WithColor(userData.Color)

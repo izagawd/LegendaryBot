@@ -5,6 +5,7 @@ using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
@@ -24,7 +25,12 @@ public class Challenge :GeneralCommandClass
 
         var player1User = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FindOrCreateUserDataAsync(player1.Id);
+            .FirstOrDefaultAsync(i => i.Id == player1.Id);
+        if (player1User is null)
+        {
+            await AskToDoBeginAsync(ctx);
+            return;
+        }
         DiscordEmbedBuilder embedToBuild;
         if (player1User.IsOccupied)
         {
@@ -51,8 +57,9 @@ public class Challenge :GeneralCommandClass
 
         var player2User = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FindOrCreateUserDataAsync(player2.Id);
-        if (player2User.IsOccupied)
+            .FirstOrDefaultAsync(i => i.Id == player2.Id);
+
+        if (player2User is null || player2User.IsOccupied)
         {
             embedToBuild = new DiscordEmbedBuilder()
                 .WithTitle($"Hmm")

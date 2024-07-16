@@ -1,6 +1,7 @@
 ﻿using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
@@ -17,7 +18,7 @@ public class Info : GeneralCommandClass
             
         if(author is null) author = ctx.User;
         
-        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync(author.Id);
+        var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
   
         var embedBuilder = new DiscordEmbedBuilder()
             .WithTitle("Info")

@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel;
+using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
@@ -23,9 +25,11 @@ public class Avatar: GeneralCommandClass
         {
             user = ctx.User;
         }
-        
+
         var color = await DatabaseContext.UserData
-            .FindOrCreateSelectUserDataAsync(user.Id, i => i.Color);
+            .Where(i => i.Id == user.Id)
+            .Select(i => i.Color)
+            .FirstOrDefaultAsync();
         var embed = new DiscordEmbedBuilder()
             .WithTitle($"**{user.Username}'s avatar**")
             .WithAuthor(ctx.User.Username, iconUrl: ctx.User.AvatarUrl)

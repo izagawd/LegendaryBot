@@ -7,6 +7,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPar
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Entities;
 using DSharpPlus.Commands;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Quests;
 
@@ -48,7 +49,8 @@ public class DirectionHelping : Quest
 
         var userData = await databaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FindOrCreateUserDataAsync(context.User.Id);
+            .FirstAsync(i => i.Id == context.User.Id);
+        
         if (dialogueResult.Decision == "right")
         {
             dialogue = new Dialogue()

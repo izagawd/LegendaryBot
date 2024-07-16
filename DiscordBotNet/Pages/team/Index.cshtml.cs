@@ -42,12 +42,13 @@ public class Index : PageModel
         var anonymous = await DatabaseContext.UserData
             .Include(i => i.EquippedPlayerTeam)
             .Include(j => j.Inventory.Where(k => k is Character))
-            
-            .FindOrCreateSelectUserDataAsync(User.GetDiscordUserId(),
-                i => new{UserData = i,TeamNames= i.PlayerTeams.Select(j => j.TeamName)});
-        UserData = anonymous.UserData;
-        TeamNames = anonymous.TeamNames.ToArray();
-
+            .Where(i => i.Id == User.GetDiscordUserId())
+            .Select(i => new { UserData = i, TeamNames = i.PlayerTeams.Select(j => j.TeamName) })
+            .FirstOrDefaultAsync();
+        if (anonymous is null)
+        {
+            Redirect("");
+        }
 
 
     }

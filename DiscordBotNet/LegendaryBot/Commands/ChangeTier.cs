@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
@@ -10,7 +11,13 @@ public class MakeMeDivine : GeneralCommandClass
      AdditionalCommand("/make-me-divine", BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx)
     {
-        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync(ctx.User.Id);
+        var userData = await DatabaseContext.UserData
+            .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(ctx);
+            return;
+        }
         if (userData.Tier == Tier.Divine)
         {
             await ctx.RespondAsync("you are already divine");

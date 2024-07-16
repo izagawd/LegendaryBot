@@ -1,6 +1,8 @@
 ﻿using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
+using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
+using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
@@ -35,7 +37,16 @@ public abstract class GeneralCommandClass
 
         return false;
     }
-
+    
+    public async Task AskToDoBeginAsync(CommandContext context)
+    {
+        var embed = new DiscordEmbedBuilder()
+            .WithTitle("Hmm")
+            .WithDescription("You have not yet began your journey with /begin")
+            .WithColor(DefaultObjects.GetDefaultObject<UserData>().Color)
+            .WithUser(context.User);
+        await context.RespondAsync(embed);
+    }
     public  async Task AfterExecutionAsync(CommandContext ctx)
     {
 

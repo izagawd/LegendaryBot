@@ -29,7 +29,7 @@ public class QuoteCommand : GeneralCommandClass
             .RandomOrDefaultAsync();
         if (anon is null)
         {
-            await ctx.RespondAsync("damn");
+            await AskToDoBeginAsync(ctx);
             return;
         }
 
@@ -125,10 +125,16 @@ public class QuoteCommand : GeneralCommandClass
     AdditionalCommand("/write Be good and good will come",BotCommandType.Fun)]
     public async Task Write(CommandContext ctx, [Parameter("text")] string text)
     {
-        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync(ctx.User.Id);
+        var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(ctx);
+            return;
+        }
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
             .WithColor(userData.Color);
+  
         if (text.Length > 200)
         {
             embedBuilder

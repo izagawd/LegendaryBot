@@ -3,6 +3,7 @@ using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.Pages;
 [Authorize]
@@ -24,7 +25,12 @@ public class IndexModel : PageModel
     {
 
         await using var databaseContext = new PostgreSqlContext();
-        UserData = await databaseContext.UserData.FindOrCreateUserDataAsync(User.GetDiscordUserId());
+        UserData = await databaseContext.UserData.FirstOrDefaultAsync(i =>  i.Id == User.GetDiscordUserId());
+        if (UserData is null)
+        {
+            UserData = new UserData(User.GetDiscordUserId());
+            await databaseContext.UserData.AddAsync(UserData);
+        }
     }
 
 }

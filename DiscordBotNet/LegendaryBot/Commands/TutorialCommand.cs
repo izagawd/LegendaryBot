@@ -2,6 +2,7 @@ using System.ComponentModel;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
@@ -27,7 +28,8 @@ public class TutorialCommand : GeneralCommandClass
             .WithUser(ctx.User)
             .WithTitle("Bot guide")
             .WithDescription(tutorialString)
-            .WithColor(await DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(ctx.User.Id, i => i.Color));
+            .WithColor(await DatabaseContext.UserData.Where(i => i.Id == ctx.User.Id).Select(i => i.Color)
+                .FirstOrDefaultAsync());
         await ctx.RespondAsync(embed);
     }
 }

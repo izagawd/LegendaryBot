@@ -219,7 +219,13 @@ public class LevelUpCharacter : GeneralCommandClass
             .ThenInclude(i => i.Stats)
             .Include(includeLambda)
             .ThenInclude((Entity i) => (i as Character)!.Blessing)
-            .FindOrCreateUserDataAsync(ctx.User.Id);
+            .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+        if (gottenUserData is null)
+        {
+            await AskToDoBeginAsync(ctx);
+            return;
+        }
+            
         gottenUserData.Inventory.ArrangeItemStacks();
         var character = gottenUserData.Inventory.OfType<Character>().FirstOrDefault();
         var embedBuilder = new DiscordEmbedBuilder()

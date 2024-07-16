@@ -180,8 +180,11 @@ public static class Bot
             var commandClass = args.CommandObject as GeneralCommandClass;
             if (commandClass is not null)
             {
-                color = await commandClass.DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(
-                    args.Context.User.Id, i => i.Color);
+                color = await commandClass.DatabaseContext.UserData
+                    .Where(i => i.Id == args.Context.User.Id)
+                    .Select(i => i.Color)
+                    .FirstOrDefaultAsync();
+           
                 await commandClass.AfterExecutionAsync(args.Context);
             }
             else

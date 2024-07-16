@@ -34,13 +34,20 @@ public class Begin : GeneralCommandClass
         var author = ctx.User;
 
         var userData = await DatabaseContext.UserData
+            .Where(i => i.Id == ctx.User.Id)
             .Include(j => j.Inventory)
             .ThenInclude(j => (j as Character).Blessing)
             .Include(i => i.Inventory)
             .ThenInclude(i => (i as Character).Gears)
             .Include(i => i.EquippedPlayerTeam)
             .Include(i => i.Inventory.Where(j => j is Character))
-            .FindOrCreateUserDataAsync(author.Id);
+            .FirstOrDefaultAsync();
+        if (userData is null)
+        {
+            userData = new UserData() { Id = ctx.User.Id };
+            await DatabaseContext.UserData.AddAsync(userData);
+        }
+           
 
         var userColor = userData.Color;
         embedToBuild
@@ -272,15 +279,15 @@ public class Begin : GeneralCommandClass
             Title = "Tutorial"
         };
 
-
-        userData.Tier = await DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(author.Id, i => i.Tier);
+        userTeam.Remove(lily);
+        await DatabaseContext.Entry(userData).ReloadAsync();
 
         if (userData.Tier == Tier.Unranked)
         {
             userData.Tier = Tier.Bronze;
             userData.LastTimeQuestWasChecked = DateTime.UtcNow.AddDays(-1);
         };
-        userTeam.Remove(lily);
+      
 
         await DatabaseContext.SaveChangesAsync();
       

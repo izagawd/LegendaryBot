@@ -26,7 +26,12 @@ public class CharacterCommand : TeamCommand
                                                  || (j is Character &&
                                                      EF.Property<string>(j, "Discriminator").ToLower() ==
                                                      simplifiedCharacterName)))
-            .FindOrCreateUserDataAsync(context.User.Id);
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
         var blessing = userData.Inventory.OfType<Blessing>().FirstOrDefault();
         var embed = new DiscordEmbedBuilder()
             .WithTitle("Equipping blessing")
@@ -68,8 +73,12 @@ public class CharacterCommand : TeamCommand
                                                      EF.Property<string>(j, "Discriminator").ToLower() ==
                                                      simplifiedCharacterName)))
             .ThenInclude((Entity i) => (i as Gear).Stats)
-            .FindOrCreateUserDataAsync(context.User.Id);
-     
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
         var embed = new DiscordEmbedBuilder()
             .WithTitle("Equipping gear")
             .WithUser(context.User)

@@ -2,6 +2,7 @@
 using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
@@ -12,7 +13,12 @@ public class Daily : GeneralCommandClass
     AdditionalCommand("/daily",BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx)
     {
-        var userData =await  DatabaseContext.UserData.FindOrCreateUserDataAsync(ctx.User.Id);
+        var userData =await  DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(ctx);
+            return;
+        }
         var embed = new DiscordEmbedBuilder()
             .WithColor(userData.Color)
             .WithUser(ctx.User)

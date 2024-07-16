@@ -31,7 +31,11 @@ public class Index : PageModel
             .ThenInclude(i => (i as Blessing).Character)
             .Include(j => j.Inventory)
             .ThenInclude(j => (j as Character).Gears)
-            .FindOrCreateUserDataAsync(User.GetDiscordUserId());
+            .FirstOrDefaultAsync(i => i.Id == User.GetDiscordUserId());
+        if (UserData is null)
+        {
+            
+        }
         Character = UserData.Inventory.OfType<Character>().FirstOrDefault(k => k.Id == id);
         Blessings = UserData.Inventory.OfType<Blessing>().ToArray();
         if (Character is null)

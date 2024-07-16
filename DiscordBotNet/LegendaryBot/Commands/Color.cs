@@ -4,6 +4,7 @@ using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Commands.Trees;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
@@ -33,9 +34,13 @@ public class Color : GeneralCommandClass
     {
         var author = ctx.User;
 
-        var userData = await DatabaseContext.UserData.FindOrCreateUserDataAsync(author.Id);
-  
+        var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
 
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(ctx);
+            return;
+        }
         
         var colorIsValid = true;
         DiscordColor newColor;

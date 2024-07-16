@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 using System.Text;
+using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
@@ -161,8 +163,9 @@ public class Help : GeneralCommandClass
 
         var color = await DatabaseContext
             .UserData
-            .FindOrCreateSelectUserDataAsync(author.Id, 
-                i => i.Color);
+            .Where(i => i.Id == ctx.User.Id)
+            .Select(i => i.Color)
+            .FirstOrDefaultAsync();
         var embedToBuild = new DiscordEmbedBuilder()
             .WithTitle("Help")
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)

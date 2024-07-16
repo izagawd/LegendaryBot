@@ -1,4 +1,5 @@
 using System.Text;
+using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
@@ -8,6 +9,7 @@ using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
@@ -49,7 +51,11 @@ public class ListAllEntities : GeneralCommandClass
             .WithUser(ctx.User)
             .WithTitle("All possible entities")
             .WithDescription(listed)
-            .WithColor(await DatabaseContext.UserData.FindOrCreateSelectUserDataAsync(ctx.User.Id, i => i.Color));
+            .WithColor(await DatabaseContext.UserData
+                .Where(i => i.Id == ctx.User.Id)
+                .Select(i => i.Color)
+                .FirstOrDefaultAsync());
+           
         await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AsEphemeral()
             .AddEmbed(embed));
     }

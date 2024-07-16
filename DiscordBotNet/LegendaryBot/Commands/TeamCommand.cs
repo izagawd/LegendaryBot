@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
@@ -24,9 +25,16 @@ public class TeamCommand : GeneralCommandClass
     {
         var anon = await DatabaseContext.UserData
             .Include(i => i.EquippedPlayerTeam)
-            .FindOrCreateSelectUserDataAsync(context.User.Id,
-                i => new { team = i.PlayerTeams.FirstOrDefault(j => j.TeamName.ToLower() == teamName.ToLower()), userData = i });
+            .Where(i => i.Id == context.User.Id)
+            .Select(i => new
+                { team = i.PlayerTeams.FirstOrDefault(j => j.TeamName.ToLower() == teamName.ToLower()), userData = i })
+            .FirstOrDefaultAsync();
 
+        if (anon is null)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
         var userData = anon.userData;
         var embed = new DiscordEmbedBuilder()
             .WithUser(context.User)
@@ -63,7 +71,12 @@ public class TeamCommand : GeneralCommandClass
             .Include(i => i.EquippedPlayerTeam)
             .Include(i => i.Inventory.Where(j => j is Character
                                                  && EF.Property<string>(j, "Discriminator").ToLower() == simplifiedCharacterName))
-            .FindOrCreateUserDataAsync(context.User.Id);
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
         var gottenTeam =  userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName.ToLower());
         
 
@@ -121,8 +134,12 @@ public class TeamCommand : GeneralCommandClass
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
-            .FindOrCreateUserDataAsync(context.User.Id);
-
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
         var embed = new DiscordEmbedBuilder()
             .WithColor(userData.Color)
             .WithUser(context.User)
@@ -162,7 +179,12 @@ public class TeamCommand : GeneralCommandClass
             .Include(i => i.EquippedPlayerTeam)
             .Include(i => i.Inventory.Where(i => i is Character
                                                  && EF.Property<string>(i, "Discriminator").ToLower() == simplifiedCharacterName))
-            .FindOrCreateUserDataAsync(context.User.Id);
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+        if (userData is null)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
         var gottenTeam = userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName.ToLower());
         
 
