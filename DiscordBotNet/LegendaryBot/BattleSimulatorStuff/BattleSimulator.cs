@@ -64,7 +64,7 @@ public class BattleSimulator
     public async Task<Image<Rgba32>> GetCombatImageAsync()
     {
 
-        var stop = new Stopwatch(); stop.Start();
+     
         var heightToUse = CharacterTeams.Select(i => i.Count).Max() * 160;
         var image = new Image<Rgba32>(500, heightToUse);
         var xOffSet = 70;
@@ -138,7 +138,7 @@ public class BattleSimulator
         }
 
         imageCtx.EntropyCrop();
-        $"battle simulator image time: {stop.Elapsed.TotalMilliseconds}".Print();
+   
         return image;
     }
 
@@ -745,8 +745,8 @@ public class BattleSimulator
         InvokeBattleEvent(new BattleBeginEventArgs());
         while (true)
         {
-            var stop = new Stopwatch();
-            stop.Start();
+ 
+           
             Turn += 1;
             var extraTurnGranted = false;
             var extraTurners =
@@ -852,7 +852,7 @@ public class BattleSimulator
                 .AddComponents(components)
                 .AddComponents(infoSelect);
 
-            stop.Stop();
+           
             if(interaction is not null)
             {
                 if (interaction.ResponseState != DiscordInteractionResponseState.Replied)
@@ -890,7 +890,7 @@ public class BattleSimulator
                 firstLoop = false;
                 CheckForForfeitOrInfoTillEndOfBattle(message,_gameCancellationTokenSource.Token);
             }
-            stop.Start();
+       
 
 
 

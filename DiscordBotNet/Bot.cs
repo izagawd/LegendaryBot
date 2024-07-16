@@ -118,7 +118,7 @@ public static class Bot
     {
         var post = new PostgreSqlContext();
 
-        (await post.UserData.FindOrCreateSelectUserDataAsync(4, i => i.Coins)).Print();
+      
 
     }
     private static async Task Main(string[] args)
