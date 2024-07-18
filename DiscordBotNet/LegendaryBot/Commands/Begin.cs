@@ -35,17 +35,15 @@ public class Begin : GeneralCommandClass
 
         var userData = await DatabaseContext.UserData
             .Where(i => i.Id == ctx.User.Id)
-            .Include(j => j.Inventory)
-            .ThenInclude(j => (j as Character).Blessing)
-            .Include(i => i.Inventory)
-            .ThenInclude(i => (i as Character).Gears)
+            .Include(j => j.Characters)
+            .ThenInclude(j => j.Blessing)
+            .Include(i => i.Characters)
+            .ThenInclude(i => i.Gears)
             .Include(i => i.EquippedPlayerTeam)
-            .Include(i => i.Inventory.Where(j => j is Character))
             .FirstOrDefaultAsync();
         if (userData is null)
         {
-            userData = new UserData() { Id = ctx.User.Id };
-            await DatabaseContext.UserData.AddAsync(userData);
+            userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);
         }
            
 
@@ -55,14 +53,8 @@ public class Begin : GeneralCommandClass
             .WithColor(userColor);
         if (userData.IsOccupied)
         {
-           
-            embedToBuild
-                .WithTitle("Hmm")
-                .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
-                .WithDescription("`You are occupied`")
-                .WithColor(userColor);
 
-            await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedToBuild.Build()));
+            await NotifyAboutOccupiedAsync(ctx);
             return;
         }
 
@@ -280,7 +272,7 @@ public class Begin : GeneralCommandClass
         };
 
         userTeam.Remove(lily);
-        await DatabaseContext.Entry(userData).ReloadAsync();
+
 
         if (userData.Tier == Tier.Unranked)
         {

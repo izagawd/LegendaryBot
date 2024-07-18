@@ -35,8 +35,11 @@ public class LevelUpCharacter : GeneralCommandClass
         var description = "";
         foreach (var i in DefaultObjects.GetDefaultObjectsThatSubclass<CharacterExpMaterial>())
         {
-            description += $"{i.Name}: {character.UserData.Inventory.GetItemStacks(i.GetType())}\n";
+            description += $"{i.Name}: {character.UserData.Items.GetItemStacks(i.GetType())}\n";
         }
+
+        description += $"{DefaultObjects.GetDefaultObject<AscensionMaterial>().Name}: " +
+                       $"{character.UserData.Items.GetItemStacks(typeof(AscensionMaterial))}";
 
         builder.WithDescription(description);
     }
@@ -155,12 +158,12 @@ public class LevelUpCharacter : GeneralCommandClass
     }
     static bool CanAscend(Character character)
     {
-        return GetCannotAscendReasonText(character) is  null && character.Level < character.MaxLevel;
+        return GetCannotAscendReasonText(character) is  null && character.Level >= character.MaxLevel;
     }
     static bool CanLevelUp(Character character)
     {
         var gottenUserData = character.UserData!;
-        var itemsInInventory = gottenUserData.Inventory.OfType<CharacterExpMaterial>();
+        var itemsInInventory = gottenUserData.Items.OfType<CharacterExpMaterial>();
 
                 
         return character.Level < character.MaxLevel &&
@@ -183,7 +186,7 @@ public class LevelUpCharacter : GeneralCommandClass
         {
             failureText = $"Max ascension reached. Cannot ascend any further";
         }
-        else if((gottenUserData?.Inventory.GetItemStacks<AscensionMaterial>()).GetValueOrDefault(0) < character.RequiredAscensionMaterialsToAscend)
+        else if((gottenUserData?.Items.GetItemStacks<AscensionMaterial>()).GetValueOrDefault(0) < character.RequiredAscensionMaterialsToAscend)
         {
             failureText = $"You do not have enough character ascension materials to ascend (you need {character.RequiredAscensionMaterialsToAscend})";
         }
@@ -200,49 +203,55 @@ public class LevelUpCharacter : GeneralCommandClass
     
     [Command("character"), Description("used to level up a character"),
      AdditionalCommand("/level-up character player",BotCommandType.Battle)]
-    public async Task LevelUp(CommandContext ctx,
+    public async Task ExecuteLevelUp(CommandContext ctx,
         [Parameter("character-name")] string characterName)
     {
+        
         var simplifiedCharacterName = characterName.ToLower().Replace(" ", "");
 
-        Expression<Func<UserData,IEnumerable<Entity>>> includeLambda = (UserData i) => i.Inventory.Where( j => (j is Character
-                                 && EF.Property<string>(j, "Discriminator").ToLower() == simplifiedCharacterName) || j is CharacterExpMaterial
-            || j is AscensionMaterial);
-
-      
-
+        Expression<Func<UserData, IEnumerable<Character>>> includeLambda = (UserData i) =>
+            i.Characters.Where(j =>
+                EF.Property<string>(j, "Discriminator").ToLower() == simplifiedCharacterName);
         
         var gottenUserData =await  DatabaseContext.UserData
-
             .Include(includeLambda)
-            .ThenInclude((Entity i) => (i as Character)!.Gears)
+            .ThenInclude(i => i.Gears)
             .ThenInclude(i => i.Stats)
             .Include(includeLambda)
-            .ThenInclude((Entity i) => (i as Character)!.Blessing)
+            .ThenInclude(i => i.Blessing)
+            .Include(i => i.Items.Where(j => j is AscensionMaterial || j is CharacterExpMaterial))
             .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
-        if (gottenUserData is null)
+   
+        if (gottenUserData is null || gottenUserData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(ctx);
             return;
         }
-            
-        gottenUserData.Inventory.ArrangeItemStacks();
-        var character = gottenUserData.Inventory.OfType<Character>().FirstOrDefault();
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
             .WithTitle("Hmm")
             .WithImageUrl("attachment://levelupimage.png")
             .WithColor(gottenUserData.Color)
             .WithDescription($"Unable to find character with the name \"{simplifiedCharacterName}\"");
-        
+
+        if(gottenUserData.IsOccupied)
+        {
+            embedBuilder.WithDescription("You are occupied")
+                .WithImageUrl((string)null);
+            await ctx.RespondAsync(embedBuilder);
+            return;
+        }
+        gottenUserData.Inventory.MergeDuplicates();
+        var character = gottenUserData.Inventory.OfType<Character>().FirstOrDefault();
+
         if (character is null)
         {
-            
             await ctx.RespondAsync(embedBuilder.Build());
-            
         }
         else
         {
+            await MakeOccupiedAsync(gottenUserData);
+            
             
             character.LoadStats();
             embedBuilder.WithTitle($"{character.Name}'s level up process");
@@ -254,47 +263,63 @@ public class LevelUpCharacter : GeneralCommandClass
             var levelToMax = new DiscordButtonComponent(DiscordButtonStyle.Primary, "level_to_max", "Level To Max");
             var ascend = new DiscordButtonComponent(DiscordButtonStyle.Primary, "ascend", "Ascend");
             var stop = new DiscordButtonComponent(DiscordButtonStyle.Danger, "stop", "Stop");
-            DiscordComponent[] components = [levelUp, levelToMax, ascend,stop];
+            DiscordButtonComponent[] components = [levelUp, levelToMax, ascend,stop];
 
             
-            var messageBuilder =new DiscordInteractionResponseBuilder()
-                .AddEmbed(embedBuilder.Build())
-                .AddFile("levelupimage.png", stream);
-
+       
 
             
 
             void SetupComponents()
             {
+                var anyConditionIsMet = false;
                 if (!CanAscend(character))
+                {
                     ascend.Disable();
+                }
+               
                 else
                 {
+                    anyConditionIsMet = true;
                     ascend.Enable();
                 }
                 if (!CanLevelUp(character))
                 {
+                   
                     levelUp.Disable();
                     levelToMax.Disable();
                 }
                 else
                 {
+                    anyConditionIsMet = true;
                     levelUp.Enable();
                     levelToMax.Enable();
+                }
+
+                if (anyConditionIsMet)
+                {
+                    stop.Enable();
+                }
+                else
+                {
+                    stop.Disable();
                 }
             }
      
 
-            var shouldContinue = ConditionsAreMet(character);
-            if (shouldContinue)
-            {
-                SetupComponents();
-                messageBuilder.AddComponents(components);
-            }
+           
             UpdateEmbed(embedBuilder,character);
+            var messageBuilder =new DiscordInteractionResponseBuilder()
+                .AddEmbed(embedBuilder.Build())
+                .AddFile("levelupimage.png", stream);
+
+            SetupComponents();
+            messageBuilder.AddComponents(components);
+            
+       
             await ctx.RespondAsync(messageBuilder);
             
-            if (!shouldContinue)
+            if (!ConditionsAreMet(character))
             {
                 return;
             }
@@ -311,17 +336,23 @@ public class LevelUpCharacter : GeneralCommandClass
                 await using var localStream = new MemoryStream();
                 await localLevelUpImage.SaveAsPngAsync(localStream);
                 localStream.Position = 0;
+                foreach (var i in components)
+                {
+                    i.Disable();
+                }
                 if (lastInteraction.ResponseState != DiscordInteractionResponseState.Replied)
                 {
                     await lastInteraction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
                         new DiscordInteractionResponseBuilder()
                             .WithTitle("Hmm")
+                            .AddComponents(components)
                             .AddFile("levelupimage.png", localStream)
                             .AddEmbed(embedBuilder.Build()));
                 }
                 else
                 {
                     await message.ModifyAsync(new DiscordMessageBuilder()
+                        .AddComponents(components)
                         .AddEmbed(embedBuilder.Build())
                         .AddFile("levelupimage.png", localStream));
                 }
@@ -338,19 +369,7 @@ public class LevelUpCharacter : GeneralCommandClass
                     break;
                 }
                 var result = await message!.WaitForButtonAsync(ctx.User,new TimeSpan(0,5,0));
-
-
-   
-                await DatabaseContext.Entry(gottenUserData).ReloadAsync();
-                foreach (var i in DatabaseContext
-                             .Entity
-                             .Where(i => i is CharacterExpMaterial || i is AscensionMaterial)
-                             .ToArray())
-                {
-                    await DatabaseContext.Entry(i).ReloadAsync();
-                }
                 
-        
                 if (result.TimedOut)
                 {
              
@@ -368,7 +387,7 @@ public class LevelUpCharacter : GeneralCommandClass
 
 
 
-                var expUpgradeMaterials = gottenUserData.Inventory.OfType<CharacterExpMaterial>()
+                var expUpgradeMaterials = gottenUserData.Items.OfType<CharacterExpMaterial>()
                     .Where(i => i.Stacks > 0)
                     .OrderBy(i => i.Rarity).ToList();
                 switch (decision)
@@ -381,7 +400,7 @@ public class LevelUpCharacter : GeneralCommandClass
                         if (CanAscend(character))
                         {
                             var requiredMats = character.RequiredAscensionMaterialsToAscend;
-                            gottenUserData.Inventory.RemoveItemStacks<AscensionMaterial>(requiredMats);
+                            gottenUserData.Items.RemoveItemStacks<AscensionMaterial>(requiredMats);
                             character.Ascension++;
                         }
 
@@ -403,7 +422,7 @@ public class LevelUpCharacter : GeneralCommandClass
                                 continue;
                             }
                             character.IncreaseExp(firstExpUpgrade.ExpToIncrease);
-                            gottenUserData.Inventory.RemoveItemStacks(firstExpUpgrade.GetType(),1);
+                            gottenUserData.Items.RemoveItemStacks(firstExpUpgrade.GetType(),1);
                             
                           
                         }
@@ -427,7 +446,7 @@ public class LevelUpCharacter : GeneralCommandClass
                                 continue;
                             }
                             character.IncreaseExp(firstExpUpgrade.ExpToIncrease);
-                            gottenUserData.Inventory.RemoveItemStacks(firstExpUpgrade.GetType(),1);
+                            gottenUserData.Items.RemoveItemStacks(firstExpUpgrade.GetType(),1);
                         }
             
                         break;
@@ -435,8 +454,9 @@ public class LevelUpCharacter : GeneralCommandClass
 
                 
                 await DatabaseContext.SaveChangesAsync();
-                UpdateEmbed(embedBuilder,character);
                 character.LoadStats();
+                UpdateEmbed(embedBuilder,character);
+              
                 using var localLevelUpImage = await GetImageForLevelUpAndAscensionAsync(character);
                 await using var localStream = new MemoryStream();
                 await localLevelUpImage.SaveAsPngAsync(localStream);

@@ -19,7 +19,7 @@ public class ListAllEntities : GeneralCommandClass
     static ListAllEntities()
     {
         var builder = new StringBuilder();
-        foreach (var i in DefaultObjects.GetDefaultObjectsThatSubclass<Entity>()
+        foreach (var i in DefaultObjects.GetDefaultObjectsThatSubclass<IInventoryEntity>()
                      .Select(i =>
                      {
                          Type type = null;
@@ -34,7 +34,7 @@ public class ListAllEntities : GeneralCommandClass
                          else if (i is Blessing)
                              type = typeof(Blessing);
                          else
-                             type = typeof(Entity);
+                             type = typeof(IInventoryEntity);
                          return new { type, entity = i };
                      }).OrderBy(i => i.type?.Name))
         {
@@ -51,10 +51,11 @@ public class ListAllEntities : GeneralCommandClass
             .WithUser(ctx.User)
             .WithTitle("All possible entities")
             .WithDescription(listed)
-            .WithColor(await DatabaseContext.UserData
+            .WithColor((await DatabaseContext.UserData
                 .Where(i => i.Id == ctx.User.Id)
-                .Select(i => i.Color)
-                .FirstOrDefaultAsync());
+                .Select(i => new DiscordColor?(i.Color))
+                .FirstOrDefaultAsync())
+                .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color));
            
         await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AsEphemeral()
             .AddEmbed(embed));

@@ -26,7 +26,7 @@ public class Challenge :GeneralCommandClass
         var player1User = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
             .FirstOrDefaultAsync(i => i.Id == player1.Id);
-        if (player1User is null)
+        if (player1User is null || player1User.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(ctx);
             return;
@@ -34,12 +34,7 @@ public class Challenge :GeneralCommandClass
         DiscordEmbedBuilder embedToBuild;
         if (player1User.IsOccupied)
         {
-            embedToBuild = new DiscordEmbedBuilder()
-                .WithTitle($"Hmm")
-                .WithColor(player1User.Color)
-                .WithAuthor(player1.Username, iconUrl: player1.AvatarUrl)
-                .WithDescription("You are occupied");
-            await ctx.RespondAsync(embedToBuild.Build());
+            await NotifyAboutOccupiedAsync(ctx);
             return;
         }
         embedToBuild = new DiscordEmbedBuilder()
@@ -58,17 +53,22 @@ public class Challenge :GeneralCommandClass
         var player2User = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
             .FirstOrDefaultAsync(i => i.Id == player2.Id);
-
-        if (player2User is null || player2User.IsOccupied)
+        
+        if (player2User is null || player2User.IsOccupied || player2User.Tier == Tier.Unranked)
         {
             embedToBuild = new DiscordEmbedBuilder()
                 .WithTitle($"Hmm")
                 .WithColor(player1User.Color)
                 .WithAuthor(player1.Username, iconUrl: player1.AvatarUrl)
-                .WithDescription($"{player2.Username} is occupied");
+                .WithDescription($"{player2.Username} is occupied, or has not begun with /begin");
             await ctx.RespondAsync(embedToBuild.Build());
             return;
         }
+
+        await DatabaseContext.UserData
+            .Where(i => i.Id == player2.Id)
+            .IncludeTeamWithAllEquipments()
+            .LoadAsync();
         if (player2User.Tier == Tier.Unranked || player1User.Tier == Tier.Unranked)
         {
             embedToBuild = embedToBuild

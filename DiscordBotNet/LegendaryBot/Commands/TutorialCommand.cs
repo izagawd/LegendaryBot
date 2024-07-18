@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
@@ -28,8 +29,10 @@ public class TutorialCommand : GeneralCommandClass
             .WithUser(ctx.User)
             .WithTitle("Bot guide")
             .WithDescription(tutorialString)
-            .WithColor(await DatabaseContext.UserData.Where(i => i.Id == ctx.User.Id).Select(i => i.Color)
-                .FirstOrDefaultAsync());
+            .WithColor((await DatabaseContext.UserData.Where(i => i.Id == ctx.User.Id)
+                .Select(i => new DiscordColor?(i.Color))
+                .FirstOrDefaultAsync())
+                .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color));
         await ctx.RespondAsync(embed);
     }
 }

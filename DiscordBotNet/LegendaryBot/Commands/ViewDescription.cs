@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
@@ -15,7 +16,7 @@ public class ViewDescription : GeneralCommandClass
     public async ValueTask Execute(CommandContext context, [Parameter("entity-name")] string entityName)
     {
         var simplifiedName = entityName.Replace(" ", "").ToLower();
-        object? zaObject = DefaultObjects.GetDefaultObjectsThatSubclass<Entity>()
+        object? zaObject = DefaultObjects.GetDefaultObjectsThatSubclass<IInventoryEntity>()
             .FirstOrDefault(i => i.GetType().Name.ToLower() == simplifiedName);
         if (zaObject is null)
         {
@@ -25,13 +26,14 @@ public class ViewDescription : GeneralCommandClass
 
         var zaColor = await DatabaseContext.UserData
             .Where(i => i.Id == context.User.Id)
-            .Select(i => i.Color)
+            .Select(i => new DiscordColor?(i.Color))
             .FirstOrDefaultAsync();
         var builder = new DiscordEmbedBuilder()
             .WithUser(context.User)
-            .WithTitle("Entity description")
-            .WithColor(zaColor);
-        if (zaObject is Entity zaEntity)
+            .WithTitle("InventoryEntity description")
+            .WithColor(zaColor
+                .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color));
+        if (zaObject is IInventoryEntity zaEntity)
         {
             var zaDescription = $"{zaEntity.Name}.\nRarity: {zaEntity.Rarity}";
             if (zaEntity is Character z)
@@ -57,7 +59,7 @@ public class ViewDescription : GeneralCommandClass
         else
         {
             
-            builder.WithDescription($"Entity of name {entityName} not found");
+            builder.WithDescription($"InventoryEntity of name {entityName} not found");
             
         }
 

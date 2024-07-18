@@ -6,7 +6,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class BlessingOfThePhoenix : Blessing, IBattleEventListener
 {
-    public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;
+    public override Rarity Rarity => Rarity.FiveStar;
 
     public int GetHealthPercentRecovering(int level)
     {

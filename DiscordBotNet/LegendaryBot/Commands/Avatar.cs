@@ -26,14 +26,20 @@ public class Avatar: GeneralCommandClass
             user = ctx.User;
         }
 
+        Optional<DiscordColor> idk;
+
         var color = await DatabaseContext.UserData
             .Where(i => i.Id == user.Id)
-            .Select(i => i.Color)
+            .Select(i => new DiscordColor?(i.Color))
             .FirstOrDefaultAsync();
+        if (color is null)
+        {
+            color = DefaultObjects.GetDefaultObject<UserData>().Color;
+        }
         var embed = new DiscordEmbedBuilder()
             .WithTitle($"**{user.Username}'s avatar**")
             .WithAuthor(ctx.User.Username, iconUrl: ctx.User.AvatarUrl)
-            .WithColor(color)
+            .WithColor(color.Value)
             .WithImageUrl(user.AvatarUrl)
             .WithTimestamp(DateTime.Now);
         await ctx.RespondAsync(embed);

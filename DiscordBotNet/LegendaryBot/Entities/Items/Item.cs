@@ -1,16 +1,43 @@
-﻿using SixLabors.Fonts;
+﻿using DiscordBotNet.Database.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace DiscordBotNet.LegendaryBot.Entities.Items;
 
-
-
-
-public abstract class Item : Entity
+public class ItemDatabaseConfiguration : IEntityTypeConfiguration<Item>
 {
-    public override Type TypeGroup => typeof(Item);
-    public override string ImageUrl => $"{Website.DomainName}/battle_images/items/{GetType().Name}.png";
+    public void Configure(EntityTypeBuilder<Item> builder)
+    {
+        builder.HasKey(nameof(Item.UserDataId),"Discriminator");
+    }
+}
+
+
+public abstract class Item : IInventoryEntity
+{
+    public  Type TypeGroup => typeof(Item);
+    public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
+    public string Description { get; }
+    public virtual Rarity Rarity { get; }
+    public IInventoryEntity Clone()
+    {
+        throw new NotImplementedException();
+    }
+
+    public string Name { get; }
+    public UserData? UserData { get; set; }
+    public  string ImageUrl { get; }
+
+    public Item()
+    {
+        ImageUrl = $"{Website.DomainName}/battle_images/items/{GetType().Name}.png";
+        Name = BasicFunctionality.Englishify(GetType().Name);
+    }
+
+    public ulong UserDataId { get; set; }
 
     public async Task<Image<Rgba32>> GetImageAsync(int? stacks = null)
     {
@@ -47,8 +74,5 @@ public abstract class Item : Entity
     public int Stacks { get; set; } = 1;
 
 
-
-
-
-
+    public IEnumerable<string> ImageUrls { get; }
 }

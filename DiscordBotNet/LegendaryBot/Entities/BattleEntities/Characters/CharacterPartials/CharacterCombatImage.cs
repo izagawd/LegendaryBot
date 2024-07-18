@@ -10,27 +10,8 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.Characte
 public partial class Character
 {
         
-    /// <summary>
-    /// Load build if this character isnt already loaded, or dont load the build if u set stats manually <br/>
-    /// eg TotalAttack = 5000;
-    /// </summary>
-    /// <param name="loadBuild"></param>
-    /// <returns></returns>
-    public virtual async Task<Image<Rgba32>> GetDetailsImageAsync(bool loadBuild)
-    {
-        using var characterImageInfo = await GetInfoAsync();
-        if(loadBuild)
-            LoadStats();
-        
-        var image = new Image<Rgba32>(850, 900);
-        
-       
-        return image;
-    }
-    public sealed override   Task<Image<Rgba32>> GetDetailsImageAsync()
-    {
-        return GetDetailsImageAsync(true);
-    }
+
+  
 
 
     /// <summary>

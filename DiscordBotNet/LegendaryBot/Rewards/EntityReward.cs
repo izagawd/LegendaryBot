@@ -19,21 +19,21 @@ public class EntityReward : Reward
     }
 
     public override bool IsValid => EntitiesToReward.Count() > 0;
-    public EntityContainer EntitiesToReward { get;  }
-    public EntityReward(IEnumerable<Entity> entitiesToReward)
+    public InventoryEntityContainer EntitiesToReward { get;  }
+    public EntityReward(IEnumerable<IInventoryEntity> entitiesToReward)
     {
-        EntitiesToReward = new EntityContainer(entitiesToReward
+        EntitiesToReward = new InventoryEntityContainer(entitiesToReward
             .Where(i => i is not null));
-        EntitiesToReward.Arrange();
+        EntitiesToReward.MergeDuplicates();
 
     }
 
     public override string GiveRewardTo(UserData userData)
     {
         var stringBuilder = new StringBuilder($"{userData.Name} got: ");
-        EntitiesToReward.Arrange();
+        EntitiesToReward.MergeDuplicates();
         userData.Inventory.AddRange(EntitiesToReward);
-        userData.Inventory.Arrange();
+        userData.Inventory.MergeDuplicates();
 
         Dictionary<string, int> nameSorter = [];
         foreach (var i in EntitiesToReward)

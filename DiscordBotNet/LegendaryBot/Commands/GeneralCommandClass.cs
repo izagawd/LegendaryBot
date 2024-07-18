@@ -20,23 +20,10 @@ public abstract class GeneralCommandClass
     }
 
 
-    public Task<bool> HandleIsOccupiedAsync(IEnumerable<UserData> userDatas, CommandContext context,
-        string? occupiedText = null)
-    {
-        return HandleIsOccupiedAsync(userDatas.Select(i => i.Id),context, occupiedText);
-    }
-    
-    public async Task<bool> HandleIsOccupiedAsync(IEnumerable<ulong> userDatas, CommandContext context, string? occupiedText = null)
-    {
-        var arrayLongs = userDatas.ToArray();
-        if ((await DatabaseContext.UserData
-                .AnyAsync(i => arrayLongs.Contains(i.Id) &&  i.IsOccupied)))
-        {
-            return true;
-        }
 
-        return false;
-    }
+    
+
+    
     
     public async Task AskToDoBeginAsync(CommandContext context)
     {
@@ -45,14 +32,41 @@ public abstract class GeneralCommandClass
             .WithDescription("You have not yet began your journey with /begin")
             .WithColor(DefaultObjects.GetDefaultObject<UserData>().Color)
             .WithUser(context.User);
+
+        var color = (await DatabaseContext.UserData
+                .Where(i => i.Id == context.User.Id)
+                .Select(i => new DiscordColor?(i.Color))
+                .FirstOrDefaultAsync())
+            .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color);
+
+        embed.WithColor(color);
         await context.RespondAsync(embed);
     }
+    public async Task NotifyAboutOccupiedAsync(CommandContext context)
+    {
+        var embed = new DiscordEmbedBuilder()
+            .WithTitle("Hmm")
+            .WithDescription("You are occupied")
+            .WithColor(DefaultObjects.GetDefaultObject<UserData>().Color)
+            .WithUser(context.User);
+
+        var color = (await DatabaseContext.UserData
+                .Where(i => i.Id == context.User.Id)
+                .Select(i => new DiscordColor?(i.Color))
+                .FirstOrDefaultAsync())
+            .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color);
+
+        embed.WithColor(color);
+        await context.RespondAsync(embed);
+    }
+
+
+ 
     public  async Task AfterExecutionAsync(CommandContext ctx)
     {
 
         try
         {
-            await PostgreSqlContext.ArrangeUserInventoriesAsync([ctx.User.Id]);
             if(_occupiedUserDatasIds.Count > 0)
             {
          

@@ -27,6 +27,12 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\characters\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\characters\info\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\modify\Index.cshtml" />
+  </ItemGroup>
+
 
 
 </Project>

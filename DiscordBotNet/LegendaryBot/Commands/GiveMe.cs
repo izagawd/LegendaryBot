@@ -19,7 +19,8 @@ public class GiveMe : GeneralCommandClass
                            Description("The amount you want of the supplied item")] long amount = 1)
     {
         var simplifiedEntityName = entityName.ToLower().Replace(" ", "");
-        var type =DefaultObjects.AllAssemblyTypes.FirstOrDefault(i => i.IsSubclassOf(typeof(Entity)) && !i.IsAbstract
+        var type =DefaultObjects.AllAssemblyTypes.FirstOrDefault(i => i.IsClass 
+                                                                      && i.GetInterfaces().Contains(typeof(IInventoryEntity)) && !i.IsAbstract
             && i.Name.ToLower() == simplifiedEntityName);
         if (type is null)
         {
@@ -31,9 +32,12 @@ public class GiveMe : GeneralCommandClass
         else
         {
             var userData = await DatabaseContext.UserData
-                .Include(i => i.Inventory)
+                .Include(i => i.Gears)
+                .Include(i => i.Blessings)
+                .Include(i => i.Characters)
+                .Include(i => i.Items)
                 .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
-            if (userData is null)
+            if (userData is null || userData.Tier == Tier.Unranked)
             {
                 await AskToDoBeginAsync(ctx);
                 return;
@@ -41,7 +45,7 @@ public class GiveMe : GeneralCommandClass
             List<EntityReward> rewards = [];
             foreach (var i in Enumerable.Range(0,(int) amount))
             {
-                var createdType = (Entity) Activator.CreateInstance(type)!;
+                var createdType = (IInventoryEntity) Activator.CreateInstance(type)!;
                 if(createdType is Gear gear)
                     gear.Initialize(Rarity.FiveStar);
                 rewards.Add(new EntityReward([createdType]));

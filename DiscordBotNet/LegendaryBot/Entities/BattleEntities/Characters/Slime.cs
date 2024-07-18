@@ -50,7 +50,7 @@ public class Slime : CharacterPartials.Character
         }
     }
 
-    public override Rarity Rarity { get; protected set; } = Rarity.TwoStar;
+    public override Rarity Rarity => Rarity.TwoStar;
 
 
     public Slime()

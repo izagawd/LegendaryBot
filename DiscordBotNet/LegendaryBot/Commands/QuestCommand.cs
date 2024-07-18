@@ -23,7 +23,7 @@ public class QuestCommand : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.Quests)
             .FirstOrDefaultAsync(i => i.Id == author.Id);
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(ctx);
             return;

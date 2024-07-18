@@ -14,7 +14,7 @@ public class Daily : GeneralCommandClass
     public async ValueTask Execute(CommandContext ctx)
     {
         var userData =await  DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(ctx);
             return;

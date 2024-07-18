@@ -16,6 +16,8 @@ using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace DiscordBotNet.Database;
 
+
+
 public class PostgreSqlContext : DbContext
 {
     
@@ -28,10 +30,11 @@ public class PostgreSqlContext : DbContext
 
     public DbSet<UserData> UserData { get; set; }
     public DbSet<GuildData> GuildData { get; set; }
-    public DbSet<Entity> Entity { get; set; }
+    public DbSet<Blessing> Blessings { get; set; }
 
-
-
+    public DbSet<Gear> Gears { get; set; }
+    public DbSet<Character> Characters { get; set; }
+    public DbSet<Item> Items { get; set; }
     public DbSet<Quote> Quote { get; set; }
 
     /// <summary>
@@ -68,7 +71,12 @@ public class PostgreSqlContext : DbContext
 
     }
 
-   
+    public async Task<UserData> CreateNonExistantUserdataAsync(ulong id)
+    {
+        var user = new UserData() { Id = id };
+        await UserData.AddAsync(user);
+        return user;
+    }
  
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -95,20 +103,7 @@ public class PostgreSqlContext : DbContext
     }
 
 
-    public static async Task ArrangeUserInventoriesAsync(IEnumerable<ulong> userIds)
-    {
-        await using var post = new PostgreSqlContext();
-        var asArray = userIds.ToArray();
-        var users = await post.UserData
-            .Where(i => asArray.Contains(i.Id))
-            .Include(i => i.Inventory.Where(j => j is Item || j is Character))
-            .ToArrayAsync();
-        foreach (var i in users)
-        {
-           i.Inventory.Arrange();
-        }
-        await post.SaveChangesAsync();
-    }
+    
 
     private static readonly IEnumerable<Type> QuestTypes =
         Assembly.GetExecutingAssembly()
@@ -124,29 +119,28 @@ public class PostgreSqlContext : DbContext
         {
             modelBuilder.Entity(i);
         }
-        foreach (var entityType in DefaultObjects.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Entity))))
+        foreach (var entityType in DefaultObjects
+                     .AllAssemblyTypes
+                     .Where(i => i.IsClass && i.GetInterfaces().Contains(typeof(IInventoryEntity))))
         {
             modelBuilder.Entity(entityType);
         }
-
+   
         foreach (var i in DefaultObjects.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(GearStat))))
         {
             modelBuilder.Entity(i);
         }
-        foreach (var i in DefaultObjects.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Gear))))
-        {
-            modelBuilder.Entity(i);
-        }
-
+    
+            
         modelBuilder
+            .ApplyConfiguration(new ItemDatabaseConfiguration())
             .ApplyConfiguration(new UserDataDatabaseConfiguration())
-            .ApplyConfiguration(new EntityDatabaseConfiguration())
             .ApplyConfiguration(new QuoteDatabaseConfiguration())
             .ApplyConfiguration(new PlayerTeamDatabaseConfiguration())
             .ApplyConfiguration(new CharacterDatabaseConfiguration())
             .ApplyConfiguration(new PlayerDatabaseConfiguration())
             .ApplyConfiguration(new GearDatabaseConfiguration())
-            .ApplyConfiguration(new ArtifactStatDatabaseConfiguration())
+            .ApplyConfiguration(new GearStatDatabaseConfiguration())
             .ApplyConfiguration(new BlessingDatabaseConfiguration());
 
 

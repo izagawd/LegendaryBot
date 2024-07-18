@@ -165,7 +165,7 @@ public abstract class StatusEffect : ICloneable
     {
         if (number <= 0)
         {
-            throw new Exception("Entity times a negative number or 0 doesn't make sense");
+            throw new Exception("InventoryEntity times a negative number or 0 doesn't make sense");
             
         }
 

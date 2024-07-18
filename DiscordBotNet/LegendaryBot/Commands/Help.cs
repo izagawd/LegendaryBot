@@ -160,16 +160,20 @@ public class Help : GeneralCommandClass
     {
         
         var author = ctx.User;
-
+        
         var color = await DatabaseContext
             .UserData
             .Where(i => i.Id == ctx.User.Id)
-            .Select(i => i.Color)
+            .Select(i => new DiscordColor?(i.Color))
             .FirstOrDefaultAsync();
+        if (color is null)
+        {
+            color = DefaultObjects.GetDefaultObject<UserData>().Color;
+        }
         var embedToBuild = new DiscordEmbedBuilder()
             .WithTitle("Help")
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
-            .WithColor(color)
+            .WithColor(color.Value)
             .WithTimestamp(DateTime.Now);
         if (cmd is null)
         {

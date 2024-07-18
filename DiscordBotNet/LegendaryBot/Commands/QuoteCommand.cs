@@ -11,6 +11,7 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 [Command("Quote")]
 public class QuoteCommand : GeneralCommandClass
 {
+    private static readonly string[] yesOrNoArray = new[] { "like", "dislike" };
 
     [Command("read"), Description("Read a random quote"),
     AdditionalCommand("/read",BotCommandType.Fun)]
@@ -29,7 +30,17 @@ public class QuoteCommand : GeneralCommandClass
             .RandomOrDefaultAsync();
         if (anon is null)
         {
-            await AskToDoBeginAsync(ctx);
+            var userColor = (await DatabaseContext.UserData
+                    .Where(i => i.Id == ctx.User.Id)
+                    .Select(i => new DiscordColor?(i.Color))
+                    .FirstOrDefaultAsync())
+                .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color);
+            var embed = new DiscordEmbedBuilder()
+                .WithUser(ctx.User)
+                .WithColor(userColor)
+                .WithTitle("Hmm")
+                .WithDescription($"There are no quotes yet. try adding one of your own with /quote write!");
+            await ctx.RespondAsync(embed);
             return;
         }
 
@@ -48,15 +59,15 @@ public class QuoteCommand : GeneralCommandClass
             .WithDescription(randomQuote.QuoteValue)
             .WithFooter($"Date and Time Created: {quoteDate:MM/dd/yyyy HH:mm:ss}\nLikes: {counts.likes} Dislikes: {counts.dislikes}");
         await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder).AddComponents(like,dislike));
-        var message = await ctx.GetResponseAsync();
-
+        var message = (await ctx.GetResponseAsync())!;
+        using var source = new CancellationTokenSource(new TimeSpan(0, 5, 0));
         while (true)
         {
-            var result = await message.WaitForButtonAsync(ctx.User);
-            if(result.TimedOut) break;
+            var result = await message.WaitForButtonAsync( source.Token);
+            if(result.TimedOut) return;
             var interactivityResult = result.Result;
             var choice = interactivityResult.Interaction.Data.CustomId;
-            if (!new[] { "like", "dislike" }.Contains(choice)) return;
+            if (!yesOrNoArray.Contains(choice)) return;
             await using var newDbContext = new PostgreSqlContext();
             var anonymous = await newDbContext.Set<QuoteReaction>()
                 .Where(j => j.QuoteId == randomQuote.Id && j.UserDataId == interactivityResult.User.Id)
@@ -128,8 +139,7 @@ public class QuoteCommand : GeneralCommandClass
         var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
         if (userData is null)
         {
-            await AskToDoBeginAsync(ctx);
-            return;
+            userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);
         }
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)

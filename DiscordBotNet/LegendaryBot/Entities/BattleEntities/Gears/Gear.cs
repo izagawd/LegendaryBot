@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using DiscordBotNet.Database.Models;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using DiscordBotNet.LegendaryBot.Results;
@@ -7,9 +8,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
-public abstract class Gear : Entity
+public abstract class Gear : IInventoryEntity
 {
-    public override Type TypeGroup => typeof(Gear);
+    public  Type TypeGroup => typeof(Gear);
+    public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
     [NotMapped] public IEnumerable<GearStat> Substats => Stats.Except([MainStat]);
 
     
@@ -45,6 +47,22 @@ public abstract class Gear : Entity
     [NotMapped] public virtual IEnumerable<Type> PossibleMainStats => [];
 
 
+    public string Description { get; }
+    public Rarity Rarity { get; private set; }
+    public IInventoryEntity Clone()
+    {
+        var clone =(Gear)  MemberwiseClone();
+        clone.Id = Guid.Empty;
+        clone.UserData = null;
+        clone.UserDataId = 0;
+        return clone;
+    }
+
+    public string Name { get; }
+    public UserData? UserData { get; set; }
+    public string ImageUrl { get; }
+    public Guid Id { get; set; }
+    public ulong UserDataId { get; set; }
     public Character Character { get; set; }
 
     public Gear(){}
@@ -90,20 +108,23 @@ public abstract class Gear : Entity
     }
 
 
-    public Guid? ArtifactWielderId { get; set; }
+    
 
     
     public GearStat MainStat { get; set; } 
 
     public List<GearStat> Stats { get; set; } = [];
 
-    
+
+    public IEnumerable<string> ImageUrls { get; }
+    public Guid? CharacterId { get; set; }
 }
 
 public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
 {
     public void Configure(EntityTypeBuilder<Gear> entity)
     {
+        entity.HasKey(i => i.Id);
         entity.HasOne(i => i.MainStat)
             .WithOne()
             .HasForeignKey<GearStat>(i => i.IsMainStat);

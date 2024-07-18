@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations.Schema;
+using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
@@ -28,13 +29,17 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
 {
     public void Configure(EntityTypeBuilder<Character> entity)
     {
+
+        entity.HasKey(i => i.Id);
+        entity.HasIndex(nameof(Character.UserDataId), "Discriminator")
+            .IsUnique();
         entity.HasMany(i => i.Gears)
             .WithOne(i => i.Character)
-            .HasForeignKey(i => i.ArtifactWielderId);
+            .HasForeignKey(i => i.CharacterId);
         
         entity.HasOne(i => i.Blessing)
             .WithOne(i => i.Character)
-            .HasForeignKey<Blessing>(i => i.BlessingWielderId)
+            .HasForeignKey<Blessing>(i => i.CharacterId)
             .OnDelete(DeleteBehavior.SetNull);
         entity.Property(i => i.Level)
             .HasColumnName(nameof(Character.Level));
@@ -47,7 +52,7 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
 /// Characters can also be loaded at once if they are in a CharacterTeam and LoadTeamGearWithPlayerDataAsync is called
 /// from the CharacterTeam
 /// </summary>
-public abstract partial  class Character : Entity, ICanBeLeveledUp
+public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp
 {
 
 
@@ -245,7 +250,14 @@ public abstract partial  class Character : Entity, ICanBeLeveledUp
         _shouldTakeExtraTurn = true;
         CurrentBattle.AddAdditionalBattleText(new Character.ExtraTurnBattleText(this));
     }
-    public override string ImageUrl =>$"{Website.DomainName}/battle_images/characters/{GetType().Name}.png";
+
+
+    public UserData? UserData { get; set; }
+
+
+    public Guid Id { get; set; }
+    public ulong UserDataId { get; set; }
+
     public float ShieldPercentage
     {
         get
@@ -344,6 +356,23 @@ public abstract partial  class Character : Entity, ICanBeLeveledUp
     public const int MaxAscensionLevel = 6;
     public int Ascension { get; set; } = 1;
 
+    public IInventoryEntity Clone()
+    {
+        var clone =(Character)  MemberwiseClone();
+        clone.UserData = null;
+        clone.UserDataId = 0;
+        clone.Id = Guid.Empty;
+        return clone;
+    }
+
+    public virtual string Name { get; }
+
+    public virtual string ImageUrl { get; }
+    public Character()
+    {
+        Name = BasicFunctionality.Englishify(GetType().Name);
+        ImageUrl = $"{Website.DomainName}/battle_images/characters/{GetType().Name}.png";
+    }
     /// <summary>
     /// Derives dialogue profile from character properties
     /// </summary>
@@ -397,7 +426,7 @@ public abstract partial  class Character : Entity, ICanBeLeveledUp
     /// Use this if you want this character to drop any extra items
     /// </summary>
     [NotMapped]
-    public virtual List<Entity> ExtraItemsToDrop { get; set; } = new();
+    public virtual List<IInventoryEntity> ExtraItemsToDrop { get; set; } = new();
 
 
     public async Task<Image<Rgba32>> GetInfoAsync()
@@ -428,9 +457,12 @@ public abstract partial  class Character : Entity, ICanBeLeveledUp
         return image;
     }
 
+    public override string ToString()
+    {
+        return CurrentBattle is not null ? NameWithAlphabetIdentifier : Name;
+    }
 
 
-   
     /// <summary>
     /// if this character is not being controlled by the player, it will use custom AI
     /// </summary>
@@ -486,7 +518,7 @@ public abstract partial  class Character : Entity, ICanBeLeveledUp
 
     [NotMapped] public IEnumerable<StatusEffect> StatusEffects => _statusEffects.ToImmutableArray();
 
-    [NotMapped] public virtual DiscordColor Color { get; protected set; } = DiscordColor.Green;
+    [NotMapped] public virtual DiscordColor Color => DiscordColor.Green;
 
 
 
@@ -553,8 +585,14 @@ public abstract partial  class Character : Entity, ICanBeLeveledUp
         }
         
     }
-    
-    public override Type TypeGroup => typeof(Character);
+
+
+
+    public  Type TypeGroup => typeof(Character);
+    public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
+    public string Description { get; }
+    public virtual Rarity Rarity => Rarity.ThreeStar;
+
     [NotMapped]
     public   BasicAttack BasicAttack { get; protected set; }
     
@@ -646,7 +684,8 @@ public abstract partial  class Character : Entity, ICanBeLeveledUp
     {
         Experience = experience;
     }
-    
+
+    public IEnumerable<string> ImageUrls { get; }
 }
 public enum StatusEffectInflictResult
 {

@@ -29,12 +29,12 @@ public class Display : GeneralCommandClass
     public async ValueTask ExecuteDisplayGear(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
-            .Include(i => i.Inventory.Where(j => j is Gear))
-            .ThenInclude((Entity i) => (i as Gear).Character)
-            .Include(i => i.Inventory.Where(j => j is Gear))
-            .ThenInclude((Entity i) =>  (i as Gear).Stats)
+            .Include(i => i.Gears)
+            .ThenInclude(i => i.Character)
+            .Include(i => i.Gears)
+            .ThenInclude(i =>  i.Stats)
             .FirstOrDefaultAsync(i => i.Id == context.User.Id);
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
@@ -127,10 +127,10 @@ public class Display : GeneralCommandClass
     public async ValueTask ExecuteDisplayCharacters(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
-            .Include(i => i.Inventory.Where(j => j is Character))
-            .ThenInclude((Entity i) => (i as Character).Blessing)
+            .Include(i => i.Characters)
+            .ThenInclude(i => i.Blessing)
             .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
@@ -151,10 +151,10 @@ public class Display : GeneralCommandClass
                 count = 0;
             }
 
-            var stringToUse = $"Name: {i.Name} |  Level: {i.Level} | Element: \n{i.Element} | Rarity: {i.Rarity} " +
+            var stringToUse = $"Name: {i.Name} |  Level: {i.Level} | Element: \n{i.Element} | Rarity: {i.Rarity} | " +
                               $"{nameof(Character.DupeCount)}: | {i.DupeCount}";
             if (i.Blessing is not null)
-                stringToUse += $"\n     Blessing Name: {i.Blessing.Name}  \n" +
+                stringToUse += $"\nBlessing Name: {i.Blessing.Name}\n" +
                                $"Blessing Id: {i.Blessing.Id}";
             currentList.Add(stringToUse);
             count++;
@@ -214,69 +214,15 @@ public class Display : GeneralCommandClass
         
 
     }
-    [Command("blessing"),Description("Displays a blessing you have by inputting their id")]
-    public async ValueTask ExecuteDisplayABlessing(CommandContext ctx,
-        [Parameter("blessing-id")] Guid blessingId)
-    {
-        var embedBuilder = new DiscordEmbedBuilder()
-            .WithUser(ctx.User)
-            .WithTitle("Hmm")
-            .WithDescription("Invalid id");
 
-        
-     
-        var userData = await DatabaseContext.UserData
-            .Include(i => i.Inventory.Where(j => j.Id == blessingId && j is Blessing))
-            .ThenInclude((Entity entity) => (entity as Blessing)!.Character)
-            .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
-        if (userData is null)
-        {
-            await AskToDoBeginAsync(ctx);
-            return;
-        }
-        embedBuilder.WithColor(userData.Color);
-        var blessing = userData.Inventory.OfType<Blessing>().FirstOrDefault(i => i.Id == blessingId);
-        if (blessing is null)
-        {
-            if (blessingId == Guid.Empty)
-            {
-                embedBuilder.WithDescription("Invalid Id");
-            }
-            else
-            {
-                embedBuilder.WithDescription($"You do not have any blessing with the id {blessingId}");
-            }
-            
-            await ctx.RespondAsync(embedBuilder);
-            return;
-        }
-
-        
-
-        
-        await using var stream = new MemoryStream();
-        await (await blessing.GetDetailsImageAsync()).SaveAsPngAsync(stream);
-        stream.Position = 0;
-        embedBuilder.WithImageUrl("attachment://description.png");
-
-        embedBuilder
-            .WithTitle("Here you go!")
-            .WithDescription($"Name: {blessing}\nId: {blessing.Id}");
-        var builder = new DiscordInteractionResponseBuilder()
-            .AddFile("description.png", stream)
-            .WithTitle("Detail")
-            .AddEmbed(embedBuilder.Build());
-        await ctx.RespondAsync(builder);
-   
-    }
     [Command("blessings"),Description("Displays all the blessings you have")]
     public async ValueTask ExecuteDisplayBlessings(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
-            .Include(i => i.Inventory.Where(j => j is Blessing))
-            .ThenInclude((Entity i) => (i as Blessing).Character)
+            .Include(i => i.Blessings)
+            .ThenInclude(i => i.Character)
             .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
@@ -368,7 +314,7 @@ public class Display : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
             .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;

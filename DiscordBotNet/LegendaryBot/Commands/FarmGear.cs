@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.ComponentModel;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
+using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
@@ -24,7 +25,7 @@ public class FarmGear : GeneralCommandClass
     {
         var userData = await DatabaseContext.UserData.IncludeTeamWithAllEquipments()
             .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(ctx);
             return;
@@ -93,7 +94,7 @@ public class FarmGear : GeneralCommandClass
         }
         await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
         
-        var enemyTeam = new CharacterTeam( (new Delinquent() * 4).Cast<Character>());
+        var enemyTeam = new CharacterTeam( new Delinquent().CloneMultiple(4).Cast<Character>());
         var level = 5;
         var ascension = 1;
         var attack = 250;

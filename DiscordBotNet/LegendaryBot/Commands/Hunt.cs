@@ -24,7 +24,7 @@ public class Hunt : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
             .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(ctx);
             return;
@@ -77,7 +77,7 @@ public class Hunt : GeneralCommandClass
 
         embedToBuild = embedToBuild
             .WithTitle($"Keep your guard up!")
-            .WithDescription($"Wild {enemyTeam.First()}(s) have appeared!");
+            .WithDescription($"Wild {enemyTeam.First().Name}(s) have appeared!");
         await ctx.RespondAsync(embedToBuild.Build());
         var message =  await ctx.GetResponseAsync();
         var userTeam = userData.EquippedPlayerTeam!.LoadTeamStats();

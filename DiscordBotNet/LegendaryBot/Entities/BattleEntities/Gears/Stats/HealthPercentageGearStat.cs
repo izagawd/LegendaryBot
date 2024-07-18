@@ -13,7 +13,7 @@ public class HealthPercentageGearStat : GearStat
     public override bool IsPercentage => true;
     public override void AddStats(Character character)
     {
-        character.TotalMaxHealth += Value * 0.01f * (character.BaseMaxHealth + (character.Blessing?.Health).GetValueOrDefault(0));
+        character.TotalMaxHealth += Value * 0.01f * character.BaseMaxHealth;
     }
 
     public override int GetMaximumSubstatLevelIncrease(Rarity rarity)

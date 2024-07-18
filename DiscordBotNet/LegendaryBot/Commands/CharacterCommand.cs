@@ -22,12 +22,14 @@ public class CharacterCommand : TeamCommand
     {
         var simplifiedCharacterName = characterName.ToLower().Replace(" ", "");
         var userData = await DatabaseContext.UserData
-            .Include(i => i.Inventory.Where(j => (j.Id == blessingId && j is Blessing)
-                                                 || (j is Character &&
-                                                     EF.Property<string>(j, "Discriminator").ToLower() ==
-                                                     simplifiedCharacterName)))
+            .Include(i => i.Blessings.Where(j => j.Id == blessingId))
+            .Include(i => i.Characters.Where(j => 
+                                              EF.Property<string>(j, "Discriminator").ToLower() ==
+                                              simplifiedCharacterName))
+            
+                       
             .FirstOrDefaultAsync(i => i.Id == context.User.Id);
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
@@ -68,13 +70,16 @@ public class CharacterCommand : TeamCommand
     {
         var simplifiedCharacterName = characterName.ToLower().Replace(" ", "");
         var userData = await DatabaseContext.UserData
-            .Include(i => i.Inventory.Where(j => j is Gear
-                                                 || (j is Character &&
-                                                     EF.Property<string>(j, "Discriminator").ToLower() ==
-                                                     simplifiedCharacterName)))
-            .ThenInclude((Entity i) => (i as Gear).Stats)
+            .Include(i => i.Gears)
+            .Include(i => 
+                i.Characters.Where(j => 
+                EF.Property<string>(j, "Discriminator").ToLower() ==
+                                                     simplifiedCharacterName))
+            .ThenInclude(i => i.Gears)
+            .Include(i => i.Gears.Where(j => j.Id == gearId))
+            .ThenInclude(i =>  i.Stats)
             .FirstOrDefaultAsync(i => i.Id == context.User.Id);
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;

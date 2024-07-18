@@ -15,10 +15,11 @@ public class Roll :  GeneralCommandClass
     public async ValueTask Execute(CommandContext ctx)
     {
 
-        var color = await DatabaseContext.UserData
+        var color = (await DatabaseContext.UserData
             .Where(i => i.Id == ctx.User.Id)
-            .Select(i => i.Color)
-            .FirstOrDefaultAsync();
+            .Select(i =>new DiscordColor?(i.Color))
+            .FirstOrDefaultAsync())
+            .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color);
         var random = new Random();
         var embed = new DiscordEmbedBuilder()
             .WithTitle("**Roll**")

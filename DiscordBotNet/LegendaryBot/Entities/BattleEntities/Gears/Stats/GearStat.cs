@@ -6,7 +6,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 
-public class ArtifactStatDatabaseConfiguration : IEntityTypeConfiguration<GearStat>
+public class GearStatDatabaseConfiguration : IEntityTypeConfiguration<GearStat>
 {
     public void Configure(EntityTypeBuilder<GearStat> builder)
     {

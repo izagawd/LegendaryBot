@@ -7,10 +7,7 @@ using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Commands;
-using DiscordBotNet.LegendaryBot.Entities;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.EventArgs;
@@ -40,12 +37,13 @@ public static class Bot
     private static ulong SlenderId => 334412512919420928;
 
 
-    private static  Task FirstTimeSetupAsync()
+    private static Task FirstTimeSetupAsync()
     {
 
 
 
         return new PostgreSqlContext().ResetDatabaseAsync();
+
     }
 
 
@@ -53,7 +51,7 @@ public static class Bot
     private static async Task StartDiscordBotAsync()
     {
         
-        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["BotToken"]!,
+        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["TestBotToken"]!,
             DiscordIntents.All)
             .ConfigureEventHandlers(i => i.HandleSocketOpened(OnReady))
             .Build();
@@ -113,17 +111,19 @@ public static class Bot
 
         return Task.CompletedTask;
     }
+    public interface Ayoo
+    {
+        public void Die() => "Die".Print();
+    }
+
 
     private async static Task DoShitAsync()
     {
         var post = new PostgreSqlContext();
-
-        
-
     }
     private static async Task Main(string[] args)
     {
-   
+        await DoShitAsync();
       
         await using (var ctx = new PostgreSqlContext())
         {
@@ -143,7 +143,7 @@ public static class Bot
             Console.WriteLine($"made all users unoccupied!");
         }
         await StartDiscordBotAsync();
-        await DoShitAsync();
+      
         await Website.StartAsync(args);
 
 

@@ -27,10 +27,11 @@ public class TeamCommand : GeneralCommandClass
             .Include(i => i.EquippedPlayerTeam)
             .Where(i => i.Id == context.User.Id)
             .Select(i => new
-                { team = i.PlayerTeams.FirstOrDefault(j => j.TeamName.ToLower() == teamName.ToLower()), userData = i })
+                
+                {  tier = i.Tier, team = i.PlayerTeams.FirstOrDefault(j => j.TeamName.ToLower() == teamName.ToLower()), userData = i })
             .FirstOrDefaultAsync();
 
-        if (anon is null)
+        if (anon is null || anon.tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
@@ -69,10 +70,10 @@ public class TeamCommand : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower() == teamName.ToLower()))
             .Include(i => i.EquippedPlayerTeam)
-            .Include(i => i.Inventory.Where(j => j is Character
-                                                 && EF.Property<string>(j, "Discriminator").ToLower() == simplifiedCharacterName))
+            .Include(i => i.Characters.Where(j => 
+                                                  EF.Property<string>(j, "Discriminator").ToLower() == simplifiedCharacterName))
             .FirstOrDefaultAsync(i => i.Id == context.User.Id);
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
@@ -135,7 +136,7 @@ public class TeamCommand : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
             .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
@@ -177,10 +178,10 @@ public class TeamCommand : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower() == teamName.ToLower()))
             .Include(i => i.EquippedPlayerTeam)
-            .Include(i => i.Inventory.Where(i => i is Character
-                                                 && EF.Property<string>(i, "Discriminator").ToLower() == simplifiedCharacterName))
+            .Include(i => i.Characters.Where(i =>
+                                                  EF.Property<string>(i, "Discriminator").ToLower() == simplifiedCharacterName))
             .FirstOrDefaultAsync(i => i.Id == context.User.Id);
-        if (userData is null)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;

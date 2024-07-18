@@ -3,7 +3,10 @@ using System.Text;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Entities;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Quests;
 using DiscordBotNet.LegendaryBot.Results;
@@ -16,6 +19,9 @@ using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace DiscordBotNet.Database.Models;
+
+
+
 
 public enum Gender : short
 {
@@ -39,7 +45,7 @@ public class UserData :   ICanBeLeveledUp
 
     public UserData()
     {
-   
+        Inventory = new(this);
     }
 
     public PlayerTeam? EquippedPlayerTeam { get; set; }
@@ -192,10 +198,14 @@ public class UserData :   ICanBeLeveledUp
     public int AdventurerLevel { get; set; } = 1;
     public DiscordColor Color { get; set; } = DiscordColor.Green;
     public string Language { get; set; } = "english";
-    public EntityContainer Inventory { get; protected set; } = [];
-
-
-
+    
+    [NotMapped]
+    public UserDataInventoryCombined Inventory { get; }
+    
+    public ItemContainer Items { get; private set; } = [];
+    public List<Gear> Gears { get; private set; } = [];
+    public CharacterContainer Characters { get; private set; } = [];
+    public List<Blessing> Blessings { get; private set; } = [];
 }
 public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
 {
@@ -209,7 +219,19 @@ public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
             .HasForeignKey(i => i.UserDataId);
                     
         builder
-            .HasMany(i => i.Inventory)
+            .HasMany(i => i.Items)
+            .WithOne(i => i.UserData)
+            .HasForeignKey(i => i.UserDataId);
+        builder
+            .HasMany(i => i.Gears)
+            .WithOne(i => i.UserData)
+            .HasForeignKey(i => i.UserDataId);
+        builder
+            .HasMany(i => i.Blessings)
+            .WithOne(i => i.UserData)
+            .HasForeignKey(i => i.UserDataId);
+        builder
+            .HasMany(i => i.Characters)
             .WithOne(i => i.UserData)
             .HasForeignKey(i => i.UserDataId);
         builder

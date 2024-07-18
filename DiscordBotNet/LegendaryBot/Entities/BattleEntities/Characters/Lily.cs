@@ -119,8 +119,8 @@ public class Lily : CharacterPartials.Character
     protected override float BaseSpeedMultiplier => 1.15f;
 
 
-    public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;
-    public override DiscordColor Color { get; protected set; } = DiscordColor.HotPink;
+    public override Rarity Rarity => Rarity.FiveStar;
+    public override DiscordColor Color => DiscordColor.HotPink;
 
     public override void NonPlayerCharacterAi(ref CharacterPartials.Character target, ref BattleDecision decision)
     {

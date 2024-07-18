@@ -38,8 +38,7 @@ public class Color : GeneralCommandClass
 
         if (userData is null)
         {
-            await AskToDoBeginAsync(ctx);
-            return;
+            userData = await DatabaseContext.CreateNonExistantUserdataAsync(author.Id);
         }
         
         var colorIsValid = true;

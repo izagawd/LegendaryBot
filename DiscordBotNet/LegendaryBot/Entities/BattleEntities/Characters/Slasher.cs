@@ -118,8 +118,8 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
 }
 public class Slasher : CharacterPartials.Character
 {
-    public override Rarity Rarity { get; protected set; } = Rarity.FiveStar;
-    public override DiscordColor Color { get; protected set; } = DiscordColor.Brown;
+    public override Rarity Rarity => Rarity.FiveStar;
+    public override DiscordColor Color => DiscordColor.Brown;
 
     public override Element Element => Element.Earth;
 
