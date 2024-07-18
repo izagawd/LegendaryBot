@@ -2,6 +2,7 @@
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using DiscordBotNet.LegendaryBot.Entities.Items;
 using Microsoft.Extensions.Primitives;
 
 namespace DiscordBotNet.LegendaryBot.Rewards;
@@ -38,9 +39,13 @@ public class EntityReward : Reward
         Dictionary<string, int> nameSorter = [];
         foreach (var i in EntitiesToReward)
         {
-            stringBuilder.Append($"\nName: {i.Name} | Type : {BasicFunctionality.Englishify(i.TypeGroup.Name)} | Rarity : {i.Rarity}");
-            
-            if (i is Gear gear)
+            stringBuilder.Append($"\nName: {i.Name} | Type : {BasicFunctionality.Englishify(i.TypeGroup.Name)} | Rarity : {i.Rarity.ToString().Englishify()}");
+            if (i is Item item)
+            {
+                stringBuilder.Append($" | {nameof(Item.Stacks)}: {item.Stacks}");
+            }
+
+            else if (i is Gear gear)
             {
                 gear.MainStat.SetMainStatValue(gear.Rarity);
                 stringBuilder.Append($"\n\nMainStat = {gear.MainStat.Name}: {gear.MainStat.Value}");
@@ -55,7 +60,9 @@ public class EntityReward : Reward
 
                 stringBuilder.Append("\n");
             }
-        }
+     
+            
+        } 
 
     
 

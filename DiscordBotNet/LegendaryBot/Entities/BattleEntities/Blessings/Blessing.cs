@@ -19,7 +19,7 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
         builder.HasKey(i => i.Id);
     }
 }
-public abstract class Blessing : IInventoryEntity
+public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 {
 
 
@@ -28,7 +28,11 @@ public abstract class Blessing : IInventoryEntity
     public abstract Rarity Rarity { get; }
     public IInventoryEntity Clone()
     {
-        throw new NotImplementedException();
+        var clone =(Blessing)  MemberwiseClone();
+        clone.Id = Guid.Empty;
+        clone.UserData = null;
+        clone.UserDataId = 0;
+        return clone;
     }
 
     public string Name { get; }

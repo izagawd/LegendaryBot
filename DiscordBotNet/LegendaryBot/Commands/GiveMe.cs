@@ -52,6 +52,7 @@ public class GiveMe : GeneralCommandClass
                 
             }
             var result = userData.ReceiveRewards(rewards);
+            
             await DatabaseContext.SaveChangesAsync();
             var embed = new DiscordEmbedBuilder()
                 .WithUser(ctx.User)

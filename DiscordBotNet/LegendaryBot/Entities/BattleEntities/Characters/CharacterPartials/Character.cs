@@ -52,7 +52,7 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
 /// Characters can also be loaded at once if they are in a CharacterTeam and LoadTeamGearWithPlayerDataAsync is called
 /// from the CharacterTeam
 /// </summary>
-public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp
+public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  IGuidPrimaryIdHaver
 {
 
 

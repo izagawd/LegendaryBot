@@ -22,9 +22,15 @@ public abstract class Item : IInventoryEntity
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
     public string Description { get; }
     public virtual Rarity Rarity { get; }
+
+
     public IInventoryEntity Clone()
     {
-        throw new NotImplementedException();
+        var clone =(Item)  MemberwiseClone();
+       
+        clone.UserData = null;
+        clone.UserDataId = 0;
+        return clone;
     }
 
     public string Name { get; }
@@ -38,6 +44,11 @@ public abstract class Item : IInventoryEntity
     }
 
     public ulong UserDataId { get; set; }
+
+    object ICloneable.Clone()
+    {
+        return Clone();
+    }
 
     public async Task<Image<Rgba32>> GetImageAsync(int? stacks = null)
     {

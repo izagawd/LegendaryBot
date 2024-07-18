@@ -4,5 +4,5 @@ namespace DiscordBotNet.LegendaryBot;
 
 public class AscensionMaterial : Item
 {
-    
+    public override Rarity Rarity => Rarity.ThreeStar;
 }

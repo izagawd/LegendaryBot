@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
-public abstract class Gear : IInventoryEntity
+public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 {
     public  Type TypeGroup => typeof(Gear);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
@@ -125,6 +125,8 @@ public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
     public void Configure(EntityTypeBuilder<Gear> entity)
     {
         entity.HasKey(i => i.Id);
+
+        entity.HasIndex(nameof(Gear.CharacterId), "Discriminator");
         entity.HasOne(i => i.MainStat)
             .WithOne()
             .HasForeignKey<GearStat>(i => i.IsMainStat);
