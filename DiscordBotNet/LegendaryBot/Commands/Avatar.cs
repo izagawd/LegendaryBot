@@ -26,8 +26,8 @@ public class Avatar: GeneralCommandClass
             user = ctx.User;
         }
 
-        Optional<DiscordColor> idk;
-
+   
+   
         var color = await DatabaseContext.UserData
             .Where(i => i.Id == user.Id)
             .Select(i => new DiscordColor?(i.Color))
