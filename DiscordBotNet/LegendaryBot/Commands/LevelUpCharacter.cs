@@ -113,9 +113,9 @@ public class LevelUpCharacter : GeneralCommandClass
         if (character.UserData is not null)
         {
             
-            var expUpgradeMat = character.UserData.Inventory.OfType<CharacterExpMaterial>()
+            var expUpgradeMat = character.UserData.Items.OfType<CharacterExpMaterial>()
                 .OrderBy(i => i.ExpToIncrease);
-            var ascensionMats = character.UserData.Inventory.OfType<AscensionMaterial>();
+            var ascensionMats = character.UserData.Items.OfType<AscensionMaterial>();
             var sum = expUpgradeMat.Cast<Item>().Union(ascensionMats);
             var xOffset = 200;
             foreach (var i in sum)
@@ -133,7 +133,7 @@ public class LevelUpCharacter : GeneralCommandClass
             string? text = null;
             if (character.Level < character.MaxLevel)
             {
-                if (character.UserData.Inventory.OfType<CharacterExpMaterial>().Select(i => i.Stacks).Sum() <= 0)
+                if (character.UserData.Items.OfType<CharacterExpMaterial>().Select(i => i.Stacks).Sum() <= 0)
                 {
                     text = "You do not have any EXP material";
                 }
@@ -242,7 +242,7 @@ public class LevelUpCharacter : GeneralCommandClass
             return;
         }
         gottenUserData.Inventory.MergeDuplicates();
-        var character = gottenUserData.Inventory.OfType<Character>().FirstOrDefault();
+        var character = gottenUserData.Characters.FirstOrDefault();
 
         if (character is null)
         {

@@ -34,7 +34,7 @@ public class CharacterCommand : TeamCommand
             await AskToDoBeginAsync(context);
             return;
         }
-        var blessing = userData.Inventory.OfType<Blessing>().FirstOrDefault();
+        var blessing = userData.Blessings.FirstOrDefault();
         var embed = new DiscordEmbedBuilder()
             .WithTitle("Equipping blessing")
             .WithUser(context.User)
@@ -46,7 +46,7 @@ public class CharacterCommand : TeamCommand
             return;
         }
 
-        var character = userData.Inventory.OfType<Character>().FirstOrDefault();
+        var character = userData.Characters.FirstOrDefault();
         if (character is null)
         {
             embed.WithDescription("Character not found");
@@ -88,14 +88,14 @@ public class CharacterCommand : TeamCommand
             .WithTitle("Equipping gear")
             .WithUser(context.User)
             .WithColor(userData.Color);
-        var character = userData.Inventory.OfType<Character>().FirstOrDefault();
+        var character = userData.Characters.FirstOrDefault();
         if (character is null)
         {
             embed.WithDescription("Character not found");
             await context.RespondAsync(embed);
             return;
         }
-        var gear = userData.Inventory.OfType<Gear>().FirstOrDefault(i => i.Id == gearId);
+        var gear = userData.Gears.FirstOrDefault(i => i.Id == gearId);
         if (gear is null)
         {
             embed.WithDescription("Gear not found");

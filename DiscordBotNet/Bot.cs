@@ -51,7 +51,7 @@ public static class Bot
     private static async Task StartDiscordBotAsync()
     {
         
-        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["TestBotToken"]!,
+        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["BotToken"]!,
             DiscordIntents.All)
             .ConfigureEventHandlers(i => i.HandleSocketOpened(OnReady))
             .Build();
@@ -111,16 +111,12 @@ public static class Bot
 
         return Task.CompletedTask;
     }
-    public interface Ayoo
-    {
-        public void Die() => "Die".Print();
-    }
 
 
     private async static Task DoShitAsync()
     {
         var post = new PostgreSqlContext();
-        await post.ResetDatabaseAsync();
+      
     }
     private static async Task Main(string[] args)
     {

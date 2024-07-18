@@ -98,8 +98,8 @@ public class TeamCommand : GeneralCommandClass
             await context.RespondAsync(embed);
             return;
         }
-        var character = userData.Inventory
-            .OfType<Character>()
+        var character = userData
+            .Characters
             .FirstOrDefault(i => i.GetType().Name.ToLower() == simplifiedCharacterName);
         if (character is null)
         {
@@ -206,8 +206,8 @@ public class TeamCommand : GeneralCommandClass
             await context.RespondAsync(embed);
             return;
         }
-        var character = userData.Inventory
-            .OfType<Character>()
+        var character = userData
+            .Characters
             .FirstOrDefault(i => i.GetType().Name.ToLower() == simplifiedCharacterName);
         if (character is null)
         {

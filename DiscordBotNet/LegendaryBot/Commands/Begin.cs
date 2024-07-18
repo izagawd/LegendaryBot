@@ -133,7 +133,8 @@ public class Begin : GeneralCommandClass
             player.UserData = userData;
             player.UserDataId = userData.Id;
         }
-        var thePlayer = userData.Inventory.OfType<Player>().First();
+
+        var thePlayer =(Player)  userData.Characters.First(i => i is Player);
         if (userData.EquippedPlayerTeam is null)
         {
             var playerTeam = new PlayerTeam();
