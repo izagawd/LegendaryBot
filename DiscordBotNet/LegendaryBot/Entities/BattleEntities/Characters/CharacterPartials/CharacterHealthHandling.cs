@@ -115,7 +115,19 @@ public partial class Character
     /// <returns>The results of the damage</returns>
     public  DamageResult Damage(DamageArgs damageArgs)
     {
-        if (IsDead) throw new Exception("Cannot damage dead character");
+        if (IsDead)
+        {
+            try
+            {
+                throw new Exception("Attempting to damage dead character");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new DamageResult()
+                    { CanBeCountered = false, Damage = 0, DamageDealer = null, DamageReceiver = null };
+            }
+        }
         CurrentBattle.InvokeBattleEvent(new CharacterPreDamageEventArgs(damageArgs));
         var didCrit = false;
         var defenseToIgnore = Math.Clamp(damageArgs.DefenseToIgnore,0,100);

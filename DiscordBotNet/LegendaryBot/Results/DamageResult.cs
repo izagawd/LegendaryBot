@@ -14,6 +14,7 @@ public class DamageResult
         Move = move;
     }
 
+    public DamageResult(){}
     public DamageResult(StatusEffect statusEffect)
     {
         StatusEffect = statusEffect;
