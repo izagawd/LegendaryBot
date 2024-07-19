@@ -20,14 +20,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 
     public virtual  string Description => GetDescription(Level);
     public abstract Rarity Rarity { get; }
-    public IInventoryEntity Clone()
-    {
-        var clone =(Blessing)  MemberwiseClone();
-        clone.Id = Guid.Empty;
-        clone.UserData = null;
-        clone.UserDataId = 0;
-        return clone;
-    }
+
 
  
     public string Name { get; }
@@ -65,5 +58,5 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     public bool IsInStandardBanner => true;
     public Character? Character { get; set; }
 
-    public IEnumerable<string> ImageUrls { get; }
+
 }

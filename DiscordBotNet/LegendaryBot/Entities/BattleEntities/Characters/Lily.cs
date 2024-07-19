@@ -99,7 +99,7 @@ public class LilyOfTheValley : Ultimate
             }
             if (BasicFunctionality.RandomChance(StunInflictChance))
             {
-                statusEffects.Add(new Stun{Duration = 2, Caster = User});
+                statusEffects.Add(new Stun{Duration = 1, Caster = User});
             }
             if(statusEffects.Any()) i.AddStatusEffects(statusEffects,effectiveness);
             statusEffects.Clear();

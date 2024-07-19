@@ -94,7 +94,7 @@ public class FarmGear : GeneralCommandClass
         }
         await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
         
-        var enemyTeam = new CharacterTeam( new Delinquent().CloneMultiple(4).Cast<Character>());
+        var enemyTeam = new CharacterTeam( new Delinquent(), new Delinquent(), new Delinquent(), new Delinquent());
         var level = 5;
         var ascension = 1;
         var attack = 250;

@@ -41,6 +41,5 @@ public class Delinquent : CharacterPartials.Character
     public Delinquent()
     {
         BasicAttack = new BaseballBatWhack(){User = this};
-     
     }
 }

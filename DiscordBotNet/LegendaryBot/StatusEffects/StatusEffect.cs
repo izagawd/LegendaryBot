@@ -8,7 +8,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
-public abstract class StatusEffect : ICloneable 
+public abstract class StatusEffect 
 {
     public StatusEffect(){}
 
@@ -150,31 +150,4 @@ public abstract class StatusEffect : ICloneable
     }
 
 
-
-    object ICloneable.Clone()
-    {
-        return Clone();
-    }
-
-    public StatusEffect Clone()
-    {
-        return (StatusEffect) MemberwiseClone();
-    }
-
-    public static IEnumerable<StatusEffect> operator *(StatusEffect effect, int number)
-    {
-        if (number <= 0)
-        {
-            throw new Exception("InventoryEntity times a negative number or 0 doesn't make sense");
-            
-        }
-
-        List<StatusEffect> clonedStatusEffects = [];
-        foreach (var _ in Enumerable.Range(0, number))
-        {
-            clonedStatusEffects.Add(effect.Clone());
-        }
-
-        return clonedStatusEffects;
-    }
 }

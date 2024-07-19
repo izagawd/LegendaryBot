@@ -30,7 +30,7 @@ public class ViewDescription : GeneralCommandClass
             .FirstOrDefaultAsync();
         var builder = new DiscordEmbedBuilder()
             .WithUser(context.User)
-            .WithTitle("InventoryEntity description")
+            .WithTitle($"Description")
             .WithColor(zaColor
                 .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color));
         if (zaObject is IInventoryEntity zaEntity)

@@ -353,14 +353,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     public const int MaxAscensionLevel = 6;
     public int Ascension { get; set; } = 1;
 
-    public IInventoryEntity Clone()
-    {
-        var clone =(Character)  MemberwiseClone();
-        clone.UserData = null;
-        clone.UserDataId = 0;
-        clone.Id = Guid.Empty;
-        return clone;
-    }
+
 
     public virtual string Name { get; }
 
@@ -655,7 +648,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
         Experience = experience;
     }
 
-    public IEnumerable<string> ImageUrls { get; }
+
 }
 public enum StatusEffectInflictResult
 {

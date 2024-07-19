@@ -45,10 +45,6 @@ public abstract class Item : IInventoryEntity
 
     public ulong UserDataId { get; set; }
 
-    object ICloneable.Clone()
-    {
-        return Clone();
-    }
 
     public async Task<Image<Rgba32>> GetImageAsync(int? stacks = null)
     {
@@ -85,5 +81,5 @@ public abstract class Item : IInventoryEntity
     public int Stacks { get; set; } = 1;
 
 
-    public IEnumerable<string> ImageUrls { get; }
+
 }

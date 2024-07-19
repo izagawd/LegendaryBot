@@ -48,15 +48,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 
     public string Description { get; }
     public Rarity Rarity { get; private set; }
-    public IInventoryEntity Clone()
-    {
-        var clone =(Gear)  MemberwiseClone();
-        clone.Id = Guid.Empty;
-        clone.UserData = null;
-        clone.UserDataId = 0;
-        return clone;
-    }
-    
+
 
     public string Name { get; }
     public UserData? UserData { get; set; }
@@ -119,7 +111,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public List<GearStat> Stats { get; set; } = [];
 
 
-    public IEnumerable<string> ImageUrls { get; }
+
     public Guid? CharacterId { get; set; }
 }
 
