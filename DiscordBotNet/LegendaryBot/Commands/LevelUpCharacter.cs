@@ -5,7 +5,6 @@ using System.Numerics;
 using System.Text;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
-using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;

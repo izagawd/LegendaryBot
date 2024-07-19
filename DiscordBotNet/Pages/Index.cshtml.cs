@@ -1,6 +1,5 @@
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
-using DiscordBotNet.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;

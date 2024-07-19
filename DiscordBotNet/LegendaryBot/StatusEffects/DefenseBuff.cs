@@ -1,5 +1,4 @@
 ﻿using DiscordBotNet.LegendaryBot.ModifierInterfaces;
-using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.StatusEffects;
 

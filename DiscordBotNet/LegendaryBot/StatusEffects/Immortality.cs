@@ -1,6 +1,4 @@
-﻿using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
-
-namespace DiscordBotNet.LegendaryBot.StatusEffects;
+﻿namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Immortality : StatusEffect
 {

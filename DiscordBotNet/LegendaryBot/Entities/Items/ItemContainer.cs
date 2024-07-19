@@ -1,7 +1,3 @@
-using System.Collections;
-using System.ComponentModel.DataAnnotations.Schema;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-
 namespace DiscordBotNet.LegendaryBot.Entities.Items;
 
 

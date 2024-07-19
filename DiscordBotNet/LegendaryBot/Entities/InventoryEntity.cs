@@ -1,9 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
-using DiscordBotNet.Database.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SixLabors.ImageSharp.PixelFormats;
+﻿using DiscordBotNet.Database.Models;
 
 namespace DiscordBotNet.LegendaryBot.Entities;
 

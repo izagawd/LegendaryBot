@@ -1,19 +1,14 @@
 using System.ComponentModel;
 using System.Text;
 using DiscordBotNet.Extensions;
-using DiscordBotNet.LegendaryBot.Entities;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Primitives;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
 [Command("character")]
-public class CharacterCommand : TeamCommand
+public class CharacterCommand : GeneralCommandClass
 {
     [Command("equip-blessing"), Description("Use this Command make a character equip a blessing")]
     public async ValueTask ExecuteEquipBlessing(CommandContext context,

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using DiscordBotNet.Database.Models;
-using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;

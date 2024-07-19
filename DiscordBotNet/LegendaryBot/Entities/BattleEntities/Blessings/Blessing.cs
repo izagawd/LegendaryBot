@@ -1,13 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Numerics;
 using DiscordBotNet.Database.Models;
-using DiscordBotNet.Extensions;
-using DiscordBotNet.LegendaryBot.Results;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp.Drawing.Processing;
-using SixLabors.ImageSharp.PixelFormats;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;

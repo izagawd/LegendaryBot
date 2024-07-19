@@ -1,5 +1,4 @@
-﻿using DiscordBotNet.Extensions;
-using DSharpPlus.Commands;
+﻿using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 

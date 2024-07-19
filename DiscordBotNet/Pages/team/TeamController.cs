@@ -1,8 +1,5 @@
 ﻿using DiscordBotNet.Database;
-using DiscordBotNet.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.Pages.team;
 

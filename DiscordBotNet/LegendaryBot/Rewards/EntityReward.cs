@@ -3,7 +3,6 @@ using DiscordBotNet.Database.Models;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.Items;
-using Microsoft.Extensions.Primitives;
 
 namespace DiscordBotNet.LegendaryBot.Rewards;
 /// <summary>
