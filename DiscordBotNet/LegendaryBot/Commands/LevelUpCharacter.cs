@@ -120,7 +120,7 @@ public class LevelUpCharacter : GeneralCommandClass
             var xOffset = 200;
             foreach (var i in sum)
             {
-                var imageToDraw = await i.GetImageAsync();
+                using var imageToDraw = await i.GetImageAsync();
                 imageToDraw.Mutate(j => j.Resize(new Size(60,60)));
                 image.Mutate(j =>
                     {

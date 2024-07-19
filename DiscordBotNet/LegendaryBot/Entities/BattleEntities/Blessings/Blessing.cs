@@ -45,28 +45,6 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     public  Type TypeGroup => typeof(Blessing);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
     public Guid? CharacterId { get; set; }
-    public virtual async Task<Image<Rgba32>> GetInfoAsync()
-    {
-        using var userImage = await BasicFunctionality.GetImageFromUrlAsync(ImageUrl);
-        var image = new Image<Rgba32>(500, 150);
-        userImage.Mutate(ctx => ctx.Resize(new Size(100,100)));
-        var userImagePoint = new Point(20, 20);
-   
-        var levelBarY = userImage.Height - 30 + userImagePoint.Y;
-        var font = SystemFonts.CreateFont(Bot.GlobalFontName, 25);
-        var xPos = 135;
-        image.Mutate(ctx =>
-        
-            ctx
-                .DrawImage(userImage,userImagePoint, new GraphicsOptions())
-                .Draw(Color.Black, 3, new RectangleF(userImagePoint,userImage.Size))
-                .DrawText($"Name: {Name}", font, Color.Black, new PointF(xPos, levelBarY+2))
-
-                .Resize(1000, 300));
-        
-
-        return image;
-    }
 
 
     

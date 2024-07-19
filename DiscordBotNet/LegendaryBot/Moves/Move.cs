@@ -35,7 +35,7 @@ public abstract class Move
 
 
 
-        return image.Clone();
+        return image;
     }
 
     /// <summary>

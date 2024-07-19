@@ -429,33 +429,6 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     public virtual List<IInventoryEntity> ExtraItemsToDrop { get; set; } = new();
 
 
-    public async Task<Image<Rgba32>> GetInfoAsync()
-    {
-        using var userImage = await BasicFunctionality.GetImageFromUrlAsync(ImageUrl);
-        var image = new Image<Rgba32>(500, 150);
-        userImage.Mutate(ctx => ctx.Resize(new Size(100,100)));
-        var userImagePoint = new Point(20, 20);
-        var levelBarMaxLevelWidth = 250ul;
-        var gottenExp = levelBarMaxLevelWidth * (Experience/(GetRequiredExperienceToNextLevel(Level) * 1.0f));
-        var levelBarY = userImage.Height - 30 + userImagePoint.Y;
-        var font = SystemFonts.CreateFont(Bot.GlobalFontName, 25);
-        var xPos = 135;
-        image.Mutate(ctx =>
-        
-            ctx.BackgroundColor(Color.ToImageSharpColor())
-                .DrawImage(userImage,userImagePoint, new GraphicsOptions())
-                .Draw(SixLabors.ImageSharp.Color.Black, 3, new RectangleF(userImagePoint,userImage.Size))
-                .Fill(SixLabors.ImageSharp.Color.Gray, new RectangleF(130, levelBarY, levelBarMaxLevelWidth, 30))
-               .Fill(SixLabors.ImageSharp.Color.Green, new RectangleF(130, levelBarY, gottenExp, 30))
-               .Draw(SixLabors.ImageSharp.Color.Black, 3, new RectangleF(130, levelBarY, levelBarMaxLevelWidth, 30))
-                .DrawText($"{Experience}/{GetRequiredExperienceToNextLevel(Level)}",font,SixLabors.ImageSharp.Color.Black,new PointF(xPos,levelBarY+2))
-            .DrawText($"Name: {Name}", font, SixLabors.ImageSharp.Color.Black, new PointF(xPos, levelBarY -57))
-            .DrawText($"Level: {Level}",font,SixLabors.ImageSharp.Color.Black,new PointF(xPos,levelBarY - 30))
-            .Resize(1000, 300));
-        
-
-        return image;
-    }
 
     public override string ToString()
     {

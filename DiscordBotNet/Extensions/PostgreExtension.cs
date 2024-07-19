@@ -18,17 +18,7 @@ public static class PostgreExtension
     {
        return queryable.OrderBy(i => EF.Functions.Random()).FirstOrDefaultAsync();
     }
-    public static void Reload(this CollectionEntry source)
-    {
-        if (source.CurrentValue != null)
-        {
-            foreach (var item in source.CurrentValue)
-                source.EntityEntry.Context.Entry(item).State = EntityState.Detached;
-            source.CurrentValue = null;
-        }
-        source.IsLoaded = false;
-        source.Load();
-    }
+
     public static T? RandomOrDefault<T>(this IQueryable<T> queryable)
     {
         return queryable.OrderBy(i => EF.Functions.Random()).FirstOrDefault();
@@ -43,26 +33,7 @@ public static class PostgreExtension
         return queryable.OrderBy(i => EF.Functions.Random()).First();
     }
 
-    public static DbContext GetDbContext(this IQueryable query) 
-    {
 
-        
-        var bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
-        var queryCompiler = typeof(EntityQueryProvider).GetField("_queryCompiler", bindingFlags)!.GetValue(query.Provider);
-        var queryContextFactory = queryCompiler.GetType().GetField("_queryContextFactory", bindingFlags).GetValue(queryCompiler);
-
-        var dependencies = typeof(RelationalQueryContextFactory).GetProperty("Dependencies", bindingFlags)!.GetValue(queryContextFactory);
-        var queryContextDependencies = typeof(DbContext).Assembly.GetType(typeof(QueryContextDependencies).FullName!);
-        var stateManagerProperty = queryContextDependencies!.GetProperty("StateManager", bindingFlags | BindingFlags.Public)!.GetValue(dependencies);
-        var stateManager = (IStateManager)stateManagerProperty!;
-        
-        return  stateManager.Context;
-    }
-
-    public static T GetDbContext<T>(this IQueryable query) where T : DbContext
-    {
-        return (T) GetDbContext(query);
-    }
 
     public static IQueryable<UserData> IncludeTeam
         (this IQueryable<UserData> queryable)

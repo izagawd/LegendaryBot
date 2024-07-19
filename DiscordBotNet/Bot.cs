@@ -51,7 +51,7 @@ public static class Bot
     private static async Task StartDiscordBotAsync()
     {
         
-        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["BotToken"]!,
+        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["TestBotToken"]!,
             DiscordIntents.All)
             .ConfigureEventHandlers(i => i.HandleSocketOpened(OnReady))
             .Build();
@@ -115,8 +115,7 @@ public static class Bot
 
     private async static Task DoShitAsync()
     {
-        var post = new PostgreSqlContext();
-      
+       
     }
     private static async Task Main(string[] args)
     {

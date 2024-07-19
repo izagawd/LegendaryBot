@@ -82,7 +82,7 @@ public partial class Character
         {
             //do not change size of the move image here.
             //do it in the method that gets the image
-            using var moveImage = await i.GetImageForCombatAsync();
+            var moveImage = await i.GetImageForCombatAsync();
             ctx.DrawImage(moveImage, new Point(xOffSet, yOffSet), new GraphicsOptions());
             xOffSet += moveLength;
             var cooldown = 0;

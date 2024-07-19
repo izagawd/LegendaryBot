@@ -110,6 +110,7 @@ public class PostgreSqlContext : DbContext
             .GetTypes()
             .Where(i => i.IsSubclassOf(typeof(Quest)) 
                         && !i.IsAbstract).ToArray();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
        
@@ -125,7 +126,8 @@ public class PostgreSqlContext : DbContext
         {
             modelBuilder.Entity(entityType);
         }
-   
+
+    
         foreach (var i in DefaultObjects.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(GearStat))))
         {
             modelBuilder.Entity(i);
