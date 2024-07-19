@@ -116,7 +116,7 @@ public class Display : GeneralCommandClass
     }
     
     protected static DiscordButtonComponent First = new DiscordButtonComponent(DiscordButtonStyle.Primary, "first", "FIRST");
-        [Command("gears"),Description("Displays all the egars you have")]
+        [Command("gears"),Description("Displays all the gears you have")]
     public async ValueTask ExecuteDisplayGear(CommandContext context)
     {
         var userData = await DatabaseContext.UserData

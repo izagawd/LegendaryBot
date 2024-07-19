@@ -29,6 +29,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
         return clone;
     }
 
+ 
     public string Name { get; }
     public UserData? UserData { get; set; }
 
@@ -56,6 +57,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     public Blessing()
     {
         ImageUrl = $"{Website.DomainName}/battle_images/blessings/{GetType().Name}.png";
+        Name = BasicFunctionality.Englishify(GetType().Name);
     }
     [NotMapped]
     protected int Level => (Character?.Level).GetValueOrDefault(1);

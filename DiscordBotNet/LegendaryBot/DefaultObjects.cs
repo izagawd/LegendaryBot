@@ -25,17 +25,25 @@ public static class DefaultObjects
     }
 
 
-    public static IEnumerable<object> GetDefaultObjectsThatSubclass(Type type)
+    public static IEnumerable<object> GetDefaultObjectsThatIsInstanceOf(Type type)
     {
-        foreach (var i in AllAssemblyTypes.Where(j => !j.IsAbstract && 
-                                              (j.IsSubclassOf(type) || j == type)))
+        IEnumerable<Type> typesToLoop = null;
+        if (type.IsInterface)
+        {
+            typesToLoop = AllAssemblyTypes.Where(j => !j.IsAbstract && j.GetInterfaces().Contains(type));
+        }
+        else
+        {
+            typesToLoop = AllAssemblyTypes.Where(j => !j.IsAbstract && (j.IsSubclassOf(type) || j == type));
+        }
+        foreach (var i in typesToLoop)
         {
             yield return GetDefaultObject(i);
         }
     }
-    public static IEnumerable<TObjectType> GetDefaultObjectsThatSubclass<TObjectType>()
+    public static IEnumerable<TObjectType> GetDefaultObjectsThatIsInstanceOf<TObjectType>()
     {
-        return GetDefaultObjectsThatSubclass(typeof(TObjectType)).Cast<TObjectType>();
+        return GetDefaultObjectsThatIsInstanceOf(typeof(TObjectType)).Cast<TObjectType>();
     }
 
     public static object GetDefaultObject(Type type)

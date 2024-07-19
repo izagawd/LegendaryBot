@@ -56,6 +56,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
         clone.UserDataId = 0;
         return clone;
     }
+    
 
     public string Name { get; }
     public UserData? UserData { get; set; }
@@ -64,7 +65,10 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public ulong UserDataId { get; set; }
     public Character Character { get; set; }
 
-    public Gear(){}
+    public Gear()
+    {
+        Name = BasicFunctionality.Englishify(GetType().Name);
+    }
     public void Initialize(Rarity rarity, Type? desiredMainStat = null)
     {
         if (Stats.Count != 0) return;

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Text;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
@@ -19,7 +20,7 @@ public class ListAllEntities : GeneralCommandClass
     static ListAllEntities()
     {
         var builder = new StringBuilder();
-        foreach (var i in DefaultObjects.GetDefaultObjectsThatSubclass<IInventoryEntity>()
+        foreach (var i in DefaultObjects.GetDefaultObjectsThatIsInstanceOf<IInventoryEntity>()
                      .Select(i =>
                      {
                          Type type = null;
@@ -44,7 +45,7 @@ public class ListAllEntities : GeneralCommandClass
         listed = builder.ToString();
 
     }
-    [Command("list-all-entities")]
+    [Command("list-all-entities"), Description("Lists all entities that can be added in inventory")]
     public async ValueTask ExecuteGetTotalMemoryUsedInBytes(CommandContext ctx)
     {
         var embed = new DiscordEmbedBuilder()

@@ -32,7 +32,7 @@ public class LevelUpCharacter : GeneralCommandClass
     public static void UpdateEmbed(DiscordEmbedBuilder builder, Character character)
     {
         var description = "";
-        foreach (var i in DefaultObjects.GetDefaultObjectsThatSubclass<CharacterExpMaterial>())
+        foreach (var i in DefaultObjects.GetDefaultObjectsThatIsInstanceOf<CharacterExpMaterial>())
         {
             description += $"{i.Name}: {character.UserData.Items.GetItemStacks(i.GetType())}\n";
         }

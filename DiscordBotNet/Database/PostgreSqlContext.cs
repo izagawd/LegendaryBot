@@ -53,7 +53,7 @@ public class PostgreSqlContext : DbContext
         if (user.LastTimeQuestWasChecked.Date == rightNowUtc.Date) return;
         
         user.Quests.Clear();
-        var availableQuests = DefaultObjects.GetDefaultObjectsThatSubclass<Quest>()
+        var availableQuests = DefaultObjects.GetDefaultObjectsThatIsInstanceOf<Quest>()
             .Select(i => i.GetType())
             .Where(i => !i.IsAbstract)
             .OrderBy(_ => BasicFunctionality.GetRandomNumberInBetween(0, 100))
