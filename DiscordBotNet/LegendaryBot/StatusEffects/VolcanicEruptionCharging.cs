@@ -22,7 +22,8 @@ public class VolcanicEruptionCharging : StatusEffect
         if(Duration == 1)
         {
             List<DamageResult> damageResults = [];
-            foreach (var i in affected.CurrentBattle.Characters.Where(j => j.Team != affected.Team))
+            foreach (var i in affected.CurrentBattle.Characters.Where(j => j.Team != affected.Team
+                     && !j.IsDead))
             {
 
                 var damageResult =  i.Damage(                new DamageArgs(this)
