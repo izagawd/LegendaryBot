@@ -15,7 +15,7 @@ public class Hunt : GeneralCommandClass
     
 
     [Command("hunt"), Description("Use this command to fight any character"),
-    AdditionalCommand("/hunt Coach Chad",BotCommandType.Battle)]
+    AdditionalCommand("/hunt CoachChad",BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx,
         [Parameter("character-name")] string characterName,
         [Parameter("enemy-count")] long enemyCount = 1 )

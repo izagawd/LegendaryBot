@@ -14,7 +14,7 @@ public class QuoteCommand : GeneralCommandClass
     private static readonly string[] yesOrNoArray = new[] { "like", "dislike" };
 
     [Command("read"), Description("Read a random quote"),
-    AdditionalCommand("/read",BotCommandType.Fun)]
+    AdditionalCommand("/quote read",BotCommandType.Fun)]
     public async Task Read(CommandContext ctx)
     {
         var anon = await DatabaseContext.Quote
@@ -133,7 +133,7 @@ public class QuoteCommand : GeneralCommandClass
 
     }
     [Command("write"), Description("write a quote for everyone to see!"),
-    AdditionalCommand("/write Be good and good will come",BotCommandType.Fun)]
+    AdditionalCommand("/quote write Be good and good will come",BotCommandType.Fun)]
     public async Task Write(CommandContext ctx, [Parameter("text")] string text)
     {
         var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
