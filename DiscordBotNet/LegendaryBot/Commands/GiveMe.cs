@@ -12,7 +12,7 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 public class GiveMe : GeneralCommandClass
 {
 
-    [Command("give-me"), Description("Use this to obtain any item. Only available temporarily"),
+    [Command("give-me"), Description("Use this to obtain anything that can be in inventory. Only available temporarily"),
      AdditionalCommand("/give-me lily\n/give-me armor 3", BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx,[Parameter("entity-name")]
         string entityName,[Parameter("entity-amount"), 
