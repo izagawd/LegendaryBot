@@ -195,7 +195,7 @@ public class Help : GeneralCommandClass
         }
     }
 
-    public static DiscordEmbedBuilder GenerateEmbedForCommand(string cmd)
+    public static DiscordEmbedBuilder? GenerateEmbedForCommand(string cmd)
     {
         var holder = _holderList.FirstOrDefault(i => i.Name.ToLower() == cmd.ToLower());
         var embedToBuild = new DiscordEmbedBuilder();
@@ -257,9 +257,16 @@ public class Help : GeneralCommandClass
         }
         else
         {
-            embedToBuild = GenerateEmbedForCommand(cmd)
+            var prevEmbed = embedToBuild;
+            embedToBuild = GenerateEmbedForCommand(cmd)?
                 .WithColor(color.Value)
                 .WithUser(ctx.User);
+            if (embedToBuild is null)
+            {
+                embedToBuild = prevEmbed;
+                embedToBuild.WithDescription($"Command `{cmd.ToLower()}` not found");
+            }
+                
             
         }
         

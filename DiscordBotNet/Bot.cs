@@ -374,7 +374,7 @@ public static class Bot
             }
             embedBuilder = Help.GenerateEmbedForCommand(commandToUse.Name);
   
-            embedBuilder.WithTitle($"You didnt properly use command `{commandToUse.Name}`.\nThis is how to use {commandToUse.Name}\n"
+            embedBuilder?.WithTitle($"You didnt properly use command `{commandToUse.Name}`.\nThis is how to use `{commandToUse.Name}`\n"
                 + embedBuilder.Title);
           
         }
