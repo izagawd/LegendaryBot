@@ -71,15 +71,20 @@ public static class Bot
     private static async Task OnMessageCreatedGiveUserExpMat(DiscordClient client, MessageCreatedEventArgs args)
     {
 
-        
+            var permissions = args.Guild.CurrentMember.PermissionsIn(args.Channel);
+            if (!permissions.HasFlag(DiscordPermissions.EmbedLinks) || !permissions.HasFlag(DiscordPermissions.SendMessages))
+            {
+                return;
+            }
             var expGainInfo = expMatGive.GetOrAdd(args.Author.Id, new CharacterExpGainInfo());
+          
             if (DateTime.UtcNow.Subtract(expGainInfo.LastTimeIncremented).Seconds >= messageCoolDown)
             {
-                "d".Print();
+               
                 expGainInfo.MessageCount++;
                 expGainInfo.LastTimeIncremented = DateTime.UtcNow;
                 expMatGive[args.Author.Id] = expGainInfo;
-                if (expGainInfo.MessageCount >= 1)
+                if (expGainInfo.MessageCount >= messagesTillExecution)
                 {
                     await using var dbContext = new PostgreSqlContext();
                     var userData =await  dbContext.UserData
@@ -88,7 +93,7 @@ public static class Bot
                     if(userData is null || userData.Tier <= Tier.Unranked)
                         return;
                     List<CharacterExpMaterial> characterExpMaterials = [];
-                    foreach (var i in Enumerable.Range(0,(int) userData.Tier * 5) )
+                    foreach (var i in Enumerable.Range(0,(int) userData.Tier * 3) )
                     {
                         characterExpMaterials.Add(new AdventurersKnowledge());
                     }
@@ -110,11 +115,16 @@ public static class Bot
     }
     private static async Task OnMessageCreatedSpawnCharacter(DiscordClient client, MessageCreatedEventArgs args)
     {        
-        
+        var permissions = args.Guild.CurrentMember.PermissionsIn(args.Channel);
+        if (!permissions.HasFlag(DiscordPermissions.EmbedLinks) || !permissions.HasFlag(DiscordPermissions.SendMessages))
+        {
+            return;
+        }
         if (!args.Author.IsBot)
         {
             var spawnInfo = idkDictionary.GetOrAdd(args.Channel.Id,
                 new ChannelSpawnInfo());
+          
             if (DateTime.UtcNow.Subtract(spawnInfo.LastTimeIncremented).Seconds >= messageCoolDown)
             {
                 spawnInfo.MessageCount++;
