@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
+using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Commands;
 using DSharpPlus;
@@ -15,6 +16,7 @@ using DSharpPlus.Commands.Processors.TextCommands;
 using DSharpPlus.Commands.Processors.TextCommands.Parsing;
 using DSharpPlus.VoiceNext;
 using Microsoft.EntityFrameworkCore;
+using SixLabors.ImageSharp.Drawing.Processing;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 
@@ -43,7 +45,7 @@ public static class Bot
     private static async Task StartDiscordBotAsync()
     {
         
-        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["BotToken"]!,
+        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["TestBotToken"]!,
             DiscordIntents.All)
             .ConfigureEventHandlers(i => i.HandleSocketOpened(OnReady))
             .Build();
@@ -104,10 +106,19 @@ public static class Bot
         return Task.CompletedTask;
     }
 
-
+    private static event Action idk;
     private async static Task DoShitAsync()
     {
-       
+
+        idk += () => { };
+        if (idk is not null)
+        {
+            foreach (var i in  idk.GetInvocationList())
+            {
+              
+            }
+        }
+        Console.WriteLine(idk is null);
     }
     private static async Task Main(string[] args)
     {

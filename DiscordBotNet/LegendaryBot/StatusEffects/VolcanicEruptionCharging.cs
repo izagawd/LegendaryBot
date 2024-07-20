@@ -22,26 +22,24 @@ public class VolcanicEruptionCharging : StatusEffect
         if(Duration == 1)
         {
             List<DamageResult> damageResults = [];
-            using (Affected.CurrentBattle.PauseBattleEventScope)
+
+            
+            foreach (var i in affected.CurrentBattle.Characters.Where(j => j.Team != affected.Team && !j.IsDead))
             {
-                foreach (var i in affected.CurrentBattle.Characters.Where(j => j.Team != affected.Team && !j.IsDead))
+                var damageResult =  i.Damage(                new DamageArgs(this)
                 {
-
-                    var damageResult =  i.Damage(                new DamageArgs(this)
-                    {
-                        ElementToDamageWith = Caster.Element,
-                        CriticalChance = Caster.CriticalChance,
-                        CriticalDamage = Caster.CriticalDamage,
-                        Damage = affected.Attack * 1.7f * 2,
-                        Caster = affected,
-                        CanCrit = true,
-                        DamageText =$"{affected} shot out a very powerful blast that dealt $ damage to {i}!"
-                    });
-                    if(damageResult is not null)
-                        damageResults.Add(damageResult);
-
-                }
+                    ElementToDamageWith = Caster.Element,
+                    CriticalChance = Caster.CriticalChance,
+                    CriticalDamage = Caster.CriticalDamage,
+                    Damage = affected.Attack * 1.7f * 2,
+                    Caster = affected,
+                    CanCrit = true,
+                    DamageText =$"{affected} shot out a very powerful blast that dealt $ damage to {i}!"
+                });
+                if(damageResult is not null)
+                    damageResults.Add(damageResult);
             }
+            
 
             return new UsageResult(this)
             { 

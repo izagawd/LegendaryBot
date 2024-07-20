@@ -8,6 +8,7 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 public class Sleep: StatusEffect, IBattleEventListener
 {
 
+   
     public override string Description =>
         "Makes affected not able to move. Is dispelled when affected takes damage from a move";
     public override int MaxStacks => 1;
@@ -17,13 +18,13 @@ public class Sleep: StatusEffect, IBattleEventListener
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
 
     [BattleEventListenerMethod]
-    public void OnTurnStart(CharacterPostDamageEventArgs eventArgs)
+    public void PostDamageEvent(CharacterPostDamageEventArgs eventArgs)
     {
         if(eventArgs.DamageResult.DamageReceiver != Affected) return;
-        if (eventArgs.DamageResult.StatusEffect is not null) return;
+     
         var removed = Affected.RemoveStatusEffect(this);
         if(removed)
-            Affected.CurrentBattle.AddAdditionalBattleText($"{this} has been dispelled from {Affected.NameWithAlphabetIdentifier} due to an attack!");
+            Affected.CurrentBattle.AddAdditionalBattleText($"{this} has been dispelled from {Affected.NameWithAlphabetIdentifier} due to taking damage!");
     }
 
     public override UsageResult OverridenUsage(Character affected, ref Character target, ref BattleDecision decision, UsageType usageType)

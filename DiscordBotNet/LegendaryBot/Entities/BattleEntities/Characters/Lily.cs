@@ -13,7 +13,7 @@ public class ChamomileSachetWhack : BasicAttack
         $"With the power of Chamomile, whacks an enemy with a sack filled with Chamomile, with a {SleepChance}% chance of making the enemy sleep";
     
 
-    public int SleepChance => 40;
+    public int SleepChance => 100;
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)

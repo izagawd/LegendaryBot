@@ -83,18 +83,17 @@ public class YouCanMakeItEveryone : Ultimate
 
         var targets = GetPossibleTargets().ToArray();
 
-        using (User.CurrentBattle.PauseBattleEventScope)
+    
+        foreach (var i in targets)
         {
-            foreach (var i in targets)
-            {
-                i.IncreaseCombatReadiness(CombatIncreaseAmount);
-            }
-            foreach (var i in targets)
-            {
-                i.AddStatusEffect(new AttackBuff() { Duration = 2, Caster = User});
-            }
-
+            i.IncreaseCombatReadiness(CombatIncreaseAmount);
         }
+        foreach (var i in targets)
+        {
+            i.AddStatusEffect(new AttackBuff() { Duration = 2, Caster = User});
+        }
+
+    
 
         return new UsageResult(this)
         {

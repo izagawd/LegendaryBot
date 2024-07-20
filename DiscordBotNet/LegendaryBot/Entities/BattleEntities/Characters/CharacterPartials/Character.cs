@@ -587,7 +587,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
         }
     }
 
-
+    
     public List<PlayerTeam> PlayerTeams { get; protected set; } = [];
 
 

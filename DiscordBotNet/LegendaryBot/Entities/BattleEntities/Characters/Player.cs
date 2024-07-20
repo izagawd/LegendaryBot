@@ -1,4 +1,7 @@
-﻿using DiscordBotNet.LegendaryBot.Moves;
+﻿using DiscordBotNet.Extensions;
+using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
+using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
+using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using Microsoft.EntityFrameworkCore;
@@ -47,27 +50,25 @@ public class FireBall : Skill
     }
 
     public override int MaxCooldown=> 2;
-  
+
+
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        DamageResult? damageResult;
-        using (User.CurrentBattle.PauseBattleEventScope)
+        
+        var damageResult = target.Damage(      new DamageArgs(this)
         {
-            
-            damageResult = target.Damage(      new DamageArgs(this)
-            {
-                ElementToDamageWith = User.Element,
-                CriticalChance = User.CriticalChance,
-                CriticalDamage = User.CriticalDamage,
-                Damage = User.Attack * 2.4f,
-                Caster = User,
-                DamageText =$"{User.NameWithAlphabetIdentifier} threw a fireball at {target.NameWithAlphabetIdentifier} and dealt $ damage!",
-            });
-            if (BasicFunctionality.RandomChance(10))
-            {
-                target.AddStatusEffect(new Burn(){Caster = User},User.Effectiveness);
-            }
+            ElementToDamageWith = User.Element,
+            CriticalChance = User.CriticalChance,
+            CriticalDamage = User.CriticalDamage,
+            Damage = User.Attack * 2.4f,
+            Caster = User,
+            DamageText =$"{User.NameWithAlphabetIdentifier} threw a fireball at {target.NameWithAlphabetIdentifier} and dealt $ damage!",
+        });
+        if (BasicFunctionality.RandomChance(10))
+        {
+            target.AddStatusEffect(new Burn(){Caster = User},User.Effectiveness);
         }
+        
 
         return new UsageResult(this)
         {
@@ -147,6 +148,7 @@ public class Player : CharacterPartials.Character
     protected override float BaseSpeedMultiplier => 1.1f;
 
 
+    private int count = 1;
 
 
 
