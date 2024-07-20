@@ -61,7 +61,7 @@ public class Journey : GeneralCommandClass
         var enemyTeam = new CharacterTeam();
         
         enemyTeam.Add((Character)Activator.CreateInstance(characterType)!);
-        enemyTeam.First().Level = 5 + ((int)userData.Tier * 10);
+        enemyTeam.First().Level = 5 + (((int)userData.Tier-1) * 10);
         enemyTeam.LoadTeamStats();
         
       
