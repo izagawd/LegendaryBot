@@ -18,7 +18,7 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 public class FarmGear : GeneralCommandClass
 {
     private static IEnumerable<Type>
-        allGearsType = ObjectsFunctionality.AllAssemblyTypes.Where(i => i.IsSubclassOf(typeof(Gear))).ToImmutableArray();
+        allGearsType = TypesFunctionality.AllAssemblyTypes.Where(i => i.IsSubclassOf(typeof(Gear))).ToImmutableArray();
     [Command("farm-gear"), Description("Use this to farm gier"),
      AdditionalCommand("/farm-gear", BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx)

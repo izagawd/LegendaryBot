@@ -4,7 +4,7 @@ using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
-public class BlessingOfThePhoenix : Blessing, IBattleEventListener
+public class PowerOfThePhoenix : Blessing, IBattleEventListener
 {
     public override Rarity Rarity => Rarity.FiveStar;
 

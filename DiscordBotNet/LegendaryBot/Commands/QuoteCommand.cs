@@ -34,7 +34,7 @@ public class QuoteCommand : GeneralCommandClass
                     .Where(i => i.Id == ctx.User.Id)
                     .Select(i => new DiscordColor?(i.Color))
                     .FirstOrDefaultAsync())
-                .GetValueOrDefault(ObjectsFunctionality.GetDefaultObject<UserData>().Color);
+                .GetValueOrDefault(TypesFunctionality.GetDefaultObject<UserData>().Color);
             var embed = new DiscordEmbedBuilder()
                 .WithUser(ctx.User)
                 .WithColor(userColor)

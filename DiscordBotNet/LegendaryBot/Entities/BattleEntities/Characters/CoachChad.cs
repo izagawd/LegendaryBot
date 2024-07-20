@@ -20,7 +20,7 @@ public class GigaPunch : BasicAttack
                     ElementToDamageWith = User.Element,
                     CriticalDamage = User.CriticalDamage,
                     CriticalChance = User.CriticalChance,
-                    Caster = User,
+                    DamageDealer = User,
                     Damage = User.Attack * 1.7f,
                     DamageText = $"{User.NameWithAlphabetIdentifier} smiles chadly, and punches {target.NameWithAlphabetIdentifier} in a cool way and dealt $ damage!"
 

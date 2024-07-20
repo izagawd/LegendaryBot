@@ -18,7 +18,7 @@ public class Help : GeneralCommandClass
         Dictionary<BotCommandType, StringBuilder> botCommandTypeBuilders = new();
         foreach (var i in Enum.GetValues<BotCommandType>())
             botCommandTypeBuilders[i] = new StringBuilder();
-        foreach (var i in  ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<GeneralCommandClass>())
+        foreach (var i in  TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<GeneralCommandClass>())
         {
             var com = i.GetType().GetCustomAttribute<CommandAttribute>();
             if (com is not null)
@@ -151,7 +151,7 @@ public class Help : GeneralCommandClass
     }
     private static void HandleCommandsInformations()
     {
-        foreach (var i in ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<GeneralCommandClass>())
+        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<GeneralCommandClass>())
         {
             var group = i.GetType().GetCustomAttribute<CommandAttribute>();
             
@@ -240,7 +240,7 @@ public class Help : GeneralCommandClass
             .FirstOrDefaultAsync();
         if (color is null)
         {
-            color = ObjectsFunctionality.GetDefaultObject<UserData>().Color;
+            color = TypesFunctionality.GetDefaultObject<UserData>().Color;
         }
         var embedToBuild = new DiscordEmbedBuilder()
             .WithTitle("Help")

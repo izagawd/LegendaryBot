@@ -20,7 +20,7 @@ public class MethaneSlap : BasicAttack
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
             Damage = User.Attack * 1.7f,
-            Caster = User,
+            DamageDealer = User,
             CanCrit = true,
             DamageText = $"That was a harsh slap on {target.NameWithAlphabetIdentifier} dealt $ damage!"
         });

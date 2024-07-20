@@ -18,7 +18,7 @@ public class GooeyStrike : BasicAttack
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
-            Caster = User,
+            DamageDealer = User,
             Damage = User.Attack * 1.7f,
             DamageText = $"{User.NameWithAlphabetIdentifier} used a slime attack at {target.NameWithAlphabetIdentifier} and dealt $ damage!"
         });

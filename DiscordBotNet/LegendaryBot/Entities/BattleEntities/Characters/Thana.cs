@@ -15,7 +15,7 @@ public class SoulAttack : BasicAttack
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
             Damage = User.Attack * 1.7f,
-            Caster = User,
+            DamageDealer = User,
             DamageText = $"{User.NameWithAlphabetIdentifier} uses the souls of the dead to attack {target.NameWithAlphabetIdentifier} and dealt $ damage!"
         });
         if (BasicFunctionality.RandomChance(25))
@@ -49,7 +49,7 @@ public class YourLifeEnergyIsMine : Skill
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
             Damage = User.Attack * 2.5f,
-            Caster = User,
+            DamageDealer = User,
             DamageText = $"{User.NameWithAlphabetIdentifier} sucks the life essence out of {target.NameWithAlphabetIdentifier} and deals $ damage!"
         });
         if(damageResult is not null)

@@ -22,7 +22,7 @@ public class ChamomileSachetWhack : BasicAttack
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
             Damage = User.Attack * 1.7f,
-            Caster = User,
+            DamageDealer = User,
             CanCrit = true,
             DamageText = $"That was a harsh snoozy whack that dealt $ damage on {target.NameWithAlphabetIdentifier}!",
 

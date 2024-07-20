@@ -17,8 +17,8 @@ public class Begin : GeneralCommandClass
 
 
     private static DiscordTextInputComponent _askForName = new("What is your name?",
-        "name", ObjectsFunctionality.GetDefaultObject<Player>().Name,
-        ObjectsFunctionality.GetDefaultObject<Player>().Name, min_length: 3, max_length: 15);
+        "name", TypesFunctionality.GetDefaultObject<Player>().Name,
+        TypesFunctionality.GetDefaultObject<Player>().Name, min_length: 3, max_length: 15);
 
     private static DiscordButtonComponent _yes = new DiscordButtonComponent(DiscordButtonStyle.Primary, "yes", "Yes");
     private static DiscordButtonComponent _no = new DiscordButtonComponent(DiscordButtonStyle.Primary, "no", "No");

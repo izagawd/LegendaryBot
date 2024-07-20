@@ -23,7 +23,7 @@ public class ShieldBash : BasicAttack
                     ElementToDamageWith = User.Element,
                     CriticalChance = User.CriticalChance,
                     CriticalDamage = User.CriticalDamage,
-                    Caster = User,
+                    DamageDealer = User,
                     DamageText =
                         $"{User.NameWithAlphabetIdentifier} bashes {target.NameWithAlphabetIdentifier} with his shield , making them receive $ damage!",
                     Damage = User.Attack * 1.7f

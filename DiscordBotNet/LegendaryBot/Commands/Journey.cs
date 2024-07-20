@@ -54,7 +54,7 @@ public class Journey : GeneralCommandClass
             return;
         }
 
-        var characterType = BasicFunctionality.RandomChoice(ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<Character>()
+        var characterType = BasicFunctionality.RandomChoice(TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Character>()
             .Where(i => i.Rarity <= Rarity.ThreeStar)).GetType();
  
         await MakeOccupiedAsync(userData);

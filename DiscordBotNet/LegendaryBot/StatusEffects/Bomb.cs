@@ -35,7 +35,7 @@ public class Bomb : StatusEffect, IDetonatable
             ElementToDamageWith = null,
 
             Damage = Attack * 3,
-            Caster = Caster,
+            DamageDealer = Caster,
             CanCrit = false,
             DamageText = $"Bomb detonated on {Affected} and dealt $ damage!"
         });

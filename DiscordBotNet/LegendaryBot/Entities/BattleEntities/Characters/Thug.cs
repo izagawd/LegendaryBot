@@ -27,7 +27,7 @@ public class ThugPunch : BasicAttack
                     CriticalChance = User.CriticalChance,
                     CriticalDamage = User.CriticalDamage,
                     Damage = User.Attack * 1.7f,
-                    Caster = User,
+                    DamageDealer = User,
                     DamageText = $"{User.NameWithAlphabetIdentifier} punches {target.NameWithAlphabetIdentifier} in a thug way!"
                 })
             ],

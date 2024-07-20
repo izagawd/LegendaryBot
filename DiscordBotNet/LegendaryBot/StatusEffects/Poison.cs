@@ -27,7 +27,7 @@ public class Poison : StatusEffect, IDetonatable
         {
             ElementToDamageWith = null,
             Damage = Affected.MaxHealth * 0.05f,
-            Caster = Caster,
+            DamageDealer = Caster,
             CanCrit = false,
             DamageText =$"{Affected} took $ damage from being poisoned!"
         });

@@ -152,7 +152,7 @@ public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
     {
         entity.HasKey(i => i.Id);
         var starting = entity.HasDiscriminator<int>("Discriminator");
-        foreach (var i in ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<Gear>())
+        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Gear>())
         {
             starting = starting.HasValue(i.GetType(), i.TypeId);
         }

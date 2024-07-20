@@ -27,7 +27,7 @@ public class Bleed : StatusEffect, IDetonatable
 
             Damage = Attack,
             DamageText = $"{Affected} took $ bleed damage!",
-            Caster = Caster,
+            DamageDealer = Caster,
         });
     }
     public override void PassTurn()

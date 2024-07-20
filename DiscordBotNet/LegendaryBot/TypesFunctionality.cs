@@ -1,19 +1,20 @@
+using System.Collections.Concurrent;
 using System.Collections.Immutable;
 using System.Linq.Expressions;
 using System.Reflection;
 
 namespace DiscordBotNet.LegendaryBot;
 
-public static class ObjectsFunctionality
+public static class TypesFunctionality
 {
 
-    private static Dictionary<Type, object> _defaultObjectsContainer =  new();
+    private static ConcurrentDictionary<Type, object> _defaultObjectsContainer =  new();
 
 
     public static readonly ImmutableArray<Type> AllAssemblyTypes;
 
 
-    static ObjectsFunctionality()
+    static TypesFunctionality()
     {
      
         AllAssemblyTypes = Assembly.GetExecutingAssembly()

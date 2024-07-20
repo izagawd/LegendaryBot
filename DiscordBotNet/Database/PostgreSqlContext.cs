@@ -53,7 +53,7 @@ public class PostgreSqlContext : DbContext
         if (user.LastTimeQuestWasChecked.Date == rightNowUtc.Date) return;
         
         user.Quests.Clear();
-        var availableQuests = ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<Quest>()
+        var availableQuests = TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Quest>()
             .Select(i => i.GetType())
             .Where(i => !i.IsAbstract)
             .OrderBy(_ => BasicFunctionality.GetRandomNumberInBetween(0, 100))
@@ -117,11 +117,11 @@ public class PostgreSqlContext : DbContext
 
         modelBuilder
             .UsePropertyAccessMode(PropertyAccessMode.Property);
-        foreach (var i in ObjectsFunctionality.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Quest))))
+        foreach (var i in TypesFunctionality.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Quest))))
         {
             modelBuilder.Entity(i);
         }
-        foreach (var entityType in ObjectsFunctionality
+        foreach (var entityType in TypesFunctionality
                      .AllAssemblyTypes
                      .Where(i => i.IsClass && i.GetInterfaces().Contains(typeof(IInventoryEntity))))
         {
@@ -129,7 +129,7 @@ public class PostgreSqlContext : DbContext
         }
 
     
-        foreach (var i in ObjectsFunctionality.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(GearStat))))
+        foreach (var i in TypesFunctionality.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(GearStat))))
         {
             modelBuilder.Entity(i);
         }

@@ -70,7 +70,7 @@ public abstract class GearStat
 
     static GearStat()
     {
-        AllGearStatTypes = ObjectsFunctionality.AllAssemblyTypes.Where(i => !i.IsAbstract && i.IsSubclassOf(typeof(GearStat))).ToImmutableArray();
+        AllGearStatTypes = TypesFunctionality.AllAssemblyTypes.Where(i => !i.IsAbstract && i.IsSubclassOf(typeof(GearStat))).ToImmutableArray();
     }
     
     [NotMapped]

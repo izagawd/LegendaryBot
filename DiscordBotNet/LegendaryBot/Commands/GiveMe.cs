@@ -19,7 +19,7 @@ public class GiveMe : GeneralCommandClass
                            Description("The amount you want of the supplied item")] long amount = 1)
     {
         var simplifiedEntityName = entityName.ToLower().Replace(" ", "");
-        var type =ObjectsFunctionality.AllAssemblyTypes.FirstOrDefault(i => i.IsClass 
+        var type =TypesFunctionality.AllAssemblyTypes.FirstOrDefault(i => i.IsClass 
                                                                       && i.GetInterfaces().Contains(typeof(IInventoryEntity)) && !i.IsAbstract
             && i.Name.ToLower() == simplifiedEntityName);
         if (type is null)

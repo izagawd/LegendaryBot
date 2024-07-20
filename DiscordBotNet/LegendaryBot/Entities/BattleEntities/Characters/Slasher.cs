@@ -26,7 +26,7 @@ public class WindSlash : Skill
                 ElementToDamageWith = User.Element,
                 CriticalChance = User.CriticalChance,
                 CriticalDamage = User.CriticalDamage,
-                Caster = User,
+                DamageDealer = User,
                 Damage = User.Attack * 1.7f, 
                 DamageText = $"The slash dealt $ damage to {i}!"
             });
@@ -61,7 +61,7 @@ public class SimpleSlashOfPrecision : BasicAttack
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
-            Caster = User,
+            DamageDealer = User,
             Damage = User.Attack * 1.7f,
             AlwaysCrits = true
         });
@@ -98,7 +98,7 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
             CanCrit = true,
-            Caster = User,
+            DamageDealer = User,
             Damage = User.Attack * 1.7f *2,
             AlwaysCrits = true,
             DamageText = $"The slash was so precise it dealt $ damage to {target.NameWithAlphabetIdentifier}!",

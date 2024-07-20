@@ -22,7 +22,7 @@ public class DoNotResist : BasicAttack
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
             Damage = User.Attack * 1.7f,
-            Caster = User,
+            DamageDealer = User,
             DamageText = $"{User.NameWithAlphabetIdentifier} tases {target.NameWithAlphabetIdentifier} and dealt $ damage! it was shocking"
         });
         if (BasicFunctionality.RandomChance(15))
@@ -60,7 +60,7 @@ public class IAmShooting : Skill
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
-            Caster = User,
+            DamageDealer = User,
             Damage = User.Attack * 2,
             DamageText = $"{User.NameWithAlphabetIdentifier} shoots at {target.NameWithAlphabetIdentifier} for resisting arrest, dealing $ damage"
         });

@@ -33,7 +33,7 @@ public class VolcanicEruptionCharging : StatusEffect
                     CriticalChance = Caster.CriticalChance,
                     CriticalDamage = Caster.CriticalDamage,
                     Damage = affected.Attack * 1.7f * 2,
-                    Caster = affected,
+                    DamageDealer = affected,
                     CanCrit = true,
                     DamageText =$"{affected} shot out a very powerful blast that dealt $ damage to {i}!"
                 });

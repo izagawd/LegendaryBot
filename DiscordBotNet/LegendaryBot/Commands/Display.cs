@@ -1,6 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Text;
+using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
+using DiscordBotNet.LegendaryBot.Entities;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using DiscordBotNet.LegendaryBot.Entities.Items;
+using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
@@ -20,7 +26,7 @@ public class Display : GeneralCommandClass
     protected static DiscordButtonComponent Last = new DiscordButtonComponent(DiscordButtonStyle.Primary, "last", "LAST");
 
     private  static async ValueTask ExecuteDisplayAsync<TObject>(CommandContext context, IEnumerable<TObject> objects, int displaySectionLimit,
-        Func<TObject, string> textToDisplayPerItem, string joiner, string objectTypeName,
+        Func<TObject, string> textToDisplayPerItem, string joiner, string title,
         DiscordColor discordColor)
     {
         List<List<string>> displayList = [];
@@ -55,7 +61,7 @@ public class Display : GeneralCommandClass
             var embed = new DiscordEmbedBuilder()
                 .WithUser(context.User)
                 .WithColor(discordColor)
-                .WithTitle($"Page {index + 1}/{displayList.Count} ({objectTypeName})")
+                .WithTitle($"{title}")
                 .WithDescription(displayList[index].Join(joiner));
             var messageBuilder = new DiscordMessageBuilder()
                 .AddComponents(First,Previous,Next,Last)
@@ -114,10 +120,44 @@ public class Display : GeneralCommandClass
             i => i.DisplayString,
             "\n","Items",userData.Color);
     }
-
-    public async ValueTask ExecuteDisplayCharacter(CommandContext context,[Description("character-number")]  int characterNumber)
+    
+    private static readonly List<string> entitiesList;
+    static Display()
     {
-        
+        entitiesList = [];
+        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<IInventoryEntity>()
+                     .Select(i =>
+                     {
+                         Type type = null;
+                         if (i is Character)
+                             type = typeof(Character);
+                         else if (i is Gear)
+                             type = typeof(Gear);
+                         else if (i is CharacterExpMaterial)
+                             type = typeof(CharacterExpMaterial);
+                         else if (i is Item)
+                             type = typeof(Item);
+                         else if (i is Blessing)
+                             type = typeof(Blessing);
+                         else
+                             type = typeof(IInventoryEntity);
+                         return new { type, entity = i };
+                     }).OrderBy(i => i.type?.Name))
+        {
+            entitiesList.Add($"{i.entity.Name} ({i.type.Name})");
+        }
+
+
+    }
+    [Command("all-entities"),Description("Displays all entities that can be gotten into your inventory"),
+    AdditionalCommand("/display all-entities")]
+    public async ValueTask ExecuteDisplayAllEntities(CommandContext context)
+    {
+        var color = (await DatabaseContext.UserData
+                .Where(i => i.Id == context.User.Id)
+                .Select(i => new DiscordColor?(i.Color))
+                .FirstOrDefaultAsync())
+            .GetValueOrDefault(TypesFunctionality.GetDefaultObject<UserData>().Color);
     }
     protected static DiscordButtonComponent First = new DiscordButtonComponent(DiscordButtonStyle.Primary, "first", "FIRST");
         [Command("gears"),Description("Displays all the gears you have")]

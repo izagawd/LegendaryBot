@@ -35,7 +35,7 @@ public partial class Character
         if (IsDead) return null;
         var damageText = damageArgs.DamageText;
         var damage = damageArgs.Damage;
-        var caster = damageArgs.Caster;
+        var caster = damageArgs.DamageDealer;
         var canBeCountered = damageArgs.CanBeCountered;
         if (damageText is null)
         {
@@ -168,7 +168,7 @@ public partial class Character
         var damageText = damageArgs.DamageText;
         if (damageText is null)
         {
-            damageText = $"{damageArgs.Caster} dealt {actualDamage} damage to {this}!";
+            damageText = $"{damageArgs.DamageDealer} dealt {actualDamage} damage to {this}!";
         }
 
         damageText = damageText.Replace("$", actualDamage.ToString());
@@ -198,7 +198,7 @@ public partial class Character
             {
                 WasCrit = didCrit,
                 Damage = actualDamage,
-                DamageDealer = damageArgs.Caster,
+                DamageDealer = damageArgs.DamageDealer,
                 DamageReceiver = this,
                 CanBeCountered = damageArgs.CanBeCountered
             };
@@ -210,7 +210,7 @@ public partial class Character
                 
                 WasCrit = didCrit,
                 Damage = actualDamage,
-                DamageDealer = damageArgs.Caster,
+                DamageDealer = damageArgs.DamageDealer,
                 DamageReceiver = this,
                 CanBeCountered = damageArgs.CanBeCountered
             };

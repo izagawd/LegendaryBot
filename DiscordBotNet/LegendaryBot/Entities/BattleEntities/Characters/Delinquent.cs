@@ -27,7 +27,7 @@ public class BaseballBatWhack : BasicAttack
                     CriticalChance = User.CriticalChance,
                     CriticalDamage = User.CriticalDamage,
                     Damage = User.Attack * 1.7f,
-                    Caster = User,
+                    DamageDealer = User,
                     DamageText = $"{User.NameWithAlphabetIdentifier} whacks {target.NameWithAlphabetIdentifier} with a baseball bat, dealing $ damage"
                 })
             ],

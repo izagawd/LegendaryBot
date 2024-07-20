@@ -36,7 +36,7 @@ public class DamageArgs
     /// <summary>
     /// The one who casted the attack
     /// </summary>
-        public required Character Caster { get; init; }
+        public required Character DamageDealer { get; init; }
         /// <summary>
         /// Use $ in the string and it will be replaced with the damage
         /// </summary>

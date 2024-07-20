@@ -18,7 +18,7 @@ public class BasicAttackSample : BasicAttack
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
             Damage = User.Attack * 1.7f,
-            Caster = User,
+            DamageDealer = User,
             CanCrit = true,
             DamageText = $"{User.NameWithAlphabetIdentifier} gave" +
                          $" {target.NameWithAlphabetIdentifier} a punch and dealt $ damage!"

@@ -13,7 +13,7 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
     {
         builder.HasKey(i => i.Id);
         var starting = builder.HasDiscriminator<int>("Discriminator");
-        foreach (var i in ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<Blessing>())
+        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Blessing>())
         {
             starting = starting.HasValue(i.GetType(), i.TypeId);
         }

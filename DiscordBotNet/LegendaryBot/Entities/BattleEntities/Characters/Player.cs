@@ -23,7 +23,7 @@ public class FourthWallBreaker: BasicAttack
                     ElementToDamageWith = User.Element,
                     CriticalChance = User.CriticalChance,
                     CriticalDamage = User.CriticalDamage,
-                    Caster = User,
+                    DamageDealer = User,
                     DamageText =
                         $"Breaks the fourth wall, causing {target.NameWithAlphabetIdentifier} to cringe, and making them receive $ damage!",
                     Damage = User.Attack * 1.7f
@@ -61,7 +61,7 @@ public class FireBall : Skill
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
             Damage = User.Attack * 2.4f,
-            Caster = User,
+            DamageDealer = User,
             DamageText =$"{User.NameWithAlphabetIdentifier} threw a fireball at {target.NameWithAlphabetIdentifier} and dealt $ damage!",
         });
         if (BasicFunctionality.RandomChance(10))

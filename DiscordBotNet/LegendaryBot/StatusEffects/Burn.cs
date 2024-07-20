@@ -34,7 +34,7 @@ public class Burn : StatusEffect, IDetonatable
             DefenseToIgnore = 70,
             ElementToDamageWith = null,
             Damage = _characterAttack * 0.6f,
-            Caster = Caster,
+            DamageDealer = Caster,
             CanCrit = false,
             DamageText = $"{Affected} took $ damage from burn!"
         });

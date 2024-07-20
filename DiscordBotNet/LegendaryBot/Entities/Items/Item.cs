@@ -17,7 +17,7 @@ public class ItemDatabaseConfiguration : IEntityTypeConfiguration<Item>
         builder.HasKey("Discriminator", nameof(Item.UserDataId));
         var starting = builder.HasDiscriminator<int>("Discriminator");
 
-        foreach (var i in ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<Item>())
+        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Item>())
         {
             starting = starting.HasValue(i.GetType(), i.TypeId);
         }

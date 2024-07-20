@@ -23,7 +23,7 @@ public class PomPomAttack : BasicAttack
                     ElementToDamageWith = User.Element,
                     CriticalChance = User.CriticalChance,
                     CriticalDamage = User.CriticalDamage,
-                    Caster = User,
+                    DamageDealer = User,
                     Damage = User.Attack * 0.8f,
                     DamageText = $"{User.NameWithAlphabetIdentifier} hits {target.NameWithAlphabetIdentifier} with their pompoms, dealing $ damage!"
                 })
