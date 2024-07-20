@@ -28,8 +28,11 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
     {
 
         entity.HasKey(i => i.Id);
-        entity.HasIndex(nameof(Character.UserDataId), "Discriminator")
+        entity.HasIndex(i => new{i.Number, i.UserDataId})
             .IsUnique();
+        entity.Property(i => i.Number)
+            .ValueGeneratedOnAdd();
+        
         entity.HasMany(i => i.Gears)
             .WithOne(i => i.Character)
             .HasForeignKey(i => i.CharacterId);
@@ -59,18 +62,27 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
         return GetRequiredExperienceToNextLevel(Level);
     }
 
+    public int Number { get; set; }
     [NotMapped]
     public virtual Type StatToIncreaseOnDupe => GearStat.AttackPercentageType;
-    private int _dupeCount = 0;
-    public int DupeCount
+ 
+
+    public string DisplayString
     {
-        get => _dupeCount;
-        set
+        get
         {
-            _dupeCount = value;
-            if (_dupeCount > 6)
-                _dupeCount = 6;
-        } 
+            var stringg = $"{Name} • Lvl: {Level}";
+            if (Number != 0)
+            {
+                stringg = $"{Number} • {stringg}";
+            }
+            if (Blessing is not null)
+            {
+                stringg += $" • Blessing: {Blessing.Name}";
+            }
+
+            return $"`{stringg}`";
+        }
     }
 
     /// <summary>
@@ -88,31 +100,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
         return increaseAmount;
     }
 
-    public static bool TierCanAscendCharacterInto(Tier tier, int newAscension)
-    {
-        if (newAscension > MaxAscensionLevel) return false;
-        return (int)tier >= (int) GetMinimumTierToAscendCharacterTo(newAscension);
-    }
-    public static Tier GetMinimumTierToAscendCharacterTo(int newAscension)
-    {
-        switch (newAscension)
-        {
-            case 1:
-                return Tier.Bronze;
-            case 2:
-                return Tier.Silver;
-            case 3:
-                return Tier.Gold;
-            case 4:
-                return Tier.Platinum;
-            case 5:
-                return Tier.Diamond;
-            case 6:
-                return Tier.Divine;
-            default:
-                throw new ArgumentException($"Tier {newAscension} doesnt exist bruh");
-        }
-    }
+ 
     /// <param name="decreaseAmount">amount to decrease</param>
     /// <param name="effectiveness">Use if it is resistable</param>
     /// <param name="announceDecrease">Whether or not to announce the fact that combat readiness was decreased</param>
@@ -335,13 +323,13 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     ];
 
 
-    protected IEnumerable<StatType> GetStatsToIncreaseBasedOnAscension(int ascension)
+    protected IEnumerable<StatType> GetStatsToIncreaseBasedOnLevelMilestone(int levelMilestone)
     {
         
         foreach (var i in AscensionStatIncrease)
         {
-            ascension--;
-            if(ascension <= 0) yield break;
+            levelMilestone--;
+            if(levelMilestone <= 0) yield break;
             yield return i;
         }
     }
@@ -350,8 +338,8 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
 
 
 
-    public const int MaxAscensionLevel = 6;
-    public int Ascension { get; set; } = 1;
+
+
 
 
 
@@ -392,7 +380,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
         }
     }
 
-    public int RequiredAscensionMaterialsToAscend => Ascension * 5;
+
 
 
 
@@ -490,7 +478,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
 
     public bool RemoveStatusEffect(StatusEffect statusEffect) => _statusEffects.Remove(statusEffect);
 
-    public  int MaxLevel => Ascension * 10;
+    public int MaxLevel => 60;
 
 
     public void SetLevel(int level)

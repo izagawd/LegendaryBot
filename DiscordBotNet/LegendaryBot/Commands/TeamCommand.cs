@@ -58,18 +58,18 @@ public class TeamCommand : GeneralCommandClass
     [Command("remove-character")]
     [AdditionalCommand("/remove-character player",BotCommandType.Battle)]
     public async ValueTask ExecuteRemoveFromTeam(CommandContext context,
-        [Parameter("character-name")] string characterName,
+        [Parameter("character-number")] int characterNumber,
         [Parameter("team-name"),  Description("Name of team you want to remove character from")]
         string teamName)
     {
     
 
-        var simplifiedCharacterName = characterName.ToLower().Replace(" ", "");
+  
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower() == teamName.ToLower()))
             .Include(i => i.EquippedPlayerTeam)
             .Include(i => i.Characters.Where(j => 
-                                                  EF.Property<string>(j, "Discriminator").ToLower() == simplifiedCharacterName))
+                                                  j.Number == characterNumber))
             .FirstOrDefaultAsync(i => i.Id == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -98,10 +98,10 @@ public class TeamCommand : GeneralCommandClass
         }
         var character = userData
             .Characters
-            .FirstOrDefault(i => i.GetType().Name.ToLower() == simplifiedCharacterName);
+            .FirstOrDefault(i => i.Number == characterNumber);
         if (character is null)
         {
-            embed.WithDescription($"Character with name {characterName} could not be found");
+            embed.WithDescription($"Character with number {characterNumber} could not be found");
             await context.RespondAsync(embed);
             return;
         }
@@ -109,15 +109,14 @@ public class TeamCommand : GeneralCommandClass
 
         if (!gottenTeam.Contains(character))
         {
-            embed.WithDescription($"Character {character} is not in team {gottenTeam.TeamName}");
+            embed.WithDescription($"Character {character} with number {characterNumber} is not in team {gottenTeam.TeamName}");
             return;
         }
-
         gottenTeam.Remove(character);
         
         await DatabaseContext.SaveChangesAsync();
 
-        embed.WithTitle("Success!").WithDescription($"{character} has been removed from team {gottenTeam.TeamName}!");
+        embed.WithTitle("Success!").WithDescription($"{character} with number {characterNumber} has been removed from team {gottenTeam.TeamName}!");
         await context.RespondAsync(embed);
 
     }
@@ -167,17 +166,16 @@ public class TeamCommand : GeneralCommandClass
 
     }
     [Command("add-character"), Description("adds a character to a team!")]
-    public async ValueTask ExecuteAddToTeam(CommandContext context, [Parameter("character-name"), Description("Name of team you want to add character to")] string characterName,
+    public async ValueTask ExecuteAddToTeam(CommandContext context, [Parameter("character-number"), Description("Id of character you want to add")] int characterNumber,
         [Parameter("team-name")] string teamName)
     {
 
 
-        var simplifiedCharacterName = characterName.ToLower().Replace(" ", "");
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower() == teamName.ToLower()))
             .Include(i => i.EquippedPlayerTeam)
-            .Include(i => i.Characters.Where(i =>
-                                                  EF.Property<string>(i, "Discriminator").ToLower() == simplifiedCharacterName))
+            .Include(i => i.Characters.Where(j =>
+                                                  j.Number == characterNumber))
             .FirstOrDefaultAsync(i => i.Id == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -206,10 +204,10 @@ public class TeamCommand : GeneralCommandClass
         }
         var character = userData
             .Characters
-            .FirstOrDefault(i => i.GetType().Name.ToLower() == simplifiedCharacterName);
+            .FirstOrDefault(i => i.Number == characterNumber);
         if (character is null)
         {
-            embed.WithDescription($"Character with name {characterName} could not be found");
+            embed.WithDescription($"Character with number {characterNumber} could not be found");
             await context.RespondAsync(embed);
             return;
         }

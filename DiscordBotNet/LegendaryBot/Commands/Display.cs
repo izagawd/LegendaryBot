@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Text;
 using DiscordBotNet.Extensions;
+using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
@@ -101,8 +102,7 @@ public class Display : GeneralCommandClass
     {
         var simplified = nameFilter.Replace(" ", "").ToLower();
         var userData = await DatabaseContext.UserData
-            .Include(i => i.Items.Where(j =>
-                    EF.Property<string>(j, "Discriminator").ToLower().Contains(simplified)))
+            .Include(i => i.Items)
             .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -110,8 +110,8 @@ public class Display : GeneralCommandClass
             return;
         }
 
-        await ExecuteDisplayAsync(context, userData.Items, 20,
-            i => $"Name: {i.Name} | Stacks: {i.Stacks} | Rarity: {i.Rarity}",
+        await ExecuteDisplayAsync(context, userData.Items.Where(i => i.Name.ToLower().Contains(simplified)), 20,
+            i => i.DisplayString,
             "\n","Items",userData.Color);
     }
     
@@ -130,21 +130,8 @@ public class Display : GeneralCommandClass
             await AskToDoBeginAsync(context);
             return;
         }
-        await ExecuteDisplayAsync(context, userData.Gears, 3,
-            i =>
-            {
-                i.MainStat.SetMainStatValue(i.Rarity);
-            
-                var stringToUse =new StringBuilder($"{i.Name} | Id: {i.Id} \nMain Stat = {i.MainStat.AsNameAndValue()}\nSubstats:");
-                foreach (var j in i.Substats)
-                {
-                    stringToUse.Append($"\n{j.AsNameAndValue()}");
-                }
-
-                if (i.Character is not null)
-                    stringToUse.Append($"Equipped By: {i.Character.Name}");
-                return stringToUse.ToString();
-            },
+        await ExecuteDisplayAsync(context, userData.Gears.OrderBy(i => i.Number), 3,
+            i => i.DisplayString,
             "\n\n","Gears",userData.Color);
         
         
@@ -156,8 +143,7 @@ public class Display : GeneralCommandClass
     {
         var simplified = nameFilter.Replace(" ", "").ToLower();
         var userData = await DatabaseContext.UserData
-            .Include(i => i.Characters
-                .Where(j => EF.Property<string>(j,"Discriminator").ToLower().Contains(simplified)))
+            .Include(i => i.Characters)
             .ThenInclude(i => i.Blessing)
             .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
         if (userData is null || userData.Tier == Tier.Unranked)
@@ -165,23 +151,17 @@ public class Display : GeneralCommandClass
             await AskToDoBeginAsync(context);
             return;
         }
-        await ExecuteDisplayAsync(context, userData.Characters, 10,
-            i =>
-            {
-                var stringToUse = $"Name: {i.Name} |  Level: {i.Level} | Element: \n{i.Element} | Rarity: {i.Rarity} | " +
-                                  $"{nameof(Character.DupeCount)}: | {i.DupeCount}";
-                if (i.Blessing is not null)
-                    stringToUse += $"\nBlessing Name: {i.Blessing.Name}\n" +
-                                   $"Blessing Id: {i.Blessing.Id}";
-                return stringToUse;
-            },
-            "\n\n","Characters",userData.Color);
+        await ExecuteDisplayAsync(context, userData.Characters
+                .Where(i => i.Name.ToLower().Contains(simplified))
+                .OrderBy(i => i.Number), 10,
+            i => i.DisplayString,
+            "\n","Characters",userData.Color);
   
 
     }
 
     [Command("blessings"),Description("Displays all the blessings you have")]
-    public async ValueTask ExecuteDisplayBlessings(CommandContext context)
+    public async ValueTask ExecuteDisplayBlessings(CommandContext context, string nameFilter = "")
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.Blessings)
@@ -192,15 +172,18 @@ public class Display : GeneralCommandClass
             await AskToDoBeginAsync(context);
             return;
         }
-        await ExecuteDisplayAsync(context, userData.Blessings, 10,
+
+        var simplified = nameFilter.ToLower().Replace(" ", "");
+        await ExecuteDisplayAsync(context, userData.Blessings
+                .Where(i => i.Name.ToLower().Replace(" ","").Contains(simplified))
+                .GroupBy(i => i.GetType()), 10,
             i =>
             {
-                var stringToUse = $"Name: {i.Name}  | Rarity: {i.Rarity} |\n Id: {i.Id}";
-                if (i.Character is not null)
-                {
-
-                    stringToUse += $"\n     Character Name: {i.Character.Name} | Character Level: {i.Character.Level}";
-                }
+                var asArray = i.ToArray();
+                var count = asArray.Length;
+                var countThatsFree = asArray.Where(j => j.Character == null).Count();
+                var sample = asArray[0];
+                var stringToUse = $"`{sample.DisplayString.Replace("`","")} • Count: {count} • Available: {countThatsFree}`";
                 return stringToUse;
             },
             "\n\n","Blessings",userData.Color);
@@ -212,6 +195,8 @@ public class Display : GeneralCommandClass
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
+            .ThenInclude(i => i.Characters)
+            .ThenInclude(i => i.Blessing)
             .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -219,30 +204,32 @@ public class Display : GeneralCommandClass
             return;
         }
         var teamStringBuilder = new StringBuilder();
-        var count = 0;
-
-
-  
-        foreach (var i in userData.PlayerTeams)
-        {
-            count++;
-            var equipped = "";
-            if (userData.EquippedPlayerTeam == i)
-                equipped = " (equipped)";
-            teamStringBuilder.Append($"1.{equipped} {i.TeamName}. Members: ");
-            foreach (var j in i)
-            {
-                teamStringBuilder.Append($"{j}, ");
-            }
-
-            teamStringBuilder.Append("\n");
-        }
+   
 
         var embed = new DiscordEmbedBuilder()
             .WithUser(context.User)
             .WithTitle("Here's a list of all your teams")
             .WithColor(userData.Color)
-            .WithDescription(teamStringBuilder.ToString());
+            .WithDescription("");
+        foreach (var i in userData.PlayerTeams)
+        {
+            var equipped = "";
+            var value = "NO TEAM MEMBER";
+            if (userData.EquippedPlayerTeam == i)
+                equipped = " (equipped)";
+            if (i.Any())
+            {
+                value = "";
+                foreach (var j in i)
+                {
+                    value += $"`{j.Number} • {j.DisplayString}`\n";
+                }
+            }
+            embed.AddField(i.TeamName + equipped,
+                value);
+        }
+
+ 
 
         await context.RespondAsync(embed);
     }

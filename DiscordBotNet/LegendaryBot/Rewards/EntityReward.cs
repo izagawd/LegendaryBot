@@ -30,7 +30,7 @@ public class EntityReward : Reward
 
     public override string GiveRewardTo(UserData userData)
     {
-        var stringBuilder = new StringBuilder($"{userData.Name} got: ");
+        var stringBuilder = new StringBuilder($"`{userData.Name} got:`\n ");
         EntitiesToReward.MergeDuplicates();
         userData.Inventory.AddRange(EntitiesToReward);
         userData.Inventory.MergeDuplicates();
@@ -38,29 +38,9 @@ public class EntityReward : Reward
         Dictionary<string, int> nameSorter = [];
         foreach (var i in EntitiesToReward)
         {
-            stringBuilder.Append($"\nName: {i.Name} | Type : {BasicFunctionality.Englishify(i.TypeGroup.Name)} | Rarity : {i.Rarity.ToString().Englishify()}");
-            if (i is Item item)
-            {
-                stringBuilder.Append($" | {nameof(Item.Stacks)}: {item.Stacks}");
-            }
+            stringBuilder.Append($"{i.DisplayString}\n");
+           
 
-            else if (i is Gear gear)
-            {
-                gear.MainStat.SetMainStatValue(gear.Rarity);
-                stringBuilder.Append($"\n\nMainStat = {gear.MainStat.Name}: {gear.MainStat.Value}");
-                if (gear.Substats.Any())
-                {
-                    stringBuilder.Append("\nSubstats: ");
-                    foreach (var j in gear.Substats)
-                    {
-                        stringBuilder.Append($"\n{j.AsNameAndValue()}");
-                    }
-                }
-
-                stringBuilder.Append("\n");
-            }
-     
-            
         } 
 
     

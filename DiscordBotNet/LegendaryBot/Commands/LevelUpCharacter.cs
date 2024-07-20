@@ -24,20 +24,18 @@ public class LevelUpCharacter : GeneralCommandClass
 {
     private static ConcurrentDictionary<string,Image<Rgba32>> _cachedLevelUpCroppedImages = new();
 
-
-
-
+    
     private static ConcurrentDictionary<string, Image<Rgba32>> _resizedBlessingsLevelUpImageCache = new();
 
     public static void UpdateEmbed(DiscordEmbedBuilder builder, Character character)
     {
-        var description = "";
-        foreach (var i in DefaultObjects.GetDefaultObjectsThatIsInstanceOf<CharacterExpMaterial>())
+        var description = $"Character number: {character.Number}\n";
+        foreach (var i in ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<CharacterExpMaterial>())
         {
             description += $"{i.Name}: {character.UserData.Items.GetItemStacks(i.GetType())}\n";
         }
 
-        description += $"{DefaultObjects.GetDefaultObject<AscensionMaterial>().Name}: " +
+        description += $"{ObjectsFunctionality.GetDefaultObject<AscensionMaterial>().Name}: " +
                        $"{character.UserData.Items.GetItemStacks(typeof(AscensionMaterial))}";
 
         builder.WithDescription(description);
@@ -69,8 +67,7 @@ public class LevelUpCharacter : GeneralCommandClass
                     statsStringBuilder.Append($"{BasicFunctionality.Englishify(i.ToString())}: {character.GetStatFromType(i)}\n");
                     
                 }
-
-                statsStringBuilder.Append($"{nameof(Character.DupeCount).Englishify()}: {character.DupeCount}");
+                
                 ctx.DrawImage(characterImage,
                         new Point(15, 15), new GraphicsOptions())
                     .BackgroundColor(DiscordColor.Gray.ToImageSharpColor())
@@ -137,10 +134,7 @@ public class LevelUpCharacter : GeneralCommandClass
                     text = "You do not have any EXP material";
                 }
             }
-            else
-            {
-                text = GetCannotAscendReasonText(character);
-            }
+            
          
             if (text is not null)
             {
@@ -155,10 +149,7 @@ public class LevelUpCharacter : GeneralCommandClass
 
         return image;
     }
-    static bool CanAscend(Character character)
-    {
-        return GetCannotAscendReasonText(character) is  null && character.Level >= character.MaxLevel;
-    }
+
     static bool CanLevelUp(Character character)
     {
         var gottenUserData = character.UserData!;
@@ -172,45 +163,22 @@ public class LevelUpCharacter : GeneralCommandClass
 
     static bool ConditionsAreMet(Character character)
     {
-        return CanAscend(character) || CanLevelUp(character);
+        return CanLevelUp(character);
     }
 
 
-    public static string? GetCannotAscendReasonText(Character character)
-    {
-        string? failureText = null;
-        var gottenUserData = character.UserData;
 
-        if (character.Ascension >= Character.MaxAscensionLevel)
-        {
-            failureText = $"Max ascension reached. Cannot ascend any further";
-        }
-        else if((gottenUserData?.Items.GetItemStacks<AscensionMaterial>()).GetValueOrDefault(0) < character.RequiredAscensionMaterialsToAscend)
-        {
-            failureText = $"You do not have enough character ascension materials to ascend (you need {character.RequiredAscensionMaterialsToAscend})";
-        }
-        else if(!Character.TierCanAscendCharacterInto((gottenUserData?.Tier).GetValueOrDefault(Tier.Unranked),
-                    character.Ascension + 1))
-        {
-            failureText = $"You need to be at least " +
-                          $"{Character.GetMinimumTierToAscendCharacterTo(character.Ascension + 1).ToString().Englishify()}" +
-                          $" tier to ascend this character";
-        }
-
-        return failureText;
-    }
     
     [Command("character"), Description("used to level up a character"),
      AdditionalCommand("/level-up character player",BotCommandType.Battle)]
     public async Task ExecuteLevelUp(CommandContext ctx,
-        [Parameter("character-name")] string characterName)
+        [Parameter("character-number")] int characterNumber)
     {
-        
-        var simplifiedCharacterName = characterName.ToLower().Replace(" ", "");
+
 
         Expression<Func<UserData, IEnumerable<Character>>> includeLambda = (UserData i) =>
             i.Characters.Where(j =>
-                EF.Property<string>(j, "Discriminator").ToLower() == simplifiedCharacterName);
+                j.Number == characterNumber);
         
         var gottenUserData =await  DatabaseContext.UserData
             .Include(includeLambda)
@@ -231,7 +199,7 @@ public class LevelUpCharacter : GeneralCommandClass
             .WithTitle("Hmm")
             .WithImageUrl("attachment://levelupimage.png")
             .WithColor(gottenUserData.Color)
-            .WithDescription($"Unable to find character with the name \"{simplifiedCharacterName}\"");
+            .WithDescription($"Unable to find character with the number \"{characterNumber}\"");
 
         if(gottenUserData.IsOccupied)
         {
@@ -260,9 +228,9 @@ public class LevelUpCharacter : GeneralCommandClass
             stream.Position = 0;
             var levelUp = new DiscordButtonComponent(DiscordButtonStyle.Primary, "level_up", "Level Up");
             var levelToMax = new DiscordButtonComponent(DiscordButtonStyle.Primary, "level_to_max", "Level To Max");
-            var ascend = new DiscordButtonComponent(DiscordButtonStyle.Primary, "ascend", "Ascend");
+
             var stop = new DiscordButtonComponent(DiscordButtonStyle.Danger, "stop", "Stop");
-            DiscordButtonComponent[] components = [levelUp, levelToMax, ascend,stop];
+            DiscordButtonComponent[] components = [levelUp, levelToMax, stop];
 
             
        
@@ -272,16 +240,8 @@ public class LevelUpCharacter : GeneralCommandClass
             void SetupComponents()
             {
                 var anyConditionIsMet = false;
-                if (!CanAscend(character))
-                {
-                    ascend.Disable();
-                }
-               
-                else
-                {
-                    anyConditionIsMet = true;
-                    ascend.Enable();
-                }
+     
+         
                 if (!CanLevelUp(character))
                 {
                    
@@ -394,16 +354,6 @@ public class LevelUpCharacter : GeneralCommandClass
                     case "stop":
                         await StopAsync();
                         return;
-                    case "ascend":
-        
-                        if (CanAscend(character))
-                        {
-                            var requiredMats = character.RequiredAscensionMaterialsToAscend;
-                            gottenUserData.Items.RemoveItemStacks<AscensionMaterial>(requiredMats);
-                            character.Ascension++;
-                        }
-
-                        break;
                     case "level_up":
                         var previousLevel = character.Level;
                 

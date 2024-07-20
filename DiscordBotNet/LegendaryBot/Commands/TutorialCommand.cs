@@ -32,7 +32,7 @@ public class TutorialCommand : GeneralCommandClass
             .WithColor((await DatabaseContext.UserData.Where(i => i.Id == ctx.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
-                .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color));
+                .GetValueOrDefault(ObjectsFunctionality.GetDefaultObject<UserData>().Color));
         await ctx.RespondAsync(embed);
     }
 }

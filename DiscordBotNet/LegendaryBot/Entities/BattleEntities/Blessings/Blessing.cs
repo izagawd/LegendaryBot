@@ -30,6 +30,8 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     {
         return "Idk man";
     }
+
+    public string DisplayString => $"`{Name}`";
     public  Type TypeGroup => typeof(Blessing);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
     public Guid? CharacterId { get; set; }
@@ -45,6 +47,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 
     [NotMapped] public virtual int Attack => 20 + (Level * 4);
     [NotMapped] public virtual int Health => 70 + (Level * 8);
+
 
 
     public Blessing()

@@ -18,6 +18,7 @@ public class ItemDatabaseConfiguration : IEntityTypeConfiguration<Item>
 
 public abstract class Item : IInventoryEntity
 {
+    public string DisplayString => $"`{Name} • Stacks: {Stacks}`";
     public  Type TypeGroup => typeof(Item);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
     public string Description { get; }

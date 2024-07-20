@@ -4,6 +4,7 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Quests;
@@ -202,7 +203,7 @@ public class UserData :   ICanBeLeveledUp
     
     public ItemContainer Items { get; private set; } = [];
     public List<Gear> Gears { get; private set; } = [];
-    public CharacterContainer Characters { get; private set; } = [];
+    public List<Character> Characters { get; private set; } = [];
     public List<Blessing> Blessings { get; private set; } = [];
 }
 public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>

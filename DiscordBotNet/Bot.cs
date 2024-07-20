@@ -1,10 +1,15 @@
-﻿using DSharpPlus.Entities;
+﻿using System.Collections.Concurrent;
+using System.Collections.Immutable;
+using DSharpPlus.Entities;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Commands;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.EventArgs;
@@ -33,16 +38,70 @@ public static class Bot
 
     private static Task FirstTimeSetupAsync()
     {
-
-
-
         return new PostgreSqlContext().ResetDatabaseAsync();
-        
     }
 
-    private static async Task OnMessageCreated(DiscordClient client, MessageCreatedEventArgs args)
+    struct ChannelSpawnInfo
     {
+        public int Count;
+        public DateTime LastTimeIncremented = DateTime.Now.AddDays(-1);
         
+        public ChannelSpawnInfo(){}
+    }
+
+    private static readonly DiscordButtonComponent ClaimCharacter = new DiscordButtonComponent(
+        DiscordButtonStyle.Success,
+        "claim", "CLAIM");
+    private static ConcurrentDictionary<ulong, ChannelSpawnInfo> idkDictionary = new();
+    private static async Task OnMessageCreated(DiscordClient client, MessageCreatedEventArgs args)
+    {        
+        
+        return;
+        if (!args.Author.IsBot)
+        {
+            var spawnInfo = idkDictionary.GetValueOrDefault(args.Channel.Id);
+            if (DateTime.Now.Subtract(spawnInfo.LastTimeIncremented).Seconds > 1)
+            {
+                spawnInfo.Count++;
+                spawnInfo.LastTimeIncremented = DateTime.Now;
+                idkDictionary[args.Channel.Id] = spawnInfo;
+                if (spawnInfo.Count >= 1)
+                {
+                    spawnInfo.Count = 0;
+                    idkDictionary[args.Channel.Id] = spawnInfo;
+                    var groups = ObjectsFunctionality
+                        .GetDefaultObjectsThatIsInstanceOf<Character>()
+                        .Where(i => i.Rarity >= Rarity.FourStar && i is not Player)
+                        .GroupBy(i => i.Rarity)
+                        .ToImmutableArray();
+                    var groupToUse = groups.First(i => i.Key == Rarity.FourStar);
+                    if (BasicFunctionality.RandomChance(5))
+                    {
+                        groupToUse = groups.First(i => i.Key == Rarity.FiveStar);
+                    }
+
+                    var randomCharacterType 
+                        = BasicFunctionality.RandomChoice(groupToUse.Select(i => i)).GetType();
+                    var created = (Character)Activator.CreateInstance(randomCharacterType)!;
+                    await using var stream = new MemoryStream();
+                    using var image = await BasicFunctionality.GetImageFromUrlAsync(created.ImageUrl);
+                    await image.SaveAsPngAsync(stream);
+                    stream.Position = 0;
+                    var message = await args.Channel.SendMessageAsync(new DiscordMessageBuilder()
+                        .AddEmbed(new DiscordEmbedBuilder()
+                            .WithColor(created.Color)
+                            .WithTitle("New character has appeared!")
+                            .WithDescription($"Name: {created.Name}\nRarity: {created.Rarity.ToString().Englishify()}")
+                            .WithImageUrl("attachment://character.png"))
+                        .AddComponents(ClaimCharacter)
+                        .AddFile("character.png",stream));
+                    var result =await message.WaitForButtonAsync();
+                    
+
+
+                }
+            }
+        }
     }
     private static async Task StartDiscordBotAsync()
     {
@@ -110,7 +169,7 @@ public static class Bot
         return Task.CompletedTask;
     }
 
-    private static event Action idk;
+
     private async static Task DoShitAsync()
     {
 
@@ -184,7 +243,7 @@ public static class Bot
             }
             else
             {
-                color = DefaultObjects.GetDefaultObject<UserData>().Color;
+                color = ObjectsFunctionality.GetDefaultObject<UserData>().Color;
             }
             
             var embed = new DiscordEmbedBuilder()

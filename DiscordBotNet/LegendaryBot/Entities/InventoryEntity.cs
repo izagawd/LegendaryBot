@@ -13,7 +13,7 @@ public static class InventoryEntityExtensions
 public interface IInventoryEntity 
 {
 
-    
+    string DisplayString { get; }
     Type TypeGroup { get;  }
     DateTime DateAcquired { get; set; }
 

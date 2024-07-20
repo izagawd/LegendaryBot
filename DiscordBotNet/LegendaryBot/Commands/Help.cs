@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Text;
 using DiscordBotNet.Database.Models;
+using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ public class Help : GeneralCommandClass
         Dictionary<BotCommandType, StringBuilder> botCommandTypeBuilders = new();
         foreach (var i in Enum.GetValues<BotCommandType>())
             botCommandTypeBuilders[i] = new StringBuilder();
-        foreach (var i in  DefaultObjects.GetDefaultObjectsThatIsInstanceOf<GeneralCommandClass>())
+        foreach (var i in  ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<GeneralCommandClass>())
         {
             var com = i.GetType().GetCustomAttribute<CommandAttribute>();
             if (com is not null)
@@ -114,7 +115,7 @@ public class Help : GeneralCommandClass
     }
     private static void HandleCommandsInformations()
     {
-        foreach (var i in DefaultObjects.GetDefaultObjectsThatIsInstanceOf<GeneralCommandClass>())
+        foreach (var i in ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<GeneralCommandClass>())
         {
             var group = i.GetType().GetCustomAttribute<CommandAttribute>();
             
@@ -157,7 +158,7 @@ public class Help : GeneralCommandClass
     public async ValueTask Execute(CommandContext ctx,
     [Parameter("Commands")] string? cmd = null)
     {
-        
+
         var author = ctx.User;
         
         var color = await DatabaseContext
@@ -167,7 +168,7 @@ public class Help : GeneralCommandClass
             .FirstOrDefaultAsync();
         if (color is null)
         {
-            color = DefaultObjects.GetDefaultObject<UserData>().Color;
+            color = ObjectsFunctionality.GetDefaultObject<UserData>().Color;
         }
         var embedToBuild = new DiscordEmbedBuilder()
             .WithTitle("Help")

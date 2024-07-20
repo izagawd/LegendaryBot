@@ -57,7 +57,7 @@ public class Hunt : GeneralCommandClass
             return;
         }
         
-        var characterType = DefaultObjects.AllAssemblyTypes.FirstOrDefault(
+        var characterType = ObjectsFunctionality.AllAssemblyTypes.FirstOrDefault(
             i =>  i.Name.ToLower() == characterName.ToLower().Replace(" ", "") && i.IsSubclassOf(typeof(Character)) && !i.IsRelatedToType(typeof(Player)));
         if (characterType is null)
         {

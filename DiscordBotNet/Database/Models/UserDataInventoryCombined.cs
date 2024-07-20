@@ -21,7 +21,6 @@ public struct UserDataInventoryCombined : IInventoryEntityContainer<IInventoryEn
 
     public void MergeDuplicates()
     {
-        _userData.Characters.MergeDuplicates();
         _userData.Items.MergeDuplicates();
     }
 

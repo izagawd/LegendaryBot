@@ -18,7 +18,7 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 public class FarmGear : GeneralCommandClass
 {
     private static IEnumerable<Type>
-        allGearsType = DefaultObjects.AllAssemblyTypes.Where(i => i.IsSubclassOf(typeof(Gear))).ToImmutableArray();
+        allGearsType = ObjectsFunctionality.AllAssemblyTypes.Where(i => i.IsSubclassOf(typeof(Gear))).ToImmutableArray();
     [Command("farm-gear"), Description("Use this to farm gier"),
      AdditionalCommand("/farm-gear", BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx)
@@ -154,7 +154,7 @@ public class FarmGear : GeneralCommandClass
 
         foreach (var i in enemyTeam)
         {
-            i.Ascension = ascension;
+            
             i.Level = level;
             i.TotalAttack = attack;
             i.TotalDefense = defense;

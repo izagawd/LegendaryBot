@@ -12,43 +12,54 @@ public class CharacterCommand : GeneralCommandClass
 {
     [Command("equip-blessing"), Description("Use this Command make a character equip a blessing")]
     public async ValueTask ExecuteEquipBlessing(CommandContext context,
-        [Parameter("character-name")] string characterName,
-        [Parameter("blessing-id")] Guid blessingId)
+        [Parameter("character-number")] int characterNumber,
+        [Parameter("blessing-name")] string blessingName)
     {
-        var simplifiedCharacterName = characterName.ToLower().Replace(" ", "");
+
         var userData = await DatabaseContext.UserData
-            .Include(i => i.Blessings.Where(j => j.Id == blessingId))
+            .Include(i => i.Blessings)
+            .ThenInclude(i => i.Character)
             .Include(i => i.Characters.Where(j => 
-                                              EF.Property<string>(j, "Discriminator").ToLower() ==
-                                              simplifiedCharacterName))
-            
-                       
+                                              j.Number == characterNumber))
             .FirstOrDefaultAsync(i => i.Id == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
         }
-        var blessing = userData.Blessings.FirstOrDefault();
+
+        var simplifiedName = blessingName.Replace(" ", "").ToLower();
+        var possibleBlessings = userData.Blessings
+            .Where(i => i.Name.ToLower().Replace(" ","") == simplifiedName)
+            .ToArray();
         var embed = new DiscordEmbedBuilder()
             .WithTitle("Equipping blessing")
             .WithUser(context.User)
             .WithColor(userData.Color);
-        if (blessing is null)
+        if (!possibleBlessings.Any())
         {
-            embed.WithDescription("Blessing not found");
+            embed.WithDescription($"Blessing with name {blessingName} not found in your inventory");
             await context.RespondAsync(embed);
             return;
         }
 
+        var blessing = possibleBlessings.FirstOrDefault(i => i.Character == null);
+        if (blessing is null)
+        {
+            embed.WithDescription($"Blessing with name {blessingName} found, but there isn't any that isn't already equipped by a character");
+            await context.RespondAsync(embed);
+            return;
+        }
+
+        
         var character = userData.Characters.FirstOrDefault();
         if (character is null)
         {
-            embed.WithDescription("Character not found");
+            embed.WithDescription($"Character with number {characterNumber} not found");
             await context.RespondAsync(embed);
             return;
         }
-
+        
         character.Blessing = blessing;
         await DatabaseContext.SaveChangesAsync();
         embed.WithDescription(
@@ -60,18 +71,17 @@ public class CharacterCommand : GeneralCommandClass
     
     [Command("equip-gear"), Description("Use this Command make a character equip a gear")]
     public async ValueTask ExecuteEquipGear(CommandContext context,
-        [Parameter("character-name")] string characterName,
-        [Parameter("gear-id")] Guid gearId)
+        [Parameter("character-number")] int characterNumber,
+        [Parameter("gear-number")] int gearNumber)
     {
-        var simplifiedCharacterName = characterName.ToLower().Replace(" ", "");
+
         var userData = await DatabaseContext.UserData
             .Include(i => i.Gears)
             .Include(i => 
                 i.Characters.Where(j => 
-                EF.Property<string>(j, "Discriminator").ToLower() ==
-                                                     simplifiedCharacterName))
+                j.Number == characterNumber))
             .ThenInclude(i => i.Gears)
-            .Include(i => i.Gears.Where(j => j.Id == gearId))
+            .Include(i => i.Gears.Where(j => j.Number == gearNumber))
             .ThenInclude(i =>  i.Stats)
             .FirstOrDefaultAsync(i => i.Id == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
@@ -86,19 +96,18 @@ public class CharacterCommand : GeneralCommandClass
         var character = userData.Characters.FirstOrDefault();
         if (character is null)
         {
-            embed.WithDescription("Character not found");
+            embed.WithDescription($"Character with number {characterNumber} not found");
             await context.RespondAsync(embed);
             return;
         }
-        var gear = userData.Gears.FirstOrDefault(i => i.Id == gearId);
+        var gear = userData.Gears.FirstOrDefault(i => i.Number == gearNumber);
         if (gear is null)
         {
-            embed.WithDescription("Gear not found");
+            embed.WithDescription($"Gear with number {gearNumber} not not found");
             await context.RespondAsync(embed);
             return;
         }
 
-        character.Gears.Select(i => i.Name.Print()).ToArray();
         var stringBuilder =
             new StringBuilder(
                 $"{character.Name} has successfully equipped {gear.Name} that has the following stats:\n");

@@ -30,14 +30,14 @@ public abstract class GeneralCommandClass
         var embed = new DiscordEmbedBuilder()
             .WithTitle("Hmm")
             .WithDescription("You have not yet began your journey with /begin")
-            .WithColor(DefaultObjects.GetDefaultObject<UserData>().Color)
+            .WithColor(ObjectsFunctionality.GetDefaultObject<UserData>().Color)
             .WithUser(context.User);
 
         var color = (await DatabaseContext.UserData
                 .Where(i => i.Id == context.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
-            .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color);
+            .GetValueOrDefault(ObjectsFunctionality.GetDefaultObject<UserData>().Color);
 
         embed.WithColor(color);
         await context.RespondAsync(embed);
@@ -47,14 +47,14 @@ public abstract class GeneralCommandClass
         var embed = new DiscordEmbedBuilder()
             .WithTitle("Hmm")
             .WithDescription("You are occupied")
-            .WithColor(DefaultObjects.GetDefaultObject<UserData>().Color)
+            .WithColor(ObjectsFunctionality.GetDefaultObject<UserData>().Color)
             .WithUser(context.User);
 
         var color = (await DatabaseContext.UserData
                 .Where(i => i.Id == context.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
-            .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color);
+            .GetValueOrDefault(ObjectsFunctionality.GetDefaultObject<UserData>().Color);
 
         embed.WithColor(color);
         await context.RespondAsync(embed);

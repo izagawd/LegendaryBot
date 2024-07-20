@@ -29,7 +29,7 @@ public class PostgreSqlContext : DbContext
     private static readonly Type[] EntityClasses;
 
     public DbSet<UserData> UserData { get; set; }
-    public DbSet<GuildData> GuildData { get; set; }
+    public DbSet<GuildData> GuildDatas { get; set; }
     public DbSet<Blessing> Blessings { get; set; }
 
     public DbSet<Gear> Gears { get; set; }
@@ -53,7 +53,7 @@ public class PostgreSqlContext : DbContext
         if (user.LastTimeQuestWasChecked.Date == rightNowUtc.Date) return;
         
         user.Quests.Clear();
-        var availableQuests = DefaultObjects.GetDefaultObjectsThatIsInstanceOf<Quest>()
+        var availableQuests = ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<Quest>()
             .Select(i => i.GetType())
             .Where(i => !i.IsAbstract)
             .OrderBy(_ => BasicFunctionality.GetRandomNumberInBetween(0, 100))
@@ -116,11 +116,11 @@ public class PostgreSqlContext : DbContext
        
         modelBuilder
             .UsePropertyAccessMode(PropertyAccessMode.Property);
-        foreach (var i in DefaultObjects.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Quest))))
+        foreach (var i in ObjectsFunctionality.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Quest))))
         {
             modelBuilder.Entity(i);
         }
-        foreach (var entityType in DefaultObjects
+        foreach (var entityType in ObjectsFunctionality
                      .AllAssemblyTypes
                      .Where(i => i.IsClass && i.GetInterfaces().Contains(typeof(IInventoryEntity))))
         {
@@ -128,12 +128,12 @@ public class PostgreSqlContext : DbContext
         }
 
     
-        foreach (var i in DefaultObjects.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(GearStat))))
+        foreach (var i in ObjectsFunctionality.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(GearStat))))
         {
             modelBuilder.Entity(i);
         }
-    
-            
+
+
         modelBuilder
             .ApplyConfiguration(new ItemDatabaseConfiguration())
             .ApplyConfiguration(new UserDataDatabaseConfiguration())
@@ -143,7 +143,8 @@ public class PostgreSqlContext : DbContext
             .ApplyConfiguration(new PlayerDatabaseConfiguration())
             .ApplyConfiguration(new GearDatabaseConfiguration())
             .ApplyConfiguration(new GearStatDatabaseConfiguration())
-            .ApplyConfiguration(new BlessingDatabaseConfiguration());
+            .ApplyConfiguration(new BlessingDatabaseConfiguration())
+            .ApplyConfiguration(new GuildDataDatabaseConfig());
 
 
 

@@ -16,11 +16,11 @@ public class ViewDescription : GeneralCommandClass
     public async ValueTask Execute(CommandContext context, [Parameter("entity-name")] string entityName)
     {
         var simplifiedName = entityName.Replace(" ", "").ToLower();
-        object? zaObject = DefaultObjects.GetDefaultObjectsThatIsInstanceOf<IInventoryEntity>()
+        object? zaObject = ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<IInventoryEntity>()
             .FirstOrDefault(i => i.GetType().Name.ToLower() == simplifiedName);
         if (zaObject is null)
         {
-            zaObject = DefaultObjects.GetDefaultObjectsThatIsInstanceOf<StatusEffect>()
+            zaObject = ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<StatusEffect>()
                 .FirstOrDefault(i => i.GetType().Name.ToLower() == simplifiedName);
         }
 
@@ -32,7 +32,7 @@ public class ViewDescription : GeneralCommandClass
             .WithUser(context.User)
             .WithTitle($"Description")
             .WithColor(zaColor
-                .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color));
+                .GetValueOrDefault(ObjectsFunctionality.GetDefaultObject<UserData>().Color));
         if (zaObject is IInventoryEntity zaEntity)
         {
             var zaDescription = $"{zaEntity.Name}.\nRarity: {zaEntity.Rarity}";

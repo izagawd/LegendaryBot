@@ -1,9 +1,10 @@
 using System.Collections.Immutable;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace DiscordBotNet.LegendaryBot;
 
-public static class DefaultObjects
+public static class ObjectsFunctionality
 {
 
     private static Dictionary<Type, object> _defaultObjectsContainer =  new();
@@ -12,8 +13,7 @@ public static class DefaultObjects
     public static readonly ImmutableArray<Type> AllAssemblyTypes;
 
 
-    
-    static DefaultObjects()
+    static ObjectsFunctionality()
     {
      
         AllAssemblyTypes = Assembly.GetExecutingAssembly()

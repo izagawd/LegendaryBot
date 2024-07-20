@@ -31,26 +31,9 @@ public class InventoryEntityContainer : InventoryEntityContainer<IInventoryEntit
             }
         }
     }
-    public void MergeCharacters()
-    {
-        var characters = List.OfType<Character>().ToArray();
-        List.RemoveAll(i => characters.Contains(i));
-        foreach (var i in characters)
-        {
-            var already =(Character?) List.FirstOrDefault(j => j.GetType() == i.GetType());
-            if (already is not null)
-            {
-                already.DupeCount += i.DupeCount + 1;
-            }
-            else
-            {
-                Add(i);
-            }
-        }
-    }
+
     public override void MergeDuplicates()
     {
         MergeItems();
-        MergeCharacters();
     }
 }

@@ -20,7 +20,7 @@ public class ListAllEntities : GeneralCommandClass
     static ListAllEntities()
     {
         var builder = new StringBuilder();
-        foreach (var i in DefaultObjects.GetDefaultObjectsThatIsInstanceOf<IInventoryEntity>()
+        foreach (var i in ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<IInventoryEntity>()
                      .Select(i =>
                      {
                          Type type = null;
@@ -56,7 +56,7 @@ public class ListAllEntities : GeneralCommandClass
                 .Where(i => i.Id == ctx.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
-                .GetValueOrDefault(DefaultObjects.GetDefaultObject<UserData>().Color));
+                .GetValueOrDefault(ObjectsFunctionality.GetDefaultObject<UserData>().Color));
            
         await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AsEphemeral()
             .AddEmbed(embed));

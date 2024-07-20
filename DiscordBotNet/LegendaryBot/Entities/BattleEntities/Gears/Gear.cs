@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
@@ -9,6 +10,28 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
 public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 {
+    public string DisplayString
+    {
+        get
+        {
+            MainStat.SetMainStatValue(Rarity);
+
+            var numberToUse = Number.ToString();
+            if (Number == 0)
+                numberToUse = "";
+            var stringToUse =new StringBuilder($"```{numberToUse} • {Name}\nMain Stat = {MainStat.AsNameAndValue()}\nSubstats:");
+            foreach (var j in Substats)
+            {
+                stringToUse.Append($"\n{j.AsNameAndValue()}");
+            }
+
+            if (Character is not null)
+                stringToUse.Append($"\nEquipped By: {Character.Name} [{Character.Number}]");
+            stringToUse.Append("```");
+            return stringToUse.ToString();
+        }
+    }
+
     public  Type TypeGroup => typeof(Gear);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
     [NotMapped] public IEnumerable<GearStat> Substats => Stats.Except([MainStat]);
@@ -113,6 +136,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 
 
     public Guid? CharacterId { get; set; }
+    public int Number { get; set; }
 }
 
 public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
@@ -131,6 +155,10 @@ public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
             .OnDelete(DeleteBehavior.Cascade);
         entity.Property(i => i.Rarity)
             .HasColumnName(nameof(Gear.Rarity));
+        entity.HasIndex(i => new { i.Number, i.UserDataId })
+            .IsUnique();
+        entity.Property(i => i.Number)
+            .ValueGeneratedOnAdd();
     }
 
 
