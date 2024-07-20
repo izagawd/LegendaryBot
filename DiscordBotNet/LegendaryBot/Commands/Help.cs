@@ -230,7 +230,7 @@ public class Help : GeneralCommandClass
     public async ValueTask Execute(CommandContext ctx,
     [Parameter("Commands")] string? cmd = null)
     {
-
+      
         var author = ctx.User;
         
         var color = await DatabaseContext

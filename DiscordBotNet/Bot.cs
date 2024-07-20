@@ -230,7 +230,10 @@ public static class Bot
             
             .Build();
 
-        var commandsExtension = Client.UseCommands();
+        var commandsExtension = Client.UseCommands(new CommandsConfiguration()
+        {
+            UseDefaultCommandErrorHandler = false
+        });
         var slashCommandProcessor = new SlashCommandProcessor();
     
         slashCommandProcessor.AddConverters(typeof(Bot).Assembly);
@@ -255,7 +258,7 @@ public static class Bot
         commandsExtension.CommandExecuted += OnCommandsExtensionOnCommandExecuted;
         
         commandsExtension.AddCommands(typeof(Bot).Assembly);
-   
+
         commandsExtension.CommandErrored += OnCommandError;
 
        
@@ -348,7 +351,7 @@ public static class Bot
  
    
         
-        var text = "Something went wrong";
+        var text = $"Send this error to my creator\n```{args.Exception}```";
         if (args.CommandObject is GeneralCommandClass commandClass)
         {
             await commandClass.AfterExecutionAsync(args.Context);
@@ -364,7 +367,7 @@ public static class Bot
         if (args.Exception is CommandNotFoundException exception)
         {
             text = $"Command `{exception.CommandName}` not found";
-        } else if (args.Exception is ArgumentParseException)
+        } else if (args.Exception is CommandsException)
         {
 
             var commandToUse = args.Context.Command;
