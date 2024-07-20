@@ -57,7 +57,7 @@ public class Help : GeneralCommandClass
     private class CommandStuffHolder
     {
         public string? Example;
-        public string Name;
+        public string Label;
         public string Description;
         
     }
@@ -65,6 +65,7 @@ public class Help : GeneralCommandClass
 
     {
         public string Name;
+        public string Label;
         public string Description;
         public List<CommandStuffHolder> CommandStuffHolders =  new();
         public string? Example;
@@ -74,6 +75,32 @@ public class Help : GeneralCommandClass
 
     private static List<Holder> _holderList = new();
 
+
+    private static IEnumerable<string> GetHelpParameterNames(MethodInfo methodInfo)
+    {
+        var parameters =methodInfo.GetParameters()
+                    
+            .Select(i => new
+            {
+                parameter = i,
+                attribute = i.GetCustomAttribute<ParameterAttribute>()
+            }).ToArray();               
+        bool isFirstParam = true;
+        foreach (var i in parameters)
+        {
+            if (isFirstParam)
+            {
+                isFirstParam = false;
+                continue;
+            }
+
+            var paramName = i.attribute?.Name ?? i.parameter.Name ?? "";
+            if (i.parameter.IsOptional)
+                paramName += "?";
+            yield return paramName;
+        }
+        
+    }
     private static void Recurse(GeneralCommandClass genComClass,
         CommandAttribute attribute, List<CommandStuffHolder> stuffHolders, Type currentType = null, string? concatenator = null)
     {
@@ -93,11 +120,14 @@ public class Help : GeneralCommandClass
 
     
                 
+        
         foreach (var j in methods)
         {
+     
             var slashCom = j.GetCustomAttribute<CommandAttribute>();
             if (slashCom is not null)
             {
+     
                 var additional = j.GetCustomAttribute<AdditionalCommandAttribute>();
                 var descr = j.GetCustomAttribute<DescriptionAttribute>();
                 var stuffHolder = new CommandStuffHolder();
@@ -105,7 +135,13 @@ public class Help : GeneralCommandClass
                 {
                     stuffHolder.Example = additional.Example;
                 }
-                stuffHolder.Name = concatenator + slashCom.Name;
+                stuffHolder.Label = concatenator + slashCom.Name;
+                bool isFirstParam = true;
+                foreach (var i in GetHelpParameterNames(j))
+                {
+                    
+                    stuffHolder.Label += $" <{i}>";
+                }
                 stuffHolder.Description = descr is not null ? descr.Description : "";
                 stuffHolders.Add(stuffHolder);
             }
@@ -125,9 +161,10 @@ public class Help : GeneralCommandClass
                 var holder = new Holder();
        
                 
-                holder.Name = group.Name;
+                holder.Label = group.Name;
+                holder.Name = holder.Label;
                 var description = i.GetType().GetCustomAttribute<DescriptionAttribute>();
-                holder.Description = description is not null ? description.Description : "";
+                holder.Description = description?.Description ?? "";
                 Recurse(i,group,holder.CommandStuffHolders);
                 _holderList.Add(holder);
             }
@@ -140,7 +177,12 @@ public class Help : GeneralCommandClass
                     var command = j.GetCustomAttribute<CommandAttribute>();
                     if(command is null) continue;
                     var holder = new Holder();
+                    holder.Label = command.Name;
                     holder.Name = command.Name;
+                    foreach (var k in GetHelpParameterNames(j))
+                    {
+                        holder.Label += $" <{k}>";
+                    }
                     var description = j.GetCustomAttribute<DescriptionAttribute>();
                     holder.Description = description is not null ? description.Description : "";
                     var additional = j.GetCustomAttribute<AdditionalCommandAttribute>();
@@ -151,6 +193,36 @@ public class Help : GeneralCommandClass
             }
             
         }
+    }
+
+    public static DiscordEmbedBuilder GenerateEmbedForCommand(string cmd)
+    {
+        var holder = _holderList.FirstOrDefault(i => i.Name.ToLower() == cmd.ToLower());
+        var embedToBuild = new DiscordEmbedBuilder();
+        if (holder is null)
+        {
+            return null;
+        }
+
+        embedToBuild
+            .WithTitle(holder.Label)
+            .WithDescription(holder.Description);
+        if (holder.Example is not null)
+            embedToBuild.AddField("Example: ", holder.Example);
+        foreach (var i in holder.CommandStuffHolders)
+        {
+            var stringToUse = $"{i.Description}";
+            if (i.Example is not null && i.Example.Length > 0)
+            {
+                stringToUse += $"\nExamples:\n{i.Example}";
+            }
+
+            if (stringToUse.Length > 0)
+                embedToBuild.AddField(i.Label, stringToUse);
+        }
+
+        return embedToBuild;
+
     }
     private static Dictionary<BotCommandType, string> _botCommandTypeDic = new();
     [Command("help"),
@@ -185,31 +257,10 @@ public class Help : GeneralCommandClass
         }
         else
         {
-            var holder = _holderList.FirstOrDefault(i => i.Name.ToLower() == cmd.ToLower());
-            if (holder is null)
-            {
-                embedToBuild
-                    .WithTitle("Hmm")
-                    .WithDescription("Inputted Commands not found");
-            }
-            else
-            {
-                embedToBuild
-                    .WithTitle(holder.Name)
-                    .WithDescription(holder.Description);
-                if (holder.Example is not null)
-                    embedToBuild.AddField("Example: ", holder.Example);
-                foreach (var i in holder.CommandStuffHolders)
-                {
-                    var stringToUse = $"{i.Description}";
-                    if (i.Example is not null && i.Example.Length > 0)
-                    {
-                        stringToUse += $"\nExamples:\n{i.Example}";
-                    }
-                    if(stringToUse.Length > 0)
-                        embedToBuild.AddField(i.Name,stringToUse );
-                }
-            }
+            embedToBuild = GenerateEmbedForCommand(cmd)
+                .WithColor(color.Value)
+                .WithUser(ctx.User);
+            
         }
         
         await ctx.RespondAsync(embed: embedToBuild.Build());

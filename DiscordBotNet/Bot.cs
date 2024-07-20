@@ -15,12 +15,14 @@ using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.EventArgs;
+using DSharpPlus.Commands.Exceptions;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.Commands.Processors.TextCommands;
 using DSharpPlus.Commands.Processors.TextCommands.Parsing;
+using DSharpPlus.Commands.Trees;
 using DSharpPlus.VoiceNext;
 using Microsoft.EntityFrameworkCore;
 using SixLabors.ImageSharp.Drawing.Processing;
@@ -66,50 +68,51 @@ public static class Bot
         
         public CharacterExpGainInfo(){}
     }
+    
 
 
     private static async Task OnMessageCreatedGiveUserExpMat(DiscordClient client, MessageCreatedEventArgs args)
     {
 
-            var permissions = args.Guild.CurrentMember.PermissionsIn(args.Channel);
-            if (!permissions.HasFlag(DiscordPermissions.EmbedLinks) || !permissions.HasFlag(DiscordPermissions.SendMessages))
+        var permissions = args.Guild.CurrentMember.PermissionsIn(args.Channel);
+        if (!permissions.HasFlag(DiscordPermissions.EmbedLinks) || !permissions.HasFlag(DiscordPermissions.SendMessages))
+        {
+            return;
+        }
+        var expGainInfo = expMatGive.GetOrAdd(args.Author.Id, new CharacterExpGainInfo());
+      
+        if (DateTime.UtcNow.Subtract(expGainInfo.LastTimeIncremented).Seconds >= messageCoolDown)
+        {
+           
+            expGainInfo.MessageCount++;
+            expGainInfo.LastTimeIncremented = DateTime.UtcNow;
+            expMatGive[args.Author.Id] = expGainInfo;
+            if (expGainInfo.MessageCount >= messagesTillExecution)
             {
-                return;
-            }
-            var expGainInfo = expMatGive.GetOrAdd(args.Author.Id, new CharacterExpGainInfo());
-          
-            if (DateTime.UtcNow.Subtract(expGainInfo.LastTimeIncremented).Seconds >= messageCoolDown)
-            {
-               
-                expGainInfo.MessageCount++;
-                expGainInfo.LastTimeIncremented = DateTime.UtcNow;
-                expMatGive[args.Author.Id] = expGainInfo;
-                if (expGainInfo.MessageCount >= messagesTillExecution)
+                await using var dbContext = new PostgreSqlContext();
+                var userData =await  dbContext.UserData
+                    .Include(i => i.Items.Where(j => j is CharacterExpMaterial))
+                    .FirstOrDefaultAsync(i => i.Id == args.Author.Id);
+                if(userData is null || userData.Tier <= Tier.Unranked)
+                    return;
+                List<CharacterExpMaterial> characterExpMaterials = [];
+                foreach (var i in Enumerable.Range(0,(int) userData.Tier * 3) )
                 {
-                    await using var dbContext = new PostgreSqlContext();
-                    var userData =await  dbContext.UserData
-                        .Include(i => i.Items.Where(j => j is CharacterExpMaterial))
-                        .FirstOrDefaultAsync(i => i.Id == args.Author.Id);
-                    if(userData is null || userData.Tier <= Tier.Unranked)
-                        return;
-                    List<CharacterExpMaterial> characterExpMaterials = [];
-                    foreach (var i in Enumerable.Range(0,(int) userData.Tier * 3) )
-                    {
-                        characterExpMaterials.Add(new AdventurersKnowledge());
-                    }
-
-                    var rewardString = userData.ReceiveRewards(new EntityReward(characterExpMaterials));
-                    await dbContext.SaveChangesAsync();
-                    var embed = new DiscordEmbedBuilder()
-                        .WithColor(userData.Color)
-                        .WithUser(args.Author)
-                        .WithTitle($"{args.Author.Username} gained some exp rewards for being active!")
-                        .WithDescription(rewardString);
-                    await args.Channel.SendMessageAsync(embed);
-
+                    characterExpMaterials.Add(new AdventurersKnowledge());
                 }
+
+                var rewardString = userData.ReceiveRewards(new EntityReward(characterExpMaterials));
+                await dbContext.SaveChangesAsync();
+                var embed = new DiscordEmbedBuilder()
+                    .WithColor(userData.Color)
+                    .WithUser(args.Author)
+                    .WithTitle($"{args.Author.Username} gained some exp rewards for being active!")
+                    .WithDescription(rewardString);
+                await args.Channel.SendMessageAsync(embed);
+
             }
-        
+        }
+    
         
 
     }
@@ -142,9 +145,9 @@ public static class Bot
          
                     var groupToUse = BasicFunctionality.GetRandom(new Dictionary<IGrouping<Rarity, Character>, double>()
                     {
-                        {groups.First(i => i.Key == Rarity.ThreeStar),70},
-                        {groups.First(i => i.Key == Rarity.FourStar), 25},
-                        {groups.First(i => i.Key == Rarity.FiveStar),5}
+                        {groups.First(i => i.Key == Rarity.ThreeStar),75},
+                        {groups.First(i => i.Key == Rarity.FourStar), 24},
+                        {groups.First(i => i.Key == Rarity.FiveStar),1}
                     });
                 
                     var randomCharacterType 
@@ -213,6 +216,8 @@ public static class Bot
             }
         }
     }
+
+
     private static async Task StartDiscordBotAsync()
     {
         
@@ -231,6 +236,7 @@ public static class Bot
         slashCommandProcessor.AddConverters(typeof(Bot).Assembly);
         
         await commandsExtension.AddProcessorAsync(slashCommandProcessor);
+        
         TextCommandProcessor textCommandProcessor = new(new()
         {
             
@@ -251,7 +257,8 @@ public static class Bot
         commandsExtension.AddCommands(typeof(Bot).Assembly);
    
         commandsExtension.CommandErrored += OnCommandError;
-        
+
+       
         Client.UseVoiceNext(new VoiceNextConfiguration { AudioFormat = AudioFormat.Default});
         var interactivityConfiguration = new InteractivityConfiguration
         {
@@ -304,7 +311,6 @@ public static class Bot
             stopwatch.Start();
             await ctx.UserData
                 .ForEachAsync(i => i.IsOccupied = false);
-            var count = await ctx.UserData.CountAsync();
             await ctx.SaveChangesAsync();
             Console.WriteLine($"made all users unoccupied!");
         }
@@ -339,36 +345,50 @@ public static class Bot
     {
         Console.WriteLine(args.Exception);
 
-
-        try
+ 
+   
+        
+        var text = "Something went wrong";
+        if (args.CommandObject is GeneralCommandClass commandClass)
         {
-            DiscordColor color;
-            var commandClass = args.CommandObject as GeneralCommandClass;
-            if (commandClass is not null)
-            {
-                color = await commandClass.DatabaseContext.UserData
-                    .Where(i => i.Id == args.Context.User.Id)
-                    .Select(i => i.Color)
-                    .FirstOrDefaultAsync();
-           
-                await commandClass.AfterExecutionAsync(args.Context);
-            }
-            else
-            {
-                color = ObjectsFunctionality.GetDefaultObject<UserData>().Color;
-            }
-            
-            var embed = new DiscordEmbedBuilder()
-                .WithColor(color)
-                .WithTitle("hmm")
-                .WithDescription("Something went wrong").Build();
+            await commandClass.AfterExecutionAsync(args.Context);
+        }
 
-                await args.Context.Channel.SendMessageAsync(embed);
-        }
-        catch (Exception e)
+        DiscordEmbedBuilder? embedBuilder = null;
+        await using var dbContext = new PostgreSqlContext();
+        var color  = (await dbContext.UserData
+                .Where(i => i.Id == args.Context.User.Id)
+                .Select(i => new DiscordColor?(i.Color))
+                .FirstOrDefaultAsync())
+            .GetValueOrDefault(ObjectsFunctionality.GetDefaultObject<UserData>().Color);
+        if (args.Exception is CommandNotFoundException exception)
         {
-            Console.WriteLine(e);
+            text = $"Command `{exception.CommandName}` not found";
+        } else if (args.Exception is ArgumentParseException)
+        {
+
+            var commandToUse = args.Context.Command;
+            while (commandToUse.Parent is not null)
+            {
+                commandToUse = commandToUse.Parent;
+            }
+            embedBuilder = Help.GenerateEmbedForCommand(commandToUse.Name);
+  
+            embedBuilder.WithTitle($"You didnt properly use command `{commandToUse.Name}`.\nThis is how to use {commandToUse.Name}\n"
+                + embedBuilder.Title);
+          
         }
+
+
+
+        if (embedBuilder is null)
+            embedBuilder = new DiscordEmbedBuilder()
+                .WithTitle("Hmm")
+                .WithDescription(text);
+        embedBuilder.WithColor(color)
+            .WithUser(args.Context.User);
+            await args.Context.Channel.SendMessageAsync(embedBuilder);
+
        
     }
     

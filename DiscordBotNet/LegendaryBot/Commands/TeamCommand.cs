@@ -17,7 +17,8 @@ public class TeamCommand : GeneralCommandClass
 
 
 
-    [Command("equip-team"), Description("Use this Commands to change teams")]
+    [Command("equip-team"), Description("Use this Commands to change teams"),
+    AdditionalCommand("/team equip-team team2")]
     public async ValueTask ExecuteEquip(CommandContext context,
         [Parameter("team-name")] string teamName)
     {
@@ -56,7 +57,7 @@ public class TeamCommand : GeneralCommandClass
     }
 
     [Command("remove-character")]
-    [AdditionalCommand("/remove-character 1",BotCommandType.Battle)]
+    [AdditionalCommand("/team remove-character 1",BotCommandType.Battle)]
     public async ValueTask ExecuteRemoveFromTeam(CommandContext context,
         [Parameter("character-number"), Description("Number of the character")] int characterNumber,
         [Parameter("team-name"),  Description("Name of team you want to remove character from")]
@@ -121,7 +122,7 @@ public class TeamCommand : GeneralCommandClass
 
     }
 
-    [Command("rename-team")]
+    [Command("rename-team"), AdditionalCommand(BotCommandType.Battle,"/team rename-team team1 superteam")]
 
     
     public async ValueTask ExecuteRenameTeam(CommandContext context,
