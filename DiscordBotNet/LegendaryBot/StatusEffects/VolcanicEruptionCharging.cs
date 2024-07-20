@@ -26,6 +26,7 @@ public class VolcanicEruptionCharging : StatusEffect
             
             foreach (var i in affected.CurrentBattle.Characters.Where(j => j.Team != affected.Team && !j.IsDead))
             {
+
                 var damageResult =  i.Damage(                new DamageArgs(this)
                 {
                     ElementToDamageWith = Caster.Element,
@@ -38,6 +39,7 @@ public class VolcanicEruptionCharging : StatusEffect
                 });
                 if(damageResult is not null)
                     damageResults.Add(damageResult);
+
             }
             
 

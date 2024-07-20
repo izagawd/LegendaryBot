@@ -172,7 +172,7 @@ public class Player : CharacterPartials.Character
     private string _imageUrl;
 
     
-    public override string ImageUrl => $"{Website.DomainName}/battle_images/characters/Player{UserData.Gender}.png";
+    public override string ImageUrl => $"{Website.DomainName}/battle_images/characters/Player{UserData?.Gender}.png";
 
 
     public override string Name => UserData is not null? UserData.Name : base.Name;

@@ -37,17 +37,21 @@ public static class Bot
 
 
         return new PostgreSqlContext().ResetDatabaseAsync();
-
+        
     }
 
-
-
+    private static async Task OnMessageCreated(DiscordClient client, MessageCreatedEventArgs args)
+    {
+        
+    }
     private static async Task StartDiscordBotAsync()
     {
         
         Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["TestBotToken"]!,
             DiscordIntents.All)
-            .ConfigureEventHandlers(i => i.HandleSocketOpened(OnReady))
+            .ConfigureEventHandlers(i => 
+                i.HandleSocketOpened(OnReady)
+                    .HandleMessageCreated(OnMessageCreated))
             .Build();
 
         var commandsExtension = Client.UseCommands();
@@ -83,7 +87,7 @@ public static class Bot
             Timeout = TimeSpan.FromMinutes(2),
         };
         Interactivity = Client.UseInteractivity(interactivityConfiguration);
-     
+        
        
         await Client.ConnectAsync();
     }
@@ -110,15 +114,7 @@ public static class Bot
     private async static Task DoShitAsync()
     {
 
-        idk += () => { };
-        if (idk is not null)
-        {
-            foreach (var i in  idk.GetInvocationList())
-            {
-              
-            }
-        }
-        Console.WriteLine(idk is null);
+
     }
     private static async Task Main(string[] args)
     {
