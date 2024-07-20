@@ -96,28 +96,7 @@ public class QuestCommand : GeneralCommandClass
         if (succeeded)
         {
             quest.Completed = true;
-            var expToAdd = 40l;
-            switch (userData.Tier)
-            {
-                case Tier.Bronze:
-                    expToAdd = 40;
-                    break;
-                case Tier.Silver:
-                    expToAdd = 800;
-                    break;
-                case Tier.Gold:
-                    expToAdd = 1600;
-                    break;
-                case Tier.Platinum:
-                    expToAdd = 3200;
-                    break;
-                case Tier.Diamond:
-                    expToAdd = 6400;
-                    break;
-                case Tier.Divine:
-                    expToAdd = 12800;
-                    break;
-                }
+            var expToAdd = 1000;
             var rewards = quest.QuestRewards.Append(new UserExperienceReward(expToAdd));
             var rewardString = userData.ReceiveRewards(rewards);
             embed

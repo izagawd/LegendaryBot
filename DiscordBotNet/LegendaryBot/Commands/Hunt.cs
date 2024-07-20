@@ -10,20 +10,20 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
-public class Hunt : GeneralCommandClass
+public class Journey : GeneralCommandClass
 {
     
 
-    [Command("hunt"), Description("Use this command to fight any character"),
+    [Command("journey"), Description("Use this command to fight any random 3 star, and optionto get them if you beat them"),
     AdditionalCommand("/hunt CoachChad",BotCommandType.Battle)]
-    public async ValueTask Execute(CommandContext ctx,
-        [Parameter("character-name")] string characterName,
-        [Parameter("enemy-count")] long enemyCount = 1 )
+    public async ValueTask Execute(CommandContext ctx)
     {
         var author = ctx.User;
         var userData = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
             .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+        
+    
 
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -37,13 +37,8 @@ public class Hunt : GeneralCommandClass
             .WithUser(author)
             .WithTitle("Hmm")
             .WithColor(userData.Color)
-            .WithDescription($"You cannot hunt because you have not yet become an adventurer with {Tier.Unranked}");
-        if (enemyCount < 1)
-        {
-            embedToBuild.WithDescription("There must be at least one enemy");
-            await ctx.RespondAsync(embedToBuild);
-            return;
-        }
+            .WithDescription($"You cannot journey because you have not yet become an adventurer with {Tier.Unranked}");
+      
 
         if (userData.IsOccupied)
         {
@@ -58,35 +53,26 @@ public class Hunt : GeneralCommandClass
             await ctx.RespondAsync(embedToBuild.Build());
             return;
         }
-        
-        var characterType = ObjectsFunctionality.AllAssemblyTypes.FirstOrDefault(
-            i =>  i.Name.ToLower() == characterName.ToLower().Replace(" ", "") && i.IsSubclassOf(typeof(Character)) && !i.IsRelatedToType(typeof(Player)));
-        if (characterType is null)
-        {
-            embedToBuild =
-                embedToBuild.WithDescription($"Mob {characterName} does not exist!");
-            await ctx.RespondAsync(embedToBuild.Build());
-            return;
-        }
 
+        var characterType = BasicFunctionality.RandomChoice(ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<Character>()
+            .Where(i => i.Rarity <= Rarity.ThreeStar)).GetType();
+ 
         await MakeOccupiedAsync(userData);
         var enemyTeam = new CharacterTeam();
-        foreach (var _ in Enumerable.Range(0,(int) enemyCount))
-        {
-            enemyTeam.Add((Character)Activator.CreateInstance(characterType)!);
-        }
+        
+        enemyTeam.Add((Character)Activator.CreateInstance(characterType)!);
+        enemyTeam.First().Level = 5 + ((int)userData.Tier * 10);
+        enemyTeam.LoadTeamStats();
+        
       
 
         embedToBuild = embedToBuild
             .WithTitle($"Keep your guard up!")
-            .WithDescription($"Wild {enemyTeam.First().Name}(s) have appeared!");
+            .WithDescription($"{enemyTeam.First().Name}(s) have appeared!");
         await ctx.RespondAsync(embedToBuild.Build());
         var message =  await ctx.GetResponseAsync();
+        await Task.Delay(2500);
         var userTeam = userData.EquippedPlayerTeam!.LoadTeamStats();
-        foreach (var i in enemyTeam)
-        {
-            i.SetLevel(userTeam.Select(j => j.Level).Average().Round());
-        }
 
         var simulator = new BattleSimulator(userTeam,  enemyTeam.LoadTeamStats());
 
@@ -129,7 +115,7 @@ public class Hunt : GeneralCommandClass
             
             embedToBuild
                 .WithTitle($"Ah, too bad\n"+additionalString)
-                .WithDescription($"You lost boii\n"+expGainText);
+                .WithDescription($"You lost boi\n"+expGainText);
             await message!.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embedToBuild));
             
         }
