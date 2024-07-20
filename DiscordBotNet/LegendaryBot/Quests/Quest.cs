@@ -16,7 +16,7 @@ public abstract class Quest
     public virtual string Title => BasicFunctionality.Englishify(GetType().Name);
     
     public bool Completed { get; set; } = false;
-    public Guid Id { get; set; }
+    public long Id { get; set; }
 
 
     /// <param name="databaseContext"></param>

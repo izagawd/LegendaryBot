@@ -113,7 +113,8 @@ public class PostgreSqlContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-       
+
+
         modelBuilder
             .UsePropertyAccessMode(PropertyAccessMode.Property);
         foreach (var i in ObjectsFunctionality.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Quest))))

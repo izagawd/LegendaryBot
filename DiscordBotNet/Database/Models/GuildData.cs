@@ -10,6 +10,7 @@ public class GuildDataDatabaseConfig : IEntityTypeConfiguration<GuildData>
     public void Configure(EntityTypeBuilder<GuildData> builder)
     {
         builder.HasKey(i => i.Id);
+        
 
     }
 }

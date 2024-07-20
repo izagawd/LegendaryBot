@@ -2,7 +2,7 @@
 
 public class CharacterPlayerTeam
 {
-    public Guid CharacterId { get; set; }
+    public long CharacterId { get; set; }
     
-    public Guid PlayerTeamId { get; set; }
+    public long PlayerTeamId { get; set; }
 }

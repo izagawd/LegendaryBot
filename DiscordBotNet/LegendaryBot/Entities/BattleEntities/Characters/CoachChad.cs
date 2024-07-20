@@ -89,6 +89,7 @@ public class ThumbsUp : Skill
 }
 public class CoachChad : CharacterPartials.Character, IBattleEventListener
 {
+    public override int TypeId => 11;
     public CoachChad()
     {
         BasicAttack = new GigaPunch(){User = this};
@@ -96,7 +97,8 @@ public class CoachChad : CharacterPartials.Character, IBattleEventListener
         Ultimate  = new MuscleFlex(){User = this};
       
     }
- 
+
+    public override bool CanSpawnNormally => false;
 
     public override DiscordColor Color => DiscordColor.Purple;
 

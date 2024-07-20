@@ -38,6 +38,7 @@ public class ThugPunch : BasicAttack
 
 public class Thug : CharacterPartials.Character
 {
+    public override int TypeId => 9;
     public Thug()
     {
         BasicAttack = new ThugPunch(){User = this};

@@ -108,9 +108,9 @@ public class YouCanMakeItEveryone : Ultimate
 }
 public class Cheerleader : CharacterPartials.Character
 {
+    public override int TypeId => 12;
 
-
-
+    public override Rarity Rarity => Rarity.FourStar;
 
     public Cheerleader()
     {

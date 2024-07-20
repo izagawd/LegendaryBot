@@ -98,6 +98,7 @@ public class VolcanicEruption : Ultimate
 }
 public class Blast : Character
 {
+    public override int TypeId => 2;
     public override Rarity Rarity => Rarity.FourStar;
     public override DiscordColor Color => DiscordColor.Brown;
 

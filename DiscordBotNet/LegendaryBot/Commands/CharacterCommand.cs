@@ -67,7 +67,7 @@ public class CharacterCommand : GeneralCommandClass
         await context.RespondAsync(embed);
 
     }
-    
+     
     
     [Command("equip-gear"), Description("Use this Command make a character equip a gear")]
     public async ValueTask ExecuteEquipGear(CommandContext context,
@@ -110,16 +110,8 @@ public class CharacterCommand : GeneralCommandClass
 
         var stringBuilder =
             new StringBuilder(
-                $"{character.Name} has successfully equipped {gear.Name} that has the following stats:\n");
-        stringBuilder.Append($"Mainstat = {gear.MainStat.AsNameAndValue()}\n\n");
-        if (gear.Substats.Any())
-        {
-            stringBuilder.Append("Substats:\n");
-            foreach (var i in gear.Substats)
-            {
-                stringBuilder.Append(i.AsNameAndValue() + "\n");
-            }
-        }
+                $"{character.Name} has successfully equipped {gear.Name} that has the following stats:\n{gear.DisplayString}");
+     
      
         character.Gears.RemoveAll(i => i.GetType() == gear.GetType());
         character.Gears.Add(gear);

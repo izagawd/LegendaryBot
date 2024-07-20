@@ -33,4 +33,6 @@ public class BlessingOfThePhoenix : Blessing, IBattleEventListener
     {
         return $"At the start of the character's turn, they recover {GetHealthPercentRecovering(level)}% of their health";
     }
+
+    public override int TypeId => 1;
 }

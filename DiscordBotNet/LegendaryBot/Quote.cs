@@ -6,7 +6,7 @@ namespace DiscordBotNet.LegendaryBot;
 
 public class QuoteReaction 
 {
-    public Guid Id { get; set; } 
+    public long Id { get; set; } 
     /// <summary>
     /// The ID of the user who reacted to the quote
     /// </summary>
@@ -15,7 +15,7 @@ public class QuoteReaction
     /// <summary>
     /// the quote id that was reacted to
     /// </summary>
-    public Guid QuoteId { get; set; }
+    public long QuoteId { get; set; }
     /// <summary>
     /// The quote that was reacted to
     /// </summary>
@@ -42,7 +42,7 @@ public class QuoteDatabaseConfiguration : IEntityTypeConfiguration<Quote>
 public class Quote 
 {
     
-    public Guid Id { get; set; } 
+    public long Id { get; set; } 
     public bool IsApproved { get; set; } 
     public ulong UserDataId { get; set; }
     public string QuoteValue { get; set; } = "Nothing";

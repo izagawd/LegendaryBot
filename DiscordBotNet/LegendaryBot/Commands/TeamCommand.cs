@@ -56,9 +56,9 @@ public class TeamCommand : GeneralCommandClass
     }
 
     [Command("remove-character")]
-    [AdditionalCommand("/remove-character player",BotCommandType.Battle)]
+    [AdditionalCommand("/remove-character 1",BotCommandType.Battle)]
     public async ValueTask ExecuteRemoveFromTeam(CommandContext context,
-        [Parameter("character-number")] int characterNumber,
+        [Parameter("character-number"), Description("Number of the character")] int characterNumber,
         [Parameter("team-name"),  Description("Name of team you want to remove character from")]
         string teamName)
     {

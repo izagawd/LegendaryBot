@@ -5,6 +5,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class HeadStart : Blessing, IBattleEventListener
 {
+    public override int TypeId => 2;
     public override Rarity Rarity => Rarity.FiveStar;
 
     public float GetCombatReadinessIncreaseAmount(int level)

@@ -1,6 +1,6 @@
 ﻿namespace DiscordBotNet.LegendaryBot;
 
-public enum Tier
+public enum Tier : byte
 {
     Unranked, Bronze, Silver, Gold, Platinum, Diamond, Divine
 }

@@ -1,4 +1,6 @@
-﻿using DiscordBotNet.Database.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using DiscordBotNet.Database.Models;
+using DiscordBotNet.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SixLabors.Fonts;
@@ -11,13 +13,22 @@ public class ItemDatabaseConfiguration : IEntityTypeConfiguration<Item>
 {
     public void Configure(EntityTypeBuilder<Item> builder)
     {
-        builder.HasKey(nameof(Item.UserDataId),"Discriminator");
+        
+        builder.HasKey("Discriminator", nameof(Item.UserDataId));
+        var starting = builder.HasDiscriminator<int>("Discriminator");
+
+        foreach (var i in ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<Item>())
+        {
+            starting = starting.HasValue(i.GetType(), i.TypeId);
+        }
     }
 }
 
 
 public abstract class Item : IInventoryEntity
 {
+    [NotMapped]
+    public abstract int TypeId { get;  }
     public string DisplayString => $"`{Name} • Stacks: {Stacks}`";
     public  Type TypeGroup => typeof(Item);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;

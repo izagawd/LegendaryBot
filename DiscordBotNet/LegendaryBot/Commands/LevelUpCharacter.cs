@@ -19,7 +19,7 @@ using DiscordInteractionResponseBuilder = DSharpPlus.Entities.DiscordInteraction
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
-[Command("level-up")]
+
 public class LevelUpCharacter : GeneralCommandClass
 {
     private static ConcurrentDictionary<string,Image<Rgba32>> _cachedLevelUpCroppedImages = new();
@@ -35,8 +35,6 @@ public class LevelUpCharacter : GeneralCommandClass
             description += $"{i.Name}: {character.UserData.Items.GetItemStacks(i.GetType())}\n";
         }
 
-        description += $"{ObjectsFunctionality.GetDefaultObject<AscensionMaterial>().Name}: " +
-                       $"{character.UserData.Items.GetItemStacks(typeof(AscensionMaterial))}";
 
         builder.WithDescription(description);
     }
@@ -111,10 +109,9 @@ public class LevelUpCharacter : GeneralCommandClass
             
             var expUpgradeMat = character.UserData.Items.OfType<CharacterExpMaterial>()
                 .OrderBy(i => i.ExpToIncrease);
-            var ascensionMats = character.UserData.Items.OfType<AscensionMaterial>();
-            var sum = expUpgradeMat.Cast<Item>().Union(ascensionMats);
+
             var xOffset = 200;
-            foreach (var i in sum)
+            foreach (var i in expUpgradeMat)
             {
                 using var imageToDraw = await i.GetImageAsync();
                 imageToDraw.Mutate(j => j.Resize(new Size(60,60)));
@@ -133,6 +130,10 @@ public class LevelUpCharacter : GeneralCommandClass
                 {
                     text = "You do not have any EXP material";
                 }
+            }
+            else
+            {
+                text = "Max level reached!";
             }
             
          
@@ -169,8 +170,8 @@ public class LevelUpCharacter : GeneralCommandClass
 
 
     
-    [Command("character"), Description("used to level up a character"),
-     AdditionalCommand("/level-up character player",BotCommandType.Battle)]
+    [Command("level-up"), Description("used to level up a character"),
+     AdditionalCommand("/level-up 1",BotCommandType.Battle)]
     public async Task ExecuteLevelUp(CommandContext ctx,
         [Parameter("character-number")] int characterNumber)
     {
@@ -186,7 +187,7 @@ public class LevelUpCharacter : GeneralCommandClass
             .ThenInclude(i => i.Stats)
             .Include(includeLambda)
             .ThenInclude(i => i.Blessing)
-            .Include(i => i.Items.Where(j => j is AscensionMaterial || j is CharacterExpMaterial))
+            .Include(i => i.Items.Where(j =>j is CharacterExpMaterial))
             .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
    
         if (gottenUserData is null || gottenUserData.Tier == Tier.Unranked)

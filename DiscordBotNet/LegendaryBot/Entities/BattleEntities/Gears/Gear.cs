@@ -10,16 +10,23 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
 public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 {
+
+    public abstract int TypeId { get; }
+
     public string DisplayString
     {
         get
         {
             MainStat.SetMainStatValue(Rarity);
 
-            var numberToUse = Number.ToString();
+            string numberToUse = null!;
             if (Number == 0)
                 numberToUse = "";
-            var stringToUse =new StringBuilder($"```{numberToUse} • {Name}\nMain Stat = {MainStat.AsNameAndValue()}\nSubstats:");
+            else
+            {
+                numberToUse = $"{Number} • ";
+            }
+            var stringToUse =new StringBuilder($"```{numberToUse}{Name}\nMain Stat = {MainStat.AsNameAndValue()}\nSubstats:");
             foreach (var j in Substats)
             {
                 stringToUse.Append($"\n{j.AsNameAndValue()}");
@@ -76,7 +83,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public string Name { get; }
     public UserData? UserData { get; set; }
     public string ImageUrl { get; }
-    public Guid Id { get; set; }
+    public long Id { get; set; }
     public ulong UserDataId { get; set; }
     public Character Character { get; set; }
 
@@ -135,7 +142,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 
 
 
-    public Guid? CharacterId { get; set; }
+    public long? CharacterId { get; set; }
     public int Number { get; set; }
 }
 
@@ -144,7 +151,11 @@ public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
     public void Configure(EntityTypeBuilder<Gear> entity)
     {
         entity.HasKey(i => i.Id);
-
+        var starting = entity.HasDiscriminator<int>("Discriminator");
+        foreach (var i in ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<Gear>())
+        {
+            starting = starting.HasValue(i.GetType(), i.TypeId);
+        }
         entity.HasIndex(nameof(Gear.CharacterId), "Discriminator");
         entity.HasOne(i => i.MainStat)
             .WithOne()
@@ -159,6 +170,7 @@ public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
             .IsUnique();
         entity.Property(i => i.Number)
             .ValueGeneratedOnAdd();
+
     }
 
 

@@ -10,6 +10,8 @@ using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Commands;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
+using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.EventArgs;
@@ -43,61 +45,159 @@ public static class Bot
 
     struct ChannelSpawnInfo
     {
-        public int Count;
-        public DateTime LastTimeIncremented = DateTime.Now.AddDays(-1);
+        public int MessageCount;
+        public DateTime LastTimeIncremented = DateTime.UtcNow.AddDays(-1);
         
         public ChannelSpawnInfo(){}
     }
 
-    private static readonly DiscordButtonComponent ClaimCharacter = new DiscordButtonComponent(
-        DiscordButtonStyle.Success,
-        "claim", "CLAIM");
+
+    const int messagesTillExecution = 24;
+    private const float messageCoolDown = 1.5f;
     private static ConcurrentDictionary<ulong, ChannelSpawnInfo> idkDictionary = new();
-    private static async Task OnMessageCreated(DiscordClient client, MessageCreatedEventArgs args)
+
+    
+    
+    private static ConcurrentDictionary<ulong, CharacterExpGainInfo> expMatGive = new();
+    struct CharacterExpGainInfo
+    {
+        public int MessageCount;
+        public DateTime LastTimeIncremented = DateTime.UtcNow.AddDays(-1);
+        
+        public CharacterExpGainInfo(){}
+    }
+
+
+    private static async Task OnMessageCreatedGiveUserExpMat(DiscordClient client, MessageCreatedEventArgs args)
+    {
+
+        
+            var expGainInfo = expMatGive.GetOrAdd(args.Author.Id, new CharacterExpGainInfo());
+            if (DateTime.UtcNow.Subtract(expGainInfo.LastTimeIncremented).Seconds >= messageCoolDown)
+            {
+                "d".Print();
+                expGainInfo.MessageCount++;
+                expGainInfo.LastTimeIncremented = DateTime.UtcNow;
+                expMatGive[args.Author.Id] = expGainInfo;
+                if (expGainInfo.MessageCount >= 1)
+                {
+                    await using var dbContext = new PostgreSqlContext();
+                    var userData =await  dbContext.UserData
+                        .Include(i => i.Items.Where(j => j is CharacterExpMaterial))
+                        .FirstOrDefaultAsync(i => i.Id == args.Author.Id);
+                    if(userData is null || userData.Tier <= Tier.Unranked)
+                        return;
+                    List<CharacterExpMaterial> characterExpMaterials = [];
+                    foreach (var i in Enumerable.Range(0,(int) userData.Tier * 5) )
+                    {
+                        characterExpMaterials.Add(new AdventurersKnowledge());
+                    }
+
+                    var rewardString = userData.ReceiveRewards(new EntityReward(characterExpMaterials));
+                    await dbContext.SaveChangesAsync();
+                    var embed = new DiscordEmbedBuilder()
+                        .WithColor(userData.Color)
+                        .WithUser(args.Author)
+                        .WithTitle($"{args.Author.Username} gained some exp rewards for being active!")
+                        .WithDescription(rewardString);
+                    await args.Channel.SendMessageAsync(embed);
+
+                }
+            }
+        
+        
+
+    }
+    private static async Task OnMessageCreatedSpawnCharacter(DiscordClient client, MessageCreatedEventArgs args)
     {        
         
-        return;
         if (!args.Author.IsBot)
         {
-            var spawnInfo = idkDictionary.GetValueOrDefault(args.Channel.Id);
-            if (DateTime.Now.Subtract(spawnInfo.LastTimeIncremented).Seconds > 1)
+            var spawnInfo = idkDictionary.GetOrAdd(args.Channel.Id,
+                new ChannelSpawnInfo());
+            if (DateTime.UtcNow.Subtract(spawnInfo.LastTimeIncremented).Seconds >= messageCoolDown)
             {
-                spawnInfo.Count++;
-                spawnInfo.LastTimeIncremented = DateTime.Now;
+                spawnInfo.MessageCount++;
+                spawnInfo.LastTimeIncremented = DateTime.UtcNow;
                 idkDictionary[args.Channel.Id] = spawnInfo;
-                if (spawnInfo.Count >= 1)
+                if (spawnInfo.MessageCount >= messagesTillExecution)
                 {
-                    spawnInfo.Count = 0;
+                    spawnInfo.MessageCount = 0;
                     idkDictionary[args.Channel.Id] = spawnInfo;
                     var groups = ObjectsFunctionality
                         .GetDefaultObjectsThatIsInstanceOf<Character>()
-                        .Where(i => i.Rarity >= Rarity.FourStar && i is not Player)
+                        .Where(i =>  i.CanSpawnNormally)
                         .GroupBy(i => i.Rarity)
                         .ToImmutableArray();
-                    var groupToUse = groups.First(i => i.Key == Rarity.FourStar);
-                    if (BasicFunctionality.RandomChance(5))
+         
+                    var groupToUse = BasicFunctionality.GetRandom(new Dictionary<IGrouping<Rarity, Character>, double>()
                     {
-                        groupToUse = groups.First(i => i.Key == Rarity.FiveStar);
-                    }
-
+                        {groups.First(i => i.Key == Rarity.ThreeStar),70},
+                        {groups.First(i => i.Key == Rarity.FourStar), 25},
+                        {groups.First(i => i.Key == Rarity.FiveStar),5}
+                    });
+                
                     var randomCharacterType 
                         = BasicFunctionality.RandomChoice(groupToUse.Select(i => i)).GetType();
                     var created = (Character)Activator.CreateInstance(randomCharacterType)!;
                     await using var stream = new MemoryStream();
                     using var image = await BasicFunctionality.GetImageFromUrlAsync(created.ImageUrl);
+                    image.Mutate(i => i.Resize(200,200));
                     await image.SaveAsPngAsync(stream);
                     stream.Position = 0;
+                    var claimCharacter = new DiscordButtonComponent(
+        DiscordButtonStyle.Success,
+        "claim", "CLAIM");
+                    var embed = new DiscordEmbedBuilder()
+                        .WithColor(created.Color)
+                        .WithTitle("New character has appeared!\nThey will join one with the fastest reaction time")
+                        .WithDescription($"Name: {created.Name}\nRarity: {created.Rarity.ToString().Englishify()}")
+                        .WithImageUrl("attachment://character.png");
                     var message = await args.Channel.SendMessageAsync(new DiscordMessageBuilder()
-                        .AddEmbed(new DiscordEmbedBuilder()
-                            .WithColor(created.Color)
-                            .WithTitle("New character has appeared!")
-                            .WithDescription($"Name: {created.Name}\nRarity: {created.Rarity.ToString().Englishify()}")
-                            .WithImageUrl("attachment://character.png"))
-                        .AddComponents(ClaimCharacter)
+                        .AddEmbed(embed)
+                        .AddComponents(claimCharacter)
                         .AddFile("character.png",stream));
                     var result =await message.WaitForButtonAsync();
+                    claimCharacter.Disable();
                     
-
+                    if (result.TimedOut)
+                    {
+                        
+                        await message.ModifyAsync(new DiscordMessageBuilder()
+                            .AddEmbed(embed)
+                            .AddComponents(claimCharacter));
+                        return;
+                    }
+                        
+                    var localUser = result.Result.User;
+                    await using var postgre = new PostgreSqlContext();
+                    var userData = await postgre.UserData.FirstOrDefaultAsync(i => i.Id == localUser.Id);
+                    bool isNew = userData is null || userData.Tier == Tier.Unranked;
+                    if (userData is null)
+                    {
+                        userData = new UserData(localUser.Id);
+                        await postgre.UserData.AddAsync(userData);
+                    }
+                    userData.Characters.Add(created);
+                    await postgre.SaveChangesAsync();
+                    var text = $"{localUser.Mention} claimed {created.Name}!";
+                    if (isNew)
+                        text += "Seems like you dont battle. Consider joining!";
+                    text += $"\n{created.DisplayString}";              
+                    await message.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embed)
+                        .AddComponents(claimCharacter));
+                    
+                     embed = new DiscordEmbedBuilder()
+                        .WithUser(localUser)
+                        .WithTitle("Success!")
+                        .WithColor(userData.Color)
+                        .WithDescription(text);
+      
+                    await result.Result.Interaction.CreateResponseAsync(
+                        DiscordInteractionResponseType.ChannelMessageWithSource,
+                        new DiscordInteractionResponseBuilder()
+                            .AddEmbed(embed));
+                    
 
                 }
             }
@@ -110,7 +210,9 @@ public static class Bot
             DiscordIntents.All)
             .ConfigureEventHandlers(i => 
                 i.HandleSocketOpened(OnReady)
-                    .HandleMessageCreated(OnMessageCreated))
+                    .HandleMessageCreated(OnMessageCreatedSpawnCharacter)
+                    .HandleMessageCreated(OnMessageCreatedGiveUserExpMat))
+            
             .Build();
 
         var commandsExtension = Client.UseCommands();

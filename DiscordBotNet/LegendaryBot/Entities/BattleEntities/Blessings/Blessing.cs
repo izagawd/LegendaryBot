@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.Database.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
@@ -11,6 +12,12 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
     public void Configure(EntityTypeBuilder<Blessing> builder)
     {
         builder.HasKey(i => i.Id);
+        var starting = builder.HasDiscriminator<int>("Discriminator");
+        foreach (var i in ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<Blessing>())
+        {
+            starting = starting.HasValue(i.GetType(), i.TypeId);
+        }
+
     }
 }
 public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
@@ -30,18 +37,20 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     {
         return "Idk man";
     }
-
+  
+    [NotMapped]
+    public abstract int TypeId { get;  }
     public string DisplayString => $"`{Name}`";
     public  Type TypeGroup => typeof(Blessing);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
-    public Guid? CharacterId { get; set; }
+    public long? CharacterId { get; set; }
 
 
     
     
 
     public string ImageUrl { get; }
-    public Guid Id { get; set; }
+    public long Id { get; set; }
     public ulong UserDataId { get; set; }
 
 

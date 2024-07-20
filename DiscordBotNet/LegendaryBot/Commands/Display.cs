@@ -114,10 +114,14 @@ public class Display : GeneralCommandClass
             i => i.DisplayString,
             "\n","Items",userData.Color);
     }
-    
+
+    public async ValueTask ExecuteDisplayCharacter(CommandContext context,[Description("character-number")]  int characterNumber)
+    {
+        
+    }
     protected static DiscordButtonComponent First = new DiscordButtonComponent(DiscordButtonStyle.Primary, "first", "FIRST");
         [Command("gears"),Description("Displays all the gears you have")]
-    public async ValueTask ExecuteDisplayGear(CommandContext context)
+    public async ValueTask ExecuteDisplayGears(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.Gears)
@@ -190,6 +194,38 @@ public class Display : GeneralCommandClass
 
 
     }
+    [Command("gear"), Description("Displays a gear based on provided number")]
+    public async ValueTask ExecuteDisplayGearByNum(CommandContext context, [Parameter("gear-number")] int gearNumber)
+    {
+        var userData = await DatabaseContext.UserData
+            .Include(i => i.Gears.Where(j => j.Number == gearNumber))
+            .ThenInclude(i => i.Character)
+            .Include(i => i.Gears.Where(j => j.Number == gearNumber))
+            .ThenInclude(i => i.Stats)
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+        if (userData is null || userData.Tier == Tier.Unranked)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
+
+        var gear = userData.Gears.FirstOrDefault();
+        var embed = new DiscordEmbedBuilder()
+            .WithColor(userData.Color)
+            .WithTitle("Displaying gear")
+            .WithUser(context.User);
+        if (gear is null)
+        {
+            embed.WithDescription($"Gear with number {gearNumber} not found");
+            
+        }
+        else
+        {
+            embed.WithDescription(gear.DisplayString);
+        }
+
+        await context.RespondAsync(embed);
+    }
     [Command("teams"), Description("Displays all the teams you have and the characters in them")]
     public async ValueTask ExecuteDisplayTeams(CommandContext context)
     {
@@ -222,7 +258,7 @@ public class Display : GeneralCommandClass
                 value = "";
                 foreach (var j in i)
                 {
-                    value += $"`{j.Number} • {j.DisplayString}`\n";
+                    value += $"{j.DisplayString}\n";
                 }
             }
             embed.AddField(i.TeamName + equipped,

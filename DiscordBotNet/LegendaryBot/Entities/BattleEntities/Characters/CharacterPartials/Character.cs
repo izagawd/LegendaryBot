@@ -45,6 +45,11 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
             .HasColumnName(nameof(Character.Level));
         entity.Property(i => i.Experience)
             .HasColumnName(nameof(Character.Experience));
+        var starting = entity.HasDiscriminator<int>("Discriminator");
+        foreach (var i in ObjectsFunctionality.GetDefaultObjectsThatIsInstanceOf<Character>())
+        {
+            starting = starting.HasValue(i.GetType(), i.TypeId);
+        }
     }
 }
 /// <summary>
@@ -65,7 +70,9 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     public int Number { get; set; }
     [NotMapped]
     public virtual Type StatToIncreaseOnDupe => GearStat.AttackPercentageType;
+
  
+    public abstract int TypeId { get;  }
 
     public string DisplayString
     {
@@ -240,7 +247,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     public UserData? UserData { get; set; }
 
 
-    public Guid Id { get; set; }
+    public long Id { get; set; }
     public ulong UserDataId { get; set; }
 
     public float ShieldPercentage
@@ -544,6 +551,8 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     public string Description { get; }
     public virtual Rarity Rarity => Rarity.ThreeStar;
 
+    [NotMapped]
+    public virtual bool CanSpawnNormally => true;
     [NotMapped]
     public   BasicAttack BasicAttack { get; protected set; }
     

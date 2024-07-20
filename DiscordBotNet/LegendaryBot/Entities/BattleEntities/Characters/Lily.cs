@@ -119,6 +119,7 @@ public class Lily : CharacterPartials.Character
     protected override float BaseSpeedMultiplier => 1.15f;
 
 
+    public override int TypeId => 3;
     public override Rarity Rarity => Rarity.FiveStar;
     public override DiscordColor Color => DiscordColor.HotPink;
 

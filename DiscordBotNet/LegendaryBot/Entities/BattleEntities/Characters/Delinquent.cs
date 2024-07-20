@@ -38,6 +38,9 @@ public class BaseballBatWhack : BasicAttack
 
 public class Delinquent : CharacterPartials.Character
 {
+    public override int TypeId => 10;
+    public override Rarity Rarity => Rarity.TwoStar;
+
     public Delinquent()
     {
         BasicAttack = new BaseballBatWhack(){User = this};

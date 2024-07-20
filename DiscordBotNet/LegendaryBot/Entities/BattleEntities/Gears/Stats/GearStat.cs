@@ -42,13 +42,13 @@ public abstract class GearStat
 
     
     public Gear Gear { get; set; }
-    public Guid Id { get; set; }
-    public Guid GearId { get; set; }
+    public long Id { get; set; }
+    public long GearId { get; set; }
     
     /// <summary>
     /// if not null them this is the main stat for a gear
     /// </summary>
-    public Guid? IsMainStat { get; set; }
+    public long? IsMainStat { get; set; }
     
     
     

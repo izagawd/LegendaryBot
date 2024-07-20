@@ -4,7 +4,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
 public class Ring : Gear
 {
-
+    public override int TypeId => 5;
     public sealed override IEnumerable<Type> PossibleMainStats =>[
     
         GearStat.AttackPercentageType,

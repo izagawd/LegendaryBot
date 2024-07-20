@@ -110,13 +110,14 @@ public class IWillProtectUs : Ultimate
 
 public class RoyalKnight : CharacterPartials.Character
 {
+    public override int TypeId => 5;
     protected override float BaseAttackMultiplier => 0.85f;
     protected override float BaseMaxHealthMultiplier => 1.125f;
     protected override float BaseDefenseMultiplier => 1.15f;
     public override DiscordColor Color => DiscordColor.Blue;
     public override Element Element => Element.Ice;
 
-
+    
     public RoyalKnight()
     {
         BasicAttack = new ShieldBash(){User = this};
