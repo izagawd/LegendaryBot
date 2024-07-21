@@ -357,6 +357,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     {
         Name = BasicFunctionality.Englishify(GetType().Name);
         ImageUrl = $"{Website.DomainName}/battle_images/characters/{GetType().Name}.png";
+        
     }
     /// <summary>
     /// Derives dialogue profile from character properties

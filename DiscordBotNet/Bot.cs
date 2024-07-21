@@ -297,7 +297,9 @@ public static class Bot
 
     private async static Task DoShitAsync()
     {
-
+        
+        ReferenceEquals(new Lily().Name, new Lily().Name ).Print();
+        Process.GetCurrentProcess().Kill();
 
     }
     private static async Task Main(string[] args)
