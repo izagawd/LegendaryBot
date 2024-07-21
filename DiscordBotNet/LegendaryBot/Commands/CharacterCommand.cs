@@ -1,7 +1,12 @@
+using System.Collections.Immutable;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Text;
 using DiscordBotNet.Extensions;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DSharpPlus.Commands;
+using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
+using DSharpPlus.Commands.Trees;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +15,11 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 [Command("character")]
 public class CharacterCommand : GeneralCommandClass
 {
+    private static readonly ImmutableArray<string> _possibleGears = TypesFunctionality
+        .GetDefaultObjectsThatIsInstanceOf<Gear>()
+        .Select(i => i.Name.ToLower().Replace(" ", "")).ToImmutableArray();
+    
+    
     [Command("equip-blessing"), Description("Use this Command make a character equip a blessing")]
     public async ValueTask ExecuteEquipBlessing(CommandContext context,
         [Parameter("character-number")] int characterNumber,
@@ -25,6 +35,12 @@ public class CharacterCommand : GeneralCommandClass
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
+            return;
+        }
+
+        if (userData.IsOccupied)
+        {
+            await NotifyAboutOccupiedAsync(context);
             return;
         }
 
@@ -68,6 +84,59 @@ public class CharacterCommand : GeneralCommandClass
 
     }
      
+        [Command("remove-blessing"), Description("Use this Command make a character equip a blessing"),
+        AdditionalCommand(BotCommandType.Battle,"/character remove-blessing 4")]
+    public async ValueTask ExecuteRemoveBlessing(CommandContext context,
+        [Parameter("character-number")] int characterNumber)
+    {
+
+        var userData = await DatabaseContext.UserData
+            .Include(i => i.Characters.Where(j => 
+                                              j.Number == characterNumber))
+            .ThenInclude(i => i.Blessing)
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+        if (userData is null || userData.Tier == Tier.Unranked)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
+
+        if (userData.IsOccupied)
+        {
+           await NotifyAboutOccupiedAsync(context);
+           return;
+        }
+
+   
+        var embed = new DiscordEmbedBuilder()
+            .WithTitle("Removing blessing")
+            .WithUser(context.User)
+            .WithColor(userData.Color);
+  
+        var character = userData.Characters.FirstOrDefault();
+        if (character is null)
+        {
+            embed.WithDescription($"Character with number {characterNumber} not found");
+            await context.RespondAsync(embed);
+            return;
+        }
+        if (character.Blessing is null)
+        {
+            embed.WithDescription($"Character {character.Name} [{character.Number}] does not have any blessing equipped");
+            await context.RespondAsync(embed);
+            return;
+        }
+
+
+        var prevBlessing = character.Blessing;
+        character.Blessing = null;
+        await DatabaseContext.SaveChangesAsync();
+        embed.WithDescription(
+            $"{character.Name} [{character.Number}] has successfully removed {prevBlessing.Name}!");
+        await context.RespondAsync(embed);
+
+    }
+     
     
     [Command("equip-gear"), Description("Use this Command make a character equip a gear")]
     public async ValueTask ExecuteEquipGear(CommandContext context,
@@ -89,6 +158,13 @@ public class CharacterCommand : GeneralCommandClass
             await AskToDoBeginAsync(context);
             return;
         }
+        
+        if (userData.IsOccupied)
+        {
+            await NotifyAboutOccupiedAsync(context);
+            return;
+        }
+
         var embed = new DiscordEmbedBuilder()
             .WithTitle("Equipping gear")
             .WithUser(context.User)
@@ -100,6 +176,7 @@ public class CharacterCommand : GeneralCommandClass
             await context.RespondAsync(embed);
             return;
         }
+        
         var gear = userData.Gears.FirstOrDefault(i => i.Number == gearNumber);
         if (gear is null)
         {
@@ -112,6 +189,81 @@ public class CharacterCommand : GeneralCommandClass
         var stringBuilder =
             new StringBuilder(
                 $"{character.Name} [{character.Number}] has successfully equipped {gear.Name} that has the following stats:\n{gear.DisplayString}");
+     
+     
+
+        await DatabaseContext.SaveChangesAsync();
+        embed.WithDescription(stringBuilder.ToString());
+        await context.RespondAsync(embed);
+
+    }
+    class GearTypeProvider : IChoiceProvider
+    {
+        private static readonly IReadOnlyDictionary<string, object> _daysOfTheWeek = new Dictionary<string, object>
+        {
+            {"Armor" , "armor"},
+            {"Weapon" , "weapon"},
+                {"Ring" , "ring"},
+                {"Necklace" , "necklace"},
+                {"Boots" ,"boots"},
+                {"Helmet" , "helmet"},
+        }.AsReadOnly();
+
+        public ValueTask<IReadOnlyDictionary<string, object>> ProvideAsync(CommandParameter parameter) => ValueTask.FromResult(_daysOfTheWeek);
+    }
+        [Command("remove-gear"), Description("Use this Command make a character remove an equipped gear"),
+         AdditionalCommand(BotCommandType.Battle,"/character remove-gear 2 armor")]
+    public async ValueTask ExecuteRemoveGear(CommandContext context,
+        [Parameter("character-number")] int characterNumber,
+        [Parameter("gear-type"), SlashChoiceProvider<GearTypeProvider>] string gearType)
+    {
+        gearType = gearType.ToLower().Replace(" ","");
+        var userData = await DatabaseContext.UserData
+            .Include(i => i.Characters.Where(j => j.Number == characterNumber))
+            .ThenInclude(i => i.Gears)
+            .ThenInclude(i => i.Stats)
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+        if (userData is null || userData.Tier == Tier.Unranked)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
+        
+        if (userData.IsOccupied)
+        {
+            await NotifyAboutOccupiedAsync(context);
+            return;
+        }
+
+        var embed = new DiscordEmbedBuilder()
+            .WithTitle("Removing gear")
+            .WithUser(context.User)
+            .WithColor(userData.Color);
+        var character = userData.Characters.FirstOrDefault();
+        if (character is null)
+        {
+            embed.WithDescription($"Character with number {characterNumber} not found");
+            await context.RespondAsync(embed);
+            return;
+        }
+
+        if (!_possibleGears.Contains(gearType))
+        {
+            embed.WithDescription($"Gear of type {gearType} doesnt exist");
+            await context.RespondAsync(embed);
+            return;
+        }
+        var gear = userData.Gears.FirstOrDefault(i => i.Name.ToLower() == gearType);
+        if (gear is null)
+        {
+            embed.WithDescription($"Your character does not have any **{gearType}** equipped");
+            await context.RespondAsync(embed);
+            return;
+        }
+        character.Gears.Remove(gear);
+        var stringBuilder =
+            new StringBuilder(
+                $"{character.Name} [{character.Number}] has successfully removed {gear.Name} that has the following stats:\n{gear.DisplayString}");
      
      
 

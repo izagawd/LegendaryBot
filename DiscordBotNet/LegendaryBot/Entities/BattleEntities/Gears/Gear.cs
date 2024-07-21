@@ -9,6 +9,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
+
 public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 {
 

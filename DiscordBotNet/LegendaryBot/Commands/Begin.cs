@@ -33,13 +33,12 @@ public class Begin : GeneralCommandClass
         var author = ctx.User;
 
         var userData = await DatabaseContext.UserData
-            .Where(i => i.Id == ctx.User.Id)
             .Include(j => j.Characters)
             .ThenInclude(j => j.Blessing)
             .Include(i => i.Characters)
             .ThenInclude(i => i.Gears)
             .Include(i => i.EquippedPlayerTeam)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
         if (userData is null)
         {
             userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);

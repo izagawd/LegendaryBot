@@ -47,7 +47,7 @@ public class Display : GeneralCommandClass
             .ThenInclude(j => j.Stats)
             .Include(i => i.Characters)
             .ThenInclude(i => i.Blessing)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
