@@ -50,7 +50,7 @@ public static class TypesFunctionality
     public static object GetDefaultObject(Type type)
     {
   
-        if(!_defaultObjectsContainer.ContainsKey(type))
+        if(!_defaultObjectsContainer.TryGetValue(type, out var o))
         {
             if (type.IsAbstract) throw new Exception($"Cannot get or create abstract class {type}");
             var createdObject  = Activator.CreateInstance(type, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
@@ -63,6 +63,6 @@ public static class TypesFunctionality
             return createdObject;
         }
 
-        return _defaultObjectsContainer[type];
+        return o;
     }
 }

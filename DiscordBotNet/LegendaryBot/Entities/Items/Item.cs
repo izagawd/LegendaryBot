@@ -34,7 +34,7 @@ public abstract class Item : IInventoryEntity
     public string DisplayString => $"`{Name} • Stacks: {Stacks}`";
     public  Type TypeGroup => typeof(Item);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
-    public virtual string Description => String.Empty;
+    public virtual string Description => string.Empty;
     public virtual Rarity Rarity => Rarity.OneStar;
 
 
