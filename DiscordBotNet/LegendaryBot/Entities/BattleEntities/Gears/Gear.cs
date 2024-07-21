@@ -191,7 +191,9 @@ public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
         {
             starting = starting.HasValue(i.GetType(), i.TypeId);
         }
-        entity.HasIndex(nameof(Gear.CharacterId), "Discriminator");
+
+        entity.HasIndex(nameof(Gear.CharacterId), "Discriminator")
+            .IsUnique();
         entity.HasOne(i => i.MainStat)
             .WithOne()
             .HasForeignKey<GearStat>(i => i.IsMainStat);
