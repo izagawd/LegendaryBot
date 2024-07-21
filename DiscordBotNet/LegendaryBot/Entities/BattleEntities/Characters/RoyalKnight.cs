@@ -38,7 +38,7 @@ public class ShieldBash : BasicAttack
         };
         if (BasicFunctionality.RandomChance(ShieldStunChanceByBash))
         {
-            target.AddStatusEffect(new Stun(){Caster = User});
+            target.AddStatusEffect(new Stun(){Duration = 1, Caster = User});
         }
 
         return usageResult;
@@ -60,7 +60,7 @@ public class IWillBeYourShield : Skill
     public int ShieldBasedOnDefense => 300;
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        target.AddStatusEffect(new Barrier((ShieldBasedOnDefense * 0.008 * User.Defense).Round())
+        target.AddStatusEffect(new Barrier((ShieldBasedOnDefense * 0.006 * User.Defense).Round())
         {
             Duration = 3,
             Caster = User

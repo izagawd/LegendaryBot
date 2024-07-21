@@ -20,7 +20,7 @@ public class DefenseBuff: StatusEffect, IStatsModifier
             new DefensePercentageModifierArgs()
             {
                 CharacterToAffect = Affected,
-                ValueToChangeWith = -50,
+                ValueToChangeWith = 50,
        
             };
     }

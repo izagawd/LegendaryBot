@@ -143,7 +143,7 @@ public class Player : CharacterPartials.Character
         [StatType.Attack, StatType.Attack, StatType.Speed, StatType.CriticalChance, StatType.CriticalDamage];
 
     public override bool CanBeTraded => false;
-    protected override float BaseAttackMultiplier => 111;
+    protected override float BaseAttackMultiplier => 1.05f;
     public override int TypeId => 1;
     public override Rarity Rarity => Rarity.FiveStar;
 

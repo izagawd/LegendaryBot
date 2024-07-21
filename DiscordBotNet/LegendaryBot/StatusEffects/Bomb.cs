@@ -29,7 +29,7 @@ public class Bomb : StatusEffect, IDetonatable
     public DamageResult? Detonate( Character detonator)
     {
         Affected.RemoveStatusEffect(this);
-        Affected.AddStatusEffect(new Stun(){Caster = detonator});
+        Affected.AddStatusEffect(new Stun(){Duration = 1,Caster = detonator});
         return Affected.Damage(        new DamageArgs(this)
         {
             ElementToDamageWith = null,

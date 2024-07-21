@@ -140,25 +140,24 @@ public class Journey : GeneralCommandClass
 
 
 
+        var expToGain = Character.GetExpBasedOnDefeatedCharacters(enemyTeam);
+        var coinsToGain = Character.GetCoinsBasedOnCharacters(enemyTeam);
+        if (battleResult.Winners != userTeam)
+        {
+            expToGain = expToGain/5;
+        }
 
-      
-           
+
+        var expGainText = userTeam.IncreaseExp(expToGain);
+        userData.EnergyValue -= requiredEnergy;
         if (battleResult.Winners == userTeam)
         {
-            var expToGain = Character.GetExpBasedOnDefeatedCharacters(enemyTeam);
-            var coinsToGain = Character.GetCoinsBasedOnCharacters(enemyTeam);
-            if (battleResult.Winners != userTeam)
-            {
-                expToGain = 0;
 
-            }
-
-
-            var expGainText = userTeam.IncreaseExp(expToGain);
             character.Level = 1;
             var rewardText = userData.ReceiveRewards([ new EntityReward([character]),new CoinsReward(coinsToGain),
                 ..enemyTeam.SelectMany(i => i.DroppedRewards), new UserExperienceReward(250),
            ]);
+           
             rewardText += $"\nYou journeyed a bit more after recruiting {character.Name} and found:\n";
             List<IInventoryEntity> entitiesToReward = [];
             List<Reward> rewards = [];
@@ -194,11 +193,12 @@ public class Journey : GeneralCommandClass
                 .WithTitle($"Nice going bud!")
                 .WithDescription($"You won!\n{expGainText}\n{rewardText}")
                 .WithImageUrl("");
-            userData.EnergyValue -= requiredEnergy;
+       
             await message!.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embedToBuild));
         }
         else
         {
+            
             var additionalString = "";
             if (battleResult.TimedOut is not null)
                 additionalString += "timed out\n";
@@ -207,7 +207,7 @@ public class Journey : GeneralCommandClass
             
             embedToBuild
                 .WithTitle($"Ah, too bad\n"+additionalString)
-                .WithDescription($"You lost boi\n");
+                .WithDescription($"You lost boi\n{expGainText}");
             await message!.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embedToBuild));
             
         }

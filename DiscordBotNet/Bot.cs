@@ -74,6 +74,7 @@ public static class Bot
     private static async Task OnMessageCreatedGiveUserExpMat(DiscordClient client, MessageCreatedEventArgs args)
     {
 
+        
         var permissions = args.Guild.CurrentMember.PermissionsIn(args.Channel);
         if (!permissions.HasFlag(DiscordPermissions.EmbedLinks) || !permissions.HasFlag(DiscordPermissions.SendMessages))
         {
@@ -221,7 +222,7 @@ public static class Bot
     private static async Task StartDiscordBotAsync()
     {
         
-        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["TestBotToken"]!,
+        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["BotToken"]!,
             DiscordIntents.All)
             .ConfigureEventHandlers(i => 
                 i.HandleSocketOpened(OnReady)
