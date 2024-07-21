@@ -222,7 +222,7 @@ public static class Bot
     private static async Task StartDiscordBotAsync()
     {
         
-        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["BotToken"]!,
+        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["TestBotToken"]!,
             DiscordIntents.All)
             .ConfigureEventHandlers(i => 
                 i.HandleSocketOpened(OnReady)

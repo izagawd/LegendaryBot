@@ -199,6 +199,11 @@ public class UserData :   ICanBeLeveledUp
     private const int MaxEnergyValue = 240;
     public void RefreshEnergyValue()
     {
+        if (EnergyValue >= MaxEnergyValue)
+        {
+            LastTimeEnergyWasAccessed = DateTime.UtcNow;
+            return;
+        }
         // Calculate the total elapsed time in minutes
         var elapsedTime = DateTime.UtcNow - LastTimeEnergyWasAccessed;
         var elapsedMinutes = elapsedTime.TotalMinutes;
