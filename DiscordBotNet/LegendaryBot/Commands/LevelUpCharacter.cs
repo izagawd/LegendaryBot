@@ -35,6 +35,11 @@ public class LevelUpCharacter : GeneralCommandClass
             description += $"{i.Name}: {character.UserData.Items.GetItemStacks(i.GetType())}\n";
         }
 
+        if (character.Blessing is not null)
+        {
+            description += $"Blessing: {character.Blessing.Name}";
+        }
+
 
         builder.WithDescription(description);
     }
@@ -170,9 +175,9 @@ public class LevelUpCharacter : GeneralCommandClass
 
 
     
-    [Command("level-up"), Description("used to level up a character"),
+    [Command("level-up"), Description("used to level up a character. Also used to display stats and blessing"),
      AdditionalCommand("/level-up 1",BotCommandType.Battle)]
-    public async Task ExecuteLevelUp(CommandContext ctx,
+    public async ValueTask ExecuteLevelUp(CommandContext ctx,
         [Parameter("character-number")] int characterNumber)
     {
 

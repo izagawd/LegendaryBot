@@ -14,7 +14,7 @@ public class DefenseFlatGearStat: GearStat
         character.TotalDefense += Value;
     }
 
-    public override string Name => "Defense";
+    public override StatType StatType => StatType.Defense;
     public override bool IsPercentage => false;
 
     public override int GetMaximumSubstatLevelIncrease(Rarity rarity)

@@ -12,7 +12,7 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 public class GiveMe : GeneralCommandClass
 {
 
-    [Command("give-me"), Description("Use this to obtain anything that can be in inventory. Only available temporarily"),
+    [Command("give-me"), Description("Use this to obtain anything that can be in inventory. Only available for izagawds use for testing"),
      AdditionalCommand("/give-me lily\n/give-me armor 3", BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx,[Parameter("entity-name")]
         string entityName,[Parameter("entity-amount"), 
@@ -22,7 +22,11 @@ public class GiveMe : GeneralCommandClass
         var type =TypesFunctionality.AllAssemblyTypes.FirstOrDefault(i => i.IsClass 
                                                                       && i.GetInterfaces().Contains(typeof(IInventoryEntity)) && !i.IsAbstract
             && i.Name.ToLower() == simplifiedEntityName);
-        if (type is null)
+        if (ctx.User.Id != Bot.Izasid)
+        {
+            await ctx.RespondAsync("Only izagawd can use this command");
+        }
+        else if (type is null)
         {
             await ctx.RespondAsync("invalid item inputted");
         } else if (amount < 1)

@@ -54,7 +54,7 @@ public static class Bot
     }
 
 
-    const int messagesTillExecution = 24;
+    const int messagesTillExecution = 30;
     private const float messageCoolDown = 1.5f;
     private static ConcurrentDictionary<ulong, ChannelSpawnInfo> idkDictionary = new();
 
@@ -145,8 +145,8 @@ public static class Bot
          
                     var groupToUse = BasicFunctionality.GetRandom(new Dictionary<IGrouping<Rarity, Character>, double>()
                     {
-                        {groups.First(i => i.Key == Rarity.ThreeStar),75},
-                        {groups.First(i => i.Key == Rarity.FourStar), 24},
+                        {groups.First(i => i.Key == Rarity.ThreeStar),85},
+                        {groups.First(i => i.Key == Rarity.FourStar), 14},
                         {groups.First(i => i.Key == Rarity.FiveStar),1}
                     });
                 
@@ -163,8 +163,8 @@ public static class Bot
         "claim", "CLAIM");
                     var embed = new DiscordEmbedBuilder()
                         .WithColor(created.Color)
-                        .WithTitle("New character has appeared!\nThey will join one with the fastest reaction time")
-                        .WithDescription($"Name: {created.Name}\nRarity: {created.Rarity.ToString().Englishify()}")
+                        .WithTitle("Character has appeared!\nThey will join one with the fastest reaction time")
+                        .WithDescription($"Name: {created.Name}\nRarity: {(int) created.Rarity} :star:")
                         .WithImageUrl("attachment://character.png");
                     var message = await args.Channel.SendMessageAsync(new DiscordMessageBuilder()
                         .AddEmbed(embed)
@@ -196,7 +196,7 @@ public static class Bot
                     var text = $"{localUser.Mention} claimed {created.Name}!";
                     if (isNew)
                         text += "Seems like you dont battle. Consider joining!";
-                    text += $"\n{created.DisplayString}";              
+                                 
                     await message.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embed)
                         .AddComponents(claimCharacter));
                     
@@ -254,10 +254,10 @@ public static class Bot
         
         textCommandProcessor.AddConverters(typeof(Bot).Assembly);
         await commandsExtension.AddProcessorAsync(textCommandProcessor);
-
-        commandsExtension.CommandExecuted += OnCommandsExtensionOnCommandExecuted;
         
         commandsExtension.AddCommands(typeof(Bot).Assembly);
+        commandsExtension.CommandExecuted += OnCommandsExtensionOnCommandExecuted;
+
 
         commandsExtension.CommandErrored += OnCommandError;
 

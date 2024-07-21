@@ -28,7 +28,7 @@ public class ThugPunch : BasicAttack
                     CriticalDamage = User.CriticalDamage,
                     Damage = User.Attack * 1.7f,
                     DamageDealer = User,
-                    DamageText = $"{User.NameWithAlphabetIdentifier} punches {target.NameWithAlphabetIdentifier} in a thug way!"
+                    DamageText = $"{User.NameWithAlphabetIdentifier} punches {target.NameWithAlphabetIdentifier} in a thug way, dealing $ damage!"
                 })
             ],
             User = User

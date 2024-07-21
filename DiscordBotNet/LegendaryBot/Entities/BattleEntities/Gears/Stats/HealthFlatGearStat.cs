@@ -8,7 +8,8 @@ public class HealthFlatGearStat : GearStat
     {
         return ((int) rarity * 440) + 500;
     }
-    public override string Name => "Health";
+
+    public override StatType StatType => StatType.MaxHealth;
     public override bool IsPercentage => false;
     public override void AddStats(Character character)
     {

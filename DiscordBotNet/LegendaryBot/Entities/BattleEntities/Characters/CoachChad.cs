@@ -89,6 +89,7 @@ public class ThumbsUp : Skill
 }
 public class CoachChad : CharacterPartials.Character, IBattleEventListener
 {
+    public override Rarity Rarity => Rarity.FourStar;
     public override int TypeId => 11;
     public CoachChad()
     {

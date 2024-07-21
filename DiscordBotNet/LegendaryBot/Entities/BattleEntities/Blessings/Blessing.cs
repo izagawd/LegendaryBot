@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Immutable;
+using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -23,8 +24,24 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
 public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 {
 
+    public static Blessing GetRandomBlessing(Dictionary<Rarity,double> rates)
+    {
+        var groups = TypesFunctionality
+            .GetDefaultObjectsThatIsInstanceOf<Blessing>()
+            .Where(i =>  i.SpawnsNormally)
+            .GroupBy(i => i.Rarity)
+            .ToImmutableArray();
+         
+        var rarityToUse = BasicFunctionality.GetRandom(rates);
+        var randomBlessing
+            = BasicFunctionality.RandomChoice(
+                groups.First(i => i.Key == rarityToUse).Select(i => i)).GetType();
+        return (Blessing)Activator.CreateInstance(randomBlessing)!;
 
 
+
+    }
+    public virtual bool SpawnsNormally => true;
     public virtual  string Description => GetDescription(Level);
     public abstract Rarity Rarity { get; }
 
@@ -37,7 +54,9 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     {
         return "Idk man";
     }
-  
+
+    public bool CanBeTraded => true;
+
     [NotMapped]
     public abstract int TypeId { get;  }
     public string DisplayString => $"`{Name}`";

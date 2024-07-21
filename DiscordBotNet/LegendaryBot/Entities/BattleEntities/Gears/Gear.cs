@@ -5,6 +5,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPar
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Primitives;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
@@ -12,6 +13,8 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 {
 
     public abstract int TypeId { get; }
+
+    public bool CanBeTraded => true;
 
     public string DisplayString
     {
@@ -26,15 +29,34 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
             {
                 numberToUse = $"{Number} • ";
             }
-            var stringToUse =new StringBuilder($"```{numberToUse}{Name}\nMain Stat = {MainStat.AsNameAndValue()}\nSubstats:");
+
+            bool shouldSpace = false;
+            var stringToUse =new StringBuilder($"```{numberToUse}{Name}".PadRight(12) +
+                                               $" • {MainStat.AsNameAndValue()} • " +
+                                               $"Rarity: {(int) Rarity}\u2b50\nSubstats:");
             foreach (var j in Substats)
             {
-                stringToUse.Append($"\n{j.AsNameAndValue()}");
+                if (shouldSpace)
+                {
+                    
+                    shouldSpace = false;
+                }
+                else
+                {
+                    shouldSpace = true;
+                    stringToUse.Append("\n");
+                }
+
+                var zaString = j.AsNameAndValue();
+
+                if (shouldSpace)
+                    zaString = zaString.PadRight(25);
+                stringToUse.Append(zaString);
             }
 
             if (Character is not null)
                 stringToUse.Append($"\nEquipped By: {Character.Name} [{Character.Number}]");
-            stringToUse.Append("```");
+            stringToUse.Append($"```");
             return stringToUse.ToString();
         }
     }
@@ -134,7 +156,18 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 
 
     
-
+    public static IEnumerable<Type> AllGearTypes
+    {
+        get
+        {
+            yield return typeof(Armor);
+            yield return typeof(Boots);
+            yield return typeof(Weapon);
+            yield return typeof(Ring);
+            yield return typeof(Necklace);
+            yield return typeof(Helmet);
+        }
+    }
     
     public GearStat MainStat { get; set; } 
 
@@ -148,6 +181,8 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 
 public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
 {
+
+
     public void Configure(EntityTypeBuilder<Gear> entity)
     {
         entity.HasKey(i => i.Id);

@@ -12,6 +12,7 @@ using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using Microsoft.EntityFrameworkCore;
+using SixLabors.ImageSharp.PixelFormats;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
@@ -25,6 +26,66 @@ public class Display : GeneralCommandClass
 // Last Button
     protected static DiscordButtonComponent Last = new DiscordButtonComponent(DiscordButtonStyle.Primary, "last", "LAST");
 
+    
+    private static async Task<Image<Rgba32>> GetCharacterDisplayAsync(Character character)
+    {
+        var image = new Image<Rgba32>(450,300);
+        using var characterImage = await BasicFunctionality.GetImageFromUrlAsync(character.ImageUrl);
+        characterImage.Mutate(i => i.Resize(75,75));
+        image.Mutate(i => i.DrawImage(characterImage,
+            new Point(200,100),new GraphicsOptions()));
+        return image;
+    }
+
+    [Command("character-gear"), Description("Displays a character's gears")]
+    public  async ValueTask ExecuteDisplayCharacterGear(CommandContext context,
+        [Parameter("character-number")] int characterNumber)
+    {
+        var userData = await DatabaseContext.UserData.Include(i => i.Characters
+                .Where(j => j.Number == characterNumber))
+            .ThenInclude(j => j.Gears)
+            .ThenInclude(j => j.Stats)
+            .Include(i => i.Characters)
+            .ThenInclude(i => i.Blessing)
+            .FirstOrDefaultAsync();
+        if (userData is null || userData.Tier == Tier.Unranked)
+        {
+            await AskToDoBeginAsync(context);
+            return;
+        }
+
+        var embed = new DiscordEmbedBuilder()
+            .WithTitle($"Gears")
+            .WithUser(context.User)
+            .WithColor(userData.Color);
+        var character = userData.Characters.FirstOrDefault();
+        if (character is null)
+        {
+            embed.WithDescription($"Character with number {characterNumber} not found");
+            await context.RespondAsync(embed);
+            return;
+        }
+
+        var count = 0;
+        embed.WithTitle($"{character.Name} [{character.Number}]'s gears");
+        foreach (var i in character.Gears.OrderBy(i => i.GetType().Name))
+        {
+            
+            embed.AddField(i.Name, i.DisplayString, true);
+            count++;
+            if (count == 2)
+            {
+                embed.AddField("\u200b", "\u200b");
+                count = 0;
+            }
+        }
+
+        
+        
+        var messageBuilder = new DiscordMessageBuilder()
+            .AddEmbed(embed);
+        await context.RespondAsync(messageBuilder);
+    }
     private  static async ValueTask ExecuteDisplayAsync<TObject>(CommandContext context, IEnumerable<TObject> objects, int displaySectionLimit,
         Func<TObject, string> textToDisplayPerItem, string joiner, string title,
         DiscordColor discordColor)
@@ -61,7 +122,7 @@ public class Display : GeneralCommandClass
             var embed = new DiscordEmbedBuilder()
                 .WithUser(context.User)
                 .WithColor(discordColor)
-                .WithTitle($"{title}")
+                .WithTitle($"{title} (Page {index+1}/{displayList.Count})")
                 .WithDescription(displayList[index].Join(joiner));
             var messageBuilder = new DiscordMessageBuilder()
                 .AddComponents(First,Previous,Next,Last)
@@ -78,7 +139,7 @@ public class Display : GeneralCommandClass
                 message = await message.ModifyAsync(messageBuilder);
             }
 
-            var result = await message.WaitForButtonAsync(context.User);
+            var result = await message!.WaitForButtonAsync(context.User);
             
             if(result.TimedOut) break;
             await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
@@ -158,6 +219,8 @@ public class Display : GeneralCommandClass
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
             .GetValueOrDefault(TypesFunctionality.GetDefaultObject<UserData>().Color);
+        await ExecuteDisplayAsync(context, entitiesList, 15, i => i,
+            "\n", "All entities", color);
     }
     protected static DiscordButtonComponent First = new DiscordButtonComponent(DiscordButtonStyle.Primary, "first", "FIRST");
         [Command("gears"),Description("Displays all the gears you have")]

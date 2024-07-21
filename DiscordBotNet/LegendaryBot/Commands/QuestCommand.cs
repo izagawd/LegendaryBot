@@ -67,7 +67,7 @@ public class QuestCommand : GeneralCommandClass
         var three = new DiscordButtonComponent(DiscordButtonStyle.Primary, "3", "3",questsShouldDisable[2]);
         var four = new DiscordButtonComponent(DiscordButtonStyle.Primary, "4", "4",questsShouldDisable[3]);
         embed
-            .WithTitle("These are your available quests")
+            .WithTitle("These are your available quests. They refresh at midnight UTC")
             .WithDescription(questString);
         await ctx.RespondAsync(new DiscordInteractionResponseBuilder()
             .AddComponents([one, two, three, four])
@@ -97,8 +97,9 @@ public class QuestCommand : GeneralCommandClass
         {
             quest.Completed = true;
             var expToAdd = 1000;
-            var rewards = quest.QuestRewards.Append(new UserExperienceReward(expToAdd));
-            var rewardString = userData.ReceiveRewards(rewards);
+       
+            var rewardString = userData.ReceiveRewards([..quest.QuestRewards,new UserExperienceReward(expToAdd),
+            new DivineShardsReward(10)]);
             embed
                 .WithTitle("Nice!!")
                 .WithDescription("You completed the quest!\n" +rewardString);

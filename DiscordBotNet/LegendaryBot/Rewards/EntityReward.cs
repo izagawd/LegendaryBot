@@ -30,7 +30,7 @@ public class EntityReward : Reward
 
     public override string GiveRewardTo(UserData userData)
     {
-        var stringBuilder = new StringBuilder($"`{userData.Name} got:`\n ");
+        var stringBuilder = new StringBuilder($"{userData.Name} got:\n ");
         EntitiesToReward.MergeDuplicates();
         userData.Inventory.AddRange(EntitiesToReward);
         userData.Inventory.MergeDuplicates();

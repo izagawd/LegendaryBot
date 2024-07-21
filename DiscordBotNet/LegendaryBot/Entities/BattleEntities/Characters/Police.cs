@@ -85,17 +85,7 @@ public class Police : CharacterPartials.Character
     public override int TypeId => 4;
     public override Rarity Rarity => Rarity.TwoStar;
 
-    public override IEnumerable<Reward> DroppedRewards
-    {
-        get
-        {
-            if (BasicFunctionality.RandomChance(20))
-            {
-                yield return new EntityReward([new Police()]);
-            }
 
-        }
-    }
 
     public Police()
     {

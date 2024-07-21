@@ -63,7 +63,7 @@ public class CharacterCommand : GeneralCommandClass
         character.Blessing = blessing;
         await DatabaseContext.SaveChangesAsync();
         embed.WithDescription(
-            $"{character.Name} has successfully equipped {blessing.Name}!");
+            $"{character.Name} [{character.Number}] has successfully equipped {blessing.Name}!");
         await context.RespondAsync(embed);
 
     }
@@ -107,14 +107,14 @@ public class CharacterCommand : GeneralCommandClass
             await context.RespondAsync(embed);
             return;
         }
-
-        var stringBuilder =
-            new StringBuilder(
-                $"{character.Name} has successfully equipped {gear.Name} that has the following stats:\n{gear.DisplayString}");
-     
-     
         character.Gears.RemoveAll(i => i.GetType() == gear.GetType());
         character.Gears.Add(gear);
+        var stringBuilder =
+            new StringBuilder(
+                $"{character.Name} [{character.Number}] has successfully equipped {gear.Name} that has the following stats:\n{gear.DisplayString}");
+     
+     
+
         await DatabaseContext.SaveChangesAsync();
         embed.WithDescription(stringBuilder.ToString());
         await context.RespondAsync(embed);

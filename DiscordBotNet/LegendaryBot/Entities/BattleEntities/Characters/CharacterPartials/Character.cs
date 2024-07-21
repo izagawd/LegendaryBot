@@ -401,6 +401,76 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     {
         return characters.Select(i => i.ExpToGainWhenKilled).Sum();
     }
+
+
+    public void SetBotStatsAndLevelBasedOnTier(Tier tier)
+    {
+        var level = 5;
+       
+        var attack = 250;
+        var defense = 90;
+        var health = 1500;
+        var speed = 80;
+     
+        
+ 
+        switch (tier)
+        {
+            case Tier.Bronze:
+                break;
+            case Tier.Silver:
+                level = 15;
+           
+                attack = 300;
+                defense = 250;
+                health = 3000;
+                speed = 90;
+                break;
+            case Tier.Gold:
+                level = 25;
+              
+                attack = 1000;
+                defense = 350;
+                health = 6000;
+                speed = 100;
+                break;
+            case Tier.Platinum:
+                level = 35;
+              
+                attack = 2500;
+                defense = 600;
+                health = 10000;
+                speed = 115;
+                break;
+            case Tier.Diamond:
+                level = 45;
+            
+                attack = 3750;
+                defense = 800;
+                health = 13000;
+                speed = 130;
+                break;
+            case Tier.Divine:
+                level = 55;
+         
+                attack = 5000;
+                defense = 1000;
+                health = 20000;
+                speed = 150;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+
+        Level = level;
+        TotalAttack = attack * BaseAttackMultiplier;
+        TotalDefense = defense * BaseDefenseMultiplier;
+        TotalSpeed = speed * BaseSpeedMultiplier;
+        TotalMaxHealth = health * BaseMaxHealthMultiplier;
+        
+
+    }
     /// <summary>
     /// this will be used to get the items this character will drop if killed
     /// </summary>
@@ -596,6 +666,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
        return BattleFunctionality.NextLevelFormula(Level);
     }
 
+    public virtual bool CanBeTraded => true;
 
 
     public long Experience { get; set; }
@@ -618,7 +689,9 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
             Level += 1;
             nextLevelExp = GetRequiredExperienceToNextLevel(Level);
         }
-        expGainText += $"{this} gained {experienceToGain} exp";
+
+        string num = Number != 0 ? $" [{Number}]" : String.Empty;
+        expGainText += $"{Name}{num} gained {experienceToGain} exp";
         if (levelBefore != Level)
         {
             expGainText += $", and moved from level {levelBefore} to level {Level}";

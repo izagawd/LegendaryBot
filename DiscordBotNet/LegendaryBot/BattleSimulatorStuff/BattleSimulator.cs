@@ -594,7 +594,7 @@ public class BattleSimulator
 
     private void CheckForForfeitOrInfoTillEndOfBattle(DiscordMessage message,CancellationToken token)
     {
-        token.UnsafeRegister(i => "AYOO".Print(),null);
+       
         _ = message.WaitForSelectAsync(args =>
         {
             if (Enum.TryParse(args.Id, out BattleDecision localDecision) && localDecision == BattleDecision.Info)
@@ -897,11 +897,6 @@ public class BattleSimulator
             {
                 message = await message.ModifyAsync(messageBuilder);
             }
-         
-            else if (message is not null)
-            {
-                message = await message.ModifyAsync(messageBuilder);
-            }
             else if(channel is not null)
             {
                 message = await channel.SendMessageAsync(messageBuilder);
@@ -911,6 +906,7 @@ public class BattleSimulator
                 throw new Exception("No way to display battle");
             }
 
+            channel = message.Channel;
             if (firstLoop)
             {
                 firstLoop = false;

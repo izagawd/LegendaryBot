@@ -45,6 +45,8 @@ public class UserData :   ICanBeLeveledUp
     public UserData()
     {
         Inventory = new(this);
+     
+        
     }
 
     public PlayerTeam? EquippedPlayerTeam { get; set; }
@@ -165,7 +167,7 @@ public class UserData :   ICanBeLeveledUp
             nextLevelEXP = GetRequiredExperienceToNextLevel(AdventurerLevel);
         }
 
-        expGainText += $"you gained {experienceToGain} exp";
+        expGainText += $"you gained {experienceToGain} exp for your adventurer level";
         if (levelBefore != AdventurerLevel)
         {
             expGainText += $", and moved from level {levelBefore} to level {AdventurerLevel}";
@@ -179,17 +181,38 @@ public class UserData :   ICanBeLeveledUp
         return new ExperienceGainResult(){ExcessExperience = excessExp, Text = expGainText};
     }
 
-    [NotMapped]
-    public bool DailyPending => LastTimeDailyWasChecked.Date != DateTime.UtcNow.Date;
-    public DateTime LastTimeDailyWasChecked { get; set; } = DateTime.UtcNow.AddDays(-1);
+
     public long StandardPrayers { get; set; } = 0;
     
     public long SupremePrayers { get; set; } = 0;
 
-    public long ShardsOfTheGods { get; set; } = 0;
+    public long DivineShards { get; set; } = 0;
     public long Coins { get; set; } = 5000;
 
 
+    public ulong UserDataId { get; set; }
+
+    public DateTime LastTimeEnergyWasAccessed { get; set; } = DateTime.UtcNow;
+    public int EnergyValue { get; set; } = MaxEnergyValue;
+
+    
+    private const int MaxEnergyValue = 240;
+    public void RefreshEnergyValue()
+    {
+        // Calculate the total elapsed time in minutes
+        var elapsedTime = DateTime.UtcNow - LastTimeEnergyWasAccessed;
+        var elapsedMinutes = elapsedTime.TotalMinutes;
+
+        // Determine how much energy has accumulated based on the rate of 1 energy every 6 minutes
+        var newEnergy = (int)(elapsedMinutes / 6);
+
+        // Update the Value with the new energy amount
+        EnergyValue += newEnergy;
+        if (EnergyValue >= MaxEnergyValue)
+            EnergyValue = MaxEnergyValue;
+        // Update LastTimeAccessed to the current time, minus the remaining minutes that didn't add up to a full energy point
+        LastTimeEnergyWasAccessed = DateTime.UtcNow.AddMinutes(-(elapsedMinutes % 6));
+    }
     public Tier Tier { get; set; } = Tier.Unranked;
 
     
@@ -215,7 +238,8 @@ public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
             );
         builder.HasMany(i => i.PlayerTeams)
             .WithOne(i => i.UserData)
-            .HasForeignKey(i => i.UserDataId);
+            .HasForeignKey(i => i.UserDataId)
+            .OnDelete(DeleteBehavior.Cascade);
                     
         builder
             .HasMany(i => i.Items)
@@ -250,6 +274,8 @@ public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
         builder.HasMany(i => i.QuoteReactions)
             .WithOne(i => i.UserData)
             .HasForeignKey(i => i.UserDataId);
+
+        
         builder.HasKey(i => i.Id);
 
     }

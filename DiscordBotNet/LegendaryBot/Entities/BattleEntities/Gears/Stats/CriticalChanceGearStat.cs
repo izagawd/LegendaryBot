@@ -14,7 +14,7 @@ public class CriticalChanceGearStat : GearStat
         character.TotalCriticalChance += Value;
     }
 
-    public override string Name => "Critical Chance";
+    public override StatType StatType => StatType.CriticalChance;
     public override bool IsPercentage => true;
 
     public override int GetMaximumSubstatLevelIncrease(Rarity rarity)

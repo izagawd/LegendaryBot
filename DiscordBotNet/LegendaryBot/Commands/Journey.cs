@@ -1,10 +1,15 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Immutable;
+using System.ComponentModel;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
+using DiscordBotNet.LegendaryBot.Entities;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
@@ -14,8 +19,8 @@ public class Journey : GeneralCommandClass
 {
     
 
-    [Command("journey"), Description("Use this command to fight any random 3 star, and optionto get them if you beat them"),
-    AdditionalCommand("/hunt CoachChad",BotCommandType.Battle)]
+    [Command("journey"), Description("Use this command to encounter a character, and get them if you beat them"),
+    AdditionalCommand("/journey",BotCommandType.Battle)]
     public async ValueTask Execute(CommandContext ctx)
     {
         var author = ctx.User;
@@ -53,28 +58,81 @@ public class Journey : GeneralCommandClass
             await ctx.RespondAsync(embedToBuild.Build());
             return;
         }
+        userData.RefreshEnergyValue();
+        const int requiredEnergy = 40;
+        if (userData.EnergyValue < requiredEnergy)
+        {
+            embedToBuild.WithDescription($"You need at least {requiredEnergy} energy to journey!");
+            await ctx.RespondAsync(embedToBuild);
+            return;
+        }
 
-        var characterType = BasicFunctionality.RandomChoice(TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Character>()
-            .Where(i => i.Rarity <= Rarity.ThreeStar)).GetType();
- 
+        var yes = new DiscordButtonComponent(DiscordButtonStyle.Success,
+            "yes", "yes");
+        var no = new DiscordButtonComponent(DiscordButtonStyle.Success,
+            "no", "no");
+
+
+
         await MakeOccupiedAsync(userData);
-        var enemyTeam = new CharacterTeam();
-        
-        enemyTeam.Add((Character)Activator.CreateInstance(characterType)!);
-        enemyTeam.First().Level = 5 + (((int)userData.Tier-1) * 10);
-        enemyTeam.LoadTeamStats();
-        
-      
+        embedToBuild
+            .WithTitle(userData.Name)
+            .WithDescription($"{requiredEnergy} energy will be consumed. Proceed?");
+        var messageBuilder = new DiscordMessageBuilder()
+            .AddComponents(yes, no)
+            .AddEmbed(embedToBuild);
+        await ctx.RespondAsync(messageBuilder);
 
-        embedToBuild = embedToBuild
+        var message = await ctx.GetResponseAsync();
+        var result = await message.WaitForButtonAsync();
+
+        if (result.TimedOut || result.Result.Id != "yes")
+        {
+            yes.Disable();
+            no.Disable();
+            if (result.TimedOut)
+            {
+                await message.ModifyAsync(messageBuilder);
+            }
+            else
+            {
+                await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+                    new DiscordInteractionResponseBuilder(messageBuilder));
+            }
+            return;
+        }
+
+        var groups = TypesFunctionality
+            .GetDefaultObjectsThatIsInstanceOf<Character>()
+            .Where(i => i.CanSpawnNormally)
+            .GroupBy(i => i.Rarity)
+            .ToImmutableArray();
+        
+        
+        var characterGrouping= BasicFunctionality.GetRandom(new Dictionary<IGrouping<Rarity, Character>, double>()
+        {
+            {groups.First(i => i.Key == Rarity.ThreeStar),85},
+            {groups.First(i => i.Key == Rarity.FourStar), 14},
+            {groups.First(i => i.Key == Rarity.FiveStar),1}
+        });
+        var characterType 
+            = BasicFunctionality.RandomChoice(characterGrouping.Select(i => i)).GetType();
+   
+        var enemyTeam = new CharacterTeam();
+
+        var character = (Character)Activator.CreateInstance(characterType)!;
+        enemyTeam.Add(character);
+        character.SetBotStatsAndLevelBasedOnTier(userData.Tier);
+        embedToBuild
             .WithTitle($"Keep your guard up!")
             .WithDescription($"{enemyTeam.First().Name}(s) have appeared!");
-        await ctx.RespondAsync(embedToBuild.Build());
-        var message =  await ctx.GetResponseAsync();
+        await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+            new DiscordInteractionResponseBuilder().AddEmbed(embedToBuild));
+
         await Task.Delay(2500);
         var userTeam = userData.EquippedPlayerTeam!.LoadTeamStats();
 
-        var simulator = new BattleSimulator(userTeam,  enemyTeam.LoadTeamStats());
+        var simulator = new BattleSimulator(userTeam,  enemyTeam);
 
  
 
@@ -82,27 +140,61 @@ public class Journey : GeneralCommandClass
 
 
 
-        var expToGain = Character.GetExpBasedOnDefeatedCharacters(enemyTeam);
-        var coinsToGain = Character.GetCoinsBasedOnCharacters(enemyTeam);
-        if (battleResult.Winners != userTeam)
-        {
-            expToGain = (expToGain/5)+1;
-     
-        }
+
       
-        
-        var expGainText = userTeam.IncreaseExp(expToGain);
-        
            
         if (battleResult.Winners == userTeam)
         {
-            var rewardText = userData.ReceiveRewards([new CoinsReward(coinsToGain),
-                ..enemyTeam.SelectMany(i => i.DroppedRewards)]);
+            var expToGain = Character.GetExpBasedOnDefeatedCharacters(enemyTeam);
+            var coinsToGain = Character.GetCoinsBasedOnCharacters(enemyTeam);
+            if (battleResult.Winners != userTeam)
+            {
+                expToGain = 0;
+
+            }
+
+
+            var expGainText = userTeam.IncreaseExp(expToGain);
+            character.Level = 1;
+            var rewardText = userData.ReceiveRewards([ new EntityReward([character]),new CoinsReward(coinsToGain),
+                ..enemyTeam.SelectMany(i => i.DroppedRewards), new UserExperienceReward(250),
+           ]);
+            rewardText += $"\nYou journeyed a bit more after recruiting {character.Name} and found:\n";
+            List<IInventoryEntity> entitiesToReward = [];
+            List<Reward> rewards = [];
+            foreach (var i in Enumerable.Range(0,BasicFunctionality.GetRandomNumberInBetween(3,5)))
+            {
+                var randomChoice = BasicFunctionality.RandomChoice(["blessing", "gear", "coins"]);
+          
+                switch (randomChoice)
+                {
+                    case "gear":
+                        var gear
+                            = (Gear) Activator.CreateInstance(BasicFunctionality.RandomChoice(Gear.AllGearTypes))!;
+                        gear.Initialize(userData.Tier.ToRarity());
+                        rewards.Add(new EntityReward([gear]));
+                        break;
+                    case "blessing":
+                        var blessing = Blessing.GetRandomBlessing(new Dictionary<Rarity, double>()
+                        {
+                            { Rarity.ThreeStar, 70 },
+                            { Rarity.FourStar, 25 },
+                            { Rarity.FiveStar, 5 }
+                        });
+                        rewards.Add(new EntityReward([blessing]));
+                        break;
+                    case "coins":
+                        var coins = 1000+  (4000 *  (int)userData.Tier);
+                        rewards.Add(new CoinsReward(coins));
+                        break;
+                }
+            }
+            rewardText += userData.ReceiveRewards(rewards);
             embedToBuild
                 .WithTitle($"Nice going bud!")
                 .WithDescription($"You won!\n{expGainText}\n{rewardText}")
                 .WithImageUrl("");
-
+            userData.EnergyValue -= requiredEnergy;
             await message!.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embedToBuild));
         }
         else
@@ -115,11 +207,11 @@ public class Journey : GeneralCommandClass
             
             embedToBuild
                 .WithTitle($"Ah, too bad\n"+additionalString)
-                .WithDescription($"You lost boi\n"+expGainText);
+                .WithDescription($"You lost boi\n");
             await message!.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embedToBuild));
             
         }
-
+        
         await DatabaseContext.SaveChangesAsync();
 
     }

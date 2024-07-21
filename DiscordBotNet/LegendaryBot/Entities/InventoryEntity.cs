@@ -13,6 +13,7 @@ public static class InventoryEntityExtensions
 public interface IInventoryEntity 
 {
 
+    bool CanBeTraded { get; }
     int TypeId { get; }
     string DisplayString { get; }
     Type TypeGroup { get;  }

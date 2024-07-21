@@ -19,9 +19,14 @@ public class KillSlimesQuest : Quest
     {
        
         var slimeTeam = new CharacterTeam([new Slime(),new Slime()]);
+  
         var userData = await databaseContext.UserData
             .IncludeTeamWithAllEquipments()
             .FirstAsync(i => i.Id == UserDataId);
+        foreach (var i in slimeTeam)
+        {
+            i.SetBotStatsAndLevelBasedOnTier(userData.Tier);
+        }
         var embed = new DiscordEmbedBuilder()
             .WithUser(context.User)
             .WithColor(userData.Color)
@@ -38,7 +43,7 @@ public class KillSlimesQuest : Quest
         await Task.Delay(2000);
         var playerTeam = userData.EquippedPlayerTeam.LoadTeamStats();
 
-        var battleSimulator = new BattleSimulator(playerTeam,slimeTeam.LoadTeamStats());
+        var battleSimulator = new BattleSimulator(playerTeam,slimeTeam);
         var result = await battleSimulator.StartAsync(message);
 
 

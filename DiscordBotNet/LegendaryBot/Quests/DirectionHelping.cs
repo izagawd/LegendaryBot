@@ -88,16 +88,7 @@ public class DirectionHelping : Quest
         dialogueResult = await dialogue.LoadAsync(context.User, dialogueResult.Message);
         var blastTeam = new CharacterTeam(blast);
 
-        blast.Level =60;
-        blast.TotalAttack = 2500;
-        blast.TotalSpeed = 150;
-        blast.TotalMaxHealth = 50000;
-        blast.TotalCriticalChance = 80;
-        blast.TotalCriticalDamage = 300;
-        blast.TotalDefense = 750;
-        blast.TotalMaxHealth = 40000;
-        blast.Health = 40000;
-        
+        blast.SetBotStatsAndLevelBasedOnTier(Tier.Divine);
 
         var userTeam = userData.EquippedPlayerTeam;
         userTeam.LoadTeamStats();
@@ -118,7 +109,6 @@ public class DirectionHelping : Quest
                         DialogueTexts =
                         [
                             "How... did you win...?",
-                            "You are a bronze tier... you shouldn't be able to beat me...",
                             "h-how..."
                         ]
                     }

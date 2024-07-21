@@ -74,13 +74,15 @@ public abstract class GearStat
     }
     
     [NotMapped]
-    public abstract string Name { get; }
+    public abstract StatType StatType { get; }
+    
+    
     
     [NotMapped]
     public abstract bool IsPercentage { get; }
     public  string AsNameAndValue()
     {
-        var asString = $"{Name}: {Value}";
+        var asString = $"{StatType.GetShortName()}: {Value}";
         if (IsPercentage)
             asString += "%";
         return asString;

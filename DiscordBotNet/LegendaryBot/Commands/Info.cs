@@ -1,4 +1,5 @@
-﻿using DSharpPlus.Commands;
+﻿using DiscordBotNet.Extensions;
+using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,15 +25,17 @@ public class Info : GeneralCommandClass
             await AskToDoBeginAsync(ctx);
             return;
         }
+        userData.RefreshEnergyValue();
         var embedBuilder = new DiscordEmbedBuilder()
             .WithTitle("Info")
-            .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
+            .WithUser(author)
             .WithColor(userData.Color)
             .AddField("Coins", $"`{userData.Coins}`", true)
-            .AddField("Experience", $"`{userData.Experience}`", true)
             .AddField("Tier", $"`{userData.Tier}`", true)
             .AddField("Date Started", $"`{userData.StartTime}`", true)
             .AddField("Time Till Next Day", $"`{BasicFunctionality.TimeTillNextDay()}`", true)
+            .AddField("Energy", $"{userData.EnergyValue}", true)
+            .AddField("Divine Shards", $"{userData.DivineShards}")
             .WithImageUrl("attachment://info.png")
             .WithTimestamp(DateTime.Now);
         using var image = await userData.GetInfoAsync(author);

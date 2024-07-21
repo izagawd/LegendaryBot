@@ -5,4 +5,6 @@ public class AdventurersKnowledge : CharacterExpMaterial
     public override int TypeId => 1;
     public override Rarity Rarity => Rarity.ThreeStar;
     public override int ExpToIncrease => 100;
+    
+    
 }

@@ -122,11 +122,11 @@ public class Begin : GeneralCommandClass
         }
         userData.Gender = gottenGender;
         var lily = new Lily();
-        
+        lily.Level = 5;
         if (!userData.Inventory.Any(i => i is Player))
         {
             var player = new Player();
-
+            player.Level = 5;
             player.SetElement(Element.Fire);
             userData.Inventory.Add(player);
             player.UserData = userData;

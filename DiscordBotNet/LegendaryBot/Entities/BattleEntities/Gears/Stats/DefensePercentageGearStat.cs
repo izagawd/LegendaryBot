@@ -8,7 +8,8 @@ public class DefensePercentageGearStat : GearStat
     {
         return ((int) rarity  * 10) + 10;
     }
-    public override string Name => "Defense";
+
+    public override StatType StatType => StatType.Defense;
     public override bool IsPercentage => true;
     public override void AddStats(Character character)
     {

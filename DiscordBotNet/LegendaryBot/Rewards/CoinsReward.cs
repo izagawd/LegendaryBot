@@ -23,6 +23,6 @@ public class CoinsReward : Reward
     public override string GiveRewardTo(UserData userData)
     {
         userData.Coins += Coins;
-        return $"{userData.Name} Gained {Coins} coins!";
+        return $"{userData.Name} gained {Coins} coins!";
     }
 }

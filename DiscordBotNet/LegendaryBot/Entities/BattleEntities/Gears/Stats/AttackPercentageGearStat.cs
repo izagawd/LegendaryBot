@@ -14,7 +14,7 @@ public class AttackPercentageGearStat : GearStat
         character.TotalAttack += Value * 0.01f * character.BaseAttack;
     }
 
-    public override string Name => "Attack";
+    public override StatType StatType => StatType.Attack;
     public override bool IsPercentage => true;
 
     public override int GetMaximumSubstatLevelIncrease(Rarity rarity)

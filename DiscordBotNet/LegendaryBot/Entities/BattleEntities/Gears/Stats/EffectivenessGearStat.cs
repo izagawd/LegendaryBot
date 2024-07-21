@@ -8,7 +8,8 @@ public class EffectivenessGearStat : GearStat
     {
         return ((int) rarity  * 10) + 10;
     }
-    public override string Name => "Effectiveness";
+
+    public override StatType StatType => StatType.Effectiveness;
     public override bool IsPercentage => true;
     public override void AddStats(Character character)
     {

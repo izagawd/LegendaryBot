@@ -9,7 +9,7 @@ public class AttackFlatGearStat : GearStat
         return ((int) rarity   * 80) + 100;
     }
 
-    public override string Name => "Attack";
+    public override StatType StatType => StatType.Attack;
     public override bool IsPercentage => false;
 
     public override void AddStats(Character character)

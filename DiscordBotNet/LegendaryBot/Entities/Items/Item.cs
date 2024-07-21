@@ -27,12 +27,14 @@ public class ItemDatabaseConfiguration : IEntityTypeConfiguration<Item>
 
 public abstract class Item : IInventoryEntity
 {
+    public bool CanBeTraded => false;
+
     [NotMapped]
     public abstract int TypeId { get;  }
     public string DisplayString => $"`{Name} • Stacks: {Stacks}`";
     public  Type TypeGroup => typeof(Item);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
-    public string Description { get; }
+    public virtual string Description => String.Empty;
     public virtual Rarity Rarity { get; }
 
 
