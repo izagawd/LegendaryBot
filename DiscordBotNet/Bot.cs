@@ -90,6 +90,8 @@ public static class Bot
             expMatGive[args.Author.Id] = expGainInfo;
             if (expGainInfo.MessageCount >= messagesTillExecution)
             {
+                expGainInfo.MessageCount = 0;
+                expMatGive[args.Author.Id] = expGainInfo;
                 await using var dbContext = new PostgreSqlContext();
                 var userData =await  dbContext.UserData
                     .Include(i => i.Items.Where(j => j is CharacterExpMaterial))
@@ -222,7 +224,7 @@ public static class Bot
     private static async Task StartDiscordBotAsync()
     {
         
-        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["TestBotToken"]!,
+        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["BotToken"]!,
             DiscordIntents.All)
             .ConfigureEventHandlers(i => 
                 i.HandleSocketOpened(OnReady)

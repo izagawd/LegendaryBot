@@ -405,7 +405,7 @@ public class BattleSimulator
             var descriptionStringBuilder = new StringBuilder();
 
 
-            descriptionStringBuilder.Append($"Combat Readiness: {characterToDisplayBattleInfo.CombatReadiness.Round()}%\n\n");
+            descriptionStringBuilder.Append($"Element: {characterToDisplayBattleInfo.Element} • Combat Readiness: {characterToDisplayBattleInfo.CombatReadiness.Round()}%\n\n");
             foreach (var i in characterToDisplayBattleInfo.MoveList)
             {
                 var moveTypeName = "Basic Attack :crossed_swords:";
