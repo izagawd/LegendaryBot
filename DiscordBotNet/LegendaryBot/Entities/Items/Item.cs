@@ -35,7 +35,7 @@ public abstract class Item : IInventoryEntity
     public  Type TypeGroup => typeof(Item);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
     public virtual string Description => String.Empty;
-    public virtual Rarity Rarity { get; }
+    public virtual Rarity Rarity => Rarity.OneStar;
 
 
     public IInventoryEntity Clone()

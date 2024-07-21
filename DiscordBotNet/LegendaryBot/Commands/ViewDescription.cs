@@ -35,7 +35,7 @@ public class ViewDescription : GeneralCommandClass
                 .GetValueOrDefault(TypesFunctionality.GetDefaultObject<UserData>().Color));
         if (zaObject is IInventoryEntity zaEntity)
         {
-            var zaDescription = $"{zaEntity.Name}.\nRarity: {zaEntity.Rarity}";
+            var zaDescription = $"{zaEntity.Name}.\nRarity: {(int) zaEntity.Rarity} :star:";
             if (zaEntity is Character z)
             {
                 zaDescription += $" | Element: {z.Element}";
