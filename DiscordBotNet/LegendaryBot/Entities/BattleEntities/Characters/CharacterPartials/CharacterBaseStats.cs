@@ -99,7 +99,8 @@ public partial class Character
         var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Attack);
         var percentageToUse = count * GetStatIncreaseMilestoneValue(StatType.Attack);
 
-        toCompute += toCompute * percentageToUse * 0.01f * BaseAttackMultiplier;
+        toCompute *= BaseAttackMultiplier;
+        toCompute += toCompute * percentageToUse * 0.01f;
         toCompute += MilestoneFlatAttackIncrease * levelMilestone;
         return toCompute;
     }
@@ -177,8 +178,9 @@ public partial class Character
 
         var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.MaxHealth);
         var percentageToUse = count * GetStatIncreaseMilestoneValue(StatType.MaxHealth);
-
-        toCompute += toCompute * percentageToUse * 0.01f * BaseMaxHealthMultiplier;
+        toCompute *= BaseMaxHealthMultiplier;
+        toCompute += toCompute * percentageToUse * 0.01f;
+        
         toCompute += MilestoneFlatHealthIncrease * levelMilestone;
         return toCompute;
     }
