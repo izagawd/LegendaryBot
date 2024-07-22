@@ -14,6 +14,7 @@ public class DamageResult
         Move = move;
     }
 
+    public bool IsFixedDamage { get; set; } = false;
     public DamageResult(){}
     public DamageResult(StatusEffect statusEffect)
     {
@@ -21,7 +22,7 @@ public class DamageResult
     }
     public int Damage { get; init; }
     public bool WasCrit { get; init; }
-    public bool CanBeCountered { get; init; } 
+    public bool CanBeCountered { get; init; } = true;
     public  Character? DamageDealer { get; init; }
     public required Character DamageReceiver { get; init; }
 

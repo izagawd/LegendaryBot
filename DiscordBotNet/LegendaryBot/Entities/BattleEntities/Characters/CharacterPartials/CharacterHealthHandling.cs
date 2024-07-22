@@ -1,5 +1,6 @@
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
+using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
@@ -30,9 +31,24 @@ public partial class Character
     /// <param name="damageText">if there is a text for the damage, then use this. Use $ in the string and it will be replaced with the damage dealt</param>
     /// <param name="caster">The character causing the damage</param>
     /// <param name="damage">The potential damage</param>
-    public DamageResult? FixedDamage(DamageArgs damageArgs)
+    public DamageResult FixedDamage(DamageArgs damageArgs)
     {
-        if (IsDead) return null;
+        if (IsDead)
+        {
+            try
+            {
+                throw new Exception("Attempting to damage dead character");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new DamageResult()
+                    { CanBeCountered = false, Damage = 0, DamageDealer = null, DamageReceiver = null, IsFixedDamage = true};
+            }
+        }
+
+        damageArgs.IsFixedDamage = true;
+        CurrentBattle?.InvokeBattleEvent(new CharacterPreDamageEventArgs(damageArgs));
         var damageText = damageArgs.DamageText;
         var damage = damageArgs.Damage;
         var caster = damageArgs.DamageDealer;
@@ -68,7 +84,8 @@ public partial class Character
                 CanBeCountered = canBeCountered
             };
         }
-            
+
+        damageResult.IsFixedDamage = true;
         CurrentBattle.InvokeBattleEvent(new CharacterPostDamageEventArgs(damageResult));
         return damageResult;
     }
@@ -125,7 +142,7 @@ public partial class Character
             {
                 Console.WriteLine(e);
                 return new DamageResult()
-                    { CanBeCountered = false, Damage = 0, DamageDealer = null, DamageReceiver = null };
+                    { CanBeCountered = false, Damage = 0, DamageDealer = damageArgs.DamageDealer, DamageReceiver = this };
             }
         }
         CurrentBattle.InvokeBattleEvent(new CharacterPreDamageEventArgs(damageArgs));

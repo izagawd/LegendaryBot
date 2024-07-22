@@ -4,6 +4,7 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.DialogueNamespace;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
@@ -42,6 +43,8 @@ public class Begin : GeneralCommandClass
         if (userData is null)
         {
             userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);
+            await DatabaseContext.SaveChangesAsync();
+           
         }
            
 
@@ -55,7 +58,7 @@ public class Begin : GeneralCommandClass
             await NotifyAboutOccupiedAsync(ctx);
             return;
         }
-
+        await MakeOccupiedAsync(userData);
 
         if (userData.Tier != Tier.Unranked)
         {
@@ -162,7 +165,7 @@ public class Begin : GeneralCommandClass
             CharacterColor = coachChad.Color, CharacterName = coachChad.Name,
             CharacterUrl = coachChad.ImageUrl,
         };
-        
+        var lilyDialogueProfile = lily.DialogueProfile;
         
         DialogueNormalArgument[] dialogueArguments =
         [
@@ -178,7 +181,7 @@ public class Begin : GeneralCommandClass
             },
             new()
             {
-                DialogueProfile = lily.DialogueProfile,
+                DialogueProfile = lilyDialogueProfile,
                 DialogueTexts = [$"Let's give it our all {userData.Name}!"]
             }
         ];
@@ -261,16 +264,34 @@ public class Begin : GeneralCommandClass
                     [
                         "Seems like you have gotten more used to battle.",
                         "You have completed the registration and you are now a **Bronze** tier adventurer! the lowest tier! you gotta work your way up the ranks!",
-                        "I will see you later then! I have other new adventurers to attend to! Let's go attend to them Lily!"
+                        "I will see you later then! My coach job is done for today! let's go and report it, lily!"
                     ]
+                },
+                new()
+                {
+                    DialogueProfile = lilyDialogueProfile,
+                    DialogueTexts = [$"Actually, I want to journey with {userData.Name}. They seem interesting!",
+                    "I hope you don't mind me quitting the job to journey with them"]
+                    
+                },
+                new()
+                {
+                    DialogueProfile = coachChadProfile,
+                    DialogueTexts = [$"Very well, absolutely no problem there. I'll go report for you then",
+                    $"Go have fun with {userData.Name}, lily! and see you later! ***i take my leave***"]
+                    
+                },
+                new()
+                {
+                    DialogueProfile = lilyDialogueProfile,
+                    DialogueTexts = [$"Now, let's go!"]
+                    
                 }
             ],
-            RemoveButtonsAtEnd = true, 
+            RemoveButtonsAtEnd = false, 
             RespondInteraction = false,
             Title = "Tutorial"
         };
-
-        userTeam.Remove(lily);
 
 
         if (userData.Tier == Tier.Unranked)
@@ -280,7 +301,7 @@ public class Begin : GeneralCommandClass
         };
       
 
-        await DatabaseContext.SaveChangesAsync();
+       
       
 
       
@@ -295,7 +316,7 @@ public class Begin : GeneralCommandClass
                 [
                     new DialogueNormalArgument
                     {
-                        DialogueProfile = coachChadProfile,
+                        DialogueProfile = lilyDialogueProfile,
                         DialogueTexts =
 
                         [
@@ -305,16 +326,16 @@ public class Begin : GeneralCommandClass
                     }
                 ]
             };
-                
-
             await theDialogue.LoadAsync(ctx.User, result.Message);
-        }
-        if (result.Skipped)
-        {
-            await result.Message.ModifyAsync(
-                new DiscordMessageBuilder()
-                    .AddEmbed(result.Message.Embeds.First()));
+            return;
         }
 
+        var rewardText = userData.ReceiveRewards(new EntityReward([lily]));
+        message = result.Message;
+        await message.ModifyAsync(new DiscordMessageBuilder()
+            .AddEmbed(embedToBuild.WithTitle("Nice!").WithUser(ctx.User).WithDescription(rewardText)
+            
+            ));
+        await DatabaseContext.SaveChangesAsync();
     }
 }

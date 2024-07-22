@@ -68,8 +68,6 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     }
 
     public int Number { get; set; }
-    [NotMapped]
-    public virtual Type StatToIncreaseOnDupe => GearStat.AttackPercentageType;
 
  
     public abstract int TypeId { get;  }
@@ -321,9 +319,9 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     }
 
     /// <summary>
-    /// Stats to increase when ascending percentage wise. order matters in this case, and it should be exactly 5
+    /// Stats to increase when reaching level milestone. order matters in this case, and it should be exactly 5
     /// </summary>
-    protected virtual IEnumerable<StatType> AscensionStatIncrease =>
+    protected virtual IEnumerable<StatType> LevelMilestoneStatIncrease =>
     [
         StatType.Defense, StatType.Defense,
         StatType.CriticalChance, StatType.CriticalDamage, StatType.Effectiveness
@@ -333,7 +331,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     protected IEnumerable<StatType> GetStatsToIncreaseBasedOnLevelMilestone(int levelMilestone)
     {
         
-        foreach (var i in AscensionStatIncrease)
+        foreach (var i in LevelMilestoneStatIncrease)
         {
             levelMilestone--;
             if(levelMilestone <= 0) yield break;

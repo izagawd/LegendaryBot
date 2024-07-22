@@ -6,6 +6,7 @@ namespace DiscordBotNet.LegendaryBot.Results;
 
 public class DamageArgs
 {
+    public bool IsFixedDamage { get; set; } = false;
     /// <summary>
     /// if null, will not consider element for damage calculation
     /// </summary>

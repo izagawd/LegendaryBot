@@ -139,7 +139,7 @@ public class Player : CharacterPartials.Character
 {
     public override bool CanSpawnNormally => false;
 
-    protected override IEnumerable<StatType> AscensionStatIncrease =>
+    protected override IEnumerable<StatType> LevelMilestoneStatIncrease =>
         [StatType.Attack, StatType.Attack, StatType.Speed, StatType.CriticalChance, StatType.CriticalDamage];
 
     public override bool CanBeTraded => false;

@@ -13,7 +13,7 @@ public class ChamomileSachetWhack : BasicAttack
         $"With the power of Chamomile, whacks an enemy with a sack filled with Chamomile, with a {SleepChance}% chance of making the enemy sleep";
     
 
-    public int SleepChance => 100;
+    public int SleepChance => 25;
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
@@ -80,34 +80,23 @@ public class LilyOfTheValley : Ultimate
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    public int PoisonInflictChance => 100;
-
-    public int StunInflictChance => 50;
-    public override  string GetDescription(CharacterPartials.Character character) => $"Releases a poisonous gas to all enemies, with an {StunInflictChance}% chance of inflicting stun for 1 turn and a {PoisonInflictChance}% chance of inflicting poison for one turn";
+ 
+    public override  string GetDescription(CharacterPartials.Character character) => $"Releases a poisonous gas to a single enemy,  inflicting stun for 1 turn, and inflicts poison x2 for 2 turns";
     
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        List<StatusEffect> statusEffects = [];
+           
+        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} used Lily of The Valley, and released a dangerous gas to {target.NameWithAlphabetIdentifier}!");
+      
         var effectiveness = User.Effectiveness;
-        foreach (var i in GetPossibleTargets())
-        {
-            
-            if (BasicFunctionality.RandomChance(PoisonInflictChance))
-            {
-                statusEffects.Add(new Poison(){Duration = 2,Caster = User});
-            }
-            if (BasicFunctionality.RandomChance(StunInflictChance))
-            {
-                statusEffects.Add(new Stun{Duration = 1, Caster = User});
-            }
-            if(statusEffects.Any()) i.AddStatusEffects(statusEffects,effectiveness);
-            statusEffects.Clear();
-        }
 
+        target.AddStatusEffects([new Poison(){Duration = 2,Caster = User},
+        new Poison(){Duration = 2, Caster = User},new Stun(){Duration = 1, Caster = User}],effectiveness);
+  
         return new UsageResult(this)
         {
-            Text =  $"{User.NameWithAlphabetIdentifier} used Lily of The Valley, and released a dangerous gas to the enemy team!",
+            Text =  $"The valley!",
             TargetType = TargetType.AOE,
             UsageType = usageType,
             User = User
@@ -120,8 +109,17 @@ public class Lily : CharacterPartials.Character
 
 
     public override int TypeId => 3;
-    public override Rarity Rarity => Rarity.FiveStar;
+    public override Rarity Rarity => Rarity.FourStar;
     public override DiscordColor Color => DiscordColor.HotPink;
+    
+    protected override IEnumerable<StatType> LevelMilestoneStatIncrease =>
+    [
+        StatType.MaxHealth, StatType.Defense,
+        StatType.Effectiveness, StatType.Effectiveness, StatType.MaxHealth, StatType.Defense
+    ];
+    protected override float BaseMaxHealthMultiplier => 1.1f;
+
+    public override bool CanSpawnNormally => false;
 
     public override void NonPlayerCharacterAi(ref CharacterPartials.Character target, ref BattleDecision decision)
     {
