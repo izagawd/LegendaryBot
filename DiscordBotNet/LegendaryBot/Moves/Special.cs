@@ -37,7 +37,6 @@ public abstract class Special : Move
         {
             Cooldown = MaxCooldown;
         }
-        
         return base.Utilize(target, usageType);
     }
 }

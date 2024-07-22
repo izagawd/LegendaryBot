@@ -23,7 +23,7 @@ namespace DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 public enum BattleDecision
 {
     
-    Forfeit, Ultimate, BasicAttack, Skill, Info,Other
+     Ultimate, BasicAttack, Skill, Other
 }
 
 
@@ -34,7 +34,7 @@ public class BattleSimulator
     private DiscordButtonComponent _basicAttackButton = new(DiscordButtonStyle.Secondary, nameof(BasicAttack), null,emoji: new DiscordComponentEmoji("⚔️"));
     private  DiscordButtonComponent _skillButton = new(DiscordButtonStyle.Secondary, nameof(Skill), null, emoji: new DiscordComponentEmoji("🪄"));
     private  DiscordButtonComponent _ultimateButton = new(DiscordButtonStyle.Secondary, nameof(Ultimate), null, emoji: new DiscordComponentEmoji("⚡"));
-    private  static DiscordButtonComponent _forfeitButton = new(DiscordButtonStyle.Danger, "Forfeit", "Forfeit");
+    private  static DiscordButtonComponent _forfeitButton = new(DiscordButtonStyle.Danger, "forfeit", "Forfeit");
 
 
 
@@ -597,7 +597,7 @@ public class BattleSimulator
        
         _ = message.WaitForSelectAsync(args =>
         {
-            if (Enum.TryParse(args.Id, out BattleDecision localDecision) && localDecision == BattleDecision.Info)
+            if (args.Id == "info")
             {
                 _ = HandleDisplayBattleInfoAsync(args);
             }
@@ -605,8 +605,7 @@ public class BattleSimulator
         }, token);
         _ = message.WaitForButtonAsync(args =>
         {
-            if (CharacterTeams.Any(i => i.TryGetUserDataId == args.User.Id)
-                && Enum.TryParse(args.Id, out BattleDecision localDecision) && localDecision == BattleDecision.Forfeit)
+            if (args.Id == "forfeit" &&  CharacterTeams.Any(i => i.TryGetUserDataId == args.User.Id))
             {
                 _ = HandleForfeitAsync(args.Interaction);
                 return false;
@@ -872,7 +871,7 @@ public class BattleSimulator
                 }
             }
             
-            var infoSelect = new DiscordSelectComponent("Info", "View info of character",
+            var infoSelect = new DiscordSelectComponent("info", "View info of character",
                 GetSelectComponentOptions());
             messageBuilder
                 .AddComponents(components)
@@ -929,9 +928,9 @@ public class BattleSimulator
             var battleDecision =BattleDecision.Other;
  
             StatusEffect? mostPowerfulStatusEffect = null;
-            var copy = ActiveCharacter.StatusEffects;
-            if (copy.Any())
-                mostPowerfulStatusEffect = copy.OrderByDescending(i => i.OverrideTurnType).First();
+           
+          
+            mostPowerfulStatusEffect = ActiveCharacter.StatusEffects.OrderByDescending(i => i.OverrideTurnType).FirstOrDefault();
 
 
             _canAddFollowUpAction = true;
@@ -947,8 +946,7 @@ public class BattleSimulator
             }
             else if (mostPowerfulStatusEffect is not null && mostPowerfulStatusEffect.OverrideTurnType > 0)
             {
-
-                var overridenUsage = mostPowerfulStatusEffect.OverridenUsage(ActiveCharacter, ref target!,
+                var overridenUsage = mostPowerfulStatusEffect.OverridenUsage(ref target!,
                     ref battleDecision, UsageType.NormalUsage);
                 if (overridenUsage.Text is not null) _mainText = overridenUsage.Text;
                 using (_interruptionCancellationTokenSource = new CancellationTokenSource())

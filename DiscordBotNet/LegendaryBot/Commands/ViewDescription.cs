@@ -35,10 +35,10 @@ public class ViewDescription : GeneralCommandClass
                 .GetValueOrDefault(TypesFunctionality.GetDefaultObject<UserData>().Color));
         if (zaObject is IInventoryEntity zaEntity)
         {
-            var zaDescription = $"{zaEntity.Name}.\nRarity: {(int) zaEntity.Rarity} :star:";
+            var zaDescription = $"{zaEntity.TypeGroup.Name.Englishify()}: {zaEntity.Name}.\nRarity: {(int) zaEntity.Rarity} :star:";
             if (zaEntity is Character z)
             {
-                zaDescription += $" | Element: {z.Element}";
+                zaDescription += $" • Element: {z.Element}";
                 
             }
 
@@ -51,10 +51,21 @@ public class ViewDescription : GeneralCommandClass
                     builder.AddField($"Skill :magic_wand:", character.Skill.GetDescription(character));
                 if (character.Ultimate is not null)
                     builder.AddField("Ultimate :zap:", character.Ultimate.GetDescription(character));
+                var statsToIncreasePerMilestone = character.GetStatsToIncreaseBasedOnLevelMilestone(6).ToArray();
+                var stringToUse = "";
+                for (var i = 0; i < statsToIncreasePerMilestone.Length; i++)
+                {
+                    stringToUse +=
+                        $"After reaching level {(i + 1) * 10}, {statsToIncreasePerMilestone[i].ToString().Englishify()} increases by {Character.GetStatIncreaseMilestoneValueString(statsToIncreasePerMilestone[i])} additionally!\n";
+                }
+
+                stringToUse +=
+                    $"Note: attack increases by {Character.MilestoneFlatAttackIncrease} and health increases by {Character.MilestoneFlatHealthIncrease} additionally, every 10 levels";
+                builder.AddField("Level milestone stat increase", stringToUse);
             }
         } else if (zaObject is StatusEffect statusEffect)
         {
-            builder.WithDescription($"Name: {statusEffect.Name} | Type: {statusEffect.EffectType}\n{statusEffect.Description}");
+            builder.WithDescription($"Status Effect: {statusEffect.Name} • Type: {statusEffect.EffectType}\n{statusEffect.Description}");
         }
         else
         {

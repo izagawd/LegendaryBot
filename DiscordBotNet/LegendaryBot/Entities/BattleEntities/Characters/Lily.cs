@@ -118,7 +118,9 @@ public class Lily : CharacterPartials.Character
         StatType.Effectiveness, StatType.Effectiveness, StatType.MaxHealth, StatType.Defense
     ];
     protected override float BaseMaxHealthMultiplier => 1.1f;
+    protected override float BaseDefenseMultiplier => 1.05f;
 
+    protected override float BaseAttackMultiplier => 0.9f;
     public override bool CanSpawnNormally => false;
 
     public override void NonPlayerCharacterAi(ref CharacterPartials.Character target, ref BattleDecision decision)

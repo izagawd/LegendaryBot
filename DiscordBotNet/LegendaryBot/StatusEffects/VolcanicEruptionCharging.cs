@@ -16,7 +16,7 @@ public class VolcanicEruptionCharging : StatusEffect
     public override OverrideTurnType OverrideTurnType => OverrideTurnType.ControlDecision;
     public override int MaxStacks => 1;
 
-    public override UsageResult OverridenUsage(Character affected,ref Character target, ref BattleDecision decision, UsageType usageType)
+    public override UsageResult OverridenUsage(ref Character target, ref BattleDecision decision, UsageType usageType)
     {
         decision = BattleDecision.Other;
         if(Duration == 1)
@@ -24,7 +24,7 @@ public class VolcanicEruptionCharging : StatusEffect
             List<DamageResult> damageResults = [];
 
             
-            foreach (var i in affected.CurrentBattle.Characters.Where(j => j.Team != affected.Team && !j.IsDead))
+            foreach (var i in Affected.CurrentBattle.Characters.Where(j => j.Team != Affected.Team && !j.IsDead))
             {
 
                 var damageResult =  i.Damage(                new DamageArgs(this)
@@ -32,10 +32,10 @@ public class VolcanicEruptionCharging : StatusEffect
                     ElementToDamageWith = Caster.Element,
                     CriticalChance = Caster.CriticalChance,
                     CriticalDamage = Caster.CriticalDamage,
-                    Damage = affected.Attack * 1.7f * 2,
-                    DamageDealer = affected,
+                    Damage = Affected.Attack * 1.7f * 2,
+                    DamageDealer = Affected,
                     CanCrit = true,
-                    DamageText =$"{affected} shot out a very powerful blast that dealt $ damage to {i}!"
+                    DamageText =$"{Affected} shot out a very powerful blast that dealt $ damage to {i}!"
                 });
                 if(damageResult is not null)
                     damageResults.Add(damageResult);
@@ -49,18 +49,18 @@ public class VolcanicEruptionCharging : StatusEffect
                 DamageResults = damageResults,
                 UsageType = UsageType.NormalUsage,
                 TargetType = TargetType.AOE,
-                User = affected
+                User = Affected
             };
         }
 
-        affected.CurrentBattle.AddAdditionalBattleText(
-            $"{affected} is charging up a very powerful attack. {Duration - 1} more turns till it is released");
+        Affected.CurrentBattle.AddAdditionalBattleText(
+            $"{Affected} is charging up a very powerful attack. {Duration - 1} more turns till it is released");
         return new UsageResult(this)
         {
             TargetType = TargetType.None,
             UsageType = usageType,
             Text = "Charging!",
-            User = affected
+            User = Affected
         };
     }
     public override void PassTurn()

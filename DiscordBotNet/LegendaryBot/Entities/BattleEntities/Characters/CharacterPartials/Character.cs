@@ -328,13 +328,17 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     ];
 
 
-    protected IEnumerable<StatType> GetStatsToIncreaseBasedOnLevelMilestone(int levelMilestone)
+    public IEnumerable<StatType> GetStatsToIncreaseBasedOnLevelMilestone(int levelMilestone)
     {
-        
+        if (levelMilestone > 6)
+        {
+            levelMilestone = 6;
+            Console.WriteLine("level milestone cannot be more than 6, cuz max level for a players character is 60, and milestones are reached every 10 levels");
+        }
         foreach (var i in LevelMilestoneStatIncrease)
         {
             levelMilestone--;
-            if(levelMilestone <= 0) yield break;
+            if(levelMilestone < 0) yield break;
             yield return i;
         }
     }

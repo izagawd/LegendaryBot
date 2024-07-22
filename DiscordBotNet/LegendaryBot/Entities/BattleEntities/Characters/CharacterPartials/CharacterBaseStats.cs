@@ -65,16 +65,43 @@ public partial class Character
 
     [NotMapped]
     protected virtual float BaseMaxHealthMultiplier => 1.0f;
+
+    public const int MilestoneFlatAttackIncrease = 30;
+    public const int MilestoneFlatHealthIncrease = 80;
+    public static int GetStatIncreaseMilestoneValue(StatType statType)
+    {
+        switch (statType)
+        {
+            case StatType.Attack:
+            case StatType.Defense:
+            case StatType.MaxHealth:
+                return 4;
+            case StatType.Resistance:
+            case StatType.Effectiveness:
+                return 10;
+            case StatType.Speed:
+                return 6;
+            case StatType.CriticalChance:
+                return 6;
+            case StatType.CriticalDamage:
+                return 10;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(statType), statType, null);
+        }
+        
+    }
+    
     public float GetBaseAttack(int level, int levelMilestone)
     {
         float toCompute = 89 + ((level - 1) * 12);
-        toCompute +=  30 * (levelMilestone - 1);
+  
 
         var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Attack);
-        var percentageToUse = count * 4;
+        var percentageToUse = count * GetStatIncreaseMilestoneValue(StatType.Attack);
 
-        toCompute += toCompute * percentageToUse * 0.01f;
-        return toCompute * BaseAttackMultiplier;
+        toCompute += toCompute * percentageToUse * 0.01f * BaseAttackMultiplier;
+        toCompute += MilestoneFlatAttackIncrease * levelMilestone;
+        return toCompute;
     }
 
  
@@ -83,7 +110,7 @@ public partial class Character
         float toCompute = 0;
 
         var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Effectiveness);
-        toCompute += count * 10;
+        toCompute += count * GetStatIncreaseMilestoneValue(StatType.Effectiveness);
         return toCompute;
     }
 
@@ -93,7 +120,7 @@ public partial class Character
 
         var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Speed);
         toCompute *= BaseSpeedMultiplier;
-        toCompute += count * 6;
+        toCompute += count * GetStatIncreaseMilestoneValue(StatType.Speed);
         return toCompute;
     }
 
@@ -102,16 +129,26 @@ public partial class Character
         float toCompute = 0;
 
         var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Resistance);
-        toCompute += count * 10;
+        toCompute += count * GetStatIncreaseMilestoneValue(StatType.Resistance);
         return toCompute;
     }
 
+
+    public static string GetStatIncreaseMilestoneValueString(StatType statType)
+    {
+        var asInt = GetStatIncreaseMilestoneValue(statType);
+        var asString = asInt.ToString();
+        if (statType != StatType.Speed)
+            asString += '%';
+        return asString;
+
+    }
     public float GetBaseCriticalChance(int level, int levelMilestone)
     {
         float toCompute = 15;
 
         var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.CriticalChance);
-        toCompute += count * 6;
+        toCompute += count * GetStatIncreaseMilestoneValue(StatType.CriticalChance);
         return toCompute;
     }
 
@@ -120,7 +157,7 @@ public partial class Character
         float toCompute = 150;
 
         var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.CriticalDamage);
-        toCompute += count * 10;
+        toCompute += count * GetStatIncreaseMilestoneValue(StatType.CriticalDamage);
         return toCompute;
     }
 
@@ -128,7 +165,7 @@ public partial class Character
     {
         var toCompute = 70 + ((level - 1) * 8.5f);
         var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Defense);
-        var percentageToUse = count * 4;
+        var percentageToUse = count * GetStatIncreaseMilestoneValue(StatType.Defense);
 
         toCompute += toCompute * percentageToUse * 0.01f;
         return toCompute * BaseDefenseMultiplier;
@@ -137,11 +174,12 @@ public partial class Character
     public float GetBaseMaxHealth(int level, int levelMilestone)
     {
         float toCompute = 295 + ((level - 1) * 75);
-        toCompute +=  80 * (levelMilestone - 1);
-        var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.MaxHealth);
-        var percentageToUse = count * 4;
 
-        toCompute += toCompute * percentageToUse * 0.01f;
-        return toCompute * BaseMaxHealthMultiplier;
+        var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.MaxHealth);
+        var percentageToUse = count * GetStatIncreaseMilestoneValue(StatType.MaxHealth);
+
+        toCompute += toCompute * percentageToUse * 0.01f * BaseMaxHealthMultiplier;
+        toCompute += MilestoneFlatHealthIncrease * levelMilestone;
+        return toCompute;
     }
 }
