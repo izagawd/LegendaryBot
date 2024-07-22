@@ -5,7 +5,7 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 public class AttackDebuff : StatusEffect, IStatsModifier
 {
 
-    protected AttackDebuff(){}
+    public AttackDebuff(){}
     public override int MaxStacks => 1;
 
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
