@@ -60,7 +60,7 @@ public class ViewDescription : GeneralCommandClass
                 }
 
                 stringToUse +=
-                    $"Note: attack increases by {Character.MilestoneFlatAttackIncrease} and health increases by {Character.MilestoneFlatHealthIncrease} additionally, every 10 levels";
+                    $"\nAttack increases by {Character.MilestoneFlatAttackIncrease} and health increases by {Character.MilestoneFlatHealthIncrease} additionally for every 10 levels as well.";
                 builder.AddField("Level milestone stat increase", stringToUse);
             }
         } else if (zaObject is StatusEffect statusEffect)

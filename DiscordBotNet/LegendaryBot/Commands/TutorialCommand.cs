@@ -14,13 +14,12 @@ public class TutorialCommand : GeneralCommandClass
     public async Task Execute(CommandContext ctx)
     {
         const string tutorialString =
-            "To start using bot, use `/begin` Commands. To see which teams you have, use `/display teams`\n" +
-            "To change equipped team, use `/team equip-team` use `/help team` to see more team commands" +
+            "To start using bot, use `/begin`.\nto see which teams you have, use `/display teams`" +
+            "\nTo change equipped team, use `/team equip-team` use `/help team` to see more team commands" +
             "\nTo battle a friend, use `/challenge @user`." +
-            "If you want to see what things you can get, use `/list-all-entities\n`" +
-            "say you want to add character `lily` to your inventory, you can use" +
-            "\n`give-me lily 1` which gives you one copy of lily" +
-            "\n to fight against any character, you can use the /hunt command" +
+            "\nIf you want to see what things you can get in this game, use `/display all-entities`"+
+            "\n to use energy to get materials, use `/journey`" +
+            "\nYou can do daily quests with `/quest`" +
             "\nNote: a blessing is like a weapon from genshin, or you could say a lightcone from honkai star rail";
         var embed = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
