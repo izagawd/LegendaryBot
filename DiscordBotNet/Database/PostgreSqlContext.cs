@@ -27,7 +27,6 @@ public class PostgreSqlContext : DbContext
     
 
 
-    private static readonly Type[] EntityClasses;
 
     public DbSet<UserData> UserData { get; set; }
     public DbSet<GuildData> GuildDatas { get; set; }
