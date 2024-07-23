@@ -13,7 +13,9 @@ using DiscordBotNet.LegendaryBot.Commands;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
+using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.Rewards;
+using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.EventArgs;
@@ -308,7 +310,36 @@ public static class Bot
 
     private async static Task DoShitAsync()
     {
-     
+        var simulator = new BattleSimulator([new CoachChad(), new CoachChad(), new CoachChad(), new CoachChad()],
+            [new CoachChad(), new CoachChad(), new CoachChad(), new CoachChad()]);
+
+
+        foreach (var i in simulator.CharacterTeams)
+        {
+            i.CurrentBattle = simulator;
+            foreach (var j in i)
+            {
+                j.Team = i;
+                simulator.SetupCharacterForThisBattle(j);
+                j.AddStatusEffects([
+                    new DefenseBuff() { Caster = j }, new DefenseBuff() { Caster = j }, new DefenseBuff() { Caster = j },
+                    new DefenseBuff() { Caster = j }, new DefenseBuff() { Caster = j },
+                ]);
+            }   
+        }
+
+        while (true)
+        {
+            var newEvent = new CharacterPostDamageEventArgs(Activator.CreateInstance<DamageResult>());
+
+            var first = simulator.Characters.First();
+            
+            var stop = new Stopwatch(); stop.Start();
+            var attack = first.Attack;
+            stop.Stop();
+            stop.Elapsed.TotalMicroseconds.Print();
+ 
+        }
 
     }
     private static async Task Main(string[] args)

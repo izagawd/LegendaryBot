@@ -417,7 +417,7 @@ public partial class BattleSimulator
 
             }
 
-            var statusEffectsCopy = characterToDisplayBattleInfo.StatusEffects;
+            var statusEffectsCopy = characterToDisplayBattleInfo.StatusEffects.ToArray();
             if (statusEffectsCopy.Any())
             {
                 descriptionStringBuilder.Append("Status Effects\n\n");
@@ -789,7 +789,7 @@ public partial class BattleSimulator
             
             ActiveCharacter.CombatReadiness = 0;
             
-            foreach (var i in ActiveCharacter.StatusEffects)
+            foreach (var i in ActiveCharacter.StatusEffects.ToArray())
             {
 
                 //this code executes for status effects that occur just before the beginning of the turn
@@ -1122,7 +1122,7 @@ public partial class BattleSimulator
             }
 
  
-            foreach (var i in ActiveCharacter.StatusEffects)
+            foreach (var i in ActiveCharacter.StatusEffects.ToArray())
             {
                 if (i.ExecuteStatusEffectAfterTurn && ActiveCharacter.StatusEffects.Contains(i))
                 {
