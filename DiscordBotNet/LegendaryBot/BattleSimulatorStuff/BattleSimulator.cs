@@ -244,7 +244,6 @@ public partial class BattleSimulator
             return;
         }
 
-        DynamicMethod method;
 
       
         
