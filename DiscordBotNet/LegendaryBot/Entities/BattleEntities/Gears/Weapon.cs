@@ -5,7 +5,11 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 public class Weapon : Gear
 {
 
-    public override int TypeId => 6;
+    public Weapon()
+    {
+        TypeId = 6;
+    }
+  
     public sealed override IEnumerable<Type> PossibleMainStats =>
     [
         GearStat.AttackFlatType,

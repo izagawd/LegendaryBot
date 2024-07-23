@@ -112,7 +112,7 @@ public class Arise : Ultimate
 }
 public class Thana : CharacterPartials.Character
 {
-    public override int TypeId => 8;
+
     public override Rarity Rarity =>Rarity.FiveStar;
     public override DiscordColor Color => DiscordColor.Brown;
 
@@ -121,6 +121,7 @@ public class Thana : CharacterPartials.Character
 
     public Thana()
     {
+        TypeId = 8;
         BasicAttack = new SoulAttack(){User = this};
         Skill = new YourLifeEnergyIsMine(){User = this};
         Ultimate = new Arise(){User = this};

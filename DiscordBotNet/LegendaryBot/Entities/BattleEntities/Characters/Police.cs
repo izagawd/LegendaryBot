@@ -82,13 +82,14 @@ public class IAmShooting : Skill
 }
 public class Police : CharacterPartials.Character
 {
-    public override int TypeId => 4;
+
     public override Rarity Rarity => Rarity.TwoStar;
 
 
 
     public Police()
     {
+        TypeId = 4;
         BasicAttack = new DoNotResist(){User = this};
         Skill = new IAmShooting(){User = this};
      

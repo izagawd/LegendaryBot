@@ -118,7 +118,7 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
 }
 public class Slasher : CharacterPartials.Character
 {
-    public override int TypeId => 6;
+  
     public override Rarity Rarity => Rarity.FourStar;
     public override DiscordColor Color => DiscordColor.Brown;
 
@@ -126,6 +126,7 @@ public class Slasher : CharacterPartials.Character
 
     public Slasher()
     {
+        TypeId = 6;
         Ultimate = new ConsecutiveSlashesOfPrecision(){User = this};
         Skill = new WindSlash(){User = this};
         BasicAttack = new SimpleSlashOfPrecision(){User = this};

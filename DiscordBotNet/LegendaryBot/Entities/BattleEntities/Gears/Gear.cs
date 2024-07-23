@@ -13,7 +13,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 {
 
-    public abstract int TypeId { get; }
+    public int TypeId { get; protected init; }
 
     public bool CanBeTraded => true;
 
@@ -187,13 +187,13 @@ public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
     public void Configure(EntityTypeBuilder<Gear> entity)
     {
         entity.HasKey(i => i.Id);
-        var starting = entity.HasDiscriminator<int>("Discriminator");
+        var starting = entity.HasDiscriminator(i => i.TypeId);
         foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Gear>())
         {
             starting = starting.HasValue(i.GetType(), i.TypeId);
         }
 
-        entity.HasIndex(nameof(Gear.CharacterId), "Discriminator")
+        entity.HasIndex(i => new{i.TypeId, i.CharacterId})
             .IsUnique();
         entity.HasOne(i => i.MainStat)
             .WithOne()

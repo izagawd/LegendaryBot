@@ -108,12 +108,13 @@ public class YouCanMakeItEveryone : Ultimate
 }
 public class Cheerleader : CharacterPartials.Character
 {
-    public override int TypeId => 12;
+
 
     public override Rarity Rarity => Rarity.FourStar;
 
     public Cheerleader()
     {
+        TypeId = 12;
         BasicAttack = new PomPomAttack(){User = this};
         Skill = new YouCanDoIt(){User = this};
         Ultimate = new YouCanMakeItEveryone(){User = this};

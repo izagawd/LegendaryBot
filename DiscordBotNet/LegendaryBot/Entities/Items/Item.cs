@@ -14,9 +14,9 @@ public class ItemDatabaseConfiguration : IEntityTypeConfiguration<Item>
     public void Configure(EntityTypeBuilder<Item> builder)
     {
         
-        builder.HasKey("Discriminator", nameof(Item.UserDataId));
-        var starting = builder.HasDiscriminator<int>("Discriminator");
-
+        builder.HasKey(i => new{i.TypeId, i.UserDataId});
+   
+        var starting = builder.HasDiscriminator(i => i.TypeId);
         foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Item>())
         {
             starting = starting.HasValue(i.GetType(), i.TypeId);
@@ -29,8 +29,8 @@ public abstract class Item : IInventoryEntity
 {
     public bool CanBeTraded => false;
 
-    [NotMapped]
-    public abstract int TypeId { get;  }
+
+    public int TypeId { get; protected init; }
     public string DisplayString => $"`{Name} • Stacks: {Stacks}`";
     public  Type TypeGroup => typeof(Item);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;

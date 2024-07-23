@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using CommunityToolkit.HighPerformance;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
@@ -101,20 +102,11 @@ public class PostgreSqlContext : DbContext
         await Database.EnsureCreatedAsync();
       
     }
-
-
     
 
-    private static readonly IEnumerable<Type> QuestTypes =
-        Assembly.GetExecutingAssembly()
-            .GetTypes()
-            .Where(i => i.IsSubclassOf(typeof(Quest)) 
-                        && !i.IsAbstract).ToArray();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
-
         modelBuilder
             .UsePropertyAccessMode(PropertyAccessMode.Property);
         foreach (var i in TypesFunctionality.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Quest))))
@@ -127,14 +119,10 @@ public class PostgreSqlContext : DbContext
         {
             modelBuilder.Entity(entityType);
         }
-
-    
         foreach (var i in TypesFunctionality.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(GearStat))))
         {
             modelBuilder.Entity(i);
         }
-
-
         modelBuilder
             .ApplyConfiguration(new ItemDatabaseConfiguration())
             .ApplyConfiguration(new UserDataDatabaseConfiguration())
@@ -146,11 +134,5 @@ public class PostgreSqlContext : DbContext
             .ApplyConfiguration(new GearStatDatabaseConfiguration())
             .ApplyConfiguration(new BlessingDatabaseConfiguration())
             .ApplyConfiguration(new GuildDataDatabaseConfig());
-
-
-
-
-
-
     }
 }

@@ -98,7 +98,7 @@ public class VolcanicEruption : Ultimate
 }
 public class Blast : Character
 {
-    public override int TypeId => 2;
+
     public override Rarity Rarity => Rarity.FourStar;
     public override DiscordColor Color => DiscordColor.Brown;
 
@@ -110,7 +110,7 @@ public class Blast : Character
 
     public Blast()
     {
-       
+        TypeId = 2;
         Ultimate = new VolcanicEruption(){User = this};
         Skill = new BlowAway(){User = this};
         BasicAttack = new MethaneSlap(){User = this};

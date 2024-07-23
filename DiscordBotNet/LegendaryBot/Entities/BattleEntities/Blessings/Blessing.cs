@@ -13,7 +13,7 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
     public void Configure(EntityTypeBuilder<Blessing> builder)
     {
         builder.HasKey(i => i.Id);
-        var starting = builder.HasDiscriminator<int>("Discriminator");
+        var starting = builder.HasDiscriminator(i => i.TypeId);
         foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Blessing>())
         {
             starting = starting.HasValue(i.GetType(), i.TypeId);
@@ -57,8 +57,8 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 
     public bool CanBeTraded => true;
 
-    [NotMapped]
-    public abstract int TypeId { get;  }
+ 
+    public  int TypeId { get; protected init; }
     public string DisplayString => $"`{Name}`";
     public  Type TypeGroup => typeof(Blessing);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;

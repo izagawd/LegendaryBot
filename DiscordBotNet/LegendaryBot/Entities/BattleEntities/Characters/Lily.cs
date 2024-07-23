@@ -108,7 +108,7 @@ public class Lily : CharacterPartials.Character
     protected override float BaseSpeedMultiplier => 1.15f;
 
 
-    public override int TypeId => 3;
+ 
     public override Rarity Rarity => Rarity.FourStar;
     public override DiscordColor Color => DiscordColor.HotPink;
     
@@ -148,7 +148,8 @@ public class Lily : CharacterPartials.Character
 
 
     public Lily()
-    { 
+    {
+        TypeId = 3;
         Skill = new BlossomTouch(){User = this};
         Ultimate  = new LilyOfTheValley(){User = this};
         BasicAttack = new ChamomileSachetWhack(){User = this};

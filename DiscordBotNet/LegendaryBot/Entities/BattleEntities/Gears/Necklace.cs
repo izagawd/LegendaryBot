@@ -4,7 +4,12 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
 public class Necklace : Gear
 {
-    public override int TypeId => 4;
+
+
+    public Necklace()
+    {
+        TypeId = 4;
+    }
     public sealed override IEnumerable<Type> PossibleMainStats =>
     [
         GearStat.AttackPercentageType,

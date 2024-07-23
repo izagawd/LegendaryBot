@@ -110,7 +110,7 @@ public class IWillProtectUs : Ultimate
 
 public class RoyalKnight : CharacterPartials.Character
 {
-    public override int TypeId => 5;
+
     protected override float BaseAttackMultiplier => 0.85f;
     protected override float BaseMaxHealthMultiplier => 1.125f;
     protected override float BaseDefenseMultiplier => 1.15f;
@@ -120,6 +120,7 @@ public class RoyalKnight : CharacterPartials.Character
     
     public RoyalKnight()
     {
+        TypeId = 5;
         BasicAttack = new ShieldBash(){User = this};
         Ultimate = new IWillProtectUs(){User = this};
         Skill = new IWillBeYourShield(){User = this};

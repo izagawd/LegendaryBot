@@ -6,6 +6,10 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class PowerOfThePhoenix : Blessing, IBattleEventListener
 {
+    public PowerOfThePhoenix()
+    {
+        TypeId = 1;
+    }
     public override Rarity Rarity => Rarity.FiveStar;
 
     public int GetHealthPercentRecovering(int level)
@@ -34,5 +38,6 @@ public class PowerOfThePhoenix : Blessing, IBattleEventListener
         return $"At the start of the character's turn, they recover {GetHealthPercentRecovering(level)}% of their health";
     }
 
-    public override int TypeId => 1;
+  
+
 }

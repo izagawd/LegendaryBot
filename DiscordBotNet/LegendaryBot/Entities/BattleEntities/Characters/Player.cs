@@ -144,7 +144,7 @@ public class Player : CharacterPartials.Character
 
     public override bool CanBeTraded => false;
     protected override float BaseAttackMultiplier => 1.05f;
-    public override int TypeId => 1;
+
     public override Rarity Rarity => Rarity.FiveStar;
 
 
@@ -157,6 +157,7 @@ public class Player : CharacterPartials.Character
 
     public Player()
     {
+        TypeId = 1;
         Element = Element.Fire;
         BasicAttack = new FourthWallBreaker(){User = this};
         Skill = new FireBall(){User = this};

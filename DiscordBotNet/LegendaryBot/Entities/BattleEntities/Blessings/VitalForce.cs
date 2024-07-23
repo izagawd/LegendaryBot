@@ -25,7 +25,11 @@ public class VitalForce : Blessing, IBattleEventListener, IStatsModifier
     
     
     public override Rarity Rarity => Rarity.ThreeStar;
-    public override int TypeId => 4;
+
+    public VitalForce()
+    {
+        TypeId = 4;
+    }
     public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
     {
         yield return new DefensePercentageModifierArgs

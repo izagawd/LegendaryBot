@@ -34,5 +34,10 @@ public class GoingAllOut : Blessing, IBattleEventListener
         
     }
     public override Rarity Rarity => Rarity.FourStar;
-    public override int TypeId => 3;
+
+    public GoingAllOut()
+    {
+        TypeId = 3;
+    }
+
 }

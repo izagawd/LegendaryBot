@@ -90,9 +90,10 @@ public class ThumbsUp : Skill
 public class CoachChad : CharacterPartials.Character, IBattleEventListener
 {
     public override Rarity Rarity => Rarity.FourStar;
-    public override int TypeId => 11;
+
     public CoachChad()
     {
+        TypeId = 11;
         BasicAttack = new GigaPunch(){User = this};
         Skill = new ThumbsUp(){User = this};
         Ultimate  = new MuscleFlex(){User = this};

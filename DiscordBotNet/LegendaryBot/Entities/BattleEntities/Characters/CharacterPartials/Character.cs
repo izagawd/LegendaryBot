@@ -45,7 +45,7 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
             .HasColumnName(nameof(Character.Level));
         entity.Property(i => i.Experience)
             .HasColumnName(nameof(Character.Experience));
-        var starting = entity.HasDiscriminator<int>("Discriminator");
+        var starting = entity.HasDiscriminator(i => i.TypeId);
         foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Character>())
         {
             starting = starting.HasValue(i.GetType(), i.TypeId);
@@ -70,7 +70,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     public int Number { get; set; }
 
  
-    public abstract int TypeId { get;  }
+    public int TypeId { get; protected init; }
 
     public string DisplayString
     {
