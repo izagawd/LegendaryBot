@@ -105,7 +105,7 @@ public partial class BattleSimulator
 
     public sealed class BattleEventMethod<TInvokerType, TBattleEventArgs> : BattleEventMethod where TBattleEventArgs : BattleEventArgs
     {
-        public static string actionName => nameof(_action);
+        public static string ActionName => nameof(_action);
         private Action<TInvokerType, TBattleEventArgs> _action = null!;
         public override void Invoke(object listener, BattleEventArgs args)
         {
