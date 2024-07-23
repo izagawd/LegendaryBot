@@ -7,6 +7,8 @@ using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
+using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
+using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Commands;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
@@ -295,9 +297,10 @@ public static class Bot
     }
 
 
+
     private async static Task DoShitAsync()
     {
-
+   
     }
     private static async Task Main(string[] args)
     {

@@ -145,41 +145,69 @@ public class BattleSimulator
 
     static BattleSimulator()
     {
+        
+        List<MethodInfo> invalidMethods = [];
         foreach (var i in Assembly.GetExecutingAssembly().GetTypes().Where(j => !j.IsAbstract && j.GetInterfaces().Contains(typeof(IBattleEventListener))))
         {
-            _methodsCache[i] = i.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-                .Where(j => j.GetCustomAttribute<BattleEventListenerMethodAttribute>() is not null)
-                .ToDictionary(j => j, j => j.GetCustomAttribute<BattleEventListenerMethodAttribute>())!;
+            foreach (var j in i.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
+                         .Select(j => new{method = j, attribute = j.GetCustomAttribute<BattleEventListenerMethodAttribute>()})
+                         .Where(j => j.attribute is not null))
+            {
+                var parameters = j.method.GetParameters();
+                
+                if (parameters.Length != 1)
+                {
+                    invalidMethods.Add(j.method);
+                    continue;
+                    
+                }
+                var parameter = parameters[0];
+                if (!parameter.ParameterType.IsRelatedToType(typeof(BattleEventArgs)))
+                {
+                    invalidMethods.Add(j.method);
+                    continue;
+                }
+
+                var cache = new EventMethodDetails(j.method, j.attribute!, parameter.ParameterType);
+                if (_methodsCache.TryGetValue(i,out var list))
+                {
+                    list.Add(cache);
+                }
+                else
+                {
+                    _methodsCache[i] = [cache];
+                }
+            }
         }
-
-        List<MethodInfo> invalidMethods = [];
-
-        foreach (var i in _methodsCache.SelectMany(i => i.Value.Keys))
-        {
-            if(i.GetParameters().Length != 1 ||!i.GetParameters()[0].ParameterType.IsRelatedToType(typeof(BattleEventArgs)) )
-                invalidMethods.Add(i);
-
-        }
-
+        
         var stringBuilder = new StringBuilder();
         if (invalidMethods.Count > 0)
         {
             stringBuilder.Append(
                 $"The following methods need to have one parameter, " +
-                $"and that one parameter should be a type or subtype of {nameof(BattleEventArgs)},\n"
+                $"and that one parameter should be a type or subtype of {typeof(BattleEventArgs)},\n"
                 +$"since it uses the {nameof(BattleEventListenerMethodAttribute)} to listen to events:\n");
 
             foreach (var i in invalidMethods)
             {
                 stringBuilder.Append($"Method \"{i.Name}\" from class \"{i.DeclaringType}\"");
             }
-
-            stringBuilder.ToString();
-            Environment.Exit(1);
+            throw new Exception(stringBuilder.ToString());
         }
     }
-
-    private static ConcurrentDictionary<Type, Dictionary<MethodInfo,BattleEventListenerMethodAttribute>> _methodsCache = [];
+    class EventMethodDetails
+    {
+        public MethodInfo MethodInfo { get; }
+        public BattleEventListenerMethodAttribute Attribute { get; }
+        public Type ParameterType { get; }
+        public EventMethodDetails(MethodInfo methodInfo, BattleEventListenerMethodAttribute attribute, Type parameterType)
+        {
+            MethodInfo = methodInfo;
+            Attribute = attribute;
+            ParameterType = parameterType;
+        }
+    }
+    private static ConcurrentDictionary<Type, List<EventMethodDetails>> _methodsCache = [];
     
     /// <summary>
     /// Used to get entities connected to this battle simulator 
@@ -210,23 +238,16 @@ public class BattleSimulator
         /// The entity to invoke the method with
         /// </summary>
         public IBattleEventListener Entity { get; }
-    
+
         /// <summary>
         /// The method to invoke
         /// </summary>
-        public MethodInfo MethodInfo { get; }
-        
-        /// <summary>
-        /// The BattleEventListener attribute the method has
-        /// </summary>
-        public BattleEventListenerMethodAttribute Attribute { get;}
-        public BattleEventListenerMethodContainer(IBattleEventListener entity,MethodInfo methodInfo,
-            BattleEventListenerMethodAttribute attribute)
+        public EventMethodDetails EventMethodDetails { get; }
+        public BattleEventListenerMethodContainer(IBattleEventListener entity,EventMethodDetails eventMethodDetails)
         {
 
             Entity = entity;
-            MethodInfo = methodInfo;
-            Attribute = attribute;
+            EventMethodDetails = eventMethodDetails;
         }
         
     }
@@ -241,11 +262,11 @@ public class BattleSimulator
             foreach (var j in 
                      _methodsCache[i.GetType()])
             {
-                yield return new BattleEventListenerMethodContainer(i, j.Key, j.Value);
+                yield return new BattleEventListenerMethodContainer(i, j);
             }
         }
     }
-  /// <summary>
+    /// <summary>
     /// 
     /// This will be used to invoke an event if it happens
     /// 
@@ -262,12 +283,12 @@ public class BattleSimulator
         }
 
 
-            
+        var eventArgsType = eventArgs.GetType();
         foreach (var i in GetAllEventMethods()
-                     .Where(k => eventArgs.GetType().IsRelatedToType(k.MethodInfo.GetParameters()[0].ParameterType))
-                     .OrderByDescending(j => j.Attribute.Priority))
+                     .Where(k => eventArgsType.IsRelatedToType(k.EventMethodDetails.ParameterType))
+                     .OrderByDescending(j => j.EventMethodDetails.Attribute.Priority))
         {
-            i.MethodInfo.Invoke(i.Entity, [eventArgs]);
+            i.EventMethodDetails.MethodInfo.Invoke(i.Entity, [eventArgs]);
         }
 
         
