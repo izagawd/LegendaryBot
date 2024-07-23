@@ -30,6 +30,7 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
         entity.HasKey(i => i.Id);
         entity.HasIndex(i => new{i.Number, i.UserDataId})
             .IsUnique();
+        // generated on add even though a trigger handles it, just in case the trigger doesn't work
         entity.Property(i => i.Number)
             .ValueGeneratedOnAdd();
         

@@ -22,7 +22,7 @@ public class GiveMe : GeneralCommandClass
         var type =TypesFunctionality.AllAssemblyTypes.FirstOrDefault(i => i.IsClass 
                                                                       && i.GetInterfaces().Contains(typeof(IInventoryEntity)) && !i.IsAbstract
             && i.Name.ToLower() == simplifiedEntityName);
-        if (ctx.User.Id != Bot.Izasid)
+        if (ctx.User.Id != Bot.Izasid && ctx.User.Id != Bot.Testersid)
         {
             await ctx.RespondAsync("Only izagawd can use this command");
         }

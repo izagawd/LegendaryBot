@@ -12,6 +12,7 @@ using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Commands;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DiscordBotNet.LegendaryBot.Results;
@@ -311,7 +312,8 @@ public static class Bot
 
     private async static Task DoShitAsync()
     {
-    
+        var post = new PostgreSqlContext();
+        await post.ResetDatabaseAsync();
 
     }
     private static async Task Main(string[] args)

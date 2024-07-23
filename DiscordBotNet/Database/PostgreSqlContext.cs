@@ -89,17 +89,46 @@ public class PostgreSqlContext : DbContext
             .EnableSensitiveDataLogging();
     
     }
-    public void ResetDatabase()
+
+    /// <param name="tableName">WARNING: case insensitive</param>
+    /// <param name="userDataIdColumnName">case sensitive</param>
+    /// <param name="numberColumnName">case sensitive</param>
+    private async Task SetupNumberIncrementorFor(string tableName, string userDataIdColumnName ,
+        string numberColumnName )
     {
-        Database.EnsureDeleted();
-        Database.EnsureCreated();
-      
+        var functionName = $"set_number_for_new_{tableName.ToLower()}_row";
+        #pragma warning disable EF1002
+        await Database.ExecuteSqlRawAsync(@$"
+CREATE OR REPLACE FUNCTION {functionName}()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Set the Number to the maximum Number + 1 where UserDataId matches
+    NEW.""{numberColumnName}"" := COALESCE(
+        (SELECT COALESCE(MAX(""{numberColumnName}""), 0) + 1
+         FROM ""{tableName}""
+         WHERE ""{userDataIdColumnName}"" = NEW.""{userDataIdColumnName}""),
+       1                                   
+    );
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+   CREATE OR REPLACE TRIGGER {functionName}_trigger
+BEFORE INSERT ON ""{tableName}""
+FOR EACH ROW
+EXECUTE FUNCTION {functionName}();
+");
+#pragma warning restore EF1002
     }
     public async Task ResetDatabaseAsync()
     {
         await Database.EnsureDeletedAsync();
         await Database.EnsureCreatedAsync();
-      
+        await SetupNumberIncrementorFor(nameof(Gears),nameof(Gear.UserDataId),
+            nameof(Gear.Number));
+        await SetupNumberIncrementorFor(nameof(Characters),
+            nameof(Character.UserDataId),nameof(Character.Number));
+        
+
     }
     
 
