@@ -221,10 +221,12 @@ public partial class BattleSimulator
     {
         foreach (var i in GetConnectedEntities<IBattleEventListener>())
         {
-            foreach (var j in 
-                     _methodsCache[i.GetType()])
+            if (_methodsCache.TryGetValue(i.GetType(), out var methodDetailsList))
             {
-                yield return new BattleEventListenerMethodContainer(i, j);
+                foreach (var j in methodDetailsList)
+                {
+                    yield return new BattleEventListenerMethodContainer(i, j);
+                }
             }
         }
     }
