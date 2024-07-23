@@ -22,7 +22,7 @@ public class CharacterTeam : ISet<CharacterPartials.Character>
     /// <returns></returns>
     public string IncreaseExp(long exp)
     {
-        exp = exp / Count;
+        exp /= Count;
         var text = "";
         foreach (var i in this)
         {
