@@ -163,28 +163,35 @@ public partial class BattleSimulator
         }
     }
     private static ConcurrentDictionary<Type, List<EventMethodDetails>> _methodsCache = [];
-    
+
+
+    public IEnumerable<object> GetConnectedEntities()
+    {
+        yield return this;
+        foreach (var i in Characters)
+        {
+            yield return i;
+            foreach (var j in i.MoveList)
+            {
+                yield return j;
+            }
+            foreach (var j in i.StatusEffects)
+            {
+                yield return j;
+            }
+            if (i.Blessing is  not null) yield  return i.Blessing;
+        }
+    }
     /// <summary>
     /// Used to get entities connected to this battle simulator 
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    private IEnumerable<T> GetConnectedEntities<T>()
+    public IEnumerable<T> GetConnectedEntities<T>()
     {
-        if (this is T thisAsT) yield return thisAsT;
-        foreach (var i in Characters)
+        foreach (var i in GetConnectedEntities())
         {
-            if (i is T characterAsT) yield return characterAsT;
-            foreach (var j in i.MoveList.OfType<T>())
-            {
-                yield return j;
-            }
-
-            foreach (var j in i.StatusEffects.OfType<T>())
-            {
-                yield return j;
-            }
-            if (i.Blessing is T blessingAsT) yield  return blessingAsT;
+            if (i is T tValue) yield return tValue;
         }
     }
     struct BattleEventListenerMethodContainer
