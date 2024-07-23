@@ -1,6 +1,8 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
@@ -27,7 +29,7 @@ public enum BattleDecision
 }
 
 
-public class BattleSimulator
+public partial class BattleSimulator
 {
 
 
@@ -143,66 +145,19 @@ public class BattleSimulator
 
 
 
+    public static void Idk(BattleEventArgs idk){}
     static BattleSimulator()
     {
-        
-        List<MethodInfo> invalidMethods = [];
-        foreach (var i in Assembly.GetExecutingAssembly().GetTypes().Where(j => !j.IsAbstract && j.GetInterfaces().Contains(typeof(IBattleEventListener))))
-        {
-            foreach (var j in i.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-                         .Select(j => new{method = j, attribute = j.GetCustomAttribute<BattleEventListenerMethodAttribute>()})
-                         .Where(j => j.attribute is not null))
-            {
-                var parameters = j.method.GetParameters();
-                
-                if (parameters.Length != 1)
-                {
-                    invalidMethods.Add(j.method);
-                    continue;
-                    
-                }
-                var parameter = parameters[0];
-                if (!parameter.ParameterType.IsRelatedToType(typeof(BattleEventArgs)))
-                {
-                    invalidMethods.Add(j.method);
-                    continue;
-                }
-
-                var cache = new EventMethodDetails(j.method, j.attribute!, parameter.ParameterType);
-                if (_methodsCache.TryGetValue(i,out var list))
-                {
-                    list.Add(cache);
-                }
-                else
-                {
-                    _methodsCache[i] = [cache];
-                }
-            }
-        }
-        
-        var stringBuilder = new StringBuilder();
-        if (invalidMethods.Count > 0)
-        {
-            stringBuilder.Append(
-                $"The following methods need to have one parameter, " +
-                $"and that one parameter should be a type or subtype of {typeof(BattleEventArgs)},\n"
-                +$"since it uses the {nameof(BattleEventListenerMethodAttribute)} to listen to events:\n");
-
-            foreach (var i in invalidMethods)
-            {
-                stringBuilder.Append($"Method \"{i.Name}\" from class \"{i.DeclaringType}\"");
-            }
-            throw new Exception(stringBuilder.ToString());
-        }
+        SetupBattleEventDelegatorStuff();
     }
     class EventMethodDetails
     {
-        public MethodInfo MethodInfo { get; }
+        public BattleEventMethod BattleEventMethod { get; }
         public BattleEventListenerMethodAttribute Attribute { get; }
         public Type ParameterType { get; }
-        public EventMethodDetails(MethodInfo methodInfo, BattleEventListenerMethodAttribute attribute, Type parameterType)
+        public EventMethodDetails(BattleEventMethod battleEventMethod, BattleEventListenerMethodAttribute attribute, Type parameterType)
         {
-            MethodInfo = methodInfo;
+            BattleEventMethod = battleEventMethod;
             Attribute = attribute;
             ParameterType = parameterType;
         }
@@ -282,16 +237,21 @@ public class BattleSimulator
             return;
         }
 
+        DynamicMethod method;
 
+      
+        
         var eventArgsType = eventArgs.GetType();
         foreach (var i in GetAllEventMethods()
                      .Where(k => eventArgsType.IsRelatedToType(k.EventMethodDetails.ParameterType))
                      .OrderByDescending(j => j.EventMethodDetails.Attribute.Priority))
         {
-            i.EventMethodDetails.MethodInfo.Invoke(i.Entity, [eventArgs]);
-        }
-
         
+            i.EventMethodDetails.BattleEventMethod.Invoke(i.Entity,eventArgs);
+
+        }
+        
+
     }
 
 

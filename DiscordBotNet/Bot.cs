@@ -297,10 +297,19 @@ public static class Bot
     }
 
 
+    class Bruh : IBattleEventListener
+    {
+        [BattleEventListenerMethod]
+        public void A(TurnEndEventArgs a)
+        {
+            
+        }
+    }
 
     private async static Task DoShitAsync()
     {
-   
+     
+
     }
     private static async Task Main(string[] args)
     {
