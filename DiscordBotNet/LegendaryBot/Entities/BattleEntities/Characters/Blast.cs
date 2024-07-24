@@ -8,11 +8,11 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class MethaneSlap : BasicAttack
 {
-    public override string GetDescription(CharacterPartials.Character character) => $"Slaps the enemy, " +
+    public override string GetDescription(Character character) => $"Slaps the enemy, " +
                                                                   $"producing methane around the enemy, with a " +
                                                                   $"{DetonateChance}% chance to detonate all the bombs the target has";
     public int DetonateChance => 75;
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
         {
@@ -45,15 +45,15 @@ public class BlowAway : Skill
 {
     
     public override int MaxCooldown => 4;
-    public override string GetDescription(CharacterPartials.Character character) => $"Throws multiple bombs at the enemy, with a {BombInflictChance}% chance each to inflict Bomb status effect";
+    public override string GetDescription(Character character) => $"Throws multiple bombs at the enemy, with a {BombInflictChance}% chance each to inflict Bomb status effect";
 
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
     public int BombInflictChance => 100;
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
                 
         User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} threw multiple bombs at the opposing team!");
@@ -79,16 +79,16 @@ public class BlowAway : Skill
 }
 public class ExplosionBlast : Ultimate
 {
-    public override string GetDescription(CharacterPartials.Character character) => $"User does an explosion blast, attacking all enemies!";
+    public override string GetDescription(Character character) => $"User does an explosion blast, attacking all enemies!";
     
 
     public override int MaxCooldown  => 6;
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
         
         foreach (var i in GetPossibleTargets())

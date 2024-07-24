@@ -162,7 +162,7 @@ public class QuoteCommand : GeneralCommandClass
             await ctx.RespondAsync(embedBuilder);
             return;
         }
-        userData.Quotes.Add(new LegendaryBot.Quote{QuoteValue = text});
+        userData.Quotes.Add(new Quote{QuoteValue = text});
         await DatabaseContext.SaveChangesAsync();
         embedBuilder
             .WithTitle("Success!")

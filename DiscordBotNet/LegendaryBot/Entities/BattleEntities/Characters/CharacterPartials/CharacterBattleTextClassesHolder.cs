@@ -59,7 +59,7 @@ public partial class Character
             }
         }
 
-        public StatusEffectInflictBattleText(CharacterPartials.Character character, StatusEffectInflictResult effectInflictResult, params StatusEffect[] statusEffects)
+        public StatusEffectInflictBattleText(Character character, StatusEffectInflictResult effectInflictResult, params StatusEffect[] statusEffects)
         {
             _affectedCharacters = [character];
             _statusEffects = [..statusEffects];
@@ -90,8 +90,8 @@ public partial class Character
 
 
         private float _combatReadinessChangeAmount;
-        private List<CharacterPartials.Character> _affectedCharacters;
-        public CombatReadinessChangeBattleText(CharacterPartials.Character character,float increaseAmount)
+        private List<Character> _affectedCharacters;
+        public CombatReadinessChangeBattleText(Character character,float increaseAmount)
         {
             _affectedCharacters = [character];
             _combatReadinessChangeAmount = increaseAmount;
@@ -135,7 +135,7 @@ public partial class Character
     }
     class  ExtraTurnBattleText : AdditionalBattleText
     {
-        private List<CharacterPartials.Character> _extraTurners;
+        private List<Character> _extraTurners;
         public override string Text {             get
         {
             var noun = "has";
@@ -148,7 +148,7 @@ public partial class Character
         
         }
 
-        public ExtraTurnBattleText(CharacterPartials.Character extraTurnCharacter)
+        public ExtraTurnBattleText(Character extraTurnCharacter)
         {
             _extraTurners = [extraTurnCharacter];
         }
@@ -168,7 +168,7 @@ public partial class Character
     }
     class  ReviveBattleText : AdditionalBattleText
     {
-        private List<CharacterPartials.Character> _revivedCharacters;
+        private List<Character> _revivedCharacters;
 
         public override string Text
         {
@@ -183,7 +183,7 @@ public partial class Character
             }
         }
 
-        public ReviveBattleText(CharacterPartials.Character revivedCharacter)
+        public ReviveBattleText(Character revivedCharacter)
         {
             _revivedCharacters = [revivedCharacter];
             
@@ -214,8 +214,8 @@ public partial class Character
         }
 
 
-        private List<CharacterPartials.Character> _deadCharacters;
-        public DeathBattleText(CharacterPartials.Character deadCharacter)
+        private List<Character> _deadCharacters;
+        public DeathBattleText(Character deadCharacter)
         {
             _deadCharacters = [deadCharacter];
         }

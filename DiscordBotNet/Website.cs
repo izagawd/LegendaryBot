@@ -99,7 +99,7 @@ public static class Website
                     if (cert is not null && !cert.Verify())
                     {
                         return httpRequestMessage.RequestUri is not null
-                               && httpRequestMessage.RequestUri.ToString().Contains(Website.DomainName);
+                               && httpRequestMessage.RequestUri.ToString().Contains(DomainName);
                     }
                     return cert is not null;
                 };

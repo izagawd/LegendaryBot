@@ -43,13 +43,13 @@ public partial class Character
         
         
         if(succeeded.Count > 0)
-            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded
+            CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded
                 ,succeeded.ToArray()));
         if(resisted.Count > 0)
-            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,StatusEffectInflictResult.Resisted
+            CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Resisted
                 ,resisted.ToArray()));
         if(failed.Count > 0)
-            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,StatusEffectInflictResult.Failed
+            CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Failed
                 ,failed.ToArray()));
         
     }
@@ -94,7 +94,7 @@ public partial class Character
                 
             if (announce)
             {
-                CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,inflictResult, statusEffect));
+                CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,inflictResult, statusEffect));
             }
             return inflictResult;
 
@@ -105,7 +105,7 @@ public partial class Character
             var onlyStatus = arrayOfType.First();
 
             onlyStatus.OptimizeWith(statusEffect);
-            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded, statusEffect));
+            CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded, statusEffect));
 
 
             return StatusEffectInflictResult.Succeeded;
@@ -113,7 +113,7 @@ public partial class Character
         inflictResult = StatusEffectInflictResult.Failed;
         if (announce)
         {
-            CurrentBattle.AddAdditionalBattleText(new Character.StatusEffectInflictBattleText(this,inflictResult, statusEffect));
+            CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,inflictResult, statusEffect));
         }
         return inflictResult;
     }
