@@ -10,7 +10,7 @@ public class DamageArgs
     /// If not null, then a move was used to deal damage
     /// </summary>
     public MoveUsageDetails? MoveUsageDetails { get; }
-    public bool IsFixedDamage { get; set; } = false;
+    public bool IsFixedDamage { get; init; } = false;
     /// <summary>
     /// if null, will not consider element for damage calculation
     /// </summary>

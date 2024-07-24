@@ -28,68 +28,7 @@ public partial class Character
         return healthToRecover;
     }
 
-    /// <param name="damageText">if there is a text for the damage, then use this. Use $ in the string and it will be replaced with the damage dealt</param>
-    /// <param name="caster">The character causing the damage</param>
-    /// <param name="damage">The potential damage</param>
-    public DamageResult FixedDamage(DamageArgs damageArgs)
-    {
-        if (IsDead)
-        {
-            try
-            {
-                throw new Exception("Attempting to damage dead character");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return new DamageResult()
-                    { CanBeCountered = false, Damage = 0, DamageDealer = null, DamageReceiver = null, IsFixedDamage = true};
-            }
-        }
 
-        damageArgs.IsFixedDamage = true;
-        CurrentBattle?.InvokeBattleEvent(new CharacterPreDamageEventArgs(damageArgs));
-        var damageText = damageArgs.DamageText;
-        var damage = damageArgs.Damage;
-        var caster = damageArgs.DamageDealer;
-        var canBeCountered = damageArgs.CanBeCountered;
-        if (damageText is null)
-        {
-            damageText = $"{this} took $ fixed damage!";
-        }
-        CurrentBattle.AddAdditionalBattleText(damageText.Replace("$", damage.Round().ToString()));
-        TakeDamageWhileConsideringShield(damage.Round());
-        DamageResult damageResult;
-        if (damageArgs.MoveUsageDetails.HasValue)
-        {
-            damageResult = new DamageResult(damageArgs.MoveUsageDetails.Value.Move, 
-                damageArgs.MoveUsageDetails.Value.UsageType)
-            {
-              
-                WasCrit = false,
-                Damage = damage.Round(),
-                DamageDealer = caster, 
-                DamageReceiver = this,
-                CanBeCountered = canBeCountered
-            };
-        }
-        else
-        {
-            damageResult = new DamageResult(damageArgs.StatusEffect)
-            {
-              
-                WasCrit = false,
-                Damage = damage.Round(),
-                DamageDealer = caster, 
-                DamageReceiver = this,
-                CanBeCountered = canBeCountered
-            };
-        }
-
-        damageResult.IsFixedDamage = true;
-        CurrentBattle.InvokeBattleEvent(new CharacterPostDamageEventArgs(damageResult));
-        return damageResult;
-    }
         public void TakeDamageWhileConsideringShield(int damage)
     {
         var shield = Shield;
@@ -147,76 +86,89 @@ public partial class Character
             }
         }
         CurrentBattle.InvokeBattleEvent(new CharacterPreDamageEventArgs(damageArgs));
-        var didCrit = false;
-        var defenseToIgnore = Math.Clamp(damageArgs.DefenseToIgnore,0,100);
-        var defenseToUse = (100 - defenseToIgnore) * 0.01f * Defense;
-        var damageModifyPercentage = 0;
-        
-        var damage = DamageFormula(damageArgs.Damage, defenseToUse);
-
-        var advantageLevel = ElementalAdvantage.Neutral;
-        if(damageArgs.ElementToDamageWith is not null)
-            advantageLevel = BattleFunctionality.GetAdvantageLevel(damageArgs.ElementToDamageWith.Value, Element);
-
-        switch (advantageLevel){
-            case ElementalAdvantage.Disadvantage:
-                damageModifyPercentage -= 30;
-                break;
-            case ElementalAdvantage.Advantage:
-                damageModifyPercentage += 30;
-                break;
-        }
-    
-
-
-        damage = (damage * 0.01f * (damageModifyPercentage + 100));
-        var chance = damageArgs.CriticalChance;
-        if (damageArgs.AlwaysCrits)
-        {
-            chance = 100;
-        }
-        if (BasicFunctionality.RandomChance(chance) && damageArgs.CanCrit)
-        {
-
-            damage *= damageArgs.CriticalDamage / 100.0f;
-            didCrit = true;
-        }
-
-        var actualDamage = damage.Round();
         var damageText = damageArgs.DamageText;
         if (damageText is null)
         {
-            damageText = $"{damageArgs.DamageDealer} dealt {actualDamage} damage to {this}!";
+            damageText = $"{damageArgs.DamageDealer} dealt $ damage to {this}!";
         }
 
-        damageText = damageText.Replace("$", actualDamage.ToString());
-
-        switch (advantageLevel)
+        var didCrit = false;
+        float damage = damageArgs.Damage;
+        if (!damageArgs.IsFixedDamage)
         {
-            case ElementalAdvantage.Advantage:
-                damageText = "It's super effective! " + damageText;
-                break;
-            case ElementalAdvantage.Disadvantage:
-                damageText = "It's not that effective... " + damageText;
-                break;
-        }
-    
-
-        if (didCrit)
-            damageText = "A critical hit! " + damageText;
-
-    
-        CurrentBattle.AddAdditionalBattleText(damageText);
+            var defenseToIgnore = Math.Clamp(damageArgs.DefenseToIgnore,0,100);
+            var defenseToUse = (100 - defenseToIgnore) * 0.01f * Defense;
+            var damageModifyPercentage = 0;
         
-        TakeDamageWhileConsideringShield(actualDamage);
+            var computedDamage = DamageFormula(damageArgs.Damage, defenseToUse);
+
+            var advantageLevel = ElementalAdvantage.Neutral;
+            if(damageArgs.ElementToDamageWith is not null)
+                advantageLevel = BattleFunctionality.GetAdvantageLevel(damageArgs.ElementToDamageWith.Value, Element);
+
+            switch (advantageLevel){
+                case ElementalAdvantage.Disadvantage:
+                    damageModifyPercentage -= 30;
+                    break;
+                case ElementalAdvantage.Advantage:
+                    damageModifyPercentage += 30;
+                    break;
+            }
+    
+
+
+            computedDamage = (computedDamage * 0.01f * (damageModifyPercentage + 100));
+            var chance = damageArgs.CriticalChance;
+            if (damageArgs.AlwaysCrits)
+            {
+                chance = 100;
+            }
+            if (BasicFunctionality.RandomChance(chance) && damageArgs.CanCrit)
+            {
+
+                computedDamage *= damageArgs.CriticalDamage / 100.0f;
+                didCrit = true;
+            }
+
+            damage = computedDamage;
+            switch (advantageLevel)
+            {
+                case ElementalAdvantage.Advantage:
+                    damageText = "It's super effective! " + damageText;
+                    break;
+                case ElementalAdvantage.Disadvantage:
+                    damageText = "It's not that effective... " + damageText;
+                    break;
+            }
+            if (didCrit)
+                damageText = "A critical hit! " + damageText;
+        }
+
+        var usageType = damageArgs.MoveUsageDetails?.UsageType;
+        if (usageType is not null)
+        {
+            if (damageArgs.MoveUsageDetails?.UsageType == UsageType.CounterUsage)
+            {
+                damageText = "Counter Attack! " +damageText;
+            } else if (usageType == UsageType.MiscellaneousFollowUpUsage)
+            {
+                damageText += "Extra Attack! " + damageText;
+            }
+        }
+      
+        
+        damageText =  damageText.Replace("$", damage.Round().ToString());
+        CurrentBattle.AddAdditionalBattleText(damageText);
+        TakeDamageWhileConsideringShield(damage.Round());
         DamageResult damageResult;
         if (damageArgs.MoveUsageDetails.HasValue)
         {
             damageResult = new DamageResult(damageArgs.MoveUsageDetails.Value.Move,
                 damageArgs.MoveUsageDetails.Value.UsageType)
             {
+                IsFixedDamage = damageArgs.IsFixedDamage,
                 WasCrit = didCrit,
-                Damage = actualDamage,
+                Damage = damage.Round(),
                 DamageDealer = damageArgs.DamageDealer,
                 DamageReceiver = this,
                 CanBeCountered = damageArgs.CanBeCountered
@@ -226,9 +178,9 @@ public partial class Character
         {
             damageResult = new DamageResult(damageArgs.StatusEffect)
             {
-                
+                IsFixedDamage = damageArgs.IsFixedDamage,
                 WasCrit = didCrit,
-                Damage = actualDamage,
+                Damage = damage.Round(),
                 DamageDealer = damageArgs.DamageDealer,
                 DamageReceiver = this,
                 CanBeCountered = damageArgs.CanBeCountered

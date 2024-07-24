@@ -23,8 +23,9 @@ public class Poison : StatusEffect, IDetonatable
 
     private DamageResult? DoDamage()
     {
-        return Affected.FixedDamage(new DamageArgs(this)
+        return Affected.Damage(new DamageArgs(this)
         {
+            IsFixedDamage = true,
             ElementToDamageWith = null,
             Damage = Affected.MaxHealth * 0.05f,
             DamageDealer = Caster,

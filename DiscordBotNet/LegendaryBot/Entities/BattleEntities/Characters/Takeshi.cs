@@ -41,7 +41,8 @@ public class TakeshiStraightPunch : BasicAttack
 }
 public class Takeshi : Character, IBattleEventListener
 {
-    public override string? PassiveDescription => "Has a 50% chance to counter attack when attacked";
+    public override Rarity Rarity => Rarity.ThreeStar;
+    public override string? PassiveDescription => "Has a 50% chance to counter attack with basic attack when attacked";
     [NotMapped] 
     private bool _hasCountered = false;
 
@@ -57,10 +58,11 @@ public class Takeshi : Character, IBattleEventListener
         if(move is null) return;
         if(HighestOverrideTurnType  > OverrideTurnType.ControlDecision) return;
         if(IsDead) return;
-        if(args.DamageResult.DamageReceiver != this) return;
+        if(damageResult.DamageReceiver != this) return;
+        if(damageResult.DamageDealer is null) return;
         if (BasicFunctionality.RandomChance(50))
         {
-            CurrentBattle.RegisterFollowUpMove(BasicAttack, args.DamageResult.DamageReceiver!, true);
+            CurrentBattle.RegisterFollowUpMove(BasicAttack, args.DamageResult.DamageDealer, true);
             _hasCountered = true;
         }
     }

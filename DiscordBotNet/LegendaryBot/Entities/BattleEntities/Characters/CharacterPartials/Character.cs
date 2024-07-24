@@ -53,15 +53,16 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
         }
     }
 }
+
 /// <summary>
 /// Don't forget to load the character with LoadTeamGearWithPlayerDataAsync before using it in combat.
 /// Characters can also be loaded at once if they are in a CharacterTeam and LoadTeamGearWithPlayerDataAsync is called
 /// from the CharacterTeam
 /// </summary>
-public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  IGuidPrimaryIdHaver
+public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGuidPrimaryIdHaver
 {
 
-
+    public bool CannotDoAnything => IsDead || HighestOverrideTurnType >= OverrideTurnType.CannotMove;
     public virtual string? PassiveDescription => null;
     public OverrideTurnType HighestOverrideTurnType
     {

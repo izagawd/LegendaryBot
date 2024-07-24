@@ -409,6 +409,11 @@ public partial class BattleSimulator
 
             }
 
+            if (characterToDisplayBattleInfo.PassiveDescription is not null)
+            {
+                descriptionStringBuilder.Append($"Passive Ability: {characterToDisplayBattleInfo.PassiveDescription}");
+                descriptionStringBuilder.Append("\n\n");
+            }
             var statusEffectsCopy = characterToDisplayBattleInfo.StatusEffects.ToArray();
             if (statusEffectsCopy.Any())
             {
