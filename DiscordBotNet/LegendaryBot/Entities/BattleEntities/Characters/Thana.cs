@@ -52,8 +52,8 @@ public class YourLifeEnergyIsMine : Skill
             DamageDealer = User,
             DamageText = $"{User.NameWithAlphabet} sucks the life essence out of {target.NameWithAlphabet} and deals $ damage!"
         });
-        if(damageResult is not null)
-            User.RecoverHealth(damageResult.Damage * 0.2f);
+   
+        User.RecoverHealth(damageResult.Damage * 0.2f);
         
         return new UsageResult(this)
         {
@@ -77,7 +77,7 @@ public class Arise : Ultimate
     public override int MaxCooldown =>6;
 
     public override string GetDescription(CharacterPartials.Character character) =>
-        $"Grants all allies immortality, increases the caster's attack for 2 turns, and grants her an extra turn";
+        $"Revives dead allies, grants all allies immortality, increases the caster's attack for 2 turns, and grants her an extra turn";
     public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.Team;
@@ -87,11 +87,16 @@ public class Arise : Ultimate
     {
         User.CurrentBattle.AddAdditionalBattleText($"With her necromancy powers, {User.NameWithAlphabet} attempts to bring back all her dead allies!");
 
-        foreach (var i in GetPossibleTargets())
+        var possibleTargets = GetPossibleTargets().ToArray();
+
+
+        foreach (var i in possibleTargets)
         {
             if(i.IsDead)
                 i.Revive();
-
+        }
+        foreach (var i in possibleTargets.OrderBy(i => i == User ? 1 : 0))
+        {
             var duration = 1;
             if (i == User)
             {

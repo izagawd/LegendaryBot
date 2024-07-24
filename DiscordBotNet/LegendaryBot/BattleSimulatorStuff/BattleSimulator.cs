@@ -718,7 +718,7 @@ public partial class BattleSimulator
                 ActiveCharacter.ShouldTakeExtraTurn = false;
                 extraTurnGranted = true;
             }
-            while (!Characters.Any(i => i.CombatReadiness >= 100 && !i.IsDead) && !extraTurnGranted)
+            while (!extraTurnGranted && !Characters.Any(i => i.CombatReadiness >= 100 && !i.IsDead))
             {
                 foreach (var j in Characters)
                 {

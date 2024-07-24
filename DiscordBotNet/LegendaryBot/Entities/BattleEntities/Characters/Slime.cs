@@ -44,7 +44,7 @@ public class Slime : CharacterPartials.Character
     protected override float BaseAttackMultiplier => 0.4f;
 
 
-    public override Rarity Rarity => Rarity.TwoStar;
+    public override Rarity Rarity => Rarity.OneStar;
 
 
     public Slime()
