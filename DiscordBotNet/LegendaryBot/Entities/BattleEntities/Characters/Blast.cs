@@ -79,7 +79,8 @@ public class BlowAway : Skill
 }
 public class ExplosionBlast : Ultimate
 {
-    public override string GetDescription(Character character) => $"User does an explosion blast, attacking all enemies!";
+    public override string GetDescription(Character character) 
+        => $"User does an explosion blast, attacking all enemies, inflicting burn x2 on each enemy hit";
     
 
     public override int MaxCooldown  => 6;
@@ -93,9 +94,18 @@ public class ExplosionBlast : Ultimate
         
         foreach (var i in GetPossibleTargets())
         {
-            
+            i.Damage(new DamageArgs(this)
+            {
+                ElementToDamageWith = User.Element,
+                Damage = User.Attack * 1.7f,
+                DamageDealer = User,
+                CriticalChance = User.CriticalChance,
+                CriticalDamage = User.CriticalDamage,
+                DamageText =
+                    $"{User.NameWithAlphabetIdentifier} blasted {i.NameWithAlphabetIdentifier}, dealing $ damage!",
+            });
         }
-        return new UsageResult(this){UsageType = usageType, TargetType = TargetType.AOE, User = User, Text = "What's this?"};
+        return new UsageResult(this){UsageType = usageType, TargetType = TargetType.AOE, User = User, Text = "EXPLODING BLAST!"};
     }
 }
 public class Blast : Character
