@@ -80,13 +80,11 @@ public abstract class Move
     /// </summary>
     /// <param name="target">The target</param>
     /// <param name="usageType">What type of usage this is</param>
-    public virtual UsageResult? Utilize(Character target, UsageType usageType)
+    public virtual UsageResult Utilize(Character target, UsageType usageType)
     {
-        // just in case
-        if (User.CannotDoAnything ||  !GetPossibleTargets().Contains(target))
-            return null;
+
         var temp = UtilizeImplementation(target, usageType);
-        CurrentBattle.InvokeBattleEvent(new CharacterUseMoveEventArgs(temp));
+        CurrentBattle.InvokeBattleEvent(new CharacterPostUseMoveEventArgs(temp));
         return temp;
     }
     /// <summary>

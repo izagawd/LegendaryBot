@@ -43,9 +43,9 @@ public class Takeshi : Character, IBattleEventListener
 {
     public override Rarity Rarity => Rarity.ThreeStar;
     public override string? PassiveDescription => "Has a 50% chance to counter attack with basic attack when attacked";
-    [NotMapped] 
-    private bool _hasCountered = false;
 
+    [NotMapped]
+    private Character _targetCharacter = null;
     [BattleEventListenerMethod]
     public void OnHitByMove(CharacterPostDamageEventArgs args)
     {
@@ -56,20 +56,22 @@ public class Takeshi : Character, IBattleEventListener
         if (args.DamageResult.MoveUsageDetails!.Value.UsageType == UsageType.CounterUsage)
             return;
         if(move is null) return;
-        if(HighestOverrideTurnType  > OverrideTurnType.ControlDecision) return;
-        if(IsDead) return;
+        if(CannotDoAnything) return;
         if(damageResult.DamageReceiver != this) return;
         if(damageResult.DamageDealer is null) return;
         if (BasicFunctionality.RandomChance(50))
         {
-            CurrentBattle.RegisterFollowUpMove(BasicAttack, args.DamageResult.DamageDealer, true);
-            _hasCountered = true;
+            _targetCharacter = damageResult.DamageDealer;
         }
     }
     [BattleEventListenerMethod]
-    public void CounterAttackUsageRefresh(TurnEndEventArgs args)
+    public void CounterAttackUsageRefresh(CharacterPostUseMoveEventArgs args)
     {
-        _hasCountered = false;
+        if (!CannotDoAnything && _targetCharacter is not null  && !_targetCharacter.IsDead)
+        {
+            BasicAttack.Utilize(_targetCharacter, UsageType.CounterUsage);
+            _targetCharacter = null;
+        }
     }
     public Takeshi()
     {

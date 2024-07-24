@@ -632,34 +632,7 @@ public partial class BattleSimulator
     }
 
 
-    private Dictionary<Move,Character> OtherFollowUpMoves = [];
 
-    private Dictionary<Move, Character> counterAttackFollowUpMoves = [];
-
-
-    private bool _canAddFollowUpAction = false;
-    /// <summary>
-    /// 
-    /// If necessary, dont forget to check if the caster or target is dead, or if caster is stunned or something
-    /// before doing what needs to be done in the inputted action <br>
-    /// it is preferred for counter attacks to be done here. counter attacks will execute before anything else
-    /// </summary>
-    /// <param name="action"></param>
-    /// <returns>true if succeeded, false if failed, meaning it wasnt the right time to add a follow up action</returns>
-    public bool RegisterFollowUpMove(Move move, Character target, bool isCounterAttack = false)
-    {
-        if (!_canAddFollowUpAction) return false;
-        if (isCounterAttack)
-        {
-            counterAttackFollowUpMoves.Add(move,target);
-        }
-        else
-        {
-            OtherFollowUpMoves.Add(move,target);
-        }
-
-        return true;
-    }
 
 
     /// <summary>
@@ -684,9 +657,7 @@ public partial class BattleSimulator
         _gameCancellationTokenSource = new CancellationTokenSource();
         var firstLoop = true;
         _stopped = false;
-        counterAttackFollowUpMoves.Clear();
-        OtherFollowUpMoves.Clear();
-        _canAddFollowUpAction = false;
+
         Team1.CurrentBattle = this;
         Team2.CurrentBattle = this;
         foreach (var i in CharacterTeams)
@@ -877,7 +848,7 @@ public partial class BattleSimulator
             mostPowerfulStatusEffect = ActiveCharacter.StatusEffects.OrderByDescending(i => i.OverrideTurnType).FirstOrDefault();
 
 
-            _canAddFollowUpAction = true;
+          
     
             if (!shouldDoTurn)
             {
@@ -1033,38 +1004,10 @@ public partial class BattleSimulator
             {
                 _mainText = moveResult.Text;
             }
-
+            
      
             
-            // loops, taking counter attacks as top priority. if a counter attack is executed after doing other follow up
-            // action, will do the counter attack straight up
-            while (counterAttackFollowUpMoves.Any() || OtherFollowUpMoves.Any())
-            {
-                while (counterAttackFollowUpMoves.Any())
-                {
-                    foreach (var i in counterAttackFollowUpMoves)
-                    {
 
-                        i.Key.Utilize(i.Value, UsageType.CounterUsage);
-                        counterAttackFollowUpMoves.Remove(i.Key);
-                    }
-                }
-                if (OtherFollowUpMoves.Any())
-                {
-                    foreach (var i in OtherFollowUpMoves)
-                    {
-                        i.Key.Utilize(i.Value, UsageType.MiscellaneousFollowUpUsage);
-                        OtherFollowUpMoves.Remove(i.Key);
-                        if (counterAttackFollowUpMoves.Any())
-                        {
-                            break;
-                        }
-                    }
-                }
-
-            }
-
-            _canAddFollowUpAction = false;
 
 
             foreach (var i in ActiveCharacter.MoveList)
