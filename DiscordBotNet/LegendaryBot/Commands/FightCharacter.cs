@@ -44,7 +44,7 @@ public class FightCharacter : GeneralCommandClass
         var interaction = (context as SlashCommandContext)?.Interaction;
         if (interaction is not null)
         {
-            await interaction.CreateResponseAsync(DiscordInteractionResponseType.DeferredChannelMessageWithSource);
+            await context.RespondAsync("hol up");
         }
 
         await battleSim.StartAsync(context.Channel);

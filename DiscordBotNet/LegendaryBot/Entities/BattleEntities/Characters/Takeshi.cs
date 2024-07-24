@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
+using DiscordBotNet.LegendaryBot.StatusEffects;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
@@ -39,44 +41,98 @@ public class TakeshiStraightPunch : BasicAttack
         };
     }
 }
+public class TakeshiMeditation : Ultimate
+{
+    public override string GetDescription(Character character)
+    {
+        return "Meditates, recovering Health proportional to 50% of the caster's max health, and gains attack buff for 2 turns";
+    }
+
+    public override IEnumerable<Character> GetPossibleTargets()
+    {
+        yield return User;
+    }
+
+    protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
+    {
+        CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} meditates!" );
+        User.RecoverHealth(User.MaxHealth * 0.5f);
+        User.AddStatusEffect(new AttackBuff() { Caster = User, Duration = 2 });
+        return new UsageResult(this)
+        {
+            TargetType = TargetType.SingleTarget,
+            User = User,
+            UsageType = usageType,
+            Text = "Hummmm...."
+        };
+    }
+
+    public override int MaxCooldown => 4;
+}
+public class KarateNeckChop : Skill
+{
+    public override string GetDescription(Character character)
+    {
+        return "Does a karate chop at the enemies neck, stunning them for 1 turn!";
+    }
+
+    public override IEnumerable<Character> GetPossibleTargets()
+    {
+        return CurrentBattle.Characters.Where(i => i.Team != User.Team);
+    }
+
+    protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
+    {
+        CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} neck chops {target}!" );
+        target.AddStatusEffect(new Stun() { Caster = User, Duration = 1 });
+        return new UsageResult(this)
+        {
+            TargetType = TargetType.SingleTarget,
+            User = User,
+            UsageType = usageType,
+            Text = "Neck chop!"
+        };
+    }
+
+    public override int MaxCooldown => 3;
+}
 public class Takeshi : Character, IBattleEventListener
 {
     public override Rarity Rarity => Rarity.ThreeStar;
-    public override string? PassiveDescription => "Has a 50% chance to counter attack with basic attack when attacked";
+    public override string? PassiveDescription => "Has a 25% chance to counter attack with basic attack when any ally is attacked";
 
-    [NotMapped]
-    private Character _targetCharacter = null;
+    protected override float BaseSpeedMultiplier => 1.05f;
+    
+    
+
     [BattleEventListenerMethod]
-    public void OnHitByMove(CharacterPostDamageEventArgs args)
+    public void ToCounterAttack(CharacterPostUseMoveEventArgs args)
     {
-        var damageResult = args.DamageResult;
-        if(!damageResult.MoveUsageDetails.HasValue)
-            return;
-        var move = damageResult.MoveUsageDetails.Value.Move;
-        if (args.DamageResult.MoveUsageDetails!.Value.UsageType == UsageType.CounterUsage)
-            return;
-        if(move is null) return;
         if(CannotDoAnything) return;
-        if(damageResult.DamageReceiver != this) return;
-        if(damageResult.DamageDealer is null) return;
-        if (BasicFunctionality.RandomChance(50))
+        if(args.UsageResult.User.Team == Team) return;
+        var usageResult = args.UsageResult;
+        if(usageResult.UsageType == UsageType.CounterUsage) return;
+        foreach (var damageResult in args.UsageResult.DamageResults
+                     .Where(i => i.CanBeCountered && i.DamageReceiver.Team == Team))
         {
-            _targetCharacter = damageResult.DamageDealer;
+
+            var damageDealer = damageResult.DamageDealer;
+            if(damageDealer is null || damageDealer.IsDead || damageDealer.Team == Team) continue;
+            if (BasicFunctionality.RandomChance(25))
+            {
+                BasicAttack.Utilize(damageDealer, UsageType.CounterUsage);
+                break;
+            }
         }
+       
+
     }
-    [BattleEventListenerMethod]
-    public void CounterAttackUsageRefresh(CharacterPostUseMoveEventArgs args)
-    {
-        if (!CannotDoAnything && _targetCharacter is not null  && !_targetCharacter.IsDead)
-        {
-            BasicAttack.Utilize(_targetCharacter, UsageType.CounterUsage);
-            _targetCharacter = null;
-        }
-    }
+
     public Takeshi()
     {
         TypeId = 13;
         BasicAttack = new TakeshiStraightPunch();
-        
+        Skill = new KarateNeckChop();
+        Ultimate = new TakeshiMeditation();
     }
 }

@@ -93,9 +93,10 @@ public class ExplosionBlast : Ultimate
     protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
         var targets = GetPossibleTargets().ToArray();
+        List<DamageResult> damageResults = [];
         foreach (var i in targets)
         {
-            i.Damage(new DamageArgs(this, usageType)
+            damageResults.Add(i.Damage(new DamageArgs(this, usageType)
             {
                 ElementToDamageWith = User.Element,
                 Damage = User.Attack * 1.5f,
@@ -104,7 +105,7 @@ public class ExplosionBlast : Ultimate
                 CriticalDamage = User.CriticalDamage,
                 DamageText =
                     $"{User.NameWithAlphabet} blasted {i.NameWithAlphabet}, dealing $ damage!",
-            });
+            }));
         }
 
         var eff = User.Effectiveness;
@@ -113,7 +114,14 @@ public class ExplosionBlast : Ultimate
             i.AddStatusEffects([new Burn() { Caster = User, Duration = 1 },
                 new Burn() { Caster = User, Duration = 1 }], eff);
         }
-        return new UsageResult(this){UsageType = usageType, TargetType = TargetType.AOE, User = User, Text = "EXPLODING BLAST!"};
+        return new UsageResult(this)
+        {
+            UsageType = usageType, 
+            TargetType = TargetType.AOE
+            , User = User, 
+            Text = "EXPLODING BLAST!",
+            DamageResults = damageResults
+        };
     }
 }
 public class Blast : Character
