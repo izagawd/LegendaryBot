@@ -23,7 +23,7 @@ public class BaseballBatWhack : BasicAttack
             Text = "Uraaah!",
             DamageResults =
             [
-                target.Damage(new DamageArgs(this)
+                target.Damage(new DamageArgs(this, usageType)
                 {
                     ElementToDamageWith = User.Element,
                     CriticalChance = User.CriticalChance,
@@ -58,7 +58,7 @@ public class DelinquentBeatdown : Skill
             Text = "Uraaah!",
             DamageResults =
             [
-                target.Damage(new DamageArgs(this)
+                target.Damage(new DamageArgs(this, usageType)
                 {
                     ElementToDamageWith = User.Element,
                     CriticalChance = User.CriticalChance,

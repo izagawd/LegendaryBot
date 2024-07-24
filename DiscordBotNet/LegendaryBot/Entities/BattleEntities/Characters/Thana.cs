@@ -9,7 +9,7 @@ public class SoulAttack : BasicAttack
     public override string GetDescription(CharacterPartials.Character character) => "Uses the souls of the dead to attack, with a 25% chance to inflict sleep!";
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        var damageResult = target.Damage(new DamageArgs(this)
+        var damageResult = target.Damage(new DamageArgs(this, usageType)
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
@@ -43,7 +43,7 @@ public class YourLifeEnergyIsMine : Skill
     }
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        var damageResult = target.Damage(new DamageArgs(this)
+        var damageResult = target.Damage(new DamageArgs(this, usageType)
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,

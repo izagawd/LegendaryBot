@@ -15,7 +15,7 @@ public class GigaPunch : BasicAttack
         {
             DamageResults =
             [
-            target.Damage(new DamageArgs(this)
+            target.Damage(new DamageArgs(this, usageType)
                 {
                     ElementToDamageWith = User.Element,
                     CriticalDamage = User.CriticalDamage,

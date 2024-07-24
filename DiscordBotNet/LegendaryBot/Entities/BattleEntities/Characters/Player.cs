@@ -18,7 +18,7 @@ public class FourthWallBreaker: BasicAttack
         return new UsageResult(this)
         {
             DamageResults = [
-                target.Damage(new DamageArgs(this)
+                target.Damage(new DamageArgs(this, usageType)
                 {
                     ElementToDamageWith = User.Element,
                     CriticalChance = User.CriticalChance,
@@ -55,7 +55,7 @@ public class FireBall : Skill
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         
-        var damageResult = target.Damage(      new DamageArgs(this)
+        var damageResult = target.Damage(      new DamageArgs(this, usageType)
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,

@@ -12,7 +12,7 @@ public class BasicAttackSample : BasicAttack
     protected  override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
  
-        var damageResult = target.Damage(       new DamageArgs(this)
+        var damageResult = target.Damage(       new DamageArgs(this, usageType)
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,

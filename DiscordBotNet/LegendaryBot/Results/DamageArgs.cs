@@ -6,6 +6,10 @@ namespace DiscordBotNet.LegendaryBot.Results;
 
 public class DamageArgs
 {
+    /// <summary>
+    /// If not null, then a move was used to deal damage
+    /// </summary>
+    public MoveUsageDetails? MoveUsageDetails { get; }
     public bool IsFixedDamage { get; set; } = false;
     /// <summary>
     /// if null, will not consider element for damage calculation
@@ -16,16 +20,15 @@ public class DamageArgs
     /// </summary>
     public int DefenseToIgnore { get; set; } = 0;
 
-    public Move? Move { get; private set; }
+
     public StatusEffect? StatusEffect { get; private set; }
 
-    public DamageArgs(Move move)
+    public DamageArgs(Move move, UsageType usageType)
     {
-        Move = move;
+        MoveUsageDetails = new MoveUsageDetails(move, usageType);
     }
 
-    public bool IsCausedByMove => Move is not null;
-    public bool IsCausedByStatusEffect => StatusEffect is not null;
+
     public DamageArgs(StatusEffect statusEffect)
     {
         StatusEffect = statusEffect;

@@ -4,14 +4,25 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.Results;
 
-public class DamageResult
+public struct MoveUsageDetails
 {
-    public  Move? Move { get; private set; }
-    public StatusEffect? StatusEffect { get; private set; }
+    public Move Move { get; }
+    public UsageType UsageType { get; }
 
-    public DamageResult(Move move)
+    public MoveUsageDetails(Move move, UsageType usageType)
     {
         Move = move;
+        UsageType = usageType;
+    }
+}
+public class DamageResult
+{
+    public  MoveUsageDetails? MoveUsageDetails { get; }
+    public StatusEffect? StatusEffect { get; private set; }
+
+    public DamageResult(Move move, UsageType moveUsageType)
+    {
+        MoveUsageDetails = new MoveUsageDetails(move, moveUsageType);
     }
 
     public bool IsFixedDamage { get; set; } = false;

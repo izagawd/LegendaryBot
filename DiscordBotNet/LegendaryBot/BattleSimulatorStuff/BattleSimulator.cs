@@ -626,10 +626,10 @@ public partial class BattleSimulator
         }
     }
 
-  
-    private event Action OtherFollowUpActions;
 
-    private event Action CounterAttackFollowUpActions;
+    private Dictionary<Move,Character> OtherFollowUpMoves = [];
+
+    private Dictionary<Move, Character> counterAttackFollowUpMoves = [];
 
 
     private bool _canAddFollowUpAction = false;
@@ -641,16 +641,16 @@ public partial class BattleSimulator
     /// </summary>
     /// <param name="action"></param>
     /// <returns>true if succeeded, false if failed, meaning it wasnt the right time to add a follow up action</returns>
-    public bool RegisterFollowUpAction(Action action, bool isCounterAttack = false)
+    public bool RegisterFollowUpMove(Move move, Character target, bool isCounterAttack = false)
     {
         if (!_canAddFollowUpAction) return false;
         if (isCounterAttack)
         {
-            CounterAttackFollowUpActions += action;
+            counterAttackFollowUpMoves.Add(move,target);
         }
         else
         {
-            OtherFollowUpActions += action;
+            OtherFollowUpMoves.Add(move,target);
         }
 
         return true;
@@ -679,6 +679,8 @@ public partial class BattleSimulator
         _gameCancellationTokenSource = new CancellationTokenSource();
         var firstLoop = true;
         _stopped = false;
+        counterAttackFollowUpMoves.Clear();
+        OtherFollowUpMoves.Clear();
         _canAddFollowUpAction = false;
         Team1.CurrentBattle = this;
         Team2.CurrentBattle = this;
@@ -1031,26 +1033,24 @@ public partial class BattleSimulator
             
             // loops, taking counter attacks as top priority. if a counter attack is executed after doing other follow up
             // action, will do the counter attack straight up
-            while (CounterAttackFollowUpActions is not null || OtherFollowUpActions is not null)
+            while (counterAttackFollowUpMoves.Any() || OtherFollowUpMoves.Any())
             {
-                while (CounterAttackFollowUpActions is not null)
+                while (counterAttackFollowUpMoves.Any())
                 {
-                    foreach (var i in CounterAttackFollowUpActions.GetInvocationList())
+                    foreach (var i in counterAttackFollowUpMoves)
                     {
-                        
-                        var asAction = (Action)i;
-                        asAction();
-                        CounterAttackFollowUpActions -= asAction;
+
+                        i.Key.Utilize(i.Value, UsageType.CounterUsage);
+                        counterAttackFollowUpMoves.Remove(i.Key);
                     }
                 }
-                if (OtherFollowUpActions is not null)
+                if (OtherFollowUpMoves.Any())
                 {
-                    foreach (var i in OtherFollowUpActions.GetInvocationList())
+                    foreach (var i in OtherFollowUpMoves)
                     {
-                        var asAction = (Action)i;
-                        asAction();
-                        OtherFollowUpActions -= asAction;
-                        if (CounterAttackFollowUpActions is not null)
+                        i.Key.Utilize(i.Value, UsageType.MiscellaneousFollowUpUsage);
+                        OtherFollowUpMoves.Remove(i.Key);
+                        if (counterAttackFollowUpMoves.Any())
                         {
                             break;
                         }

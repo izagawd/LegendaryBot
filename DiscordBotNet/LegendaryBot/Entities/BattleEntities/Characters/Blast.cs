@@ -15,7 +15,7 @@ public class MethaneSlap : BasicAttack
     public int DetonateChance => 75;
     protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
-        var damageResult = target.Damage(new DamageArgs(this)
+        var damageResult = target.Damage(new DamageArgs(this, usageType)
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
@@ -95,7 +95,7 @@ public class ExplosionBlast : Ultimate
         var targets = GetPossibleTargets().ToArray();
         foreach (var i in targets)
         {
-            i.Damage(new DamageArgs(this)
+            i.Damage(new DamageArgs(this, usageType)
             {
                 ElementToDamageWith = User.Element,
                 Damage = User.Attack * 1.5f,

@@ -18,7 +18,7 @@ public class ShieldBash : BasicAttack
         {
             DamageResults = 
             [
-                target.Damage(new DamageArgs(this)
+                target.Damage(new DamageArgs(this, usageType)
                 {
                     ElementToDamageWith = User.Element,
                     CriticalChance = User.CriticalChance,

@@ -10,7 +10,8 @@ public class GoingAllOut : Blessing, IBattleEventListener
     public  void IncreaseUlt(CharacterPreDamageEventArgs eventArgs)
     {
 
-        if (eventArgs.DamageArgs.DamageDealer == Character && eventArgs.DamageArgs.Move is Ultimate)
+        if (eventArgs.DamageArgs.DamageDealer == Character && eventArgs.DamageArgs
+                .MoveUsageDetails?.Move is Ultimate)
         {
             eventArgs.DamageArgs.Damage *= (100 + GetUltimateDamageBoostPercent(Level)) * 0.01f;
         }

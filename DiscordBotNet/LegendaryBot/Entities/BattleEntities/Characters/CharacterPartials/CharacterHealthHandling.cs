@@ -60,9 +60,10 @@ public partial class Character
         CurrentBattle.AddAdditionalBattleText(damageText.Replace("$", damage.Round().ToString()));
         TakeDamageWhileConsideringShield(damage.Round());
         DamageResult damageResult;
-        if (damageArgs.Move is not null)
+        if (damageArgs.MoveUsageDetails.HasValue)
         {
-            damageResult = new DamageResult(damageArgs.Move)
+            damageResult = new DamageResult(damageArgs.MoveUsageDetails.Value.Move, 
+                damageArgs.MoveUsageDetails.Value.UsageType)
             {
               
                 WasCrit = false,
@@ -209,9 +210,10 @@ public partial class Character
         
         TakeDamageWhileConsideringShield(actualDamage);
         DamageResult damageResult;
-        if (damageArgs.Move is not null)
+        if (damageArgs.MoveUsageDetails.HasValue)
         {
-            damageResult = new DamageResult(damageArgs.Move)
+            damageResult = new DamageResult(damageArgs.MoveUsageDetails.Value.Move,
+                damageArgs.MoveUsageDetails.Value.UsageType)
             {
                 WasCrit = didCrit,
                 Damage = actualDamage,

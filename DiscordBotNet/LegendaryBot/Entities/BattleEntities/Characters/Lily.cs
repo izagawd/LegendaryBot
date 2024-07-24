@@ -16,7 +16,7 @@ public class ChamomileSachetWhack : BasicAttack
     public int SleepChance => 25;
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        var damageResult = target.Damage(new DamageArgs(this)
+        var damageResult = target.Damage(new DamageArgs(this, usageType)
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,

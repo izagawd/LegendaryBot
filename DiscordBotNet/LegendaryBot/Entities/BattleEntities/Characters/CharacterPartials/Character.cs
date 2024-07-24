@@ -62,6 +62,16 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
 {
 
 
+    public virtual string? PassiveDescription => null;
+    public OverrideTurnType HighestOverrideTurnType
+    {
+        get
+        {
+            if (!_statusEffects.Any())
+                return OverrideTurnType.None;
+            return _statusEffects.Select(i => i.OverrideTurnType).Max();
+        }
+    }
 
     public long GetRequiredExperienceToNextLevel()
     {
