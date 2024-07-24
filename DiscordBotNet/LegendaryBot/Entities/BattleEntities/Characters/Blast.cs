@@ -77,9 +77,9 @@ public class BlowAway : Skill
 
 
 }
-public class VolcanicEruption : Ultimate
+public class ExplosionBlast : Ultimate
 {
-    public override string GetDescription(CharacterPartials.Character character) => $"Makes the user charge up a very powerful explosion that hits all enemies for 4 turns!";
+    public override string GetDescription(CharacterPartials.Character character) => $"User does an explosion blast, attacking all enemies!";
     
 
     public override int MaxCooldown  => 6;
@@ -90,9 +90,11 @@ public class VolcanicEruption : Ultimate
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        var isCharging = User.AddStatusEffect(new VolcanicEruptionCharging(){Duration = 3, Caster = User});
-        if(isCharging == StatusEffectInflictResult.Succeeded)
-            User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} is charging up a very powerful attack!");
+        
+        foreach (var i in GetPossibleTargets())
+        {
+            
+        }
         return new UsageResult(this){UsageType = usageType, TargetType = TargetType.AOE, User = User, Text = "What's this?"};
     }
 }
@@ -111,7 +113,7 @@ public class Blast : Character
     public Blast()
     {
         TypeId = 2;
-        Ultimate = new VolcanicEruption(){User = this};
+        Ultimate = new ExplosionBlast(){User = this};
         Skill = new BlowAway(){User = this};
         BasicAttack = new MethaneSlap(){User = this};
       

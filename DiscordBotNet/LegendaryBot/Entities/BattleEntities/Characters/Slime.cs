@@ -31,7 +31,7 @@ public class GooeyStrike : BasicAttack
             DamageResults = [damageResult],
             TargetType = TargetType.SingleTarget,
             UsageType = usageType,
-            Text = "Sulaimu attacku!",
+            Text = "Attack!",
             User = User
         };
     }

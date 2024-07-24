@@ -46,7 +46,7 @@ public class IAmShooting : Skill
 {
     public override string GetDescription(CharacterPartials.Character character)
     {
-        return "Shoots the enemy twice, causing two bleed effects for two turns";
+        return "Shoots the enemy twice, causing bleed for two turns";
     }
     public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
@@ -64,10 +64,9 @@ public class IAmShooting : Skill
             Damage = User.Attack * 2,
             DamageText = $"{User.NameWithAlphabetIdentifier} shoots at {target.NameWithAlphabetIdentifier} for resisting arrest, dealing $ damage"
         });
-        foreach (var _ in Enumerable.Range(0,2))
-        {
-            target.AddStatusEffect(new Bleed(){ Caster = User}, User.Effectiveness);
-        }
+ 
+        target.AddStatusEffect(new Bleed(){ Caster = User, Duration = 2}, User.Effectiveness);
+        
         return new UsageResult(this)
         {
             DamageResults = [damageResult],

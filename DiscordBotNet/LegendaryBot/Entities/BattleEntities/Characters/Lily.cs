@@ -128,7 +128,7 @@ public class Lily : CharacterPartials.Character
         if (Ultimate.CanBeUsed())
         {
             decision = BattleDecision.Ultimate;
-            target = Ultimate.GetPossibleTargets().First();
+            target = BasicFunctionality.RandomChoice(Ultimate.GetPossibleTargets());
             return;
         }
 

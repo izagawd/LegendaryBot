@@ -8,7 +8,7 @@ using DSharpPlus.Interactivity.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
-[Command("Quote")]
+[Command("quote")]
 public class QuoteCommand : GeneralCommandClass
 {
     private static readonly string[] yesOrNoArray = new[] { "like", "dislike" };

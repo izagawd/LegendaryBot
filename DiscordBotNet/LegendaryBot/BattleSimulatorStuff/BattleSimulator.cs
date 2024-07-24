@@ -239,16 +239,7 @@ public partial class BattleSimulator
     /// <typeparam name="T">the type of argument of the battle event</typeparam>
     public void InvokeBattleEvent<T>(T eventArgs) where T : BattleEventArgs
     {
-        
-        if (IsEventsPaused)
-        {
-            _queuedBattleEvents.Add(eventArgs);
-            return;
-        }
 
-
-      
-        
         var eventArgsType = eventArgs.GetType();
         foreach (var i in GetAllEventMethods()
                      .Where(k => eventArgsType.IsRelatedToType(k.EventMethodDetails.ParameterType))
@@ -538,48 +529,6 @@ public partial class BattleSimulator
         }
 
     }
-    public class PauseBattleEventsInstance : IDisposable
-    {
-        private BattleSimulator _battleSimulator;
-        public PauseBattleEventsInstance(BattleSimulator battleSimulator)
-        {
-            _battleSimulator = battleSimulator;
-            _battleSimulator._pauseCount++;
-        }
-
-        private bool _disposed = false;
-
-        public void Dispose()
-        {
-            if(_disposed) return;
-
-            _battleSimulator._pauseCount--;
-            _disposed = true;
-
-            if(_battleSimulator.IsEventsPaused) return;
-            _battleSimulator._pauseCount = 0;
-            foreach (var i in _battleSimulator._queuedBattleEvents.ToArray())
-            {
-                if (_battleSimulator.IsEventsPaused) break;
-                if(!_battleSimulator._queuedBattleEvents.Contains(i)) continue;
-                _battleSimulator._queuedBattleEvents.Remove(i);
-                _battleSimulator.InvokeBattleEvent(i);
-            }
-       
-        }
-    }
-
-
-    private List<BattleEventArgs> _queuedBattleEvents = [];
-    private int _pauseCount = 0;
-    public bool IsEventsPaused => _pauseCount > 0;
-
-    /// <summary>
-    /// Battle events will be paused until this scope is disposed
-    /// </summary>
-    protected PauseBattleEventsInstance PauseBattleEventScope => new(this);
-
-    
 
     private void CheckForForfeitOrInfoTillEndOfBattle(DiscordMessage message,CancellationToken token)
     {
@@ -729,7 +678,6 @@ public partial class BattleSimulator
         }
         _gameCancellationTokenSource = new CancellationTokenSource();
         var firstLoop = true;
-        _pauseCount = 0;
         _stopped = false;
         _canAddFollowUpAction = false;
         Team1.CurrentBattle = this;

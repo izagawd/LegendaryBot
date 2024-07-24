@@ -27,11 +27,10 @@ public class WindSlash : Skill
                 CriticalChance = User.CriticalChance,
                 CriticalDamage = User.CriticalDamage,
                 DamageDealer = User,
-                Damage = User.Attack * 1.7f, 
+                Damage = User.Attack * 1.8f, 
                 DamageText = $"The slash dealt $ damage to {i}!"
             });
-            if(damageResult is not null)
-                damageResults.Add(damageResult);
+            damageResults.Add(damageResult);
         }
 
         return new UsageResult(this)
