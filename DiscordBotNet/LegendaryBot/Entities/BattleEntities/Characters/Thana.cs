@@ -6,7 +6,7 @@ using DSharpPlus.Entities;
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class SoulAttack : BasicAttack
 {
-    public override string GetDescription(CharacterPartials.Character character) => "Uses the souls of the dead to attack, with a 25% chance to sleep!";
+    public override string GetDescription(CharacterPartials.Character character) => "Uses the souls of the dead to attack, with a 25% chance to inflict sleep!";
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
         var damageResult = target.Damage(new DamageArgs(this)
@@ -20,7 +20,7 @@ public class SoulAttack : BasicAttack
         });
         if (BasicFunctionality.RandomChance(25))
         {
-            target.AddStatusEffect(new Sleep(){Caster = User});
+            target.AddStatusEffect(new Sleep(){Caster = User, Duration = 1});
         }
         return new UsageResult(this)
         {

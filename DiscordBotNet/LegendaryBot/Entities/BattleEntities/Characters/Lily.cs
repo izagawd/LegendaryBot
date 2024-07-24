@@ -39,7 +39,7 @@ public class ChamomileSachetWhack : BasicAttack
 
         if (BasicFunctionality.RandomChance(SleepChance))
         {
-            target.AddStatusEffect(new Sleep(){Caster = User}, User.Effectiveness);
+            target.AddStatusEffect(new Sleep(){Caster = User, Duration = 1}, User.Effectiveness);
         }
         return result;
     }

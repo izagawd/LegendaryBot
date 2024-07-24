@@ -83,7 +83,7 @@ public class ExplosionBlast : Ultimate
         => $"User does an explosion blast, attacking all enemies, inflicting burn x2 on each enemy hit";
     
 
-    public override int MaxCooldown  => 6;
+    public override int MaxCooldown  => 5;
     public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
@@ -91,19 +91,23 @@ public class ExplosionBlast : Ultimate
 
     protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
-        
-        foreach (var i in GetPossibleTargets())
+        var targets = GetPossibleTargets().ToArray();
+        foreach (var i in targets)
         {
             i.Damage(new DamageArgs(this)
             {
                 ElementToDamageWith = User.Element,
-                Damage = User.Attack * 1.7f,
+                Damage = User.Attack * 1.5f,
                 DamageDealer = User,
                 CriticalChance = User.CriticalChance,
                 CriticalDamage = User.CriticalDamage,
                 DamageText =
                     $"{User.NameWithAlphabetIdentifier} blasted {i.NameWithAlphabetIdentifier}, dealing $ damage!",
             });
+        }
+        foreach (var i in targets)
+        {
+            i.AddStatusEffect(new Burn() { Caster = User, Duration = 1 });
         }
         return new UsageResult(this){UsageType = usageType, TargetType = TargetType.AOE, User = User, Text = "EXPLODING BLAST!"};
     }

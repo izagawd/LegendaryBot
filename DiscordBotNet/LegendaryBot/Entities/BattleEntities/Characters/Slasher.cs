@@ -7,8 +7,9 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class WindSlash : Skill
 {
-
-    public override string GetDescription(CharacterPartials.Character character) => "Attacks all enemies with a sharp wind";
+    private const int increasedCritChance = 25;
+    public override string GetDescription(CharacterPartials.Character character) => "Attacks all enemies with a sharp wind." +
+        $" Attack has an increased crit chance of {increasedCritChance}%";
     
 
     public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
@@ -24,13 +25,14 @@ public class WindSlash : Skill
             var damageResult = i.Damage(new DamageArgs(this)
             {
                 ElementToDamageWith = User.Element,
-                CriticalChance = User.CriticalChance,
+                CriticalChance = User.CriticalChance + increasedCritChance,
                 CriticalDamage = User.CriticalDamage,
                 DamageDealer = User,
-                Damage = User.Attack * 1.8f, 
+                Damage = User.Attack * 1.7f, 
                 DamageText = $"The slash dealt $ damage to {i}!"
             });
-            damageResults.Add(damageResult);
+            if(damageResult is not null)
+                damageResults.Add(damageResult);
         }
 
         return new UsageResult(this)
@@ -49,8 +51,9 @@ public class WindSlash : Skill
 
 public class SimpleSlashOfPrecision : BasicAttack
 {
-    private int BleedChance => 50;
-    public override string GetDescription(CharacterPartials.Character character) =>$"Does a simple slash. Always lands a critical hit, with a {BleedChance}% chance to cause bleed for 2 turns";
+    private const int increasedCritChance = 25;
+    public override string GetDescription(CharacterPartials.Character character) =>
+        $"Does a simple slash. Attack has an increased crit chance of {increasedCritChance}";
     
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
@@ -58,16 +61,13 @@ public class SimpleSlashOfPrecision : BasicAttack
         var damageResult = target.Damage(new DamageArgs(this)
         {
             ElementToDamageWith = User.Element,
-            CriticalChance = User.CriticalChance,
+            CriticalChance = User.CriticalChance + increasedCritChance,
             CriticalDamage = User.CriticalDamage,
             DamageDealer = User,
             Damage = User.Attack * 1.7f,
-            AlwaysCrits = true
+ 
         });
-        if (BasicFunctionality.RandomChance(BleedChance))
-        {
-            target.AddStatusEffect(new Bleed(){Caster = User});
-        }
+
         return new UsageResult(this)
         {
             DamageResults = [damageResult],
@@ -80,9 +80,11 @@ public class SimpleSlashOfPrecision : BasicAttack
 }
 public class ConsecutiveSlashesOfPrecision : Ultimate
 {
+     const int increasedCritChance = 25;
 
-    public override string GetDescription(CharacterPartials.Character character)
-        =>"Slashes the enemy many times, dealing crazy damage. This attack will always deal a critical hit";
+     public override string GetDescription(CharacterPartials.Character character)
+         => $"Slashes the enemy many times, dealing crazy damage. attack has an increased crit chance of "
+            + $"{increasedCritChance}%";
 
     public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
@@ -94,14 +96,11 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
         var damageResult =target.Damage(new DamageArgs(this)
         {
             ElementToDamageWith = User.Element,
-            CriticalChance = User.CriticalChance,
+            CriticalChance = User.CriticalChance + increasedCritChance,
             CriticalDamage = User.CriticalDamage,
-            CanCrit = true,
             DamageDealer = User,
             Damage = User.Attack * 1.7f *2,
-            AlwaysCrits = true,
             DamageText = $"The slash was so precise it dealt $ damage to {target.NameWithAlphabetIdentifier}!",
-     
         });
 
         return new UsageResult(this)

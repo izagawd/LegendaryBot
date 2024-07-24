@@ -24,7 +24,7 @@ public class GooeyStrike : BasicAttack
         });
         if (BasicFunctionality.RandomChance(10))
         {
-            target.AddStatusEffect(new Poison(){Caster = User});
+            target.AddStatusEffect(new Poison(){Caster = User, Duration = 1});
         }
         return new UsageResult(this)
         {

@@ -116,7 +116,7 @@ public abstract class StatusEffect
     /// <summary>
     /// The duration of the status effect
     /// </summary>
-    public int Duration { get; set; } = 2;
+    public required int Duration { get; set; } = 1;
     /// <summary>
     /// The person who casted the status effect
     /// </summary>
