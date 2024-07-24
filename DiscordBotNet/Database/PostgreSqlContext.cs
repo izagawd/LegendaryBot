@@ -131,41 +131,9 @@ EXECUTE FUNCTION {functionName}();
     {
         await SetupNumberIncrementorForGearAsync();
         await SetupNumberIncrementorForCharacterAsync();
-        await SetupHandleDupeItemsTriggerAsync();
-    }
-    public async Task SetupHandleDupeItemsTriggerAsync()
-    {
-        await Database.ExecuteSqlRawAsync(@$"
-CREATE OR REPLACE FUNCTION handle_item_conflict()
-RETURNS TRIGGER AS $$
-DECLARE
-    existing_stacks INTEGER;
-BEGIN
-    -- Get the stacks of the existing item
-    SELECT ""{nameof(Item.Stacks)}"" INTO existing_stacks
-    FROM ""{nameof(Items)}""
-    WHERE ""{nameof(Item.TypeId)}"" = NEW.""{nameof(Item.TypeId)}"" 
-      AND ""{nameof(Item.UserDataId)}"" = NEW.""{nameof(Item.UserDataId)}""
-    LIMIT 1;
-    -- Check if an item with the same ""{nameof(Item.TypeId)}"" and ""{nameof(Item.UserDataId)}"" exists
-    IF FOUND THEN
-        -- Delete the existing item
-        DELETE FROM ""{nameof(Items)}""
-        WHERE ""{nameof(Item.TypeId)}"" = NEW.""{nameof(Item.TypeId)}"" AND ""{nameof(Item.UserDataId)}"" = NEW.""{nameof(Item.UserDataId)}"";
 
-        -- Adjust the stacks of the new item
-        NEW.""{nameof(Item.Stacks)}"" := NEW.""{nameof(Item.Stacks)}"" + existing_stacks;
-    END IF;
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-CREATE OR REPLACE TRIGGER item_conflict_trigger
-BEFORE INSERT ON ""{nameof(Items)}""
-FOR EACH ROW
-EXECUTE FUNCTION handle_item_conflict();
-");
     }
+
     private Task SetupNumberIncrementorForCharacterAsync()
     {
         return SetupNumberIncrementorForAsync(nameof(Characters),
