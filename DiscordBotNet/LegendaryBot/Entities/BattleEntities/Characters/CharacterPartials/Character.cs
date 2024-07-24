@@ -191,8 +191,9 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
             if (_health <= 0)
             {
                 _health = 0;
-         
+            
                 CurrentBattle.AddAdditionalBattleText(new DeathBattleText(this));
+                ShouldTakeExtraTurn = false;
                 _statusEffects.Clear();
                 CurrentBattle.InvokeBattleEvent(new CharacterDeathEventArgs(this));
             
