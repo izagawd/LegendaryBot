@@ -127,7 +127,7 @@ EXECUTE FUNCTION {functionName}();
 
     }
 
-    public async Task SetupDatabaseTriggersAsync()
+    private async Task SetupDatabaseTriggersAsync()
     {
         await SetupNumberIncrementorForGearAsync();
         await SetupNumberIncrementorForCharacterAsync();
