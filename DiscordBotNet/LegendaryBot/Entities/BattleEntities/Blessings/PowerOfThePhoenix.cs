@@ -28,7 +28,7 @@ public class PowerOfThePhoenix : Blessing, IBattleEventListener
     
         if (eventArgs.Character != Character) return;
 
-         Character!.RecoverHealth((GetHealthPercentRecovering(Level) *  0.01 * Character.MaxHealth).Round(),$"{Character.NameWithAlphabetIdentifier} recovered $ health via the blessing of the phoenix");
+         Character!.RecoverHealth((GetHealthPercentRecovering(Level) *  0.01 * Character.MaxHealth).Round(),$"{Character.NameWithAlphabet} recovered $ health via the blessing of the phoenix");
   
 
     }

@@ -359,8 +359,8 @@ public partial class BattleSimulator
         List<DiscordSelectComponentOption> toSelect = [];
         foreach (var i in Characters)
         {
-            toSelect.Add(new DiscordSelectComponentOption(i.NameWithAlphabetIdentifier, 
-                i.NameWithAlphabetIdentifier));
+            toSelect.Add(new DiscordSelectComponentOption(i.NameWithAlphabet, 
+                i.NameWithAlphabet));
         }
 
         return toSelect.ToArray();
@@ -372,7 +372,7 @@ public partial class BattleSimulator
         {
             var interaction = interactionCreateEventArgs.Interaction;
             var gottenValue = interactionCreateEventArgs.Values.First();
-            var characterToDisplayBattleInfo = Characters.FirstOrDefault(i => i.NameWithAlphabetIdentifier == gottenValue);
+            var characterToDisplayBattleInfo = Characters.FirstOrDefault(i => i.NameWithAlphabet == gottenValue);
             if (characterToDisplayBattleInfo is null)
             {
                 await interaction.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource,
@@ -456,7 +456,7 @@ public partial class BattleSimulator
           
 
             var embed = new DiscordEmbedBuilder()
-                .WithAuthor(characterToDisplayBattleInfo.NameWithAlphabetIdentifier, iconUrl: characterToDisplayBattleInfo.ImageUrl)
+                .WithAuthor(characterToDisplayBattleInfo.NameWithAlphabet, iconUrl: characterToDisplayBattleInfo.ImageUrl)
                 .WithTitle($"{characterToDisplayBattleInfo} [{characterToDisplayBattleInfo.AlphabetIdentifier}]'s description")
                 .WithColor(characterToDisplayBattleInfo.Color)
                 .WithDescription(descriptionStringBuilder.ToString());
@@ -753,7 +753,7 @@ public partial class BattleSimulator
             InvokeBattleEvent(new TurnStartEventArgs(ActiveCharacter));
             var shouldDoTurn = !ActiveCharacter.IsDead;
             if (!shouldDoTurn)
-                AddAdditionalBattleText($"{ActiveCharacter.NameWithAlphabetIdentifier} cannot take their turn because they died in the process of taking their turn!");
+                AddAdditionalBattleText($"{ActiveCharacter.NameWithAlphabet} cannot take their turn because they died in the process of taking their turn!");
             
             
             

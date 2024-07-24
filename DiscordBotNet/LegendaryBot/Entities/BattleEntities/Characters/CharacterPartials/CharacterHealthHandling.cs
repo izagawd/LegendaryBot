@@ -21,7 +21,7 @@ public partial class Character
 
         Health += healthToRecover;
         if (recoveryText is null)
-            recoveryText = $"{NameWithAlphabetIdentifier} recovered $ health!";
+            recoveryText = $"{NameWithAlphabet} recovered $ health!";
         if(announceHealing)
             CurrentBattle.AddAdditionalBattleText(recoveryText.Replace("$",healthToRecover.ToString()));
         

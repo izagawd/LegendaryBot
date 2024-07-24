@@ -21,7 +21,7 @@ public partial class Character
                 if (_statusEffects.Count > 1)
                     noun = "have";
                 var concatenated = BasicFunctionality.CommaConcatenator(_affectedCharacters
-                    .Select(i => i.NameWithAlphabetIdentifier));
+                    .Select(i => i.NameWithAlphabet));
 
                 Dictionary<StatusEffect, int> countTracker = [];
 
@@ -113,7 +113,7 @@ public partial class Character
                 }
 
                 return BasicFunctionality.CommaConcatenator(_affectedCharacters
-                           .Select(i => i.NameWithAlphabetIdentifier))
+                           .Select(i => i.NameWithAlphabet))
                        + $" {noun} their combat readiness {thingDone} by {Math.Abs(_combatReadinessChangeAmount)}%!";
             }
         }
@@ -143,7 +143,7 @@ public partial class Character
             if (_extraTurners.Count > 1)
                 noun = "have";
             return BasicFunctionality.CommaConcatenator(_extraTurners
-                    .Select(i => i.NameWithAlphabetIdentifier)) + $" {noun} been granted an extra turn!";
+                    .Select(i => i.NameWithAlphabet)) + $" {noun} been granted an extra turn!";
         }
         
         }
@@ -179,7 +179,7 @@ public partial class Character
                 if (_revivedCharacters.Count > 1)
                     noun = "have";
                 return BasicFunctionality.CommaConcatenator(_revivedCharacters
-                        .Select(i => i.NameWithAlphabetIdentifier)) + $" {noun} been revived!";
+                        .Select(i => i.NameWithAlphabet)) + $" {noun} been revived!";
             }
         }
 
@@ -209,7 +209,7 @@ public partial class Character
                 if (_deadCharacters.Count > 1)
                     noun = "have";
                 return BasicFunctionality.CommaConcatenator(_deadCharacters
-                    .Select(i => i.NameWithAlphabetIdentifier)) + $" {noun} died!";
+                    .Select(i => i.NameWithAlphabet)) + $" {noun} died!";
             }
         }
 

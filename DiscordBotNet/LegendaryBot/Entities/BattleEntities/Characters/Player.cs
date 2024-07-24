@@ -25,7 +25,7 @@ public class FourthWallBreaker: BasicAttack
                     CriticalDamage = User.CriticalDamage,
                     DamageDealer = User,
                     DamageText =
-                        $"Breaks the fourth wall, causing {target.NameWithAlphabetIdentifier} to cringe, and making them receive $ damage!",
+                        $"Breaks the fourth wall, causing {target.NameWithAlphabet} to cringe, and making them receive $ damage!",
                     Damage = User.Attack * 1.7f
 
                 })
@@ -62,7 +62,7 @@ public class FireBall : Skill
             CriticalDamage = User.CriticalDamage,
             Damage = User.Attack * 2.4f,
             DamageDealer = User,
-            DamageText =$"{User.NameWithAlphabetIdentifier} threw a fireball at {target.NameWithAlphabetIdentifier} and dealt $ damage!",
+            DamageText =$"{User.NameWithAlphabet} threw a fireball at {target.NameWithAlphabet} and dealt $ damage!",
         });
         if (BasicFunctionality.RandomChance(10))
         {
@@ -82,10 +82,10 @@ public class FireBall : Skill
 public class Ignite : Ultimate
 {
     public override int MaxCooldown => 4;
-    public override string GetDescription(CharacterPartials.Character character) =>$"Ignites the enemy with 3 burns. {IgniteChance}% chance each";
+    public override string GetDescription(CharacterPartials.Character character) =>$"Ignites the enemy with 3 burns for 2 turns!";
     
 
-    public int IgniteChance  => 100;
+ 
     public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
@@ -93,17 +93,17 @@ public class Ignite : Ultimate
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} " +
+        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} " +
                
-                                                    $"attempts to make a human torch out of {target.NameWithAlphabetIdentifier}!");
+                                                    $"attempts to make a human torch out of {target.NameWithAlphabet}!");
 
         List<StatusEffect> burns = [];
+        
         for (var i = 0; i < 3; i++)
         {
-            if (BasicFunctionality.RandomChance(IgniteChance))
-            {
-                burns.Add(new Burn(){ Caster = User, Duration = 2});
-            }
+            
+            burns.Add(new Burn(){ Caster = User, Duration = 2});
+            
         }
 
         target.AddStatusEffects(burns,User.Effectiveness);

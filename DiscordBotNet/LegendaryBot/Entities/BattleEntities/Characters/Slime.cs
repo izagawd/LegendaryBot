@@ -7,7 +7,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 
 
-public class GooeyStrike : BasicAttack
+public class SlimeBodySlam : BasicAttack
 {
     
     public override string GetDescription(CharacterPartials.Character character) => "Slams it's body on the enemy, with a 10% chance to inflict poison";
@@ -20,7 +20,7 @@ public class GooeyStrike : BasicAttack
             CriticalDamage = User.CriticalDamage,
             DamageDealer = User,
             Damage = User.Attack * 1.7f,
-            DamageText = $"{User.NameWithAlphabetIdentifier} used a slime attack at {target.NameWithAlphabetIdentifier} and dealt $ damage!"
+            DamageText = $"{User.NameWithAlphabet} slams at {target.NameWithAlphabet} and dealt $ damage!"
         });
         if (BasicFunctionality.RandomChance(10))
         {
@@ -31,7 +31,7 @@ public class GooeyStrike : BasicAttack
             DamageResults = [damageResult],
             TargetType = TargetType.SingleTarget,
             UsageType = usageType,
-            Text = "Attack!",
+            Text = "Slime body slam!",
             User = User
         };
     }
@@ -50,7 +50,7 @@ public class Slime : CharacterPartials.Character
     public Slime()
     {
         TypeId = 7;
-        BasicAttack = new GooeyStrike(){User = this};
+        BasicAttack = new SlimeBodySlam(){User = this};
         
     }
 

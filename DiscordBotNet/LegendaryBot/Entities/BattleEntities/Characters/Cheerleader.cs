@@ -25,7 +25,7 @@ public class PomPomAttack : BasicAttack
                     CriticalDamage = User.CriticalDamage,
                     DamageDealer = User,
                     Damage = User.Attack * 0.8f,
-                    DamageText = $"{User.NameWithAlphabetIdentifier} hits {target.NameWithAlphabetIdentifier} with their pompoms, dealing $ damage!"
+                    DamageText = $"{User.NameWithAlphabet} hits {target.NameWithAlphabet} with their pompoms, dealing $ damage!"
                 })
             ],
             TargetType = TargetType.SingleTarget,
@@ -50,7 +50,7 @@ public class  YouCanDoIt : Skill
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} wants {target.NameWithAlphabetIdentifier} to prevail!");
+        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} wants {target.NameWithAlphabet} to prevail!");
         target.IncreaseCombatReadiness(100);
         target.AddStatusEffect(new AttackBuff() { Duration = 2 , Caster = User});
 
@@ -79,7 +79,7 @@ public class YouCanMakeItEveryone : Ultimate
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} encourages her allies!");
+        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} encourages her allies!");
 
         var targets = GetPossibleTargets().ToArray();
 

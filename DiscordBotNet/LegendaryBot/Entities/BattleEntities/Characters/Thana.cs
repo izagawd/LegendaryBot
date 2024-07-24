@@ -16,7 +16,7 @@ public class SoulAttack : BasicAttack
             CriticalDamage = User.CriticalDamage,
             Damage = User.Attack * 1.7f,
             DamageDealer = User,
-            DamageText = $"{User.NameWithAlphabetIdentifier} uses the souls of the dead to attack {target.NameWithAlphabetIdentifier} and dealt $ damage!"
+            DamageText = $"{User.NameWithAlphabet} uses the souls of the dead to attack {target.NameWithAlphabet} and dealt $ damage!"
         });
         if (BasicFunctionality.RandomChance(25))
         {
@@ -50,7 +50,7 @@ public class YourLifeEnergyIsMine : Skill
             CriticalDamage = User.CriticalDamage,
             Damage = User.Attack * 2.5f,
             DamageDealer = User,
-            DamageText = $"{User.NameWithAlphabetIdentifier} sucks the life essence out of {target.NameWithAlphabetIdentifier} and deals $ damage!"
+            DamageText = $"{User.NameWithAlphabet} sucks the life essence out of {target.NameWithAlphabet} and deals $ damage!"
         });
         if(damageResult is not null)
             User.RecoverHealth(damageResult.Damage * 0.2f);
@@ -85,7 +85,7 @@ public class Arise : Ultimate
     
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        User.CurrentBattle.AddAdditionalBattleText($"With her necromancy powers, {User.NameWithAlphabetIdentifier} attempts to bring back all her dead allies!");
+        User.CurrentBattle.AddAdditionalBattleText($"With her necromancy powers, {User.NameWithAlphabet} attempts to bring back all her dead allies!");
 
         foreach (var i in GetPossibleTargets())
         {

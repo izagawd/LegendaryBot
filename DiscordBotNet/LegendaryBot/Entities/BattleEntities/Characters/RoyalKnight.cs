@@ -25,7 +25,7 @@ public class ShieldBash : BasicAttack
                     CriticalDamage = User.CriticalDamage,
                     DamageDealer = User,
                     DamageText =
-                        $"{User.NameWithAlphabetIdentifier} bashes {target.NameWithAlphabetIdentifier} with his shield , making them receive $ damage!",
+                        $"{User.NameWithAlphabet} bashes {target.NameWithAlphabet} with his shield , making them receive $ damage!",
                     Damage = User.Attack * 1.7f
 
                 }),
@@ -69,7 +69,7 @@ public class IWillBeYourShield : Skill
 
         return new UsageResult(this)
         {
-            Text = $"As a loyal knight, {User.NameWithAlphabetIdentifier} helps {target.NameWithAlphabetIdentifier}!",
+            Text = $"As a loyal knight, {User.NameWithAlphabet} helps {target.NameWithAlphabet}!",
             UsageType = usageType,
             TargetType = TargetType.SingleTarget,
             User = User
@@ -102,7 +102,7 @@ public class IWillProtectUs : Ultimate
         {
             UsageType = usageType,
             TargetType = TargetType.AOE,
-            Text = $"As a loyal knight, {User.NameWithAlphabetIdentifier} increases the defense of all allies for three turns",
+            Text = $"As a loyal knight, {User.NameWithAlphabet} increases the defense of all allies for three turns",
             User = User
         };
     }

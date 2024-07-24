@@ -23,7 +23,7 @@ public class DoNotResist : BasicAttack
             CriticalDamage = User.CriticalDamage,
             Damage = User.Attack * 1.7f,
             DamageDealer = User,
-            DamageText = $"{User.NameWithAlphabetIdentifier} tases {target.NameWithAlphabetIdentifier} and dealt $ damage! it was shocking"
+            DamageText = $"{User.NameWithAlphabet} tases {target.NameWithAlphabet} and dealt $ damage! it was shocking"
         });
         if (BasicFunctionality.RandomChance(15))
         {
@@ -62,7 +62,7 @@ public class IAmShooting : Skill
             CriticalDamage = User.CriticalDamage,
             DamageDealer = User,
             Damage = User.Attack * 2,
-            DamageText = $"{User.NameWithAlphabetIdentifier} shoots at {target.NameWithAlphabetIdentifier} for resisting arrest, dealing $ damage"
+            DamageText = $"{User.NameWithAlphabet} shoots at {target.NameWithAlphabet} for resisting arrest, dealing $ damage"
         });
  
         target.AddStatusEffect(new Bleed(){ Caster = User, Duration = 2}, User.Effectiveness);

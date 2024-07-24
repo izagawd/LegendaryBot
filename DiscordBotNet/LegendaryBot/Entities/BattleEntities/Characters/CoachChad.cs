@@ -22,7 +22,7 @@ public class GigaPunch : BasicAttack
                     CriticalChance = User.CriticalChance,
                     DamageDealer = User,
                     Damage = User.Attack * 1.7f,
-                    DamageText = $"{User.NameWithAlphabetIdentifier} smiles chadly, and punches {target.NameWithAlphabetIdentifier} in a cool way and dealt $ damage!"
+                    DamageText = $"{User.NameWithAlphabet} smiles chadly, and punches {target.NameWithAlphabet} in a cool way and dealt $ damage!"
 
                 })
             ],
@@ -47,7 +47,7 @@ public class MuscleFlex : Ultimate
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier}... flexed his muscles?");
+        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet}... flexed his muscles?");
         return new UsageResult(this)
         {
             Text = $"Hmph!",
@@ -74,12 +74,12 @@ public class ThumbsUp : Skill
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} is cheering {target.NameWithAlphabetIdentifier} on!");
+        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} is cheering {target.NameWithAlphabet} on!");
         return new UsageResult(this)
         {
             UsageType = usageType,
             TargetType = TargetType.SingleTarget,
-            Text = $"{User.NameWithAlphabetIdentifier} gave {target.NameWithAlphabetIdentifier} a thumbs up!",
+            Text = $"{User.NameWithAlphabet} gave {target.NameWithAlphabet} a thumbs up!",
             User = User
         };
 
@@ -105,20 +105,6 @@ public class CoachChad : CharacterPartials.Character, IBattleEventListener
     public override DiscordColor Color => DiscordColor.Purple;
 
 
-    public override void NonPlayerCharacterAi(ref CharacterPartials.Character target, ref BattleDecision decision)
-    {
-        List<BattleDecision> possibleDecisions = [BattleDecision.BasicAttack];
-        
-        
-        if(Skill.CanBeUsed())
-            possibleDecisions.Add(BattleDecision.Skill);
-        if(Ultimate.CanBeUsed())
-            possibleDecisions.Add(BattleDecision.Ultimate);
-        decision = BasicFunctionality.RandomChoice(possibleDecisions.AsEnumerable());
-        target = BasicFunctionality.RandomChoice(BasicAttack.GetPossibleTargets());
-
-
-    }
 
     [BattleEventListenerMethod]
     private void HandleRevive(CharacterDeathEventArgs deathEventArgs)

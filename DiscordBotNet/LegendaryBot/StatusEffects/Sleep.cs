@@ -24,7 +24,7 @@ public class Sleep: StatusEffect, IBattleEventListener
      
         var removed = Affected.RemoveStatusEffect(this);
         if(removed)
-            Affected.CurrentBattle.AddAdditionalBattleText($"{this} has been dispelled from {Affected.NameWithAlphabetIdentifier} due to taking damage!");
+            Affected.CurrentBattle.AddAdditionalBattleText($"{this} has been dispelled from {Affected.NameWithAlphabet} due to taking damage!");
     }
 
     public override UsageResult OverridenUsage(ref Character target, ref BattleDecision decision, UsageType usageType)

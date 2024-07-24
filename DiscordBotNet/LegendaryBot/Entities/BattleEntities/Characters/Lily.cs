@@ -24,7 +24,7 @@ public class ChamomileSachetWhack : BasicAttack
             Damage = User.Attack * 1.7f,
             DamageDealer = User,
             CanCrit = true,
-            DamageText = $"That was a harsh snoozy whack that dealt $ damage on {target.NameWithAlphabetIdentifier}!",
+            DamageText = $"That was a harsh snoozy whack that dealt $ damage on {target.NameWithAlphabet}!",
 
         });
         var result = new UsageResult(this)
@@ -63,7 +63,7 @@ public class BlossomTouch : Skill
         target.RecoverHealth((User.MaxHealth *HealthHealScaling* 0.01).Round());
         return new UsageResult(this)
         {
-            Text = $"{User.NameWithAlphabetIdentifier} used Blossom Touch!",
+            Text = $"{User.NameWithAlphabet} used Blossom Touch!",
             UsageType = usageType,
             TargetType = TargetType.SingleTarget,
             User = User
@@ -87,7 +87,7 @@ public class LilyOfTheValley : Ultimate
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
            
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} used Lily of The Valley, and released a dangerous gas to {target.NameWithAlphabetIdentifier}!");
+        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} used Lily of The Valley, and released a dangerous gas to {target.NameWithAlphabet}!");
       
         var effectiveness = User.Effectiveness;
 

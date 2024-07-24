@@ -122,7 +122,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
             if (BasicFunctionality.RandomChance(percentToResist))
             {
                 if(announceDecrease)
-                    CurrentBattle.AddAdditionalBattleText($"{NameWithAlphabetIdentifier} resisted combat readiness decrease!");
+                    CurrentBattle.AddAdditionalBattleText($"{NameWithAlphabet} resisted combat readiness decrease!");
                 return 0;
             }
         }
@@ -491,7 +491,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
 
     public override string ToString()
     {
-        return CurrentBattle is not null ? NameWithAlphabetIdentifier : Name;
+        return CurrentBattle is not null ? NameWithAlphabet : Name;
     }
 
 
@@ -502,28 +502,21 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
     /// <param name="decision"></param>
     public virtual void NonPlayerCharacterAi(ref Character target, ref BattleDecision decision)
     {
-        List<BattleDecision> possibleDecisions = [BattleDecision.BasicAttack];
+        if ((Ultimate?.CanBeUsed()).GetValueOrDefault(false))
+        {
+            decision = BattleDecision.Ultimate;
+            target = BasicFunctionality.RandomChoice(Ultimate.GetPossibleTargets());
+            return;
+        }
+        if ((Skill?.CanBeUsed()).GetValueOrDefault(false))
+        {
+            decision = BattleDecision.Skill;
+            target = BasicFunctionality.RandomChoice(Skill.GetPossibleTargets());
+            return;
+        }
 
-
-        if(Skill is not null && Skill.CanBeUsed())
-            possibleDecisions.Add(BattleDecision.Skill);
-        if(Ultimate is not null && Ultimate.CanBeUsed())
-            possibleDecisions.Add(BattleDecision.Ultimate);
-
-   
-        Move move;
-        var moveDecision = BattleDecision.BasicAttack;
-
-        moveDecision =BasicFunctionality.RandomChoice<BattleDecision>(possibleDecisions);
-        move = this[moveDecision]!;
-        var possibleTargets = move.GetPossibleTargets().ToArray();
-        possibleDecisions.Remove(moveDecision);
-    
-
-        
-        target = BasicFunctionality.RandomChoice(possibleTargets);
-
-        decision = moveDecision;
+        target = BasicFunctionality.RandomChoice(BasicAttack.GetPossibleTargets());
+        decision = BattleDecision.BasicAttack;
 
     }
 
@@ -640,7 +633,7 @@ public abstract partial  class Character : IInventoryEntity, ICanBeLeveledUp,  I
         return $"{Name} ({side}) [{AlphabetIdentifier}]";
     }
     
-    public string NameWithAlphabetIdentifier => $"{Name} ({AlphabetIdentifier})";
+    public string NameWithAlphabet => $"{Name} ({AlphabetIdentifier})";
     [NotMapped] public  Skill? Skill { get; protected set; } 
     /// <summary>
     /// The position of the player based on combat readiness

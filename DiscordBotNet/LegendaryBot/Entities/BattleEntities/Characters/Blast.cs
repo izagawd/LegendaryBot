@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+﻿using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
@@ -22,7 +23,7 @@ public class MethaneSlap : BasicAttack
             Damage = User.Attack * 1.7f,
             DamageDealer = User,
             CanCrit = true,
-            DamageText = $"That was a harsh slap on {target.NameWithAlphabetIdentifier} dealt $ damage!"
+            DamageText = $"That was a harsh slap on {target.NameWithAlphabet} dealt $ damage!"
         });
         var damageResultList = new []{ damageResult };
         var result = new UsageResult(this)
@@ -56,7 +57,7 @@ public class BlowAway : Skill
     protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
                 
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabetIdentifier} threw multiple bombs at the opposing team!");
+        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} threw multiple bombs at the opposing team!");
         foreach (var i in GetPossibleTargets())
         {
 
@@ -88,7 +89,7 @@ public class ExplosionBlast : Ultimate
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
-
+    
     protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
         var targets = GetPossibleTargets().ToArray();
@@ -102,12 +103,15 @@ public class ExplosionBlast : Ultimate
                 CriticalChance = User.CriticalChance,
                 CriticalDamage = User.CriticalDamage,
                 DamageText =
-                    $"{User.NameWithAlphabetIdentifier} blasted {i.NameWithAlphabetIdentifier}, dealing $ damage!",
+                    $"{User.NameWithAlphabet} blasted {i.NameWithAlphabet}, dealing $ damage!",
             });
         }
+
+        var eff = User.Effectiveness;
         foreach (var i in targets)
         {
-            i.AddStatusEffect(new Burn() { Caster = User, Duration = 1 });
+            i.AddStatusEffects([new Burn() { Caster = User, Duration = 1 },
+                new Burn() { Caster = User, Duration = 1 }], eff);
         }
         return new UsageResult(this){UsageType = usageType, TargetType = TargetType.AOE, User = User, Text = "EXPLODING BLAST!"};
     }

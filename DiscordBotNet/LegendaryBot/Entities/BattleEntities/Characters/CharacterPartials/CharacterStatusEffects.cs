@@ -5,7 +5,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.Characte
 public partial class Character
 {
     
-    public void AddStatusEffects(IEnumerable<StatusEffect> statusEffects, float? effectiveness = null,
+    public void AddStatusEffects(IEnumerable<StatusEffect> statusEffects, float? effectiveness ,
         bool announce = true)
     {
   

@@ -20,8 +20,8 @@ public class BasicAttackSample : BasicAttack
             Damage = User.Attack * 1.7f,
             DamageDealer = User,
             CanCrit = true,
-            DamageText = $"{User.NameWithAlphabetIdentifier} gave" +
-                         $" {target.NameWithAlphabetIdentifier} a punch and dealt $ damage!"
+            DamageText = $"{User.NameWithAlphabet} gave" +
+                         $" {target.NameWithAlphabet} a punch and dealt $ damage!"
         });
         return new UsageResult(this)
         {

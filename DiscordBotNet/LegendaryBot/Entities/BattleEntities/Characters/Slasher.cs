@@ -72,7 +72,7 @@ public class SimpleSlashOfPrecision : BasicAttack
         {
             DamageResults = [damageResult],
             TargetType = TargetType.SingleTarget,
-            Text = $"{User.NameWithAlphabetIdentifier} does a simple slash to {target.NameWithAlphabetIdentifier}!",
+            Text = $"{User.NameWithAlphabet} does a simple slash to {target.NameWithAlphabet}!",
             User = User,
             UsageType = usageType
         };
@@ -100,7 +100,7 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
             CriticalDamage = User.CriticalDamage,
             DamageDealer = User,
             Damage = User.Attack * 1.7f *2,
-            DamageText = $"The slash was so precise it dealt $ damage to {target.NameWithAlphabetIdentifier}!",
+            DamageText = $"The slash was so precise it dealt $ damage to {target.NameWithAlphabet}!",
         });
 
         return new UsageResult(this)
