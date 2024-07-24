@@ -93,7 +93,7 @@ public class PostgreSqlContext : DbContext
     /// <param name="tableName">WARNING: case insensitive</param>
     /// <param name="userDataIdColumnName">case sensitive</param>
     /// <param name="numberColumnName">case sensitive</param>
-    private async Task SetupNumberIncrementorFor(string tableName, string userDataIdColumnName ,
+    private async Task SetupNumberIncrementorForAsync(string tableName, string userDataIdColumnName ,
         string numberColumnName )
     {
         var functionName = $"set_number_for_new_{tableName.ToLower()}_row";
@@ -123,12 +123,20 @@ EXECUTE FUNCTION {functionName}();
     {
         await Database.EnsureDeletedAsync();
         await Database.EnsureCreatedAsync();
-        await SetupNumberIncrementorFor(nameof(Gears),nameof(Gear.UserDataId),
-            nameof(Gear.Number));
-        await SetupNumberIncrementorFor(nameof(Characters),
-            nameof(Character.UserDataId),nameof(Character.Number));
-        
+        await SetupNumberIncrementorForGearAsync();
+        await SetupNumberIncrementorForCharacterAsync();
 
+
+    }
+    private Task SetupNumberIncrementorForCharacterAsync()
+    {
+        return SetupNumberIncrementorForAsync(nameof(Characters),
+            nameof(Character.UserDataId),nameof(Character.Number));
+    }
+    private Task SetupNumberIncrementorForGearAsync()
+    {
+        return SetupNumberIncrementorForAsync(nameof(Gears),nameof(Gear.UserDataId),
+            nameof(Gear.Number));
     }
     
 
