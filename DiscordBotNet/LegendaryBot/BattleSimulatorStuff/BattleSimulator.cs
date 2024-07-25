@@ -237,7 +237,7 @@ public partial class BattleSimulator
     /// <typeparam name="T">the type of argument of the battle event</typeparam>
     public void InvokeBattleEvent<T>(T eventArgs) where T : BattleEventArgs
     {
-        var stop = new Stopwatch(); stop.Start();
+
         var eventArgsType = eventArgs.GetType();
         foreach (var i in GetAllEventMethods()
                      .Where(k => eventArgsType.IsAssignableTo(k.EventMethodDetails.ParameterType))
@@ -247,9 +247,7 @@ public partial class BattleSimulator
             i.EventMethodDetails.BattleEventMethod.Invoke(i.Entity,eventArgs);
 
         }
-        stop.Stop();
-        Console.Write(eventArgs.GetType().Name);
-        stop.Elapsed.TotalMicroseconds.Print();
+
 
     }
 
