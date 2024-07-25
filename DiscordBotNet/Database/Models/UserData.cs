@@ -191,7 +191,7 @@ public class UserData :   ICanBeLeveledUp
     public long Coins { get; set; } = 5000;
 
 
-    public ulong UserDataId { get; set; }
+
 
     public DateTime LastTimeEnergyWasAccessed { get; set; } = DateTime.UtcNow;
     public int EnergyValue { get; set; } = MaxEnergyValue;

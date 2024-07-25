@@ -76,7 +76,7 @@ public class CharacterTeam : ISet<Character>
     public void AddRange(IEnumerable<Character> characters)
     {
         
-        foreach (var i in Characters)
+        foreach (var i in characters)
         {
             if(i is null) continue;
             Add(i);

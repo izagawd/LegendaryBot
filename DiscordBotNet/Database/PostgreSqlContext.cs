@@ -121,7 +121,7 @@ EXECUTE FUNCTION {functionName}();
     }
     public async Task ResetDatabaseAsync()
     {
-
+        await Database.MigrateAsync();
         await Database.EnsureCreatedAsync();
         await SetupDatabaseTriggersAsync();
 

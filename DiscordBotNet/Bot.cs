@@ -10,6 +10,7 @@ using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Commands;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
@@ -310,9 +311,49 @@ public static class Bot
         }
     }
 
+    private async static Task BeginUser(ulong userId,string name,  PostgreSqlContext postgreSqlContext)
+    {
+        var post =await  postgreSqlContext.UserData.FirstOrDefaultAsync(i => i.Id == userId);
+        if (post is null)
+        {
+            post = await postgreSqlContext.CreateNonExistantUserdataAsync(userId);
+            post.Name = name;
+        }
+
+        var player = new Player();
+        var lily = new Lily();
+        player.Level = 5;
+        lily.Level = 5;
+        post.Tier = Tier.Bronze;
+        post.EquippedPlayerTeam = new PlayerTeam() { TeamName = "Team1" };
+        post.EquippedPlayerTeam.AddRange([lily]);
+        post.Inventory.AddRange([player,lily]);
+        post.PlayerTeams.Add(post.EquippedPlayerTeam);
+        post.PlayerTeams.Add(new PlayerTeam(){TeamName = "Team2"});
+        post.PlayerTeams.Add(new PlayerTeam(){TeamName = "Team3"});
+        post.PlayerTeams.Add(new PlayerTeam(){TeamName = "Team4"});
+        foreach (var i in post.PlayerTeams)
+        {
+            i.Add(player);
+        }
+        
+    }
     private async static Task DoShitAsync()
     {
-        await new PostgreSqlContext().ResetDatabaseAsync();
+        var post = new PostgreSqlContext();
+        await  post.UserData
+            .Include(i => i.Characters)
+            .Include(i => i.PlayerTeams)
+            .ForEachAsync(i =>
+            {
+                foreach (var j in i.PlayerTeams)
+                {
+                    $"User: {i.Name} Name {j.TeamName}. characters: {j.Characters.Select(i => i.Name).Represent()}"
+                        .Print();
+                }
+
+            });
+
     }
     private static async Task Main(string[] args)
     {
