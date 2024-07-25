@@ -237,18 +237,13 @@ public partial class BattleSimulator
     /// <typeparam name="T">the type of argument of the battle event</typeparam>
     public void InvokeBattleEvent<T>(T eventArgs) where T : BattleEventArgs
     {
-
         var eventArgsType = eventArgs.GetType();
         foreach (var i in GetAllEventMethods()
                      .Where(k => eventArgsType.IsAssignableTo(k.EventMethodDetails.ParameterType))
                      .OrderByDescending(j => j.EventMethodDetails.Attribute.Priority))
         {
-        
             i.EventMethodDetails.BattleEventMethod.Invoke(i.Entity,eventArgs);
-
         }
-
-
     }
 
 
