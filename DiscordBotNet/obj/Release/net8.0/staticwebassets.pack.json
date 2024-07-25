@@ -53,6 +53,10 @@
       "PackagePath": "staticwebassets\\battle_images\\characters\\Slime.png"
     },
     {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Takeshi.png",
+      "PackagePath": "staticwebassets\\battle_images\\characters\\Takeshi.png"
+    },
+    {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Thana.png",
       "PackagePath": "staticwebassets\\battle_images\\characters\\Thana.png"
     },

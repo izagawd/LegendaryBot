@@ -11,11 +11,17 @@ public class GearStatDatabaseConfiguration : IEntityTypeConfiguration<GearStat>
     public void Configure(EntityTypeBuilder<GearStat> builder)
     {
         builder.HasKey(i => i.Id);
+        var starting =  builder.HasDiscriminator(i => i.TypeId);
+        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<GearStat>())
+        {
+            starting = starting.HasValue(i.GetType(), i.TypeId);
+        }
     }
 }
 
 public abstract class GearStat
 {
+    public int TypeId { get; protected init; }
     [NotMapped]
     public static Type AttackPercentageType { get; } = typeof(AttackPercentageGearStat);
     [NotMapped]  public static Type AttackFlatType { get; } = typeof(AttackFlatGearStat);

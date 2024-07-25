@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4IPxUsKyByDfiXmQndpN21WBP9W4v+qaabOGcMGVlvs=",
+  "Hash": "///eo+Z7kCVJyOavxVcz8+zWtTDfmWoGZpRUeY/Dyg4=",
   "Source": "DiscordBotNet",
   "BasePath": "_content/DiscordBotNet",
   "Mode": "Default",
@@ -281,6 +281,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\battle_images\\characters\\Slime.png"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Takeshi.png",
+      "SourceId": "DiscordBotNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
+      "BasePath": "_content/DiscordBotNet",
+      "RelativePath": "battle_images/characters/Takeshi.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\battle_images\\characters\\Takeshi.png"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Thana.png",

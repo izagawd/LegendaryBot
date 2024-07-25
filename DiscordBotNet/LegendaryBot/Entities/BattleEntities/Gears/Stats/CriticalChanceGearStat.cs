@@ -4,6 +4,10 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 
 public class CriticalChanceGearStat : GearStat
 {
+    public CriticalChanceGearStat()
+    {
+        TypeId = 3;
+    }
     public override int GetMainStatValue(Rarity rarity)
     {
         return ((int) rarity  *  9) + 10;
