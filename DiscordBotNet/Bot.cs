@@ -316,8 +316,7 @@ public static class Bot
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
     private async static Task DoShitAsync()
     {
-        await new PostgreSqlContext().ResetDatabaseAsync();
-        Process.GetCurrentProcess().Kill();
+       
     }
     private static async Task Main(string[] args)
     {
