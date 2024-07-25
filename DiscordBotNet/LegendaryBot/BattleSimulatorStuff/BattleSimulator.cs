@@ -242,7 +242,7 @@ public partial class BattleSimulator
 
         var eventArgsType = eventArgs.GetType();
         foreach (var i in GetAllEventMethods()
-                     .Where(k => eventArgsType.IsRelatedToType(k.EventMethodDetails.ParameterType))
+                     .Where(k => eventArgsType.IsAssignableTo(k.EventMethodDetails.ParameterType))
                      .OrderByDescending(j => j.EventMethodDetails.Attribute.Priority))
         {
         

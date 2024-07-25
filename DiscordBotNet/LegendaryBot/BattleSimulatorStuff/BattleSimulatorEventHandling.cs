@@ -36,7 +36,7 @@ public partial class BattleSimulator
                     
                 }
                 var parameter = parameters[0];
-                if (!parameter.ParameterType.IsRelatedToType(typeof(BattleEventArgs)))
+                if (!parameter.ParameterType.IsAssignableTo(typeof(BattleEventArgs)))
                 {
                     invalidMethods.Add(j.method);
                     continue;
@@ -81,7 +81,7 @@ public partial class BattleSimulator
             
         if (parameters.Length != 1) throw new Exception("Params length must be 1");
         var param = parameters[0];
-        if (!param.ParameterType.IsRelatedToType(typeof(BattleEventArgs)))
+        if (!param.ParameterType.IsAssignableTo(typeof(BattleEventArgs)))
             throw new Exception($"Parameter must be of instance {nameof(BattleEventArgs)}");
         var parameterType = param.ParameterType;
             

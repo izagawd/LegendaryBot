@@ -75,10 +75,7 @@ public static class BasicExtension
         
     }
 
-    public static bool IsRelatedToType(this Type theType, Type type)
-    {
-        return theType.IsSubclassOf(type) || theType == type;
-    }
+
     public static int Round(this double theDouble)
     {
         return (int) Math.Round(theDouble);

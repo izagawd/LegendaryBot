@@ -155,7 +155,7 @@ EXECUTE FUNCTION {functionName}();
     {
         modelBuilder
             .UsePropertyAccessMode(PropertyAccessMode.Property);
-        foreach (var i in TypesFunctionality.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(Quest))))
+        foreach (var i in TypesFunctionality.AllAssemblyTypes.Where(i => i.IsAssignableTo(typeof(Quest))))
         {
             modelBuilder.Entity(i);
         }
@@ -165,7 +165,7 @@ EXECUTE FUNCTION {functionName}();
         {
             modelBuilder.Entity(entityType);
         }
-        foreach (var i in TypesFunctionality.AllAssemblyTypes.Where(i => i.IsRelatedToType(typeof(GearStat))))
+        foreach (var i in TypesFunctionality.AllAssemblyTypes.Where(i => i.IsAssignableTo(typeof(GearStat))))
         {
             modelBuilder.Entity(i);
         }

@@ -10,6 +10,7 @@ using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Commands;
+using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
@@ -316,12 +317,13 @@ public static class Bot
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
     private async static Task DoShitAsync()
     {
-       
+
     }
     private static async Task Main(string[] args)
     {
         await DoShitAsync();
       
+        
         await using (var ctx = new PostgreSqlContext())
         {
 
