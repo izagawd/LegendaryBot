@@ -7,7 +7,6 @@ using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.DialogueNamespace;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;

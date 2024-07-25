@@ -1,8 +1,6 @@
 ﻿using System.Text;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.LegendaryBot.Entities;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
-using DiscordBotNet.LegendaryBot.Entities.Items;
 
 namespace DiscordBotNet.LegendaryBot.Rewards;
 /// <summary>

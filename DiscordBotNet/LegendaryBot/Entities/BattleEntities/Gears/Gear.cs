@@ -5,7 +5,6 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPar
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.Extensions.Primitives;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 

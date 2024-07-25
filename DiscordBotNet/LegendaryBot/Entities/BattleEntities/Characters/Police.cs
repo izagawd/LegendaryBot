@@ -1,6 +1,5 @@
 ﻿using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
-using DiscordBotNet.LegendaryBot.Rewards;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;

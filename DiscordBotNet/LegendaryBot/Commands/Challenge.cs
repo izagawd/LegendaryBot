@@ -2,7 +2,6 @@
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;

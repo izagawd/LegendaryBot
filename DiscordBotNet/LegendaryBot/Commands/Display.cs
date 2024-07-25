@@ -7,7 +7,6 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
-using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;

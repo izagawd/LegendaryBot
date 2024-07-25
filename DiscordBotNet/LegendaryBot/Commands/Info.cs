@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.Extensions;
+﻿using DiscordBotNet.Database.Models;
+using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -18,11 +19,23 @@ public class Info : GeneralCommandClass
             
         if(author is null) author = ctx.User;
         
-        var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+        var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == author.Id);
 
         if (userData is null || userData.Tier == Tier.Unranked)
         {
-            await AskToDoBeginAsync(ctx);
+            if (author == ctx.User)
+            {
+                await AskToDoBeginAsync(ctx);
+            }
+            else
+            {
+                var embed = new DiscordEmbedBuilder()
+                    .WithUser(author)
+                    .WithTitle("Hmm")
+                    .WithDescription($"{author.Username} has not begun with /begin")
+                    .WithColor(TypesFunctionality.GetDefaultObject<UserData>().Color);
+                await ctx.RespondAsync(embed);
+            }
             return;
         }
         userData.RefreshEnergyValue();

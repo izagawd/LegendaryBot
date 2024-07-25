@@ -1,5 +1,4 @@
 using DiscordBotNet.LegendaryBot.Entities;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 
 namespace DiscordBotNet.Database.Models;

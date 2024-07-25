@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.Database.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 

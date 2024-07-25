@@ -1,6 +1,5 @@
 using System.Reflection;
 using System.Text;
-using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 
 namespace DiscordBotNet.LegendaryBot.BattleSimulatorStuff;

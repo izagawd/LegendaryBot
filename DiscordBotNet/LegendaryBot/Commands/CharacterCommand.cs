@@ -1,6 +1,5 @@
 using System.Collections.Immutable;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Text;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;

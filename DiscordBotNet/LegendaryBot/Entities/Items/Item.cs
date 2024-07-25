@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using DiscordBotNet.Database.Models;
-using DiscordBotNet.Extensions;
+﻿using DiscordBotNet.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SixLabors.Fonts;

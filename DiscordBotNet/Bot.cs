@@ -2,7 +2,6 @@
 using System.Collections.Immutable;
 using DSharpPlus.Entities;
 using System.Diagnostics;
-using System.Linq.Expressions;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
@@ -10,17 +9,9 @@ using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Commands;
-using DiscordBotNet.LegendaryBot.Entities;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
-using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
-using DiscordBotNet.LegendaryBot.Quests;
-using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.Rewards;
-using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.EventArgs;
@@ -31,11 +22,8 @@ using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.Commands.Processors.TextCommands;
 using DSharpPlus.Commands.Processors.TextCommands.Parsing;
-using DSharpPlus.Commands.Trees;
 using DSharpPlus.VoiceNext;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using SixLabors.ImageSharp.Drawing.Processing;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 
@@ -260,8 +248,9 @@ public static class Bot
             // and to the "!" prefix.
             // If you want to change it, you first set if the bot should react to mentions
             // and then you can provide as many prefixes as you want.
-            PrefixResolver = new DefaultPrefixResolver(true, "?", "&").ResolvePrefixAsync,
+            PrefixResolver = new DefaultPrefixResolver(true,  "&").ResolvePrefixAsync,
             IgnoreBots = true,
+   
         });
         
         
@@ -284,6 +273,8 @@ public static class Bot
         
        
         await Client.ConnectAsync();
+        await Client.UpdateStatusAsync(new DiscordActivity("&help", DiscordActivityType.Playing));
+
     }
 
     private static  Task OnCommandsExtensionOnCommandExecuted(CommandsExtension sender, CommandExecutedEventArgs args)
@@ -416,9 +407,11 @@ public static class Bot
     }
     
 
-    private static Task OnReady(DiscordClient client, SocketEventArgs e)
+    private static async Task OnReady(DiscordClient client, SocketEventArgs e)
     {
+ 
+
         Console.WriteLine("Ready!");
-        return Task.CompletedTask;
+        
     }
 }

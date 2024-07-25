@@ -1,7 +1,4 @@
-﻿using DiscordBotNet.Extensions;
-using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
-using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
-using DiscordBotNet.LegendaryBot.Moves;
+﻿using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using Microsoft.EntityFrameworkCore;
