@@ -2,6 +2,7 @@
 using System.Collections.Immutable;
 using DSharpPlus.Entities;
 using System.Diagnostics;
+using System.Reflection;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
@@ -9,6 +10,8 @@ using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Commands;
+using DiscordBotNet.LegendaryBot.Entities;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DiscordBotNet.LegendaryBot.Rewards;
