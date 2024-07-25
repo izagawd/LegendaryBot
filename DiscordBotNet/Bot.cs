@@ -231,7 +231,7 @@ public static class Bot
     private static async Task StartDiscordBotAsync()
     {
         
-        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings["BotToken"]!,
+        Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings[BotTokenToPathUse]!,
             DiscordIntents.All)
             .ConfigureEventHandlers(i => 
                 i.HandleSocketOpened(OnReady)
@@ -311,49 +311,13 @@ public static class Bot
         }
     }
 
-    private async static Task BeginUser(ulong userId,string name,  PostgreSqlContext postgreSqlContext)
-    {
-        var post =await  postgreSqlContext.UserData.FirstOrDefaultAsync(i => i.Id == userId);
-        if (post is null)
-        {
-            post = await postgreSqlContext.CreateNonExistantUserdataAsync(userId);
-            post.Name = name;
-        }
-
-        var player = new Player();
-        var lily = new Lily();
-        player.Level = 5;
-        lily.Level = 5;
-        post.Tier = Tier.Bronze;
-        post.EquippedPlayerTeam = new PlayerTeam() { TeamName = "Team1" };
-        post.EquippedPlayerTeam.AddRange([lily]);
-        post.Inventory.AddRange([player,lily]);
-        post.PlayerTeams.Add(post.EquippedPlayerTeam);
-        post.PlayerTeams.Add(new PlayerTeam(){TeamName = "Team2"});
-        post.PlayerTeams.Add(new PlayerTeam(){TeamName = "Team3"});
-        post.PlayerTeams.Add(new PlayerTeam(){TeamName = "Team4"});
-        foreach (var i in post.PlayerTeams)
-        {
-            i.Add(player);
-        }
-        
-    }
+    public const bool UseTestDatabaseAndBot = true;
+    public static string BotTokenToPathUse => UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
+    public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
     private async static Task DoShitAsync()
     {
-        var post = new PostgreSqlContext();
-        await  post.UserData
-            .Include(i => i.Characters)
-            .Include(i => i.PlayerTeams)
-            .ForEachAsync(i =>
-            {
-                foreach (var j in i.PlayerTeams)
-                {
-                    $"User: {i.Name} Name {j.TeamName}. characters: {j.Characters.Select(i => i.Name).Represent()}"
-                        .Print();
-                }
-
-            });
-
+        await new PostgreSqlContext().ResetDatabaseAsync();
+        Process.GetCurrentProcess().Kill();
     }
     private static async Task Main(string[] args)
     {
@@ -361,12 +325,7 @@ public static class Bot
       
         await using (var ctx = new PostgreSqlContext())
         {
-            if (args.Length > 0 && args[0] == "reset-database")
-            {
-                Console.WriteLine("Resetting database...");
-                await ctx.ResetDatabaseAsync();
-                Console.WriteLine("Database reset!");
-            }
+
             var stopwatch = new Stopwatch(); 
             Console.WriteLine("Making all users unoccupied...");
             stopwatch.Start();

@@ -84,7 +84,7 @@ public class PostgreSqlContext : DbContext
         
         // Configure the database provider and connection string
         optionsBuilder
-            .UseNpgsql(ConfigurationManager.AppSettings["ConnectionString"])
+            .UseNpgsql(ConfigurationManager.AppSettings[Bot.DatabaseUrlPathToUse])
 
             .EnableSensitiveDataLogging();
     
@@ -121,7 +121,11 @@ EXECUTE FUNCTION {functionName}();
     }
     public async Task ResetDatabaseAsync()
     {
-        await Database.MigrateAsync();
+        if (!Bot.UseTestDatabaseAndBot)
+        {
+            throw new Exception("Cannot reset database. you are on the main server right now");
+        }
+        await Database.EnsureDeletedAsync();
         await Database.EnsureCreatedAsync();
         await SetupDatabaseTriggersAsync();
 

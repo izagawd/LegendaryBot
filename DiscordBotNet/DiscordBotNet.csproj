@@ -31,6 +31,9 @@
     <_ContentIncludedByDefault Remove="Pages\characters\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\characters\info\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\modify\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\testing\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\team\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\blessings\Index.cshtml" />
   </ItemGroup>
 
 

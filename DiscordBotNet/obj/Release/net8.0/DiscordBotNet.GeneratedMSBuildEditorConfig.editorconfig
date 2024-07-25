@@ -18,10 +18,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/Pages/blessings/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcYmxlc3NpbmdzXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -40,14 +36,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/Pages/team/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdGVhbVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/Pages/testing/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdGVzdGluZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/Pages/_ViewImports.cshtml]
