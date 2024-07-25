@@ -5,7 +5,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
-public class Sleep: StatusEffect, IBattleEventListener
+public class Sleep: StatusEffect
 {
 
    

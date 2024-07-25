@@ -3,7 +3,7 @@ using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
-public class HeadStart : Blessing, IBattleEventListener
+public class HeadStart : Blessing
 {
     public HeadStart()
     {

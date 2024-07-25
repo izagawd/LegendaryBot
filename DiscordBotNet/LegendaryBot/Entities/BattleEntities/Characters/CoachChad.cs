@@ -87,7 +87,7 @@ public class ThumbsUp : Skill
 
     public override int MaxCooldown => 1;
 }
-public class CoachChad : CharacterPartials.Character, IBattleEventListener
+public class CoachChad : CharacterPartials.Character
 {
     public override Rarity Rarity => Rarity.FourStar;
 

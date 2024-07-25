@@ -3,7 +3,7 @@ using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
-public class VitalForce : Blessing, IBattleEventListener, IStatsModifier
+public class VitalForce : Blessing, IStatsModifier
 {
 
     public override string GetDescription(int level)

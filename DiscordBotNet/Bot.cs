@@ -296,14 +296,7 @@ public static class Bot
     }
 
 
-    class Bruh : IBattleEventListener
-    {
-        [BattleEventListenerMethod]
-        public void A(TurnEndEventArgs a)
-        {
-            
-        }
-    }
+
 
     public const bool UseTestDatabaseAndBot = true;
     public static string BotTokenToPathUse => UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";

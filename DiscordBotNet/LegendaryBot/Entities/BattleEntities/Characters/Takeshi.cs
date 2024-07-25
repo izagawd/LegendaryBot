@@ -94,7 +94,7 @@ public class KarateNeckChop : Skill
 
     public override int MaxCooldown => 3;
 }
-public class Takeshi : Character, IBattleEventListener
+public class Takeshi : Character
 {
     public override Rarity Rarity => Rarity.ThreeStar;
     public override string? PassiveDescription => "Has a 25% chance to counter attack with basic attack when any ally is attacked";

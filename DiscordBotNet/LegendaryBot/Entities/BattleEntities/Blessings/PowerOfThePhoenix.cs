@@ -4,7 +4,7 @@ using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
-public class PowerOfThePhoenix : Blessing, IBattleEventListener
+public class PowerOfThePhoenix : Blessing
 {
     public PowerOfThePhoenix()
     {

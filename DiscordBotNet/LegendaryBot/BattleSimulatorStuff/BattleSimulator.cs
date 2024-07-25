@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Text;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
@@ -196,13 +197,13 @@ public partial class BattleSimulator
         /// <summary>
         /// The entity to invoke the method with
         /// </summary>
-        public IBattleEventListener Entity { get; }
+        public object Entity { get; }
 
         /// <summary>
         /// The method to invoke
         /// </summary>
         public EventMethodDetails EventMethodDetails { get; }
-        public BattleEventListenerMethodContainer(IBattleEventListener entity,EventMethodDetails eventMethodDetails)
+        public BattleEventListenerMethodContainer(object entity,EventMethodDetails eventMethodDetails)
         {
 
             Entity = entity;
@@ -216,7 +217,7 @@ public partial class BattleSimulator
     /// <returns></returns>
     private IEnumerable<BattleEventListenerMethodContainer> GetAllEventMethods()
     {
-        foreach (var i in GetConnectedEntities<IBattleEventListener>())
+        foreach (var i in GetConnectedEntities())
         {
             if (_methodsCache.TryGetValue(i.GetType(), out var methodDetailsList))
             {
@@ -236,7 +237,7 @@ public partial class BattleSimulator
     /// <typeparam name="T">the type of argument of the battle event</typeparam>
     public void InvokeBattleEvent<T>(T eventArgs) where T : BattleEventArgs
     {
-
+        var stop = new Stopwatch(); stop.Start();
         var eventArgsType = eventArgs.GetType();
         foreach (var i in GetAllEventMethods()
                      .Where(k => eventArgsType.IsAssignableTo(k.EventMethodDetails.ParameterType))
@@ -246,7 +247,9 @@ public partial class BattleSimulator
             i.EventMethodDetails.BattleEventMethod.Invoke(i.Entity,eventArgs);
 
         }
-        
+        stop.Stop();
+        Console.Write(eventArgs.GetType().Name);
+        stop.Elapsed.TotalMicroseconds.Print();
 
     }
 

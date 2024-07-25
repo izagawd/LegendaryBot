@@ -4,7 +4,7 @@ using DiscordBotNet.LegendaryBot.Moves;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
-public class GoingAllOut : Blessing, IBattleEventListener
+public class GoingAllOut : Blessing
 {
     [BattleEventListenerMethod]
     public  void IncreaseUlt(CharacterPreDamageEventArgs eventArgs)
