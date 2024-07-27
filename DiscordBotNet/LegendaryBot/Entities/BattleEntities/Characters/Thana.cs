@@ -9,8 +9,13 @@ public class SoulAttack : BasicAttack
     public override string GetDescription(CharacterPartials.Character character) => "Uses the souls of the dead to attack, with a 25% chance to inflict sleep!";
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        var damageResult = target.Damage(new DamageArgs(this, usageType)
+        var damageResult = target.Damage(new DamageArgs
         {
+            DamageSource = new MoveDamageSource()
+            {
+                Move = this,
+                UsageType = usageType
+            },
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
@@ -43,8 +48,13 @@ public class YourLifeEnergyIsMine : Skill
     }
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        var damageResult = target.Damage(new DamageArgs(this, usageType)
+        var damageResult = target.Damage(new DamageArgs
         {
+            DamageSource = new MoveDamageSource()
+            {
+                Move = this,
+                UsageType = usageType
+            },
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
@@ -53,7 +63,7 @@ public class YourLifeEnergyIsMine : Skill
             DamageText = $"{User.NameWithAlphabet} sucks the life essence out of {target.NameWithAlphabet} and deals $ damage!"
         });
    
-        User.RecoverHealth(damageResult.Damage * 0.2f);
+        User.RecoverHealth(damageResult.DamageDealt * 0.2f);
         
         return new UsageResult(this)
         {

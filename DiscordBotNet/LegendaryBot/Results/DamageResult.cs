@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.LegendaryBot.Moves;
+﻿using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
@@ -17,24 +18,17 @@ public struct MoveUsageDetails
 }
 public class DamageResult
 {
-    public  MoveUsageDetails? MoveUsageDetails { get; }
-    public StatusEffect? StatusEffect { get; private set; }
 
-    public DamageResult(Move move, UsageType moveUsageType)
-    {
-        MoveUsageDetails = new MoveUsageDetails(move, moveUsageType);
-    }
+    public required  DamageSource DamageSource { get; init; }
+    public StatusEffect? StatusEffect { get; init; }
 
-    public bool IsFixedDamage { get; set; } = false;
-    public DamageResult(){}
-    public DamageResult(StatusEffect statusEffect)
-    {
-        StatusEffect = statusEffect;
-    }
-    public int Damage { get; init; }
+
+
+    public bool IsFixedDamage { get; init; } = false;
+
+    public float DamageDealt { get; init; }
     public bool WasCrit { get; init; }
     public bool CanBeCountered { get; init; } = true;
-    public  Character? DamageDealer { get; init; }
     public required Character DamageReceiver { get; init; }
 
 }

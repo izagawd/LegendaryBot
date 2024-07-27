@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.LegendaryBot.Results;
+﻿using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Results;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Moves;
@@ -12,8 +13,13 @@ public class BasicAttackSample : BasicAttack
     protected  override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
  
-        var damageResult = target.Damage(       new DamageArgs(this, usageType)
+        var damageResult = target.Damage(       new DamageArgs
         {
+            DamageSource = new MoveDamageSource()
+            {
+                Move = this,
+                UsageType = usageType
+            },
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,

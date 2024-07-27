@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.LegendaryBot.Results;
+﻿using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Results;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.StatusEffects;
@@ -30,8 +31,12 @@ public class Bomb : StatusEffect, IDetonatable
     {
         Affected.RemoveStatusEffect(this);
         Affected.AddStatusEffect(new Stun(){Duration = 1,Caster = detonator});
-        return Affected.Damage(        new DamageArgs(this)
+        return Affected.Damage(        new DamageArgs
         {
+            DamageSource = new StatusEffectDamageSource()
+            {
+                StatusEffect = this
+            },
             ElementToDamageWith = null,
 
             Damage = Attack * 3,

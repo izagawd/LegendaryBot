@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.LegendaryBot.Moves;
+﻿using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
@@ -6,10 +7,8 @@ namespace DiscordBotNet.LegendaryBot.Results;
 
 public class DamageArgs
 {
-    /// <summary>
-    /// If not null, then a move was used to deal damage
-    /// </summary>
-    public MoveUsageDetails? MoveUsageDetails { get; }
+    public required DamageSource DamageSource { get; init; }
+
     public bool IsFixedDamage { get; init; } = false;
     /// <summary>
     /// if null, will not consider element for damage calculation
@@ -22,17 +21,7 @@ public class DamageArgs
 
 
     public StatusEffect? StatusEffect { get; private set; }
-
-    public DamageArgs(Move move, UsageType usageType)
-    {
-        MoveUsageDetails = new MoveUsageDetails(move, usageType);
-    }
-
-
-    public DamageArgs(StatusEffect statusEffect)
-    {
-        StatusEffect = statusEffect;
-    }
+    
     public required float Damage
     {
         get; set;
@@ -58,7 +47,7 @@ public class DamageArgs
         /// <summary>
         /// if true, the attack always lands a critical hit. Doesnt work in fixed damage
         /// </summary>
-        public bool AlwaysCrits { get; init; } = false;
+        public bool AlwaysCrits { get; set; } = false;
         /// <summary>
         /// attack can always crit. doesnt work in fixed damage
         /// </summary>

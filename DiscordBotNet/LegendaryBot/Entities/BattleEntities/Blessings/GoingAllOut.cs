@@ -1,5 +1,6 @@
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Moves;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
@@ -10,8 +11,8 @@ public class GoingAllOut : Blessing
     public  void IncreaseUlt(CharacterPreDamageEventArgs eventArgs)
     {
 
-        if (eventArgs.DamageArgs.DamageDealer == Character && eventArgs.DamageArgs
-                .MoveUsageDetails?.Move is Ultimate)
+        if (eventArgs.DamageArgs.DamageDealer == Character && (eventArgs.DamageArgs
+                .DamageSource as MoveDamageSource).Move is Ultimate)
         {
             eventArgs.DamageArgs.Damage *= (100 + GetUltimateDamageBoostPercent(Level)) * 0.01f;
         }

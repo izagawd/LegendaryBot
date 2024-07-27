@@ -23,8 +23,13 @@ public class ThugPunch : BasicAttack
             Text = "Uraaah!",
             DamageResults =
             [
-                target.Damage(new DamageArgs(this, usageType)
+                target.Damage(new DamageArgs
                 {
+                    DamageSource = new MoveDamageSource()
+                    {
+                        Move = this,
+                        UsageType = usageType
+                    },
                     ElementToDamageWith = User.Element,
                     CriticalChance = User.CriticalChance,
                     CriticalDamage = User.CriticalDamage,

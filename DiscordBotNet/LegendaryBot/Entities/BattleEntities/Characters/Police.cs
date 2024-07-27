@@ -15,8 +15,13 @@ public class DoNotResist : BasicAttack
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        var damageResult= target.Damage(new DamageArgs(this, usageType)
+        var damageResult= target.Damage(new DamageArgs
         {
+            DamageSource = new MoveDamageSource()
+            {
+                Move = this,
+                UsageType = usageType
+            },
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
@@ -54,8 +59,13 @@ public class IAmShooting : Skill
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        var damageResult = target.Damage(new DamageArgs(this, usageType)
+        var damageResult = target.Damage(new DamageArgs
         {
+            DamageSource = new MoveDamageSource
+            {
+                Move = this,
+                UsageType = usageType
+            },
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,

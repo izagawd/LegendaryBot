@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.LegendaryBot.Results;
+﻿using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Results;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.StatusEffects;
@@ -29,8 +30,12 @@ public class Burn : StatusEffect, IDetonatable
     private DamageResult? DoDamage()
     {
         if (Affected.IsDead) return null;
-        return Affected.Damage(new DamageArgs(this)
+        return Affected.Damage(new DamageArgs
         {
+            DamageSource = new StatusEffectDamageSource()
+            {
+                StatusEffect = this
+            },
             DefenseToIgnore = 70,
             ElementToDamageWith = null,
             Damage = _characterAttack * 0.6f,

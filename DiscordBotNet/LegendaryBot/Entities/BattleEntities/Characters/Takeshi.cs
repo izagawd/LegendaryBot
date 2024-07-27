@@ -1,3 +1,4 @@
+using System.Net;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
@@ -22,8 +23,13 @@ public class TakeshiStraightPunch : BasicAttack
         {
             DamageResults =
             [
-                target.Damage(new DamageArgs(this, usageType)
+                target.Damage(new DamageArgs
                 {
+                    DamageSource = new MoveDamageSource()
+                    {
+                        Move = this,
+                        UsageType = usageType
+                    },
                     DamageText =
                         $"{User.NameWithAlphabet} does a straight punch at {target.NameWithAlphabet}, dealing $ damage!",
                     CriticalChance = User.CriticalChance,
@@ -110,12 +116,13 @@ public class Takeshi : Character
         if(args.UsageResult.User.Team == Team) return;
         var usageResult = args.UsageResult;
         if(usageResult.UsageType == UsageType.CounterUsage) return;
-        foreach (var damageResult in args.UsageResult.DamageResults
+        var damageDealer = usageResult.User;
+        if (damageDealer is null || damageDealer.IsDead || damageDealer.Team == Team)
+            return;
+        
+        foreach (var _ in args.UsageResult.DamageResults
                      .Where(i => i.CanBeCountered && i.DamageReceiver.Team == Team))
         {
-
-            var damageDealer = damageResult.DamageDealer;
-            if(damageDealer is null || damageDealer.IsDead || damageDealer.Team == Team) continue;
             if (BasicFunctionality.RandomChance(25))
             {
                 BasicAttack.Utilize(damageDealer, UsageType.CounterUsage);

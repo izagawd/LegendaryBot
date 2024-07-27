@@ -21,8 +21,13 @@ public class WindSlash : Skill
         List<DamageResult> damageResults = [];
         foreach (var i in GetPossibleTargets())
         {
-            var damageResult = i.Damage(new DamageArgs(this, usageType)
+            var damageResult = i.Damage(new DamageArgs
             {
+                DamageSource = new MoveDamageSource()
+                {
+                    Move = this,
+                    UsageType = usageType
+                },
                 ElementToDamageWith = User.Element,
                 CriticalChance = User.CriticalChance + increasedCritChance,
                 CriticalDamage = User.CriticalDamage,
@@ -57,8 +62,13 @@ public class SimpleSlashOfPrecision : BasicAttack
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        var damageResult = target.Damage(new DamageArgs(this, usageType)
+        var damageResult = target.Damage(new DamageArgs
         {
+            DamageSource = new MoveDamageSource()
+            {
+                Move = this,
+                UsageType = usageType
+            },
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance + increasedCritChance,
             CriticalDamage = User.CriticalDamage,
@@ -92,8 +102,13 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        var damageResult =target.Damage(new DamageArgs(this, usageType)
+        var damageResult =target.Damage(new DamageArgs
         {
+            DamageSource = new MoveDamageSource()
+            {
+                Move = this,
+                UsageType = usageType
+            },
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance + increasedCritChance,
             CriticalDamage = User.CriticalDamage,

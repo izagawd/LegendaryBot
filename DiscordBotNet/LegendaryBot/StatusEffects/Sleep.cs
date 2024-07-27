@@ -20,7 +20,7 @@ public class Sleep: StatusEffect
     [BattleEventListenerMethod]
     public void PostDamageEvent(CharacterPostDamageEventArgs eventArgs)
     {
-        if(eventArgs.DamageResult.DamageReceiver != Affected || eventArgs.DamageResult.Damage <= 0) return;
+        if(eventArgs.DamageResult.DamageReceiver != Affected || eventArgs.DamageResult.DamageDealt <= 0) return;
      
         var removed = Affected.RemoveStatusEffect(this);
         if(removed)

@@ -1,6 +1,7 @@
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.Results;
+using Barrier = DiscordBotNet.LegendaryBot.StatusEffects.Barrier;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
@@ -60,6 +61,7 @@ public partial class Character
     {
         return (potentialDamage * 375) / (300 + defense);
     }
+
     /// <summary>
     /// Used to damage this character
     /// </summary>
@@ -81,7 +83,7 @@ public partial class Character
             {
                 Console.WriteLine(e);
                 return new DamageResult()
-                    { CanBeCountered = false, Damage = 0, DamageDealer = damageArgs.DamageDealer, DamageReceiver = this };
+                    { CanBeCountered = false, DamageDealt = 0, DamageSource = damageArgs.DamageSource, DamageReceiver = this };
             }
         }
         CurrentBattle.InvokeBattleEvent(new CharacterPreDamageEventArgs(damageArgs));
@@ -143,10 +145,10 @@ public partial class Character
                 damageText = "A critical hit! " + damageText;
         }
 
-        var usageType = damageArgs.MoveUsageDetails?.UsageType;
+        var usageType = (damageArgs.DamageSource as MoveDamageSource)?.UsageType;
         if (usageType is not null)
         {
-            if (damageArgs.MoveUsageDetails?.UsageType == UsageType.CounterUsage)
+            if (usageType == UsageType.CounterUsage)
             {
                 damageText = "Counter Attack! " +damageText;
             } else if (usageType == UsageType.MiscellaneousFollowUpUsage)
@@ -159,32 +161,16 @@ public partial class Character
         damageText =  damageText.Replace("$", damage.Round().ToString());
         CurrentBattle.AddAdditionalBattleText(damageText);
         TakeDamageWhileConsideringShield(damage.Round());
-        DamageResult damageResult;
-        if (damageArgs.MoveUsageDetails.HasValue)
+        var damageResult = new DamageResult
         {
-            damageResult = new DamageResult(damageArgs.MoveUsageDetails.Value.Move,
-                damageArgs.MoveUsageDetails.Value.UsageType)
-            {
+                DamageSource = damageArgs.DamageSource,
                 IsFixedDamage = damageArgs.IsFixedDamage,
                 WasCrit = didCrit,
-                Damage = damage.Round(),
-                DamageDealer = damageArgs.DamageDealer,
+                DamageDealt = damage,
                 DamageReceiver = this,
-                CanBeCountered = damageArgs.CanBeCountered
-            };
-        }
-        else
-        {
-            damageResult = new DamageResult(damageArgs.StatusEffect)
-            {
-                IsFixedDamage = damageArgs.IsFixedDamage,
-                WasCrit = didCrit,
-                Damage = damage.Round(),
-                DamageDealer = damageArgs.DamageDealer,
-                DamageReceiver = this,
-                CanBeCountered = damageArgs.CanBeCountered
-            };
-        }
+                CanBeCountered = damageArgs.CanBeCountered, 
+        };
+        
         CurrentBattle.InvokeBattleEvent(new CharacterPostDamageEventArgs(damageResult));
         return damageResult;
     }
