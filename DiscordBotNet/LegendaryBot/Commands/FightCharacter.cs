@@ -11,7 +11,8 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 public class FightCharacter : GeneralCommandClass
 {
     [Command("fight-chosen-character")]
-    public async ValueTask FightCommand(CommandContext context, string enemyName)
+    public async ValueTask FightCommand(CommandContext context, string enemyName,
+        int count = 1)
     {
         if (context.User.Id != Bot.Izasid)
         {
@@ -35,11 +36,18 @@ public class FightCharacter : GeneralCommandClass
             return;
         }
 
-        var createdChar = (Character) Activator.CreateInstance(type)!;
-        createdChar.Level = userData.EquippedPlayerTeam.Select(i => i.Level).Average().Round();
+        List<Character> created = [];
+        foreach (var _  in Enumerable.Range(0,count))
+        {
+            var newOne = (Character)Activator.CreateInstance(type);
+            newOne.Level =userData.EquippedPlayerTeam.Select(i => i.Level).Average().Round();
+            created.Add(newOne);
+        }
+   
+
         await MakeOccupiedAsync(userData);
         var battleSim = new BattleSimulator(userData.EquippedPlayerTeam.LoadTeamStats(),
-            new CharacterTeam(createdChar).LoadTeamStats());
+            new CharacterTeam(created).LoadTeamStats());
         var interaction = (context as SlashCommandContext)?.Interaction;
         if (interaction is not null)
         {

@@ -107,20 +107,11 @@ public class Takeshi : Character
 
     protected override float BaseSpeedMultiplier => 1.05f;
 
-    [BattleEventListenerMethod]
-    public void testingListener(BattleEventArgs args)
-    {
-        if (args is CharacterDeathEventArgs deathEventArgs && deathEventArgs.Killed == this)
-        {
-            Revive();
-            Health = MaxHealth;
-        }
-    }
+
 
     [BattleEventListenerMethod]
     public void ToCounterAttack(CharacterPostUseMoveEventArgs args)
     {
-        Bot.Client.GetChannelAsync(1262087698597023937).Result.SendMessageAsync("Done").GetAwaiter().GetResult();
         if(CannotDoAnything) return;
         if(args.UsageResult.User.Team == Team) return;
         var usageResult = args.UsageResult;
