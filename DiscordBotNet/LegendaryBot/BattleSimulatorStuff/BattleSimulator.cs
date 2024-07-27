@@ -577,7 +577,7 @@ public partial class BattleSimulator
 
     private List<BattleText> _battleTextInstances = ["Have fun!"];
 
-    public void AddAdditionalBattleText(BattleText battleTextInstance)
+    public void AddBattleText(BattleText battleTextInstance)
     {
         if (battleTextInstance is null) throw new ArgumentNullException("Inputted argument is null");
        _battleTextInstances.Add(battleTextInstance);
@@ -724,7 +724,7 @@ public partial class BattleSimulator
             InvokeBattleEvent(new TurnStartEventArgs(ActiveCharacter));
             var shouldDoTurn = !ActiveCharacter.IsDead;
             if (!shouldDoTurn)
-                AddAdditionalBattleText($"{ActiveCharacter.NameWithAlphabet} cannot take their turn because they died in the process of taking their turn!");
+                AddBattleText($"{ActiveCharacter.NameWithAlphabet} cannot take their turn because they died in the process of taking their turn!");
             
             
             

@@ -95,7 +95,7 @@ public class Arise : Ultimate
     
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        User.CurrentBattle.AddAdditionalBattleText($"With her necromancy powers, {User.NameWithAlphabet} attempts to bring back all her dead allies!");
+        User.CurrentBattle.AddBattleText($"With her necromancy powers, {User.NameWithAlphabet} attempts to bring back all her dead allies!");
 
         var possibleTargets = GetPossibleTargets().ToArray();
 

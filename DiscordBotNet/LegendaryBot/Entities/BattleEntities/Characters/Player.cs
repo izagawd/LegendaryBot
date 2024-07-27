@@ -100,7 +100,7 @@ public class Ignite : Ultimate
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} " +
+        User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} " +
                
                                                     $"attempts to make a human torch out of {target.NameWithAlphabet}!");
 

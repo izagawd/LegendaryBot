@@ -52,7 +52,7 @@ public class MuscleFlex : Ultimate
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet}... flexed his muscles?");
+        User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet}... flexed his muscles?");
         return new UsageResult(this)
         {
             Text = $"Hmph!",
@@ -79,7 +79,7 @@ public class ThumbsUp : Skill
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} is cheering {target.NameWithAlphabet} on!");
+        User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} is cheering {target.NameWithAlphabet} on!");
         return new UsageResult(this)
         {
             UsageType = usageType,

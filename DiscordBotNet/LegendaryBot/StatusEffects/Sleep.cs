@@ -23,12 +23,12 @@ public class Sleep: StatusEffect
      
         var removed = Affected.RemoveStatusEffect(this);
         if(removed)
-            Affected.CurrentBattle.AddAdditionalBattleText($"{this} has been dispelled from {Affected.NameWithAlphabet} due to taking damage!");
+            Affected.CurrentBattle.AddBattleText($"{this} has been dispelled from {Affected.NameWithAlphabet} due to taking damage!");
     }
 
     public override UsageResult OverridenUsage(ref Character target, ref BattleDecision decision, UsageType usageType)
     {
-        Affected.CurrentBattle.AddAdditionalBattleText($"{Affected} is fast asleep");
+        Affected.CurrentBattle.AddBattleText($"{Affected} is fast asleep");
         return new UsageResult(this)
         {
             UsageType = usageType,

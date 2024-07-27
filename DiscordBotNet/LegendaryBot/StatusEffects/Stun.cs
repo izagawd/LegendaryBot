@@ -19,7 +19,7 @@ public class Stun : StatusEffect
     public override UsageResult OverridenUsage(ref Character target, ref BattleDecision decision, UsageType usageType)
     {
         decision = BattleDecision.Other;
-        Affected.CurrentBattle.AddAdditionalBattleText($"{Affected} cannot move because they are stunned!");
+        Affected.CurrentBattle.AddBattleText($"{Affected} cannot move because they are stunned!");
         return new UsageResult(this)
         {
             Text = "dizzy...",

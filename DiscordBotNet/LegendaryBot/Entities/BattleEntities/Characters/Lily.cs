@@ -92,7 +92,7 @@ public class LilyOfTheValley : Ultimate
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
            
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} used Lily of The Valley, and released a dangerous gas to {target.NameWithAlphabet}!");
+        User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} used Lily of The Valley, and released a dangerous gas to {target.NameWithAlphabet}!");
       
         var effectiveness = User.Effectiveness;
 

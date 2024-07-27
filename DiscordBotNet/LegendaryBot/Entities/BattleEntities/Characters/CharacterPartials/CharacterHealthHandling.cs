@@ -23,7 +23,7 @@ public partial class Character
         if (recoveryText is null)
             recoveryText = $"{NameWithAlphabet} recovered $ health!";
         if(announceHealing)
-            CurrentBattle.AddAdditionalBattleText(recoveryText.Replace("$",healthToRecover.ToString()));
+            CurrentBattle.AddBattleText(recoveryText.Replace("$",healthToRecover.ToString()));
         
         return healthToRecover;
     }
@@ -159,7 +159,7 @@ public partial class Character
       
         
         damageText =  damageText.Replace("$", damage.Round().ToString());
-        CurrentBattle.AddAdditionalBattleText(damageText);
+        CurrentBattle.AddBattleText(damageText);
         TakeDamageWhileConsideringShield(damage.Round());
         var damageResult = new DamageResult
         {

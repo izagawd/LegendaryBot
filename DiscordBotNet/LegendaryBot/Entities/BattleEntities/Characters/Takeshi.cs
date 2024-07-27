@@ -59,7 +59,7 @@ public class TakeshiMeditation : Ultimate
 
     protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
-        CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} meditates!" );
+        CurrentBattle.AddBattleText($"{User.NameWithAlphabet} meditates!" );
         User.RecoverHealth(User.MaxHealth * 0.5f);
         User.AddStatusEffect(new AttackBuff() { Caster = User, Duration = 2 });
         return new UsageResult(this)
@@ -87,7 +87,7 @@ public class KarateNeckChop : Skill
 
     protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
-        CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} neck chops {target}!" );
+        CurrentBattle.AddBattleText($"{User.NameWithAlphabet} neck chops {target}!" );
         target.AddStatusEffect(new Stun() { Caster = User, Duration = 1 });
         return new UsageResult(this)
         {

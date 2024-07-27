@@ -112,7 +112,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         if (increaseAmount < 0) throw new ArgumentException("Increase amount should be at least 0");
         CombatReadiness += increaseAmount;
         if(announceIncrease && increaseAmount > 0)
-            CurrentBattle.AddAdditionalBattleText(new CombatReadinessChangeBattleText(this, increaseAmount));
+            CurrentBattle.AddBattleText(new CombatReadinessChangeBattleText(this, increaseAmount));
         return increaseAmount;
     }
 
@@ -132,14 +132,14 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             if (BasicFunctionality.RandomChance(percentToResist))
             {
                 if(announceDecrease)
-                    CurrentBattle.AddAdditionalBattleText($"{NameWithAlphabet} resisted combat readiness decrease!");
+                    CurrentBattle.AddBattleText($"{NameWithAlphabet} resisted combat readiness decrease!");
                 return 0;
             }
         }
 
         CombatReadiness -= decreaseAmount;
         if(announceDecrease && decreaseAmount > 0)
-            CurrentBattle.AddAdditionalBattleText(new CombatReadinessChangeBattleText(this, -decreaseAmount));
+            CurrentBattle.AddBattleText(new CombatReadinessChangeBattleText(this, -decreaseAmount));
         return decreaseAmount;
     }
 
@@ -202,7 +202,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             {
                 _health = 0;
             
-                CurrentBattle.AddAdditionalBattleText(new DeathBattleText(this));
+                CurrentBattle.AddBattleText(new DeathBattleText(this));
                 ShouldTakeExtraTurn = false;
                 _statusEffects.Clear();
                 CurrentBattle.InvokeBattleEvent(new CharacterDeathEventArgs(this));
@@ -220,7 +220,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     {
         if(!IsDead) return;
         _health = 1;
-        CurrentBattle.AddAdditionalBattleText(new ReviveBattleText(this));
+        CurrentBattle.AddBattleText(new ReviveBattleText(this));
         CurrentBattle.InvokeBattleEvent(new CharacterReviveEventArgs(this));
     }
 
@@ -250,7 +250,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     {
         if(IsDead) return;
         _shouldTakeExtraTurn = true;
-        CurrentBattle.AddAdditionalBattleText(new ExtraTurnBattleText(this));
+        CurrentBattle.AddBattleText(new ExtraTurnBattleText(this));
     }
 
 

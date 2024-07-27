@@ -56,7 +56,7 @@ public class ThugInsult : Skill
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} insults {target.NameWithAlphabet} like a thug!");
+        CurrentBattle.AddBattleText($"{User.NameWithAlphabet} insults {target.NameWithAlphabet} like a thug!");
         target.AddStatusEffect(new DefenseDebuff() { Caster = User, Duration = 2 }, User.Effectiveness);
         return new UsageResult(this)
         {

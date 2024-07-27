@@ -61,7 +61,7 @@ public class BlowAway : Skill
     protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
     {
                 
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} threw multiple bombs at the opposing team!");
+        User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} threw multiple bombs at the opposing team!");
         foreach (var i in GetPossibleTargets())
         {
 

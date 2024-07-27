@@ -55,7 +55,7 @@ public class  YouCanDoIt : Skill
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} wants {target.NameWithAlphabet} to prevail!");
+        User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} wants {target.NameWithAlphabet} to prevail!");
         target.IncreaseCombatReadiness(100);
         target.AddStatusEffect(new AttackBuff() { Duration = 2 , Caster = User});
 
@@ -84,7 +84,7 @@ public class YouCanMakeItEveryone : Ultimate
 
     protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
     {
-        User.CurrentBattle.AddAdditionalBattleText($"{User.NameWithAlphabet} encourages her allies!");
+        User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} encourages her allies!");
 
         var targets = GetPossibleTargets().ToArray();
 
