@@ -5,10 +5,10 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 public class DefenseDebuff: StatusEffect, IStatsModifier
 {
 
-
+    public override bool IsStackable => false;
 
    
-    public override int MaxStacks => 1;
+
 
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
 

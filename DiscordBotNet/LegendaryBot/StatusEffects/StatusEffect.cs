@@ -40,10 +40,11 @@ public abstract class StatusEffect
     /// Returns true if the status effect is executed before the character's turn
     /// </summary>
     public bool ExecuteStatusEffectBeforeTurn => !ExecuteStatusEffectAfterTurn;
+
     /// <summary>
     /// Returns true if the status effect can be on a character more than once
     /// </summary>
-    public bool IsStackable => MaxStacks > 1;
+    public abstract bool IsStackable { get; }
 
     private static ConcurrentDictionary<string,Image<Rgba32>> _cachedResizedCombatImages = new();
     
@@ -104,15 +105,16 @@ public abstract class StatusEffect
 
 
     /// <summary>
-    /// When status effect optimizing has occured this will be called
+    /// When status effect optimizing has occured this will be called. it will use the returned status effect.
     /// </summary>
-    /// <param name="statusEffect">The status effect to optimize with. the status effect instance that calls this method will be used as the status effect, not the parameter</param>
-    public virtual void OptimizeWith(StatusEffect statusEffect)
+    /// <param name="statusEffect">The status effect to optimize with</param>
+    public virtual StatusEffect OptimizeWith(StatusEffect statusEffect)
     {
         if (statusEffect.Duration > Duration)
             Duration = statusEffect.Duration;
+        return this;
     }
-    public virtual int MaxStacks => int.MaxValue;
+
     /// <summary>
     /// The duration of the status effect
     /// </summary>

@@ -7,7 +7,7 @@ public class Immortality : StatusEffect
         "Makes the affected not able to die by preventing their hp from going below one";
 
 
-    public override int MaxStacks => 1;
+    public override bool IsStackable => false;
     public override StatusEffectType EffectType => StatusEffectType.Buff;
 
 

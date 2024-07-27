@@ -6,7 +6,7 @@ public class AttackDebuff : StatusEffect, IStatsModifier
 {
 
     public AttackDebuff(){}
-    public override int MaxStacks => 1;
+    public override bool IsStackable => false;
 
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
 

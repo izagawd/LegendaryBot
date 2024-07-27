@@ -6,7 +6,7 @@ public class Barrier : StatusEffect
 {
 
     public override string Description => "Protects the caster with a barrier";
-    public override int MaxStacks => 1;
+    public override bool IsStackable => false;
     public override StatusEffectType EffectType => StatusEffectType.Buff;
     private float _shieldValue;
     /// <summary>

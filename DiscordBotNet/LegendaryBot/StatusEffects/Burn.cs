@@ -27,6 +27,7 @@ public class Burn : StatusEffect, IDetonatable
         DoDamage();
     }
 
+    public override bool IsStackable => true;
     private DamageResult? DoDamage()
     {
         if (Affected.IsDead) return null;

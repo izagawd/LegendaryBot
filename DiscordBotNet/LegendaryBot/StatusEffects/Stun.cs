@@ -13,7 +13,7 @@ public class Stun : StatusEffect
 
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
 
-    public override int MaxStacks => 1;
+    public override bool IsStackable => false;
     public override OverrideTurnType OverrideTurnType => OverrideTurnType.CannotMove;
 
     public override UsageResult OverridenUsage(ref Character target, ref BattleDecision decision, UsageType usageType)

@@ -39,6 +39,8 @@ public class Poison : StatusEffect, IDetonatable
            
         });
     }
+
+    public override bool IsStackable => true;
     public DamageResult? Detonate( Character detonator)
     {
         var removed = Affected.RemoveStatusEffect(this);

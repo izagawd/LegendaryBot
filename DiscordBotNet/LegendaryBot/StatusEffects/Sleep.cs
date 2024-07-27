@@ -11,8 +11,7 @@ public class Sleep: StatusEffect
    
     public override string Description =>
         "Makes affected not able to move. Is dispelled when affected takes damage from a move";
-    public override int MaxStacks => 1;
-
+    public override bool IsStackable => false;
 
     public override OverrideTurnType OverrideTurnType => OverrideTurnType.CannotMove;
     public override StatusEffectType EffectType => StatusEffectType.Debuff;

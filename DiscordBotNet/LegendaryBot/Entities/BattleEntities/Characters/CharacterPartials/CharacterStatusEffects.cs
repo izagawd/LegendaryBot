@@ -1,3 +1,4 @@
+using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
@@ -65,7 +66,7 @@ public partial class Character
             _statusEffects.Where(i => i.GetType() == statusEffect.GetType())
                 .ToArray();
         statusEffect.Affected = this;
-        if (arrayOfType.Length < statusEffect.MaxStacks)
+        if (statusEffect.IsStackable || !arrayOfType.Any())
         {
             var added = false;
             if (effectiveness is not null && statusEffect.EffectType == StatusEffectType.Debuff)
@@ -90,6 +91,10 @@ public partial class Character
             {
                 inflictResult =  StatusEffectInflictResult.Succeeded;
                 statusEffect.OnAdded();
+                CurrentBattle.InvokeBattleEvent(new CharacterStatusEffectAppliedEventArgs
+                {
+                    AddedStatusEffect = statusEffect
+                });
             }
                 
             if (announce)
@@ -103,11 +108,10 @@ public partial class Character
         if (!statusEffect.IsStackable && arrayOfType.Any())
         {
             var onlyStatus = arrayOfType.First();
-
-            onlyStatus.OptimizeWith(statusEffect);
+            var optimizedOne = onlyStatus.OptimizeWith(statusEffect);
+            _statusEffects.Remove(onlyStatus);
+            _statusEffects.Add(optimizedOne);
             CurrentBattle.AddAdditionalBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded, statusEffect));
-
-
             return StatusEffectInflictResult.Succeeded;
         }
         inflictResult = StatusEffectInflictResult.Failed;

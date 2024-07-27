@@ -17,7 +17,7 @@ public class Bomb : StatusEffect, IDetonatable
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
     public float Attack { get; private set; }
 
-
+    public override bool IsStackable => true;
     public override void PassTurn()
     {
         base.PassTurn();
