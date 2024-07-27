@@ -1,20 +1,20 @@
 ﻿namespace DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 
-public class AdditionalBattleText
+public class BattleText
 {
  
-    public static implicit operator AdditionalBattleText(string text) => new(text);
+    public static implicit operator BattleText(string text) => new(text);
     public virtual string Text { get; } 
 
-    public AdditionalBattleText(string text)
+    public BattleText(string text)
     {
         Text = text;
     }
 
-    public static IEnumerable<AdditionalBattleText> Combine(IEnumerable<AdditionalBattleText> battleTexts)
+    public static IEnumerable<BattleText> Combine(IEnumerable<BattleText> battleTexts)
     {
         var asArray = battleTexts.ToArray();
-        List<AdditionalBattleText> toReturnList = [];
+        List<BattleText> toReturnList = [];
         if (asArray.Length == 0) return [];
         var lastBattleTextInstance = asArray[0];
         for (var i = 1; i < asArray.Length; i++)
@@ -38,12 +38,12 @@ public class AdditionalBattleText
     /// This comes before the argument in the order
     /// </summary>
 
-    public virtual AdditionalBattleText? Merge(AdditionalBattleText additionalBattleTextInstance)
+    public virtual BattleText? Merge(BattleText battleTextInstance)
     {
         return null;
     }
 
-    protected AdditionalBattleText(){}
+    protected BattleText(){}
 }
 
 

@@ -575,12 +575,12 @@ public partial class BattleSimulator
 
 
 
-    private List<AdditionalBattleText> _battleTextInstances = ["Have fun!"];
+    private List<BattleText> _battleTextInstances = ["Have fun!"];
 
-    public void AddAdditionalBattleText(AdditionalBattleText additionalBattleTextInstance)
+    public void AddAdditionalBattleText(BattleText battleTextInstance)
     {
-        if (additionalBattleTextInstance is null) throw new ArgumentNullException("Inputted argument is null");
-       _battleTextInstances.Add(additionalBattleTextInstance);
+        if (battleTextInstance is null) throw new ArgumentNullException("Inputted argument is null");
+       _battleTextInstances.Add(battleTextInstance);
     }
 
 
@@ -728,7 +728,7 @@ public partial class BattleSimulator
             
             
             
-            var additionalText =AdditionalBattleText
+            var additionalText =BattleText
                 .Combine(_battleTextInstances)
                 .Select(i => i.Text).Join("\n");
             _battleTextInstances.Clear();

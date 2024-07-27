@@ -6,7 +6,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.Characte
 public partial class Character
 {
     
-    class StatusEffectInflictBattleText : AdditionalBattleText
+    class StatusEffectInflictBattleText : BattleText
     {
         private StatusEffectInflictResult _effectInflictResult;
         private List<StatusEffect> _statusEffects = [];
@@ -66,16 +66,16 @@ public partial class Character
             _effectInflictResult = effectInflictResult;
         }
         protected StatusEffectInflictBattleText(){}
-        public override AdditionalBattleText? Merge(AdditionalBattleText additionalBattleTextInstance)
+        public override BattleText? Merge(BattleText battleTextInstance)
         {
-            if (additionalBattleTextInstance is not StatusEffectInflictBattleText statusEffectBattleText) return null;
+            if (battleTextInstance is not StatusEffectInflictBattleText statusEffectBattleText) return null;
             if (_effectInflictResult != statusEffectBattleText._effectInflictResult) return null;
             if (_statusEffects.Count != statusEffectBattleText._statusEffects.Count) return null;
             foreach (var i in Enumerable.Range(0,_statusEffects.Count))
             {
                 if (_statusEffects[i].GetType() !=  statusEffectBattleText._statusEffects[i].GetType()) return null;
             }
-            if (_affectedCharacters.Any(i => statusEffectBattleText._affectedCharacters.Contains(i))) return null;
+            if (_affectedCharacters.Intersect(statusEffectBattleText._affectedCharacters).Any()) return null;
             return new StatusEffectInflictBattleText()
             {
                 _effectInflictResult =  _effectInflictResult,
@@ -85,7 +85,7 @@ public partial class Character
 
         }
     }
-    class CombatReadinessChangeBattleText : AdditionalBattleText
+    class CombatReadinessChangeBattleText : BattleText
     {
 
 
@@ -119,13 +119,14 @@ public partial class Character
         }
 
         protected CombatReadinessChangeBattleText(){}
-        public override AdditionalBattleText? Merge(AdditionalBattleText additionalBattleTextInstance)
+        public override BattleText? Merge(BattleText battleTextInstance)
         {
-            if (additionalBattleTextInstance is not CombatReadinessChangeBattleText combatReadinessChangeBattleText)
+            if (battleTextInstance is not CombatReadinessChangeBattleText combatReadinessChangeBattleText)
                 return null;
             if (combatReadinessChangeBattleText._combatReadinessChangeAmount != _combatReadinessChangeAmount)
                 return null;
-            if (_affectedCharacters.Any(i => combatReadinessChangeBattleText._affectedCharacters.Contains(i))) return null;
+            if (_affectedCharacters.Intersect(combatReadinessChangeBattleText._affectedCharacters).Any())
+                return null;
             return new CombatReadinessChangeBattleText()
             {
                 _combatReadinessChangeAmount = _combatReadinessChangeAmount,
@@ -133,7 +134,7 @@ public partial class Character
             };
         }
     }
-    class  ExtraTurnBattleText : AdditionalBattleText
+    class  ExtraTurnBattleText : BattleText
     {
         private List<Character> _extraTurners;
         public override string Text {             get
@@ -157,16 +158,17 @@ public partial class Character
         {
             
         }
-        public override AdditionalBattleText? Merge(AdditionalBattleText additionalBattleTextInstance)
+        public override BattleText? Merge(BattleText battleTextInstance)
         {
-            if (additionalBattleTextInstance is not ExtraTurnBattleText extraTurnBattleText) return null;
+            if (battleTextInstance is not ExtraTurnBattleText extraTurnBattleText) return null;
+            if (_extraTurners.Intersect(extraTurnBattleText._extraTurners).Any()) return null;
             return new ExtraTurnBattleText()
             {
                 _extraTurners = [.._extraTurners, ..extraTurnBattleText._extraTurners]
             };
         }
     }
-    class  ReviveBattleText : AdditionalBattleText
+    class  ReviveBattleText : BattleText
     {
         private List<Character> _revivedCharacters;
 
@@ -189,16 +191,17 @@ public partial class Character
             
         }
         protected ReviveBattleText(){}
-        public override AdditionalBattleText? Merge(AdditionalBattleText additionalBattleTextInstance)
+        public override BattleText? Merge(BattleText battleTextInstance)
         {
-            if (additionalBattleTextInstance is not ReviveBattleText reviveBattleText) return null;
+            if (battleTextInstance is not ReviveBattleText reviveBattleText) return null;
+            if (_revivedCharacters.Intersect(reviveBattleText._revivedCharacters).Any()) return null;
             return new ReviveBattleText()
             {
                 _revivedCharacters = [.._revivedCharacters, ..reviveBattleText._revivedCharacters]
             };
         }
     }
-    class  DeathBattleText : AdditionalBattleText
+    class  DeathBattleText : BattleText
     {
         public override string Text
         {
@@ -220,9 +223,10 @@ public partial class Character
             _deadCharacters = [deadCharacter];
         }
         protected DeathBattleText(){}
-        public override AdditionalBattleText? Merge(AdditionalBattleText additionalBattleTextInstance)
+        public override BattleText? Merge(BattleText battleTextInstance)
         {
-            if (additionalBattleTextInstance is not DeathBattleText deathHolder) return null;
+            if (battleTextInstance is not DeathBattleText deathHolder) return null;
+            if (_deadCharacters.Intersect(deathHolder._deadCharacters).Any()) return null;
             return new DeathBattleText()
             {
                 _deadCharacters = [.._deadCharacters, ..deathHolder._deadCharacters]
