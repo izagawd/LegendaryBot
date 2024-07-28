@@ -195,7 +195,8 @@ public class Help : GeneralCommandClass
             var result = await message.WaitForSelectAsync(ctx.User,selectComponentId);
             if (result.TimedOut)
             {
-                await message.ModifyAsync(i => i.ClearComponents());
+                await message.ModifyAsync(i => i.Components.SelectMany(j => j.Components)
+                    .OfType<DiscordSelectComponent>().ForEach(j => j.Disable()));
                 break;
             }
             var parsedInt =int.Parse(result.Result.Interaction.Data.Values[0]);
