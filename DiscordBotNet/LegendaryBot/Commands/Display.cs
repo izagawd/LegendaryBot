@@ -164,7 +164,8 @@ public class Display : GeneralCommandClass
         }
         
     }
-        [Command("items"),Description("Displays all the stackable items you have")]
+        [Command("items"),Description("Displays all the stackable items you have"),
+        BotCommandCategory(BotCommandCategory.Inventory)]
     public async ValueTask ExecuteDisplayItems(CommandContext context,[Description("pretty self explanatory")]  string nameFilter = "")
     {
         var simplified = nameFilter.Replace(" ", "").ToLower();
@@ -300,8 +301,9 @@ public class Display : GeneralCommandClass
 
 
     }
-    [Command("gear"), Description("Displays a gear based on provided number")]
-    public async ValueTask ExecuteDisplayGearByNum(CommandContext context, [Parameter("gear-number")] int gearNumber)
+    [Command("gear"), Description("Displays a gear based on provided number"),
+    BotCommandCategory(BotCommandCategory.Inventory)]
+    public async ValueTask ExecuteDisplayGearByNum(CommandContext context, [Parameter("gear-num")] int gearNumber)
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.Gears.Where(j => j.Number == gearNumber))
