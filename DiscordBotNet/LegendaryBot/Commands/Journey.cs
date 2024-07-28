@@ -20,7 +20,7 @@ public class Journey : GeneralCommandClass
     
 
     [Command("journey"), Description("Use this command to encounter a character, and get them if you beat them"),
-    AdditionalCommand("/journey",BotCommandType.Battle)]
+    AdditionalCommand("/journey",BotCommandCategory.Battle)]
     public async ValueTask Execute(CommandContext ctx)
     {
         var author = ctx.User;

@@ -15,8 +15,8 @@ public class Help : GeneralCommandClass
     private static void HandleDefaultHelp()
     {
                 
-        Dictionary<BotCommandType, StringBuilder> botCommandTypeBuilders = new();
-        foreach (var i in Enum.GetValues<BotCommandType>())
+        Dictionary<BotCommandCategory, StringBuilder> botCommandTypeBuilders = new();
+        foreach (var i in Enum.GetValues<BotCommandCategory>())
             botCommandTypeBuilders[i] = new StringBuilder();
         foreach (var i in  TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<GeneralCommandClass>())
         {
@@ -24,9 +24,9 @@ public class Help : GeneralCommandClass
             if (com is not null)
             {
                 var additional = i.GetType().GetCustomAttribute<AdditionalCommandAttribute>();
-                var type = BotCommandType.Other;
+                var type = BotCommandCategory.Other;
                 if (additional is not null)
-                    type = additional.BotCommandType;
+                    type = additional.BotCommandCategory;
                 botCommandTypeBuilders[type].Append($"`{com.Name}`  ");
             }
             else
@@ -37,14 +37,14 @@ public class Help : GeneralCommandClass
                 foreach (var j in selected)
                 {
                     if(j.Default is null) continue;
-                    var type = BotCommandType.Other;
+                    var type = BotCommandCategory.Other;
                     if (j.Additional is not null)
-                        type = j.Additional.BotCommandType;
+                        type = j.Additional.BotCommandCategory;
                     botCommandTypeBuilders[type].Append($"`{j.Default.Name}`  ");
                 }
             }
         }
-        foreach(var i in Enum.GetValues<BotCommandType>())
+        foreach(var i in Enum.GetValues<BotCommandCategory>())
             _botCommandTypeDic[i] = botCommandTypeBuilders[i].ToString();
     }
 
@@ -224,9 +224,9 @@ public class Help : GeneralCommandClass
         return embedToBuild;
 
     }
-    private static Dictionary<BotCommandType, string> _botCommandTypeDic = new();
+    private static Dictionary<BotCommandCategory, string> _botCommandTypeDic = new();
     [Command("help"),
-     AdditionalCommand("/help\n/help command_name",BotCommandType.Other)]
+     AdditionalCommand("/help\n/help command_name",BotCommandCategory.Other)]
     public async ValueTask Execute(CommandContext ctx,
     [Parameter("Commands")] string? cmd = null)
     {
@@ -249,7 +249,7 @@ public class Help : GeneralCommandClass
             .WithTimestamp(DateTime.Now);
         if (cmd is null)
         {
-            foreach (var i in Enum.GetValues<BotCommandType>())
+            foreach (var i in Enum.GetValues<BotCommandCategory>())
             {
                 embedToBuild.AddField(i.ToString().Englishify(),
                     _botCommandTypeDic[i]);

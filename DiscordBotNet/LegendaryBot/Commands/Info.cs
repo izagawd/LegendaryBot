@@ -12,7 +12,7 @@ public class Info : GeneralCommandClass
 
  
     [Command("info"),
-    AdditionalCommand("/info\n/info @user",BotCommandType.Battle)]
+    AdditionalCommand("/info\n/info @user",BotCommandCategory.Battle)]
     public async ValueTask Execute(CommandContext ctx,[Parameter("user")]DiscordUser? author = null)
     {  
 

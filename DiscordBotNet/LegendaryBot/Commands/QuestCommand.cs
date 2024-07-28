@@ -13,7 +13,7 @@ public class QuestCommand : GeneralCommandClass
 
 
     [Command("quest"),
-    AdditionalCommand("/quest",BotCommandType.Battle)]
+    AdditionalCommand("/quest",BotCommandCategory.Battle)]
     public async ValueTask Execute(CommandContext ctx)
     {
         var author = ctx.User;

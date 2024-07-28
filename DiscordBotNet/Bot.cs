@@ -3,6 +3,7 @@ using System.Collections.Immutable;
 using DSharpPlus.Entities;
 using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
@@ -300,13 +301,17 @@ public static class Bot
 
 
 
-
+    struct idk
+    {
+        private int a;
+    }
     public const bool UseTestDatabaseAndBot = true;
     public static string BotTokenToPathUse => UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
     private async static Task DoShitAsync()
     {
-
+        
+      
     }
     private static async Task Main(string[] args)
     {

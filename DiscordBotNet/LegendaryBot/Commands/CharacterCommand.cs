@@ -84,7 +84,7 @@ public class CharacterCommand : GeneralCommandClass
     }
      
         [Command("remove-blessing"), Description("Use this Command make a character equip a blessing"),
-        AdditionalCommand(BotCommandType.Battle,"/character remove-blessing 4")]
+        AdditionalCommand("/character remove-blessing 4",BotCommandCategory.Character)]
     public async ValueTask ExecuteRemoveBlessing(CommandContext context,
         [Parameter("character-number")] int characterNumber)
     {
@@ -211,7 +211,7 @@ public class CharacterCommand : GeneralCommandClass
         public ValueTask<IReadOnlyDictionary<string, object>> ProvideAsync(CommandParameter parameter) => ValueTask.FromResult(_daysOfTheWeek);
     }
         [Command("remove-gear"), Description("Use this Command make a character remove an equipped gear"),
-         AdditionalCommand(BotCommandType.Battle,"/character remove-gear 2 armor")]
+         AdditionalCommand("/character remove-gear 2 armor",BotCommandCategory.Character)]
     public async ValueTask ExecuteRemoveGear(CommandContext context,
         [Parameter("character-number")] int characterNumber,
         [Parameter("gear-type"), SlashChoiceProvider<GearTypeProvider>] string gearType)

@@ -14,7 +14,7 @@ public class Avatar: GeneralCommandClass
 
     [Command("avatar")]
     [Description("Displays your avatar, or someone elses avatar")] 
-    [AdditionalCommand("/avatar\n/avatar @user",BotCommandType.Fun)]
+    [AdditionalCommand("/avatar\n/avatar @user",BotCommandCategory.Fun)]
     public async ValueTask Execute(CommandContext ctx,  [Parameter("user")]
         [Description("if set, will display this users avatar instead")] 
         DiscordUser? user = null)

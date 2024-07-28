@@ -3,23 +3,12 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 public class AdditionalCommandAttribute : Attribute
 {
     public string? Example { get; }
-    public BotCommandType BotCommandType { get; }
-    public AdditionalCommandAttribute(string example, BotCommandType botCommandType)
+    public BotCommandCategory BotCommandCategory { get; }
+    public AdditionalCommandAttribute(string example, BotCommandCategory botCommandCategory = BotCommandCategory.Other)
     {
         Example = example;
-        BotCommandType = botCommandType;
+        BotCommandCategory = botCommandCategory;
     }
 
-    public AdditionalCommandAttribute(string example)
-    {
-        Example = example;
-        BotCommandType = BotCommandType.Other;
-    }
-    public AdditionalCommandAttribute(BotCommandType botCommandType, string example)
-        : this(example, botCommandType){}
-    public AdditionalCommandAttribute(BotCommandType botCommandType)
-    {
-  
-        BotCommandType = botCommandType;
-    }
+
 }

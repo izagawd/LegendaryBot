@@ -127,7 +127,7 @@ public class Arise : Ultimate
 }
 public class Thana : CharacterPartials.Character
 {
-
+    protected override float BaseSpeedMultiplier => 1.1f;
     public override Rarity Rarity =>Rarity.FiveStar;
     public override DiscordColor Color => DiscordColor.Brown;
 

@@ -175,7 +175,7 @@ public class LevelUpCharacter : GeneralCommandClass
 
     
     [Command("level-up"), Description("used to level up a character. Also used to display stats and blessing"),
-     AdditionalCommand("/level-up 1",BotCommandType.Battle)]
+     AdditionalCommand("/level-up 1",BotCommandCategory.Battle)]
     public async ValueTask ExecuteLevelUp(CommandContext ctx,
         [Parameter("character-number")] int characterNumber)
     {
