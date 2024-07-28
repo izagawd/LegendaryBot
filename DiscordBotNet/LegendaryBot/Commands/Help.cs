@@ -169,7 +169,18 @@ public class Help : GeneralCommandClass
         IEnumerable<DiscordSelectComponentOption> enumerable()
         {
         
-            foreach (var i in embedsToUse.Keys)
+            foreach (var i in embedsToUse.Keys.OrderBy(i =>
+                     {
+                         switch (i)
+                         {
+                             case BotCommandCategory.Battle:
+                                 return (short)0;
+                             case BotCommandCategory.Other:
+                                 return (short)2;
+                             default:
+                                 return (short) 1;
+                         }
+                     }))
             {
                 yield return new DiscordSelectComponentOption(i.ToString().Englishify(),
                     ((int)i).ToString());
