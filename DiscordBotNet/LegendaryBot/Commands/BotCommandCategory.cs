@@ -2,5 +2,5 @@
 
 public enum BotCommandCategory
 {
-    Other, Fun,Inventory, Character, Team, Battle
+    Other, Inventory, Character, Team, Battle
 }

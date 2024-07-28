@@ -12,7 +12,7 @@ public abstract class Reward : IComparable<Reward>
     [NotMapped]
     public virtual int Priority => 1;
     private static IEnumerable<Type> RewardTypes { get; } =
-        Assembly.GetExecutingAssembly().GetTypes().Where(i => i.IsSubclassOf(typeof(Reward)) && !i.IsAbstract);
+        typeof(Reward).Assembly.GetTypes().Where(i => i.IsSubclassOf(typeof(Reward)) && !i.IsAbstract);
     /// <summary>
     /// Merges all rewards in a collection to avoid rewards of the same type from appearing more than once.
     /// eg reward called coinsreward merges with another coinsreward. the merged version will have a coins property value

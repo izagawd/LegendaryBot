@@ -27,7 +27,7 @@ public class Begin : GeneralCommandClass
         "gender", Gender.Male.ToString(),
         Gender.Male.ToString());
     [Command("begin"),
-    AdditionalCommand("/begin",BotCommandCategory.Battle), Description("Use this Commands to begin your journey")]
+    BotCommandCategory(BotCommandCategory.Battle), Description("Use this Commands to begin your journey")]
     public async ValueTask Execute(CommandContext ctx)
     {
         DiscordEmbedBuilder embedToBuild = new();

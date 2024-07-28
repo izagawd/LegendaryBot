@@ -12,16 +12,17 @@ using Microsoft.EntityFrameworkCore;
 namespace DiscordBotNet.LegendaryBot.Commands;
 
 [Command("character")]
-public class CharacterCommand : GeneralCommandClass
+public partial class CharacterCommand : GeneralCommandClass
 {
     private static readonly ImmutableArray<string> _possibleGears = TypesFunctionality
         .GetDefaultObjectsThatIsInstanceOf<Gear>()
         .Select(i => i.Name.ToLower().Replace(" ", "")).ToImmutableArray();
     
     
-    [Command("equip-blessing"), Description("Use this Command make a character equip a blessing")]
+    [Command("equip-blessing"), Description("Use this Command make a character equip a blessing"),
+    BotCommandCategory(BotCommandCategory.Character)]
     public async ValueTask ExecuteEquipBlessing(CommandContext context,
-        [Parameter("character-number")] int characterNumber,
+        [Parameter("character-num")] int characterNumber,
         [Parameter("blessing-name")] string blessingName)
     {
 
@@ -84,14 +85,14 @@ public class CharacterCommand : GeneralCommandClass
     }
      
         [Command("remove-blessing"), Description("Use this Command make a character equip a blessing"),
-        AdditionalCommand("/character remove-blessing 4",BotCommandCategory.Character)]
+        BotCommandCategory(BotCommandCategory.Character)]
     public async ValueTask ExecuteRemoveBlessing(CommandContext context,
-        [Parameter("character-number")] int characterNumber)
+        [Parameter("character-num")] int characterNum)
     {
 
         var userData = await DatabaseContext.UserData
             .Include(i => i.Characters.Where(j => 
-                                              j.Number == characterNumber))
+                                              j.Number == characterNum))
             .ThenInclude(i => i.Blessing)
             .FirstOrDefaultAsync(i => i.Id == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
@@ -115,7 +116,7 @@ public class CharacterCommand : GeneralCommandClass
         var character = userData.Characters.FirstOrDefault();
         if (character is null)
         {
-            embed.WithDescription($"Character with number {characterNumber} not found");
+            embed.WithDescription($"Character with number {characterNum} not found");
             await context.RespondAsync(embed);
             return;
         }
@@ -137,10 +138,11 @@ public class CharacterCommand : GeneralCommandClass
     }
      
     
-    [Command("equip-gear"), Description("Use this Command make a character equip a gear")]
+    [Command("equip-gear"), Description("Use this Command make a character equip a gear"),
+    BotCommandCategory(BotCommandCategory.Character)]
     public async ValueTask ExecuteEquipGear(CommandContext context,
-        [Parameter("character-number")] int characterNumber,
-        [Parameter("gear-number")] int gearNumber)
+        [Parameter("character-num")] int characterNumber,
+        [Parameter("gear-num")] int gearNumber)
     {
 
         var userData = await DatabaseContext.UserData
@@ -211,9 +213,9 @@ public class CharacterCommand : GeneralCommandClass
         public ValueTask<IReadOnlyDictionary<string, object>> ProvideAsync(CommandParameter parameter) => ValueTask.FromResult(_daysOfTheWeek);
     }
         [Command("remove-gear"), Description("Use this Command make a character remove an equipped gear"),
-         AdditionalCommand("/character remove-gear 2 armor",BotCommandCategory.Character)]
+         BotCommandCategory(BotCommandCategory.Character)]
     public async ValueTask ExecuteRemoveGear(CommandContext context,
-        [Parameter("character-number")] int characterNumber,
+        [Parameter("character-num")] int characterNumber,
         [Parameter("gear-type"), SlashChoiceProvider<GearTypeProvider>] string gearType)
     {
         gearType = gearType.ToLower().Replace(" ","");

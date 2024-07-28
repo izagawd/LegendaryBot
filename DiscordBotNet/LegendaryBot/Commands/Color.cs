@@ -25,7 +25,7 @@ public class Color : GeneralCommandClass
             ValueTask.FromResult(_choices);
     }
     [Command("color"),Description("Use this to change your color"),
-    AdditionalCommand("/color Blue",BotCommandCategory.Other)]
+    BotCommandCategory(BotCommandCategory.Other)]
     public async ValueTask Execute(CommandContext ctx,
         [SlashChoiceProvider<ColorChoice>]
         

@@ -10,7 +10,7 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class FightCharacter : GeneralCommandClass
 {
-    [Command("fight-chosen-character")]
+    [Command("fight-chosen-character"), BotCommandCategory(BotCommandCategory.Battle)]
     public async ValueTask FightCommand(CommandContext context, string enemyName,
         int count = 1)
     {

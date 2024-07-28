@@ -36,9 +36,10 @@ public class Display : GeneralCommandClass
         return image;
     }
 
-    [Command("character-gear"), Description("Displays a character's gears")]
+    [Command("character-gear"), Description("Displays a character's gears"),
+    BotCommandCategory(BotCommandCategory.Character)]
     public  async ValueTask ExecuteDisplayCharacterGear(CommandContext context,
-        [Parameter("character-number")] int characterNumber)
+        [Parameter("character-num")] int characterNumber)
     {
         var userData = await DatabaseContext.UserData.Include(i => i.Characters
                 .Where(j => j.Number == characterNumber))
@@ -210,7 +211,7 @@ public class Display : GeneralCommandClass
 
     }
     [Command("all-entities"),Description("Displays all entities that can be gotten into your inventory"),
-    AdditionalCommand("/display all-entities")]
+    BotCommandCategory(BotCommandCategory.Other)]
     public async ValueTask ExecuteDisplayAllEntities(CommandContext context)
     {
         var color = (await DatabaseContext.UserData
@@ -222,7 +223,8 @@ public class Display : GeneralCommandClass
             "\n", "All entities", color);
     }
     protected static DiscordButtonComponent First = new DiscordButtonComponent(DiscordButtonStyle.Primary, "first", "FIRST");
-        [Command("gears"),Description("Displays all the gears you have")]
+        [Command("gears"),Description("Displays all the gears you have"),
+        BotCommandCategory(BotCommandCategory.Inventory)]
     public async ValueTask ExecuteDisplayGears(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
@@ -244,7 +246,8 @@ public class Display : GeneralCommandClass
 
     }
 
-    [Command("characters"),Description("Displays all the characters you have")]
+    [Command("characters"),Description("Displays all the characters you have"),
+    BotCommandCategory(BotCommandCategory.Character)]
     public async ValueTask ExecuteDisplayCharacters(CommandContext context,[Description("pretty self explanatory")]  string nameFilter = "")
     {
         var simplified = nameFilter.Replace(" ", "").ToLower();
@@ -266,7 +269,8 @@ public class Display : GeneralCommandClass
 
     }
 
-    [Command("blessings"),Description("Displays all the blessings you have")]
+    [Command("blessings"),Description("Displays all the blessings you have"),
+    BotCommandCategory(BotCommandCategory.Inventory)]
     public async ValueTask ExecuteDisplayBlessings(CommandContext context, string nameFilter = "")
     {
         var userData = await DatabaseContext.UserData
@@ -328,7 +332,7 @@ public class Display : GeneralCommandClass
 
         await context.RespondAsync(embed);
     }
-    [Command("teams"), Description("Displays all the teams you have and the characters in them")]
+    [Command("teams"),BotCommandCategory(BotCommandCategory.Team), Description("Displays all the teams you have and the characters in them")]
     public async ValueTask ExecuteDisplayTeams(CommandContext context)
     {
         var userData = await DatabaseContext.UserData

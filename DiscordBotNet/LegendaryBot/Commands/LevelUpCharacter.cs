@@ -19,7 +19,7 @@ using DiscordInteractionResponseBuilder = DSharpPlus.Entities.DiscordInteraction
 namespace DiscordBotNet.LegendaryBot.Commands;
 
 
-public class LevelUpCharacter : GeneralCommandClass
+public partial class CharacterCommand 
 {
     private static ConcurrentDictionary<string,Image<Rgba32>> _cachedLevelUpCroppedImages = new();
 
@@ -175,9 +175,9 @@ public class LevelUpCharacter : GeneralCommandClass
 
     
     [Command("level-up"), Description("used to level up a character. Also used to display stats and blessing"),
-     AdditionalCommand("/level-up 1",BotCommandCategory.Battle)]
+     BotCommandCategory(BotCommandCategory.Character)]
     public async ValueTask ExecuteLevelUp(CommandContext ctx,
-        [Parameter("character-number")] int characterNumber)
+        [Parameter("character-num")] int characterNumber)
     {
 
 

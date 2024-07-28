@@ -1,236 +1,115 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.Collections.Concurrent;
+using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
+using DSharpPlus.Commands.Trees;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class Help : GeneralCommandClass
 {
-
-    private static void HandleDefaultHelp()
-    {
-                
-        Dictionary<BotCommandCategory, StringBuilder> botCommandTypeBuilders = new();
-        foreach (var i in Enum.GetValues<BotCommandCategory>())
-            botCommandTypeBuilders[i] = new StringBuilder();
-        foreach (var i in  TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<GeneralCommandClass>())
-        {
-            var com = i.GetType().GetCustomAttribute<CommandAttribute>();
-            if (com is not null)
-            {
-                var additional = i.GetType().GetCustomAttribute<AdditionalCommandAttribute>();
-                var type = BotCommandCategory.Other;
-                if (additional is not null)
-                    type = additional.BotCommandCategory;
-                botCommandTypeBuilders[type].Append($"`{com.Name}`  ");
-            }
-            else
-            {
-                var selected = i.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Public  | BindingFlags.Instance)
-                    .Select(j =>new{Additional= j.GetCustomAttribute<AdditionalCommandAttribute>(),
-                        Default = j.GetCustomAttribute<CommandAttribute>()});
-                foreach (var j in selected)
-                {
-                    if(j.Default is null) continue;
-                    var type = BotCommandCategory.Other;
-                    if (j.Additional is not null)
-                        type = j.Additional.BotCommandCategory;
-                    botCommandTypeBuilders[type].Append($"`{j.Default.Name}`  ");
-                }
-            }
-        }
-        foreach(var i in Enum.GetValues<BotCommandCategory>())
-            _botCommandTypeDic[i] = botCommandTypeBuilders[i].ToString();
-    }
-
+    private static Dictionary<BotCommandCategory, List<Command>> _commandsThatDoesShit;
 
     static Help()
     {
-        HandleDefaultHelp();
-        HandleCommandsInformations();
+        RefreshCommandsCategoryCache();
     }
-    private class CommandStuffHolder
+    private static void RefreshCommandsCategoryCache()
     {
-        public string? Example;
-        public string Label;
-        public string Description;
-        
-    }
-    private class Holder
-
-    {
-        public string Name;
-        public string Label;
-        public string Description;
-        public List<CommandStuffHolder> CommandStuffHolders =  new();
-        public string? Example;
-
-
-    }
-
-    private static List<Holder> _holderList = new();
-
-
-    private static IEnumerable<string> GetHelpParameterNames(MethodInfo methodInfo)
-    {
-        var parameters =methodInfo.GetParameters()
-                    
-            .Select(i => new
-            {
-                parameter = i,
-                attribute = i.GetCustomAttribute<ParameterAttribute>()
-            }).ToArray();               
-        bool isFirstParam = true;
-        foreach (var i in parameters)
+        if ((Bot.Client.GetCommandsExtension()?.Commands.Count).GetValueOrDefault(0) <= 0)
+            throw new Exception("no command has been registered yet");
+        _commandsThatDoesShit = [];
+        foreach (var i in Bot.Client.GetCommandsExtension()!.Commands.Values)
         {
-            if (isFirstParam)
+            if (i.Method is null)
             {
-                isFirstParam = false;
-                continue;
-            }
-
-            var paramName = i.attribute?.Name ?? i.parameter.Name ?? "";
-            if (i.parameter.IsOptional)
-                paramName += "?";
-            yield return paramName;
-        }
-        
-    }
-    private static void Recurse(GeneralCommandClass genComClass,
-        CommandAttribute attribute, List<CommandStuffHolder> stuffHolders, Type currentType = null, string? concatenator = null)
-    {
-        if (currentType == null) currentType = genComClass.GetType();
-        if (concatenator is null) concatenator = $"{attribute.Name} ";
-        foreach (var nestedType in currentType.GetNestedTypes(BindingFlags.NonPublic | 
-                                                              BindingFlags.Public | BindingFlags.Instance))
-        {
-
-            var locAttribute = nestedType.GetCustomAttribute<CommandAttribute>();
-            if(locAttribute is not null)
-                Recurse(genComClass, locAttribute,
-                    stuffHolders, nestedType ,concatenator + $"{locAttribute.Name} ");
-            
-        }
-        var methods = currentType.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-
-    
-                
-        
-        foreach (var j in methods)
-        {
-     
-            var slashCom = j.GetCustomAttribute<CommandAttribute>();
-            if (slashCom is not null)
-            {
-     
-                var additional = j.GetCustomAttribute<AdditionalCommandAttribute>();
-                var descr = j.GetCustomAttribute<DescriptionAttribute>();
-                var stuffHolder = new CommandStuffHolder();
-                if (additional is not null)
+                foreach (var j in i.Subcommands)
                 {
-                    stuffHolder.Example = additional.Example;
+                    var category = ((j.Attributes.FirstOrDefault(k => k is BotCommandCategoryAttribute) as BotCommandCategoryAttribute)?
+                        .BotCommandCategory).GetValueOrDefault(BotCommandCategory.Other);
+                    if (!_commandsThatDoesShit.TryGetValue(category, out var commands))
+                    {
+                        commands = _commandsThatDoesShit[category] =  [];
+                    }
+                    commands.Add(j);
                 }
-                stuffHolder.Label = concatenator + slashCom.Name;
-                bool isFirstParam = true;
-                foreach (var i in GetHelpParameterNames(j))
-                {
-                    
-                    stuffHolder.Label += $" <{i}>";
-                }
-                stuffHolder.Description = descr is not null ? descr.Description : "";
-                stuffHolders.Add(stuffHolder);
-            }
-
-        }
-
-    }
-    private static void HandleCommandsInformations()
-    {
-        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<GeneralCommandClass>())
-        {
-            var group = i.GetType().GetCustomAttribute<CommandAttribute>();
-            
-        
-            if (group is not null)
-            {
-                var holder = new Holder();
-       
-                
-                holder.Label = group.Name;
-                holder.Name = holder.Label;
-                var description = i.GetType().GetCustomAttribute<DescriptionAttribute>();
-                holder.Description = description?.Description ?? "";
-                Recurse(i,group,holder.CommandStuffHolders);
-                _holderList.Add(holder);
             }
             else
             {
-                var methods = i.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-
-                foreach (var j in methods)
+                var category = ((i.Attributes.FirstOrDefault(k => k is BotCommandCategoryAttribute) as BotCommandCategoryAttribute)?
+                    .BotCommandCategory).GetValueOrDefault(BotCommandCategory.Other);
+                if (!_commandsThatDoesShit.TryGetValue(category, out var commands))
                 {
-                    var command = j.GetCustomAttribute<CommandAttribute>();
-                    if(command is null) continue;
-                    var holder = new Holder();
-                    holder.Label = command.Name;
-                    holder.Name = command.Name;
-                    foreach (var k in GetHelpParameterNames(j))
-                    {
-                        holder.Label += $" <{k}>";
-                    }
-                    var description = j.GetCustomAttribute<DescriptionAttribute>();
-                    holder.Description = description is not null ? description.Description : "";
-                    var additional = j.GetCustomAttribute<AdditionalCommandAttribute>();
-                    if (additional is not null)
-                        holder.Example = additional.Example;
-                    _holderList.Add(holder);
+                    commands = _commandsThatDoesShit[category] =  [];
                 }
+                commands.Add(i);
             }
-            
+                
         }
     }
+    
+
 
     public static DiscordEmbedBuilder? GenerateEmbedForCommand(string cmd)
     {
-        var holder = _holderList.FirstOrDefault(i => i.Name.ToLower() == cmd.ToLower());
-        var embedToBuild = new DiscordEmbedBuilder();
-        if (holder is null)
+        if (!Bot.Client.GetCommandsExtension()!.Commands.TryGetValue(cmd, out var gottenCommand))
         {
             return null;
         }
-
-        embedToBuild
-            .WithTitle(holder.Label)
-            .WithDescription(holder.Description);
-        if (holder.Example is not null)
-            embedToBuild.AddField("Example: ", holder.Example);
-        foreach (var i in holder.CommandStuffHolders)
+        var embedToBuild = new DiscordEmbedBuilder();
+        var label = gottenCommand.Name;
+        foreach (var i in gottenCommand.Parameters)
         {
-            var stringToUse = $"{i.Description}";
-            if (i.Example is not null && i.Example.Length > 0)
-            {
-                stringToUse += $"\nExamples:\n{i.Example}";
-            }
+            var questionMark = i.DefaultValue.HasValue ? "?" : "";
+            label += $" <{i.Name}{questionMark}>";
+        }
+      
+        embedToBuild
+            .WithTitle(label);
+    
+        embedToBuild.WithDescription(gottenCommand.Description ?? "No Description");
+        
 
-            if (stringToUse.Length > 0)
-                embedToBuild.AddField(i.Label, stringToUse);
+
+            var additionalCommandAttribute =
+               (BotCommandCategoryAttribute)  gottenCommand.Attributes.FirstOrDefault(i => i is BotCommandCategoryAttribute)!;
+        
+ 
+        foreach (var i in gottenCommand.Subcommands)
+        {
+            var stringToUse = i.Description ?? "No description";
+
+            var subAttribute =       (BotCommandCategoryAttribute) i.Attributes.FirstOrDefault(j => j is BotCommandCategoryAttribute)!;
+            
+
+
+            var subLabel = $"{gottenCommand.Name} {i.Name}";
+            foreach (var j in i.Parameters)
+            {
+                var questionMark = j.DefaultValue.HasValue ? "?" : "";
+                subLabel += $" <{j.Name}{questionMark}>";
+            }
+            embedToBuild.AddField(subLabel, stringToUse);
         }
 
         return embedToBuild;
 
     }
-    private static Dictionary<BotCommandCategory, string> _botCommandTypeDic = new();
+
     [Command("help"),
-     AdditionalCommand("/help\n/help command_name",BotCommandCategory.Other)]
+     BotCommandCategory(BotCommandCategory.Other)]
     public async ValueTask Execute(CommandContext ctx,
     [Parameter("Commands")] string? cmd = null)
     {
       
+       
         var author = ctx.User;
         
         var color = await DatabaseContext
@@ -241,19 +120,85 @@ public class Help : GeneralCommandClass
         if (color is null)
         {
             color = TypesFunctionality.GetDefaultObject<UserData>().Color;
-        }
+        } 
+
         var embedToBuild = new DiscordEmbedBuilder()
             .WithTitle("Help")
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
             .WithColor(color.Value)
-            .WithTimestamp(DateTime.Now);
+            .WithFooter("note: text with < > means its a parameter, and ? means the command parameter is optional");
+
+
+
         if (cmd is null)
         {
-            foreach (var i in Enum.GetValues<BotCommandCategory>())
+            
+            Dictionary<BotCommandCategory, DiscordEmbed> embedsToUse = [];
+
+            foreach (var i in _commandsThatDoesShit.Keys)
             {
-                embedToBuild.AddField(i.ToString().Englishify(),
-                    _botCommandTypeDic[i]);
+                embedToBuild.WithTitle(i.ToString().Englishify());
+                embedToBuild.ClearFields();
+                foreach (var j in _commandsThatDoesShit[i])
+                {
+                    var nameToUse = (j.Parent?.Name ??"")  + $" {j.Name}";
+                    
+                    foreach (var k in j.Parameters)
+                    {
+                        var questionMark = k.DefaultValue.HasValue ? "?" : "";
+                        nameToUse += $" <{k.Name}{questionMark}>";
+                    }
+
+                    var otherInfo = j.Description ?? "No Description";
+
+                    embedToBuild.AddField(nameToUse, otherInfo);
+                }
+                embedsToUse[i] = embedToBuild.Build();
             }
+
+            IEnumerable<DiscordSelectComponentOption> enumerable()
+            {
+            
+                foreach (var i in embedsToUse.Keys)
+                {
+                    yield return new DiscordSelectComponentOption(i.ToString().Englishify(),
+                        ((int)i).ToString());
+                  
+                }
+            }
+            List<DiscordSelectComponent> components = [];
+            const string selectComponentId = "select_comp";
+            var selectComponent =          new DiscordSelectComponent(selectComponentId, 
+                embedsToUse[BotCommandCategory.Battle].Title!,
+                enumerable());
+
+
+            var discordMessageBuilder = new DiscordMessageBuilder()
+                .AddEmbed(embedsToUse[BotCommandCategory.Battle])
+                .AddComponents(selectComponent);
+            await ctx.RespondAsync(discordMessageBuilder);
+            var message = (await ctx.GetResponseAsync())!;
+
+            while (true)
+            {
+                var result = await message.WaitForSelectAsync(ctx.User,selectComponentId);
+                if (result.TimedOut)
+                {
+                    await message.ModifyAsync(i => i.ClearComponents());
+                    break;
+                }
+                var parsedInt =int.Parse(result.Result.Interaction.Data.Values[0]);
+                var embedToUse = embedsToUse[(BotCommandCategory)parsedInt];
+                selectComponent = new DiscordSelectComponent(selectComponentId, embedToUse.Title,
+                    selectComponent.Options);
+                await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+                    new DiscordInteractionResponseBuilder()
+                        .AddEmbed(embedToUse)
+                        .AddComponents(selectComponent));
+            }
+
+                
+            
         }
         else
         {
@@ -266,11 +211,11 @@ public class Help : GeneralCommandClass
                 embedToBuild = prevEmbed;
                 embedToBuild.WithDescription($"Command `{cmd.ToLower()}` not found");
             }
-                
+            await ctx.RespondAsync(embed: embedToBuild.Build());
             
         }
         
-        await ctx.RespondAsync(embed: embedToBuild.Build());
+
 
             
     }

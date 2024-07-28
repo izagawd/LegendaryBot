@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.Database.Models;
+﻿using System.ComponentModel;
+using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
@@ -11,8 +12,8 @@ public class Info : GeneralCommandClass
 
 
  
-    [Command("info"),
-    AdditionalCommand("/info\n/info @user",BotCommandCategory.Battle)]
+    [Command("info"), Description("Use to see basic details about yourself or a player"),
+    BotCommandCategory(BotCommandCategory.Other)]
     public async ValueTask Execute(CommandContext ctx,[Parameter("user")]DiscordUser? author = null)
     {  
 

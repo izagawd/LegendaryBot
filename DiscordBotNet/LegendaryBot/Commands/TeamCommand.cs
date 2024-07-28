@@ -18,7 +18,7 @@ public class TeamCommand : GeneralCommandClass
 
 
     [Command("equip-team"), Description("Use this Commands to change teams"),
-    AdditionalCommand("/team equip-team team2", BotCommandCategory.Team)]
+    BotCommandCategory( BotCommandCategory.Team)]
     public async ValueTask ExecuteEquip(CommandContext context,
         [Parameter("team-name")] string teamName)
     {
@@ -57,9 +57,9 @@ public class TeamCommand : GeneralCommandClass
     }
 
     [Command("remove-character")]
-    [AdditionalCommand("/team remove-character 1",BotCommandCategory.Character)]
+    [BotCommandCategory(BotCommandCategory.Team)]
     public async ValueTask ExecuteRemoveFromTeam(CommandContext context,
-        [Parameter("character-number"), Description("Number of the character")] int characterNumber,
+        [Parameter("character-num"), Description("Number of the character")] int characterNumber,
         [Parameter("team-name"),  Description("Name of team you want to remove character from")]
         string teamName)
     {
@@ -122,7 +122,7 @@ public class TeamCommand : GeneralCommandClass
 
     }
 
-    [Command("rename-team"), AdditionalCommand("/team rename-team team1 superteam",BotCommandCategory.Team)]
+    [Command("rename-team"), BotCommandCategory(BotCommandCategory.Team)]
 
     
     public async ValueTask ExecuteRenameTeam(CommandContext context,
@@ -166,8 +166,8 @@ public class TeamCommand : GeneralCommandClass
         await context.RespondAsync(embed);
 
     }
-    [Command("add-character"), Description("adds a character to a team!")]
-    public async ValueTask ExecuteAddToTeam(CommandContext context, [Parameter("character-number"), Description("Id of character you want to add")] int characterNumber,
+    [Command("add-character"), Description("adds a character to a team!"), BotCommandCategory(BotCommandCategory.Team)]
+    public async ValueTask ExecuteAddToTeam(CommandContext context, [Parameter("character-num"), Description("Id of character you want to add")] int characterNumber,
         [Parameter("team-name")] string teamName)
     {
 

@@ -262,6 +262,7 @@ public static class Bot
         await commandsExtension.AddProcessorAsync(textCommandProcessor);
         
         commandsExtension.AddCommands(typeof(Bot).Assembly);
+
         commandsExtension.CommandExecuted += OnCommandsExtensionOnCommandExecuted;
 
 

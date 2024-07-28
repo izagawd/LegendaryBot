@@ -10,7 +10,7 @@ public class Roll :  GeneralCommandClass
 {
 
     [Command("roll"), Description("roll a random number form 0 - 100!"),
-    AdditionalCommand("/roll",BotCommandCategory.Fun)]
+    BotCommandCategory(BotCommandCategory.Other)]
     public async ValueTask Execute(CommandContext ctx)
     {
 

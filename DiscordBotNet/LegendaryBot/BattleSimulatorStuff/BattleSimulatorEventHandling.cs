@@ -14,7 +14,7 @@ public partial class BattleSimulator
     private static void SetupBattleEventDelegatorStuff()
     {
         List<MethodInfo> invalidMethods = [];
-        foreach (var i in Assembly.GetExecutingAssembly().GetTypes().Where(j => !j.IsAbstract && !j.IsInterface))
+        foreach (var i in typeof(BattleSimulator).Assembly.GetTypes().Where(j => !j.IsAbstract && !j.IsInterface))
         {
             foreach (var j in i.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                          .Select(j => new{method = j, attribute = j.GetCustomAttribute<BattleEventListenerMethodAttribute>()})

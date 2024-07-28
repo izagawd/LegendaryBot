@@ -10,7 +10,7 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 public class TutorialCommand : GeneralCommandClass
 {
     [Command("tutorial"), Description("Guide on how to use stuff"),
-     AdditionalCommand("/read", BotCommandCategory.Fun)]
+     BotCommandCategory(BotCommandCategory.Other)]
     public async Task Execute(CommandContext ctx)
     {
         const string tutorialString =

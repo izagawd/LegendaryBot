@@ -16,7 +16,7 @@ public static class TypesFunctionality
     static TypesFunctionality()
     {
      
-        AllAssemblyTypes = Assembly.GetExecutingAssembly()
+        AllAssemblyTypes = typeof(TypesFunctionality).Assembly
             .GetTypes().ToImmutableArray();
     }
     public static  TObjectType GetDefaultObject<TObjectType>()

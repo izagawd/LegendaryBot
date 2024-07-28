@@ -49,14 +49,7 @@ public static class BasicExtension
         }
     }
 
-    public static Task<InteractivityResult<ComponentInteractionCreatedEventArgs>> WaitForAnyComponentInteractionAsync(this DiscordMessage message, Func<ComponentInteractionCreatedEventArgs,bool> predicate,
-        TimeSpan? timeoutOverride = null)
-    {
 
-
-        return Bot.Interactivity.WaitForEventArgsAsync<ComponentInteractionCreatedEventArgs>
-            (i => i.Message == message && predicate(i),timeoutOverride);
-    }
 
     public static DiscordEmbedBuilder WithUser(this DiscordEmbedBuilder embedBuilder, DiscordUser user)
     {
