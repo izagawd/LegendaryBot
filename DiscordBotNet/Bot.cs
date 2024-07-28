@@ -383,14 +383,18 @@ public static class Bot
         } else if (args.Exception is CommandsException)
         {
 
-            var commandToUse = args.Context.Command;
-            while (commandToUse.Parent is not null)
+            var currentCommand = args.Context.Command;
+
+            var nameToUse = currentCommand.Name;
+            while (currentCommand.Parent is not null)
             {
-                commandToUse = commandToUse.Parent;
+                currentCommand = currentCommand.Parent;
+                nameToUse = currentCommand.Name.Print() + " " + nameToUse;
             }
-            embedBuilder = Help.GenerateEmbedForCommand(commandToUse.Name);
+            
+            embedBuilder = Help.GenerateEmbedForCommandFailure(nameToUse.Print());
   
-            embedBuilder?.WithTitle($"You didnt properly use command `{commandToUse.Name}`.\nThis is how to use `{commandToUse.Name}`\n"
+            embedBuilder?.WithTitle($"You didnt properly use command `{nameToUse}`.\nDetails of `{nameToUse}`\n"
                 + embedBuilder.Title);
           
         }

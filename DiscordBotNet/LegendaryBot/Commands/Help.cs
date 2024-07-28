@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Concurrent;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using DiscordBotNet.Database.Models;
@@ -57,23 +58,35 @@ public class Help : GeneralCommandClass
     
 
 
-    public static DiscordEmbedBuilder? GenerateEmbedForCommand(string cmd)
+    public static DiscordEmbedBuilder? GenerateEmbedForCommandFailure(string cmd)
     {
-        if (!Bot.Client.GetCommandsExtension()!.Commands.TryGetValue(cmd, out var gottenCommand))
+        var splitted = cmd.Split(' ');
+        if (!Bot.Client.GetCommandsExtension()!.Commands.TryGetValue(splitted[0], out var gottenCommand))
         {
             return null;
+            
+        }
+
+        if (splitted.Length > 1)
+        {
+            gottenCommand = gottenCommand.Subcommands.FirstOrDefault(i => i.Name == splitted[1]);
+            if (gottenCommand is null)
+                return null;
         }
         var embedToBuild = new DiscordEmbedBuilder();
         var label = gottenCommand.Name;
+        if (gottenCommand.Parent is not null)
+        {
+            label = $"{gottenCommand.Parent.Name} {label}";
+        }
         foreach (var i in gottenCommand.Parameters)
         {
             var questionMark = i.DefaultValue.HasValue ? "?" : "";
             label += $" <{i.Name}{questionMark}>";
         }
-      
         embedToBuild
             .WithTitle(label);
-    
+        embedToBuild.WithFooter("note: text with < > means it is a parameter, and ? means the parameter is optional");
         embedToBuild.WithDescription(gottenCommand.Description ?? "No Description");
         
 
@@ -105,119 +118,96 @@ public class Help : GeneralCommandClass
 
     [Command("help"),
      BotCommandCategory(BotCommandCategory.Other)]
-    public async ValueTask Execute(CommandContext ctx,
-    [Parameter("Commands")] string? cmd = null)
+    public async ValueTask Execute(CommandContext ctx)
     {
-      
-       
-        var author = ctx.User;
+    var author = ctx.User;
+    
+    var color = await DatabaseContext
+        .UserData
+        .Where(i => i.Id == ctx.User.Id)
+        .Select(i => new DiscordColor?(i.Color))
+        .FirstOrDefaultAsync();
+    if (color is null)
+    {
+        color = TypesFunctionality.GetDefaultObject<UserData>().Color;
+    }
+
+   
+    var embedToBuild = new DiscordEmbedBuilder()
+        .WithTitle("Help")
+        .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
+        .WithColor(color.Value)
+        .WithFooter("note: text with < > means its a parameter, and ? means the command parameter is optional");
+
+
+
+
         
-        var color = await DatabaseContext
-            .UserData
-            .Where(i => i.Id == ctx.User.Id)
-            .Select(i => new DiscordColor?(i.Color))
-            .FirstOrDefaultAsync();
-        if (color is null)
+        Dictionary<BotCommandCategory, DiscordEmbed> embedsToUse = [];
+
+        foreach (var i in _commandsThatDoesShit.Keys)
         {
-            color = TypesFunctionality.GetDefaultObject<UserData>().Color;
-        } 
-
-        var embedToBuild = new DiscordEmbedBuilder()
-            .WithTitle("Help")
-            .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
-            .WithColor(color.Value)
-            .WithFooter("note: text with < > means its a parameter, and ? means the command parameter is optional");
-
-
-
-        if (cmd is null)
-        {
-            
-            Dictionary<BotCommandCategory, DiscordEmbed> embedsToUse = [];
-
-            foreach (var i in _commandsThatDoesShit.Keys)
+            embedToBuild.WithTitle(i.ToString().Englishify());
+            embedToBuild.ClearFields();
+            foreach (var j in _commandsThatDoesShit[i])
             {
-                embedToBuild.WithTitle(i.ToString().Englishify());
-                embedToBuild.ClearFields();
-                foreach (var j in _commandsThatDoesShit[i])
-                {
-                    var nameToUse = (j.Parent?.Name ??"")  + $" {j.Name}";
-                    
-                    foreach (var k in j.Parameters)
-                    {
-                        var questionMark = k.DefaultValue.HasValue ? "?" : "";
-                        nameToUse += $" <{k.Name}{questionMark}>";
-                    }
-
-                    var otherInfo = j.Description ?? "No Description";
-
-                    embedToBuild.AddField(nameToUse, otherInfo);
-                }
-                embedsToUse[i] = embedToBuild.Build();
-            }
-
-            IEnumerable<DiscordSelectComponentOption> enumerable()
-            {
-            
-                foreach (var i in embedsToUse.Keys)
-                {
-                    yield return new DiscordSelectComponentOption(i.ToString().Englishify(),
-                        ((int)i).ToString());
-                  
-                }
-            }
-            List<DiscordSelectComponent> components = [];
-            const string selectComponentId = "select_comp";
-            var selectComponent =          new DiscordSelectComponent(selectComponentId, 
-                embedsToUse[BotCommandCategory.Battle].Title!,
-                enumerable());
-
-
-            var discordMessageBuilder = new DiscordMessageBuilder()
-                .AddEmbed(embedsToUse[BotCommandCategory.Battle])
-                .AddComponents(selectComponent);
-            await ctx.RespondAsync(discordMessageBuilder);
-            var message = (await ctx.GetResponseAsync())!;
-
-            while (true)
-            {
-                var result = await message.WaitForSelectAsync(ctx.User,selectComponentId);
-                if (result.TimedOut)
-                {
-                    await message.ModifyAsync(i => i.ClearComponents());
-                    break;
-                }
-                var parsedInt =int.Parse(result.Result.Interaction.Data.Values[0]);
-                var embedToUse = embedsToUse[(BotCommandCategory)parsedInt];
-                selectComponent = new DiscordSelectComponent(selectComponentId, embedToUse.Title,
-                    selectComponent.Options);
-                await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
-                    new DiscordInteractionResponseBuilder()
-                        .AddEmbed(embedToUse)
-                        .AddComponents(selectComponent));
-            }
-
+                var nameToUse = (j.Parent?.Name ??"")  + $" {j.Name}";
                 
-            
-        }
-        else
-        {
-            var prevEmbed = embedToBuild;
-            embedToBuild = GenerateEmbedForCommand(cmd)?
-                .WithColor(color.Value)
-                .WithUser(ctx.User);
-            if (embedToBuild is null)
-            {
-                embedToBuild = prevEmbed;
-                embedToBuild.WithDescription($"Command `{cmd.ToLower()}` not found");
+                foreach (var k in j.Parameters)
+                {
+                    var questionMark = k.DefaultValue.HasValue ? "?" : "";
+                    nameToUse += $" <{k.Name}{questionMark}>";
+                }
+
+                var otherInfo = j.Description ?? "No Description";
+
+                embedToBuild.AddField(nameToUse, otherInfo);
             }
-            await ctx.RespondAsync(embed: embedToBuild.Build());
-            
+            embedsToUse[i] = embedToBuild.Build();
+        }
+
+        IEnumerable<DiscordSelectComponentOption> enumerable()
+        {
+        
+            foreach (var i in embedsToUse.Keys)
+            {
+                yield return new DiscordSelectComponentOption(i.ToString().Englishify(),
+                    ((int)i).ToString());
+              
+            }
+        }
+        List<DiscordSelectComponent> components = [];
+        const string selectComponentId = "select_comp";
+        var selectComponent =          new DiscordSelectComponent(selectComponentId, 
+            embedsToUse[BotCommandCategory.Battle].Title!,
+            enumerable());
+
+
+        var discordMessageBuilder = new DiscordMessageBuilder()
+            .AddEmbed(embedsToUse[BotCommandCategory.Battle])
+            .AddComponents(selectComponent);
+
+        await ctx.RespondAsync(discordMessageBuilder);
+        var message = (await ctx.GetResponseAsync())!;
+
+        while (true)
+        {
+            var result = await message.WaitForSelectAsync(ctx.User,selectComponentId);
+            if (result.TimedOut)
+            {
+                await message.ModifyAsync(i => i.ClearComponents());
+                break;
+            }
+            var parsedInt =int.Parse(result.Result.Interaction.Data.Values[0]);
+            var embedToUse = embedsToUse[(BotCommandCategory)parsedInt];
+            selectComponent = new DiscordSelectComponent(selectComponentId, embedToUse.Title,
+                selectComponent.Options);
+            await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+                new DiscordInteractionResponseBuilder()
+                    .AddEmbed(embedToUse)
+                    .AddComponents(selectComponent));
         }
         
-
-
-            
     }
 
 

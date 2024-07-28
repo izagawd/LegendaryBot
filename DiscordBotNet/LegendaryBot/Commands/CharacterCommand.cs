@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
-[Command("character")]
+[Command("character"), Description("some commands related to character")]
 public partial class CharacterCommand : GeneralCommandClass
 {
     private static readonly ImmutableArray<string> _possibleGears = TypesFunctionality
