@@ -14,7 +14,7 @@ public class WindSlash : Skill
 
     public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
     {
-        return User.CurrentBattle.Characters.Where(i => i.Team != User.Team);
+        return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
     protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
