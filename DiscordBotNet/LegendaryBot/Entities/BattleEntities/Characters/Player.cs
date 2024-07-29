@@ -127,17 +127,15 @@ public class Player : Character
     protected override float BaseSpeedMultiplier => 1.1f;
 
 
-    private int count = 1;
-
 
 
     public Player()
     {
         TypeId = 1;
         Element = Element.Fire;
-        BasicAttack = new FourthWallBreaker(){User = this};
-        Skill = new FireBall(){User = this};
-        Ultimate = new Ignite(){User = this};
+        BasicAttack = new FourthWallBreaker();
+        Skill = new FireBall();
+        Ultimate = new Ignite();
       
     }
 

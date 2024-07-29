@@ -420,7 +420,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         return characters.Select(i => i.CoinsToGainWhenKilled).Sum();
     }
     [NotMapped]
-    public int ExpIncreaseScale { get; set; } = 1;
+    public virtual int ExpIncreaseScale => 1;
     public static long GetExpBasedOnDefeatedCharacters(IEnumerable<Character> characters)
     {
         return characters.Select(i => i.ExpToGainWhenKilled).Sum();

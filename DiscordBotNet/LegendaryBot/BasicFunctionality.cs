@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System.Numerics;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
+using DiscordBotNet.Extensions;
 using Microsoft.Extensions.Caching.Memory;
 using SixLabors.ImageSharp.PixelFormats;
 using Image = SixLabors.ImageSharp.Image;
@@ -104,6 +108,46 @@ public static class BasicFunctionality
         SlidingExpiration = new TimeSpan(0,0,30),
         PostEvictionCallbacks = { new PostEvictionCallbackRegistration{EvictionCallback = DisposeEvictionCallback } }
     };
+    /// <summary>
+    /// Gets the size of object.
+    /// </summary>
+    /// <param name="obj">The object.</param>
+    /// <param name="avgStringSize">Average size of the string.</param>
+    /// <returns>An approximation of the size of the object in bytes</returns>
+    public static int SizeOf(Type type)
+    {
+        int pointerSize = IntPtr.Size;
+        int size = 0;
+        var loopingType = type;
+        List<FieldInfo> info = [];
+        while (loopingType is not null)
+        {
+            info.AddRange(loopingType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public));
+            loopingType = loopingType.BaseType;
+        }
+        info = new List<FieldInfo>(info.Distinct());
+        foreach (var field in info)
+        {
+            field.Name.Print();
+            if (field.FieldType.IsValueType)
+            {
+                try
+                {
+                    var marshal = Marshal.SizeOf(field.FieldType);
+                    size += marshal;
+                }
+                catch (Exception e)
+                {
+                    size += SizeOf(field.FieldType);
+                }
+            }
+            else
+            {
+                size += pointerSize;
+            }
+        }
+        return size;
+    }
     public static int GetRandomNumberInBetween(int a, int b)
     {
         return new Random().Next(a, b + 1);

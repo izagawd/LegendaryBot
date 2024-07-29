@@ -308,10 +308,59 @@ public static class Bot
     public static string BotTokenToPathUse => UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
 
+    public static List<FieldInfo> GetAllFieldsAndBackingFields(Type type)
+    {
+        if (type == null)
+        {
+            throw new ArgumentNullException(nameof(type));
+        }
 
+        var allFields = new List<FieldInfo>();
+
+        // Get all fields (both public and non-public) including inherited fields
+        FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+        allFields.AddRange(fields);
+
+        // Get all properties and their backing fields
+        PropertyInfo[] properties = type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+
+        foreach (PropertyInfo property in properties)
+        {
+            // Check if the property has a backing field
+            FieldInfo backingField = type.GetField($"<{property.Name}>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance);
+            if (backingField != null)
+            {
+                allFields.Add(backingField);
+            }
+        }
+
+        return allFields;
+    }
     private async static Task DoShitAsync()
     {
-        MoveUsageContext
+        var arise = new Arise();
+        BasicFunctionality.SizeOf(new Player().GetType()).Print();
+        typeof(Player)
+            
+            .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic 
+        | BindingFlags.FlattenHierarchy).ForEach(i => i.Name.Print());
+        await Task.Delay(-1);
+        return;
+        await Task.Delay(5000);
+        typeof(Arise)
+            .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+            .ForEach(i => i.Name.Print());
+    
+        while (true)
+        {
+            var stop = new Stopwatch();
+            stop.Start();
+
+            var usage = new MoveUsageContext(new Arise(), MoveUsageType.NormalUsage);
+            stop.Stop();
+            stop.Elapsed.TotalMicroseconds.Print();
+            
+        }
     }
     private static async Task Main(string[] args)
     {
