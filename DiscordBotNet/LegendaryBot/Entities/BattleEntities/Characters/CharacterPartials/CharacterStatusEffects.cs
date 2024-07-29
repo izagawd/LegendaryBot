@@ -111,7 +111,7 @@ public partial class Character
             var optimizedOne = onlyStatus.OptimizeWith(statusEffect);
             _statusEffects.Remove(onlyStatus);
             _statusEffects.Add(optimizedOne);
-            CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded, statusEffect));
+            CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded, optimizedOne));
             return StatusEffectInflictResult.Succeeded;
         }
         inflictResult = StatusEffectInflictResult.Failed;
