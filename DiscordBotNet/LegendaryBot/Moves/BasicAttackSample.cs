@@ -14,7 +14,7 @@ public class BasicAttackSample : BasicAttack
         out string? text)
     {
  
-        var damageResult = target.Damage(       new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
+        target.Damage(       new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
         {
 
             ElementToDamageWith = User.Element,

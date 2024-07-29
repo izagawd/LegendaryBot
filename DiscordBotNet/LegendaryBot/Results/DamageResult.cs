@@ -20,10 +20,6 @@ public class DamageResult
 {
 
     public  DamageSource DamageSource { get; init; }
-    public StatusEffect? StatusEffect { get; init; }
-
-
-
     public bool IsFixedDamage { get; init; } = false;
 
     public float DamageDealt { get; init; }

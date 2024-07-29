@@ -16,7 +16,7 @@ public class DoNotResist : BasicAttack
 
     protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-        var damageResult= target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,

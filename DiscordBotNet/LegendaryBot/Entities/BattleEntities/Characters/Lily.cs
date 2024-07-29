@@ -82,7 +82,7 @@ public class LilyOfTheValley : Ultimate
         target.AddStatusEffects([new Poison(){Duration = 2,Caster = User},
         new Poison(){Duration = 2, Caster = User},new Stun(){Duration = 1, Caster = User}],effectiveness);
         text = $"The valley!";
-        targetType = TargetType.AOE;
+        targetType = TargetType.SingleTarget;
 
     }
 }

@@ -31,7 +31,7 @@ public class MethaneSlap : BasicAttack
                 i.Detonate(User);
         }
         text =  "Methane Slap!";
-        targetType = TargetType.AOE;
+        targetType = TargetType.SingleTarget;
 
     }
 }
