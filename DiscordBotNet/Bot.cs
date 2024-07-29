@@ -58,11 +58,11 @@ public static class Bot
 
     const int messagesTillExecution = 30;
     private const float messageCoolDown = 1.5f;
-    private static ConcurrentDictionary<ulong, ChannelSpawnInfo> idkDictionary = new();
+    private static ConcurrentDictionary<ulong, ChannelSpawnInfo> _channelSpawnInfoDictionary = new();
 
     
     
-    private static ConcurrentDictionary<ulong, CharacterExpGainInfo> expMatGive = new();
+    private static ConcurrentDictionary<ulong, CharacterExpGainInfo> _expMatGive = new();
     struct CharacterExpGainInfo
     {
         public int MessageCount;
@@ -82,18 +82,18 @@ public static class Bot
         {
             return;
         }
-        var expGainInfo = expMatGive.GetOrAdd(args.Author.Id, new CharacterExpGainInfo());
+        var expGainInfo = _expMatGive.GetOrAdd(args.Author.Id, new CharacterExpGainInfo());
       
         if (DateTime.UtcNow.Subtract(expGainInfo.LastTimeIncremented).Seconds >= messageCoolDown)
         {
            
             expGainInfo.MessageCount++;
             expGainInfo.LastTimeIncremented = DateTime.UtcNow;
-            expMatGive[args.Author.Id] = expGainInfo;
+            _expMatGive[args.Author.Id] = expGainInfo;
             if (expGainInfo.MessageCount >= messagesTillExecution)
             {
                 expGainInfo.MessageCount = 0;
-                expMatGive[args.Author.Id] = expGainInfo;
+                _expMatGive[args.Author.Id] = expGainInfo;
                 await using var dbContext = new PostgreSqlContext();
                 var userData =await  dbContext.UserData
                     .Include(i => i.Items.Where(j => j is CharacterExpMaterial))
@@ -130,18 +130,18 @@ public static class Bot
         }
         if (!args.Author.IsBot)
         {
-            var spawnInfo = idkDictionary.GetOrAdd(args.Channel.Id,
+            var spawnInfo = _channelSpawnInfoDictionary.GetOrAdd(args.Channel.Id,
                 new ChannelSpawnInfo());
           
             if (DateTime.UtcNow.Subtract(spawnInfo.LastTimeIncremented).Seconds >= messageCoolDown)
             {
                 spawnInfo.MessageCount++;
                 spawnInfo.LastTimeIncremented = DateTime.UtcNow;
-                idkDictionary[args.Channel.Id] = spawnInfo;
+                _channelSpawnInfoDictionary[args.Channel.Id] = spawnInfo;
                 if (spawnInfo.MessageCount >= messagesTillExecution)
                 {
                     spawnInfo.MessageCount = 0;
-                    idkDictionary[args.Channel.Id] = spawnInfo;
+                    _channelSpawnInfoDictionary[args.Channel.Id] = spawnInfo;
                     var groups = TypesFunctionality
                         .GetDefaultObjectsThatIsInstanceOf<Character>()
                         .Where(i =>  i.CanSpawnNormally)
@@ -302,17 +302,15 @@ public static class Bot
 
 
 
-    struct idk
-    {
-        private int a;
-    }
+
     public const bool UseTestDatabaseAndBot = true;
     public static string BotTokenToPathUse => UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
+
+
     private async static Task DoShitAsync()
     {
-        
-      
+   
     }
     private static async Task Main(string[] args)
     {
