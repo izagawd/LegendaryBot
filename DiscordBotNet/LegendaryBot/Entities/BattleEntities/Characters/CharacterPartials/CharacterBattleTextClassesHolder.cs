@@ -51,6 +51,8 @@ public partial class Character
                                $"{noun} been inflicted on {concatenated}!";
                     case StatusEffectInflictResult.Resisted:
                         return $"{concatenated} resisted {statusEffectsString}!";
+                    case StatusEffectInflictResult.Optimized:
+                        return $"{statusEffectsString} {noun} been optimized on {concatenated}!";
                     default:
                         return $"{statusEffectsString} " +
                                $"failed to be inflicted on {concatenated}!";

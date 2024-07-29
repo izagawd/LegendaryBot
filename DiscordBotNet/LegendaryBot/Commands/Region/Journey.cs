@@ -6,6 +6,7 @@ using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
@@ -18,10 +19,15 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 public class Journey : GeneralCommandClass
 {
     
+    static Journey()
+    {
+        
+    }
+    
 
     [Command("journey"), Description("Use this command to encounter a character, and get them if you beat them"),
     BotCommandCategory(BotCommandCategory.Battle)]
-    public async ValueTask Execute(CommandContext ctx)
+    public async ValueTask Execute(CommandContext ctx, int city)
     {
         var author = ctx.User;
         var userData = await DatabaseContext.UserData
@@ -161,33 +167,31 @@ public class Journey : GeneralCommandClass
             rewardText += $"\nYou journeyed a bit more after recruiting {character.Name} and found:\n";
             List<IInventoryEntity> entitiesToReward = [];
             List<Reward> rewards = [];
-            foreach (var i in Enumerable.Range(0,BasicFunctionality.GetRandomNumberInBetween(3,5)))
+           
+ 
+            var expMatCount = BasicFunctionality.GetRandomNumberInBetween(3, 5);
+            var gearCount = BasicFunctionality.GetRandomNumberInBetween(1, 2);
+            
+            var extraCoinsCount = BasicFunctionality.GetRandomNumberInBetween(2, 3);
+            foreach (var _ in Enumerable.Range(0,gearCount))
             {
-                var randomChoice = BasicFunctionality.RandomChoice(["blessing", "gear", "coins"]);
-          
-                switch (randomChoice)
-                {
-                    case "gear":
-                        var gear
-                            = (Gear) Activator.CreateInstance(BasicFunctionality.RandomChoice(Gear.AllGearTypes))!;
-                        gear.Initialize(userData.Tier.ToRarity());
-                        rewards.Add(new EntityReward([gear]));
-                        break;
-                    case "blessing":
-                        var blessing = Blessing.GetRandomBlessing(new Dictionary<Rarity, double>()
-                        {
-                            { Rarity.ThreeStar, 70 },
-                            { Rarity.FourStar, 25 },
-                            { Rarity.FiveStar, 5 }
-                        });
-                        rewards.Add(new EntityReward([blessing]));
-                        break;
-                    case "coins":
-                        var coins = 1000+  (4000 *  (int)userData.Tier);
-                        rewards.Add(new CoinsReward(coins));
-                        break;
-                }
+                var gear
+                    = (Gear) Activator.CreateInstance(BasicFunctionality.RandomChoice(Gear.AllGearTypes))!;
+                var gearRarityToGive = BasicFunctionality.RandomChoice([Rarity.OneStar, Rarity.TwoStar]);
+                gear.Initialize(gearRarityToGive);
+                rewards.Add(new EntityReward([gear]));
             }
+            foreach (var _ in Enumerable.Range(0, expMatCount))
+            {
+                rewards.Add(new EntityReward([new DivineKnowledge()]));
+            }
+            foreach (var _ in Enumerable.Range(0, extraCoinsCount))
+            {
+                rewards.Add(new CoinsReward(1000));
+            }
+
+            await DatabaseContext.Items.Where(i => i is DivineKnowledge)
+                .LoadAsync();
             rewardText += userData.ReceiveRewards(rewards);
             embedToBuild
                 .WithTitle($"Nice going bud!")

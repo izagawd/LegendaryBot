@@ -15,6 +15,14 @@ public partial class Character
         }
         
     }
+
+    public static bool TryToResist(float effectiveness, float resistance)
+    {
+        var percentToResistance =resistance -effectiveness;
+        if (percentToResistance < 0) percentToResistance = 0;
+        return BasicFunctionality.RandomChance(percentToResistance);
+
+    }
     /// <param name="statusEffect">The status effect to add</param>
     /// <param name="effectiveness">the effectiveness of the caster. Null to ignore effect resistance</param>
     /// <returns>true if the status effect was successfully added</returns>
@@ -32,13 +40,13 @@ public partial class Character
             var added = false;
             if (effectiveness is not null && statusEffect.EffectType == StatusEffectType.Debuff)
             {
-                var percentToResistance =Resistance -effectiveness;
-                
-                if (percentToResistance < 0) percentToResistance = 0;
-                if (!BasicFunctionality.RandomChance((int)percentToResistance))
+                if (!TryToResist(effectiveness.Value,Resistance))
                 {
                     added = _statusEffects.Add(statusEffect);
-                    
+                }
+                else
+                {
+                    inflictResult = StatusEffectInflictResult.Resisted;
                 }
                 
             }
@@ -47,11 +55,12 @@ public partial class Character
                 added = _statusEffects.Add(statusEffect);
                 
             }
-            inflictResult = StatusEffectInflictResult.Resisted;
+
+            if (added)
+                inflictResult = StatusEffectInflictResult.Succeeded;
             CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,inflictResult, statusEffect));
             if (added)
             {
-                inflictResult =  StatusEffectInflictResult.Succeeded;
                 statusEffect.OnAdded();
                 CurrentBattle.InvokeBattleEvent(new CharacterStatusEffectAppliedEventArgs
                 {
@@ -62,14 +71,34 @@ public partial class Character
 
 
         }
+        
         if (!statusEffect.IsStackable && arrayOfType.Any())
         {
-            var onlyStatus = arrayOfType.First();
-            var optimizedOne = onlyStatus.OptimizeWith(statusEffect);
-            _statusEffects.Remove(onlyStatus);
-            _statusEffects.Add(optimizedOne);
-            CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded, optimizedOne));
-            return StatusEffectInflictResult.Succeeded;
+            void DoOptimize()
+            {
+                var onlyStatus = arrayOfType.First();
+                var optimizedOne = onlyStatus.OptimizeWith(statusEffect);
+                _statusEffects.Remove(onlyStatus);
+                _statusEffects.Add(optimizedOne);
+                inflictResult = StatusEffectInflictResult.Optimized;
+                CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,inflictResult, optimizedOne));
+            }
+            if (statusEffect.EffectType == StatusEffectType.Debuff && effectiveness is not null)
+            {
+                if (!TryToResist(effectiveness.Value, Resistance))
+                {
+                    DoOptimize();
+                }
+                else
+                {
+                    inflictResult = StatusEffectInflictResult.Resisted;
+                }
+            }
+            else
+            {
+                DoOptimize();
+            }
+            return inflictResult;
         }
         inflictResult = StatusEffectInflictResult.Failed;
         CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,inflictResult, statusEffect));

@@ -93,8 +93,7 @@ public class Takeshi : Character
 
     protected override float BaseSpeedMultiplier => 1.05f;
 
-
-
+    
     [BattleEventListenerMethod]
     public void ToCounterAttack(CharacterPostUseMoveEventArgs args)
     {

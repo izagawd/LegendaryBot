@@ -727,5 +727,5 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 }
 public enum StatusEffectInflictResult
 {
-    Succeeded, Resisted, Failed
+    Failed, Resisted,Optimized,  Succeeded, 
 }
