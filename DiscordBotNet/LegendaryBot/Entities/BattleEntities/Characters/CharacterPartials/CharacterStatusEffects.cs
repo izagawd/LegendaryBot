@@ -6,20 +6,19 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.Characte
 public partial class Character
 {
     
-    public void AddStatusEffects(IEnumerable<StatusEffect> statusEffects, float? effectiveness ,
-        bool announce = true)
+    public void AddStatusEffects(IEnumerable<StatusEffect> statusEffects, float? effectiveness)
     {
 
         foreach (var i in statusEffects)
         {
-            AddStatusEffect(i, effectiveness, announce);
+            AddStatusEffect(i, effectiveness);
         }
         
     }
     /// <param name="statusEffect">The status effect to add</param>
     /// <param name="effectiveness">the effectiveness of the caster. Null to ignore effect resistance</param>
     /// <returns>true if the status effect was successfully added</returns>
-    public StatusEffectInflictResult AddStatusEffect(StatusEffect statusEffect,float? effectiveness = null, bool announce =  true)
+    public StatusEffectInflictResult AddStatusEffect(StatusEffect statusEffect,float? effectiveness)
     {
         var inflictResult = StatusEffectInflictResult.Failed;
         if (statusEffect is null) return StatusEffectInflictResult.Failed;
@@ -49,6 +48,7 @@ public partial class Character
                 
             }
             inflictResult = StatusEffectInflictResult.Resisted;
+            CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,inflictResult, statusEffect));
             if (added)
             {
                 inflictResult =  StatusEffectInflictResult.Succeeded;
@@ -57,11 +57,6 @@ public partial class Character
                 {
                     AddedStatusEffect = statusEffect
                 });
-            }
-                
-            if (announce)
-            {
-                CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,inflictResult, statusEffect));
             }
             return inflictResult;
 
@@ -77,10 +72,7 @@ public partial class Character
             return StatusEffectInflictResult.Succeeded;
         }
         inflictResult = StatusEffectInflictResult.Failed;
-        if (announce)
-        {
-            CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,inflictResult, statusEffect));
-        }
+        CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,inflictResult, statusEffect));
         return inflictResult;
     }
     /// <summary>

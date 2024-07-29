@@ -30,7 +30,8 @@ public class ShieldBash : BasicAttack
 
         if (BasicFunctionality.RandomChance(ShieldStunChanceByBash))
         {
-            target.AddStatusEffect(new Stun(){Duration = 1, Caster = User});
+            target.AddStatusEffect(new Stun(){Duration = 1, Caster = User},
+                User.Effectiveness);
         }
 
     }
@@ -55,7 +56,7 @@ public class IWillBeYourShield : Skill
         {
             Duration = 3,
             Caster = User
-        });
+        }, User.Effectiveness);
 
 
 
@@ -83,7 +84,8 @@ public class IWillProtectUs : Ultimate
     {
         foreach (var i in GetPossibleTargets())
         {
-            i.AddStatusEffect(new DefenseBuff() { Duration = 2, Caster = User});
+            i.AddStatusEffect(new DefenseBuff() { Duration = 2, Caster = User},
+                User.Effectiveness);
             
         }
 
