@@ -3,6 +3,7 @@ using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class FourthWallBreaker: BasicAttack
@@ -10,34 +11,21 @@ public class FourthWallBreaker: BasicAttack
     public override string GetDescription(CharacterPartials.Character character) =>  "Damages the enemy by breaking the fourth wall";
     
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-        return new UsageResult(this)
+        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
         {
-            DamageResults = [
-                target.Damage(new DamageArgs
-                {
-                    DamageSource = new MoveDamageSource
-                    {
-                        Move = this,
-                        UsageType = usageType
-                    },
-                    ElementToDamageWith = User.Element,
-                    CriticalChance = User.CriticalChance,
-                    CriticalDamage = User.CriticalDamage,
-                    DamageDealer = User,
-                    DamageText =
-                        $"Breaks the fourth wall, causing {target.NameWithAlphabet} to cringe, and making them receive $ damage!",
-                    Damage = User.Attack * 1.7f
+            ElementToDamageWith = User.Element,
+            CriticalChance = User.CriticalChance,
+            CriticalDamage = User.CriticalDamage,
+                 
+            DamageText =
+                $"Breaks the fourth wall, causing {target.NameWithAlphabet} to cringe, and making them receive $ damage!",
+        });
 
-                })
-            ],
-            User = User,
-            TargetType = TargetType.SingleTarget,
-            Text = "It's the power of being a real human",
-            UsageType = usageType
+        targetType = TargetType.SingleTarget;
+        text = "It's the power of being a real human";
 
-        };
     }
 }
 
@@ -54,21 +42,15 @@ public class FireBall : Skill
     public override int MaxCooldown=> 2;
 
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
         
-        var damageResult = target.Damage(new DamageArgs
+        var damageResult = target.Damage(new DamageArgs(User.Attack * 2.4f, new MoveDamageSource(usageContext))
         {
-            DamageSource = new MoveDamageSource
-            {
-                Move = this,
-                UsageType = usageType
-            },
+
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
-            Damage = User.Attack * 2.4f,
-            DamageDealer = User,
             DamageText =$"{User.NameWithAlphabet} threw a fireball at {target.NameWithAlphabet} and dealt $ damage!",
         });
         if (BasicFunctionality.RandomChance(10))
@@ -76,14 +58,9 @@ public class FireBall : Skill
             target.AddStatusEffect(new Burn(){Caster = User,Duration = 1},User.Effectiveness);
         }
         
+        targetType = TargetType.SingleTarget;
+        text = null;
 
-        return new UsageResult(this)
-        {
-            UsageType = usageType,
-            TargetType = TargetType.SingleTarget,
-            User = User,
-            DamageResults =[damageResult]
-        };
     }
 }
 public class Ignite : Ultimate
@@ -98,29 +75,20 @@ public class Ignite : Ultimate
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} " +
                
                                                     $"attempts to make a human torch out of {target.NameWithAlphabet}!");
 
         List<StatusEffect> burns = [];
-        
         for (var i = 0; i < 3; i++)
         {
-            
             burns.Add(new Burn(){ Caster = User, Duration = 2});
-            
         }
-
         target.AddStatusEffects(burns,User.Effectiveness);
-        return new UsageResult(this)
-        {
-            UsageType = usageType,
-            TargetType = TargetType.SingleTarget,
-            Text = "Ignite!",
-            User = User
-        };
+        targetType = TargetType.SingleTarget;
+        text = "Ignite!";
     }
     
 }

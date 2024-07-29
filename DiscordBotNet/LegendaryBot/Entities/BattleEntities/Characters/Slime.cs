@@ -1,6 +1,7 @@
 ﻿using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
@@ -10,34 +11,23 @@ public class SlimeBodySlam : BasicAttack
 {
     
     public override string GetDescription(CharacterPartials.Character character) => "Slams it's body on the enemy, with a 10% chance to inflict poison";
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-        var damageResult = target.Damage(new DamageArgs
+        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
         {
-            DamageSource = new MoveDamageSource()
-            {
-                Move = this,
-                UsageType = usageType
-            },
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
-            DamageDealer = User,
-            Damage = User.Attack * 1.7f,
-            DamageText = $"{User.NameWithAlphabet} slams at {target.NameWithAlphabet} and dealt $ damage!"
+            DamageText = $"{User.NameWithAlphabet} slams at {target.NameWithAlphabet} and dealt $ damage!",
         });
         if (BasicFunctionality.RandomChance(10))
         {
             target.AddStatusEffect(new Poison(){Caster = User, Duration = 1});
         }
-        return new UsageResult(this)
-        {
-            DamageResults = [damageResult],
-            TargetType = TargetType.SingleTarget,
-            UsageType = usageType,
-            Text = "Slime body slam!",
-            User = User
-        };
+        targetType = TargetType.SingleTarget;
+
+        text = "Slime body slam!";
+        
     }
 }
 public class Slime : CharacterPartials.Character

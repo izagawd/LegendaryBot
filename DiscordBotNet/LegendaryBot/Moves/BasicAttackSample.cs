@@ -10,31 +10,22 @@ public class BasicAttackSample : BasicAttack
 {
     public override string GetDescription(Character character) => "Take that!";
     
-    protected  override UsageResult UtilizeImplementation(Character target, UsageType usageType)
+    protected  override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, 
+        out string? text)
     {
  
-        var damageResult = target.Damage(       new DamageArgs
+        var damageResult = target.Damage(       new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
         {
-            DamageSource = new MoveDamageSource()
-            {
-                Move = this,
-                UsageType = usageType
-            },
+
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
-            Damage = User.Attack * 1.7f,
-            DamageDealer = User,
+
             CanCrit = true,
             DamageText = $"{User.NameWithAlphabet} gave" +
                          $" {target.NameWithAlphabet} a punch and dealt $ damage!"
         });
-        return new UsageResult(this)
-        {
-            UsageType = usageType,
-            TargetType = TargetType.SingleTarget,
-            User = User,
-            DamageResults = [damageResult]
-        };
+        targetType = TargetType.SingleTarget;
+        text = "very basic...";
     }
 }

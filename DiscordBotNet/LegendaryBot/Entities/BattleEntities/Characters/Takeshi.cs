@@ -17,32 +17,22 @@ public class TakeshiStraightPunch : BasicAttack
         return "Does a simple but powerful straight punch at the enemy!";
     }
 
-    protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+        out TargetType targetType, out string? text)
     {
-        return new UsageResult(this)
+        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
         {
-            DamageResults =
-            [
-                target.Damage(new DamageArgs
-                {
-                    DamageSource = new MoveDamageSource()
-                    {
-                        Move = this,
-                        UsageType = usageType
-                    },
-                    DamageText =
-                        $"{User.NameWithAlphabet} does a straight punch at {target.NameWithAlphabet}, dealing $ damage!",
-                    CriticalChance = User.CriticalChance,
-                    CriticalDamage = User.CriticalDamage,
-                    ElementToDamageWith = User.Element,
-                    Damage = User.Attack * 1.7f,
-                    DamageDealer = User
-                })
-            ],
-            TargetType = TargetType.SingleTarget,
-            User = User,
-            UsageType = usageType
-        };
+
+            DamageText =
+                $"{User.NameWithAlphabet} does a straight punch at {target.NameWithAlphabet}, dealing $ damage!",
+            CriticalChance = User.CriticalChance,
+            CriticalDamage = User.CriticalDamage,
+            ElementToDamageWith = User.Element,
+        });
+        targetType = TargetType.SingleTarget;
+        text = null;
+
+
     }
 }
 public class TakeshiMeditation : Ultimate
@@ -57,18 +47,14 @@ public class TakeshiMeditation : Ultimate
         yield return User;
     }
 
-    protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+        out TargetType targetType, out string? text)
     {
         CurrentBattle.AddBattleText($"{User.NameWithAlphabet} meditates!" );
         User.RecoverHealth(User.MaxHealth * 0.5f);
         User.AddStatusEffect(new AttackBuff() { Caster = User, Duration = 2 });
-        return new UsageResult(this)
-        {
-            TargetType = TargetType.SingleTarget,
-            User = User,
-            UsageType = usageType,
-            Text = "Hummmm...."
-        };
+        targetType = TargetType.SingleTarget;
+        text = "Hummmm....";
     }
 
     public override int MaxCooldown => 4;
@@ -85,17 +71,15 @@ public class KarateNeckChop : Skill
         return CurrentBattle.Characters.Where(i => i.Team != User.Team);
     }
 
-    protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+        out TargetType targetType, out string? text)
     {
         CurrentBattle.AddBattleText($"{User.NameWithAlphabet} neck chops {target}!" );
         target.AddStatusEffect(new Stun() { Caster = User, Duration = 1 });
-        return new UsageResult(this)
-        {
-            TargetType = TargetType.SingleTarget,
-            User = User,
-            UsageType = usageType,
-            Text = "Neck chop!"
-        };
+
+        targetType = TargetType.SingleTarget;
+
+        text = "Neck chop!";
     }
 
     public override int MaxCooldown => 3;
@@ -113,14 +97,14 @@ public class Takeshi : Character
     public void ToCounterAttack(CharacterPostUseMoveEventArgs args)
     {
         if(CannotDoAnything) return;
-        if(args.UsageResult.User.Team == Team) return;
-        var usageResult = args.UsageResult;
+        if(args.MoveUsageResult.User.Team == Team) return;
+        var usageResult = args.MoveUsageResult;
         if(usageResult.UsageType == UsageType.CounterUsage) return;
         var damageDealer = usageResult.User;
         if (damageDealer is null || damageDealer.IsDead || damageDealer.Team == Team)
             return;
         
-        foreach (var _ in args.UsageResult.DamageResults
+        foreach (var _ in args.MoveUsageResult.DamageResults
                      .Where(i => i.CanBeCountered && i.DamageReceiver.Team == Team))
         {
           

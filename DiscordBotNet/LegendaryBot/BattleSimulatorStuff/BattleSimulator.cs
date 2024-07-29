@@ -854,9 +854,9 @@ public partial class BattleSimulator
             }
             else if (mostPowerfulStatusEffect is not null && mostPowerfulStatusEffect.OverrideTurnType > 0)
             {
-                var overridenUsage = mostPowerfulStatusEffect.OverridenUsage(ref target!,
+                var overridenUsageText = mostPowerfulStatusEffect.OverridenUsage(ref target!,
                     ref battleDecision, UsageType.NormalUsage);
-                if (overridenUsage.Text is not null) _mainText = overridenUsage.Text;
+                if (overridenUsageText is not null) _mainText = overridenUsageText;
                 using (_interruptionCancellationTokenSource = new CancellationTokenSource())
                 {
                     await BasicFunctionality.DelayWithTokenNoError(WaitDelay,

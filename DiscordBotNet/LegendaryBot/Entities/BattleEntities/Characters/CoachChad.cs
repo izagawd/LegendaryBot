@@ -3,39 +3,29 @@ using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DSharpPlus.Entities;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class GigaPunch : BasicAttack
 {
     public override string GetDescription(CharacterPartials.Character character) => "Punch is thrown gigaly";
     
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-        return new UsageResult(this)
+        targetType = TargetType.SingleTarget;
+        text = "Hrraghh!";
+        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
         {
-            DamageResults =
-            [
-            target.Damage(new DamageArgs
-                {
-                    DamageSource = new MoveDamageSource()
-                    {
-                        Move = this,
-                        UsageType = usageType
-                    },
-                    ElementToDamageWith = User.Element,
-                    CriticalDamage = User.CriticalDamage,
-                    CriticalChance = User.CriticalChance,
-                    DamageDealer = User,
-                    Damage = User.Attack * 1.7f,
-                    DamageText = $"{User.NameWithAlphabet} smiles chadly, and punches {target.NameWithAlphabet} in a cool way and dealt $ damage!"
 
-                })
-            ],
-            TargetType = TargetType.SingleTarget,
-            User = User,
-            UsageType = usageType,
-            Text = "Hrrah!"
-        };
+            ElementToDamageWith = User.Element,
+            CriticalDamage = User.CriticalDamage,
+            CriticalChance = User.CriticalChance,
+
+            DamageText =
+                $"{User.NameWithAlphabet} smiles chadly, and punches {target.NameWithAlphabet} in a cool way and dealt $ damage!"
+
+        });
+
     }
 }
 
@@ -50,17 +40,12 @@ public class MuscleFlex : Ultimate
         yield return User;
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet}... flexed his muscles?");
-        return new UsageResult(this)
-        {
-            Text = $"Hmph!",
-            TargetType = TargetType.None,
-            User = User,
-            UsageType = usageType
-        };
-    
+        text = "Hmph!";
+        targetType = TargetType.None;
+
     }
 
     public override int MaxCooldown => 1;
@@ -77,16 +62,14 @@ public class ThumbsUp : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} is cheering {target.NameWithAlphabet} on!");
-        return new UsageResult(this)
-        {
-            UsageType = usageType,
-            TargetType = TargetType.SingleTarget,
-            Text = $"{User.NameWithAlphabet} gave {target.NameWithAlphabet} a thumbs up!",
-            User = User
-        };
+
+
+        targetType = TargetType.SingleTarget;
+        text = $"{User.NameWithAlphabet} gave {target.NameWithAlphabet} a thumbs up!";
+
 
     }
 

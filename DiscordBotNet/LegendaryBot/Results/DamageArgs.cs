@@ -7,8 +7,13 @@ namespace DiscordBotNet.LegendaryBot.Results;
 
 public class DamageArgs
 {
-    public required DamageSource DamageSource { get; init; }
+    public  DamageSource DamageSource { get;  }
 
+    public DamageArgs(float damage, DamageSource damageSource)
+    {
+        DamageSource = damageSource;
+        Damage = damage;
+    }
     public bool IsFixedDamage { get; init; } = false;
     /// <summary>
     /// if null, will not consider element for damage calculation
@@ -22,14 +27,12 @@ public class DamageArgs
 
     public StatusEffect? StatusEffect { get; private set; }
     
-    public required float Damage
+    public  float Damage
     {
-        get; set;
+        get;
+        set;
     }
-    /// <summary>
-    /// The one who casted the attack
-    /// </summary>
-        public required Character DamageDealer { get; init; }
+
         /// <summary>
         /// Use $ in the string and it will be replaced with the damage
         /// </summary>

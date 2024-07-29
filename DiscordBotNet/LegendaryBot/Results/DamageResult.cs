@@ -19,7 +19,7 @@ public struct MoveUsageDetails
 public class DamageResult
 {
 
-    public required  DamageSource DamageSource { get; init; }
+    public  DamageSource DamageSource { get; init; }
     public StatusEffect? StatusEffect { get; init; }
 
 

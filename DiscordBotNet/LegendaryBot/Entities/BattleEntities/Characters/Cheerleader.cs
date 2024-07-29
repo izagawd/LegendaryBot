@@ -1,6 +1,7 @@
 ﻿using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
@@ -11,32 +12,17 @@ public class PomPomAttack : BasicAttack
         return "Caster hits the enemy with a pom-pom... and that it";
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-
-        return new UsageResult(this)
+        target.Damage(new DamageArgs(User.Attack * 0.8f, new MoveDamageSource(usageContext))
         {
-            DamageResults =
-            [
-                target.Damage(new DamageArgs
-                {
-                    DamageSource = new MoveDamageSource()
-                    {
-                        Move = this,
-                        UsageType = usageType
-                    },
-                    ElementToDamageWith = User.Element,
-                    CriticalChance = User.CriticalChance,
-                    CriticalDamage = User.CriticalDamage,
-                    DamageDealer = User,
-                    Damage = User.Attack * 0.8f,
-                    DamageText = $"{User.NameWithAlphabet} hits {target.NameWithAlphabet} with their pompoms, dealing $ damage!"
-                })
-            ],
-            TargetType = TargetType.SingleTarget,
-            User = User,
-            UsageType = usageType
-        };
+            ElementToDamageWith = User.Element,
+            CriticalChance = User.CriticalChance,
+            CriticalDamage = User.CriticalDamage,
+            DamageText = $"{User.NameWithAlphabet} hits {target.NameWithAlphabet} with their pompoms, dealing $ damage!"
+        });
+        targetType = TargetType.SingleTarget;
+        text = null;
     }
 }
 
@@ -53,18 +39,16 @@ public class  YouCanDoIt : Skill
         return User.Team.Where(i => !i.IsDead && i != User);
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, 
+        out TargetType targetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} wants {target.NameWithAlphabet} to prevail!");
         target.IncreaseCombatReadiness(100);
         target.AddStatusEffect(new AttackBuff() { Duration = 2 , Caster = User});
 
-        return new UsageResult(this)
-        {
-            TargetType = TargetType.SingleTarget,
-            User = User,
-            UsageType = usageType,
-        };
+        targetType = TargetType.SingleTarget;
+
+        text = "You can do it!";
     }
     public override int MaxCooldown => 2;
 }
@@ -82,7 +66,8 @@ public class YouCanMakeItEveryone : Ultimate
         return User.Team.Where(i => !i.IsDead);
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+        out TargetType targetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} encourages her allies!");
 
@@ -98,16 +83,11 @@ public class YouCanMakeItEveryone : Ultimate
             i.AddStatusEffect(new AttackBuff() { Duration = 2, Caster = User});
         }
 
-    
 
-        return new UsageResult(this)
-        {
-            TargetType = TargetType.AOE,
-            User = User,
-            UsageType = UsageType.NormalUsage
-        };
-
+        targetType = TargetType.AOE;
+        text = null;
     }
+
 
     public override int MaxCooldown => 4;
 }

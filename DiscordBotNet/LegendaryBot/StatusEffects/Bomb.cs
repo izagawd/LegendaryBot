@@ -31,16 +31,9 @@ public class Bomb : StatusEffect, IDetonatable
     {
         Affected.RemoveStatusEffect(this);
         Affected.AddStatusEffect(new Stun(){Duration = 1,Caster = detonator});
-        return Affected.Damage(        new DamageArgs
+        return Affected.Damage(        new DamageArgs(Attack * 3,new StatusEffectDamageSource(this) )
         {
-            DamageSource = new StatusEffectDamageSource()
-            {
-                StatusEffect = this
-            },
             ElementToDamageWith = null,
-
-            Damage = Attack * 3,
-            DamageDealer = Caster,
             CanCrit = false,
             DamageText = $"Bomb detonated on {Affected} and dealt $ damage!"
         });

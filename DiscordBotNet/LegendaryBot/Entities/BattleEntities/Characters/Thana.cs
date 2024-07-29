@@ -2,38 +2,32 @@
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class SoulAttack : BasicAttack
 {
     public override string GetDescription(CharacterPartials.Character character) => "Uses the souls of the dead to attack, with a 25% chance to inflict sleep!";
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, 
+        out string? text)
     {
-        var damageResult = target.Damage(new DamageArgs
+        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
         {
-            DamageSource = new MoveDamageSource()
-            {
-                Move = this,
-                UsageType = usageType
-            },
+
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
-            Damage = User.Attack * 1.7f,
-            DamageDealer = User,
             DamageText = $"{User.NameWithAlphabet} uses the souls of the dead to attack {target.NameWithAlphabet} and dealt $ damage!"
         });
         if (BasicFunctionality.RandomChance(25))
         {
             target.AddStatusEffect(new Sleep(){Caster = User, Duration = 1});
         }
-        return new UsageResult(this)
-        {
-            TargetType = TargetType.SingleTarget,
-            User = User,
-            UsageType = usageType,
-            DamageResults = [damageResult]
-        };
+
+        targetType = TargetType.SingleTarget;
+
+        text = "Soul Attack!";
+
     }
 }
 
@@ -46,37 +40,21 @@ public class YourLifeEnergyIsMine : Skill
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-        var damageResult = target.Damage(new DamageArgs
+        var damageResult = target.Damage(new DamageArgs(User.Attack * 2.5f,
+            new MoveDamageSource(usageContext))
         {
-            DamageSource = new MoveDamageSource()
-            {
-                Move = this,
-                UsageType = usageType
-            },
+
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
-            Damage = User.Attack * 2.5f,
-            DamageDealer = User,
             DamageText = $"{User.NameWithAlphabet} sucks the life essence out of {target.NameWithAlphabet} and deals $ damage!"
         });
    
         User.RecoverHealth(damageResult.DamageDealt * 0.2f);
-        
-        return new UsageResult(this)
-        {
-            DamageResults =
-            [
-            
-                damageResult
-            ],
-            Text = "Your lifespan is mine!",
-            User = User,
-            TargetType = TargetType.SingleTarget,
-            UsageType = usageType
-        };
+        text = "Your lifespan is mine!";
+        targetType = TargetType.SingleTarget;
     }
 
     public override int MaxCooldown => 3;
@@ -93,7 +71,7 @@ public class Arise : Ultimate
         return User.Team;
     }
     
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"With her necromancy powers, {User.NameWithAlphabet} attempts to bring back all her dead allies!");
 
@@ -116,13 +94,9 @@ public class Arise : Ultimate
         }
         User.AddStatusEffect(new AttackBuff() { Duration = 3 , Caster = User});
         User.GrantExtraTurn();
-        return new UsageResult(this)
-        {
-            User = User,
-            TargetType = TargetType.AOE,
-            Text = "Necromancy!",
-            UsageType = usageType
-        };
+        text = "Necromancy!";
+        targetType = TargetType.AOE;
+
     }
 }
 public class Thana : CharacterPartials.Character

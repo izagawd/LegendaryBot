@@ -21,18 +21,11 @@ public class Bleed : StatusEffect, IDetonatable
 
     private DamageResult? DoDamage()
     {
-        return Affected.Damage(new DamageArgs
+        return Affected.Damage(new DamageArgs(Attack, new StatusEffectDamageSource(this))
         {
-            DamageSource = new StatusEffectDamageSource()
-            {
-                StatusEffect = this
-            },
             ElementToDamageWith = null,
             DefenseToIgnore = 70,
-
-            Damage = Attack,
             DamageText = $"{Affected} took $ bleed damage!",
-            DamageDealer = Caster,
         });
     }
     public override void PassTurn()

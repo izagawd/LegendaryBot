@@ -13,32 +13,19 @@ public class BaseballBatWhack : BasicAttack
         return "Swings a baseball bat at the enemy, causing solid  damage";
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-        return new UsageResult(this)
+        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
         {
-            TargetType = TargetType.SingleTarget,
-            UsageType = usageType,
-            Text = "Uraaah!",
-            DamageResults =
-            [
-                target.Damage(new DamageArgs
-                {
-                    DamageSource = new MoveDamageSource()
-                    {
-                        Move = this,
-                        UsageType = usageType
-                    },
-                    ElementToDamageWith = User.Element,
-                    CriticalChance = User.CriticalChance,
-                    CriticalDamage = User.CriticalDamage,
-                    Damage = User.Attack * 1.7f,
-                    DamageDealer = User,
-                    DamageText = $"{User.NameWithAlphabet} whacks {target.NameWithAlphabet} with a baseball bat, dealing $ damage"
-                })
-            ],
-            User = User
-        };
+
+            ElementToDamageWith = User.Element,
+            CriticalChance = User.CriticalChance,
+            CriticalDamage = User.CriticalDamage,
+            DamageText =
+                $"{User.NameWithAlphabet} whacks {target.NameWithAlphabet} with a baseball bat, dealing $ damage"
+        });
+        targetType = TargetType.SingleTarget;
+        text = "Temeee!";
     }
 }
 public class DelinquentBeatdown : Skill
@@ -53,32 +40,20 @@ public class DelinquentBeatdown : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-        return new UsageResult(this)
+        targetType = TargetType.SingleTarget;
+        text = "Uraah!";
+        target.Damage(new DamageArgs(User.Attack * 2.5f,
+            new MoveDamageSource(usageContext))
         {
-            TargetType = TargetType.SingleTarget,
-            UsageType = usageType,
-            Text = "Uraaah!",
-            DamageResults =
-            [
-                target.Damage(new DamageArgs
-                {
-                    DamageSource = new MoveDamageSource()
-                    {
-                        Move = this,
-                        UsageType = usageType
-                    },
-                    ElementToDamageWith = User.Element,
-                    CriticalChance = User.CriticalChance,
-                    CriticalDamage = User.CriticalDamage,
-                    Damage = User.Attack * 2.5f,
-                    DamageDealer = User,
-                    DamageText = $"many of {User.NameWithAlphabet}'s  friends beat up {target.NameWithAlphabet}, dealing $ damage"
-                })
-            ],
-            User = User
-        };
+
+            ElementToDamageWith = User.Element,
+            CriticalChance = User.CriticalChance,
+            CriticalDamage = User.CriticalDamage,
+            DamageText =
+                $"many of {User.NameWithAlphabet}'s  friends beat up {target.NameWithAlphabet}, dealing $ damage"
+        });
     }
 
     public override int MaxCooldown => 4;

@@ -1,6 +1,7 @@
 ﻿using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DSharpPlus.Entities;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
@@ -16,38 +17,27 @@ public class WindSlash : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team);
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-        List<DamageResult> damageResults = [];
+ 
         foreach (var i in GetPossibleTargets())
         {
-            var damageResult = i.Damage(new DamageArgs
+            i.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
             {
-                DamageSource = new MoveDamageSource()
-                {
-                    Move = this,
-                    UsageType = usageType
-                },
+
                 ElementToDamageWith = User.Element,
                 CriticalChance = User.CriticalChance + increasedCritChance,
                 CriticalDamage = User.CriticalDamage,
-                DamageDealer = User,
-                Damage = User.Attack * 1.7f, 
+
                 DamageText = $"The slash dealt $ damage to {i}!"
             });
-            if(damageResult is not null)
-                damageResults.Add(damageResult);
         }
 
-        return new UsageResult(this)
-        {
-            DamageResults = damageResults,
-            TargetType = TargetType.AOE,
-            User = User,
-            Text = "Wind Slash!",
-            UsageType = usageType
 
-        };
+        targetType = TargetType.AOE;
+
+            text = "Wind Slash!";
+
     }
 
     public override int MaxCooldown => 2;
@@ -60,31 +50,20 @@ public class SimpleSlashOfPrecision : BasicAttack
         $"Does a simple slash. Attack has an increased crit chance of {increasedCritChance}";
     
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-        var damageResult = target.Damage(new DamageArgs
+        target.Damage(new DamageArgs(User.Attack * 1.7f,
+            new MoveDamageSource(usageContext))
         {
-            DamageSource = new MoveDamageSource()
-            {
-                Move = this,
-                UsageType = usageType
-            },
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance + increasedCritChance,
             CriticalDamage = User.CriticalDamage,
-            DamageDealer = User,
-            Damage = User.Attack * 1.7f,
- 
         });
 
-        return new UsageResult(this)
-        {
-            DamageResults = [damageResult],
-            TargetType = TargetType.SingleTarget,
-            Text = $"{User.NameWithAlphabet} does a simple slash to {target.NameWithAlphabet}!",
-            User = User,
-            UsageType = usageType
-        };
+
+        targetType = TargetType.SingleTarget;
+            text = $"{User.NameWithAlphabet} does a simple slash to {target.NameWithAlphabet}!";
+
     }
 }
 public class ConsecutiveSlashesOfPrecision : Ultimate
@@ -100,30 +79,21 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-        var damageResult =target.Damage(new DamageArgs
+        var damageResult =target.Damage(new DamageArgs( User.Attack * 1.7f *2,
+            new MoveDamageSource(usageContext))
         {
-            DamageSource = new MoveDamageSource()
-            {
-                Move = this,
-                UsageType = usageType
-            },
+
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance + increasedCritChance,
             CriticalDamage = User.CriticalDamage,
-            DamageDealer = User,
-            Damage = User.Attack * 1.7f *2,
+      
             DamageText = $"The slash was so precise it dealt $ damage to {target.NameWithAlphabet}!",
         });
 
-        return new UsageResult(this)
-        {
-            DamageResults =  [damageResult],
-            UsageType = usageType,
-            TargetType = TargetType.SingleTarget,
-            User = User
-        };
+        targetType = TargetType.SingleTarget;
+        text = null;
     }
 
     public override int MaxCooldown => 5;

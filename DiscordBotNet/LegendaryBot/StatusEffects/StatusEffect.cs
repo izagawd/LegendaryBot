@@ -8,6 +8,8 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
+
+
 public abstract class StatusEffect 
 {
     public StatusEffect()
@@ -129,14 +131,10 @@ public abstract class StatusEffect
     public virtual string Name { get; }
 
     
-    public virtual UsageResult OverridenUsage(ref Character target, ref BattleDecision decision, UsageType usageType) // the status effect might or might not replace the player's decision
+    public virtual string? OverridenUsage(ref Character target, ref BattleDecision decision,
+        UsageType usageType) // the status effect might or might not replace the player's decision
     {
-        return new UsageResult(this)
-        {
-            UsageType = usageType,
-            TargetType = TargetType.None,
-            User = Affected
-        };
+        return null;
     }
 
     /// <summary>

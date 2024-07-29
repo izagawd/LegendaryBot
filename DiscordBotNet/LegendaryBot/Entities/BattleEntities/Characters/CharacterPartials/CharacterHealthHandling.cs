@@ -90,7 +90,7 @@ public partial class Character
         var damageText = damageArgs.DamageText;
         if (damageText is null)
         {
-            damageText = $"{damageArgs.DamageDealer} dealt $ damage to {this}!";
+            damageText = $"{NameWithAlphabet} took $ damage!";
         }
 
         var didCrit = false;
@@ -145,7 +145,7 @@ public partial class Character
                 damageText = "A critical hit! " + damageText;
         }
 
-        var usageType = (damageArgs.DamageSource as MoveDamageSource)?.UsageType;
+        var usageType = (damageArgs.DamageSource as MoveDamageSource)?.UsageContext.UsageType;
         if (usageType is not null)
         {
             if (usageType == UsageType.CounterUsage)
@@ -170,7 +170,7 @@ public partial class Character
                 DamageReceiver = this,
                 CanBeCountered = damageArgs.CanBeCountered, 
         };
-        
+        damageArgs.DamageSource.OnPostDamage(damageResult);
         CurrentBattle.InvokeBattleEvent(new CharacterPostDamageEventArgs(damageResult));
         return damageResult;
     }

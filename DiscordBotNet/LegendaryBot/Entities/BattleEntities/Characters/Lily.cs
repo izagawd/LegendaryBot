@@ -4,6 +4,7 @@ using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
@@ -14,39 +15,24 @@ public class ChamomileSachetWhack : BasicAttack
     
 
     public int SleepChance => 25;
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, 
+        out TargetType targetType, out string? text)
     {
-        var damageResult = target.Damage(new DamageArgs
+        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
         {
-            DamageSource = new MoveDamageSource()
-            {
-                Move = this,
-                UsageType = usageType
-            },
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
-            Damage = User.Attack * 1.7f,
-            DamageDealer = User,
             CanCrit = true,
             DamageText = $"That was a harsh snoozy whack that dealt $ damage on {target.NameWithAlphabet}!",
-
         });
-        var result = new UsageResult(this)
-        {
-            UsageType = usageType,
-            TargetType = TargetType.SingleTarget,
-            User = User,
-            Text = "Chamomile Whack!",
-            DamageResults = [damageResult],
-        };
-    
-
+        targetType = TargetType.SingleTarget;
+        text = "Chamomile Whack!";
         if (BasicFunctionality.RandomChance(SleepChance))
         {
             target.AddStatusEffect(new Sleep(){Caster = User, Duration = 1}, User.Effectiveness);
         }
-        return result;
+
     }
 }
 public class BlossomTouch : Skill
@@ -63,16 +49,13 @@ public class BlossomTouch : Skill
     public override string GetDescription(CharacterPartials.Character character) =>  $"With the power of flowers, recovers the hp of an ally with {HealthHealScaling}% of the caster's max health, dispelling one debuff";
     
  
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
         target.RecoverHealth((User.MaxHealth *HealthHealScaling* 0.01).Round());
-        return new UsageResult(this)
-        {
-            Text = $"{User.NameWithAlphabet} used Blossom Touch!",
-            UsageType = usageType,
-            TargetType = TargetType.SingleTarget,
-            User = User
-        };
+
+        text = $"{User.NameWithAlphabet} used Blossom Touch!";
+        targetType = TargetType.SingleTarget;
+
     }
 }
 public class LilyOfTheValley : Ultimate
@@ -89,7 +72,7 @@ public class LilyOfTheValley : Ultimate
     public override  string GetDescription(CharacterPartials.Character character) => $"Releases a poisonous gas to a single enemy,  inflicting stun for 1 turn, and inflicts poison x2 for 2 turns";
     
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
            
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} used Lily of The Valley, and released a dangerous gas to {target.NameWithAlphabet}!");
@@ -98,14 +81,9 @@ public class LilyOfTheValley : Ultimate
 
         target.AddStatusEffects([new Poison(){Duration = 2,Caster = User},
         new Poison(){Duration = 2, Caster = User},new Stun(){Duration = 1, Caster = User}],effectiveness);
-  
-        return new UsageResult(this)
-        {
-            Text =  $"The valley!",
-            TargetType = TargetType.AOE,
-            UsageType = usageType,
-            User = User
-        };
+        text = $"The valley!";
+        targetType = TargetType.AOE;
+
     }
 }
 public class Lily : CharacterPartials.Character

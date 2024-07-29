@@ -31,7 +31,7 @@ public abstract class Special : Move
         return base.ToString();
     }
 
-    public sealed override UsageResult Utilize(Character target, UsageType usageType)
+    public sealed override MoveUsageResult Utilize(Character target, UsageType usageType)
     {
         if (usageType == UsageType.NormalUsage)
         {

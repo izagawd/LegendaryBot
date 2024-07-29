@@ -31,16 +31,13 @@ public class Burn : StatusEffect, IDetonatable
     private DamageResult? DoDamage()
     {
         if (Affected.IsDead) return null;
-        return Affected.Damage(new DamageArgs
+        return Affected.Damage(new DamageArgs(_characterAttack * 0.6f,
+            new StatusEffectDamageSource(this))
         {
-            DamageSource = new StatusEffectDamageSource()
-            {
-                StatusEffect = this
-            },
+       
             DefenseToIgnore = 70,
             ElementToDamageWith = null,
-            Damage = _characterAttack * 0.6f,
-            DamageDealer = Caster,
+         
             CanCrit = false,
             DamageText = $"{Affected} took $ damage from burn!"
         });

@@ -8,6 +8,22 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.Moves;
 
+public class UsageContext
+{
+    public UsageType UsageType { get; }
+    public Move Move { get; }
+
+
+    public List<DamageResult> DamageResults;
+    public UsageContext(Move move, UsageType usageType)
+    {
+        UsageType = usageType;
+        Move = move;
+        DamageResults = [];
+    }
+    
+}
+
 public abstract class Move 
 {
     /// <summary>
@@ -68,24 +84,30 @@ public abstract class Move
     public abstract IEnumerable<Character> GetPossibleTargets();
 
     public BattleSimulator CurrentBattle => User?.CurrentBattle;
+
     /// <summary>
     /// This is where the custom functionality of a move is created
     /// </summary>
     /// <param name="target">The target</param>
-    /// <param name="usageType">What type of usage this is</param>
-    protected abstract UsageResult UtilizeImplementation(Character target, UsageType usageType);
+    /// <param name="usageContext"></param>
+    /// <param name="targetType"></param>
+    /// <param name="text"></param>
+    protected abstract void UtilizeImplementation(Character target, UsageContext usageContext,
+        out TargetType targetType, out string? text);
 
     /// <summary>
     /// This is where the general functionality of a move is done. It does some checks before UtilizeImplementation is called
     /// </summary>
     /// <param name="target">The target</param>
-    /// <param name="usageType">What type of usage this is</param>
-    public virtual UsageResult Utilize(Character target, UsageType usageType)
+    /// <param name="usageType"></param>
+    public virtual MoveUsageResult Utilize(Character target, UsageType usageType)
     {
 
-        var temp = UtilizeImplementation(target, usageType);
-        CurrentBattle.InvokeBattleEvent(new CharacterPostUseMoveEventArgs(temp));
-        return temp;
+        var usageContext = new UsageContext(this, usageType);
+        UtilizeImplementation(target,usageContext , out var targetType, out var text);
+        var moveUsageResult = new MoveUsageResult(usageContext, targetType, text);
+        CurrentBattle.InvokeBattleEvent(new CharacterPostUseMoveEventArgs(moveUsageResult));
+        return moveUsageResult;
     }
     /// <summary>
     /// Checks if this move can be used based on the owner

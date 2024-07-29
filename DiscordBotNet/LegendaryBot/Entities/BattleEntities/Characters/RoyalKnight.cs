@@ -4,6 +4,7 @@ using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
 using Barrier = DiscordBotNet.LegendaryBot.StatusEffects.Barrier;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class ShieldBash : BasicAttack
@@ -12,41 +13,26 @@ public class ShieldBash : BasicAttack
 
 
     public int ShieldStunChanceByBash => 10;
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-        var usageResult =  new UsageResult(this)
+        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
         {
-            DamageResults = 
-            [
-                target.Damage(new DamageArgs
-                {
-                    DamageSource = new MoveDamageSource()
-                    {
-                        Move = this,
-                        UsageType = usageType
-                    },
-                    ElementToDamageWith = User.Element,
-                    CriticalChance = User.CriticalChance,
-                    CriticalDamage = User.CriticalDamage,
-                    DamageDealer = User,
-                    DamageText =
-                        $"{User.NameWithAlphabet} bashes {target.NameWithAlphabet} with his shield , making them receive $ damage!",
-                    Damage = User.Attack * 1.7f
 
-                }),
-            ],
-            User = User,
-            TargetType = TargetType.SingleTarget,
-            Text = "Hrraagh!!",
-            UsageType = usageType
+            ElementToDamageWith = User.Element,
+            CriticalChance = User.CriticalChance,
+            CriticalDamage = User.CriticalDamage,
+            DamageText =
+                $"{User.NameWithAlphabet} bashes {target.NameWithAlphabet} with his shield , making them receive $ damage!",
+        });
 
-        };
+        targetType = TargetType.SingleTarget;
+        text = "Hrraagh!!";
+
         if (BasicFunctionality.RandomChance(ShieldStunChanceByBash))
         {
             target.AddStatusEffect(new Stun(){Duration = 1, Caster = User});
         }
 
-        return usageResult;
     }
 }
 public class IWillBeYourShield : Skill
@@ -63,7 +49,7 @@ public class IWillBeYourShield : Skill
 
 
     public int ShieldBasedOnDefense => 300;
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
         target.AddStatusEffect(new Barrier((ShieldBasedOnDefense * 0.006 * User.Defense).Round())
         {
@@ -72,13 +58,11 @@ public class IWillBeYourShield : Skill
         });
 
 
-        return new UsageResult(this)
-        {
-            Text = $"As a loyal knight, {User.NameWithAlphabet} helps {target.NameWithAlphabet}!",
-            UsageType = usageType,
-            TargetType = TargetType.SingleTarget,
-            User = User
-        };
+
+        text = $"As a loyal knight, {User.NameWithAlphabet} helps {target.NameWithAlphabet}!";
+
+        targetType = TargetType.SingleTarget;
+
     }
 }
 
@@ -95,7 +79,7 @@ public class IWillProtectUs : Ultimate
     public override string GetDescription(CharacterPartials.Character character) => "Increases the defense of all allies for 3 turns";
     
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
         foreach (var i in GetPossibleTargets())
         {
@@ -103,13 +87,10 @@ public class IWillProtectUs : Ultimate
             
         }
 
-        return new UsageResult(this)
-        {
-            UsageType = usageType,
-            TargetType = TargetType.AOE,
-            Text = $"As a loyal knight, {User.NameWithAlphabet} increases the defense of all allies for three turns",
-            User = User
-        };
+
+        targetType = TargetType.AOE;
+        text = $"As a loyal knight, {User.NameWithAlphabet} increases the defense of all allies for three turns";
+;
     }
 }
 

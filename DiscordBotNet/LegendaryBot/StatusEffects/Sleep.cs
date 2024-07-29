@@ -26,16 +26,10 @@ public class Sleep: StatusEffect
             Affected.CurrentBattle.AddBattleText($"{this} has been dispelled from {Affected.NameWithAlphabet} due to taking damage!");
     }
 
-    public override UsageResult OverridenUsage(ref Character target, ref BattleDecision decision, UsageType usageType)
+    public override string? OverridenUsage(ref Character target, ref BattleDecision decision,
+        UsageType usageType)
     {
         Affected.CurrentBattle.AddBattleText($"{Affected} is fast asleep");
-        return new UsageResult(this)
-        {
-            UsageType = usageType,
-            TargetType = TargetType.None,
-            Text = "Snores...",
-            User = Affected
-        };
-
+        return "Snores...";
     }
 }

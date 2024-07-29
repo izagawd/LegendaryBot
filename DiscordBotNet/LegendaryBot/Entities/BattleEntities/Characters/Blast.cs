@@ -12,37 +12,26 @@ public class MethaneSlap : BasicAttack
                                                                   $"producing methane around the enemy, with a " +
                                                                   $"{DetonateChance}% chance to detonate all the bombs the target has";
     public int DetonateChance => 75;
-    protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+        out TargetType targetType, out string? text)
     {
-        var damageResult = target.Damage(new DamageArgs
+        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
         {
-            DamageSource = new MoveDamageSource()
-            {
-                Move = this,
-                UsageType = usageType
-            },
+
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
-            Damage = User.Attack * 1.7f,
-            DamageDealer = User,
+            
             CanCrit = true,
             DamageText = $"That was a harsh slap on {target.NameWithAlphabet} dealt $ damage!"
         });
-        var damageResultList = new []{ damageResult };
-        var result = new UsageResult(this)
-        {
-            Text = "Methane Slap!",User = User,
-            UsageType = usageType,
-            TargetType = TargetType.SingleTarget,
-            DamageResults = damageResultList
-        };
         if (BasicFunctionality.RandomChance(DetonateChance))
         {
             foreach (var i in target.StatusEffects.OfType<Bomb>().ToArray())
                 i.Detonate(User);
         }
-        return result;
+        text =  "Methane Slap!";
+        targetType = TargetType.AOE;
 
     }
 }
@@ -58,7 +47,8 @@ public class BlowAway : Skill
     }
 
     public int BombInflictChance => 100;
-    protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+        out TargetType targetType, out string? text)
     {
                 
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} threw multiple bombs at the opposing team!");
@@ -76,8 +66,9 @@ public class BlowAway : Skill
 
         }
 
-        return new UsageResult(this){TargetType = TargetType.AOE,Text = "Blow Away!",User = User,UsageType = usageType};
-        
+        text = "Blow Away!";
+        targetType = TargetType.AOE;
+
     }
 
 
@@ -94,27 +85,20 @@ public class ExplosionBlast : Ultimate
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
     
-    protected override UsageResult UtilizeImplementation(Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+        out TargetType targetType, out string? text)
     {
         var targets = GetPossibleTargets().ToArray();
-        List<DamageResult> damageResults = [];
         foreach (var i in targets)
         {
-            damageResults.Add(i.Damage(new DamageArgs
+            i.Damage(new DamageArgs( User.Attack * 1.5f,new MoveDamageSource(usageContext))
             {
-                DamageSource = new MoveDamageSource()
-                {
-                    Move = this,
-                    UsageType = usageType
-                },
                 ElementToDamageWith = User.Element,
-                Damage = User.Attack * 1.5f,
-                DamageDealer = User,
                 CriticalChance = User.CriticalChance,
                 CriticalDamage = User.CriticalDamage,
                 DamageText =
                     $"{User.NameWithAlphabet} blasted {i.NameWithAlphabet}, dealing $ damage!",
-            }));
+            });
         }
 
         var eff = User.Effectiveness;
@@ -123,14 +107,9 @@ public class ExplosionBlast : Ultimate
             i.AddStatusEffects([new Burn() { Caster = User, Duration = 1 },
                 new Burn() { Caster = User, Duration = 1 }], eff);
         }
-        return new UsageResult(this)
-        {
-            UsageType = usageType, 
-            TargetType = TargetType.AOE
-            , User = User, 
-            Text = "EXPLODING BLAST!",
-            DamageResults = damageResults
-        };
+
+        text = "Blow Away!";
+        targetType = TargetType.AOE;
     }
 }
 public class Blast : Character

@@ -14,32 +14,19 @@ public class ThugPunch : BasicAttack
         return "Punches the enemy in a thug way";
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
     {
-        return new UsageResult(this)
+        target.Damage(new DamageArgs(User.Attack * 1.5f, new MoveDamageSource(usageContext))
         {
-            TargetType = TargetType.SingleTarget,
-            UsageType = usageType,
-            Text = "Uraaah!",
-            DamageResults =
-            [
-                target.Damage(new DamageArgs
-                {
-                    DamageSource = new MoveDamageSource()
-                    {
-                        Move = this,
-                        UsageType = usageType
-                    },
-                    ElementToDamageWith = User.Element,
-                    CriticalChance = User.CriticalChance,
-                    CriticalDamage = User.CriticalDamage,
-                    Damage = User.Attack * 1.5f,
-                    DamageDealer = User,
-                    DamageText = $"{User.NameWithAlphabet} punches {target.NameWithAlphabet} with terrible battle stance, dealing $ damage!"
-                })
-            ],
-            User = User
-        };
+
+            ElementToDamageWith = User.Element,
+            CriticalChance = User.CriticalChance,
+            CriticalDamage = User.CriticalDamage,
+            DamageText =
+                $"{User.NameWithAlphabet} punches {target.NameWithAlphabet} with terrible battle stance, dealing $ damage!"
+        });
+        targetType = TargetType.SingleTarget;
+        text = "Uraah!";
     }
 }
 public class ThugInsult : Skill
@@ -54,17 +41,13 @@ public class ThugInsult : Skill
        return CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override UsageResult UtilizeImplementation(CharacterPartials.Character target, UsageType usageType)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType,
+        out string? text)
     {
         CurrentBattle.AddBattleText($"{User.NameWithAlphabet} insults {target.NameWithAlphabet} like a thug!");
         target.AddStatusEffect(new DefenseDebuff() { Caster = User, Duration = 2 }, User.Effectiveness);
-        return new UsageResult(this)
-        {
-            TargetType = TargetType.SingleTarget,
-            UsageType = usageType,
-            Text = "What you gonna do about it?",
-            User = User
-        };
+        targetType = TargetType.SingleTarget;
+        text = "What are you gonna do about it?";
     }
 
     public override int MaxCooldown => 4;
