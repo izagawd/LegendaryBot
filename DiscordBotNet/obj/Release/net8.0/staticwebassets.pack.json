@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\battle_images\\characters\\CoachChad.png"
     },
     {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\CommanderJean.png",
+      "PackagePath": "staticwebassets\\battle_images\\characters\\CommanderJean.png"
+    },
+    {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Delinquent.png",
       "PackagePath": "staticwebassets\\battle_images\\characters\\Delinquent.png"
     },
@@ -39,6 +43,10 @@
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Police.png",
       "PackagePath": "staticwebassets\\battle_images\\characters\\Police.png"
+    },
+    {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Roxy.png",
+      "PackagePath": "staticwebassets\\battle_images\\characters\\Roxy.png"
     },
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\RoyalKnight.png",

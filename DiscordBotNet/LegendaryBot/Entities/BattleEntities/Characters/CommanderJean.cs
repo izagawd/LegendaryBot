@@ -33,7 +33,7 @@ public class CommanderJeanTaser : Skill
 {
     public override string GetDescription(Character character)
     {
-        return "Tazes the enemy, stunning them for one turn, and increasing super points by 1";
+        return "Tazes the enemy, stunning them for one turn, and increasing super points by 2";
     }
 
     public override int MaxCooldown => 3;

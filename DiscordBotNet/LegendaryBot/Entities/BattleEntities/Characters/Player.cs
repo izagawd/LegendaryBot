@@ -115,7 +115,8 @@ public class Player : Character
     public override bool CanSpawnNormally => false;
 
     protected override IEnumerable<StatType> LevelMilestoneStatIncrease =>
-        [StatType.Attack, StatType.Attack, StatType.Speed, StatType.CriticalChance, StatType.CriticalDamage];
+        [StatType.Attack, StatType.Attack, StatType.Speed, StatType.CriticalChance, StatType.CriticalDamage,
+        StatType.Speed];
 
     public override bool CanBeTraded => false;
     protected override float BaseAttackMultiplier => 1.05f;
