@@ -10,9 +10,9 @@ public class GigaPunch : BasicAttack
 {
     public override string GetDescription(CharacterPartials.Character character) => "Punch is thrown gigaly";
     
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
         text = "Hrraghh!";
         target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
         {
@@ -40,11 +40,11 @@ public class MuscleFlex : Ultimate
         yield return User;
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet}... flexed his muscles?");
         text = "Hmph!";
-        targetType = TargetType.None;
+        attackTargetType = AttackTargetType.None;
 
     }
 
@@ -62,12 +62,12 @@ public class ThumbsUp : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} is cheering {target.NameWithAlphabet} on!");
 
 
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.None;
         text = $"{User.NameWithAlphabet} gave {target.NameWithAlphabet} a thumbs up!";
 
 

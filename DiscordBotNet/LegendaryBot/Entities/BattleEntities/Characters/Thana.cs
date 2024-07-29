@@ -8,7 +8,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class SoulAttack : BasicAttack
 {
     public override string GetDescription(CharacterPartials.Character character) => "Uses the souls of the dead to attack, with a 25% chance to inflict sleep!";
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, 
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, 
         out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
@@ -24,7 +24,7 @@ public class SoulAttack : BasicAttack
             target.AddStatusEffect(new Sleep(){Caster = User, Duration = 1});
         }
 
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
 
         text = "Soul Attack!";
 
@@ -40,7 +40,7 @@ public class YourLifeEnergyIsMine : Skill
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         var damageResult = target.Damage(new DamageArgs(User.Attack * 2.5f,
             new MoveDamageSource(usageContext))
@@ -54,7 +54,7 @@ public class YourLifeEnergyIsMine : Skill
    
         User.RecoverHealth(damageResult.DamageDealt * 0.2f);
         text = "Your lifespan is mine!";
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
     }
 
     public override int MaxCooldown => 3;
@@ -71,7 +71,7 @@ public class Arise : Ultimate
         return User.Team;
     }
     
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"With her necromancy powers, {User.NameWithAlphabet} attempts to bring back all her dead allies!");
 
@@ -95,7 +95,7 @@ public class Arise : Ultimate
         User.AddStatusEffect(new AttackBuff() { Duration = 3 , Caster = User});
         User.GrantExtraTurn();
         text = "Necromancy!";
-        targetType = TargetType.AOE;
+        attackTargetType = AttackTargetType.None;
 
     }
 }

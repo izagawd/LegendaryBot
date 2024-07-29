@@ -10,7 +10,7 @@ public class BasicAttackSample : BasicAttack
 {
     public override string GetDescription(Character character) => "Take that!";
     
-    protected  override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, 
+    protected  override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, 
         out string? text)
     {
  
@@ -25,7 +25,7 @@ public class BasicAttackSample : BasicAttack
             DamageText = $"{User.NameWithAlphabet} gave" +
                          $" {target.NameWithAlphabet} a punch and dealt $ damage!"
         });
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
         text = "very basic...";
     }
 }

@@ -16,7 +16,7 @@ public class ChamomileSachetWhack : BasicAttack
 
     public int SleepChance => 25;
     protected override void UtilizeImplementation(Character target, UsageContext usageContext, 
-        out TargetType targetType, out string? text)
+        out AttackTargetType attackTargetType, out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
         {
@@ -26,7 +26,7 @@ public class ChamomileSachetWhack : BasicAttack
             CanCrit = true,
             DamageText = $"That was a harsh snoozy whack that dealt $ damage on {target.NameWithAlphabet}!",
         });
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
         text = "Chamomile Whack!";
         if (BasicFunctionality.RandomChance(SleepChance))
         {
@@ -49,12 +49,12 @@ public class BlossomTouch : Skill
     public override string GetDescription(CharacterPartials.Character character) =>  $"With the power of flowers, recovers the hp of an ally with {HealthHealScaling}% of the caster's max health, dispelling one debuff";
     
  
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         target.RecoverHealth((User.MaxHealth *HealthHealScaling* 0.01).Round());
 
         text = $"{User.NameWithAlphabet} used Blossom Touch!";
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.None;
 
     }
 }
@@ -72,7 +72,7 @@ public class LilyOfTheValley : Ultimate
     public override  string GetDescription(CharacterPartials.Character character) => $"Releases a poisonous gas to a single enemy,  inflicting stun for 1 turn, and inflicts poison x2 for 2 turns";
     
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
            
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} used Lily of The Valley, and released a dangerous gas to {target.NameWithAlphabet}!");
@@ -82,7 +82,7 @@ public class LilyOfTheValley : Ultimate
         target.AddStatusEffects([new Poison(){Duration = 2,Caster = User},
         new Poison(){Duration = 2, Caster = User},new Stun(){Duration = 1, Caster = User}],effectiveness);
         text = $"The valley!";
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.None;
 
     }
 }

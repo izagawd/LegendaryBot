@@ -12,7 +12,7 @@ public class PomPomAttack : BasicAttack
         return "Caster hits the enemy with a pom-pom... and that it";
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 0.8f, new MoveDamageSource(usageContext))
         {
@@ -21,7 +21,7 @@ public class PomPomAttack : BasicAttack
             CriticalDamage = User.CriticalDamage,
             DamageText = $"{User.NameWithAlphabet} hits {target.NameWithAlphabet} with their pompoms, dealing $ damage!"
         });
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
         text = null;
     }
 }
@@ -40,13 +40,13 @@ public class  YouCanDoIt : Skill
     }
 
     protected override void UtilizeImplementation(Character target, UsageContext usageContext, 
-        out TargetType targetType, out string? text)
+        out AttackTargetType attackTargetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} wants {target.NameWithAlphabet} to prevail!");
         target.IncreaseCombatReadiness(100);
         target.AddStatusEffect(new AttackBuff() { Duration = 2 , Caster = User});
 
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
 
         text = "You can do it!";
     }
@@ -67,7 +67,7 @@ public class YouCanMakeItEveryone : Ultimate
     }
 
     protected override void UtilizeImplementation(Character target, UsageContext usageContext,
-        out TargetType targetType, out string? text)
+        out AttackTargetType attackTargetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} encourages her allies!");
 
@@ -84,7 +84,7 @@ public class YouCanMakeItEveryone : Ultimate
         }
 
 
-        targetType = TargetType.AOE;
+        attackTargetType = AttackTargetType.AOE;
         text = null;
     }
 

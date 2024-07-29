@@ -13,8 +13,9 @@ public class MethaneSlap : BasicAttack
                                                                   $"{DetonateChance}% chance to detonate all the bombs the target has";
     public int DetonateChance => 75;
     protected override void UtilizeImplementation(Character target, UsageContext usageContext,
-        out TargetType targetType, out string? text)
+        out AttackTargetType attackTargetType, out string? text)
     {
+      
         target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
         {
 
@@ -31,7 +32,7 @@ public class MethaneSlap : BasicAttack
                 i.Detonate(User);
         }
         text =  "Methane Slap!";
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
 
     }
 }
@@ -48,7 +49,7 @@ public class BlowAway : Skill
 
     public int BombInflictChance => 100;
     protected override void UtilizeImplementation(Character target, UsageContext usageContext,
-        out TargetType targetType, out string? text)
+        out AttackTargetType attackTargetType, out string? text)
     {
                 
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} threw multiple bombs at the opposing team!");
@@ -67,7 +68,7 @@ public class BlowAway : Skill
         }
 
         text = "Blow Away!";
-        targetType = TargetType.AOE;
+        attackTargetType = AttackTargetType.AOE;
 
     }
 
@@ -86,7 +87,7 @@ public class ExplosionBlast : Ultimate
     }
     
     protected override void UtilizeImplementation(Character target, UsageContext usageContext,
-        out TargetType targetType, out string? text)
+        out AttackTargetType attackTargetType, out string? text)
     {
         var targets = GetPossibleTargets().ToArray();
         foreach (var i in targets)
@@ -109,7 +110,7 @@ public class ExplosionBlast : Ultimate
         }
 
         text = "Blow Away!";
-        targetType = TargetType.AOE;
+        attackTargetType = AttackTargetType.AOE;
     }
 }
 public class Blast : Character

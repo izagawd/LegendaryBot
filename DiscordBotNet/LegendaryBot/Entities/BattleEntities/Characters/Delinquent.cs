@@ -13,7 +13,7 @@ public class BaseballBatWhack : BasicAttack
         return "Swings a baseball bat at the enemy, causing solid  damage";
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
         {
@@ -24,7 +24,7 @@ public class BaseballBatWhack : BasicAttack
             DamageText =
                 $"{User.NameWithAlphabet} whacks {target.NameWithAlphabet} with a baseball bat, dealing $ damage"
         });
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
         text = "Temeee!";
     }
 }
@@ -40,9 +40,9 @@ public class DelinquentBeatdown : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
         text = "Uraah!";
         target.Damage(new DamageArgs(User.Attack * 2.5f,
             new MoveDamageSource(usageContext))

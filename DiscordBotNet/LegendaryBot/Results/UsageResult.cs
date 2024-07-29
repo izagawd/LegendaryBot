@@ -5,7 +5,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.Results;
 
-public enum TargetType
+public enum AttackTargetType
 {
     None, SingleTarget, AOE, InBetween, 
 }
@@ -16,7 +16,7 @@ public class MoveUsageResult
     /// If not null, this text will be used as the main text
     /// </summary>
     public string? Text { get;  }
-    public TargetType TargetType { get; }
+    public AttackTargetType AttackTargetType { get; }
 
 
 
@@ -42,10 +42,10 @@ public class MoveUsageResult
     public Move Move => UsageContext.Move;
   
     public UsageContext UsageContext { get; }
-    public MoveUsageResult(UsageContext usageContext, TargetType targetType, string? text)
+    public MoveUsageResult(UsageContext usageContext, AttackTargetType attackTargetType, string? text)
     {
         UsageContext = usageContext;
-        TargetType = targetType;
+        AttackTargetType = attackTargetType;
         Text = text;
     }
 

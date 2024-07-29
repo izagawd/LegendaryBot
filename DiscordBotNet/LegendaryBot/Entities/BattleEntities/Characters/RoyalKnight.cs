@@ -13,7 +13,7 @@ public class ShieldBash : BasicAttack
 
 
     public int ShieldStunChanceByBash => 10;
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
         {
@@ -25,7 +25,7 @@ public class ShieldBash : BasicAttack
                 $"{User.NameWithAlphabet} bashes {target.NameWithAlphabet} with his shield , making them receive $ damage!",
         });
 
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
         text = "Hrraagh!!";
 
         if (BasicFunctionality.RandomChance(ShieldStunChanceByBash))
@@ -49,7 +49,7 @@ public class IWillBeYourShield : Skill
 
 
     public int ShieldBasedOnDefense => 300;
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         target.AddStatusEffect(new Barrier((ShieldBasedOnDefense * 0.006 * User.Defense).Round())
         {
@@ -61,7 +61,7 @@ public class IWillBeYourShield : Skill
 
         text = $"As a loyal knight, {User.NameWithAlphabet} helps {target.NameWithAlphabet}!";
 
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.None;
 
     }
 }
@@ -79,7 +79,7 @@ public class IWillProtectUs : Ultimate
     public override string GetDescription(CharacterPartials.Character character) => "Increases the defense of all allies for 3 turns";
     
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         foreach (var i in GetPossibleTargets())
         {
@@ -88,7 +88,7 @@ public class IWillProtectUs : Ultimate
         }
 
 
-        targetType = TargetType.AOE;
+        attackTargetType = AttackTargetType.AOE;
         text = $"As a loyal knight, {User.NameWithAlphabet} increases the defense of all allies for three turns";
 ;
     }

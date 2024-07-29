@@ -18,7 +18,7 @@ public class TakeshiStraightPunch : BasicAttack
     }
 
     protected override void UtilizeImplementation(Character target, UsageContext usageContext,
-        out TargetType targetType, out string? text)
+        out AttackTargetType attackTargetType, out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
         {
@@ -29,7 +29,7 @@ public class TakeshiStraightPunch : BasicAttack
             CriticalDamage = User.CriticalDamage,
             ElementToDamageWith = User.Element,
         });
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
         text = null;
 
 
@@ -48,12 +48,12 @@ public class TakeshiMeditation : Ultimate
     }
 
     protected override void UtilizeImplementation(Character target, UsageContext usageContext,
-        out TargetType targetType, out string? text)
+        out AttackTargetType attackTargetType, out string? text)
     {
         CurrentBattle.AddBattleText($"{User.NameWithAlphabet} meditates!" );
         User.RecoverHealth(User.MaxHealth * 0.5f);
         User.AddStatusEffect(new AttackBuff() { Caster = User, Duration = 2 });
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
         text = "Hummmm....";
     }
 
@@ -72,12 +72,12 @@ public class KarateNeckChop : Skill
     }
 
     protected override void UtilizeImplementation(Character target, UsageContext usageContext,
-        out TargetType targetType, out string? text)
+        out AttackTargetType attackTargetType, out string? text)
     {
         CurrentBattle.AddBattleText($"{User.NameWithAlphabet} neck chops {target}!" );
         target.AddStatusEffect(new Stun() { Caster = User, Duration = 1 });
 
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
 
         text = "Neck chop!";
     }

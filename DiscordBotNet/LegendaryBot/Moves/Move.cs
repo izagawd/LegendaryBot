@@ -90,10 +90,10 @@ public abstract class Move
     /// </summary>
     /// <param name="target">The target</param>
     /// <param name="usageContext"></param>
-    /// <param name="targetType"></param>
+    /// <param name="attackTargetType"></param>
     /// <param name="text"></param>
     protected abstract void UtilizeImplementation(Character target, UsageContext usageContext,
-        out TargetType targetType, out string? text);
+        out AttackTargetType attackTargetType, out string? text);
 
     /// <summary>
     /// This is where the general functionality of a move is done. It does some checks before UtilizeImplementation is called
@@ -104,8 +104,8 @@ public abstract class Move
     {
 
         var usageContext = new UsageContext(this, usageType);
-        UtilizeImplementation(target,usageContext , out var targetType, out var text);
-        var moveUsageResult = new MoveUsageResult(usageContext, targetType, text);
+        UtilizeImplementation(target,usageContext , out var attackTargetType, out var text);
+        var moveUsageResult = new MoveUsageResult(usageContext,attackTargetType , text);
         CurrentBattle.InvokeBattleEvent(new CharacterPostUseMoveEventArgs(moveUsageResult));
         return moveUsageResult;
     }

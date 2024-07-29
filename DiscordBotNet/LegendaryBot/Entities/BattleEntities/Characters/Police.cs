@@ -14,7 +14,7 @@ public class DoNotResist : BasicAttack
         return "Tases the enemy, with a 15% chance to stun for one turn";
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
         {
@@ -31,7 +31,7 @@ public class DoNotResist : BasicAttack
 
         text = "DO NOT RESIST!";
 
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
 
 
     }
@@ -48,7 +48,7 @@ public class IAmShooting : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 2,new MoveDamageSource(usageContext))
         {
@@ -61,7 +61,7 @@ public class IAmShooting : Skill
  
         target.AddStatusEffect(new Bleed(){ Caster = User, Duration = 2}, User.Effectiveness);
         text = "I warned you!";
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
 
     }
 

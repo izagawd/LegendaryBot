@@ -17,7 +17,7 @@ public class WindSlash : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
  
         foreach (var i in GetPossibleTargets())
@@ -34,7 +34,7 @@ public class WindSlash : Skill
         }
 
 
-        targetType = TargetType.AOE;
+        attackTargetType = AttackTargetType.AOE;
 
             text = "Wind Slash!";
 
@@ -50,7 +50,7 @@ public class SimpleSlashOfPrecision : BasicAttack
         $"Does a simple slash. Attack has an increased crit chance of {increasedCritChance}";
     
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 1.7f,
             new MoveDamageSource(usageContext))
@@ -61,7 +61,7 @@ public class SimpleSlashOfPrecision : BasicAttack
         });
 
 
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
             text = $"{User.NameWithAlphabet} does a simple slash to {target.NameWithAlphabet}!";
 
     }
@@ -79,7 +79,7 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out TargetType targetType, out string? text)
+    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         var damageResult =target.Damage(new DamageArgs( User.Attack * 1.7f *2,
             new MoveDamageSource(usageContext))
@@ -92,7 +92,7 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
             DamageText = $"The slash was so precise it dealt $ damage to {target.NameWithAlphabet}!",
         });
 
-        targetType = TargetType.SingleTarget;
+        attackTargetType = AttackTargetType.SingleTarget;
         text = null;
     }
 
