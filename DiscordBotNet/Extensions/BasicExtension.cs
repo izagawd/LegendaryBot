@@ -92,7 +92,6 @@ public static class BasicExtension
     public static T Print<T>(this T idk)
     {
         Console.WriteLine(idk);
-   
         return idk;
     }
 

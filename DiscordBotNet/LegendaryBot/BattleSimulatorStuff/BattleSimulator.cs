@@ -451,7 +451,7 @@ public partial class BattleSimulator
 
             var embed = new DiscordEmbedBuilder()
                 .WithAuthor(characterToDisplayBattleInfo.NameWithAlphabet, iconUrl: characterToDisplayBattleInfo.ImageUrl)
-                .WithTitle($"{characterToDisplayBattleInfo} [{characterToDisplayBattleInfo.AlphabetIdentifier}]'s description")
+                .WithTitle($"{characterToDisplayBattleInfo.NameWithAlphabet}'s description")
                 .WithColor(characterToDisplayBattleInfo.Color)
                 .WithDescription(descriptionStringBuilder.ToString());
 

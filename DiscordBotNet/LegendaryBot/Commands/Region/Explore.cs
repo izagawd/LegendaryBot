@@ -68,7 +68,21 @@ public class Explore : GeneralCommandClass
         var region = Region.GetRegion(regionName);
         if (region is null)
         {
-            embedToBuild.WithDescription($"Region with name `{regionName}` not found");
+            var regionString = $"Region with name `{regionName}` not found\nThese are the following existing regions:";
+            foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Region>())
+            {
+                embedToBuild.AddField(i.Name,
+                    $"Required Tier: **{i.TierRequirement}**");
+            }
+            embedToBuild.WithDescription(regionString);
+            await ctx.RespondAsync(embedToBuild);
+            return;
+        }
+
+        if (userData.Tier < region.TierRequirement)
+        {
+            embedToBuild.WithDescription(
+                $"You need to be at least tier **{region.TierRequirement}** to explore **{region.Name}**");
             await ctx.RespondAsync(embedToBuild);
             return;
         }

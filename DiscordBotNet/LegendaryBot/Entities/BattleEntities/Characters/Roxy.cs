@@ -97,6 +97,7 @@ public class RoxyHeadBatWhack : Ultimate
 }
 public class Roxy : Character
 {
+    protected override float BaseAttackMultiplier => 1.1f;
     public override Rarity Rarity => Rarity.FourStar;
 
     public Roxy()

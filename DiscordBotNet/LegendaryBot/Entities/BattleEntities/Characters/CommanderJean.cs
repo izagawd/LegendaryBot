@@ -144,7 +144,10 @@ public class CommanderJeanFiringSquad : Skill
 }
 public class CommanderJean : Character
 {
+    protected override float BaseAttackMultiplier => 1.15f;
+    public override string Name => "C. Jean";
 
+    public override bool UsesSuperPoints => true;
 
     [BattleEventListenerMethod]
     public void InvokeFiringSquad(CharacterPostUseMoveEventArgs moveEventArgs)

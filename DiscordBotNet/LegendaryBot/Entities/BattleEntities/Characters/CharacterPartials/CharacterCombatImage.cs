@@ -50,7 +50,14 @@ public partial class Character
         SixLabors.ImageSharp.Color.Black, new PointF(55, 36.2f))
             .Draw(SixLabors.ImageSharp.Color.Black, 1,
         new RectangleF(52.5f, 35, 115, 12.5f));
-
+        if (UsesSuperPoints)
+        {
+            ctx
+                .DrawText($"SP: {SuperPoints}", SystemFonts.CreateFont(Bot.GlobalFontName, 10),
+                    SixLabors.ImageSharp.Color.Black, new PointF(55, 6.5f))
+                .Draw(SixLabors.ImageSharp.Color.Black, 1,
+                    new RectangleF(52.5f, 5f, 40, 11.5f));
+        }
         var healthPercentage = HealthPercentage;
         var width = 175;
         var shieldPercentage = ShieldPercentage;
