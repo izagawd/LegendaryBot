@@ -120,7 +120,7 @@ public abstract class StatusEffect  : INameHaver
     /// <summary>
     /// The duration of the status effect
     /// </summary>
-    public required int Duration { get; set; } = 1;
+    public int Duration { get; set; } = 1;
     /// <summary>
     /// The person who casted the status effect
     /// </summary>

@@ -60,11 +60,12 @@ public class RoxyAggressiveOverload : Skill
         attackTargetType = AttackTargetType.SingleTarget;
     }
 
-    public override int MaxCooldown { get; }
+    public override int MaxCooldown => 3;
 }
 
 public class RoxyHeadBatWhack : Ultimate
 {
+    
     public override string GetDescription(Character character)
     {
         return "Caster whacks enemy on the head, dealing increadible damage, stunning them for 1 turn";
@@ -86,11 +87,13 @@ public class RoxyHeadBatWhack : Ultimate
                 ElementToDamageWith = User.Element,
                 DamageText = $"{User.NameWithAlphabet} whacks {target.NameWithAlphabet} in the head, dealing $ damage.. ouch"
             });
+        target.AddStatusEffect(new Stun() { Caster = User, Duration = 1 },
+            User.Effectiveness);
         text = "Can you move after THIS??";
         attackTargetType = AttackTargetType.SingleTarget;
     }
 
-    public override int MaxCooldown { get; }
+    public override int MaxCooldown => 5;
 }
 public class Roxy : Character
 {
