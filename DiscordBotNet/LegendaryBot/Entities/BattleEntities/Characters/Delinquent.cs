@@ -8,7 +8,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class BaseballBatWhack : BasicAttack
 {
-    public override string GetDescription(CharacterPartials.Character character)
+    public override string GetDescription(Character character)
     {
         return "Swings a baseball bat at the enemy, causing solid  damage";
     }
@@ -30,7 +30,7 @@ public class BaseballBatWhack : BasicAttack
 }
 public class DelinquentBeatdown : Skill
 {
-    public override string GetDescription(CharacterPartials.Character character)
+    public override string GetDescription(Character character)
     {
         return "Calls all other delinquents to beat up ally, dealing solid damage";
     }
@@ -58,7 +58,7 @@ public class DelinquentBeatdown : Skill
 
     public override int MaxCooldown => 4;
 }
-public class Delinquent : CharacterPartials.Character
+public class Delinquent : Character
 {
     public override Element Element => Element.Fire;
 

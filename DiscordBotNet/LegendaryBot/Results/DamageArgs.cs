@@ -18,7 +18,7 @@ public class DamageArgs
     /// <summary>
     /// if null, will not consider element for damage calculation
     /// </summary>
-    public required Element? ElementToDamageWith { get; set; }
+    public Element? ElementToDamageWith { get; set; }
     /// <summary>
     /// The percentage of defense to ignore if possible
     /// </summary>

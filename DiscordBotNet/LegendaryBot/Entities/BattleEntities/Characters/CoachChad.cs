@@ -8,7 +8,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class GigaPunch : BasicAttack
 {
-    public override string GetDescription(CharacterPartials.Character character) => "Punch is thrown gigaly";
+    public override string GetDescription(Character character) => "Punch is thrown gigaly";
     
     protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
@@ -32,10 +32,10 @@ public class GigaPunch : BasicAttack
 public class MuscleFlex : Ultimate
 {
   
-    public override string GetDescription(CharacterPartials.Character character) => "Flexes muscles";
+    public override string GetDescription(Character character) => "Flexes muscles";
     
 
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         yield return User;
     }
@@ -54,10 +54,10 @@ public class MuscleFlex : Ultimate
 public class ThumbsUp : Skill
 {
 
-    public override string GetDescription(CharacterPartials.Character character) => "Gives the enemy a thumbs up!";
+    public override string GetDescription(Character character) => "Gives the enemy a thumbs up!";
     
 
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
@@ -75,7 +75,7 @@ public class ThumbsUp : Skill
 
     public override int MaxCooldown => 1;
 }
-public class CoachChad : CharacterPartials.Character
+public class CoachChad : Character
 {
     public override Rarity Rarity => Rarity.FourStar;
 

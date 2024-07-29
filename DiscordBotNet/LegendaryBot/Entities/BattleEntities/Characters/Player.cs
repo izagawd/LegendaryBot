@@ -8,7 +8,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class FourthWallBreaker: BasicAttack
 {
-    public override string GetDescription(CharacterPartials.Character character) =>  "Damages the enemy by breaking the fourth wall";
+    public override string GetDescription(Character character) =>  "Damages the enemy by breaking the fourth wall";
     
 
     protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
@@ -31,10 +31,10 @@ public class FourthWallBreaker: BasicAttack
 
 public class FireBall : Skill
 {
-    public override string GetDescription(CharacterPartials.Character character) => "Throws a fire ball at the enemy with a 40% chance to inflict burn";
+    public override string GetDescription(Character character) => "Throws a fire ball at the enemy with a 40% chance to inflict burn";
     
 
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
@@ -66,11 +66,11 @@ public class FireBall : Skill
 public class Ignite : Ultimate
 {
     public override int MaxCooldown => 4;
-    public override string GetDescription(CharacterPartials.Character character) =>$"Ignites the enemy with 3 burns for 2 turns!";
+    public override string GetDescription(Character character) =>$"Ignites the enemy with 3 burns for 2 turns!";
     
 
  
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
@@ -110,7 +110,7 @@ public struct PlayerCachedData
 
 
 
-public class Player : CharacterPartials.Character
+public class Player : Character
 {
     public override bool CanSpawnNormally => false;
 

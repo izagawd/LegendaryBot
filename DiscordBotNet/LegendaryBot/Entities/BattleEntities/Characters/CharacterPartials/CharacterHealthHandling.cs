@@ -153,7 +153,7 @@ public partial class Character
                 damageText = "Counter Attack! " +damageText;
             } else if (moveUsageType == MoveUsageType.MiscellaneousFollowUpUsage)
             {
-                damageText += "Extra Attack! " + damageText;
+                damageText = "Extra Attack! " + damageText;
             }
         }
       

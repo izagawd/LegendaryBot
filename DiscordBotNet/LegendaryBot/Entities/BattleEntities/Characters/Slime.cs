@@ -10,7 +10,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class SlimeBodySlam : BasicAttack
 {
     
-    public override string GetDescription(CharacterPartials.Character character) => "Slams it's body on the enemy, with a 10% chance to inflict poison";
+    public override string GetDescription(Character character) => "Slams it's body on the enemy, with a 10% chance to inflict poison";
     protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
@@ -30,7 +30,7 @@ public class SlimeBodySlam : BasicAttack
         
     }
 }
-public class Slime : CharacterPartials.Character
+public class Slime : Character
 {
 
     protected override float BaseSpeedMultiplier => 0.8f;
@@ -38,7 +38,7 @@ public class Slime : CharacterPartials.Character
     protected override float BaseAttackMultiplier => 0.4f;
 
 
-    public override Rarity Rarity => Rarity.OneStar;
+    public override Rarity Rarity => Rarity.TwoStar;
 
 
     public Slime()

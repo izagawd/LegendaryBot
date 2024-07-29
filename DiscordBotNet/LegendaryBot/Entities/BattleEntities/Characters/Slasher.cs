@@ -8,11 +8,11 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class WindSlash : Skill
 {
     private const int increasedCritChance = 25;
-    public override string GetDescription(CharacterPartials.Character character) => "Attacks all enemies with a sharp wind." +
+    public override string GetDescription(Character character) => "Attacks all enemies with a sharp wind." +
         $" Attack has an increased crit chance of {increasedCritChance}%";
     
 
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
@@ -46,7 +46,7 @@ public class WindSlash : Skill
 public class SimpleSlashOfPrecision : BasicAttack
 {
     private const int increasedCritChance = 25;
-    public override string GetDescription(CharacterPartials.Character character) =>
+    public override string GetDescription(Character character) =>
         $"Does a simple slash. Attack has an increased crit chance of {increasedCritChance}";
     
 
@@ -70,11 +70,11 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
 {
      const int increasedCritChance = 25;
 
-     public override string GetDescription(CharacterPartials.Character character)
+     public override string GetDescription(Character character)
          => $"Slashes the enemy many times, dealing crazy damage. attack has an increased crit chance of "
             + $"{increasedCritChance}%";
 
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
@@ -98,7 +98,7 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
 
     public override int MaxCooldown => 5;
 }
-public class Slasher : CharacterPartials.Character
+public class Slasher : Character
 {
   
     public override Rarity Rarity => Rarity.FourStar;

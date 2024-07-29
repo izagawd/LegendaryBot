@@ -10,7 +10,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class ChamomileSachetWhack : BasicAttack
 {
-    public override string GetDescription(CharacterPartials.Character character) => 
+    public override string GetDescription(Character character) => 
         $"With the power of Chamomile, whacks an enemy with a sack filled with Chamomile, with a {SleepChance}% chance of making the enemy sleep";
     
 
@@ -39,14 +39,14 @@ public class BlossomTouch : Skill
 {
     public override int MaxCooldown => 3;
 
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.Team.Where(i =>!i.IsDead);
     }
 
     public int HealthHealScaling => 30;
   
-    public override string GetDescription(CharacterPartials.Character character) =>  $"With the power of flowers, recovers the hp of an ally with {HealthHealScaling}% of the caster's max health, dispelling one debuff";
+    public override string GetDescription(Character character) =>  $"With the power of flowers, recovers the hp of an ally with {HealthHealScaling}% of the caster's max health, dispelling one debuff";
     
  
     protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
@@ -62,14 +62,14 @@ public class LilyOfTheValley : Ultimate
 {
     public override int MaxCooldown  => 5;
 
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
  
-    public override  string GetDescription(CharacterPartials.Character character) => $"Releases a poisonous gas to a single enemy,  inflicting stun for 1 turn, and inflicts poison x2 for 2 turns";
+    public override  string GetDescription(Character character) => $"Releases a poisonous gas to a single enemy,  inflicting stun for 1 turn, and inflicts poison x2 for 2 turns";
     
 
     protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
@@ -86,7 +86,7 @@ public class LilyOfTheValley : Ultimate
 
     }
 }
-public class Lily : CharacterPartials.Character
+public class Lily : Character
 {
     protected override float BaseSpeedMultiplier => 1.15f;
 
@@ -106,7 +106,7 @@ public class Lily : CharacterPartials.Character
     protected override float BaseAttackMultiplier => 0.9f;
     public override bool CanSpawnNormally => false;
 
-    public override void NonPlayerCharacterAi(ref CharacterPartials.Character target, ref BattleDecision decision)
+    public override void NonPlayerCharacterAi(ref Character target, ref BattleDecision decision)
     {
         if (Ultimate.CanBeUsed())
         {

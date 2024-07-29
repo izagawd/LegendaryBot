@@ -16,18 +16,18 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
-public class Journey : GeneralCommandClass
+public class Explore : GeneralCommandClass
 {
     
-    static Journey()
+    static Explore()
     {
         
     }
     
 
-    [Command("journey"), Description("Use this command to encounter a character, and get them if you beat them"),
+    [Command("explore"), Description("Use this command to encounter a character while exploring a region, and get them when you beat them"),
     BotCommandCategory(BotCommandCategory.Battle)]
-    public async ValueTask Execute(CommandContext ctx)
+    public async ValueTask Execute(CommandContext ctx, string regionName)
     {
         var author = ctx.User;
         var userData = await DatabaseContext.UserData
@@ -62,6 +62,14 @@ public class Journey : GeneralCommandClass
         if (userData.Tier == Tier.Unranked)
         {
             await ctx.RespondAsync(embedToBuild.Build());
+            return;
+        }
+        
+        var region = Region.GetRegion(regionName);
+        if (region is null)
+        {
+            embedToBuild.WithDescription($"Region with name `{regionName}` not found");
+            await ctx.RespondAsync(embedToBuild);
             return;
         }
         userData.RefreshEnergyValue();
@@ -108,13 +116,10 @@ public class Journey : GeneralCommandClass
             return;
         }
 
-        var groups = TypesFunctionality
-            .GetDefaultObjectsThatIsInstanceOf<Character>()
-            .Where(i => i.CanSpawnNormally)
+        var groups = region.ObtainableCharacters
+            .Select(i => (Character) TypesFunctionality.GetDefaultObject(i))
             .GroupBy(i => i.Rarity)
             .ToImmutableArray();
-        
-        
         var characterGrouping= BasicFunctionality.GetRandom(new Dictionary<IGrouping<Rarity, Character>, double>()
         {
             {groups.First(i => i.Key == Rarity.ThreeStar),85},

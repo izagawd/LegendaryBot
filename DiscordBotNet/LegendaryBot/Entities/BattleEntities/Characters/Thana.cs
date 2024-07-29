@@ -7,7 +7,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class SoulAttack : BasicAttack
 {
-    public override string GetDescription(CharacterPartials.Character character) => "Uses the souls of the dead to attack, with a 25% chance to inflict sleep!";
+    public override string GetDescription(Character character) => "Uses the souls of the dead to attack, with a 25% chance to inflict sleep!";
     protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, 
         out string? text)
     {
@@ -35,8 +35,8 @@ public class YourLifeEnergyIsMine : Skill
 {
 
 
-    public override string GetDescription(CharacterPartials.Character character) => "Sucks the life energy out of the enemy, recovering 20% of damage dealt as hp";
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override string GetDescription(Character character) => "Sucks the life energy out of the enemy, recovering 20% of damage dealt as hp";
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
@@ -64,9 +64,9 @@ public class Arise : Ultimate
 
     public override int MaxCooldown =>6;
 
-    public override string GetDescription(CharacterPartials.Character character) =>
+    public override string GetDescription(Character character) =>
         $"Revives dead allies, grants all allies immortality, increases the caster's attack for 2 turns, and grants her an extra turn";
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.Team;
     }
@@ -101,7 +101,7 @@ public class Arise : Ultimate
 
     }
 }
-public class Thana : CharacterPartials.Character
+public class Thana : Character
 {
     protected override float BaseSpeedMultiplier => 1.1f;
     public override Rarity Rarity =>Rarity.FiveStar;

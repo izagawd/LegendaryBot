@@ -61,6 +61,7 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
 public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGuidPrimaryIdHaver
 {
 
+    public virtual bool CanSpawnNormally => true;
     public bool CannotDoAnything => IsDead || HighestOverrideTurnType >= OverrideTurnType.CannotMove;
     public virtual string? PassiveDescription => null;
     public OverrideTurnType HighestOverrideTurnType
@@ -626,8 +627,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public string Description { get; }
     public virtual Rarity Rarity => Rarity.ThreeStar;
 
-    [NotMapped]
-    public virtual bool CanSpawnNormally => true;
+
     [NotMapped]
     public   BasicAttack BasicAttack { get; protected set; }
     

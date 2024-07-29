@@ -9,7 +9,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class ShieldBash : BasicAttack
 {
-    public override string GetDescription(CharacterPartials.Character character) => $"Bashes the shield to the enemy, with a {ShieldStunChanceByBash}% chance to stun"!;
+    public override string GetDescription(Character character) => $"Bashes the shield to the enemy, with a {ShieldStunChanceByBash}% chance to stun"!;
 
 
     public int ShieldStunChanceByBash => 10;
@@ -40,13 +40,13 @@ public class IWillBeYourShield : Skill
 {
     public override int MaxCooldown => 4;
 
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.Team.Where(i =>!i.IsDead);
     }
 
   
-    public override string GetDescription(CharacterPartials.Character character) => "gives a shield to the target and caster for 3 turns. Shield strength is proportional to the caster's defense";
+    public override string GetDescription(Character character) => "gives a shield to the target and caster for 3 turns. Shield strength is proportional to the caster's defense";
 
 
     public int ShieldBasedOnDefense => 300;
@@ -69,7 +69,7 @@ public class IWillBeYourShield : Skill
 
 public class IWillProtectUs : Ultimate
 {
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.Team.Where(i => !i.IsDead);
     }
@@ -77,7 +77,7 @@ public class IWillProtectUs : Ultimate
     public override int MaxCooldown => 5;
   
 
-    public override string GetDescription(CharacterPartials.Character character) => "Increases the defense of all allies for 3 turns";
+    public override string GetDescription(Character character) => "Increases the defense of all allies for 3 turns";
     
 
     protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
@@ -96,7 +96,7 @@ public class IWillProtectUs : Ultimate
     }
 }
 
-public class RoyalKnight : CharacterPartials.Character
+public class RoyalKnight : Character
 {
 
     protected override float BaseAttackMultiplier => 0.85f;

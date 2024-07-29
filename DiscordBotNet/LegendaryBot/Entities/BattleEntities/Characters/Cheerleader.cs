@@ -7,7 +7,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class PomPomAttack : BasicAttack
 {
-    public override string GetDescription(CharacterPartials.Character character)
+    public override string GetDescription(Character character)
     {
         return "Caster hits the enemy with a pom-pom... and that it";
     }
@@ -28,13 +28,13 @@ public class PomPomAttack : BasicAttack
 
 public class  YouCanDoIt : Skill
 {
-    public override string GetDescription(CharacterPartials.Character character)
+    public override string GetDescription(Character character)
     {
         return "Increases the combat readiness of a single target by 100%, increasing their attack for 2 turns. " +
                "Cannot be used on self";
     }
 
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.Team.Where(i => !i.IsDead && i != User);
     }
@@ -56,12 +56,12 @@ public class  YouCanDoIt : Skill
 public class YouCanMakeItEveryone : Ultimate
 {
     private int CombatIncreaseAmount => 30;
-    public override string GetDescription(CharacterPartials.Character character)
+    public override string GetDescription(Character character)
     {
         return $"Encourages all allies, increasing their combat readiness by {CombatIncreaseAmount}%, and increases their attack for 2 turns";
     }
 
-    public override IEnumerable<CharacterPartials.Character> GetPossibleTargets()
+    public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.Team.Where(i => !i.IsDead);
     }
@@ -93,7 +93,7 @@ public class YouCanMakeItEveryone : Ultimate
 
     public override int MaxCooldown => 4;
 }
-public class Cheerleader : CharacterPartials.Character
+public class Cheerleader : Character
 {
 
 
