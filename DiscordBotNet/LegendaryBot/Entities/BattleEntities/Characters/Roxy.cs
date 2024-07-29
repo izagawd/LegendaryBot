@@ -17,10 +17,10 @@ public class RoxyBatWhack : BasicAttack
         return $"Whacks the target with a bat, with a {SkillUseChance}% chance to use their skill";
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType,
         out string? text)
     {
-        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(moveUsageContext))
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
@@ -46,10 +46,10 @@ public class RoxyAggressiveOverload : Skill
         return CurrentBattle.Characters.Where(i => !i.IsDead && i.Team != User.Team);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType,
         out string? text)
     {
-        target.Damage(new DamageArgs(User.Attack * 2.5f, new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 2.5f, new MoveDamageSource(moveUsageContext))
         {
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
@@ -76,11 +76,11 @@ public class RoxyHeadBatWhack : Ultimate
         return CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType,
         out string? text)
     {
         target.Damage(
-            new DamageArgs(target.Attack * 1.7f * 2, new MoveDamageSource(usageContext))
+            new DamageArgs(target.Attack * 1.7f * 2, new MoveDamageSource(moveUsageContext))
             {
                 CriticalChance = User.CriticalChance,
                 CriticalDamage = User.CriticalDamage,

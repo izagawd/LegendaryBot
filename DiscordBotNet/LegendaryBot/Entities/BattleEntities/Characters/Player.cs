@@ -11,9 +11,9 @@ public class FourthWallBreaker: BasicAttack
     public override string GetDescription(Character character) =>  "Damages the enemy by breaking the fourth wall";
     
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
-        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(moveUsageContext))
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
@@ -42,10 +42,10 @@ public class FireBall : Skill
     public override int MaxCooldown=> 2;
 
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
         
-        var damageResult = target.Damage(new DamageArgs(User.Attack * 2.4f, new MoveDamageSource(usageContext))
+        var damageResult = target.Damage(new DamageArgs(User.Attack * 2.4f, new MoveDamageSource(moveUsageContext))
         {
 
             ElementToDamageWith = User.Element,
@@ -75,7 +75,7 @@ public class Ignite : Ultimate
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} " +
                

@@ -8,14 +8,14 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.Moves;
 
-public class UsageContext
+public class MoveUsageContext
 {
     public MoveUsageType MoveUsageType { get; }
     public Move Move { get; }
 
 
     public List<DamageResult> DamageResults;
-    public UsageContext(Move move, MoveUsageType moveUsageType)
+    public MoveUsageContext(Move move, MoveUsageType moveUsageType)
     {
         MoveUsageType = moveUsageType;
         Move = move;
@@ -89,10 +89,10 @@ public abstract class Move
     /// This is where the custom functionality of a move is created
     /// </summary>
     /// <param name="target">The target</param>
-    /// <param name="usageContext"></param>
+    /// <param name="moveUsageContext"></param>
     /// <param name="attackTargetType"></param>
     /// <param name="text"></param>
-    protected abstract void UtilizeImplementation(Character target, UsageContext usageContext,
+    protected abstract void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType, out string? text);
 
     /// <summary>
@@ -103,7 +103,7 @@ public abstract class Move
     public virtual MoveUsageResult Utilize(Character target, MoveUsageType moveUsageType)
     {
 
-        var usageContext = new UsageContext(this, moveUsageType);
+        var usageContext = new MoveUsageContext(this, moveUsageType);
         UtilizeImplementation(target,usageContext , out var attackTargetType, out var text);
         var moveUsageResult = new MoveUsageResult(usageContext,attackTargetType , text);
         CurrentBattle.InvokeBattleEvent(new CharacterPostUseMoveEventArgs(moveUsageResult));

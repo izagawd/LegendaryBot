@@ -24,7 +24,7 @@ public class MoveUsageResult
     {
         get
         {
-            foreach (var i in UsageContext.DamageResults)
+            foreach (var i in MoveUsageContext.DamageResults)
             {
                 yield return i;
             }
@@ -34,17 +34,17 @@ public class MoveUsageResult
     /// <summary>
     /// Determines if the usage was from a normal skill use or a follow up use.  this must be set
     /// </summary>
-    public MoveUsageType MoveUsageType => UsageContext.MoveUsageType;
+    public MoveUsageType MoveUsageType => MoveUsageContext.MoveUsageType;
 
     /// <summary>
     /// The move used to execute this skill
     /// </summary>
-    public Move Move => UsageContext.Move;
+    public Move Move => MoveUsageContext.Move;
   
-    public UsageContext UsageContext { get; }
-    public MoveUsageResult(UsageContext usageContext, AttackTargetType attackTargetType, string? text)
+    public MoveUsageContext MoveUsageContext { get; }
+    public MoveUsageResult(MoveUsageContext moveUsageContext, AttackTargetType attackTargetType, string? text)
     {
-        UsageContext = usageContext;
+        MoveUsageContext = moveUsageContext;
         AttackTargetType = attackTargetType;
         Text = text;
     }

@@ -14,9 +14,9 @@ public class DoNotResist : BasicAttack
         return "Tases the enemy, with a 15% chance to stun for one turn";
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
-        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(moveUsageContext))
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
@@ -48,9 +48,9 @@ public class IAmShooting : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
-        target.Damage(new DamageArgs(User.Attack * 2,new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 2,new MoveDamageSource(moveUsageContext))
         {
 
             ElementToDamageWith = User.Element,

@@ -11,9 +11,9 @@ public class SlimeBodySlam : BasicAttack
 {
     
     public override string GetDescription(Character character) => "Slams it's body on the enemy, with a 10% chance to inflict poison";
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
-        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(moveUsageContext))
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,

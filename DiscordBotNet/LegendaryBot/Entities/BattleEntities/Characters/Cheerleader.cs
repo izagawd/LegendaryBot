@@ -12,9 +12,9 @@ public class PomPomAttack : BasicAttack
         return "Caster hits the enemy with a pom-pom... and that it";
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
-        target.Damage(new DamageArgs(User.Attack * 0.8f, new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 0.8f, new MoveDamageSource(moveUsageContext))
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
@@ -39,7 +39,7 @@ public class  YouCanDoIt : Skill
         return User.Team.Where(i => !i.IsDead && i != User);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, 
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, 
         out AttackTargetType attackTargetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} wants {target.NameWithAlphabet} to prevail!");
@@ -66,7 +66,7 @@ public class YouCanMakeItEveryone : Ultimate
         return User.Team.Where(i => !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} encourages her allies!");

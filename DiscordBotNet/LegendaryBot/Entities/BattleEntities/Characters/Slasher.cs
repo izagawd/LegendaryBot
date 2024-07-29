@@ -17,12 +17,12 @@ public class WindSlash : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
  
         foreach (var i in GetPossibleTargets())
         {
-            i.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
+            i.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(moveUsageContext))
             {
 
                 ElementToDamageWith = User.Element,
@@ -50,10 +50,10 @@ public class SimpleSlashOfPrecision : BasicAttack
         $"Does a simple slash. Attack has an increased crit chance of {increasedCritChance}";
     
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 1.7f,
-            new MoveDamageSource(usageContext))
+            new MoveDamageSource(moveUsageContext))
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance + increasedCritChance,
@@ -79,10 +79,10 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
         var damageResult =target.Damage(new DamageArgs( User.Attack * 1.7f *2,
-            new MoveDamageSource(usageContext))
+            new MoveDamageSource(moveUsageContext))
         {
 
             ElementToDamageWith = User.Element,

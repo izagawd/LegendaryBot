@@ -30,17 +30,17 @@ public class MoveDamageSource : DamageSource
     public override void OnPostDamage(DamageResult damageResult)
     {
         base.OnPostDamage(damageResult);
-        UsageContext.DamageResults.Add(damageResult);
+        MoveUsageContext.DamageResults.Add(damageResult);
     }
 
-    public Move Move => UsageContext.Move;
-    public override object Source => UsageContext.Move;
-    public MoveDamageSource(UsageContext usageContext)
+    public Move Move => MoveUsageContext.Move;
+    public override object Source => MoveUsageContext.Move;
+    public MoveDamageSource(MoveUsageContext moveUsageContext)
     {
-        UsageContext = usageContext;
+        MoveUsageContext = moveUsageContext;
     }
 
     
-    public UsageContext UsageContext { get; }
+    public MoveUsageContext MoveUsageContext { get; }
 
 }

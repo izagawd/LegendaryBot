@@ -10,11 +10,11 @@ public class GigaPunch : BasicAttack
 {
     public override string GetDescription(Character character) => "Punch is thrown gigaly";
     
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
         attackTargetType = AttackTargetType.SingleTarget;
         text = "Hrraghh!";
-        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(moveUsageContext))
         {
 
             ElementToDamageWith = User.Element,
@@ -40,7 +40,7 @@ public class MuscleFlex : Ultimate
         yield return User;
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet}... flexed his muscles?");
         text = "Hmph!";
@@ -62,7 +62,7 @@ public class ThumbsUp : Skill
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} is cheering {target.NameWithAlphabet} on!");
 

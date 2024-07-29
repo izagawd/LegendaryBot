@@ -16,9 +16,9 @@ public class ThugPunch : BasicAttack
         return "Punches the enemy in a thug way";
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
-        target.Damage(new DamageArgs(User.Attack * 1.5f, new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 1.5f, new MoveDamageSource(moveUsageContext))
         {
 
             ElementToDamageWith = User.Element,
@@ -43,7 +43,7 @@ public class ThugInsult : Skill
        return CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType,
         out string? text)
     {
         CurrentBattle.AddBattleText($"{User.NameWithAlphabet} insults {target.NameWithAlphabet} like a thug!");

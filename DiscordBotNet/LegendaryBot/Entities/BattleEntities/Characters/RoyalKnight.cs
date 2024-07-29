@@ -13,9 +13,9 @@ public class ShieldBash : BasicAttack
 
 
     public int ShieldStunChanceByBash => 10;
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
-        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(moveUsageContext))
         {
 
             ElementToDamageWith = User.Element,
@@ -50,7 +50,7 @@ public class IWillBeYourShield : Skill
 
 
     public int ShieldBasedOnDefense => 300;
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
         target.AddStatusEffect(new Barrier((ShieldBasedOnDefense * 0.006 * User.Defense).Round())
         {
@@ -80,7 +80,7 @@ public class IWillProtectUs : Ultimate
     public override string GetDescription(Character character) => "Increases the defense of all allies for 3 turns";
     
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
         foreach (var i in GetPossibleTargets())
         {

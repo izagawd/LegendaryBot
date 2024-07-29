@@ -15,6 +15,7 @@ using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
+using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus;
 using DSharpPlus.Commands;
@@ -310,7 +311,7 @@ public static class Bot
 
     private async static Task DoShitAsync()
     {
-
+        MoveUsageContext
     }
     private static async Task Main(string[] args)
     {

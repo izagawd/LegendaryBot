@@ -145,7 +145,7 @@ public partial class Character
                 damageText = "A critical hit! " + damageText;
         }
 
-        var moveUsageType = (damageArgs.DamageSource as MoveDamageSource)?.UsageContext.MoveUsageType;
+        var moveUsageType = (damageArgs.DamageSource as MoveDamageSource)?.MoveUsageContext.MoveUsageType;
         if (moveUsageType is not null)
         {
             if (moveUsageType == MoveUsageType.CounterUsage)

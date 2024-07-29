@@ -17,10 +17,10 @@ public class TakeshiStraightPunch : BasicAttack
         return "Does a simple but powerful straight punch at the enemy!";
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType, out string? text)
     {
-        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(moveUsageContext))
         {
 
             DamageText =
@@ -47,7 +47,7 @@ public class TakeshiMeditation : Ultimate
         yield return User;
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType, out string? text)
     {
         CurrentBattle.AddBattleText($"{User.NameWithAlphabet} meditates!" );
@@ -72,7 +72,7 @@ public class KarateNeckChop : Skill
         return CurrentBattle.Characters.Where(i => i.Team != User.Team);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType, out string? text)
     {
         CurrentBattle.AddBattleText($"{User.NameWithAlphabet} neck chops {target}!" );

@@ -10,11 +10,11 @@ public class BasicAttackSample : BasicAttack
 {
     public override string GetDescription(Character character) => "Take that!";
     
-    protected  override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType, 
+    protected  override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, 
         out string? text)
     {
  
-        target.Damage(       new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
+        target.Damage(       new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(moveUsageContext))
         {
 
             ElementToDamageWith = User.Element,

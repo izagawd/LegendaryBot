@@ -12,11 +12,11 @@ public class MethaneSlap : BasicAttack
                                                                   $"producing methane around the enemy, with a " +
                                                                   $"{DetonateChance}% chance to detonate all the bombs the target has";
     public int DetonateChance => 75;
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType, out string? text)
     {
       
-        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(moveUsageContext))
         {
 
             ElementToDamageWith = User.Element,
@@ -48,7 +48,7 @@ public class BlowAway : Skill
     }
 
     public int BombInflictChance => 100;
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType, out string? text)
     {
                 
@@ -86,13 +86,13 @@ public class ExplosionBlast : Ultimate
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team&& !i.IsDead);
     }
     
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType, out string? text)
     {
       
         foreach (var i in GetPossibleTargets())
         {
-            i.Damage(new DamageArgs( User.Attack * 1.5f,new MoveDamageSource(usageContext))
+            i.Damage(new DamageArgs( User.Attack * 1.5f,new MoveDamageSource(moveUsageContext))
             {
                 ElementToDamageWith = User.Element,
                 CriticalChance = User.CriticalChance,

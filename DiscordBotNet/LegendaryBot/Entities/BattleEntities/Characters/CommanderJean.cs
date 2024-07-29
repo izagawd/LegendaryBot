@@ -15,10 +15,10 @@ public class CommanderJeanTonfaWhack : BasicAttack
         return "Whacks the enemy with a tonfa, increasing super points by 1 point";
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType,
         out string? text)
     {
-        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(moveUsageContext))
         {
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
@@ -43,10 +43,10 @@ public class CommanderJeanTaser : Skill
         return CurrentBattle.Characters.Where(i => !i.IsDead && i.Team != User.Team);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType,
         out string? text)
     {
-        target.Damage(new DamageArgs(User.Attack * 2f, new MoveDamageSource(usageContext))
+        target.Damage(new DamageArgs(User.Attack * 2f, new MoveDamageSource(moveUsageContext))
         {
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
@@ -77,13 +77,13 @@ public class CommanderJeanGrenade : Ultimate
         return CurrentBattle.Characters.Where(i => !i.IsDead && i.Team != User.Team);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType,
         out string? text)
     {
 
         foreach (var i in GetPossibleTargets())
         {
-            i.Damage(new DamageArgs(User.Attack * 2f, new MoveDamageSource(usageContext))
+            i.Damage(new DamageArgs(User.Attack * 2f, new MoveDamageSource(moveUsageContext))
             {
                 CriticalChance = User.CriticalChance,
                 CriticalDamage = User.CriticalDamage,
@@ -122,14 +122,14 @@ public class CommanderJeanFiringSquad : Skill
         return CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, UsageContext usageContext, out AttackTargetType attackTargetType,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType,
         out string? text)
     {
         User.SuperPoints -= 5;
         
         foreach (var i in GetPossibleTargets())
         {
-            i.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(usageContext))
+            i.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(moveUsageContext))
             {
                 CriticalChance = User.CriticalChance,
                 CriticalDamage = User.CriticalDamage,
