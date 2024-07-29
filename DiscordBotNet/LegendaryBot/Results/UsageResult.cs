@@ -34,7 +34,7 @@ public class MoveUsageResult
     /// <summary>
     /// Determines if the usage was from a normal skill use or a follow up use.  this must be set
     /// </summary>
-    public UsageType UsageType => UsageContext.UsageType;
+    public MoveUsageType MoveUsageType => UsageContext.MoveUsageType;
 
     /// <summary>
     /// The move used to execute this skill

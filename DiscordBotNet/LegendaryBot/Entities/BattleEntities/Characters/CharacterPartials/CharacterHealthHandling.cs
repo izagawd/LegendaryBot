@@ -145,13 +145,13 @@ public partial class Character
                 damageText = "A critical hit! " + damageText;
         }
 
-        var usageType = (damageArgs.DamageSource as MoveDamageSource)?.UsageContext.UsageType;
-        if (usageType is not null)
+        var moveUsageType = (damageArgs.DamageSource as MoveDamageSource)?.UsageContext.MoveUsageType;
+        if (moveUsageType is not null)
         {
-            if (usageType == UsageType.CounterUsage)
+            if (moveUsageType == MoveUsageType.CounterUsage)
             {
                 damageText = "Counter Attack! " +damageText;
-            } else if (usageType == UsageType.MiscellaneousFollowUpUsage)
+            } else if (moveUsageType == MoveUsageType.MiscellaneousFollowUpUsage)
             {
                 damageText += "Extra Attack! " + damageText;
             }

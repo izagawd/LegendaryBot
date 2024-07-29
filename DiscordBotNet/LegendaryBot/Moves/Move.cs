@@ -10,14 +10,14 @@ namespace DiscordBotNet.LegendaryBot.Moves;
 
 public class UsageContext
 {
-    public UsageType UsageType { get; }
+    public MoveUsageType MoveUsageType { get; }
     public Move Move { get; }
 
 
     public List<DamageResult> DamageResults;
-    public UsageContext(Move move, UsageType usageType)
+    public UsageContext(Move move, MoveUsageType moveUsageType)
     {
-        UsageType = usageType;
+        MoveUsageType = moveUsageType;
         Move = move;
         DamageResults = [];
     }
@@ -99,11 +99,11 @@ public abstract class Move
     /// This is where the general functionality of a move is done. It does some checks before UtilizeImplementation is called
     /// </summary>
     /// <param name="target">The target</param>
-    /// <param name="usageType"></param>
-    public virtual MoveUsageResult Utilize(Character target, UsageType usageType)
+    /// <param name="moveUsageType"></param>
+    public virtual MoveUsageResult Utilize(Character target, MoveUsageType moveUsageType)
     {
 
-        var usageContext = new UsageContext(this, usageType);
+        var usageContext = new UsageContext(this, moveUsageType);
         UtilizeImplementation(target,usageContext , out var attackTargetType, out var text);
         var moveUsageResult = new MoveUsageResult(usageContext,attackTargetType , text);
         CurrentBattle.InvokeBattleEvent(new CharacterPostUseMoveEventArgs(moveUsageResult));

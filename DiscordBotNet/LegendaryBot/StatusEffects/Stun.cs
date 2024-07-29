@@ -13,11 +13,12 @@ public class Stun : StatusEffect
 
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
 
+    
     public override bool IsStackable => false;
     public override OverrideTurnType OverrideTurnType => OverrideTurnType.CannotMove;
 
     public override string? OverridenUsage(ref Character target, ref BattleDecision decision,
-        UsageType usageType)
+        MoveUsageType moveUsageType)
     {
         decision = BattleDecision.Other;
         Affected.CurrentBattle.AddBattleText($"{Affected} cannot move because they are stunned!");

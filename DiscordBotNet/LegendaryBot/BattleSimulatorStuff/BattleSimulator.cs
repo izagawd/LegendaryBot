@@ -855,7 +855,7 @@ public partial class BattleSimulator
             else if (mostPowerfulStatusEffect is not null && mostPowerfulStatusEffect.OverrideTurnType > 0)
             {
                 var overridenUsageText = mostPowerfulStatusEffect.OverridenUsage(ref target!,
-                    ref battleDecision, UsageType.NormalUsage);
+                    ref battleDecision, MoveUsageType.NormalUsage);
                 if (overridenUsageText is not null) _mainText = overridenUsageText;
                 using (_interruptionCancellationTokenSource = new CancellationTokenSource())
                 {
@@ -992,7 +992,7 @@ public partial class BattleSimulator
                 break;
             }
             var move = ActiveCharacter[battleDecision];
-            var moveResult =  move?.Utilize(target!, UsageType.NormalUsage);
+            var moveResult =  move?.Utilize(target!, MoveUsageType.NormalUsage);
             if (moveResult?.Text is not null)
             {
                 _mainText = moveResult.Text;

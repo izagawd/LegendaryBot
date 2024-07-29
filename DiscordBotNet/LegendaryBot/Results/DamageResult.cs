@@ -8,12 +8,12 @@ namespace DiscordBotNet.LegendaryBot.Results;
 public struct MoveUsageDetails
 {
     public Move Move { get; }
-    public UsageType UsageType { get; }
+    public MoveUsageType MoveUsageType { get; }
 
-    public MoveUsageDetails(Move move, UsageType usageType)
+    public MoveUsageDetails(Move move, MoveUsageType moveUsageType)
     {
         Move = move;
-        UsageType = usageType;
+        MoveUsageType = moveUsageType;
     }
 }
 public class DamageResult

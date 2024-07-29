@@ -14,8 +14,8 @@ public abstract class BasicAttack : Move
     {
         return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
-    public sealed override MoveUsageResult Utilize(Character target, UsageType usageType)
+    public sealed override MoveUsageResult Utilize(Character target, MoveUsageType moveUsageType)
     {
-        return base.Utilize(target, usageType);
+        return base.Utilize(target, moveUsageType);
     }
 }

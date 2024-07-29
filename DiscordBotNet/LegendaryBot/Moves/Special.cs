@@ -31,12 +31,12 @@ public abstract class Special : Move
         return base.ToString();
     }
 
-    public sealed override MoveUsageResult Utilize(Character target, UsageType usageType)
+    public sealed override MoveUsageResult Utilize(Character target, MoveUsageType moveUsageType)
     {
-        if (usageType == UsageType.NormalUsage)
+        if (moveUsageType == MoveUsageType.NormalUsage)
         {
             Cooldown = MaxCooldown;
         }
-        return base.Utilize(target, usageType);
+        return base.Utilize(target, moveUsageType);
     }
 }

@@ -27,7 +27,7 @@ public class Sleep: StatusEffect
     }
 
     public override string? OverridenUsage(ref Character target, ref BattleDecision decision,
-        UsageType usageType)
+        MoveUsageType moveUsageType)
     {
         Affected.CurrentBattle.AddBattleText($"{Affected} is fast asleep");
         return "Snores...";

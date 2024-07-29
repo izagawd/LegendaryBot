@@ -99,7 +99,7 @@ public class Takeshi : Character
         if(CannotDoAnything) return;
         if(args.MoveUsageResult.User.Team == Team) return;
         var usageResult = args.MoveUsageResult;
-        if(usageResult.UsageType == UsageType.CounterUsage) return;
+        if(usageResult.MoveUsageType == MoveUsageType.CounterUsage) return;
         var damageDealer = usageResult.User;
         if (damageDealer is null || damageDealer.IsDead || damageDealer.Team == Team)
             return;
@@ -110,7 +110,7 @@ public class Takeshi : Character
           
             if (BasicFunctionality.RandomChance(25))
             {
-                BasicAttack.Utilize(damageDealer, UsageType.CounterUsage);
+                BasicAttack.Utilize(damageDealer, MoveUsageType.CounterUsage);
                 break;
             }
         }

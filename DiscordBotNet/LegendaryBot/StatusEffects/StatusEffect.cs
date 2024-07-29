@@ -132,7 +132,7 @@ public abstract class StatusEffect  : INameHaver
 
     
     public virtual string? OverridenUsage(ref Character target, ref BattleDecision decision,
-        UsageType usageType) // the status effect might or might not replace the player's decision
+        MoveUsageType moveUsageType) // the status effect might or might not replace the player's decision
     {
         return null;
     }
