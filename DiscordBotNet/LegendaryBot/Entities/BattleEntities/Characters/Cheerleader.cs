@@ -71,16 +71,16 @@ public class YouCanMakeItEveryone : Ultimate
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} encourages her allies!");
 
-        var targets = GetPossibleTargets().ToArray();
+
 
     
-        foreach (var i in targets)
+        foreach (var i in GetPossibleTargets())
         {
             i.IncreaseCombatReadiness(CombatIncreaseAmount);
         }
 
         var eff = User.Effectiveness;
-        foreach (var i in targets)
+        foreach (var i in GetPossibleTargets())
         {
             i.AddStatusEffect(new AttackBuff() { Duration = 2, Caster = User},eff);
         }

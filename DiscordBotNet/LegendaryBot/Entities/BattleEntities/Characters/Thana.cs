@@ -75,15 +75,15 @@ public class Arise : Ultimate
     {
         User.CurrentBattle.AddBattleText($"With her necromancy powers, {User.NameWithAlphabet} attempts to bring back all her dead allies!");
 
-        var possibleTargets = GetPossibleTargets().ToArray();
+     
 
 
-        foreach (var i in possibleTargets)
+        foreach (var i in GetPossibleTargets())
         {
             if(i.IsDead)
                 i.Revive();
         }
-        foreach (var i in possibleTargets.OrderBy(i => i == User ? 1 : 0))
+        foreach (var i in GetPossibleTargets().OrderBy(i => i == User ? 1 : 0))
         {
             var duration = 1;
             if (i == User)

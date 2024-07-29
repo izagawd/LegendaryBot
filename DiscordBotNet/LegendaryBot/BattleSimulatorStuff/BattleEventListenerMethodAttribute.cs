@@ -1,5 +1,9 @@
 namespace DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 
+/// <summary>
+/// Use it on any method that is involved in a battle, and it will listen for events
+/// Note: doesnt work on methods in moves. use in character instead
+/// </summary>
 [AttributeUsage(AttributeTargets.Method)]
 public class BattleEventListenerMethodAttribute : Attribute
 {

@@ -89,8 +89,8 @@ public class ExplosionBlast : Ultimate
     protected override void UtilizeImplementation(Character target, UsageContext usageContext,
         out AttackTargetType attackTargetType, out string? text)
     {
-        var targets = GetPossibleTargets().ToArray();
-        foreach (var i in targets)
+      
+        foreach (var i in GetPossibleTargets())
         {
             i.Damage(new DamageArgs( User.Attack * 1.5f,new MoveDamageSource(usageContext))
             {
@@ -103,7 +103,7 @@ public class ExplosionBlast : Ultimate
         }
 
         var eff = User.Effectiveness;
-        foreach (var i in targets)
+        foreach (var i in GetPossibleTargets())
         {
             i.AddStatusEffects([new Burn() { Caster = User, Duration = 1 },
                 new Burn() { Caster = User, Duration = 1 }], eff);

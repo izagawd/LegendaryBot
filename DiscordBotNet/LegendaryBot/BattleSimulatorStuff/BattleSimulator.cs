@@ -169,10 +169,6 @@ public partial class BattleSimulator
         foreach (var i in Characters)
         {
             yield return i;
-            foreach (var j in i.MoveList)
-            {
-                yield return j;
-            }
             foreach (var j in i.StatusEffects)
             {
                 yield return j;

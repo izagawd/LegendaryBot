@@ -61,6 +61,23 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
 public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGuidPrimaryIdHaver
 {
 
+    /// <summary>
+    /// if not null, will assume this character uses super points.
+    /// </summary>
+    [NotMapped]
+    public int? MaxSuperPoints => null;
+    [NotMapped]
+    private int _superPoints = 0;
+    [NotMapped]
+    public int SuperPoints
+    {
+        get => _superPoints;
+        set
+        {
+            if (value < 0) value = 0;
+            _superPoints = value;
+        } 
+    }
     public virtual bool CanSpawnNormally => true;
     public bool CannotDoAnything => IsDead || HighestOverrideTurnType >= OverrideTurnType.CannotMove;
     public virtual string? PassiveDescription => null;
@@ -153,7 +170,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public Barrier? Shield => _statusEffects.OfType<Barrier>().FirstOrDefault();
 
     [NotMapped]
-    public IEnumerable<Move> MoveList
+    public virtual IEnumerable<Move> MoveList
     {
         get
         {

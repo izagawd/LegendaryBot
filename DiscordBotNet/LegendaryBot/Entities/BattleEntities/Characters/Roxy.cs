@@ -107,8 +107,7 @@ public class Roxy : Character
         Ultimate = new RoxyHeadBatWhack();
     }
 
-    protected override float BaseDefenseMultiplier => 1000;
-    protected override float BaseSpeedMultiplier => 100;
+
 
     [BattleEventListenerMethod]
     public void ShouldProcSkill(CharacterPostUseMoveEventArgs postUseMoveEventArgs)

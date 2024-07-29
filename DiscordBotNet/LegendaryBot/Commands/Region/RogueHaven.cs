@@ -7,6 +7,7 @@ public class RogueHaven : Region
     public override IEnumerable<Type> ObtainableCharacters =>
     [
         typeof(Thug),
-        typeof(Delinquent), typeof(Police), typeof(Roxy)
+        typeof(Delinquent), typeof(Police), typeof(Roxy), typeof(Slime),
+        typeof(Takeshi), typeof(CommanderJean)
     ];
 }
