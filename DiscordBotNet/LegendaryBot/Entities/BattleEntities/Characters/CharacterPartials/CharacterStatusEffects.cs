@@ -9,49 +9,11 @@ public partial class Character
     public void AddStatusEffects(IEnumerable<StatusEffect> statusEffects, float? effectiveness ,
         bool announce = true)
     {
-  
-        var statusEffectsAsArray = statusEffects.ToArray();
-        if (!announce)
-        {
-            foreach (var i in statusEffectsAsArray)
-            {
-                AddStatusEffect(i, effectiveness, false);
-            }
-            return;
-        }
 
-        List<StatusEffect> resisted = [];
-        List<StatusEffect> succeeded = [];
-        List<StatusEffect> failed = [];
-
-        foreach (var i in statusEffectsAsArray)
+        foreach (var i in statusEffects)
         {
-            var result = AddStatusEffect(i, effectiveness, false);
-            switch (result)
-            {
-                case StatusEffectInflictResult.Resisted:
-                    resisted.Add(i);
-                    break;
-                case StatusEffectInflictResult.Succeeded:
-                    succeeded.Add(i);
-                    break;
-                default:
-                    failed.Add(i);
-                    break;
-            }
+            AddStatusEffect(i, effectiveness, announce);
         }
-        
-        
-        
-        if(succeeded.Count > 0)
-            CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Succeeded
-                ,succeeded.ToArray()));
-        if(resisted.Count > 0)
-            CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Resisted
-                ,resisted.ToArray()));
-        if(failed.Count > 0)
-            CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,StatusEffectInflictResult.Failed
-                ,failed.ToArray()));
         
     }
     /// <param name="statusEffect">The status effect to add</param>
