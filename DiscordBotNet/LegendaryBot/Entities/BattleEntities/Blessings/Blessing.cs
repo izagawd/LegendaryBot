@@ -41,7 +41,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 
     }
     public virtual bool SpawnsNormally => true;
-    public virtual  string Description => GetDescription(Level);
+    public virtual  string Description => GetDescription(LevelMilestone);
     public abstract Rarity Rarity { get; }
 
 
@@ -49,7 +49,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     public string Name { get; }
     public UserData? UserData { get; set; }
 
-    public virtual string GetDescription(int level)
+    public virtual string GetDescription(int levelMilestone)
     {
         return "Idk man";
     }
@@ -72,8 +72,8 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     public ulong UserDataId { get; set; }
 
 
-    [NotMapped] public virtual int Attack => 20 + (Level * 4);
-    [NotMapped] public virtual int Health => 70 + (Level * 8);
+    [NotMapped] public virtual int Attack => 20 + (LevelMilestone * 40);
+    [NotMapped] public virtual int Health => 70 + (LevelMilestone * 80);
 
 
 
@@ -82,9 +82,9 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
         ImageUrl = $"{Website.DomainName}/battle_images/blessings/{GetType().Name}.png";
         Name = BasicFunctionality.Englishify(GetType().Name);
     }
-    [NotMapped]
-    protected int Level => (Character?.Level).GetValueOrDefault(1);
-    [NotMapped]
+
+    public int LevelMilestone => (Character?.LevelMilestone).GetValueOrDefault(0);
+    
     public bool IsInStandardBanner => true;
     public Character? Character { get; set; }
 

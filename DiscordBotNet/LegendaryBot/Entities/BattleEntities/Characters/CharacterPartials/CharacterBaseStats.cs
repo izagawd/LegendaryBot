@@ -5,7 +5,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.Characte
 public partial class Character
 {
     [NotMapped]
-    protected int LevelMilestone
+    public int LevelMilestone
     {
         get
         {

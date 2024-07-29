@@ -14,24 +14,24 @@ public class GoingAllOut : Blessing
         if(usedMove is null) return;
         if (usedMove.User == Character)
         {
-            eventArgs.DamageArgs.Damage *= (100 + GetUltimateDamageBoostPercent(Level)) * 0.01f;
+            eventArgs.DamageArgs.Damage *= (100 + GetUltimateDamageBoostPercent(LevelMilestone)) * 0.01f;
         }
 
         
     }
-    public override string GetDescription(int level)
+    public override string GetDescription(int levelMilestone)
     {
-        return $"Damage dealt by ultimate is increased by {GetUltimateDamageBoostPercent(level)}%";
+        return $"Damage dealt by ultimate is increased by {GetUltimateDamageBoostPercent(levelMilestone)}%";
     }
 
-    public int GetUltimateDamageBoostPercent(int level)
+    public int GetUltimateDamageBoostPercent(int levelMilestone)
     {
-        if (level >= 60) return 20;
-        if (level >= 50) return 18;
-        if (level >= 40) return 16;
-        if (level >= 30) return 14;
-        if (level >= 20) return 12;
-        if (level >= 10) return 10;
+        if (levelMilestone >= 6) return 20;
+        if (levelMilestone >= 5) return 18;
+        if (levelMilestone >= 4) return 16;
+        if (levelMilestone >= 3) return 14;
+        if (levelMilestone >= 2) return 12;
+        if (levelMilestone >= 1) return 10;
         return 8;
         
     }
