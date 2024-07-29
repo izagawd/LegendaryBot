@@ -566,10 +566,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public int MaxLevel => 60;
 
 
-    public void SetLevel(int level)
-    {
-        Level = level;
-    }
+
     [NotMapped]
     public float TotalAttack { get; set; }
     [NotMapped]
