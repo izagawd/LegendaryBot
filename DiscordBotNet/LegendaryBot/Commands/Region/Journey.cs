@@ -27,7 +27,7 @@ public class Journey : GeneralCommandClass
 
     [Command("journey"), Description("Use this command to encounter a character, and get them if you beat them"),
     BotCommandCategory(BotCommandCategory.Battle)]
-    public async ValueTask Execute(CommandContext ctx, int city)
+    public async ValueTask Execute(CommandContext ctx)
     {
         var author = ctx.User;
         var userData = await DatabaseContext.UserData
@@ -164,15 +164,14 @@ public class Journey : GeneralCommandClass
                 ..enemyTeam.SelectMany(i => i.DroppedRewards), new UserExperienceReward(250),
            ]);
            
-            rewardText += $"\nYou journeyed a bit more after recruiting {character.Name} and found:\n";
-            List<IInventoryEntity> entitiesToReward = [];
+            rewardText += $"\nYou explored a bit more after recruiting {character.Name}\n";
+   
             List<Reward> rewards = [];
            
  
             var expMatCount = BasicFunctionality.GetRandomNumberInBetween(3, 5);
             var gearCount = BasicFunctionality.GetRandomNumberInBetween(1, 2);
             
-            var extraCoinsCount = BasicFunctionality.GetRandomNumberInBetween(2, 3);
             foreach (var _ in Enumerable.Range(0,gearCount))
             {
                 var gear
@@ -183,14 +182,10 @@ public class Journey : GeneralCommandClass
             }
             foreach (var _ in Enumerable.Range(0, expMatCount))
             {
-                rewards.Add(new EntityReward([new DivineKnowledge()]));
+                rewards.Add(new EntityReward([new HerosKnowledge()]));
             }
-            foreach (var _ in Enumerable.Range(0, extraCoinsCount))
-            {
-                rewards.Add(new CoinsReward(1000));
-            }
-
-            await DatabaseContext.Items.Where(i => i is DivineKnowledge)
+            rewards.Add(new CoinsReward(5000));
+            await DatabaseContext.Items.Where(i => i is HerosKnowledge)
                 .LoadAsync();
             rewardText += userData.ReceiveRewards(rewards);
             embedToBuild

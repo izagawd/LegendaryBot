@@ -61,16 +61,17 @@ public partial class Character
             }
         }
 
-        public StatusEffectInflictBattleText(Character character, StatusEffectInflictResult effectInflictResult, params StatusEffect[] statusEffects)
+        public StatusEffectInflictBattleText(IEnumerable<Character> characters, StatusEffectInflictResult effectInflictResult, IEnumerable<StatusEffect> statusEffects)
         {
-            _affectedCharacters = [character];
+            _affectedCharacters = characters.ToList();
             _statusEffects = [..statusEffects];
             _effectInflictResult = effectInflictResult;
         }
+
         protected StatusEffectInflictBattleText(){}
-        public override BattleText? Merge(BattleText battleTextInstance)
+
+        private StatusEffectInflictBattleText? TryMergeCharacters(StatusEffectInflictBattleText statusEffectBattleText)
         {
-            if (battleTextInstance is not StatusEffectInflictBattleText statusEffectBattleText) return null;
             if (_effectInflictResult != statusEffectBattleText._effectInflictResult) return null;
             if (_statusEffects.Count != statusEffectBattleText._statusEffects.Count) return null;
             foreach (var i in Enumerable.Range(0,_statusEffects.Count))
@@ -84,6 +85,32 @@ public partial class Character
                 _statusEffects =  _statusEffects,
                 _affectedCharacters = [.._affectedCharacters, ..statusEffectBattleText._affectedCharacters]
             };
+        }
+
+        private StatusEffectInflictBattleText? TryMergeStatusEffects(
+            StatusEffectInflictBattleText statusEffectInflictBattleText)
+        {
+            if (_affectedCharacters.OrderBy(i => i.NameWithAlphabet)
+                    .SequenceEqual(statusEffectInflictBattleText._affectedCharacters.OrderBy(i => i.NameWithAlphabet))
+                && _effectInflictResult == statusEffectInflictBattleText._effectInflictResult)
+            {
+                return new StatusEffectInflictBattleText()
+                {
+                    _effectInflictResult = _effectInflictResult,
+                    _statusEffects = [.._statusEffects, ..statusEffectInflictBattleText._statusEffects],
+                    _affectedCharacters = _affectedCharacters
+                };
+            }
+
+            return null;
+        }
+        public override BattleText? Merge(BattleText battleTextInstance)
+        {
+            if (battleTextInstance is not StatusEffectInflictBattleText statusEffectBattleText) return null;
+            var tryMergeCharacters = TryMergeCharacters(statusEffectBattleText);
+            if (tryMergeCharacters is not null)
+                return tryMergeCharacters;
+            return TryMergeStatusEffects(statusEffectBattleText);
 
         }
     }

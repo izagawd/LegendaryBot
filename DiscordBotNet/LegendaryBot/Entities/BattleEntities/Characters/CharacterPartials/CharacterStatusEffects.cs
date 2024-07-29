@@ -58,7 +58,7 @@ public partial class Character
 
             if (added)
                 inflictResult = StatusEffectInflictResult.Succeeded;
-            CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,inflictResult, statusEffect));
+            CurrentBattle.AddBattleText(new StatusEffectInflictBattleText([this],inflictResult, [statusEffect]));
             if (added)
             {
                 statusEffect.OnAdded();
@@ -81,7 +81,7 @@ public partial class Character
                 _statusEffects.Remove(onlyStatus);
                 _statusEffects.Add(optimizedOne);
                 inflictResult = StatusEffectInflictResult.Optimized;
-                CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,inflictResult, optimizedOne));
+                CurrentBattle.AddBattleText(new StatusEffectInflictBattleText([this],inflictResult, [optimizedOne]));
             }
             if (statusEffect.EffectType == StatusEffectType.Debuff && effectiveness is not null)
             {
@@ -101,7 +101,7 @@ public partial class Character
             return inflictResult;
         }
         inflictResult = StatusEffectInflictResult.Failed;
-        CurrentBattle.AddBattleText(new StatusEffectInflictBattleText(this,inflictResult, statusEffect));
+        CurrentBattle.AddBattleText(new StatusEffectInflictBattleText([this],inflictResult, [statusEffect]));
         return inflictResult;
     }
     /// <summary>
