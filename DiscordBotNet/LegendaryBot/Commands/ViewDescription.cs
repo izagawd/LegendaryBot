@@ -17,11 +17,11 @@ public class ViewDescription : GeneralCommandClass
     {
         var simplifiedName = entityName.Replace(" ", "").ToLower();
         object? zaObject = TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<IInventoryEntity>()
-            .FirstOrDefault(i => i.GetType().Name.ToLower() == simplifiedName);
+            .FirstOrDefault(i => i.Name.ToLower().Replace(" ","") == simplifiedName);
         if (zaObject is null)
         {
             zaObject = TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<StatusEffect>()
-                .FirstOrDefault(i => i.GetType().Name.ToLower() == simplifiedName);
+                .FirstOrDefault(i => i.Name.ToLower().Replace(" ","") == simplifiedName);
         }
 
         var zaColor = await DatabaseContext.UserData

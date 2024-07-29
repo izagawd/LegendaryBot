@@ -344,8 +344,8 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     /// </summary>
     protected virtual IEnumerable<StatType> LevelMilestoneStatIncrease =>
     [
-        StatType.Defense, StatType.Defense,
-        StatType.CriticalChance, StatType.CriticalDamage, StatType.Effectiveness, StatType.Attack
+        StatType.MaxHealth, StatType.CriticalChance,
+        StatType.Attack, StatType.Effectiveness, StatType.Resistance, StatType.Speed
     ];
 
 
