@@ -324,8 +324,10 @@ public static class Bot
             Console.WriteLine("Making all users unoccupied...");
             stopwatch.Start();
             await ctx.UserData
-                .ForEachAsync(i => i.IsOccupied = false);
-            await ctx.SaveChangesAsync();
+
+                .ExecuteUpdateAsync(i => i.SetProperty(j => j.IsOccupied,
+                    _ => false));
+          
             Console.WriteLine($"made all users unoccupied!");
         }
         await StartDiscordBotAsync();
