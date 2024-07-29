@@ -10,7 +10,7 @@ public static class InventoryEntityExtensions
 /// <summary>
 /// An entity that can be stored in the user's inventory
 /// </summary>
-public interface IInventoryEntity 
+public interface IInventoryEntity : INameHaver 
 {
 
     bool CanBeTraded { get; }
@@ -23,11 +23,7 @@ public interface IInventoryEntity
     Rarity Rarity { get;  }
 
 
-    string Name { get; }
- 
-
-
-
+   
     UserData? UserData { get; set; }
 
     string ImageUrl { get; }

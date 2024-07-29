@@ -10,7 +10,7 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 
 
-public abstract class StatusEffect 
+public abstract class StatusEffect  : INameHaver
 {
     public StatusEffect()
     {
