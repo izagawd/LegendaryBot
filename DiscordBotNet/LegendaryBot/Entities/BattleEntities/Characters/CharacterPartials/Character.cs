@@ -520,13 +520,13 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         if ((Ultimate?.CanBeUsed()).GetValueOrDefault(false))
         {
             decision = BattleDecision.Ultimate;
-            target = BasicFunctionality.RandomChoice(Ultimate.GetPossibleTargets());
+            target = BasicFunctionality.RandomChoice(Ultimate!.GetPossibleTargets());
             return;
         }
         if ((Skill?.CanBeUsed()).GetValueOrDefault(false))
         {
             decision = BattleDecision.Skill;
-            target = BasicFunctionality.RandomChoice(Skill.GetPossibleTargets());
+            target = BasicFunctionality.RandomChoice(Skill!.GetPossibleTargets());
             return;
         }
 
