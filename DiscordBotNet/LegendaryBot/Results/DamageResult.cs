@@ -5,17 +5,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.Results;
 
-public struct MoveUsageDetails
-{
-    public Move Move { get; }
-    public MoveUsageType MoveUsageType { get; }
 
-    public MoveUsageDetails(Move move, MoveUsageType moveUsageType)
-    {
-        Move = move;
-        MoveUsageType = moveUsageType;
-    }
-}
 public class DamageResult
 {
 

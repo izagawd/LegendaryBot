@@ -85,7 +85,7 @@ public partial class Character
 
         var moveLength = 25; 
 
-        foreach (var i in MoveList)
+        foreach (var i in MoveList.Take(3))
         {
             //do not change size of the move image here.
             //do it in the method that gets the image
