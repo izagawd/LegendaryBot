@@ -316,14 +316,9 @@ public static class Bot
     
     private async static Task DoShitAsync()
     {
-        List<object> players = [];
-        var cont = new PostgreSqlContext();
-        await cont.UserData
-            .Select(i => new{i.Name})
-            .LoadAsync();
-        Process.GetCurrentProcess().Kill();
 
-        players.ForEach(i => i.GetType().Name.Print());
+     
+
     }
     private static async Task Main(string[] args)
     {

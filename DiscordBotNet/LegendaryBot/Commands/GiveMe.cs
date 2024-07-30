@@ -19,9 +19,9 @@ public class GiveMe : GeneralCommandClass
                            Description("The amount you want of the supplied item")] long amount = 1)
     {
         var simplifiedEntityName = entityName.ToLower().Replace(" ", "");
-        var type =TypesFunctionality.AllAssemblyTypes.FirstOrDefault(i => i.IsClass 
-                                                                      && i.GetInterfaces().Contains(typeof(IInventoryEntity)) && !i.IsAbstract
-            && i.Name.ToLower().Replace(" ","") == simplifiedEntityName);
+        var type =TypesFunctionality
+            .GetDefaultObjectsThatIsInstanceOf<IInventoryEntity>()
+            .FirstOrDefault(i => i.Name.ToLower().Replace(" ","") == simplifiedEntityName)?.GetType();
         if (ctx.User.Id != Bot.Izasid && ctx.User.Id != Bot.Testersid)
         {
             await ctx.RespondAsync("Only izagawd can use this command");

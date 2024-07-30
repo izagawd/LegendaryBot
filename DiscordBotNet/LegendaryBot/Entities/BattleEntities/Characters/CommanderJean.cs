@@ -166,7 +166,7 @@ public class CommanderJean : Character
     
     }
 
-    protected override float BaseSpeedMultiplier => 100;
+    protected override float BaseSpeedMultiplier => 1.1f;
 
     public override string? PassiveDescription =>
         "Once super points reach 5, a firing squad appears, attacking all enemies";

@@ -589,7 +589,7 @@ public partial class BattleSimulator
     }
     public Alphabet GetAlphabetIdentifier(Character character)
     {
-         return (Alphabet)Characters.ToList().IndexOf(character);
+         return (Alphabet)Characters.IndexOf(character);
     }
 
     /// <summary>

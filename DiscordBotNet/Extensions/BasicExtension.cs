@@ -7,6 +7,31 @@ namespace DiscordBotNet.Extensions;
 
 public static class BasicExtension
 {
+    public static int IndexOf<T>(this IEnumerable<T> enumerable, T target)
+    {
+        int index = 0;
+        if (target is null)
+        {
+            foreach (var item in enumerable)
+            {
+                if (item is null)
+                    return index;
+                if(item.Equals(target))
+                    return index;
+                index++;
+            }
+        }
+        else
+        {
+            foreach (var item in enumerable)
+            {
+                if (target.Equals(item))
+                    return index;
+                index++;
+            }
+        }
+        return -1; // Item not found
+    }
     public static void ForEach<T>(this IEnumerable<T> enumeration, Action<T> action)
     {
         foreach (T item in enumeration)
