@@ -3,10 +3,9 @@ using DSharpPlus.Commands;
 using SixLabors.ImageSharp.Diagnostics;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
-[Command("memory")]
 public class Memory : GeneralCommandClass
 {
-    [Command("usage")]
+    [Command("memory-diagnostics")]
     public async ValueTask ExecuteGetTotalMemoryUsedInBytes(CommandContext context)
     {
         var currentProcess = Process.GetCurrentProcess();

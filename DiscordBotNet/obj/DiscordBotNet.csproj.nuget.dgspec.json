@@ -48,7 +48,7 @@
             },
             "DSharpPlus.Commands": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02342, )"
+              "version": "[5.0.0-nightly-02341, )"
             },
             "DSharpPlus.Core": {
               "target": "Package",
@@ -60,15 +60,15 @@
             },
             "DSharpPlus.Lavalink": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02333, )"
+              "version": "[5.0.0-nightly-02342, )"
             },
             "DSharpPlus.Rest": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02333, )"
+              "version": "[5.0.0-nightly-02342, )"
             },
             "DSharpPlus.VoiceNext": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02333, )"
+              "version": "[5.0.0-nightly-02342, )"
             },
             "Microsoft.AspNetCore.Authentication.Certificate": {
               "target": "Package",

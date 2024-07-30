@@ -229,6 +229,7 @@ public static class Bot
     }
 
 
+
     private static async Task StartDiscordBotAsync()
     {
         
@@ -243,8 +244,9 @@ public static class Bot
 
         var commandsExtension = Client.UseCommands(new CommandsConfiguration()
         {
-            UseDefaultCommandErrorHandler = false
+            UseDefaultCommandErrorHandler = false,
         });
+   
         var slashCommandProcessor = new SlashCommandProcessor();
     
         slashCommandProcessor.AddConverters(typeof(Bot).Assembly);
@@ -260,9 +262,8 @@ public static class Bot
             // and then you can provide as many prefixes as you want.
             PrefixResolver = new DefaultPrefixResolver(true,  "&").ResolvePrefixAsync,
             IgnoreBots = true,
-   
         });
-        
+
         
         textCommandProcessor.AddConverters(typeof(Bot).Assembly);
         await commandsExtension.AddProcessorAsync(textCommandProcessor);
@@ -284,7 +285,7 @@ public static class Bot
         
        
         await Client.ConnectAsync();
-        await Client.UpdateStatusAsync(new DiscordActivity("&help", DiscordActivityType.Playing));
+ 
 
     }
 
