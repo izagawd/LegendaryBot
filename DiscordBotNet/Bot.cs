@@ -317,18 +317,6 @@ public static class Bot
     private async static Task DoShitAsync()
     {
 
-        List<Player> players = [];
-        foreach (var i in Enumerable.Range(0,10))
-        {
-            var stop = new Stopwatch();
-            stop.Start();
-            var player = new Player();
-            stop.Stop();
-            stop.Elapsed.TotalMicroseconds.Print();
-            players.Add(player);
-        }
-  
-        Process.GetCurrentProcess().Kill();
 
     }
     private static async Task Main(string[] args)
@@ -347,7 +335,7 @@ public static class Bot
                 .ExecuteUpdateAsync(i => i.SetProperty(j => j.IsOccupied,
                     _ => false));
           
-            Console.WriteLine("Made all users unoccupied!");
+            Console.WriteLine($"made all users unoccupied!");
         }
         await StartDiscordBotAsync();
       
