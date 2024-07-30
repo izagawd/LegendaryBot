@@ -9,6 +9,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class ShieldBash : BasicAttack
 {
+    public override string Name => "Shield Bash";
     public override string GetDescription(Character character) => $"Bashes the shield to the enemy, with a {ShieldStunChanceByBash}% chance to stun"!;
 
 
@@ -38,6 +39,7 @@ public class ShieldBash : BasicAttack
 }
 public class IWillBeYourShield : Skill
 {
+    public override string Name => "I Will Be Your Shield!!";
     public override int MaxCooldown => 4;
 
     public override IEnumerable<Character> GetPossibleTargets()
@@ -69,6 +71,7 @@ public class IWillBeYourShield : Skill
 
 public class IWillProtectUs : Ultimate
 {
+    public override string Name => "I Will Protect Us!!";
     public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.Team.Where(i => !i.IsDead);
@@ -98,7 +101,7 @@ public class IWillProtectUs : Ultimate
 
 public class RoyalKnight : Character
 {
-
+    public override string Name => "Royal Knight";
     protected override float BaseAttackMultiplier => 0.85f;
     protected override float BaseMaxHealthMultiplier => 1.125f;
     protected override float BaseDefenseMultiplier => 1.15f;

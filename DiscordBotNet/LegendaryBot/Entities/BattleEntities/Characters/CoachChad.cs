@@ -8,6 +8,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class GigaPunch : BasicAttack
 {
+    public override string Name => "Giga Punch";
     public override string GetDescription(Character character) => "Punch is thrown gigaly";
     
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
@@ -31,7 +32,7 @@ public class GigaPunch : BasicAttack
 
 public class MuscleFlex : Ultimate
 {
-  
+    public override string Name => "Muscle Flex";
     public override string GetDescription(Character character) => "Flexes muscles";
     
 
@@ -53,7 +54,7 @@ public class MuscleFlex : Ultimate
 
 public class ThumbsUp : Skill
 {
-
+    public override string Name => "Thumbs Up";
     public override string GetDescription(Character character) => "Gives the enemy a thumbs up!";
     
 
@@ -77,6 +78,7 @@ public class ThumbsUp : Skill
 }
 public class CoachChad : Character
 {
+    public override string Name => "Coach Chad";
     public override Rarity Rarity => Rarity.FourStar;
 
     public CoachChad()

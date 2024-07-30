@@ -4,7 +4,7 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class AttackDebuff : StatusEffect, IStatsModifier
 {
-
+    public override string Name => "Attack Debuff";
     public AttackDebuff(){}
     public override bool IsStackable => false;
 

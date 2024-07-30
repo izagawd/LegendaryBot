@@ -5,6 +5,8 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class HeadStart : Blessing
 {
+    public override string Name => "Head Start";
+
     public HeadStart()
     {
         TypeId = 2;

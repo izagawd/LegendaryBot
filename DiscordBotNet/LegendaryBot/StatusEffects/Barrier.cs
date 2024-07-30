@@ -4,7 +4,7 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Barrier : StatusEffect
 {
-
+    public override string Name => "Barrier";
     public override string Description => "Protects the caster with a barrier";
     public override bool IsStackable => false;
     public override StatusEffectType EffectType => StatusEffectType.Buff;

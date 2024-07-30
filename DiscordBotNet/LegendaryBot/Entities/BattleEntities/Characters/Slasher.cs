@@ -7,6 +7,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class WindSlash : Skill
 {
+    public override string Name => "Wind Slash";
     private const int increasedCritChance = 25;
     public override string GetDescription(Character character) => "Attacks all enemies with a sharp wind." +
         $" Attack has an increased crit chance of {increasedCritChance}%";
@@ -45,6 +46,7 @@ public class WindSlash : Skill
 
 public class SimpleSlashOfPrecision : BasicAttack
 {
+    public override string Name => "Simple Slash Of Precision";
     private const int increasedCritChance = 25;
     public override string GetDescription(Character character) =>
         $"Does a simple slash. Attack has an increased crit chance of {increasedCritChance}";
@@ -68,6 +70,7 @@ public class SimpleSlashOfPrecision : BasicAttack
 }
 public class ConsecutiveSlashesOfPrecision : Ultimate
 {
+    public override string Name => "Consecutive Slashes Of Precision";
      const int increasedCritChance = 25;
 
      public override string GetDescription(Character character)
@@ -100,7 +103,7 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
 }
 public class Slasher : Character
 {
-  
+    public override string Name => "Slasher";
     public override Rarity Rarity => Rarity.FourStar;
     public override DiscordColor Color => DiscordColor.Brown;
 

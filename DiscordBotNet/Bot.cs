@@ -29,6 +29,7 @@ using DSharpPlus.Commands.Processors.TextCommands;
 using DSharpPlus.Commands.Processors.TextCommands.Parsing;
 using DSharpPlus.VoiceNext;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 
@@ -336,23 +337,22 @@ public static class Bot
 
         return allFields;
     }
+
+    class Bruh
+    {
+        private int idk = 5;
+    }
     private async static Task DoShitAsync()
     {
         var arise = new Arise();
-        BasicFunctionality.SizeOf(new Player().GetType()).Print();
-        typeof(Player)
-            
-            .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic 
-        | BindingFlags.FlattenHierarchy).ForEach(i => i.Name.Print());
-
+   
+        BasicFunctionality.SizeOf(typeof(Character)).Print();
+  
+        
         while (true)
         {
-            var stop = new Stopwatch();
-            stop.Start();
-            var englishified = stop.GetType().Name;
-            stop.Stop();
-            stop.Elapsed.TotalMicroseconds.Print();
-            englishified.Print();
+ 
+
 
         }
     }

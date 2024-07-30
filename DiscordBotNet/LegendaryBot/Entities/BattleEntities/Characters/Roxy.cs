@@ -10,7 +10,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class RoxyBatWhack : BasicAttack
 {
-
+    public override string Name => "Roxy Bat Whack";
     public int SkillUseChance => 50;
     public override string GetDescription(Character character)
     {
@@ -36,6 +36,7 @@ public class RoxyBatWhack : BasicAttack
 
 public class RoxyAggressiveOverload : Skill
 {
+    public override string Name => "Roxy Aggressive Overload";
     public override string GetDescription(Character character)
     {
         return "Aggressively whacks the target with their bat non stop!";
@@ -65,7 +66,7 @@ public class RoxyAggressiveOverload : Skill
 
 public class RoxyHeadBatWhack : Ultimate
 {
-    
+    public override string Name => "Roxy Head Bat Whack";
     public override string GetDescription(Character character)
     {
         return "Caster whacks enemy on the head, dealing increadible damage, stunning them for 1 turn";
@@ -97,6 +98,7 @@ public class RoxyHeadBatWhack : Ultimate
 }
 public class Roxy : Character
 {
+    public override string Name => "Roxy";
     protected override float BaseAttackMultiplier => 1.1f;
     public override Rarity Rarity => Rarity.FourStar;
 

@@ -126,7 +126,7 @@ public abstract class StatusEffect  : INameHaver
     /// <summary>
     /// The name of the status effect
     /// </summary>
-    public virtual string Name => GetType().Name;
+    public abstract string Name { get; }
 
     
     public virtual string? OverridenUsage(ref Character target, ref BattleDecision decision,

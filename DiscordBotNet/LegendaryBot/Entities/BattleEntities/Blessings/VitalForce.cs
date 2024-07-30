@@ -5,6 +5,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class VitalForce : Blessing, IStatsModifier
 {
+    public override string Name => "Vital Force";
 
     public override string GetDescription(int levelMilestone)
     {

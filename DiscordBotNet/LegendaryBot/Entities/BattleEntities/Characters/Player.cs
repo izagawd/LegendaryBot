@@ -8,6 +8,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class FourthWallBreaker: BasicAttack
 {
+    public override string Name => "Fourth Wall Breaker";
     public override string GetDescription(Character character) =>  "Damages the enemy by breaking the fourth wall";
     
 
@@ -31,6 +32,7 @@ public class FourthWallBreaker: BasicAttack
 
 public class FireBall : Skill
 {
+    public override string Name => "Fire Ball";
     public override string GetDescription(Character character) => "Throws a fire ball at the enemy with a 40% chance to inflict burn";
     
 
@@ -65,6 +67,7 @@ public class FireBall : Skill
 }
 public class Ignite : Ultimate
 {
+    public override string Name => "Ignite";
     public override int MaxCooldown => 4;
     public override string GetDescription(Character character) =>$"Ignites the enemy with 3 burns for 2 turns!";
     
@@ -146,15 +149,14 @@ public class Player : Character
         Element = element;
     }
 
-    
-    private string _imageUrl;
+
 
     
     
     public override string ImageUrl => $"{Website.DomainName}/battle_images/characters/Player{UserData?.Gender}.png";
 
 
-    public override string Name => UserData?.Name ??  base.Name;
+    public override string Name => UserData?.Name ??  "Player";
 
 
 

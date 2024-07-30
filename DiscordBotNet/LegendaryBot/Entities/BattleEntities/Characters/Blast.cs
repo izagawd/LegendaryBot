@@ -8,6 +8,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class MethaneSlap : BasicAttack
 {
+    public override string Name => "Methane Slap";
     public override string GetDescription(Character character) => $"Slaps the enemy, " +
                                                                   $"producing methane around the enemy, with a " +
                                                                   $"{DetonateChance}% chance to detonate all the bombs the target has";
@@ -38,7 +39,7 @@ public class MethaneSlap : BasicAttack
 }
 public class BlowAway : Skill
 {
-    
+    public override string Name => "Blow Away";
     public override int MaxCooldown => 4;
     public override string GetDescription(Character character) => $"Throws multiple bombs at the enemy, with a {BombInflictChance}% chance each to inflict Bomb status effect";
 
@@ -76,6 +77,7 @@ public class BlowAway : Skill
 }
 public class ExplosionBlast : Ultimate
 {
+    public override string Name => "Explosion Blast";
     public override string GetDescription(Character character) 
         => $"User does an explosion blast, attacking all enemies, inflicting burn x2 on each enemy hit";
     
@@ -115,7 +117,7 @@ public class ExplosionBlast : Ultimate
 }
 public class Blast : Character
 {
-
+    public override string Name => "Blast";
     public override Rarity Rarity => Rarity.FourStar;
     public override DiscordColor Color => DiscordColor.Brown;
 

@@ -4,6 +4,8 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class BurgsKingdom : Region
 {
+    public override string Name => "Burgs Kingdom";
+
     public override IEnumerable<Type> ObtainableCharacters =>
     [
         typeof(RoyalKnight),

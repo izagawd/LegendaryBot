@@ -7,6 +7,8 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class GoingAllOut : Blessing
 {
+    public override string Name => "Going All Out";
+
     [BattleEventListenerMethod]
     public  void IncreaseUlt(CharacterPreDamageEventArgs eventArgs)
     {

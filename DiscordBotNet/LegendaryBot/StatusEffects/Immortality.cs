@@ -2,7 +2,7 @@
 
 public class Immortality : StatusEffect
 {
-  
+    public override string Name => "Immortality";
     public override string Description =>
         "Makes the affected not able to die by preventing their hp from going below one";
 

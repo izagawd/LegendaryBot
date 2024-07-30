@@ -24,7 +24,7 @@ public class MoveUsageContext
     
 }
 
-public abstract class Move 
+public abstract class Move  : INameHaver
 {
     /// <summary>
     /// The maximum amount this move can be enhanced to
@@ -122,7 +122,7 @@ public abstract class Move
 
 
 
-    public virtual string Name => GetType().Name;
+    public abstract string Name { get; }
 
 
 }

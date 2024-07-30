@@ -10,6 +10,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class ChamomileSachetWhack : BasicAttack
 {
+    public override string Name => "Chamomile Sachet Whack";
     public override string GetDescription(Character character) => 
         $"With the power of Chamomile, whacks an enemy with a sack filled with Chamomile, with a {SleepChance}% chance of making the enemy sleep";
     
@@ -37,6 +38,7 @@ public class ChamomileSachetWhack : BasicAttack
 }
 public class BlossomTouch : Skill
 {
+    public override string Name => "Blossom Touch";
     public override int MaxCooldown => 3;
 
     public override IEnumerable<Character> GetPossibleTargets()
@@ -60,6 +62,7 @@ public class BlossomTouch : Skill
 }
 public class LilyOfTheValley : Ultimate
 {
+    public override string Name => "Lily Of The Valley";
     public override int MaxCooldown  => 5;
 
     public override IEnumerable<Character> GetPossibleTargets()
@@ -88,6 +91,7 @@ public class LilyOfTheValley : Ultimate
 }
 public class Lily : Character
 {
+    public override string Name => "Lily";
     protected override float BaseSpeedMultiplier => 1.15f;
 
 

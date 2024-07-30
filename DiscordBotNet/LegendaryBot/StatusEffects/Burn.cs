@@ -6,7 +6,7 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Burn : StatusEffect, IDetonatable
 {
-
+    public override string Name => "Burn";
     public override string Description => "Does damage at the start of the affected's turn. Damage ignores 70% of defense";
     private float _characterAttack;
     public override StatusEffectType EffectType => StatusEffectType.Debuff;

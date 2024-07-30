@@ -19,7 +19,7 @@ public class PlayerTeamDatabaseConfiguration : IEntityTypeConfiguration<PlayerTe
             .AutoInclude();
         entity.HasKey(i => i.Id);
         entity.HasMany<CharacterPartials.Character>(i => i.Characters)
-            .WithMany(i => i.PlayerTeams)
+            .WithMany()
             .UsingEntity<CharacterPlayerTeam>(i
                 => i.HasOne<CharacterPartials.Character>().WithMany().HasForeignKey(j => j.CharacterId), i =>
                 i.HasOne<PlayerTeam>().WithMany().HasForeignKey(j => j.PlayerTeamId), i =>

@@ -8,7 +8,7 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 public class Sleep: StatusEffect
 {
 
-   
+    public override string Name => "Sleep";
     public override string Description =>
         "Makes affected not able to move. Is dispelled when affected takes damage from a move";
     public override bool IsStackable => false;

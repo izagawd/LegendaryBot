@@ -9,6 +9,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class DoNotResist : BasicAttack
 {
+    public override string Name => "Do Not Resist";
     public override string GetDescription(Character character)
     {
         return "Tases the enemy, with a 15% chance to stun for one turn";
@@ -39,6 +40,7 @@ public class DoNotResist : BasicAttack
 
 public class IAmShooting : Skill
 {
+    public override string Name => "I Am Shooting";
     public override string GetDescription(Character character)
     {
         return "Shoots the enemy twice, causing bleed for two turns";
@@ -69,7 +71,7 @@ public class IAmShooting : Skill
 }
 public class Police : Character
 {
-
+    public override string Name => "Police";
     public override Rarity Rarity => Rarity.TwoStar;
 
 

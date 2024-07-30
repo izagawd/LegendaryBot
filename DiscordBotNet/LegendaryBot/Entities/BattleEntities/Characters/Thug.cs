@@ -11,6 +11,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class ThugPunch : BasicAttack
 {
+    public override string Name => "Thug Punch";
     public override string GetDescription(Character character)
     {
         return "Punches the enemy in a thug way";
@@ -33,6 +34,7 @@ public class ThugPunch : BasicAttack
 }
 public class ThugInsult : Skill
 {
+    public override string Name => "Thug Insult";
     public override string GetDescription(Character character)
     {
         return "Insults the enemy, decreasing defense for 2 turns";
@@ -56,6 +58,7 @@ public class ThugInsult : Skill
 }
 public class Thug : Character
 {
+    public override string Name => "Thug";
 
     public Thug()
     {

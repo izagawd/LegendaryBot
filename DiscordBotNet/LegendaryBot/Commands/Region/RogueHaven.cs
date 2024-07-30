@@ -4,6 +4,8 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class RogueHaven : Region
 {
+    public override string Name => "Rogue Haven";
+
     public override IEnumerable<Type> ObtainableCharacters =>
     [
         typeof(Thug),

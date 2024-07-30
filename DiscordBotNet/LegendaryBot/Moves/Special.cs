@@ -27,7 +27,7 @@ public abstract class Special : Move
     public override string ToString()
     {
         if (IsOnCooldown)
-            return base.ToString() + $" ({Cooldown})";
+            return base.ToString() + $" [{Cooldown}]";
         return base.ToString();
     }
 

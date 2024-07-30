@@ -219,7 +219,37 @@ public static class BasicFunctionality
         return FirstLetterCapital(stringToRobotify).Replace(" ", "");
     }
         
+    /// <summary>Spaces out a sentence and makes each word start with a capital letter</summary>
+    ///<returns>The computed string</returns>
+    public static string Englishify(this string stringToEnglishify)
+    {
+        string[] newArray; 
+        if (stringToEnglishify.Contains('_'))
+        {
+            newArray = stringToEnglishify.Split("_");
+        
+        }
+        else if(stringToEnglishify.Contains(' '))
+                
+        {
+            newArray = stringToEnglishify.Split(" ");
+        } else
+        {
+            var tempStringBuilder = new StringBuilder();
+            for(var i = 0; i < stringToEnglishify.Length; i++)
+            {
+                tempStringBuilder.Append(stringToEnglishify[i]);
+                if (stringToEnglishify.Length > i + 1 &&  char.IsUpper(stringToEnglishify[i + 1]))
+                {
+                    tempStringBuilder.Append(' ');
+                }
+            }
+            newArray = tempStringBuilder.ToString().Split(" ");
+        }
+        return string.Join(" ", newArray);
 
+
+    }
 
 
     ///<returns>The amount of time till the next day as a string</returns>

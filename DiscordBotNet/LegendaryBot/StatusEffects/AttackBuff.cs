@@ -4,6 +4,7 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class AttackBuff : StatusEffect, IStatsModifier
 {
+    public override string Name => "Attack Buff";
     public override bool IsStackable => false;
     public override string Description => "Increases the caster's attack by 50%";
 

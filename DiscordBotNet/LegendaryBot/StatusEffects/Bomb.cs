@@ -6,6 +6,7 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Bomb : StatusEffect, IDetonatable
 {
+    public override string Name => "Bomb";
     public override void OnAdded()
     {
         base.OnAdded();

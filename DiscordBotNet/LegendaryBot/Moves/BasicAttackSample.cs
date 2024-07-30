@@ -8,6 +8,7 @@ namespace DiscordBotNet.LegendaryBot.Moves;
 /// </summary>
 public class BasicAttackSample : BasicAttack
 {
+    public override string Name => "Basic Attack Sample";
     public override string GetDescription(Character character) => "Take that!";
     
     protected  override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, 

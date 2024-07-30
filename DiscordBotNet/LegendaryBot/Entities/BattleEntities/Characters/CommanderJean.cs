@@ -10,6 +10,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class CommanderJeanTonfaWhack : BasicAttack
 {
+    public override string Name => "Commander Jean Tonfa Whack";
     public override string GetDescription(Character character)
     {
         return "Whacks the enemy with a tonfa, increasing super points by 1 point";
@@ -31,6 +32,7 @@ public class CommanderJeanTonfaWhack : BasicAttack
 }
 public class CommanderJeanTaser : Skill
 {
+    public override string Name => "Commander Jean Taser";
     public override string GetDescription(Character character)
     {
         return "Tazes the enemy, stunning them for one turn, and increasing super points by 2";
@@ -65,6 +67,7 @@ public class CommanderJeanTaser : Skill
 }
 public class CommanderJeanGrenade : Ultimate
 {
+    public override string Name => "Commander Jean Grenade";
     public override string GetDescription(Character character)
     {
         return "Throws multiple grenades at the enemy, dealing damage, and inflicting 2 bleed effects for 2 turns, increasing super points by 3";
@@ -112,6 +115,7 @@ public class CommanderJeanGrenade : Ultimate
 
 public class CommanderJeanFiringSquad : Skill
 {
+    public override string Name => "Commander Jean Firing Squad";
     public override string GetDescription(Character character)
     {
         return "d";

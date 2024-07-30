@@ -6,7 +6,7 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Poison : StatusEffect, IDetonatable
 {
-
+    public override string Name => "Poison";
     public override string Description => "Deals damage equivalent to 5% of the affected's max health";
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
 

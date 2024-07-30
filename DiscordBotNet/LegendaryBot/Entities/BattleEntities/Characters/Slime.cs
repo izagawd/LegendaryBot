@@ -9,7 +9,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class SlimeBodySlam : BasicAttack
 {
-    
+    public override string Name => "Slime Body Slam";
     public override string GetDescription(Character character) => "Slams it's body on the enemy, with a 10% chance to inflict poison";
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
     {
@@ -32,7 +32,7 @@ public class SlimeBodySlam : BasicAttack
 }
 public class Slime : Character
 {
-
+    public override string Name => "Slime";
     protected override float BaseSpeedMultiplier => 0.8f;
     protected override float BaseMaxHealthMultiplier => 0.7f;
     protected override float BaseAttackMultiplier => 0.4f;

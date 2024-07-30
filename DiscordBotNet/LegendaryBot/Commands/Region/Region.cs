@@ -7,7 +7,7 @@ public abstract class Region
     public virtual Tier TierRequirement => Tier.Bronze;
     public abstract IEnumerable<Type> ObtainableCharacters { get; }
 
-    public virtual string Name => GetType().Name;
+    public abstract string Name { get; }
 
     static Region()
     {

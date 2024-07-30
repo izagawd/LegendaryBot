@@ -7,6 +7,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class PomPomAttack : BasicAttack
 {
+    public override string Name => "Pom Pom Attack";
     public override string GetDescription(Character character)
     {
         return "Caster hits the enemy with a pom-pom... and that it";
@@ -28,6 +29,7 @@ public class PomPomAttack : BasicAttack
 
 public class  YouCanDoIt : Skill
 {
+    public override string Name => "You Can Do It";
     public override string GetDescription(Character character)
     {
         return "Increases the combat readiness of a single target by 100%, increasing their attack for 2 turns. " +
@@ -55,6 +57,7 @@ public class  YouCanDoIt : Skill
 
 public class YouCanMakeItEveryone : Ultimate
 {
+    public override string Name => "You Can Make It Everyone";
     private int CombatIncreaseAmount => 30;
     public override string GetDescription(Character character)
     {
@@ -95,8 +98,7 @@ public class YouCanMakeItEveryone : Ultimate
 }
 public class Cheerleader : Character
 {
-
-
+    public override string Name => "Cheerleader";
     public override Rarity Rarity => Rarity.FourStar;
 
     public Cheerleader()

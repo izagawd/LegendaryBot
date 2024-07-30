@@ -12,6 +12,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class TakeshiStraightPunch : BasicAttack
 {
+    public override string Name => "Takeshi Straight Punch";
     public override string GetDescription(Character character)
     {
         return "Does a simple but powerful straight punch at the enemy!";
@@ -37,6 +38,7 @@ public class TakeshiStraightPunch : BasicAttack
 }
 public class TakeshiMeditation : Ultimate
 {
+    public override string Name => "Takeshi Meditation";
     public override string GetDescription(Character character)
     {
         return "Meditates, recovering Health proportional to 50% of the caster's max health, and gains attack buff for 2 turns";
@@ -62,6 +64,7 @@ public class TakeshiMeditation : Ultimate
 }
 public class KarateNeckChop : Skill
 {
+    public override string Name => "Karate Neck Chop";
     public override string GetDescription(Character character)
     {
         return "Does a karate chop at the enemies neck, stunning them for 1 turn!";
@@ -88,6 +91,7 @@ public class KarateNeckChop : Skill
 }
 public class Takeshi : Character
 {
+    public override string Name => "Takeshi";
     public override Rarity Rarity => Rarity.ThreeStar;
     public override string? PassiveDescription => "Has a 25% chance to counter attack with basic attack when any ally is attacked";
 

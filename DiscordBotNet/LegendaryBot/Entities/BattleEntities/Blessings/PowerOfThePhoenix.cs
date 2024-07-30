@@ -6,6 +6,8 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class PowerOfThePhoenix : Blessing
 {
+    public override string Name => "Power Of The Phoenix";
+
     public PowerOfThePhoenix()
     {
         TypeId = 1;

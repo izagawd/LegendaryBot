@@ -373,7 +373,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
 
 
-    public virtual string Name => GetType().Name;
+    public abstract string Name { get; }
 
     public virtual string ImageUrl => $"{Website.DomainName}/battle_images/characters/{GetType().Name}.png";
     /// <summary>
@@ -661,7 +661,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     }
 
     
-    public List<PlayerTeam> PlayerTeams { get; protected set; } = [];
+
 
 
 

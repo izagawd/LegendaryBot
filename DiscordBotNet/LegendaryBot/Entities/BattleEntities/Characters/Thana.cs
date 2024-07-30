@@ -7,6 +7,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 public class SoulAttack : BasicAttack
 {
+    public override string Name => "Soul Attack";
     public override string GetDescription(Character character) => "Uses the souls of the dead to attack, with a 25% chance to inflict sleep!";
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, 
         out string? text)
@@ -33,7 +34,7 @@ public class SoulAttack : BasicAttack
 
 public class YourLifeEnergyIsMine : Skill
 {
-
+    public override string Name => "Your Life Energy Is Mine";
 
     public override string GetDescription(Character character) => "Sucks the life energy out of the enemy, recovering 20% of damage dealt as hp";
     public override IEnumerable<Character> GetPossibleTargets()
@@ -61,7 +62,7 @@ public class YourLifeEnergyIsMine : Skill
 }
 public class Arise : Ultimate
 {
-
+    public override string Name => "Arise!!";
     public override int MaxCooldown =>6;
 
     public override string GetDescription(Character character) =>
@@ -103,6 +104,7 @@ public class Arise : Ultimate
 }
 public class Thana : Character
 {
+    public override string Name => "Thana";
     protected override float BaseSpeedMultiplier => 1.1f;
     public override Rarity Rarity =>Rarity.FiveStar;
     public override DiscordColor Color => DiscordColor.Brown;

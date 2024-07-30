@@ -75,7 +75,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     [NotMapped] public virtual int Attack => 20 + (LevelMilestone * 40);
     [NotMapped] public virtual int Health => 70 + (LevelMilestone * 80);
     public virtual string ImageUrl => $"{Website.DomainName}/battle_images/blessings/{GetType().Name}.png";
-    public virtual string Name => GetType().Name;
+    public abstract string Name { get; }
     public int LevelMilestone => (Character?.LevelMilestone).GetValueOrDefault(0);
     public bool IsInStandardBanner => true;
     public Character? Character { get; set; }
