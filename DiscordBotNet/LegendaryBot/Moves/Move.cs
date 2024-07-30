@@ -31,13 +31,9 @@ public abstract class Move
     /// </summary>
  
     
-    public virtual string IconUrl { get; }
+    public virtual string IconUrl => $"{Website.DomainName}/battle_images/moves/{GetType().Name}.png";
 
-    public Move()
-    {
-        IconUrl = $"{Website.DomainName}/battle_images/moves/{GetType().Name}.png";
-        Name =  BasicFunctionality.Englishify(GetType().Name);
-    }
+
     protected static ConcurrentDictionary<string, Image<Rgba32>> _croppedCombatImages { get; } = new();
 
 
@@ -126,7 +122,7 @@ public abstract class Move
 
 
 
-    public virtual string Name { get; }
+    public virtual string Name => GetType().Name;
 
 
 }

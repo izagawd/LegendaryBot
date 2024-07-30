@@ -45,15 +45,11 @@ public abstract class Item : IInventoryEntity
         return clone;
     }
 
-    public string Name { get; }
+    public string Name => GetType().Name;
     public UserData? UserData { get; set; }
-    public  string ImageUrl { get; }
+    public  string ImageUrl => $"{Website.DomainName}/battle_images/items/{GetType().Name}.png";
 
-    public Item()
-    {
-        ImageUrl = $"{Website.DomainName}/battle_images/items/{GetType().Name}.png";
-        Name = BasicFunctionality.Englishify(GetType().Name);
-    }
+
 
     public ulong UserDataId { get; set; }
 

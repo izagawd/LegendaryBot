@@ -66,7 +66,7 @@ public partial class CharacterCommand
                 
                 foreach (var i in Enum.GetValues<StatType>())
                 {
-                    statsStringBuilder.Append($"{BasicFunctionality.Englishify(i.ToString())}: {character.GetStatFromType(i)}\n");
+                    statsStringBuilder.Append($"{i.GetShortName()}: {character.GetStatFromType(i)}\n");
                     
                 }
                 

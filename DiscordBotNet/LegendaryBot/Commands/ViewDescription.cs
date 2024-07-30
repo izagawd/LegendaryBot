@@ -35,7 +35,7 @@ public class ViewDescription : GeneralCommandClass
                 .GetValueOrDefault(TypesFunctionality.GetDefaultObject<UserData>().Color));
         if (zaObject is IInventoryEntity zaEntity)
         {
-            var zaDescription = $"{zaEntity.TypeGroup.Name.Englishify()}: {zaEntity.Name}.\nRarity: {(int) zaEntity.Rarity} :star:";
+            var zaDescription = $"{zaEntity.TypeGroup.Name}: {zaEntity.Name}.\nRarity: {(int) zaEntity.Rarity} :star:";
             if (zaEntity is Character z)
             {
                 zaDescription += $" • Element: {z.Element}";
@@ -60,7 +60,7 @@ public class ViewDescription : GeneralCommandClass
                 for (var i = 0; i < statsToIncreasePerMilestone.Length; i++)
                 {
                     stringToUse +=
-                        $"After reaching level {(i + 1) * 10}, {statsToIncreasePerMilestone[i].ToString().Englishify()} increases by {Character.GetStatIncreaseMilestoneValueString(statsToIncreasePerMilestone[i])} additionally!\n";
+                        $"After reaching level {(i + 1) * 10}, {statsToIncreasePerMilestone[i].GetShortName()} increases by {Character.GetStatIncreaseMilestoneValueString(statsToIncreasePerMilestone[i])} additionally!\n";
                 }
 
                 stringToUse +=

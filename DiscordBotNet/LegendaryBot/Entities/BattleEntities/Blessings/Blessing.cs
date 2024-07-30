@@ -46,7 +46,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 
 
  
-    public string Name { get; }
+    
     public UserData? UserData { get; set; }
 
     public virtual string GetDescription(int levelMilestone)
@@ -67,26 +67,17 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     
     
 
-    public string ImageUrl { get; }
+    
     public long Id { get; set; }
     public ulong UserDataId { get; set; }
 
 
     [NotMapped] public virtual int Attack => 20 + (LevelMilestone * 40);
     [NotMapped] public virtual int Health => 70 + (LevelMilestone * 80);
-
-
-
-    public Blessing()
-    {
-        ImageUrl = $"{Website.DomainName}/battle_images/blessings/{GetType().Name}.png";
-        Name = BasicFunctionality.Englishify(GetType().Name);
-    }
-
+    public virtual string ImageUrl => $"{Website.DomainName}/battle_images/blessings/{GetType().Name}.png";
+    public virtual string Name => GetType().Name;
     public int LevelMilestone => (Character?.LevelMilestone).GetValueOrDefault(0);
-    
     public bool IsInStandardBanner => true;
     public Character? Character { get; set; }
-
-
+    
 }

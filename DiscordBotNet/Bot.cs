@@ -344,22 +344,16 @@ public static class Bot
             
             .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic 
         | BindingFlags.FlattenHierarchy).ForEach(i => i.Name.Print());
-        await Task.Delay(-1);
-        return;
-        await Task.Delay(5000);
-        typeof(Arise)
-            .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-            .ForEach(i => i.Name.Print());
-    
+
         while (true)
         {
             var stop = new Stopwatch();
             stop.Start();
-
-            var usage = new MoveUsageContext(new Arise(), MoveUsageType.NormalUsage);
+            var englishified = stop.GetType().Name;
             stop.Stop();
             stop.Elapsed.TotalMicroseconds.Print();
-            
+            englishified.Print();
+
         }
     }
     private static async Task Main(string[] args)

@@ -147,7 +147,7 @@ public class Help : GeneralCommandClass
 
         foreach (var i in _commandsThatDoesShit.Keys)
         {
-            embedToBuild.WithTitle(i.ToString().Englishify());
+            embedToBuild.WithTitle(i.ToString());
             embedToBuild.ClearFields();
             foreach (var j in _commandsThatDoesShit[i])
             {
@@ -182,7 +182,7 @@ public class Help : GeneralCommandClass
                          }
                      }))
             {
-                yield return new DiscordSelectComponentOption(i.ToString().Englishify(),
+                yield return new DiscordSelectComponentOption(i.GetName(),
                     ((int)i).ToString());
               
             }

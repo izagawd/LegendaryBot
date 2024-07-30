@@ -12,13 +12,10 @@ public abstract class Quest
     public static IEnumerable<Type> QuestTypes => _questTypes;
     [NotMapped]
     public abstract string Description { get; }
-    [NotMapped]
-    public virtual string Title { get; }
 
-    public Quest()
-    {
-        Title = BasicFunctionality.Englishify(GetType().Name);
-    }
+    [NotMapped] public virtual string Title => GetType().Name;
+
+
     public bool Completed { get; set; } = false;
     public long Id { get; set; }
 

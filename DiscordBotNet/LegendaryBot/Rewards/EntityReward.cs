@@ -36,7 +36,7 @@ public class EntityReward : Reward
         Dictionary<string, int> nameSorter = [];
         foreach (var i in EntitiesToReward)
         {
-            stringBuilder.Append($"{i.TypeGroup.Name.Englishify()}: {i.DisplayString}\n");
+            stringBuilder.Append($"{i.TypeGroup.Name}: {i.DisplayString}\n");
            
 
         } 

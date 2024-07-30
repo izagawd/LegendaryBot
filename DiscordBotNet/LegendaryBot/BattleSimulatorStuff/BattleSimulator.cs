@@ -422,7 +422,7 @@ public partial class BattleSimulator
             foreach (var i in Enum.GetValues<StatType>())
             {
                 descriptionStringBuilder.Append(
-                    $"{BasicFunctionality.Englishify(i.ToString())}: {characterToDisplayBattleInfo.GetStatFromType(i)}");
+                    $"{i.GetShortName()}: {characterToDisplayBattleInfo.GetStatFromType(i)}");
                 
                 
                 switch (i)

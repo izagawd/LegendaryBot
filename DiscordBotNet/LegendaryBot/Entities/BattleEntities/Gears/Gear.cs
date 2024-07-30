@@ -102,17 +102,14 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public Rarity Rarity { get; private set; }
 
 
-    public string Name { get; }
+    public string Name => GetType().Name;
     public UserData? UserData { get; set; }
     public string ImageUrl { get; }
     public long Id { get; set; }
     public ulong UserDataId { get; set; }
     public Character Character { get; set; }
 
-    public Gear()
-    {
-        Name = BasicFunctionality.Englishify(GetType().Name);
-    }
+
     public void Initialize(Rarity rarity, Type? desiredMainStat = null)
     {
         if (Stats.Count != 0) return;

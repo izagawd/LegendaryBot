@@ -12,11 +12,8 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public abstract class StatusEffect  : INameHaver
 {
-    public StatusEffect()
-    {
-        Name = BasicFunctionality.Englishify(GetType().Name);
-        IconUrl =  $"{Website.DomainName}/battle_images/status_effects/{GetType().Name}.png";
-    }
+    public virtual string IconUrl => $"{Website.DomainName}/battle_images/status_effects/{GetType().Name}.png";
+
 
     /// <summary>
     /// Called when this status effect has been added to a character. use this instead of constructor
@@ -31,7 +28,7 @@ public abstract class StatusEffect  : INameHaver
     /// </summary>
     public Character Affected { get; set; }
     public virtual string Description => "Does the bla bla bla of the bla bla bla";
-    public virtual string IconUrl { get; }
+   
 
 
     /// <summary>
@@ -125,10 +122,11 @@ public abstract class StatusEffect  : INameHaver
     /// The person who casted the status effect
     /// </summary>
     public required Character Caster { get; set; }
+
     /// <summary>
     /// The name of the status effect
     /// </summary>
-    public virtual string Name { get; }
+    public virtual string Name => GetType().Name;
 
     
     public virtual string? OverridenUsage(ref Character target, ref BattleDecision decision,

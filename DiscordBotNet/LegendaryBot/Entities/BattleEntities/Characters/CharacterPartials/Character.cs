@@ -373,15 +373,9 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
 
 
-    public virtual string Name { get; }
+    public virtual string Name => GetType().Name;
 
-    public virtual string ImageUrl { get; }
-    public Character()
-    {
-        Name = BasicFunctionality.Englishify(GetType().Name);
-        ImageUrl = $"{Website.DomainName}/battle_images/characters/{GetType().Name}.png";
-        
-    }
+    public virtual string ImageUrl => $"{Website.DomainName}/battle_images/characters/{GetType().Name}.png";
     /// <summary>
     /// Derives dialogue profile from character properties
     /// </summary>
@@ -499,13 +493,12 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     /// this will be used to get the items this character will drop if killed
     /// </summary>
     [NotMapped]
-    public virtual IEnumerable<Reward> DroppedRewards => [];
+    public virtual IEnumerable<Reward> DroppedRewards
+    {
+        get {yield break; }
+    }
 
-    /// <summary>
-    /// Use this if you want this character to drop any extra items
-    /// </summary>
-    [NotMapped]
-    public virtual List<IInventoryEntity> ExtraItemsToDrop { get; set; } = new();
+
 
 
 
@@ -632,7 +625,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     public  Type TypeGroup => typeof(Character);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
-    public string Description { get; }
+    public virtual string Description => "";
     public virtual Rarity Rarity => Rarity.ThreeStar;
 
 
