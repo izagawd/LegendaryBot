@@ -77,8 +77,20 @@ public static class Bot
         public CharacterExpGainInfo(){}
     }
     
+    public class GarbageCollectorTracker
+    {
+        ~GarbageCollectorTracker()
+        {
+            Console.WriteLine("Garbage Collector Called");
+            new GarbageCollectorTracker();
+        }
+        
+    }
 
-
+    private static void TrackGarbageCollector()
+    {
+        new GarbageCollectorTracker().Print();
+    }
     private static async Task OnMessageCreatedGiveUserExpMat(DiscordClient client, MessageCreatedEventArgs args)
     {
 
@@ -324,7 +336,7 @@ public static class Bot
     private static async Task Main(string[] args)
     {
         await DoShitAsync();
-      
+    
         
         await using (var ctx = new PostgreSqlContext())
         {
