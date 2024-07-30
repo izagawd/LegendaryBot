@@ -2,6 +2,8 @@ namespace DiscordBotNet.LegendaryBot.Entities.Items;
 
 public class EnergyDrink : Item
 {
+    public override string Name => "Energy Drink";
+
     public EnergyDrink()
     {
         TypeId = 4;

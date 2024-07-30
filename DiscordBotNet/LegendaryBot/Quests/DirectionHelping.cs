@@ -13,6 +13,7 @@ namespace DiscordBotNet.LegendaryBot.Quests;
 
 public class DirectionHelping : Quest
 {
+    public override string Title => "Direction Helping";
     public override string Description => "You are tasked with giving people directions";
     public override async Task<bool> StartQuest(PostgreSqlContext databaseContext, CommandContext context,
         DiscordMessage messageToEdit)

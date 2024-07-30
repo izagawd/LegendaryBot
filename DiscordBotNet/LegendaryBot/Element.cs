@@ -1,6 +1,6 @@
 ﻿namespace DiscordBotNet.LegendaryBot;
 
-public enum Element
+public enum Element : byte
 {
     Fire,Ice, Earth
 }

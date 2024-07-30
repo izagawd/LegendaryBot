@@ -45,7 +45,7 @@ public abstract class Item : IInventoryEntity
         return clone;
     }
 
-    public string Name => GetType().Name;
+    public abstract string Name { get; }
     public UserData? UserData { get; set; }
     public  string ImageUrl => $"{Website.DomainName}/battle_images/items/{GetType().Name}.png";
 

@@ -21,7 +21,7 @@ public class GiveMe : GeneralCommandClass
         var simplifiedEntityName = entityName.ToLower().Replace(" ", "");
         var type =TypesFunctionality.AllAssemblyTypes.FirstOrDefault(i => i.IsClass 
                                                                       && i.GetInterfaces().Contains(typeof(IInventoryEntity)) && !i.IsAbstract
-            && i.Name.ToLower() == simplifiedEntityName);
+            && i.Name.ToLower().Replace(" ","") == simplifiedEntityName);
         if (ctx.User.Id != Bot.Izasid && ctx.User.Id != Bot.Testersid)
         {
             await ctx.RespondAsync("Only izagawd can use this command");

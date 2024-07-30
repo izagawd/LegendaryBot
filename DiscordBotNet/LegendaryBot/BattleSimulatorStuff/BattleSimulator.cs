@@ -20,7 +20,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 
-public enum BattleDecision
+public enum BattleDecision : byte
 {
     
      Ultimate, BasicAttack, Skill, Other

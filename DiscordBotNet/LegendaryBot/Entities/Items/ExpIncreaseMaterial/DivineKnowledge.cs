@@ -2,6 +2,8 @@ namespace DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 
 public class DivineKnowledge : CharacterExpMaterial
 {
+    public override string Name => "Divine Knowledge";
+
     public DivineKnowledge()
     {
         TypeId = 2;

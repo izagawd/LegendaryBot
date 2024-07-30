@@ -1,6 +1,6 @@
 ﻿namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
-public enum StatusEffectType
+public enum StatusEffectType : byte
 {
     Buff,Debuff
 }

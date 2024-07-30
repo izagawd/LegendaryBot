@@ -61,6 +61,8 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
 public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGuidPrimaryIdHaver
 {
 
+
+    
     /// <summary>
     /// if not null, will assume this character uses super points.
     /// </summary>
@@ -639,7 +641,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         {
             side = "team mate";
         }
-        return $"{Name} ({side}) [{AlphabetIdentifier}]";
+        return $"{Name} [{side}] [{AlphabetIdentifier}]";
     }
     
     public string NameWithAlphabet => $"{Name} [{AlphabetIdentifier}]";
@@ -726,7 +728,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
 
 }
-public enum StatusEffectInflictResult
+public enum StatusEffectInflictResult : byte
 {
     Failed, Resisted,Optimized,  Succeeded, 
 }

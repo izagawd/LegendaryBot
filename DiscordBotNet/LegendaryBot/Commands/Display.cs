@@ -68,7 +68,7 @@ public class Display : GeneralCommandClass
 
         var count = 0;
         embed.WithTitle($"{character.Name} [{character.Number}]'s gears");
-        foreach (var i in character.Gears.OrderBy(i => i.GetType().Name))
+        foreach (var i in character.Gears.OrderBy(i => i.Name))
         {
             
             embed.AddField(i.Name, i.DisplayString, true);
@@ -178,7 +178,9 @@ public class Display : GeneralCommandClass
             return;
         }
 
-        await ExecuteDisplayAsync(context, userData.Items.Where(i => i.Name.ToLower().Contains(simplified)), 20,
+        await ExecuteDisplayAsync(context, userData.Items.Where(i => i.Name.ToLower()
+                .Replace(" ","")
+                .Contains(simplified)), 20,
             i => i.DisplayString,
             "\n","Items",userData.Color);
     }
@@ -262,7 +264,7 @@ public class Display : GeneralCommandClass
             return;
         }
         await ExecuteDisplayAsync(context, userData.Characters
-                .Where(i => i.Name.ToLower().Contains(simplified))
+                .Where(i => i.Name.ToLower().Replace(" ","").Contains(simplified))
                 .OrderBy(i => i.Number), 10,
             i => i.DisplayString,
             "\n","Characters",userData.Color);

@@ -12,11 +12,14 @@ using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Commands;
 using DiscordBotNet.LegendaryBot.Entities;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DiscordBotNet.LegendaryBot.Moves;
+using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.Rewards;
+using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.EventArgs;
@@ -309,52 +312,18 @@ public static class Bot
     public static string BotTokenToPathUse => UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
 
-    public static List<FieldInfo> GetAllFieldsAndBackingFields(Type type)
-    {
-        if (type == null)
-        {
-            throw new ArgumentNullException(nameof(type));
-        }
-
-        var allFields = new List<FieldInfo>();
-
-        // Get all fields (both public and non-public) including inherited fields
-        FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-        allFields.AddRange(fields);
-
-        // Get all properties and their backing fields
-        PropertyInfo[] properties = type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-
-        foreach (PropertyInfo property in properties)
-        {
-            // Check if the property has a backing field
-            FieldInfo backingField = type.GetField($"<{property.Name}>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance);
-            if (backingField != null)
-            {
-                allFields.Add(backingField);
-            }
-        }
-
-        return allFields;
-    }
-
-    class Bruh
-    {
-        private int idk = 5;
-    }
+ 
+    
     private async static Task DoShitAsync()
     {
-        var arise = new Arise();
-   
-        BasicFunctionality.SizeOf(typeof(Character)).Print();
-  
-        
-        while (true)
-        {
- 
+        List<object> players = [];
+        var cont = new PostgreSqlContext();
+        await cont.UserData
+            .Select(i => new{i.Name})
+            .LoadAsync();
+        Process.GetCurrentProcess().Kill();
 
-
-        }
+        players.ForEach(i => i.GetType().Name.Print());
     }
     private static async Task Main(string[] args)
     {

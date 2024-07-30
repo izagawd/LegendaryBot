@@ -22,7 +22,7 @@ namespace DiscordBotNet.Database.Models;
 
 
 
-public enum Gender : short
+public enum Gender : byte
 {
     Male, Female
 }
@@ -44,6 +44,7 @@ public class UserData :   ICanBeLeveledUp
 
     public UserData()
     {
+        "I WAS CREATED!!".Print();
         Inventory = new(this);
      
         

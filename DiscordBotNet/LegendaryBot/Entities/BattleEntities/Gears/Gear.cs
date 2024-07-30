@@ -102,7 +102,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public Rarity Rarity { get; private set; }
 
 
-    public string Name => GetType().Name;
+    public abstract string Name { get; }
     public UserData? UserData { get; set; }
     public string ImageUrl { get; }
     public long Id { get; set; }

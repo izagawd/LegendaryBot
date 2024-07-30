@@ -90,8 +90,8 @@ public partial class Character
         private StatusEffectInflictBattleText? TryMergeStatusEffects(
             StatusEffectInflictBattleText statusEffectInflictBattleText)
         {
-            if (_affectedCharacters.OrderBy(i => i.NameWithAlphabet)
-                    .SequenceEqual(statusEffectInflictBattleText._affectedCharacters.OrderBy(i => i.NameWithAlphabet))
+            if (_affectedCharacters.OrderBy(i => i.AlphabetIdentifier)
+                    .SequenceEqual(statusEffectInflictBattleText._affectedCharacters.OrderBy(i => i.AlphabetIdentifier))
                 && _effectInflictResult == statusEffectInflictBattleText._effectInflictResult)
             {
                 return new StatusEffectInflictBattleText()

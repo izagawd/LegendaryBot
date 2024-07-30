@@ -13,7 +13,7 @@ public abstract class Quest
     [NotMapped]
     public abstract string Description { get; }
 
-    [NotMapped] public virtual string Title => GetType().Name;
+    [NotMapped] public abstract string Title { get; }
 
 
     public bool Completed { get; set; } = false;

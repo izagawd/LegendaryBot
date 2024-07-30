@@ -113,16 +113,11 @@ public abstract class Move  : INameHaver
     {
         return GetPossibleTargets().Any() && !User.IsOverriden;
     }
-
     public override string ToString()
     {
 
         return Name;
     }
-
-
-
+    
     public abstract string Name { get; }
-
-
 }

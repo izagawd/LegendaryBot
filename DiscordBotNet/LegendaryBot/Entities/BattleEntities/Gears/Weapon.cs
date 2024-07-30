@@ -4,6 +4,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
 public class Weapon : Gear
 {
+    public override string Name => "Weapon";
 
     public Weapon()
     {

@@ -254,7 +254,7 @@ public partial class CharacterCommand : GeneralCommandClass
             await context.RespondAsync(embed);
             return;
         }
-        var gear = userData.Gears.FirstOrDefault(i => i.Name.ToLower() == gearType);
+        var gear = userData.Gears.FirstOrDefault(i => i.Name.ToLower().Replace(" ","") == gearType);
         if (gear is null)
         {
             embed.WithDescription($"Your character does not have any **{gearType}** equipped");

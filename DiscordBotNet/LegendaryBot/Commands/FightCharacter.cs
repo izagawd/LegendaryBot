@@ -27,7 +27,7 @@ public class FightCharacter : GeneralCommandClass
         }
 
         var type =TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Character>()
-            .Where(i => i.GetType().Name.ToLower() == enemyName.ToLower().Replace(" ", ""))
+            .Where(i => i.Name.ToLower().Replace(" ","") == enemyName.ToLower().Replace(" ", ""))
             .Select(i => i.GetType())
             .FirstOrDefault();
         if (type is null)

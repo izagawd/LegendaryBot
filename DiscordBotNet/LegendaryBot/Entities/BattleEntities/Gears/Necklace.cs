@@ -4,7 +4,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
 public class Necklace : Gear
 {
-
+    public override string Name => "Necklace";
 
     public Necklace()
     {

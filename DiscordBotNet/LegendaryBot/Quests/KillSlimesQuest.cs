@@ -12,6 +12,7 @@ namespace DiscordBotNet.LegendaryBot.Quests;
 
 public class KillSlimesQuest : Quest
 {
+    public override string Title => "Kill Slimes";
     public override string Description => "Simple quest. Defeat the slimes that are attacking a village";
 
     public override async Task<bool> StartQuest(PostgreSqlContext databaseContext, CommandContext context,

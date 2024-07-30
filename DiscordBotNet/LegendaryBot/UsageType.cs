@@ -1,6 +1,6 @@
 ﻿namespace DiscordBotNet.LegendaryBot;
 
-public enum MoveUsageType
+public enum MoveUsageType : byte
 {
     NormalUsage, CounterUsage, MiscellaneousFollowUpUsage
 }

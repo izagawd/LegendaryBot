@@ -27,7 +27,8 @@ public class TeamCommand : GeneralCommandClass
             .Where(i => i.Id == context.User.Id)
             .Select(i => new
                 
-                {  tier = i.Tier, team = i.PlayerTeams.FirstOrDefault(j => j.TeamName.ToLower() == teamName.ToLower()), userData = i })
+                {  tier = i.Tier, team = i.PlayerTeams.FirstOrDefault(j => j.TeamName.ToLower()
+                    .Replace(" ","")== teamName.ToLower()), userData = i })
             .FirstOrDefaultAsync();
 
         if (anon is null || anon.tier == Tier.Unranked)
@@ -67,7 +68,8 @@ public class TeamCommand : GeneralCommandClass
 
   
         var userData = await DatabaseContext.UserData
-            .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower() == teamName.ToLower()))
+            .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower()
+                                                   == teamName.ToLower()))
             .Include(i => i.EquippedPlayerTeam)
             .Include(i => i.Characters.Where(j => 
                                                   j.Number == characterNumber))
@@ -77,7 +79,8 @@ public class TeamCommand : GeneralCommandClass
             await AskToDoBeginAsync(context);
             return;
         }
-        var gottenTeam =  userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName.ToLower());
+        var gottenTeam =  userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower()
+                                                                   == teamName.ToLower());
         
 
         var embed = new DiscordEmbedBuilder()

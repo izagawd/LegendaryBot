@@ -4,7 +4,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
 public class Ring : Gear
 {
-
+    public override string Name => "Ring";
 
     public Ring()
     {

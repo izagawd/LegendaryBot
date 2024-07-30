@@ -1,6 +1,6 @@
 namespace DiscordBotNet.LegendaryBot;
 
-public enum StatType : short
+public enum StatType : byte
 {
     Attack, Defense, Speed,CriticalChance, CriticalDamage, MaxHealth, Resistance, Effectiveness
 }

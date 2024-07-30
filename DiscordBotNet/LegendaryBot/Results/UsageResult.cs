@@ -5,7 +5,7 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.Results;
 
-public enum AttackTargetType
+public enum AttackTargetType : byte
 {
     None, SingleTarget, AOE, InBetween, 
 }
