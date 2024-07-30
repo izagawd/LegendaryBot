@@ -4,6 +4,7 @@ using DSharpPlus.Entities;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using CommunityToolkit.HighPerformance.Helpers;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
@@ -312,12 +313,12 @@ public static class Bot
     public static string BotTokenToPathUse => UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
 
- 
-    
+
+
+
     private async static Task DoShitAsync()
     {
-
-
+        
     }
     private static async Task Main(string[] args)
     {
@@ -331,7 +332,6 @@ public static class Bot
             Console.WriteLine("Making all users unoccupied...");
             stopwatch.Start();
             await ctx.UserData
-
                 .ExecuteUpdateAsync(i => i.SetProperty(j => j.IsOccupied,
                     _ => false));
           

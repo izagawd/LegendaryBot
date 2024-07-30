@@ -44,11 +44,11 @@
             },
             "DSharpPlus": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02313, )"
+              "version": "[5.0.0-nightly-02342, )"
             },
             "DSharpPlus.Commands": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02313, )"
+              "version": "[5.0.0-nightly-02342, )"
             },
             "DSharpPlus.Core": {
               "target": "Package",
@@ -56,19 +56,19 @@
             },
             "DSharpPlus.Interactivity": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02313, )"
+              "version": "[5.0.0-nightly-02342, )"
             },
             "DSharpPlus.Lavalink": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02313, )"
+              "version": "[5.0.0-nightly-02333, )"
             },
             "DSharpPlus.Rest": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02313, )"
+              "version": "[5.0.0-nightly-02333, )"
             },
             "DSharpPlus.VoiceNext": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02313, )"
+              "version": "[5.0.0-nightly-02333, )"
             },
             "Microsoft.AspNetCore.Authentication.Certificate": {
               "target": "Package",
@@ -88,15 +88,15 @@
             },
             "SixLabors.ImageSharp": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[3.1.5, )"
             },
             "SixLabors.ImageSharp.Drawing": {
               "target": "Package",
-              "version": "[2.1.3, )"
+              "version": "[2.1.4, )"
             },
             "SixLabors.ImageSharp.Web": {
               "target": "Package",
-              "version": "[3.1.2, )"
+              "version": "[3.1.3, )"
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
