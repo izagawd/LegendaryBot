@@ -35,15 +35,13 @@ public class Color : GeneralCommandClass
         var author = ctx.User;
 
         var userData = await DatabaseContext.UserData
-            .Where(i => i.Id == ctx.User.Id)
-            .Select(i => new{i.Color})
-            .FirstOrDefaultAsync();
+      
+            .FirstOrDefaultAsync(i => i.Id == author.Id);
 
         if (userData is null)
         {
-            await DatabaseContext.CreateNonExistantUserdataAsync(author.Id);
-            await DatabaseContext.SaveChangesAsync();
-            userData = new { TypesFunctionality.GetDefaultObject<UserData>().Color };
+            userData = await DatabaseContext.CreateNonExistantUserdataAsync(author.Id);
+ 
         }
         
         var colorIsValid = true;
@@ -77,10 +75,8 @@ public class Color : GeneralCommandClass
             .WithTimestamp(DateTime.Now);
         if (colorIsValid)
         {
-            await DatabaseContext.UserData
-                .Where(i => i.Id == ctx.User.Id)
-                .ExecuteUpdateAsync(i => i.SetProperty(j => j.Color,
-                    newColor));
+            userData.Color = newColor;
+            await DatabaseContext.SaveChangesAsync();
             embed.WithTitle("**Success!**");
             embed.WithDescription("`Look at your new color!`");
         }
