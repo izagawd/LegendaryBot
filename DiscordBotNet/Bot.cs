@@ -332,11 +332,6 @@ public static class Bot
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
 
 
-    class Idk : Character
-    {
-        public override string Name => "Idk";
-    }
-    
     private async  static Task DoShitAsync()
     {
 
