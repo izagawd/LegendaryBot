@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using DiscordBotNet.Database.Models;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Commands.Trees;
@@ -33,11 +34,16 @@ public class Color : GeneralCommandClass
     {
         var author = ctx.User;
 
-        var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+        var userData = await DatabaseContext.UserData
+            .Where(i => i.Id == ctx.User.Id)
+            .Select(i => new{i.Color})
+            .FirstOrDefaultAsync();
 
         if (userData is null)
         {
-            userData = await DatabaseContext.CreateNonExistantUserdataAsync(author.Id);
+            await DatabaseContext.CreateNonExistantUserdataAsync(author.Id);
+            await DatabaseContext.SaveChangesAsync();
+            userData = new { TypesFunctionality.GetDefaultObject<UserData>().Color };
         }
         
         var colorIsValid = true;
@@ -71,8 +77,10 @@ public class Color : GeneralCommandClass
             .WithTimestamp(DateTime.Now);
         if (colorIsValid)
         {
-            userData.Color = newColor;
-            await DatabaseContext.SaveChangesAsync();
+            await DatabaseContext.UserData
+                .Where(i => i.Id == ctx.User.Id)
+                .ExecuteUpdateAsync(i => i.SetProperty(j => j.Color,
+                    newColor));
             embed.WithTitle("**Success!**");
             embed.WithDescription("`Look at your new color!`");
         }
