@@ -4,6 +4,7 @@ using DSharpPlus.Entities;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using CommunityToolkit.HighPerformance;
 using CommunityToolkit.HighPerformance.Helpers;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
@@ -321,18 +322,19 @@ public static class Bot
 
 
 
-
-    public const bool UseTestDatabaseAndBot = true;
+   
+    public const bool UseTestDatabaseAndBot = false;
     public static string BotTokenToPathUse => UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
 
 
 
-
-    private async static Task DoShitAsync()
+ 
+    private static Task DoShitAsync()
     {
-        
-        
+
+        return Task.CompletedTask;
+
     }
     private static async Task Main(string[] args)
     {

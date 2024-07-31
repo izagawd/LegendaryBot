@@ -99,9 +99,6 @@ public class Help : GeneralCommandClass
         {
             var stringToUse = i.Description ?? "No description";
 
-            var subAttribute =       (BotCommandCategoryAttribute) i.Attributes.FirstOrDefault(j => j is BotCommandCategoryAttribute)!;
-            
-
 
             var subLabel = $"{gottenCommand.Name} {i.Name}";
             foreach (var j in i.Parameters)
