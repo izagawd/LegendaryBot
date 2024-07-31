@@ -105,12 +105,6 @@ public class PlayerDatabaseConfiguration : IEntityTypeConfiguration<Player>
     }
 }
 
-public struct PlayerCachedData
-{
-     string CharacterUrl;
-    string Name;
-}
-
 
 
 public class Player : Character
