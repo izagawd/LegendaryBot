@@ -108,6 +108,18 @@ public static class BasicFunctionality
         SlidingExpiration = new TimeSpan(0,0,30),
         PostEvictionCallbacks = { new PostEvictionCallbackRegistration{EvictionCallback = DisposeEvictionCallback } }
     };
+
+    public static FieldInfo[] GetAllFields(Type type)
+    {
+        var loopingType = type;
+        List<FieldInfo> info = [];
+        while (loopingType is not null)
+        {
+            info.AddRange(loopingType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public));
+            loopingType = loopingType.BaseType;
+        }
+        return info.Distinct().ToArray();
+    }
     /// <summary>
     /// Gets the size of object.
     /// </summary>
@@ -118,14 +130,7 @@ public static class BasicFunctionality
     {
         int pointerSize = IntPtr.Size;
         int size = 0;
-        var loopingType = type;
-        List<FieldInfo> info = [];
-        while (loopingType is not null)
-        {
-            info.AddRange(loopingType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public));
-            loopingType = loopingType.BaseType;
-        }
-        info = new List<FieldInfo>(info.Distinct());
+        var info = GetAllFields(type);
         foreach (var field in info)
         {
             field.Name.Print();
