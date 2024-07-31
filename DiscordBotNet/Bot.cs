@@ -36,7 +36,9 @@ using DSharpPlus.Commands.Processors.TextCommands.Parsing;
 using DSharpPlus.VoiceNext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Barrier = DiscordBotNet.LegendaryBot.StatusEffects.Barrier;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
+using DiscordEmbedBuilder = DSharpPlus.Entities.DiscordEmbedBuilder;
 
 
 namespace DiscordBotNet;
@@ -330,10 +332,13 @@ public static class Bot
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
 
 
-    
-    private async static Task DoShitAsync()
+    class Idk : Character
     {
-
+        public override string Name => "Idk";
+    }
+    
+    private async  static Task DoShitAsync()
+    {
 
     }
     private static async Task Main(string[] args)
