@@ -328,8 +328,6 @@ public static class Bot
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
 
 
-
- 
     private static Task DoShitAsync()
     {
 
@@ -377,7 +375,7 @@ public static class Bot
 
 
 
-    public static string GlobalFontName => "Arial";
+    public const string GlobalFontName = "Arial";
 
     
     private static async  Task OnCommandError(CommandsExtension extension,CommandErroredEventArgs args)
