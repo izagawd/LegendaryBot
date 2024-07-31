@@ -325,7 +325,7 @@ public static class Bot
 
 
    
-    public const bool UseTestDatabaseAndBot = false;
+    public const bool UseTestDatabaseAndBot = true;
     public static string BotTokenToPathUse => UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
 
