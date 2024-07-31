@@ -2,6 +2,7 @@
 using System.Collections.Immutable;
 using DSharpPlus.Entities;
 using System.Diagnostics;
+using System.Numerics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using CommunityToolkit.HighPerformance;
@@ -63,8 +64,9 @@ public static class Bot
     }
 
 
-    const int messagesTillExecution = 30;
-    private const float messageCoolDown = 1.5f;
+
+    const int MessagesTillExecution = 30;
+    private const float MessageCoolDown = 1.5f;
     private static ConcurrentDictionary<ulong, ChannelSpawnInfo> _channelSpawnInfoDictionary = new();
 
     
@@ -103,13 +105,13 @@ public static class Bot
         }
         var expGainInfo = _expMatGive.GetOrAdd(args.Author.Id, new CharacterExpGainInfo());
       
-        if (DateTime.UtcNow.Subtract(expGainInfo.LastTimeIncremented).Seconds >= messageCoolDown)
+        if (DateTime.UtcNow.Subtract(expGainInfo.LastTimeIncremented).Seconds >= MessageCoolDown)
         {
            
             expGainInfo.MessageCount++;
             expGainInfo.LastTimeIncremented = DateTime.UtcNow;
             _expMatGive[args.Author.Id] = expGainInfo;
-            if (expGainInfo.MessageCount >= messagesTillExecution)
+            if (expGainInfo.MessageCount >= MessagesTillExecution)
             {
                 expGainInfo.MessageCount = 0;
                 _expMatGive[args.Author.Id] = expGainInfo;
@@ -152,12 +154,12 @@ public static class Bot
             var spawnInfo = _channelSpawnInfoDictionary.GetOrAdd(args.Channel.Id,
                 new ChannelSpawnInfo());
           
-            if (DateTime.UtcNow.Subtract(spawnInfo.LastTimeIncremented).Seconds >= messageCoolDown)
+            if (DateTime.UtcNow.Subtract(spawnInfo.LastTimeIncremented).Seconds >= MessageCoolDown)
             {
                 spawnInfo.MessageCount++;
                 spawnInfo.LastTimeIncremented = DateTime.UtcNow;
                 _channelSpawnInfoDictionary[args.Channel.Id] = spawnInfo;
-                if (spawnInfo.MessageCount >= messagesTillExecution)
+                if (spawnInfo.MessageCount >= MessagesTillExecution)
                 {
                     spawnInfo.MessageCount = 0;
                     _channelSpawnInfoDictionary[args.Channel.Id] = spawnInfo;
@@ -328,10 +330,10 @@ public static class Bot
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
 
 
-    private static Task DoShitAsync()
+    
+    private async static Task DoShitAsync()
     {
 
-        return Task.CompletedTask;
 
     }
     private static async Task Main(string[] args)
@@ -372,6 +374,7 @@ public static class Bot
 
     public static ulong Surjidid => 1025325026955767849;
     public static DiscordClient Client { get; private set; }
+
 
 
 
