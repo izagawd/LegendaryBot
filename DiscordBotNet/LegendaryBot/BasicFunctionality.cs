@@ -133,7 +133,7 @@ public static class BasicFunctionality
         var info = GetAllFields(type);
         foreach (var field in info)
         {
-            field.Name.Print();
+
             if (field.FieldType.IsValueType)
             {
                 try

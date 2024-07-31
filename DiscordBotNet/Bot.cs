@@ -320,7 +320,16 @@ public static class Bot
 
     private async  static Task DoShitAsync()
     {
-   
+
+    
+        BasicFunctionality.GetAllFields(typeof(long?)).ForEach(i =>
+        {
+            var size = IntPtr.Size;
+            if (i.FieldType.IsValueType)
+                size = BasicFunctionality.SizeOf(i.FieldType);
+            $"{i.Name}: {size}: {i.FieldType.Name}".Print();
+        });
+        Process.GetCurrentProcess().Kill();
     }
     private static async Task Main(string[] args)
     {
