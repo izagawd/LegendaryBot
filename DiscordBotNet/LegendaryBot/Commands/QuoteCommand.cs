@@ -11,7 +11,7 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 [Command("quote")]
 public class QuoteCommand : GeneralCommandClass
 {
-    private static readonly string[] yesOrNoArray = new[] { "like", "dislike" };
+    private static readonly string[] YesOrNoArray = ["like", "dislike" ];
 
     [Command("read"), Description("Read a random quote"),
     BotCommandCategory(BotCommandCategory.Other)]
@@ -67,7 +67,7 @@ public class QuoteCommand : GeneralCommandClass
             if(result.TimedOut) return;
             var interactivityResult = result.Result;
             var choice = interactivityResult.Interaction.Data.CustomId;
-            if (!yesOrNoArray.Contains(choice)) return;
+            if (!YesOrNoArray.Contains(choice)) return;
             await using var newDbContext = new PostgreSqlContext();
             var anonymous = await newDbContext.Set<QuoteReaction>()
                 .Where(j => j.QuoteId == randomQuote.Id && j.UserDataId == interactivityResult.User.Id)
