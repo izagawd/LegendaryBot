@@ -184,9 +184,6 @@ public class UserData :   ICanBeLeveledUp
     }
 
 
-    public long StandardPrayers { get; set; } = 0;
-    
-    public long SupremePrayers { get; set; } = 0;
 
     public long DivineShards { get; set; } = 0;
     public long Coins { get; set; } = 5000;
