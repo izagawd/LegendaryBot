@@ -1,6 +1,7 @@
 ﻿using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
+using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
@@ -109,6 +110,7 @@ public class PlayerDatabaseConfiguration : IEntityTypeConfiguration<Player>
 
 public class Player : Character
 {
+    public override DiscordColor Color => UserData?.Color ?? base.Color;
     public override bool CanSpawnNormally => false;
 
     protected override IEnumerable<StatType> LevelMilestoneStatIncrease =>
