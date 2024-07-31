@@ -18,6 +18,7 @@ using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
@@ -312,7 +313,7 @@ public static class Bot
 
 
 
-   
+
     public const bool UseTestDatabaseAndBot = true;
     public static string BotTokenToPathUse => UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
@@ -321,7 +322,8 @@ public static class Bot
     private async  static Task DoShitAsync()
     {
 
-    
+        
+
 
     }
     private static async Task Main(string[] args)
