@@ -122,9 +122,9 @@ public static class BasicExtension
         return idk;
     }
 
-    public static TExpressionResult Map<TObject, TExpressionResult>(this TObject theObject, Expression<Func<TObject, TExpressionResult>> expression)
+    public static TExpressionResult Map<TObject, TExpressionResult>(this TObject theObject,Func<TObject, TExpressionResult> expression)
     {
-        return expression.Compile().Invoke(theObject);
+        return expression(theObject);
     }
 
 
