@@ -82,20 +82,6 @@ public static class Bot
         public CharacterExpGainInfo(){}
     }
     
-    public class GarbageCollectorTracker
-    {
-        ~GarbageCollectorTracker()
-        {
-            Console.WriteLine("Garbage Collector Called");
-            new GarbageCollectorTracker();
-        }
-        
-    }
-
-    private static void TrackGarbageCollector()
-    {
-        new GarbageCollectorTracker().Print();
-    }
     private static async Task OnMessageCreatedGiveUserExpMat(DiscordClient client, MessageCreatedEventArgs args)
     {
 
