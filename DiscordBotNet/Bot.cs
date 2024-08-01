@@ -316,10 +316,7 @@ public static class Bot
     private async  static Task DoShitAsync()
     {
 
-        TypesFunctionality
-            .AllAssemblyTypes
-            .Where(i => i.IsClass && i.IsAssignableTo(typeof(IInventoryEntity)))
-            .ForEach(i => i.Name.Print());
+
             
         
         async Task ToDoAsync()
