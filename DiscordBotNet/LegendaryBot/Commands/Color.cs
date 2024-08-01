@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using DiscordBotNet.Database.Models;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Commands.Trees;

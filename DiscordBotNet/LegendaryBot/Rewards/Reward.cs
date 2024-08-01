@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
 using DiscordBotNet.Database.Models;
 
 namespace DiscordBotNet.LegendaryBot.Rewards;

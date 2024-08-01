@@ -1,7 +1,4 @@
-﻿using System.Linq.Expressions;
-using DSharpPlus.Entities;
-using DSharpPlus.EventArgs;
-using DSharpPlus.Interactivity;
+﻿using DSharpPlus.Entities;
 
 namespace DiscordBotNet.Extensions;
 

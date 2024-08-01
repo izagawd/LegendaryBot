@@ -1,6 +1,4 @@
-﻿using System.Collections.Immutable;
-using DiscordBotNet.LegendaryBot.Moves;
-using DiscordBotNet.LegendaryBot.StatusEffects;
+﻿using DiscordBotNet.LegendaryBot.Moves;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Results;

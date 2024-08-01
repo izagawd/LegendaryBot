@@ -2,29 +2,14 @@
 using System.Collections.Immutable;
 using DSharpPlus.Entities;
 using System.Diagnostics;
-using System.Numerics;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using CommunityToolkit.HighPerformance;
-using CommunityToolkit.HighPerformance.Helpers;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
-using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
-using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Commands;
-using DiscordBotNet.LegendaryBot.Entities;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
-using DiscordBotNet.LegendaryBot.Moves;
-using DiscordBotNet.LegendaryBot.Quests;
-using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.Rewards;
-using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.EventArgs;
@@ -37,8 +22,6 @@ using DSharpPlus.Commands.Processors.TextCommands;
 using DSharpPlus.Commands.Processors.TextCommands.Parsing;
 using DSharpPlus.VoiceNext;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Barrier = DiscordBotNet.LegendaryBot.StatusEffects.Barrier;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 using DiscordEmbedBuilder = DSharpPlus.Entities.DiscordEmbedBuilder;
 
@@ -256,7 +239,7 @@ public static class Bot
     
         slashCommandProcessor.AddConverters(typeof(Bot).Assembly);
         
-        await commandsExtension.AddProcessorAsync(slashCommandProcessor);
+        commandsExtension.AddProcessor(slashCommandProcessor);
         
         TextCommandProcessor textCommandProcessor = new(new()
         {
@@ -271,7 +254,7 @@ public static class Bot
 
         
         textCommandProcessor.AddConverters(typeof(Bot).Assembly);
-        await commandsExtension.AddProcessorAsync(textCommandProcessor);
+        commandsExtension.AddProcessor(textCommandProcessor);
         
         commandsExtension.AddCommands(typeof(Bot).Assembly);
 
