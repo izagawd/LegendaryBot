@@ -21,6 +21,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPar
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DiscordBotNet.LegendaryBot.Moves;
+using DiscordBotNet.LegendaryBot.Quests;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DiscordBotNet.LegendaryBot.StatusEffects;
@@ -319,11 +320,22 @@ public static class Bot
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
 
 
+    
+    unsafe struct someclass
+    {
+        public fixed byte buffer[10000];    
+    }
+   
+    private static void StopProgram()
+    {
+        
+        Process.GetCurrentProcess().Kill();
+    }
     private async  static Task DoShitAsync()
     {
 
-        
-
+        BasicFunctionality.SizeOf(typeof(someclass));
+        StopProgram();
 
     }
     private static async Task Main(string[] args)

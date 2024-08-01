@@ -166,6 +166,7 @@ EXECUTE FUNCTION {functionName}();
         {
             modelBuilder.Entity(i);
         }
+
         modelBuilder
             .ApplyConfiguration(new ItemDatabaseConfiguration())
             .ApplyConfiguration(new UserDataDatabaseConfiguration())
@@ -176,6 +177,7 @@ EXECUTE FUNCTION {functionName}();
             .ApplyConfiguration(new GearDatabaseConfiguration())
             .ApplyConfiguration(new GearStatDatabaseConfiguration())
             .ApplyConfiguration(new BlessingDatabaseConfiguration())
-            .ApplyConfiguration(new GuildDataDatabaseConfig());
+            .ApplyConfiguration(new GuildDataDatabaseConfig())
+            .ApplyConfiguration(new QuestDatabaseSetup());
     }
 }
