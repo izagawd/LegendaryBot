@@ -11,10 +11,10 @@ public abstract class Region
 
     static Region()
     {
-        foreach (var i in TypesFunctionality.GetDefaultObjectsAndSubclasses<Region>())
+        foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<Region>())
         {
             var rarities = i.ObtainableCharacters.GroupBy(j =>
-                    ((Character)TypesFunctionality.GetDefaultObject(j)).Rarity)
+                    ((Character)TypesFunction.GetDefaultObject(j)).Rarity)
                 .Select(j => j.Key).ToArray();
             if (!rarities.Contains(Rarity.TwoStar)
                 || !rarities.Contains(Rarity.ThreeStar) ||
@@ -29,7 +29,7 @@ public abstract class Region
     public static Region? GetRegion(string regionName)
     {
         var simplifiedRegionName = regionName.ToLower().Replace(" ", "");
-        return TypesFunctionality.GetDefaultObjectsAndSubclasses<Region>()
+        return TypesFunction.GetDefaultObjectsAndSubclasses<Region>()
             .FirstOrDefault(i => i.Name.ToLower().Replace(" ", "")
                         == simplifiedRegionName);
     }

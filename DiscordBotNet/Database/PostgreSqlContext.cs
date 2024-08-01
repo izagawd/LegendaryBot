@@ -50,7 +50,7 @@ public class PostgreSqlContext : DbContext
         if (user.LastTimeQuestWasChecked.Date == rightNowUtc.Date) return;
         
         user.Quests.Clear();
-        var availableQuests = TypesFunctionality.GetDefaultObjectsAndSubclasses<Quest>()
+        var availableQuests = TypesFunction.GetDefaultObjectsAndSubclasses<Quest>()
             .Select(i => i.GetType())
             .Where(i => !i.IsAbstract)
             .OrderBy(_ => BasicFunctionality.GetRandomNumberInBetween(0, 100))
@@ -152,17 +152,17 @@ EXECUTE FUNCTION {functionName}();
     {
         modelBuilder
             .UsePropertyAccessMode(PropertyAccessMode.Property);
-        foreach (var i in TypesFunctionality.AllAssemblyTypes.Where(i => i.IsAssignableTo(typeof(Quest))))
+        foreach (var i in TypesFunction.AllAssemblyTypes.Where(i => i.IsAssignableTo(typeof(Quest))))
         {
             modelBuilder.Entity(i);
         }
-        foreach (var entityType in TypesFunctionality
+        foreach (var entityType in TypesFunction
                      .AllAssemblyTypes
                      .Where(i => i.IsClass && i.IsAssignableTo(typeof(IInventoryEntity))))
         {
             modelBuilder.Entity(entityType);
         }
-        foreach (var i in TypesFunctionality.AllAssemblyTypes.Where(i => i.IsAssignableTo(typeof(GearStat))))
+        foreach (var i in TypesFunction.AllAssemblyTypes.Where(i => i.IsAssignableTo(typeof(GearStat))))
         {
             modelBuilder.Entity(i);
         }

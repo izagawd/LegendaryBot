@@ -33,7 +33,7 @@ public class Avatar: GeneralCommandClass
             .FirstOrDefaultAsync();
         if (color is null)
         {
-            color = TypesFunctionality.GetDefaultObject<UserData>().Color;
+            color = TypesFunction.GetDefaultObject<UserData>().Color;
         }
         var embed = new DiscordEmbedBuilder()
             .WithTitle($"**{user.Username}'s avatar**")

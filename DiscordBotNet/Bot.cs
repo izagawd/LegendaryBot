@@ -138,7 +138,7 @@ public static class Bot
                 {
                     spawnInfo.MessageCount = 0;
                     _channelSpawnInfoDictionary[args.Channel.Id] = spawnInfo;
-                    var groups = TypesFunctionality
+                    var groups = TypesFunction
                         .GetDefaultObjectsAndSubclasses<Character>()
                         .Where(i =>  i.CanSpawnNormally)
                         .GroupBy(i => i.Rarity)
@@ -412,7 +412,7 @@ public static class Bot
                 .Where(i => i.Id == args.Context.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
-            .GetValueOrDefault(TypesFunctionality.GetDefaultObject<UserData>().Color);
+            .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color);
         if (args.Exception is CommandNotFoundException exception)
         {
             text = $"Command `{exception.CommandName}` not found";

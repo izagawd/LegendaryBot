@@ -12,7 +12,7 @@ public class GearStatDatabaseConfiguration : IEntityTypeConfiguration<GearStat>
     {
         builder.HasKey(i => i.Id);
         var starting =  builder.HasDiscriminator(i => i.TypeId);
-        foreach (var i in TypesFunctionality.GetDefaultObjectsAndSubclasses<GearStat>())
+        foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<GearStat>())
         {
             starting = starting.HasValue(i.GetType(), i.TypeId);
         }
@@ -76,7 +76,7 @@ public abstract class GearStat
 
     static GearStat()
     {
-        AllGearStatTypes = TypesFunctionality.AllAssemblyTypes.Where(i => !i.IsAbstract && i.IsSubclassOf(typeof(GearStat))).ToImmutableArray();
+        AllGearStatTypes = TypesFunction.AllAssemblyTypes.Where(i => !i.IsAbstract && i.IsSubclassOf(typeof(GearStat))).ToImmutableArray();
     }
     
     [NotMapped]

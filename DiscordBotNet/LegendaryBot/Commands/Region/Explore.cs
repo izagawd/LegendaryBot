@@ -67,7 +67,7 @@ public class Explore : GeneralCommandClass
         if (region is null)
         {
             var regionString = $"Region with name `{regionName}` not found\nThese are the following existing regions:";
-            foreach (var i in TypesFunctionality.GetDefaultObjectsAndSubclasses<Region>())
+            foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<Region>())
             {
                 embedToBuild.AddField(i.Name,
                     $"Required Tier: **{i.TierRequirement}**");
@@ -129,7 +129,7 @@ public class Explore : GeneralCommandClass
         }
 
         var groups = region.ObtainableCharacters
-            .Select(i => (Character) TypesFunctionality.GetDefaultObject(i))
+            .Select(i => (Character) TypesFunction.GetDefaultObject(i))
             .GroupBy(i => i.Rarity)
             .ToImmutableArray();
         var characterGrouping= BasicFunctionality.GetRandom(new Dictionary<IGrouping<Rarity, Character>, double>()

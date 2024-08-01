@@ -120,7 +120,7 @@ public class Help : GeneralCommandClass
         .FirstOrDefaultAsync();
     if (color is null)
     {
-        color = TypesFunctionality.GetDefaultObject<UserData>().Color;
+        color = TypesFunction.GetDefaultObject<UserData>().Color;
     }
 
    

@@ -16,11 +16,11 @@ public class ViewDescription : GeneralCommandClass
     public async ValueTask Execute(CommandContext context, [Parameter("entity-name")] string entityName)
     {
         var simplifiedName = entityName.Replace(" ", "").ToLower();
-        object? zaObject = TypesFunctionality.GetDefaultObjectsAndSubclasses<IInventoryEntity>()
+        object? zaObject = TypesFunction.GetDefaultObjectsAndSubclasses<IInventoryEntity>()
             .FirstOrDefault(i => i.Name.ToLower().Replace(" ","") == simplifiedName);
         if (zaObject is null)
         {
-            zaObject = TypesFunctionality.GetDefaultObjectsAndSubclasses<StatusEffect>()
+            zaObject = TypesFunction.GetDefaultObjectsAndSubclasses<StatusEffect>()
                 .FirstOrDefault(i => i.Name.ToLower().Replace(" ","") == simplifiedName);
         }
 
@@ -32,7 +32,7 @@ public class ViewDescription : GeneralCommandClass
             .WithUser(context.User)
             .WithTitle($"Description")
             .WithColor(zaColor
-                .GetValueOrDefault(TypesFunctionality.GetDefaultObject<UserData>().Color));
+                .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color));
         if (zaObject is IInventoryEntity zaEntity)
         {
             var zaDescription = $"{zaEntity.TypeGroup.Name}: {zaEntity.Name}.\nRarity: {(int) zaEntity.Rarity} :star:";

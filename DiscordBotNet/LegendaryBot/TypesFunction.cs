@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace DiscordBotNet.LegendaryBot;
 
-public static class TypesFunctionality
+public static class TypesFunction
 {
 
     private static ConcurrentDictionary<Type, object> _defaultObjectsContainer =  new();
@@ -13,10 +13,10 @@ public static class TypesFunctionality
     public static readonly ImmutableArray<Type> AllAssemblyTypes;
 
 
-    static TypesFunctionality()
+    static TypesFunction()
     {
      
-        AllAssemblyTypes = typeof(TypesFunctionality).Assembly
+        AllAssemblyTypes = typeof(TypesFunction).Assembly
             .GetTypes().ToImmutableArray();
     }
     public static  TObjectType GetDefaultObject<TObjectType>()

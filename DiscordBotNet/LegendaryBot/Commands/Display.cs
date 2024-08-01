@@ -189,7 +189,7 @@ public class Display : GeneralCommandClass
     static Display()
     {
         entitiesList = [];
-        foreach (var i in TypesFunctionality.GetDefaultObjectsAndSubclasses<IInventoryEntity>()
+        foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<IInventoryEntity>()
                      .Select(i =>
                      {
                          Type type = null;
@@ -221,7 +221,7 @@ public class Display : GeneralCommandClass
                 .Where(i => i.Id == context.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
-            .GetValueOrDefault(TypesFunctionality.GetDefaultObject<UserData>().Color);
+            .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color);
         await ExecuteDisplayAsync(context, entitiesList, 15, i => i,
             "\n", "All entities", color);
     }

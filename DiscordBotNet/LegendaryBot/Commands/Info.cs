@@ -34,7 +34,7 @@ public class Info : GeneralCommandClass
                     .WithUser(author)
                     .WithTitle("Hmm")
                     .WithDescription($"{author.Username} has not begun with /begin")
-                    .WithColor(TypesFunctionality.GetDefaultObject<UserData>().Color);
+                    .WithColor(TypesFunction.GetDefaultObject<UserData>().Color);
                 await ctx.RespondAsync(embed);
             }
             return;
