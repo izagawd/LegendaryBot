@@ -15,7 +15,7 @@ public class QuestDatabaseSetup : IEntityTypeConfiguration<Quest>
     {
         builder.HasKey(i => i.Id);
         var discrimStart =builder.HasDiscriminator(i => i.TypeId);
-        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Quest>())
+        foreach (var i in TypesFunctionality.GetDefaultObjectsAndSubclasses<Quest>())
         {
             discrimStart = discrimStart.HasValue(i.GetType(), i.TypeId);
         }

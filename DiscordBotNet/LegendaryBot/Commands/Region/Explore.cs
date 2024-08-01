@@ -67,7 +67,7 @@ public class Explore : GeneralCommandClass
         if (region is null)
         {
             var regionString = $"Region with name `{regionName}` not found\nThese are the following existing regions:";
-            foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Region>())
+            foreach (var i in TypesFunctionality.GetDefaultObjectsAndSubclasses<Region>())
             {
                 embedToBuild.AddField(i.Name,
                     $"Required Tier: **{i.TierRequirement}**");

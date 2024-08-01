@@ -13,7 +13,7 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
     {
         builder.HasKey(i => i.Id);
         var starting = builder.HasDiscriminator(i => i.TypeId);
-        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Blessing>())
+        foreach (var i in TypesFunctionality.GetDefaultObjectsAndSubclasses<Blessing>())
         {
             starting = starting.HasValue(i.GetType(), i.TypeId);
         }
@@ -26,7 +26,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     public static Blessing GetRandomBlessing(Dictionary<Rarity,double> rates)
     {
         var groups = TypesFunctionality
-            .GetDefaultObjectsThatIsInstanceOf<Blessing>()
+            .GetDefaultObjectsAndSubclasses<Blessing>()
             .Where(i =>  i.SpawnsNormally)
             .GroupBy(i => i.Rarity)
             .ToImmutableArray();

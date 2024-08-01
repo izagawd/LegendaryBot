@@ -16,11 +16,11 @@ public class ViewDescription : GeneralCommandClass
     public async ValueTask Execute(CommandContext context, [Parameter("entity-name")] string entityName)
     {
         var simplifiedName = entityName.Replace(" ", "").ToLower();
-        object? zaObject = TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<IInventoryEntity>()
+        object? zaObject = TypesFunctionality.GetDefaultObjectsAndSubclasses<IInventoryEntity>()
             .FirstOrDefault(i => i.Name.ToLower().Replace(" ","") == simplifiedName);
         if (zaObject is null)
         {
-            zaObject = TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<StatusEffect>()
+            zaObject = TypesFunctionality.GetDefaultObjectsAndSubclasses<StatusEffect>()
                 .FirstOrDefault(i => i.Name.ToLower().Replace(" ","") == simplifiedName);
         }
 

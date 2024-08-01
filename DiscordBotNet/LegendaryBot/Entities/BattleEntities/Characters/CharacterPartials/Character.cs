@@ -46,7 +46,7 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
         entity.Property(i => i.Experience)
             .HasColumnName(nameof(Character.Experience));
         var starting = entity.HasDiscriminator(i => i.TypeId);
-        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Character>())
+        foreach (var i in TypesFunctionality.GetDefaultObjectsAndSubclasses<Character>())
         {
             starting = starting.HasValue(i.GetType(), i.TypeId);
         }

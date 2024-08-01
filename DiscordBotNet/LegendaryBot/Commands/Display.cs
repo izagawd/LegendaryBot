@@ -189,7 +189,7 @@ public class Display : GeneralCommandClass
     static Display()
     {
         entitiesList = [];
-        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<IInventoryEntity>()
+        foreach (var i in TypesFunctionality.GetDefaultObjectsAndSubclasses<IInventoryEntity>()
                      .Select(i =>
                      {
                          Type type = null;

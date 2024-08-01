@@ -12,7 +12,7 @@ public class GearStatDatabaseConfiguration : IEntityTypeConfiguration<GearStat>
     {
         builder.HasKey(i => i.Id);
         var starting =  builder.HasDiscriminator(i => i.TypeId);
-        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<GearStat>())
+        foreach (var i in TypesFunctionality.GetDefaultObjectsAndSubclasses<GearStat>())
         {
             starting = starting.HasValue(i.GetType(), i.TypeId);
         }

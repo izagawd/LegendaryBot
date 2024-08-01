@@ -25,25 +25,18 @@ public static class TypesFunctionality
     }
 
 
-    public static IEnumerable<object> GetDefaultObjectsThatIsInstanceOf(Type type)
+    public static IEnumerable<object> GetDefaultObjectsAndSubclasses(Type type)
     {
         IEnumerable<Type> typesToLoop = null;
-        if (type.IsInterface)
-        {
-            typesToLoop = AllAssemblyTypes.Where(j => !j.IsAbstract && j.GetInterfaces().Contains(type));
-        }
-        else
-        {
-            typesToLoop = AllAssemblyTypes.Where(j => !j.IsAbstract && (j.IsSubclassOf(type) || j == type));
-        }
-        foreach (var i in typesToLoop)
+
+        foreach (var i in AllAssemblyTypes.Where(i=>i.IsAssignableTo(type) && !i.IsAbstract))
         {
             yield return GetDefaultObject(i);
         }
     }
-    public static IEnumerable<TObjectType> GetDefaultObjectsThatIsInstanceOf<TObjectType>()
+    public static IEnumerable<TObjectType> GetDefaultObjectsAndSubclasses<TObjectType>()
     {
-        return GetDefaultObjectsThatIsInstanceOf(typeof(TObjectType)).Cast<TObjectType>();
+        return GetDefaultObjectsAndSubclasses(typeof(TObjectType)).Cast<TObjectType>();
     }
 
     public static object GetDefaultObject(Type type)

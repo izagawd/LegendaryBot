@@ -26,7 +26,7 @@ public class FightCharacter : GeneralCommandClass
             return;
         }
 
-        var type =TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Character>()
+        var type =TypesFunctionality.GetDefaultObjectsAndSubclasses<Character>()
             .Where(i => i.Name.ToLower().Replace(" ","") == enemyName.ToLower().Replace(" ", ""))
             .Select(i => i.GetType())
             .FirstOrDefault();

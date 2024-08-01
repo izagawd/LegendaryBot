@@ -7,7 +7,9 @@ using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Commands;
+using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus;
@@ -137,7 +139,7 @@ public static class Bot
                     spawnInfo.MessageCount = 0;
                     _channelSpawnInfoDictionary[args.Channel.Id] = spawnInfo;
                     var groups = TypesFunctionality
-                        .GetDefaultObjectsThatIsInstanceOf<Character>()
+                        .GetDefaultObjectsAndSubclasses<Character>()
                         .Where(i =>  i.CanSpawnNormally)
                         .GroupBy(i => i.Rarity)
                         .ToImmutableArray();
@@ -313,7 +315,41 @@ public static class Bot
     }
     private async  static Task DoShitAsync()
     {
+
+        TypesFunctionality
+            .AllAssemblyTypes
+            .Where(i => i.IsClass && i.IsAssignableTo(typeof(IInventoryEntity)))
+            .ForEach(i => i.Name.Print());
+            
         
+        async Task ToDoAsync()
+        {
+            var post = new PostgreSqlContext();
+            var user =await post.UserData
+                .IncludeTeamWithAllEquipments()
+                .FirstOrDefaultAsync();
+          
+        }
+
+        foreach (var i in Enumerable.Range(0,10))
+        {
+            await ToDoAsync();
+        }
+
+        List<double> done = [];
+        foreach (var i in Enumerable.Range(0,100))
+        {
+            var stop = new Stopwatch();
+            stop.Start();
+            await ToDoAsync();
+            stop.Stop();
+            done.Add(stop.Elapsed.TotalMilliseconds);
+        }
+
+        done.Average().Print();
+        StopProgram();
+        
+
     }
     private static async Task Main(string[] args)
     {

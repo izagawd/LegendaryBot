@@ -20,7 +20,7 @@ public class GiveMe : GeneralCommandClass
     {
         var simplifiedEntityName = entityName.ToLower().Replace(" ", "");
         var type =TypesFunctionality
-            .GetDefaultObjectsThatIsInstanceOf<IInventoryEntity>()
+            .GetDefaultObjectsAndSubclasses<IInventoryEntity>()
             .FirstOrDefault(i => i.Name.ToLower().Replace(" ","") == simplifiedEntityName)?.GetType();
         if (ctx.User.Id != Bot.Izasid && ctx.User.Id != Bot.Testersid)
         {

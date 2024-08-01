@@ -29,7 +29,7 @@ public partial class CharacterCommand
     public static void UpdateEmbed(DiscordEmbedBuilder builder, Character character)
     {
         var description = $"Character number: {character.Number}\n";
-        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<CharacterExpMaterial>())
+        foreach (var i in TypesFunctionality.GetDefaultObjectsAndSubclasses<CharacterExpMaterial>())
         {
             description += $"{i.Name}: {character.UserData.Items.GetItemStacks(i.GetType())}\n";
         }

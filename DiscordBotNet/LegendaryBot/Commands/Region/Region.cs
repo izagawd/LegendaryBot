@@ -11,7 +11,7 @@ public abstract class Region
 
     static Region()
     {
-        foreach (var i in TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Region>())
+        foreach (var i in TypesFunctionality.GetDefaultObjectsAndSubclasses<Region>())
         {
             var rarities = i.ObtainableCharacters.GroupBy(j =>
                     ((Character)TypesFunctionality.GetDefaultObject(j)).Rarity)
@@ -29,7 +29,7 @@ public abstract class Region
     public static Region? GetRegion(string regionName)
     {
         var simplifiedRegionName = regionName.ToLower().Replace(" ", "");
-        return TypesFunctionality.GetDefaultObjectsThatIsInstanceOf<Region>()
+        return TypesFunctionality.GetDefaultObjectsAndSubclasses<Region>()
             .FirstOrDefault(i => i.Name.ToLower().Replace(" ", "")
                         == simplifiedRegionName);
     }

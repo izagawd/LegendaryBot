@@ -15,7 +15,7 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 public partial class CharacterCommand : GeneralCommandClass
 {
     private static readonly ImmutableArray<string> _possibleGears = TypesFunctionality
-        .GetDefaultObjectsThatIsInstanceOf<Gear>()
+        .GetDefaultObjectsAndSubclasses<Gear>()
         .Select(i => i.Name.ToLower().Replace(" ", "")).ToImmutableArray();
     
     
