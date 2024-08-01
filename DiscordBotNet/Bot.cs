@@ -321,10 +321,7 @@ public static class Bot
 
 
     
-    unsafe struct someclass
-    {
-        public fixed byte buffer[10000];    
-    }
+
    
     private static void StopProgram()
     {
@@ -333,10 +330,7 @@ public static class Bot
     }
     private async  static Task DoShitAsync()
     {
-
-        BasicFunctionality.SizeOf(typeof(someclass));
-        StopProgram();
-
+        
     }
     private static async Task Main(string[] args)
     {
