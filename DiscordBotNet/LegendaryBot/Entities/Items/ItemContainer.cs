@@ -7,7 +7,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.Items;
 public class ItemContainer : InventoryEntityContainer<Item>
 {
 
-    public override void MergeDuplicates()
+    public override void MergeItemStacks()
     {
         var items = List.ToArray();
         List.Clear();

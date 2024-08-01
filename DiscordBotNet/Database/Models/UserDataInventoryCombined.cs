@@ -19,9 +19,9 @@ public struct UserDataInventoryCombined : IInventoryEntityContainer<IInventoryEn
         _userData = userData;
     }
 
-    public void MergeDuplicates()
+    public void MergeItemStacks()
     {
-        _userData.Items.MergeDuplicates();
+        _userData.Items.MergeItemStacks();
     }
 
     public IEnumerator<IInventoryEntity> GetEnumerator()

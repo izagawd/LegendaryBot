@@ -5,13 +5,13 @@ namespace DiscordBotNet.LegendaryBot.Entities.Items;
 public interface IInventoryEntityContainer<TInventoryEntity> : IList<TInventoryEntity>
     where TInventoryEntity : IInventoryEntity
 {
-    public  void MergeDuplicates();
+    public  void MergeItemStacks();
 }
 public abstract class InventoryEntityContainer<TInventoryEntity>  : IInventoryEntityContainer<TInventoryEntity>
     where TInventoryEntity : IInventoryEntity
 {
     protected List<TInventoryEntity> List { get; }
-    public abstract void MergeDuplicates();
+    public abstract void MergeItemStacks();
 
     public virtual IEnumerator<TInventoryEntity> GetEnumerator()
     {

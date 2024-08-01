@@ -213,7 +213,7 @@ public partial class CharacterCommand
             await ctx.RespondAsync(embedBuilder);
             return;
         }
-        gottenUserData.Inventory.MergeDuplicates();
+        gottenUserData.Inventory.MergeItemStacks();
         var character = gottenUserData.Characters.FirstOrDefault();
 
         if (character is null)

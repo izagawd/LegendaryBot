@@ -31,7 +31,7 @@ public class InventoryEntityContainer : InventoryEntityContainer<IInventoryEntit
         }
     }
 
-    public override void MergeDuplicates()
+    public override void MergeItemStacks()
     {
         MergeItems();
     }

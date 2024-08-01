@@ -22,16 +22,16 @@ public class EntityReward : Reward
     {
         EntitiesToReward = new InventoryEntityContainer(entitiesToReward
             .Where(i => i is not null));
-        EntitiesToReward.MergeDuplicates();
+        EntitiesToReward.MergeItemStacks();
 
     }
 
     public override string GiveRewardTo(UserData userData)
     {
         var stringBuilder = new StringBuilder($"{userData.Name} got:\n ");
-        EntitiesToReward.MergeDuplicates();
+        EntitiesToReward.MergeItemStacks();
         userData.Inventory.AddRange(EntitiesToReward);
-        userData.Inventory.MergeDuplicates();
+        userData.Inventory.MergeItemStacks();
 
         Dictionary<string, int> nameSorter = [];
         foreach (var i in EntitiesToReward)
