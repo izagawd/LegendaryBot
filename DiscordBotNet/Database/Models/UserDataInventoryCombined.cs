@@ -127,7 +127,7 @@ public struct UserDataInventoryCombined : IInventoryEntityContainer<IInventoryEn
 
  
 
-    public int Count => _userData.Items.Count + _userData.Inventory.Count + _userData.Blessings.Count +
+    public int Count => _userData.Items.Count + _userData.Characters.Count + _userData.Blessings.Count +
                         _userData.Gears.Count;
     public bool IsReadOnly => false;
     public int IndexOf(IInventoryEntity inventoryEntity)
