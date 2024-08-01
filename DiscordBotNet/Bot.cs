@@ -50,7 +50,7 @@ namespace DiscordBotNet;
 public static class Bot
 {
 
-    private static ulong SlenderId => 334412512919420928;
+    private const ulong SlenderId = 334412512919420928;
 
 
     private static Task FirstTimeSetupAsync()
@@ -356,13 +356,13 @@ public static class Bot
     /// <summary>
     /// This is my discord user Id because it's too long to memorize
     /// </summary>
-    public static ulong Izasid => 216230858783326209;
+    public const ulong Izasid = 216230858783326209;
     /// <summary>
     /// this is the discord user Id of another account of mine that i use to test stuff
     /// </summary>
-    public static ulong Testersid => 266157684380663809;
+    public const ulong Testersid = 266157684380663809;
 
-    public static ulong Surjidid => 1025325026955767849;
+    public const ulong Surjidid = 1025325026955767849;
     public static DiscordClient Client { get; private set; }
 
 
