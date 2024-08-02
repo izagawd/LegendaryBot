@@ -317,38 +317,8 @@ public static class Bot
     }
     private async  static Task DoShitAsync()
     {
-
-
-            
-        return;
-        async Task ToDoAsync()
-        {
-         
-            var post = new PostgreSqlContext();
-            var user =await post.UserData
-                .IncludeTeamWithAllEquipments()
-                .FirstOrDefaultAsync(i => i.Id == 5555);
-            BasicFunctionality.SizeOf(typeof(Gear)).Print();
-        }
-
-        foreach (var i in Enumerable.Range(0,10))
-        {
-            await ToDoAsync();
-        }
-
-        List<double> done = [];
-        foreach (var i in Enumerable.Range(0,100))
-        {
-            var stop = new Stopwatch();
-            stop.Start();
-            await ToDoAsync();
-            stop.Stop();
-            done.Add(stop.Elapsed.TotalMilliseconds);
-        }
-
-        done.Average().Print();
-        StopProgram();
         
+
 
     }
     private static async Task Main(string[] args)
