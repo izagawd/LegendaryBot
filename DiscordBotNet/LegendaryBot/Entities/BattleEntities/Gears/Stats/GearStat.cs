@@ -47,7 +47,7 @@ public abstract class GearStat
     }
 
     
-
+    public Gear Gear { get; set; }
     public long Id { get; set; }
     public long GearId { get; set; }
     

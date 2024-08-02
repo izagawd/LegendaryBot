@@ -323,7 +323,7 @@ public static class Bot
         
         async Task ToDoAsync()
         {
-            GearStat
+          GearStat
             var post = new PostgreSqlContext();
             var user =await post.UserData
                 .IncludeTeamWithAllEquipments()
