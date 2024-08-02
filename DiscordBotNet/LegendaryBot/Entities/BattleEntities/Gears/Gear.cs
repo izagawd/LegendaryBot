@@ -195,7 +195,7 @@ public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
             .WithOne()
             .HasForeignKey<GearStat>(i => i.IsMainStat);
         entity.HasMany(i => i.Stats)
-            .WithOne(i => i.Gear)
+            .WithOne()
             .HasForeignKey(i => i.GearId)
             .OnDelete(DeleteBehavior.Cascade);
         entity.Property(i => i.Rarity)

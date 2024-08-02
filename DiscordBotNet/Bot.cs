@@ -9,6 +9,8 @@ using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Commands;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DiscordBotNet.LegendaryBot.Rewards;
@@ -321,11 +323,12 @@ public static class Bot
         
         async Task ToDoAsync()
         {
+            GearStat
             var post = new PostgreSqlContext();
             var user =await post.UserData
                 .IncludeTeamWithAllEquipments()
-                .FirstOrDefaultAsync();
-          
+                .FirstOrDefaultAsync(i => i.Id == 5555);
+            BasicFunctionality.SizeOf(typeof(Gear)).Print();
         }
 
         foreach (var i in Enumerable.Range(0,10))
