@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
-      "PackagePath": "staticwebassets\\DiscordBotNet.bundle.scp.css"
+      "PackagePath": "staticwebassets\\DiscordBotNet.fkfnsml1mf.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\blessings\\BlessingOfThePhoenix.png",
@@ -403,6 +403,10 @@
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.DiscordBotNet.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.DiscordBotNet.Microsoft.AspNetCore.StaticWebAssets.props",

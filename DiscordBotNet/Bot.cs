@@ -2,12 +2,15 @@
 using System.Collections.Immutable;
 using DSharpPlus.Entities;
 using System.Diagnostics;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Commands;
 using DiscordBotNet.LegendaryBot.Entities;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
@@ -222,9 +225,9 @@ public static class Bot
 
 
 
+    #region BotSetup
     private static async Task StartDiscordBotAsync()
     {
-        
         Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings[BotTokenToPathUse]!,
             DiscordIntents.All)
             .ConfigureEventHandlers(i => 
@@ -233,21 +236,15 @@ public static class Bot
                     .HandleMessageCreated(OnMessageCreatedGiveUserExpMat))
             
             .Build();
-
         var commandsExtension = Client.UseCommands(new CommandsConfiguration()
         {
             UseDefaultCommandErrorHandler = false,
         });
-   
         var slashCommandProcessor = new SlashCommandProcessor();
-    
         slashCommandProcessor.AddConverters(typeof(Bot).Assembly);
-        
         commandsExtension.AddProcessor(slashCommandProcessor);
-        
         TextCommandProcessor textCommandProcessor = new(new()
         {
-            
             // The default behavior is that the bot reacts to direct mentions
             // and to the "!" prefix.
             // If you want to change it, you first set if the bot should react to mentions
@@ -255,32 +252,20 @@ public static class Bot
             PrefixResolver = new DefaultPrefixResolver(true,  "&").ResolvePrefixAsync,
             IgnoreBots = true,
         });
-
-        
         textCommandProcessor.AddConverters(typeof(Bot).Assembly);
         commandsExtension.AddProcessor(textCommandProcessor);
-        
         commandsExtension.AddCommands(typeof(Bot).Assembly);
-
         commandsExtension.CommandExecuted += OnCommandsExtensionOnCommandExecuted;
-
-
         commandsExtension.CommandErrored += OnCommandError;
-
-       
         Client.UseVoiceNext(new VoiceNextConfiguration { AudioFormat = AudioFormat.Default});
         var interactivityConfiguration = new InteractivityConfiguration
         {
             Timeout = TimeSpan.FromMinutes(2),
         };
         Interactivity = Client.UseInteractivity(interactivityConfiguration);
-        
-       
         await Client.ConnectAsync();
- 
-
     }
-
+    #endregion
     private static  Task OnCommandsExtensionOnCommandExecuted(CommandsExtension sender, CommandExecutedEventArgs args)
     {
         try
@@ -294,38 +279,22 @@ public static class Bot
         {
             Console.WriteLine(e);
         }
-
-
         return Task.CompletedTask;
     }
-
-
-
-
     public const bool UseTestDatabaseAndBot = true;
     public static string BotTokenToPathUse => UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
     public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
-
-
-    
-
-   
     private static void StopProgram()
     {
-        
         Process.GetCurrentProcess().Kill();
     }
     private async  static Task DoShitAsync()
     {
-        
-
 
     }
     private static async Task Main(string[] args)
     {
         await DoShitAsync();
-    
-        
         await using (var ctx = new PostgreSqlContext())
         {
 
