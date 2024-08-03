@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="AspNet.Security.OAuth.Discord" Version="8.1.0" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.12" />
     <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02345" />
     <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02345" />
     <PackageReference Include="DSharpPlus.Core" Version="5.0.0-nightly-01576" />
