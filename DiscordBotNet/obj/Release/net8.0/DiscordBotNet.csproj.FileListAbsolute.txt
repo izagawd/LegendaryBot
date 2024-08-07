@@ -202,3 +202,6 @@ C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Release\net
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Release\net8.0\runtimes\win-x64\native\capstone.dll
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Release\net8.0\runtimes\win-x86\native\capstone.dll
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Release\net8.0\runtimes\win\lib\netcoreapp2.0\System.Management.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Release\net8.0\DiscordBotNet.staticwebassets.endpoints.json
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Release\net8.0\staticwebassets.build.endpoints.json
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Release\net8.0\staticwebassets\msbuild.DiscordBotNet.Microsoft.AspNetCore.StaticWebAssetEndpoints.props

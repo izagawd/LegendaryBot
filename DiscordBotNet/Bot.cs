@@ -8,6 +8,7 @@ using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
+using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Commands;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
@@ -302,12 +303,11 @@ public static class Bot
     {
         Process.GetCurrentProcess().Kill();
     }
+
+
     private async  static Task DoShitAsync()
     {
-        var lily = new Lily();
 
-        StopProgram();
-        
     }
     private static async Task Main(string[] args)
     {
