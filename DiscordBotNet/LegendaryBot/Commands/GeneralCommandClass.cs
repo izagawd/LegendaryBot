@@ -73,9 +73,8 @@ public abstract class GeneralCommandClass
                 await using var tempCtx = new PostgreSqlContext();
                 await tempCtx.UserData
                     .Where(i => _occupiedUserDatasIds.Contains(i.Id))
-                    .ForEachAsync(i => i.IsOccupied = false);
-                await tempCtx.SaveChangesAsync();
- 
+                    .ExecuteUpdateAsync(i
+                        => i.SetProperty(j => j.IsOccupied, false));
             }
             await DatabaseContext.DisposeAsync();
             DatabaseContext = null!;
@@ -91,8 +90,7 @@ public abstract class GeneralCommandClass
 
     ~GeneralCommandClass()
     {
-        if(DatabaseContext is not null)
-            DatabaseContext.Dispose();
+        DatabaseContext?.Dispose();
     }
     private List<ulong> _occupiedUserDatasIds  = new();
 
