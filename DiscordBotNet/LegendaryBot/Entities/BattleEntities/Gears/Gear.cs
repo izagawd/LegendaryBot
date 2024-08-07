@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.GearSets;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -15,6 +16,39 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public int TypeId { get; protected init; }
 
     public bool CanBeTraded => true;
+
+    private int _gearSetTypeId;
+    public int GearSetTypeId
+    {
+        get => _gearSetTypeId;
+        set
+        {
+            if (!_gearSetCache.Keys.Contains(value))
+                throw new Exception($"No gear set type with typeid {value}");
+            _gearSetTypeId = value;
+        } 
+    }
+
+    private static Dictionary<int, Type> _gearSetCache= [];
+
+    static Gear()
+    {
+        foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<GearSet>())
+        {
+            _gearSetCache[i.TypeId] = i.GetType();
+        }
+    }
+    [NotMapped]
+    public Type GearSetType
+    {
+        get => _gearSetCache[_gearSetTypeId];
+        set
+        {
+            if (!value.IsAssignableTo(typeof(GearSet)))
+                throw new Exception("Inputted type must be of type gearstat");
+            _gearSetTypeId = ((GearSet)TypesFunction.GetDefaultObject(value)).TypeId;
+        }
+    }
 
     public string DisplayString
     {

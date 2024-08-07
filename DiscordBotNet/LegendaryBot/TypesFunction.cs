@@ -36,7 +36,8 @@ public static class TypesFunction
     }
     public static IEnumerable<TObjectType> GetDefaultObjectsAndSubclasses<TObjectType>()
     {
-        return GetDefaultObjectsAndSubclasses(typeof(TObjectType)).Cast<TObjectType>();
+        return GetDefaultObjectsAndSubclasses(typeof(TObjectType))
+            .Cast<TObjectType>();
     }
 
     public static object GetDefaultObject(Type type)

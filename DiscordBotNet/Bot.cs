@@ -303,7 +303,8 @@ public static class Bot
     }
     private async  static Task DoShitAsync()
     {
-
+        BasicFunctionality.SizeOf(typeof(List<object>)).Print();
+        StopProgram();
     }
     private static async Task Main(string[] args)
     {

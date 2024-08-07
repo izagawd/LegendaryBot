@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
@@ -571,12 +572,15 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     [NotMapped] private readonly HashSet<StatusEffect> _statusEffects = [];
 
 
-    [NotMapped] public IEnumerable<StatusEffect> StatusEffects => _statusEffects.ToImmutableArray();
+    [NotMapped] public IEnumerable<StatusEffect> StatusEffects => _statusEffects;
 
     [NotMapped] public virtual DiscordColor Color => DiscordColor.Green;
 
 
 
+    private List<GearSet> _gearSets = [];
+
+    public IEnumerable<GearSet> GearSets => _gearSets;
 
     [NotMapped] public BattleSimulator CurrentBattle => Team?.CurrentBattle!;
 
@@ -632,7 +636,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             i.MainStat.SetMainStatValue(i.Rarity);
             i.MainStat.AddStats(this);
         }
-        
+        _gearSets = GenerateGearSets().ToList();
     }
 
 
