@@ -7,6 +7,7 @@ using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.DialogueNamespace;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.GearSets;
 using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
@@ -552,6 +553,20 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             }
         }
     }
+    
+    public IEnumerable<GearSet> GenerateGearSets()
+    {
+        foreach (var i in Gears.GroupBy(i => i.GearSetType))
+        {
+            var count = i.Count();
+            if(count < 2) continue;
+            var created = (GearSet)Activator.CreateInstance(i.Key)!;
+            created.Owner = this;
+            if (count >= 4)
+                created.CanUseFourPiece = true;
+            yield return created;
+        }
+    }
 
     [NotMapped] private readonly HashSet<StatusEffect> _statusEffects = [];
 
@@ -568,9 +583,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public bool RemoveStatusEffect(StatusEffect statusEffect) => _statusEffects.Remove(statusEffect);
 
     public int MaxLevel => 60;
-
-
-
     [NotMapped]
     public float TotalAttack { get; set; }
     [NotMapped]
