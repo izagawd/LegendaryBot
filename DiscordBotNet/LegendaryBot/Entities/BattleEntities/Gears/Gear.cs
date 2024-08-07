@@ -37,6 +37,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
         {
             _gearSetCache[i.TypeId] = i.GetType();
         }
+        
     }
     [NotMapped]
     public Type GearSetType
@@ -64,10 +65,11 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
                 numberToUse = $"{Number} • ";
             }
 
+            var setName = ((GearSet)TypesFunction.GetDefaultObject(GearSetType)).Name;
             bool shouldSpace = false;
             var stringToUse =new StringBuilder($"```{numberToUse}{Name}".PadRight(12) +
                                                $" • {MainStat.AsNameAndValue()} • " +
-                                               $"Rarity: {(int) Rarity}\u2b50\nSubstats:");
+                                               $"Rarity: {(int) Rarity}\u2b50\nSet: {setName}\nSubstats:");
             foreach (var j in Substats)
             {
                 if (shouldSpace)
@@ -144,10 +146,22 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public Character Character { get; set; }
 
 
-    public void Initialize(Rarity rarity, Type? desiredMainStat = null)
+    public void Initialize(Rarity rarity, Type? desiredGearSet = null, Type? desiredMainStat = null)
     {
         if (Stats.Count != 0) return;
         Rarity = rarity;
+
+        GearSetType = desiredGearSet;
+        if (GearSetType is null)
+        {
+            GearSetType =
+                BasicFunctionality.RandomChoice(
+                        TypesFunction.GetDefaultObjectsAndSubclasses<GearSet>())
+                    .GetType();
+        } else if (!desiredGearSet.IsAssignableTo(typeof(GearSet)))
+        {
+            throw new ArgumentException($"{nameof(desiredGearSet)} inputted is not subclass of type {typeof(GearSet).FullName}");
+        }
         if (desiredMainStat is null)
         {
             desiredMainStat = BasicFunctionality.RandomChoice(PossibleMainStats);

@@ -577,9 +577,12 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     [NotMapped] public virtual DiscordColor Color => DiscordColor.Green;
 
 
+    
 
+    [NotMapped]
     private List<GearSet> _gearSets = [];
 
+    [NotMapped]
     public IEnumerable<GearSet> GearSets => _gearSets;
 
     [NotMapped] public BattleSimulator CurrentBattle => Team?.CurrentBattle!;

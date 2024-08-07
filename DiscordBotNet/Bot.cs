@@ -14,6 +14,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.GearSets;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
@@ -303,8 +304,10 @@ public static class Bot
     }
     private async  static Task DoShitAsync()
     {
-        BasicFunctionality.SizeOf(typeof(List<object>)).Print();
+        var lily = new Lily();
+
         StopProgram();
+        
     }
     private static async Task Main(string[] args)
     {
