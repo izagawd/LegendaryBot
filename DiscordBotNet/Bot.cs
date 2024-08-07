@@ -10,6 +10,7 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Commands;
 using DiscordBotNet.LegendaryBot.Entities;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
@@ -266,6 +267,16 @@ public static class Bot
         await Client.ConnectAsync();
     }
     #endregion
+
+
+    public static IEnumerable<int> Infinity(int startingPoint = 0, int jumpAmount = 1)
+    {
+        while (true)
+        {
+            yield return startingPoint;
+            startingPoint += jumpAmount;
+        }
+    }
     private static  Task OnCommandsExtensionOnCommandExecuted(CommandsExtension sender, CommandExecutedEventArgs args)
     {
         try
@@ -281,9 +292,11 @@ public static class Bot
         }
         return Task.CompletedTask;
     }
+    
+    public const string BotTokenToPathUse = UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
+    public const string DatabaseUrlPathToUse = UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
     public const bool UseTestDatabaseAndBot = true;
-    public static string BotTokenToPathUse => UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
-    public static string DatabaseUrlPathToUse => UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
+
     private static void StopProgram()
     {
         Process.GetCurrentProcess().Kill();
