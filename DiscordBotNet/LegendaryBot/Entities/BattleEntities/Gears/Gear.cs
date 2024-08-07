@@ -151,8 +151,8 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
         if (Stats.Count != 0) return;
         Rarity = rarity;
 
-        GearSetType = desiredGearSet;
-        if (GearSetType is null)
+       
+        if (desiredGearSet is null)
         {
             GearSetType =
                 BasicFunctionality.RandomChoice(
@@ -161,6 +161,10 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
         } else if (!desiredGearSet.IsAssignableTo(typeof(GearSet)))
         {
             throw new ArgumentException($"{nameof(desiredGearSet)} inputted is not subclass of type {typeof(GearSet).FullName}");
+        }
+        else
+        {
+            GearSetType = desiredGearSet;
         }
         if (desiredMainStat is null)
         {
