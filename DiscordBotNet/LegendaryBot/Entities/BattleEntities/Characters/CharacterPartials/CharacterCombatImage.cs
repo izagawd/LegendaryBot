@@ -59,11 +59,11 @@ public partial class Character
                     new RectangleF(52.5f, 5f, 40, 11.5f));
         }
         var healthPercentage = HealthPercentage;
-        var width = 175;
+        const int width = 175;
         var shieldPercentage = ShieldPercentage;
         var filledWidth = (width * healthPercentage / 100.0).Round();
         var filledShieldWidth = (width * shieldPercentage / 100).Round();
-        var barHeight = 16; 
+        const int barHeight = 16; 
         if(healthPercentage < 100)
             ctx.Fill(SixLabors.ImageSharp.Color.Red, new Rectangle(0, 50, width, barHeight));
         ctx.Fill(SixLabors.ImageSharp.Color.Green, new Rectangle(0, 50, filledWidth, barHeight));
@@ -83,7 +83,7 @@ public partial class Character
         var xOffSet = 0;
         var yOffSet = 50 + barHeight + 5;
 
-        var moveLength = 25; 
+        const int moveLength = 25; 
 
         foreach (var i in MoveList.Take(3))
         {
