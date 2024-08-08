@@ -26,6 +26,7 @@ public class MoveUsageContext
 
 public abstract class Move  : INameHaver
 {
+
     /// <summary>
     /// The maximum amount this move can be enhanced to
     /// </summary>
@@ -70,9 +71,12 @@ public abstract class Move  : INameHaver
     /// <summary>
     /// The character who owns this move
     /// </summary>
-    public  Character User { get; set; }
+    public  Character User { get; }
 
-
+    public Move(Character user)
+    {
+        User = user;
+    }
     /// <summary>
     /// Gets all the possible targets this move can be used on based on the owner of the move
     /// </summary>
