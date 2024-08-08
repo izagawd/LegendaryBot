@@ -34,6 +34,10 @@ public class TakeshiStraightPunch : BasicAttack
 
 
     }
+
+    public TakeshiStraightPunch(Character user) : base(user)
+    {
+    }
 }
 public class TakeshiMeditation : Ultimate
 {
@@ -60,6 +64,10 @@ public class TakeshiMeditation : Ultimate
     }
 
     public override int MaxCooldown => 4;
+
+    public TakeshiMeditation(Character user) : base(user)
+    {
+    }
 }
 public class KarateNeckChop : Skill
 {
@@ -87,6 +95,10 @@ public class KarateNeckChop : Skill
     }
 
     public override int MaxCooldown => 3;
+
+    public KarateNeckChop(Character user) : base(user)
+    {
+    }
 }
 public class Takeshi : Character
 {
@@ -122,11 +134,24 @@ public class Takeshi : Character
 
     }
 
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new TakeshiStraightPunch(this);
+    }
+
+    public override Skill? GenerateSkill()
+    {
+        return new KarateNeckChop(this);
+    }
+
+    public override Ultimate? GenerateUltimate()
+    {
+        return new TakeshiMeditation(this);
+    }
+
     public Takeshi()
     {
         TypeId = 13;
-        BasicAttack = new TakeshiStraightPunch();
-        Skill = new KarateNeckChop();
-        Ultimate = new TakeshiMeditation();
+
     }
 }

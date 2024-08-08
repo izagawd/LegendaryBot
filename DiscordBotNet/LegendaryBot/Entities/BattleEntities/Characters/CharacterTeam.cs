@@ -76,9 +76,9 @@ public class CharacterTeam : ISet<Character>
     public void AddRange(IEnumerable<Character> characters)
     {
         
+        
         foreach (var i in characters)
         {
-            if(i is null) continue;
             Add(i);
         }
     }
@@ -147,6 +147,10 @@ public class CharacterTeam : ISet<Character>
     {
 
         Characters = characters.ToHashSet();
+        foreach (var i in Characters)
+        {
+            i.Team = this;
+        }
     }
 
 

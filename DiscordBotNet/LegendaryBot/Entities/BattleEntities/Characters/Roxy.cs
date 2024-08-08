@@ -29,7 +29,11 @@ public class RoxyBatWhack : BasicAttack
         });
         attackTargetType = AttackTargetType.SingleTarget;
         text = "Dont get in my way!";
-    }   
+    }
+
+    public RoxyBatWhack(Character user) : base(user)
+    {
+    }
 }
 
 
@@ -61,6 +65,10 @@ public class RoxyAggressiveOverload : Skill
     }
 
     public override int MaxCooldown => 3;
+
+    public RoxyAggressiveOverload(Character user) : base(user)
+    {
+    }
 }
 
 public class RoxyHeadBatWhack : Ultimate
@@ -94,6 +102,10 @@ public class RoxyHeadBatWhack : Ultimate
     }
 
     public override int MaxCooldown => 5;
+
+    public RoxyHeadBatWhack(Character user) : base(user)
+    {
+    }
 }
 public class Roxy : Character
 {
@@ -104,12 +116,23 @@ public class Roxy : Character
     public Roxy()
     {
         TypeId = 14;
-        Skill = new RoxyAggressiveOverload();
-        BasicAttack = new RoxyBatWhack();
-        Ultimate = new RoxyHeadBatWhack();
+
     }
 
+    public override Skill? GenerateSkill()
+    {
+        return new RoxyAggressiveOverload(this);
+    }
 
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new RoxyBatWhack(this);
+    }
+
+    public override Ultimate? GenerateUltimate()
+    {
+        return new RoxyHeadBatWhack(this);
+    }
 
     [BattleEventListenerMethod]
     public void ShouldProcSkill(CharacterPostUseMoveEventArgs postUseMoveEventArgs)

@@ -42,6 +42,10 @@ public class WindSlash : Skill
     }
 
     public override int MaxCooldown => 2;
+
+    public WindSlash(Character user) : base(user)
+    {
+    }
 }
 
 public class SimpleSlashOfPrecision : BasicAttack
@@ -66,6 +70,10 @@ public class SimpleSlashOfPrecision : BasicAttack
         attackTargetType = AttackTargetType.SingleTarget;
             text = $"{User.NameWithAlphabet} does a simple slash to {target.NameWithAlphabet}!";
 
+    }
+
+    public SimpleSlashOfPrecision(Character user) : base(user)
+    {
     }
 }
 public class ConsecutiveSlashesOfPrecision : Ultimate
@@ -100,11 +108,30 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
     }
 
     public override int MaxCooldown => 5;
+
+    public ConsecutiveSlashesOfPrecision(Character user) : base(user)
+    {
+    }
 }
 public class Slasher : Character
 {
     public override string Name => "Slasher";
     public override Rarity Rarity => Rarity.FourStar;
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new SimpleSlashOfPrecision(this);
+    }
+
+    public override Skill? GenerateSkill()
+    {
+        return new WindSlash(this);
+    }
+
+    public override Ultimate? GenerateUltimate()
+    {
+        return new ConsecutiveSlashesOfPrecision(this);
+    }
+
     public override DiscordColor Color => DiscordColor.Brown;
 
     public override Element Element => Element.Earth;
@@ -112,9 +139,7 @@ public class Slasher : Character
     public Slasher()
     {
         TypeId = 6;
-        Ultimate = new ConsecutiveSlashesOfPrecision(){User = this};
-        Skill = new WindSlash(){User = this};
-        BasicAttack = new SimpleSlashOfPrecision(){User = this};
+
        
     }
 

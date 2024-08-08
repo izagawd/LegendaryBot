@@ -265,24 +265,7 @@ public partial class BattleSimulator
             yield return Team2;
         }
     }
-    /// <summary>
-    /// Call this for a character that you want to add to a battle,
-    /// or a change in blessing, or move is made to a character. Does not need to be manually called for
-    /// characters that started with this battle
-    /// </summary>
-    /// <param name="character"></param>
-    public void SetupCharacterForThisBattle(Character character)
-    {
-        if (!CharacterTeams.Any(i => i.Contains(character)))
-            throw new Exception("Character must be in a team that is in this battle to be set up");
-        if (character.Blessing is not null)
-            character.Blessing.Character = character;
-        foreach (var i in character.MoveList)
-        {
-            i.User = character;
-        }
-        
-    }
+
 
     private string? _mainText = "battle begins";
 
@@ -652,15 +635,11 @@ public partial class BattleSimulator
 
         Team1.CurrentBattle = this;
         Team2.CurrentBattle = this;
-        foreach (var i in CharacterTeams)
+        foreach (var i in Characters)
         {
-            foreach (var j in i)
-            {
-                j.Team = i;
-                if (SetToMaxHealthAtStart)
-                    j.Health = j.MaxHealth;
-                SetupCharacterForThisBattle(j);
-            }
+            if (SetToMaxHealthAtStart)
+                i.Health = i.MaxHealth;
+  
         }
         
         CharacterTeam? timedOut = null;

@@ -25,6 +25,10 @@ public class PomPomAttack : BasicAttack
         attackTargetType = AttackTargetType.SingleTarget;
         text = null;
     }
+
+    public PomPomAttack(Character user) : base(user)
+    {
+    }
 }
 
 public class  YouCanDoIt : Skill
@@ -53,6 +57,10 @@ public class  YouCanDoIt : Skill
         text = "You can do it!";
     }
     public override int MaxCooldown => 2;
+
+    public YouCanDoIt(Character user) : base(user)
+    {
+    }
 }
 
 public class YouCanMakeItEveryone : Ultimate
@@ -95,19 +103,30 @@ public class YouCanMakeItEveryone : Ultimate
 
 
     public override int MaxCooldown => 4;
+
+    public YouCanMakeItEveryone(Character user) : base(user)
+    {
+    }
 }
 public class Cheerleader : Character
 {
     public override string Name => "Cheerleader";
     public override Rarity Rarity => Rarity.FourStar;
 
-    public Cheerleader()
+    public override BasicAttack GenerateBasicAttack()
     {
-        TypeId = 12;
-        BasicAttack = new PomPomAttack(){User = this};
-        Skill = new YouCanDoIt(){User = this};
-        Ultimate = new YouCanMakeItEveryone(){User = this};
-       
+        return new PomPomAttack(this);
     }
+
+    public override Skill? GenerateSkill()
+    {
+        return new YouCanDoIt(this);
+    }
+
+    public override Ultimate? GenerateUltimate()
+    {
+        return new YouCanMakeItEveryone(this);
+    }
+    
 
 }

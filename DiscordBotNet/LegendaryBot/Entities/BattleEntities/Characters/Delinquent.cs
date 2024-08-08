@@ -28,6 +28,10 @@ public class BaseballBatWhack : BasicAttack
         attackTargetType = AttackTargetType.SingleTarget;
         text = "Temeee!";
     }
+
+    public BaseballBatWhack(Character user) : base(user)
+    {
+    }
 }
 public class DelinquentBeatdown : Skill
 {
@@ -59,6 +63,10 @@ public class DelinquentBeatdown : Skill
     }
 
     public override int MaxCooldown => 4;
+
+    public DelinquentBeatdown(Character user) : base(user)
+    {
+    }
 }
 public class Delinquent : Character
 {
@@ -68,11 +76,19 @@ public class Delinquent : Character
 
 
     public override Rarity Rarity => Rarity.TwoStar;
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new BaseballBatWhack(this);
+    }
 
+    public override Skill? GenerateSkill()
+    {
+        return new DelinquentBeatdown(this);
+    }
+    
     public Delinquent()
     {
         TypeId = 10;
-        BasicAttack = new BaseballBatWhack(){User = this};
-        Skill = new DelinquentBeatdown();
+
     }
 }

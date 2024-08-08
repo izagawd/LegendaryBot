@@ -30,6 +30,10 @@ public class SoulAttack : BasicAttack
         text = "Soul Attack!";
 
     }
+
+    public SoulAttack(Character user) : base(user)
+    {
+    }
 }
 
 public class YourLifeEnergyIsMine : Skill
@@ -59,6 +63,10 @@ public class YourLifeEnergyIsMine : Skill
     }
 
     public override int MaxCooldown => 3;
+
+    public YourLifeEnergyIsMine(Character user) : base(user)
+    {
+    }
 }
 public class Arise : Ultimate
 {
@@ -101,6 +109,10 @@ public class Arise : Ultimate
         attackTargetType = AttackTargetType.None;
 
     }
+
+    public Arise(Character user) : base(user)
+    {
+    }
 }
 public class Thana : Character
 {
@@ -112,12 +124,25 @@ public class Thana : Character
     public override Element Element => Element.Earth;
 
 
+    public override Skill? GenerateSkill()
+    {
+        return new YourLifeEnergyIsMine(this);
+    }
+
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new SoulAttack(this);
+    }
+
+    public override Ultimate? GenerateUltimate()
+    {
+        return new Arise(this);
+    }
+
     public Thana()
     {
         TypeId = 8;
-        BasicAttack = new SoulAttack(){User = this};
-        Skill = new YourLifeEnergyIsMine(){User = this};
-        Ultimate = new Arise(){User = this};
+
         
     }
 

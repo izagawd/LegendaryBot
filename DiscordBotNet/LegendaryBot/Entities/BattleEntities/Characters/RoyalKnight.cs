@@ -3,6 +3,7 @@ using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
+using Polly.Retry;
 using Barrier = DiscordBotNet.LegendaryBot.StatusEffects.Barrier;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
@@ -36,6 +37,10 @@ public class ShieldBash : BasicAttack
         }
 
     }
+
+    public ShieldBash(Character user) : base(user)
+    {
+    }
 }
 public class IWillBeYourShield : Skill
 {
@@ -67,6 +72,10 @@ public class IWillBeYourShield : Skill
         attackTargetType = AttackTargetType.None;
 
     }
+
+    public IWillBeYourShield(Character user) : base(user)
+    {
+    }
 }
 
 public class IWillProtectUs : Ultimate
@@ -97,6 +106,10 @@ public class IWillProtectUs : Ultimate
         text = $"As a loyal knight, {User.NameWithAlphabet} increases the defense of all allies for three turns";
 ;
     }
+
+    public IWillProtectUs(Character user) : base(user)
+    {
+    }
 }
 
 public class RoyalKnight : Character
@@ -108,14 +121,25 @@ public class RoyalKnight : Character
     public override DiscordColor Color => DiscordColor.Blue;
     public override Element Element => Element.Ice;
 
-    
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new ShieldBash(this);
+    }
+
+    public override Ultimate? GenerateUltimate()
+    {
+        return new IWillProtectUs(this);
+    }
+
+    public override Skill? GenerateSkill()
+    {
+        return new IWillBeYourShield(this);
+    }
+
     public RoyalKnight()
     {
         TypeId = 5;
-        BasicAttack = new ShieldBash(){User = this};
-        Ultimate = new IWillProtectUs(){User = this};
-        Skill = new IWillBeYourShield(){User = this};
-     
+
     }
 
     public override Rarity Rarity => Rarity.ThreeStar;

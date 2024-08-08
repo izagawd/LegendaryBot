@@ -36,6 +36,10 @@ public class MethaneSlap : BasicAttack
         attackTargetType = AttackTargetType.SingleTarget;
 
     }
+
+    public MethaneSlap(Character user) : base(user)
+    {
+    }
 }
 public class BlowAway : Skill
 {
@@ -74,6 +78,9 @@ public class BlowAway : Skill
     }
 
 
+    public BlowAway(Character user) : base(user)
+    {
+    }
 }
 public class ExplosionBlast : Ultimate
 {
@@ -114,6 +121,10 @@ public class ExplosionBlast : Ultimate
         text = "Blow Away!";
         attackTargetType = AttackTargetType.AOE;
     }
+
+    public ExplosionBlast(Character user) : base(user)
+    {
+    }
 }
 public class Blast : Character
 {
@@ -124,16 +135,24 @@ public class Blast : Character
     protected override float BaseSpeedMultiplier => 1.1f;
     protected override float BaseAttackMultiplier => 1.05f;
 
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new MethaneSlap(this);
+    }
 
+    public override Ultimate? GenerateUltimate()
+    {
+        return new ExplosionBlast(this);
+    }
 
+    public override Skill? GenerateSkill()
+    {
+        return new BlowAway(this);
+    }
 
     public Blast()
     {
         TypeId = 2;
-        Ultimate = new ExplosionBlast(){User = this};
-        Skill = new BlowAway(){User = this};
-        BasicAttack = new MethaneSlap(){User = this};
-      
     }
     
 
