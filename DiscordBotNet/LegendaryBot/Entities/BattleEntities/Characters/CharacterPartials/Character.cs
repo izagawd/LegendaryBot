@@ -72,11 +72,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public virtual bool UsesSuperPoints => false;
 
     [NotMapped]
-    public int SuperPoints
-    {
-        get => BattleData.SuperPoints;
-        set => BattleData.SuperPoints = value;
-    }
+    public int SuperPoints { get; set; }
     public virtual bool CanSpawnNormally => true;
     public bool CannotDoAnything => IsDead || HighestOverrideTurnType >= OverrideTurnType.CannotMove;
     public virtual string? PassiveDescription => null;
@@ -607,18 +603,17 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     #region Stats
 
 
-    [NotMapped] public CharacterStats Stats => BattleData.Stats;
+
     
     public int MaxLevel => 60;
-    [NotMapped] public ref float TotalAttack =>ref  Stats.TotalAttack;
-    [NotMapped] public ref float TotalDefense => ref Stats.TotalDefense;
-    [NotMapped] public ref float TotalSpeed => ref Stats.TotalSpeed;
-    [NotMapped] public ref float TotalCriticalChance => ref Stats.TotalCriticalChance;
-    [NotMapped] public ref float TotalCriticalDamage => ref Stats.TotalCriticalDamage;
-    [NotMapped] public ref float TotalEffectiveness => ref Stats.TotalEffectiveness;
-    [NotMapped] public ref float TotalResistance => ref Stats.TotalResistance;
-
-    [NotMapped] public ref float TotalMaxHealth => ref Stats.TotalMaxHealth;
+    [NotMapped] public float TotalAttack { get; set; }
+    [NotMapped] public  float TotalDefense { get; set; }
+    [NotMapped] public float TotalSpeed { get; set; }
+    [NotMapped] public float TotalCriticalChance { get; set; }
+    [NotMapped] public float TotalCriticalDamage { get; set; }
+    [NotMapped] public  float TotalEffectiveness { get; set; }
+    [NotMapped] public  float TotalResistance{ get; set; }
+    [NotMapped] public  float TotalMaxHealth { get; set; }
 
    
     /// <summary>
@@ -655,9 +650,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     }
     #endregion
 
-    [NotMapped]
-    private CharacterBattleData? _battleData;
-    public CharacterBattleData BattleData => _battleData ??= new CharacterBattleData(this);
 
     public  Type TypeGroup => typeof(Character);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
@@ -689,9 +681,20 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         return null;
     }
 
-    public BasicAttack BasicAttack => BattleData.CharacterMoves.BasicAttack;
-    [NotMapped] public Ultimate? Ultimate => BattleData.CharacterMoves.Ultimate;
-    [NotMapped] public Skill? Skill => BattleData.CharacterMoves.Skill;
+    [NotMapped]
+    private BasicAttack? _basicAttack;
+    
+
+    [NotMapped] public BasicAttack BasicAttack => _basicAttack ??= GenerateBasicAttack();
+
+    [NotMapped]
+    private Ultimate? _ultimate;
+    [NotMapped] public Ultimate? Ultimate => _ultimate ??= GenerateUltimate();
+
+    [NotMapped]
+    private Skill? _skill;
+
+    [NotMapped] public Skill? Skill => _skill ??= GenerateSkill();
     /// <summary>
     /// The position of the player based on combat readiness
     /// </summary>
