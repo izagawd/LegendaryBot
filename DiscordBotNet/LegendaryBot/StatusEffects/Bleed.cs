@@ -6,6 +6,7 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Bleed : StatusEffect, IDetonatable
 {
+    public override StatusEffectType EffectType => StatusEffectType.Debuff;
     public override string Name => "Bleed";
     public override bool IsStackable => true;
     public override string Description => "Does damage proportional to the caster's attack to the affected at the start of the affected's turn." +
@@ -27,6 +28,7 @@ public class Bleed : StatusEffect, IDetonatable
             ElementToDamageWith = null,
             DefenseToIgnore = 70,
             DamageText = $"{Affected} took $ bleed damage!",
+            CanCrit = false
         });
     }
     public override void PassTurn()

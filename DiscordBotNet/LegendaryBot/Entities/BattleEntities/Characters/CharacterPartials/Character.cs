@@ -410,10 +410,10 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     {
         var level = 5;
        
-        var attack = 100;
+        var attack = 66;
         var defense = 90;
-        var health = 1500;
-        var speed = 80;
+        var health = 1000;
+        var speed = 60;
      
         
  
