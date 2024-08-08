@@ -83,7 +83,7 @@ public abstract class Move  : INameHaver
 
     public abstract IEnumerable<Character> GetPossibleTargets();
 
-    public BattleSimulator CurrentBattle => User?.CurrentBattle;
+    public BattleSimulator CurrentBattle => User.CurrentBattle;
 
     /// <summary>
     /// This is where the custom functionality of a move is created

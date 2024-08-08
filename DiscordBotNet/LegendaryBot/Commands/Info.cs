@@ -61,10 +61,6 @@ public class Info : GeneralCommandClass
             .AddEmbed(embedBuilder)
             .AddFile("info.png", stream);
         await ctx.RespondAsync(response);
-
-
-
-
     }
 
 

@@ -2,6 +2,7 @@
 using System.Collections.Immutable;
 using DSharpPlus.Entities;
 using System.Diagnostics;
+using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using DiscordBotNet.Database;
@@ -304,40 +305,13 @@ public static class Bot
         Process.GetCurrentProcess().Kill();
     }
 
-    public class MyClass
-    {
-        unsafe struct Idk
-        {
-            public fixed byte buffer[300];
-        }
-
-        class Testing
-        {
-            public Idk yo;
-        }
 
 
-
-        protected virtual void SomeShit(){}
-        public Character Character;
-        [Benchmark]
-        public void BENCHNIGGA()
-        {
-            const int count = 300;
-            List<object> objects = new List<object>(count);
-            for(int i = 0; i < count; i++)
-            {
-                objects.Add(Activator.CreateInstance(typeof(UserData)));
-            }
-        }
-    }
 
     private async  static Task DoShitAsync()
     {
-        TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
-            .OrderBy(i => i.TypeId)
-            .ForEach(i => $"{i.Name} {i.TypeId}".Print());
-        StopProgram();
+
+
     }
     private static async Task Main(string[] args)
     {

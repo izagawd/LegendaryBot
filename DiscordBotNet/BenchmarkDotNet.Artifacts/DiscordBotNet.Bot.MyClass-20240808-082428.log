@@ -1,0 +1,137 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 1 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet  restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\theiz\Documents\coding\DiscordBotSolution\discordbotnet\bin\Release\net8.0\f8d17334-e145-4cf1-884c-f96c4ae8036a
+// command took 1.4 sec and exited with 0
+// start dotnet  build -c Release --no-restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\theiz\Documents\coding\DiscordBotSolution\discordbotnet\bin\Release\net8.0\f8d17334-e145-4cf1-884c-f96c4ae8036a
+// command took 17.28 sec and exited with 1
+// start dotnet  build -c Release --no-restore --no-dependencies /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\theiz\Documents\coding\DiscordBotSolution\discordbotnet\bin\Release\net8.0\f8d17334-e145-4cf1-884c-f96c4ae8036a
+// command took 3.66 sec and exited with 0
+// ***** Done, took 00:00:22 (22.44 sec)   *****
+// Found 1 benchmarks:
+//   MyClass.BENCHNIGGA: DefaultJob
+
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: MyClass.BENCHNIGGA: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f8d17334-e145-4cf1-884c-f96c4ae8036a.dll --anonymousPipes 3256 3248 --benchmarkName DiscordBotNet.Bot+MyClass.BENCHNIGGA --job Default --benchmarkId 0 in C:\Users\theiz\Documents\coding\DiscordBotSolution\discordbotnet\bin\Release\net8.0\f8d17334-e145-4cf1-884c-f96c4ae8036a\bin\Release\net8.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.13.12
+// Runtime=.NET 8.0.6 (8.0.624.26715), X64 RyuJIT AVX2
+// GC=Concurrent Server
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+304
+OverheadJitting  1: 1 op, 282100.00 ns, 282.1000 us/op
+WorkloadJitting  1: 1 op, 5035600.00 ns, 5.0356 ms/op
+
+OverheadJitting  2: 16 op, 184700.00 ns, 11.5437 us/op
+WorkloadJitting  2: 16 op, 279300.00 ns, 17.4563 us/op
+
+WorkloadPilot    1: 16 op, 74000.00 ns, 4.6250 us/op
+WorkloadPilot    2: 32 op, 83600.00 ns, 2.6125 us/op
+WorkloadPilot    3: 64 op, 113600.00 ns, 1.7750 us/op
+WorkloadPilot    4: 128 op, 181700.00 ns, 1.4195 us/op
+WorkloadPilot    5: 256 op, 319200.00 ns, 1.2469 us/op
+WorkloadPilot    6: 512 op, 629900.00 ns, 1.2303 us/op
+WorkloadPilot    7: 1024 op, 2550500.00 ns, 2.4907 us/op
+WorkloadPilot    8: 2048 op, 2776500.00 ns, 1.3557 us/op
+WorkloadPilot    9: 4096 op, 8926800.00 ns, 2.1794 us/op
+WorkloadPilot   10: 8192 op, 19567600.00 ns, 2.3886 us/op
+WorkloadPilot   11: 16384 op, 20586500.00 ns, 1.2565 us/op
+WorkloadPilot   12: 32768 op, 47372800.00 ns, 1.4457 us/op
+WorkloadPilot   13: 65536 op, 94579000.00 ns, 1.4432 us/op
+WorkloadPilot   14: 131072 op, 170858700.00 ns, 1.3035 us/op
+WorkloadPilot   15: 262144 op, 295036300.00 ns, 1.1255 us/op
+WorkloadPilot   16: 524288 op, 499722300.00 ns, 953.1446 ns/op
+WorkloadPilot   17: 1048576 op, 1012366000.00 ns, 965.4675 ns/op
+
+OverheadWarmup   1: 1048576 op, 2284800.00 ns, 2.1790 ns/op
+OverheadWarmup   2: 1048576 op, 2566000.00 ns, 2.4471 ns/op
+OverheadWarmup   3: 1048576 op, 2345700.00 ns, 2.2370 ns/op
+OverheadWarmup   4: 1048576 op, 2445400.00 ns, 2.3321 ns/op
+OverheadWarmup   5: 1048576 op, 2653000.00 ns, 2.5301 ns/op
+OverheadWarmup   6: 1048576 op, 2800400.00 ns, 2.6707 ns/op
+OverheadWarmup   7: 1048576 op, 2236000.00 ns, 2.1324 ns/op
+
+OverheadActual   1: 1048576 op, 2491800.00 ns, 2.3764 ns/op
+OverheadActual   2: 1048576 op, 2285300.00 ns, 2.1794 ns/op
+OverheadActual   3: 1048576 op, 2165500.00 ns, 2.0652 ns/op
+OverheadActual   4: 1048576 op, 2484400.00 ns, 2.3693 ns/op
+OverheadActual   5: 1048576 op, 2191500.00 ns, 2.0900 ns/op
+OverheadActual   6: 1048576 op, 2615800.00 ns, 2.4946 ns/op
+OverheadActual   7: 1048576 op, 2293000.00 ns, 2.1868 ns/op
+OverheadActual   8: 1048576 op, 2208400.00 ns, 2.1061 ns/op
+OverheadActual   9: 1048576 op, 2202200.00 ns, 2.1002 ns/op
+OverheadActual  10: 1048576 op, 2284100.00 ns, 2.1783 ns/op
+OverheadActual  11: 1048576 op, 2419000.00 ns, 2.3069 ns/op
+OverheadActual  12: 1048576 op, 3608800.00 ns, 3.4416 ns/op
+OverheadActual  13: 1048576 op, 2169200.00 ns, 2.0687 ns/op
+OverheadActual  14: 1048576 op, 2199600.00 ns, 2.0977 ns/op
+OverheadActual  15: 1048576 op, 2247900.00 ns, 2.1438 ns/op
+OverheadActual  16: 1048576 op, 2264900.00 ns, 2.1600 ns/op
+OverheadActual  17: 1048576 op, 1756900.00 ns, 1.6755 ns/op
+OverheadActual  18: 1048576 op, 1674700.00 ns, 1.5971 ns/op
+OverheadActual  19: 1048576 op, 1717800.00 ns, 1.6382 ns/op
+OverheadActual  20: 1048576 op, 1654900.00 ns, 1.5782 ns/op
+
+WorkloadWarmup   1: 1048576 op, 1003533100.00 ns, 957.0437 ns/op
+WorkloadWarmup   2: 1048576 op, 979936200.00 ns, 934.5400 ns/op
+WorkloadWarmup   3: 1048576 op, 973600600.00 ns, 928.4979 ns/op
+No Workload Results were obtained from the run.
+// Benchmark Process 22828 has exited with code -1073741819.
+
+// ** Remained 0 (0.0%) benchmark(s) to run. Estimated finish 2024-08-08 8:26 (0h 0m from now) **
+Successfully reverted power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// ***** BenchmarkRunner: Finish  *****
+
+// * Export *
+  BenchmarkDotNet.Artifacts\results\DiscordBotNet.Bot.MyClass-report.csv
+  BenchmarkDotNet.Artifacts\results\DiscordBotNet.Bot.MyClass-report-github.md
+  BenchmarkDotNet.Artifacts\results\DiscordBotNet.Bot.MyClass-report.html
+
+// * Detailed results *
+MyClass.BENCHNIGGA: DefaultJob
+Runtime = .NET 8.0.6 (8.0.624.26715), X64 RyuJIT AVX2; GC = Concurrent Server
+There are not any results runs
+
+// * Summary *
+
+BenchmarkDotNet v0.13.12, Windows 11 (10.0.22631.3958/23H2/2023Update/SunValley3)
+Intel Core i7-10870H CPU 2.20GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 8.0.302
+  [Host]     : .NET 8.0.6 (8.0.624.26715), X64 RyuJIT AVX2
+  DefaultJob : .NET 8.0.6 (8.0.624.26715), X64 RyuJIT AVX2
+
+
+| Method     | Mean | Error |
+|----------- |-----:|------:|
+| BENCHNIGGA |   NA |    NA |
+
+Benchmarks with issues:
+  MyClass.BENCHNIGGA: DefaultJob
+
+// * Warnings *
+Environment
+  Summary -> Detected error exit code from one of the benchmarks. It might be caused by following antivirus software:
+        - Windows Defender (windowsdefender://)
+Use InProcessEmitToolchain or InProcessNoEmitToolchain to avoid new process creation.
+
+
+// * Legends *
+  Mean  : Arithmetic mean of all measurements
+  Error : Half of 99.9% confidence interval
+  1 ns  : 1 Nanosecond (0.000000001 sec)
+
+// ***** BenchmarkRunner: End *****
+Run time: 00:01:13 (73.72 sec), executed benchmarks: 1
+
+Global total time: 00:01:36 (96.41 sec), executed benchmarks: 1
+// * Artifacts cleanup *
+Artifacts cleanup is finished

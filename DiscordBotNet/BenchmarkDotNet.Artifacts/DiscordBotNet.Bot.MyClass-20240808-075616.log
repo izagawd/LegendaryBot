@@ -1,0 +1,166 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 1 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet  restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\theiz\Documents\coding\DiscordBotSolution\discordbotnet\bin\Release\net8.0\5249d46d-9dd1-483e-92f4-7f6fb58ff6c5
+// command took 1.52 sec and exited with 0
+// start dotnet  build -c Release --no-restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\theiz\Documents\coding\DiscordBotSolution\discordbotnet\bin\Release\net8.0\5249d46d-9dd1-483e-92f4-7f6fb58ff6c5
+// command took 19.75 sec and exited with 1
+// start dotnet  build -c Release --no-restore --no-dependencies /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\theiz\Documents\coding\DiscordBotSolution\discordbotnet\bin\Release\net8.0\5249d46d-9dd1-483e-92f4-7f6fb58ff6c5
+// command took 3.96 sec and exited with 0
+// ***** Done, took 00:00:25 (25.32 sec)   *****
+// Found 1 benchmarks:
+//   MyClass.BENCHNIGGA: DefaultJob
+
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: MyClass.BENCHNIGGA: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet 5249d46d-9dd1-483e-92f4-7f6fb58ff6c5.dll --anonymousPipes 2096 2100 --benchmarkName DiscordBotNet.Bot+MyClass.BENCHNIGGA --job Default --benchmarkId 0 in C:\Users\theiz\Documents\coding\DiscordBotSolution\discordbotnet\bin\Release\net8.0\5249d46d-9dd1-483e-92f4-7f6fb58ff6c5\bin\Release\net8.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.13.12
+// Runtime=.NET 8.0.6 (8.0.624.26715), X64 RyuJIT AVX2
+// GC=Concurrent Server
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 253800.00 ns, 253.8000 us/op
+WorkloadJitting  1: 1 op, 1750600.00 ns, 1.7506 ms/op
+
+OverheadJitting  2: 16 op, 200600.00 ns, 12.5375 us/op
+WorkloadJitting  2: 16 op, 366300.00 ns, 22.8938 us/op
+
+WorkloadPilot    1: 16 op, 81500.00 ns, 5.0938 us/op
+WorkloadPilot    2: 32 op, 179600.00 ns, 5.6125 us/op
+WorkloadPilot    3: 64 op, 469500.00 ns, 7.3359 us/op
+WorkloadPilot    4: 128 op, 906500.00 ns, 7.0820 us/op
+WorkloadPilot    5: 256 op, 1263700.00 ns, 4.9363 us/op
+WorkloadPilot    6: 512 op, 2752000.00 ns, 5.3750 us/op
+WorkloadPilot    7: 1024 op, 5245300.00 ns, 5.1224 us/op
+WorkloadPilot    8: 2048 op, 6874400.00 ns, 3.3566 us/op
+WorkloadPilot    9: 4096 op, 12427300.00 ns, 3.0340 us/op
+WorkloadPilot   10: 8192 op, 22381400.00 ns, 2.7321 us/op
+WorkloadPilot   11: 16384 op, 54193800.00 ns, 3.3077 us/op
+WorkloadPilot   12: 32768 op, 86694500.00 ns, 2.6457 us/op
+WorkloadPilot   13: 65536 op, 200505100.00 ns, 3.0595 us/op
+WorkloadPilot   14: 131072 op, 137230800.00 ns, 1.0470 us/op
+WorkloadPilot   15: 262144 op, 271505200.00 ns, 1.0357 us/op
+WorkloadPilot   16: 524288 op, 500756000.00 ns, 955.1163 ns/op
+
+OverheadWarmup   1: 524288 op, 1965300.00 ns, 3.7485 ns/op
+OverheadWarmup   2: 524288 op, 1657500.00 ns, 3.1614 ns/op
+OverheadWarmup   3: 524288 op, 1098800.00 ns, 2.0958 ns/op
+OverheadWarmup   4: 524288 op, 1231500.00 ns, 2.3489 ns/op
+OverheadWarmup   5: 524288 op, 1096100.00 ns, 2.0906 ns/op
+OverheadWarmup   6: 524288 op, 1093600.00 ns, 2.0859 ns/op
+OverheadWarmup   7: 524288 op, 1237900.00 ns, 2.3611 ns/op
+OverheadWarmup   8: 524288 op, 1262400.00 ns, 2.4078 ns/op
+OverheadWarmup   9: 524288 op, 1457500.00 ns, 2.7800 ns/op
+OverheadWarmup  10: 524288 op, 1565500.00 ns, 2.9860 ns/op
+
+OverheadActual   1: 524288 op, 1283200.00 ns, 2.4475 ns/op
+OverheadActual   2: 524288 op, 1861600.00 ns, 3.5507 ns/op
+OverheadActual   3: 524288 op, 1092500.00 ns, 2.0838 ns/op
+OverheadActual   4: 524288 op, 1334100.00 ns, 2.5446 ns/op
+OverheadActual   5: 524288 op, 1221100.00 ns, 2.3291 ns/op
+OverheadActual   6: 524288 op, 1306000.00 ns, 2.4910 ns/op
+OverheadActual   7: 524288 op, 1453000.00 ns, 2.7714 ns/op
+OverheadActual   8: 524288 op, 1544100.00 ns, 2.9451 ns/op
+OverheadActual   9: 524288 op, 1476500.00 ns, 2.8162 ns/op
+OverheadActual  10: 524288 op, 1472500.00 ns, 2.8086 ns/op
+OverheadActual  11: 524288 op, 1183900.00 ns, 2.2581 ns/op
+OverheadActual  12: 524288 op, 1245100.00 ns, 2.3748 ns/op
+OverheadActual  13: 524288 op, 1345300.00 ns, 2.5660 ns/op
+OverheadActual  14: 524288 op, 1461600.00 ns, 2.7878 ns/op
+OverheadActual  15: 524288 op, 2243700.00 ns, 4.2795 ns/op
+OverheadActual  16: 524288 op, 1481500.00 ns, 2.8257 ns/op
+OverheadActual  17: 524288 op, 1368000.00 ns, 2.6093 ns/op
+OverheadActual  18: 524288 op, 1214300.00 ns, 2.3161 ns/op
+OverheadActual  19: 524288 op, 1261200.00 ns, 2.4055 ns/op
+OverheadActual  20: 524288 op, 1218600.00 ns, 2.3243 ns/op
+
+WorkloadWarmup   1: 524288 op, 530442500.00 ns, 1.0117 us/op
+WorkloadWarmup   2: 524288 op, 487860500.00 ns, 930.5201 ns/op
+WorkloadWarmup   3: 524288 op, 476116500.00 ns, 908.1202 ns/op
+WorkloadWarmup   4: 524288 op, 481861700.00 ns, 919.0783 ns/op
+WorkloadWarmup   5: 524288 op, 483215300.00 ns, 921.6600 ns/op
+WorkloadWarmup   6: 524288 op, 474006000.00 ns, 904.0947 ns/op
+WorkloadWarmup   7: 524288 op, 492668200.00 ns, 939.6900 ns/op
+WorkloadWarmup   8: 524288 op, 478803100.00 ns, 913.2444 ns/op
+
+// BeforeActualRun
+WorkloadActual   1: 524288 op, 484569300.00 ns, 924.2426 ns/op
+WorkloadActual   2: 524288 op, 508334400.00 ns, 969.5709 ns/op
+WorkloadActual   3: 524288 op, 482077000.00 ns, 919.4889 ns/op
+WorkloadActual   4: 524288 op, 504815500.00 ns, 962.8592 ns/op
+WorkloadActual   5: 524288 op, 517777200.00 ns, 987.5816 ns/op
+WorkloadActual   6: 524288 op, 630067000.00 ns, 1.2018 us/op
+WorkloadActual   7: 524288 op, 478059300.00 ns, 911.8258 ns/op
+WorkloadActual   8: 524288 op, 499609400.00 ns, 952.9293 ns/op
+WorkloadActual   9: 524288 op, 482005900.00 ns, 919.3533 ns/op
+WorkloadActual  10: 524288 op, 498426600.00 ns, 950.6733 ns/op
+WorkloadActual  11: 524288 op, 496822200.00 ns, 947.6131 ns/op
+WorkloadActual  12: 524288 op, 479493200.00 ns, 914.5607 ns/op
+WorkloadActual  13: 524288 op, 491547800.00 ns, 937.5530 ns/op
+WorkloadActual  14: 524288 op, 496010300.00 ns, 946.0646 ns/op
+WorkloadActual  15: 524288 op, 491611000.00 ns, 937.6736 ns/op
+WorkloadActual  16: 524288 op, 477260700.00 ns, 910.3025 ns/op
+WorkloadActual  17: 524288 op, 493864100.00 ns, 941.9710 ns/op
+No Workload Results were obtained from the run.
+// Benchmark Process 26580 has exited with code -1073741819.
+
+// ** Remained 0 (0.0%) benchmark(s) to run. Estimated finish 2024-08-08 7:57 (0h 0m from now) **
+Successfully reverted power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// ***** BenchmarkRunner: Finish  *****
+
+// * Export *
+  BenchmarkDotNet.Artifacts\results\DiscordBotNet.Bot.MyClass-report.csv
+  BenchmarkDotNet.Artifacts\results\DiscordBotNet.Bot.MyClass-report-github.md
+  BenchmarkDotNet.Artifacts\results\DiscordBotNet.Bot.MyClass-report.html
+
+// * Detailed results *
+MyClass.BENCHNIGGA: DefaultJob
+Runtime = .NET 8.0.6 (8.0.624.26715), X64 RyuJIT AVX2; GC = Concurrent Server
+There are not any results runs
+
+// * Summary *
+
+BenchmarkDotNet v0.13.12, Windows 11 (10.0.22631.3958/23H2/2023Update/SunValley3)
+Intel Core i7-10870H CPU 2.20GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 8.0.302
+  [Host]     : .NET 8.0.6 (8.0.624.26715), X64 RyuJIT AVX2
+  DefaultJob : .NET 8.0.6 (8.0.624.26715), X64 RyuJIT AVX2
+
+
+| Method     | Mean | Error |
+|----------- |-----:|------:|
+| BENCHNIGGA |   NA |    NA |
+
+Benchmarks with issues:
+  MyClass.BENCHNIGGA: DefaultJob
+
+// * Warnings *
+Environment
+  Summary -> Detected error exit code from one of the benchmarks. It might be caused by following antivirus software:
+        - Windows Defender (windowsdefender://)
+Use InProcessEmitToolchain or InProcessNoEmitToolchain to avoid new process creation.
+
+
+// * Hints *
+Outliers
+  MyClass.BENCHNIGGA: Default -> 1 outlier  was  removed (1.20 μs)
+
+// * Legends *
+  Mean  : Arithmetic mean of all measurements
+  Error : Half of 99.9% confidence interval
+  1 ns  : 1 Nanosecond (0.000000001 sec)
+
+// ***** BenchmarkRunner: End *****
+Run time: 00:00:25 (25.3 sec), executed benchmarks: 1
+
+Global total time: 00:00:50 (50.94 sec), executed benchmarks: 1
+// * Artifacts cleanup *
+Artifacts cleanup is finished

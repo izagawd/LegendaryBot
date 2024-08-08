@@ -1,5 +1,8 @@
 ﻿using System.Collections.Concurrent;
+using System.Reflection;
+using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
@@ -107,6 +110,23 @@ public abstract class StatusEffect  : INameHaver
     public virtual OverrideTurnType OverrideTurnType => OverrideTurnType.None;
 
 
+    [DefaultObjectRegisterer]
+    private static IEnumerable<object> RegisteringDefaultObjects()
+    {
+        foreach (var i in TypesFunction.AllTypes.Where(i => i.IsAssignableTo(typeof(StatusEffect)) && !i.IsAbstract))
+        {
+            var created = (StatusEffect) i.GetConstructor(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null,
+                    [typeof(Character)], null)
+                .Invoke(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                    null, [new Player()],
+                    null);
+            yield return created;
+        }
+    }
+    static StatusEffect()
+    {
+
+    }
     /// <summary>
     /// When status effect optimizing has occured this will be called. it will use the returned status effect.
     /// </summary>

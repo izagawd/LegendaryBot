@@ -121,7 +121,7 @@ public class CommanderJeanGrenade : Ultimate
     }
 }
 
-public class CommanderJeanFiringSquad : Skill
+public class CommanderJeanFiringSquad : Move
 {
     public override string Name => "Commander Jean Firing Squad";
     public override string GetDescription(Character character)
@@ -152,7 +152,7 @@ public class CommanderJeanFiringSquad : Skill
         attackTargetType = AttackTargetType.AOE;
     }
 
-    public override int MaxCooldown { get; }
+
 
     public CommanderJeanFiringSquad(Character user) : base(user)
     {
@@ -198,13 +198,14 @@ public class CommanderJean : Character
 
     public override Rarity Rarity => Rarity.FiveStar;
 
-    public CommanderJeanFiringSquad FiringSquad => _firingSquad ??= new CommanderJeanFiringSquad(this);
-    private CommanderJeanFiringSquad? _firingSquad;
+    public CommanderJeanFiringSquad FiringSquad { get; }
+ 
     public CommanderJean()
     {
         TypeId = 15;
         Skill = new CommanderJeanTaser(this);
         Ultimate = new CommanderJeanGrenade(this);
         BasicAttack = new CommanderJeanTonfaWhack(this);
+        FiringSquad = new CommanderJeanFiringSquad(this);
     }
 }
