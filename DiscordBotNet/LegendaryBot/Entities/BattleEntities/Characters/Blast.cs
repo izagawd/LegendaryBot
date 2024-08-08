@@ -152,6 +152,8 @@ public class Blast : Character
     public Blast()
     {
         TypeId = 2;
+
+        
     }
     
 

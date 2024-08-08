@@ -304,10 +304,37 @@ public static class Bot
         Process.GetCurrentProcess().Kill();
     }
 
+    public class MyClass
+    {
+        unsafe struct Idk
+        {
+            public fixed byte buffer[300];
+        }
+
+        class Testing
+        {
+            public Idk yo;
+        }
+
+
+
+        protected virtual void SomeShit(){}
+        public Character Character;
+        [Benchmark]
+        public void BENCHNIGGA()
+        {
+            const int Idk = 300;
+            var bruh = new List<object>(Idk);
+            for(int i = 0; i < Idk; i++)
+            {
+                bruh.Add(Activator.CreateInstance(typeof(Testing)));
+            }
+        }
+    }
 
     private async  static Task DoShitAsync()
     {
-        new Lily().Skill.Name.Print();
+        BenchmarkRunner.Run<MyClass>();
         StopProgram();
 
     }

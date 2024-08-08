@@ -10,4 +10,4 @@ Intel Core i7-10870H CPU 2.20GHz, 1 CPU, 16 logical and 8 physical cores
 ```
 | Method     | Mean     | Error    | StdDev   |
 |----------- |---------:|---------:|---------:|
-| StartBench | 27.01 μs | 0.828 μs | 2.294 μs |
+| BENCHNIGGA | 14.51 μs | 0.358 μs | 1.032 μs |

@@ -1,0 +1,105 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 1 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet  restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\theiz\Documents\coding\DiscordBotSolution\discordbotnet\bin\Release\net8.0\b5be7e2c-7c13-4aeb-b238-f58a44420418
+// command took 1.4 sec and exited with 0
+// start dotnet  build -c Release --no-restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\theiz\Documents\coding\DiscordBotSolution\discordbotnet\bin\Release\net8.0\b5be7e2c-7c13-4aeb-b238-f58a44420418
+// command took 17.12 sec and exited with 1
+// start dotnet  build -c Release --no-restore --no-dependencies /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\theiz\Documents\coding\DiscordBotSolution\discordbotnet\bin\Release\net8.0\b5be7e2c-7c13-4aeb-b238-f58a44420418
+// command took 3.54 sec and exited with 0
+// ***** Done, took 00:00:22 (22.17 sec)   *****
+// Found 1 benchmarks:
+//   MyClass.BENCHNIGGA: DefaultJob
+
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: MyClass.BENCHNIGGA: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet b5be7e2c-7c13-4aeb-b238-f58a44420418.dll --anonymousPipes 2988 2952 --benchmarkName DiscordBotNet.Bot+MyClass.BENCHNIGGA --job Default --benchmarkId 0 in C:\Users\theiz\Documents\coding\DiscordBotSolution\discordbotnet\bin\Release\net8.0\b5be7e2c-7c13-4aeb-b238-f58a44420418\bin\Release\net8.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.13.12
+// Runtime=.NET 8.0.6 (8.0.624.26715), X64 RyuJIT AVX2
+// GC=Concurrent Server
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 182100.00 ns, 182.1000 us/op
+WorkloadJitting  1: 1 op, 638700.00 ns, 638.7000 us/op
+
+OverheadJitting  2: 16 op, 205600.00 ns, 12.8500 us/op
+WorkloadJitting  2: 16 op, 3471900.00 ns, 216.9938 us/op
+
+WorkloadPilot    1: 16 op, 1486600.00 ns, 92.9125 us/op
+WorkloadPilot    2: 32 op, 2731300.00 ns, 85.3531 us/op
+WorkloadPilot    3: 64 op, 6414100.00 ns, 100.2203 us/op
+WorkloadPilot    4: 128 op, 14726300.00 ns, 115.0492 us/op
+WorkloadPilot    5: 256 op, 27978100.00 ns, 109.2895 us/op
+WorkloadPilot    6: 512 op, 49571600.00 ns, 96.8195 us/op
+WorkloadPilot    7: 1024 op, 59638900.00 ns, 58.2411 us/op
+WorkloadPilot    8: 2048 op, 86576900.00 ns, 42.2739 us/op
+WorkloadPilot    9: 4096 op, 175734900.00 ns, 42.9040 us/op
+WorkloadPilot   10: 8192 op, 354468500.00 ns, 43.2701 us/op
+WorkloadPilot   11: 16384 op, 696811300.00 ns, 42.5300 us/op
+
+OverheadWarmup   1: 16384 op, 63200.00 ns, 3.8574 ns/op
+OverheadWarmup   2: 16384 op, 57900.00 ns, 3.5339 ns/op
+OverheadWarmup   3: 16384 op, 50100.00 ns, 3.0579 ns/op
+OverheadWarmup   4: 16384 op, 43300.00 ns, 2.6428 ns/op
+OverheadWarmup   5: 16384 op, 60700.00 ns, 3.7048 ns/op
+OverheadWarmup   6: 16384 op, 59100.00 ns, 3.6072 ns/op
+OverheadWarmup   7: 16384 op, 50800.00 ns, 3.1006 ns/op
+OverheadWarmup   8: 16384 op, 43400.00 ns, 2.6489 ns/op
+OverheadWarmup   9: 16384 op, 36200.00 ns, 2.2095 ns/op
+OverheadWarmup  10: 16384 op, 60900.00 ns, 3.7170 ns/op
+
+OverheadActual   1: 16384 op, 44200.00 ns, 2.6978 ns/op
+OverheadActual   2: 16384 op, 50100.00 ns, 3.0579 ns/op
+OverheadActual   3: 16384 op, 50400.00 ns, 3.0762 ns/op
+OverheadActual   4: 16384 op, 49800.00 ns, 3.0396 ns/op
+OverheadActual   5: 16384 op, 41600.00 ns, 2.5391 ns/op
+OverheadActual   6: 16384 op, 40500.00 ns, 2.4719 ns/op
+OverheadActual   7: 16384 op, 63500.00 ns, 3.8757 ns/op
+OverheadActual   8: 16384 op, 50900.00 ns, 3.1067 ns/op
+OverheadActual   9: 16384 op, 56300.00 ns, 3.4363 ns/op
+OverheadActual  10: 16384 op, 44000.00 ns, 2.6855 ns/op
+OverheadActual  11: 16384 op, 58700.00 ns, 3.5828 ns/op
+OverheadActual  12: 16384 op, 43400.00 ns, 2.6489 ns/op
+OverheadActual  13: 16384 op, 98500.00 ns, 6.0120 ns/op
+OverheadActual  14: 16384 op, 68700.00 ns, 4.1931 ns/op
+OverheadActual  15: 16384 op, 54400.00 ns, 3.3203 ns/op
+OverheadActual  16: 16384 op, 43000.00 ns, 2.6245 ns/op
+OverheadActual  17: 16384 op, 35800.00 ns, 2.1851 ns/op
+OverheadActual  18: 16384 op, 60700.00 ns, 3.7048 ns/op
+OverheadActual  19: 16384 op, 45700.00 ns, 2.7893 ns/op
+OverheadActual  20: 16384 op, 51900.00 ns, 3.1677 ns/op
+
+WorkloadWarmup   1: 16384 op, 977365600.00 ns, 59.6537 us/op
+WorkloadWarmup   2: 16384 op, 700585600.00 ns, 42.7604 us/op
+WorkloadWarmup   3: 16384 op, 667950800.00 ns, 40.7685 us/op
+WorkloadWarmup   4: 16384 op, 676878000.00 ns, 41.3134 us/op
+WorkloadWarmup   5: 16384 op, 674510100.00 ns, 41.1688 us/op
+WorkloadWarmup   6: 16384 op, 678041600.00 ns, 41.3844 us/op
+WorkloadWarmup   7: 16384 op, 711055600.00 ns, 43.3994 us/op
+WorkloadWarmup   8: 16384 op, 690765100.00 ns, 42.1610 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 16384 op, 741927600.00 ns, 45.2837 us/op
+WorkloadActual   2: 16384 op, 676572500.00 ns, 41.2947 us/op
+WorkloadActual   3: 16384 op, 724550200.00 ns, 44.2230 us/op
+WorkloadActual   4: 16384 op, 899348800.00 ns, 54.8919 us/op
+WorkloadActual   5: 16384 op, 726236800.00 ns, 44.3260 us/op
+WorkloadActual   6: 16384 op, 1146055300.00 ns, 69.9497 us/op
+WorkloadActual   7: 16384 op, 1169290700.00 ns, 71.3678 us/op
+WorkloadActual   8: 16384 op, 1231422400.00 ns, 75.1601 us/op
+WorkloadActual   9: 16384 op, 1047178300.00 ns, 63.9147 us/op
+WorkloadActual  10: 16384 op, 1008474000.00 ns, 61.5524 us/op
+WorkloadActual  11: 16384 op, 848850400.00 ns, 51.8097 us/op
+WorkloadActual  12: 16384 op, 947104900.00 ns, 57.8067 us/op
+WorkloadActual  13: 16384 op, 666853700.00 ns, 40.7015 us/op
+WorkloadActual  14: 16384 op, 680424600.00 ns, 41.5298 us/op
+WorkloadActual  15: 16384 op, 671662000.00 ns, 40.9950 us/op
+WorkloadActual  16: 16384 op, 659966900.00 ns, 40.2812 us/op

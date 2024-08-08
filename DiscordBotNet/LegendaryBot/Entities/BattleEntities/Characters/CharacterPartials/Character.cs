@@ -254,7 +254,16 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         
     }
 
-    public List<Gear> Gears { get; set; } = [];
+    
+    private List<Gear>? _gears;
+    public List<Gear> Gears
+    {
+        get => _gears ??= [];
+        set
+        {
+            _gears = value;
+        }
+    }
 
 
 
@@ -581,13 +590,11 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     [NotMapped] public virtual DiscordColor Color => DiscordColor.Green;
 
 
-    
 
-    [NotMapped]
-    private List<GearSet> _gearSets = [];
 
-    [NotMapped]
-    public IEnumerable<GearSet> GearSets => _gearSets;
+    [NotMapped] private GearSet[]? _gearSets;
+
+    [NotMapped] public IEnumerable<GearSet> GearSets => _gearSets ?? [];
 
     [NotMapped] public BattleSimulator CurrentBattle => Team?.CurrentBattle!;
 
@@ -646,7 +653,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             i.MainStat.SetMainStatValue(i.Rarity);
             i.MainStat.AddStats(this);
         }
-        _gearSets = GenerateGearSets().ToList();
+        _gearSets = GenerateGearSets().ToArray();
     }
     #endregion
 
