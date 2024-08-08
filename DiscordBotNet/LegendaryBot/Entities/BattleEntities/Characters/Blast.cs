@@ -29,7 +29,7 @@ public class MethaneSlap : BasicAttack
         });
         if (BasicFunctionality.RandomChance(DetonateChance))
         {
-            foreach (var i in target.StatusEffectsCopy.OfType<Bomb>().ToArray())
+            foreach (var i in target.StatusEffects.OfType<Bomb>().ToArray())
                 i.Detonate(User);
         }
         text =  "Methane Slap!";

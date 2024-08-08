@@ -80,9 +80,9 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     {
         get
         {
-            if (!StatusEffects.Any())
+            if (!StatusEffectsChecked.Any())
                 return OverrideTurnType.None;
-            return StatusEffects.Select(i => i.OverrideTurnType).Max();
+            return StatusEffectsChecked.Select(i => i.OverrideTurnType).Max();
         }
     }
 
@@ -164,7 +164,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public  Blessing? Blessing { get; set; }
 
 
-    public Barrier? Shield => StatusEffects.OfType<Barrier>().FirstOrDefault();
+    public Barrier? Shield => StatusEffectsChecked.OfType<Barrier>().FirstOrDefault();
 
     [NotMapped]
     public virtual IEnumerable<Move> MoveList
@@ -209,7 +209,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             if (_health <= 0 )return;
             var tempMaxHealth = MaxHealth;
 
-            if (value <= 0 && StatusEffects.Any(i => i is Immortality))
+            if (value <= 0 && StatusEffectsChecked.Any(i => i is Immortality))
                 value = 1;
             _health = value;
             
@@ -219,7 +219,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             
                 CurrentBattle.AddBattleText(new DeathBattleText(this));
                 ShouldTakeExtraTurn = false;
-                StatusEffects.Clear();
+                StatusEffectsChecked.Clear();
                 CurrentBattle.InvokeBattleEvent(new CharacterDeathEventArgs(this));
             
             }
@@ -554,9 +554,9 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     [NotMapped] private HashSet<StatusEffect>? _statusEffects;
 
-    private HashSet<StatusEffect> StatusEffects => _statusEffects ??= [];
+    private HashSet<StatusEffect> StatusEffectsChecked => _statusEffects ??= [];
 
-    [NotMapped] public IEnumerable<StatusEffect> StatusEffectsCopy => StatusEffects;
+    [NotMapped] public IEnumerable<StatusEffect> StatusEffects => StatusEffectsChecked;
 
     [NotMapped] public virtual DiscordColor Color => DiscordColor.Green;
 
@@ -569,7 +569,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     [NotMapped] public BattleSimulator CurrentBattle => Team?.CurrentBattle!;
 
-    public bool RemoveStatusEffect(StatusEffect statusEffect) => StatusEffects.Remove(statusEffect);
+    public bool RemoveStatusEffect(StatusEffect statusEffect) => StatusEffectsChecked.Remove(statusEffect);
 
     
     
@@ -685,7 +685,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     {
         get
         {
-            return StatusEffects.Any(i => i.OverrideTurnType > 0);
+            return StatusEffectsChecked.Any(i => i.OverrideTurnType > 0);
         }
     }
 

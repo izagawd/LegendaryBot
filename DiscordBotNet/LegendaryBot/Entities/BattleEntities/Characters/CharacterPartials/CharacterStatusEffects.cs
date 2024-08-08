@@ -32,7 +32,7 @@ public partial class Character
         if (statusEffect is null) return StatusEffectInflictResult.Failed;
         if (IsDead) return StatusEffectInflictResult.Failed;
         var arrayOfType =
-            StatusEffects.Where(i => i.GetType() == statusEffect.GetType())
+            _statusEffects.Where(i => i.GetType() == statusEffect.GetType())
                 .ToArray();
         statusEffect.Affected = this;
         if (statusEffect.IsStackable || !arrayOfType.Any())
@@ -42,7 +42,7 @@ public partial class Character
             {
                 if (!TryToResist(effectiveness.Value,Resistance))
                 {
-                    added = StatusEffects.Add(statusEffect);
+                    added = _statusEffects.Add(statusEffect);
                 }
                 else
                 {
@@ -52,7 +52,7 @@ public partial class Character
             }
             else
             {
-                added = StatusEffects.Add(statusEffect);
+                added = _statusEffects.Add(statusEffect);
                 
             }
 
@@ -78,8 +78,8 @@ public partial class Character
             {
                 var onlyStatus = arrayOfType.First();
                 var optimizedOne = onlyStatus.OptimizeWith(statusEffect);
-                StatusEffects.Remove(onlyStatus);
-                StatusEffects.Add(optimizedOne);
+                _statusEffects.Remove(onlyStatus);
+                _statusEffects.Add(optimizedOne);
                 inflictResult = StatusEffectInflictResult.Optimized;
                 CurrentBattle.AddBattleText(new StatusEffectInflictBattleText([this],inflictResult, [optimizedOne]));
             }
@@ -113,11 +113,11 @@ public partial class Character
     public bool DispellStatusEffect(StatusEffect statusEffect, int? effectiveness = null)
     {
         if (effectiveness is null || statusEffect.EffectType == StatusEffectType.Debuff)
-            return StatusEffects.Remove(statusEffect);
+            return _statusEffects.Remove(statusEffect);
 
         if (!BattleFunctionality.CheckForResist(effectiveness.Value,Resistance))
         {
-            return StatusEffects.Remove(statusEffect);
+            return _statusEffects.Remove(statusEffect);
         }
         return false;
         
