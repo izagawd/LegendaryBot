@@ -661,9 +661,23 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     [NotMapped]
     private BasicAttack? _basicAttack;
-    
 
-    [NotMapped] public BasicAttack BasicAttack => _basicAttack ??= GenerateBasicAttack();
+
+    [NotMapped]
+    public BasicAttack BasicAttack
+    {
+        get
+        {
+            if (_basicAttack is null)
+            {
+                _basicAttack = GenerateBasicAttack();
+                "Yoo".Print();
+            }
+
+            return _basicAttack;
+
+        }
+    }
 
     [NotMapped]
     private Ultimate? _ultimate;

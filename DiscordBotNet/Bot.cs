@@ -323,11 +323,11 @@ public static class Bot
         [Benchmark]
         public void BENCHNIGGA()
         {
-            const int Idk = 300;
-            var bruh = new List<object>(Idk);
-            for(int i = 0; i < Idk; i++)
+            const int count = 300;
+            List<object> objects = new List<object>(count);
+            for(int i = 0; i < count; i++)
             {
-                bruh.Add(Activator.CreateInstance(typeof(Blast)));
+                objects.Add(Activator.CreateInstance(typeof(UserData)));
             }
         }
     }
@@ -336,7 +336,6 @@ public static class Bot
     {
         BenchmarkRunner.Run<MyClass>();
         StopProgram();
-
     }
     private static async Task Main(string[] args)
     {

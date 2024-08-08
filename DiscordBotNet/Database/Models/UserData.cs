@@ -99,13 +99,18 @@ public class UserData :   ICanBeLeveledUp
     /// </summary>
 
 
+    [NotMapped]
+    private List<Quest>? _quests;
 
-    public List<Quest> Quests { get; set; } = [];
+    public List<Quest> Quests => _quests ??= new();
     /// <summary>
     /// This is used to refresh quest 
     /// </summary>
     public DateTime LastTimeQuestWasChecked { get; set; } = DateTime.UtcNow.AddDays(-1);
-    public List<Quote> Quotes { get; protected set; } = new();
+
+    [NotMapped]
+    private List<Quote>? _quotes;
+    public List<Quote> Quotes => _quotes ??= new();
     public bool IsOccupied { get; set; } = false;
     public long Experience { get; protected set; }
     public long GetRequiredExperienceToNextLevel(int level)
@@ -227,11 +232,19 @@ public class UserData :   ICanBeLeveledUp
     
     [NotMapped]
     public UserDataInventoryCombined Inventory { get; }
-    
-    public ItemContainer Items { get; private set; } = [];
-    public List<Gear> Gears { get; private set; } = [];
-    public List<Character> Characters { get; private set; } = [];
-    public List<Blessing> Blessings { get; private set; } = [];
+    [NotMapped]
+    private ItemContainer? _items;
+    public ItemContainer Items => _items ??= new ItemContainer();
+    [NotMapped]
+    private List<Gear>? _gears;
+    public List<Gear> Gears => _gears ??= new();
+    [NotMapped]
+    private List<Character>? _characters;
+    public List<Character> Characters => _characters ??= new();
+
+    [NotMapped]
+    private List<Blessing>? _blessings;
+    public List<Blessing> Blessings => _blessings ??= new();
 }
 public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
 {
