@@ -67,6 +67,7 @@ public class Thug : Character
     public override string Name => "Thug";
 
 
+    public override Rarity Rarity => Rarity.TwoStar;
 
     public Thug()
     {

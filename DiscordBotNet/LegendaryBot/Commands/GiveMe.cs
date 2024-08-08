@@ -16,7 +16,7 @@ public class GiveMe : GeneralCommandClass
      BotCommandCategory( BotCommandCategory.Battle)]
     public async ValueTask Execute(CommandContext ctx,[Parameter("entity-name")]
         string entityName,[Parameter("entity-amount"), 
-                           Description("The amount you want of the supplied item")] long amount = 1)
+                           Description("The amount you want of the supplied item")] int amount = 1)
     {
         var simplifiedEntityName = entityName.ToLower().Replace(" ", "");
         var type =TypesFunction

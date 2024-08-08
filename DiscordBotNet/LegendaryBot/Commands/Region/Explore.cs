@@ -4,6 +4,7 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
@@ -140,12 +141,8 @@ public class Explore : GeneralCommandClass
         });
         var characterType 
             = BasicFunctionality.RandomChoice(characterGrouping.Select(i => i)).GetType();
-   
-        var enemyTeam = new CharacterTeam();
 
-        var character = (Character)Activator.CreateInstance(characterType)!;
-        enemyTeam.Add(character);
-        character.SetBotStatsAndLevelBasedOnTier(userData.Tier);
+        var enemyTeam = region.GenerateCharacterTeamFor(characterType, out var character);
         embedToBuild
             .WithTitle($"Keep your guard up!")
             .WithDescription($"{enemyTeam.First().Name}(s) have appeared!");
@@ -177,13 +174,31 @@ public class Explore : GeneralCommandClass
         {
 
             character.Level = 1;
-            var rewardText = userData.ReceiveRewards([ new EntityReward([character]),new CoinsReward(coinsToGain),
+            List<Reward> rewards =
+            [
+                new EntityReward([character, new Coin() { Stacks = coinsToGain }]),
                 ..enemyTeam.SelectMany(i => i.DroppedRewards), new UserExperienceReward(250),
-           ]);
+            ];
+            if (character.Blessing is not null)
+            {
+                rewards.Add(new EntityReward([character.Blessing]));
+            }
+
+            var otherChar = enemyTeam
+                .Where(i => i != character)
+                .MinBy(_ => BasicFunctionality.GetRandomNumberInBetween(0, 100));
+            if (otherChar is not null)
+            {
+                otherChar.Level = 1;
+                rewards.Add(new EntityReward([otherChar]));
+            }
+            
+          
+            var rewardText = userData.ReceiveRewards(rewards);
            
             rewardText += $"\nYou explored a bit more after recruiting {character.Name}\n";
    
-            List<Reward> rewards = [];
+            rewards.Clear();
            
  
             var expMatCount = BasicFunctionality.GetRandomNumberInBetween(3, 5);
@@ -201,8 +216,8 @@ public class Explore : GeneralCommandClass
             {
                 rewards.Add(new EntityReward([new HerosKnowledge()]));
             }
-            rewards.Add(new CoinsReward(5000));
-            await DatabaseContext.Items.Where(i => i is HerosKnowledge)
+            rewards.Add(new EntityReward([new Coin(){Stacks = 5000}]));
+            await DatabaseContext.Items.Where(i => i is HerosKnowledge || i is Coin)
                 .LoadAsync();
             rewardText += userData.ReceiveRewards(rewards);
             embedToBuild

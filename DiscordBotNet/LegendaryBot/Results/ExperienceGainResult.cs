@@ -3,7 +3,7 @@
 public class ExperienceGainResult
 {
 
-    public long ExcessExperience { get; set; }
+    public int ExcessExperience { get; set; }
     public string Text { get; init; } = "";
     public override string ToString()
     {

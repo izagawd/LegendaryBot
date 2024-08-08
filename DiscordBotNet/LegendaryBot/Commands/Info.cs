@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
+using DiscordBotNet.LegendaryBot.Entities.Items;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,9 @@ public class Info : GeneralCommandClass
             
         if(author is null) author = ctx.User;
         
-        var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == author.Id);
+        var userData = await DatabaseContext.UserData
+            .Include(i => i.Items.Where(j => j is Coin || j is DivineShard))
+            .FirstOrDefaultAsync(i => i.Id == author.Id);
 
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -44,12 +47,12 @@ public class Info : GeneralCommandClass
             .WithTitle("Info")
             .WithUser(author)
             .WithColor(userData.Color)
-            .AddField("Coins", $"`{userData.Coins}`", true)
+            .AddField("Coins", $"`{userData.Items.GetItemStacks(typeof(Coin))}`", true)
             .AddField("Tier", $"`{userData.Tier}`", true)
             .AddField("Date Started", $"`{userData.StartTime}`", true)
             .AddField("Time Till Next Day", $"`{BasicFunctionality.TimeTillNextDay()}`", true)
-            .AddField("Energy", $"{userData.EnergyValue}", true)
-            .AddField("Divine Shards", $"{userData.DivineShards}")
+            .AddField("Energy", $"`{userData.EnergyValue}`", true)
+            .AddField("Divine Shards", $"`{userData.Items.GetItemStacks(typeof(DivineShard))}`")
             .WithImageUrl("attachment://info.png")
             .WithTimestamp(DateTime.Now);
         using var image = await userData.GetInfoAsync(author);

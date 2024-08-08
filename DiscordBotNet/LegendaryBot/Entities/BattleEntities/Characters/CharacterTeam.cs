@@ -20,7 +20,7 @@ public class CharacterTeam : ISet<Character>
     /// </summary>
     /// <param name="exp"></param>
     /// <returns></returns>
-    public string IncreaseExp(long exp)
+    public string IncreaseExp(int exp)
     {
         exp /= Count;
         var text = "";

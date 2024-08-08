@@ -4,6 +4,7 @@ using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.DialogueNamespace;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Entities;
 using DSharpPlus.Commands;
@@ -119,9 +120,12 @@ public class DirectionHelping : Quest
                     }
                 ]
             };
+       
              await dialogue.LoadAsync(context.User, battleResult.Message);
+             await databaseContext.Items.Where(i => i.UserDataId == context.User.Id && i is Coin)
+                 .LoadAsync();
             QuestRewards = [new TextReward(userTeam.IncreaseExp(Character.GetExpBasedOnDefeatedCharacters(blastTeam))),
-                    new CoinsReward(Character.GetCoinsBasedOnCharacters(blastTeam))];
+                    new EntityReward([new Coin(){Stacks =Character.GetCoinsBasedOnCharacters(blastTeam)}] )];
             
             return true;
         }

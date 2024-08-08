@@ -51,9 +51,9 @@ public static  class BattleFunctionality
     /// <returns>
     /// The amount of exp required for a character to be able to level up depending on their level
     /// </returns>
-    public static long NextLevelFormula(int level)
+    public static int NextLevelFormula(int level)
     {
-        return (long)Math.Round(4 * Math.Pow(level, 3) / 5) + 1;
+        return (int)Math.Round(4 * Math.Pow(level, 3) / 5) + 1;
     }
 
 
@@ -80,7 +80,7 @@ public static  class BattleFunctionality
     public static long TotalExp(int level)
     {
             
-        long totalExperience = 0;
+        int totalExperience = 0;
         while (level > 1)
         {
             totalExperience += NextLevelFormula(level);

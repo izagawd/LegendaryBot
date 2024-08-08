@@ -86,7 +86,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         }
     }
 
-    public long GetRequiredExperienceToNextLevel()
+    public int GetRequiredExperienceToNextLevel()
     {
         return GetRequiredExperienceToNextLevel(Level);
     }
@@ -373,9 +373,9 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         };
 
     public int Level { get; set; } = 1;
-    public virtual long CoinsToGainWhenKilled => (Level + 50) * (int) Rarity;
+    public virtual int CoinsToGainWhenKilled => (Level + 50) * (int) Rarity;
 
-    public virtual long ExpToGainWhenKilled
+    public virtual int ExpToGainWhenKilled
     {
         get
         {
@@ -384,7 +384,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             
             var powCalculator = Math.Pow(1.05f, Level);
             var rarityMuliplier = 1 + ((int)Rarity * 0.2);
-            var computed = ((averageFormulaTillNextLevel / powCalculator) * rarityMuliplier * 0.75f).RoundLong();
+            var computed = ((averageFormulaTillNextLevel / powCalculator) * rarityMuliplier * 0.75f).Round();
             return computed;
 
         }
@@ -394,13 +394,13 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
 
 
-    public static long GetCoinsBasedOnCharacters(IEnumerable<Character> characters)
+    public static int GetCoinsBasedOnCharacters(IEnumerable<Character> characters)
     {
         return characters.Select(i => i.CoinsToGainWhenKilled).Sum();
     }
     [NotMapped]
     public virtual int ExpIncreaseScale => 1;
-    public static long GetExpBasedOnDefeatedCharacters(IEnumerable<Character> characters)
+    public static int GetExpBasedOnDefeatedCharacters(IEnumerable<Character> characters)
     {
         return characters.Select(i => i.ExpToGainWhenKilled).Sum();
     }
@@ -686,7 +686,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
 
  
-    public long GetRequiredExperienceToNextLevel(int level)
+    public int GetRequiredExperienceToNextLevel(int level)
     {
        return BattleFunctionality.NextLevelFormula(Level);
     }
@@ -694,12 +694,12 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public virtual bool CanBeTraded => true;
 
 
-    public long Experience { get; set; }
+    public int Experience { get; set; }
     /// <summary>
     /// Increases the Exp of a character and returns useful text
     /// </summary>
     /// <returns></returns>
-    public ExperienceGainResult IncreaseExp(long experienceToGain)
+    public ExperienceGainResult IncreaseExp(int experienceToGain)
     {
         if (Level >= MaxLevel)
             return new ExperienceGainResult() { ExcessExperience = experienceToGain, Text = $"{this} has already reached their max level!" };
@@ -721,7 +721,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         {
             expGainText += $", and moved from level {levelBefore} to level {Level}";
         }
-        long excessExp = 0;
+        int excessExp = 0;
         if (Experience > nextLevelExp)
         {
             excessExp = Experience - nextLevelExp;
@@ -738,7 +738,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         return new ExperienceGainResult(){ExcessExperience = excessExp, Text = expGainText};
     }
 
-    public void SetExperience(long experience)
+    public void SetExperience(int experience)
     {
         Experience = experience;
     }

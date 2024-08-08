@@ -1,4 +1,5 @@
 ﻿using DiscordBotNet.Extensions;
+using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Quests;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
@@ -97,9 +98,12 @@ public class QuestCommand : GeneralCommandClass
         {
             quest.Completed = true;
             var expToAdd = 1000;
-       
+
+        
             var rewardString = userData.ReceiveRewards([..quest.QuestRewards,new UserExperienceReward(expToAdd),
-            new DivineShardsReward(10)]);
+            new EntityReward([new DivineShard(){Stacks = 10}])]);
+            await DatabaseContext.Items.Where(i => i.UserDataId == userData.Id && i is DivineShard)
+                .LoadAsync();
             embed
                 .WithTitle("Nice!!")
                 .WithDescription("You completed the quest!\n" +rewardString);

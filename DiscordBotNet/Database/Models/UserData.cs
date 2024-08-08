@@ -108,12 +108,12 @@ public class UserData :   ICanBeLeveledUp
     private List<Quote>? _quotes;
     public List<Quote> Quotes => _quotes ??= new();
     public bool IsOccupied { get; set; } = false;
-    public long Experience { get; protected set; }
-    public long GetRequiredExperienceToNextLevel(int level)
+    public int Experience { get; protected set; }
+    public int GetRequiredExperienceToNextLevel(int level)
     {
         return BattleFunctionality.NextLevelFormula(level) * 10;
     }
-    public long GetRequiredExperienceToNextLevel()
+    public int GetRequiredExperienceToNextLevel()
     {
         return GetRequiredExperienceToNextLevel(AdventurerLevel);
     }
@@ -151,7 +151,7 @@ public class UserData :   ICanBeLeveledUp
     
  
 
-    public ExperienceGainResult IncreaseExp(long experienceToGain)
+    public ExperienceGainResult IncreaseExp(int experienceToGain)
     {
         var maxLevel = 60;
         if (AdventurerLevel >= maxLevel)
@@ -175,7 +175,7 @@ public class UserData :   ICanBeLeveledUp
         {
             expGainText += $", and moved from level {levelBefore} to level {AdventurerLevel}";
         }
-        long excessExp = 0;
+        int excessExp = 0;
         if (Experience > nextLevelEXP)
         {
             excessExp = Experience - nextLevelEXP;
@@ -184,10 +184,6 @@ public class UserData :   ICanBeLeveledUp
         return new ExperienceGainResult(){ExcessExperience = excessExp, Text = expGainText};
     }
 
-
-
-    public long DivineShards { get; set; } = 0;
-    public long Coins { get; set; } = 5000;
 
 
 

@@ -37,6 +37,10 @@
     <_ContentIncludedByDefault Remove="Pages\blessings\Index.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="LegendaryBot\Commands\GearFarmStuffs\" />
+  </ItemGroup>
+
 
 
 </Project>

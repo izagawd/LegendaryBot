@@ -5,10 +5,10 @@ namespace DiscordBotNet.LegendaryBot.Rewards;
 public class UserExperienceReward : Reward
 {
     
-    public long Experience { get; }
+    public int Experience { get; }
     public override bool IsValid => Experience > 0;
 
-    public UserExperienceReward(long experience)
+    public UserExperienceReward(int experience)
     {
         Experience = experience;
     }
