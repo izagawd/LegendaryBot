@@ -39,4 +39,8 @@ public abstract class Special : Move
         }
         return base.Utilize(target, moveUsageType);
     }
+
+    protected Special(Character user) : base(user)
+    {
+    }
 }
