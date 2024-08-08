@@ -1,4 +1,5 @@
 ﻿using DiscordBotNet.LegendaryBot.ModifierInterfaces;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
@@ -25,5 +26,9 @@ public class AttackBuff : StatusEffect, IStatsModifier
                 ValueToChangeWith = 50,
   
             };
+    }
+
+    public AttackBuff(Character caster) : base(caster)
+    {
     }
 }

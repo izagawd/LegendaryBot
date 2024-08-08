@@ -41,4 +41,8 @@ public class Poison : StatusEffect, IDetonatable
         if (removed) return DoDamage();
         return null;
     }
+
+    public Poison(Character caster) : base(caster)
+    {
+    }
 }

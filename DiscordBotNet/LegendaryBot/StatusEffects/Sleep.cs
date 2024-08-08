@@ -31,4 +31,8 @@ public class Sleep: StatusEffect
         Affected.CurrentBattle.AddBattleText($"{Affected} is fast asleep");
         return "Snores...";
     }
+
+    public Sleep(Character caster) : base(caster)
+    {
+    }
 }

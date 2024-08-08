@@ -1,4 +1,6 @@
-﻿namespace DiscordBotNet.LegendaryBot.StatusEffects;
+﻿using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+
+namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Immortality : StatusEffect
 {
@@ -11,4 +13,7 @@ public class Immortality : StatusEffect
     public override StatusEffectType EffectType => StatusEffectType.Buff;
 
 
+    public Immortality(Character caster) : base(caster)
+    {
+    }
 }

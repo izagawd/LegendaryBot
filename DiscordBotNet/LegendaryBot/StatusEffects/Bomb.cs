@@ -31,7 +31,7 @@ public class Bomb : StatusEffect, IDetonatable
     public DamageResult? Detonate( Character detonator)
     {
         Affected.RemoveStatusEffect(this);
-        Affected.AddStatusEffect(new Stun(){Duration = 1,Caster = detonator}, detonator.Effectiveness);
+        Affected.AddStatusEffect(new Stun(detonator), detonator.Effectiveness);
         return Affected.Damage(        new DamageArgs(Attack * 3,new StatusEffectDamageSource(this) )
         {
             ElementToDamageWith = null,
@@ -41,4 +41,8 @@ public class Bomb : StatusEffect, IDetonatable
    
     }
     public override bool ExecuteStatusEffectAfterTurn => false;
+
+    public Bomb(Character caster) : base(caster)
+    {
+    }
 }

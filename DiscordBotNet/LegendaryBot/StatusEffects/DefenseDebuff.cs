@@ -1,4 +1,5 @@
 ﻿using DiscordBotNet.LegendaryBot.ModifierInterfaces;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
@@ -23,5 +24,9 @@ public class DefenseDebuff: StatusEffect, IStatsModifier
 
             };
 
+    }
+
+    public DefenseDebuff(Character caster) : base(caster)
+    {
     }
 }

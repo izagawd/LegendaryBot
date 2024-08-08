@@ -1,11 +1,12 @@
 ﻿using DiscordBotNet.LegendaryBot.ModifierInterfaces;
+using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class AttackDebuff : StatusEffect, IStatsModifier
 {
     public override string Name => "Attack Debuff";
-    public AttackDebuff(){}
+
     public override bool IsStackable => false;
 
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
@@ -26,4 +27,7 @@ public class AttackDebuff : StatusEffect, IStatsModifier
     }
 
 
+    public AttackDebuff(Character caster) : base(caster)
+    {
+    }
 }

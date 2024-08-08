@@ -95,7 +95,7 @@ public class RoxyHeadBatWhack : Ultimate
                 ElementToDamageWith = User.Element,
                 DamageText = $"{User.NameWithAlphabet} whacks {target.NameWithAlphabet} in the head, dealing $ damage.. ouch"
             });
-        target.AddStatusEffect(new Stun() { Caster = User, Duration = 1 },
+        target.AddStatusEffect(new Stun(User),
             User.Effectiveness);
         text = "Can you move after THIS??";
         attackTargetType = AttackTargetType.SingleTarget;

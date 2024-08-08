@@ -49,4 +49,8 @@ public class Burn : StatusEffect, IDetonatable
         Affected.RemoveStatusEffect(this);
         return DoDamage();
     }
+
+    public Burn(Character caster) : base(caster)
+    {
+    }
 }

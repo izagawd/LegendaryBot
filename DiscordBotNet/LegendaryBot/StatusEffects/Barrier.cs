@@ -37,11 +37,11 @@ public class Barrier : StatusEffect
         
     }
 
-    public Barrier() : this(0)
+    public Barrier(Character caster) : this( caster,0)
     {
         
     }
-    public Barrier(int shieldValue) 
+    public Barrier(Character caster, int shieldValue) : base(caster)
     {
         _shieldValue = shieldValue;
     }

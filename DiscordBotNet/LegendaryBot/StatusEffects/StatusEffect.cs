@@ -94,6 +94,11 @@ public abstract class StatusEffect  : INameHaver
 
         return image;
     }
+
+    public StatusEffect(Character caster)
+    {
+        Caster = caster;
+    }
     public virtual StatusEffectType EffectType => StatusEffectType.Buff;
 
     ///<summary>With an override turn type of enum number 1 or more, the status effect can modify the user's decision for a turn.
@@ -120,7 +125,7 @@ public abstract class StatusEffect  : INameHaver
     /// <summary>
     /// The person who casted the status effect
     /// </summary>
-    public required Character Caster { get; set; }
+    public  Character Caster { get;  }
 
     /// <summary>
     /// The name of the status effect

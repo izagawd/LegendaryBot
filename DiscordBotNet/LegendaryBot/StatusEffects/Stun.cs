@@ -23,4 +23,8 @@ public class Stun : StatusEffect
         Affected.CurrentBattle.AddBattleText($"{Affected} cannot move because they are stunned!");
         return "dizzy...";
     }
+
+    public Stun(Character caster) : base(caster)
+    {
+    }
 }

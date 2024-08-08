@@ -22,7 +22,7 @@ public class SlimeBodySlam : BasicAttack
         });
         if (BasicFunctionality.RandomChance(10))
         {
-            target.AddStatusEffect(new Poison(){Caster = User, Duration = 1}, User.Effectiveness);
+            target.AddStatusEffect(new Poison(User){ Duration = 1}, User.Effectiveness);
         }
         attackTargetType = AttackTargetType.SingleTarget;
 

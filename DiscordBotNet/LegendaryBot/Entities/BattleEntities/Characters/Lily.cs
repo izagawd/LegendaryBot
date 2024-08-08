@@ -31,7 +31,7 @@ public class ChamomileSachetWhack : BasicAttack
         text = "Chamomile Whack!";
         if (BasicFunctionality.RandomChance(SleepChance))
         {
-            target.AddStatusEffect(new Sleep(){Caster = User, Duration = 1}, User.Effectiveness);
+            target.AddStatusEffect(new Sleep(User), User.Effectiveness);
         }
 
     }
@@ -90,8 +90,8 @@ public class LilyOfTheValley : Ultimate
       
         var effectiveness = User.Effectiveness;
 
-        target.AddStatusEffects([new Poison(){Duration = 2,Caster = User},
-        new Poison(){Duration = 2, Caster = User},new Stun(){Duration = 1, Caster = User}],effectiveness);
+        target.AddStatusEffects([new Poison(User){Duration = 2,},
+        new Poison(User){Duration = 2, },new Stun(User)],effectiveness);
         text = $"The valley!";
         attackTargetType = AttackTargetType.None;
 

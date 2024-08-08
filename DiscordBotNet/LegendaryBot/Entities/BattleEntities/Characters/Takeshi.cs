@@ -57,7 +57,7 @@ public class TakeshiMeditation : Ultimate
     {
         CurrentBattle.AddBattleText($"{User.NameWithAlphabet} meditates!" );
         User.RecoverHealth(User.MaxHealth * 0.5f);
-        User.AddStatusEffect(new AttackBuff() { Caster = User, Duration = 2 },
+        User.AddStatusEffect(new AttackBuff(User) { Duration = 2 },
             User.Effectiveness);
         attackTargetType = AttackTargetType.SingleTarget;
         text = "Hummmm....";
@@ -86,7 +86,7 @@ public class KarateNeckChop : Skill
         out AttackTargetType attackTargetType, out string? text)
     {
         CurrentBattle.AddBattleText($"{User.NameWithAlphabet} neck chops {target}!" );
-        target.AddStatusEffect(new Stun() { Caster = User, Duration = 1 },
+        target.AddStatusEffect(new Stun(User) { Duration = 1 },
             User.Effectiveness);
 
         attackTargetType = AttackTargetType.SingleTarget;

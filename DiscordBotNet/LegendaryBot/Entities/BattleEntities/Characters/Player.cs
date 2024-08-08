@@ -62,7 +62,7 @@ public class FireBall : Skill
         });
         if (BasicFunctionality.RandomChance(10))
         {
-            target.AddStatusEffect(new Burn(){Caster = User,Duration = 1},User.Effectiveness);
+            target.AddStatusEffect(new Burn(User),User.Effectiveness);
         }
         
         attackTargetType = AttackTargetType.SingleTarget;
@@ -96,7 +96,7 @@ public class Ignite : Ultimate
         List<StatusEffect> burns = [];
         for (var i = 0; i < 3; i++)
         {
-            burns.Add(new Burn(){ Caster = User, Duration = 2});
+            burns.Add(new Burn(User));
         }
         target.AddStatusEffects(burns,User.Effectiveness);
         attackTargetType = AttackTargetType.SingleTarget;

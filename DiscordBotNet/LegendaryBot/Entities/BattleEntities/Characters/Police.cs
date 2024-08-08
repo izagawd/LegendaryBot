@@ -26,7 +26,7 @@ public class DoNotResist : BasicAttack
         });
         if (BasicFunctionality.RandomChance(15))
         {
-            target.AddStatusEffect(new Stun(){Duration = 1, Caster = User}, User.Effectiveness);
+            target.AddStatusEffect(new Stun(User), User.Effectiveness);
         }
 
 
@@ -65,7 +65,7 @@ public class IAmShooting : Skill
             DamageText = $"{User.NameWithAlphabet} shoots at {target.NameWithAlphabet} for resisting arrest, dealing $ damage"
         });
  
-        target.AddStatusEffect(new Bleed(){ Caster = User, Duration = 2}, User.Effectiveness);
+        target.AddStatusEffect(new Bleed(User), User.Effectiveness);
         text = "I warned you!";
         attackTargetType = AttackTargetType.SingleTarget;
 

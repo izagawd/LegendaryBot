@@ -307,7 +307,7 @@ public static class Bot
 
     private async  static Task DoShitAsync()
     {
-
+        BasicFunctionality.SizeOf(typeof(Character)).Print();
     }
     private static async Task Main(string[] args)
     {

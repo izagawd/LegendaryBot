@@ -58,11 +58,7 @@ public class CommanderJeanTaser : Skill
             CriticalDamage = User.CriticalDamage,
             DamageText = $"{User.NameWithAlphabet} tases {target.NameWithAlphabet}, dealing $ damage!"
         });
-        target.AddStatusEffect(new Stun()
-        {
-            Caster = User,
-            Duration = 1,
-        },User.Effectiveness);
+        target.AddStatusEffect(new Stun(User),User.Effectiveness);
         
         attackTargetType = AttackTargetType.SingleTarget;
         User.SuperPoints += 2;
@@ -104,14 +100,14 @@ public class CommanderJeanGrenade : Ultimate
         }
         foreach (var i in GetPossibleTargets())
         {
-            i.AddStatusEffects([new Bleed()
+            i.AddStatusEffects([new Bleed(User)
             {
-                Caster = User,
-                Duration = 2,
-            },new Bleed()
+                
+                Duration = 2
+            },new Bleed(User)
             {
-                Caster = User,
-                Duration = 2,
+                
+                Duration = 2
             }],User.Effectiveness);
         }
  

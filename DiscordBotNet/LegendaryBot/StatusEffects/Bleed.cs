@@ -42,4 +42,7 @@ public class Bleed : StatusEffect, IDetonatable
     }
 
 
+    public Bleed(Character caster) : base(caster)
+    {
+    }
 }

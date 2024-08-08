@@ -51,7 +51,7 @@ public class ThugInsult : Skill
         out string? text)
     {
         CurrentBattle.AddBattleText($"{User.NameWithAlphabet} insults {target.NameWithAlphabet} like a thug!");
-        target.AddStatusEffect(new DefenseDebuff() { Caster = User, Duration = 2 }, User.Effectiveness);
+        target.AddStatusEffect(new DefenseDebuff(User) {  Duration = 2 }, User.Effectiveness);
         attackTargetType = AttackTargetType.SingleTarget;
         text = "What are you gonna do about it?";
     }

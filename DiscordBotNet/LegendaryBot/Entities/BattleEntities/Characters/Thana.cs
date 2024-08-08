@@ -22,7 +22,7 @@ public class SoulAttack : BasicAttack
         });
         if (BasicFunctionality.RandomChance(25))
         {
-            target.AddStatusEffect(new Sleep(){Caster = User, Duration = 1}, User.Effectiveness);
+            target.AddStatusEffect(new Sleep(User){ Duration = 1}, User.Effectiveness);
         }
 
         attackTargetType = AttackTargetType.SingleTarget;
@@ -99,10 +99,10 @@ public class Arise : Ultimate
             {
                 duration = 3;
             }
-            i.AddStatusEffect(new Immortality(){Duration = duration, Caster = User}
+            i.AddStatusEffect(new Immortality(User){Duration = duration}
             ,User.Effectiveness);
         }
-        User.AddStatusEffect(new AttackBuff() { Duration = 3 , Caster = User},
+        User.AddStatusEffect(new AttackBuff(User) { Duration = 3 },
             User.Effectiveness);
         User.GrantExtraTurn();
         text = "Necromancy!";

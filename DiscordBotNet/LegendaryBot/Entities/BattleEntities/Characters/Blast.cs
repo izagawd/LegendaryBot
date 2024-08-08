@@ -66,7 +66,7 @@ public class BlowAway : Skill
                 if (BasicFunctionality.RandomChance(BombInflictChance))
                 {
                                 
-                    i.AddStatusEffect(new Bomb(){Duration = 2, Caster = User}, User.Effectiveness);
+                    i.AddStatusEffect(new Bomb(User){Duration = 2}, User.Effectiveness);
                 }
             }
 
@@ -114,8 +114,7 @@ public class ExplosionBlast : Ultimate
         var eff = User.Effectiveness;
         foreach (var i in GetPossibleTargets())
         {
-            i.AddStatusEffects([new Burn() { Caster = User, Duration = 1 },
-                new Burn() { Caster = User, Duration = 1 }], eff);
+            i.AddStatusEffects([new Burn(User) , new Burn(User)], eff);
         }
 
         text = "Blow Away!";
