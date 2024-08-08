@@ -172,7 +172,7 @@ public partial class BattleSimulator
                 yield return j;
             }
             yield return i;
-            foreach (var j in i.StatusEffects)
+            foreach (var j in i.StatusEffectsCopy)
             {
                 yield return j;
             }
@@ -389,7 +389,7 @@ public partial class BattleSimulator
                 descriptionStringBuilder.Append($"Passive Ability: {characterToDisplayBattleInfo.PassiveDescription}");
                 descriptionStringBuilder.Append("\n\n");
             }
-            var statusEffectsCopy = characterToDisplayBattleInfo.StatusEffects.ToArray();
+            var statusEffectsCopy = characterToDisplayBattleInfo.StatusEffectsCopy.ToArray();
             if (statusEffectsCopy.Any())
             {
                 descriptionStringBuilder.Append("Status Effects\n\n");
@@ -687,11 +687,11 @@ public partial class BattleSimulator
             
             ActiveCharacter.CombatReadiness = 0;
             
-            foreach (var i in ActiveCharacter.StatusEffects.ToArray())
+            foreach (var i in ActiveCharacter.StatusEffectsCopy.ToArray())
             {
 
                 //this code executes for status effects that occur just before the beginning of the turn
-                if (i.ExecuteStatusEffectBeforeTurn && ActiveCharacter.StatusEffects.Contains(i))
+                if (i.ExecuteStatusEffectBeforeTurn && ActiveCharacter.StatusEffectsCopy.Contains(i))
                 {
                     i.PassTurn();
                     if (i.Duration <= 0) ActiveCharacter.RemoveStatusEffect(i);
@@ -816,7 +816,7 @@ public partial class BattleSimulator
             StatusEffect? mostPowerfulStatusEffect = null;
            
           
-            mostPowerfulStatusEffect = ActiveCharacter.StatusEffects.OrderByDescending(i => i.OverrideTurnType).FirstOrDefault();
+            mostPowerfulStatusEffect = ActiveCharacter.StatusEffectsCopy.OrderByDescending(i => i.OverrideTurnType).FirstOrDefault();
 
 
           
@@ -990,9 +990,9 @@ public partial class BattleSimulator
             }
 
  
-            foreach (var i in ActiveCharacter.StatusEffects.ToArray())
+            foreach (var i in ActiveCharacter.StatusEffectsCopy.ToArray())
             {
-                if (i.ExecuteStatusEffectAfterTurn && ActiveCharacter.StatusEffects.Contains(i))
+                if (i.ExecuteStatusEffectAfterTurn && ActiveCharacter.StatusEffectsCopy.Contains(i))
                 {
                     i.PassTurn();
                     if (i.Duration <= 0) ActiveCharacter.RemoveStatusEffect(i);

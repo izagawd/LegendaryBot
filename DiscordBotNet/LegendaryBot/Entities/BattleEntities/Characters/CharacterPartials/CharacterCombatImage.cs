@@ -114,7 +114,7 @@ public partial class Character
 
       
         
-        foreach (var i in _statusEffects.Take(16))
+        foreach (var i in StatusEffects.Take(16))
         {
             
             //do not change size of the status effect image here.

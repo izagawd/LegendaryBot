@@ -327,7 +327,7 @@ public static class Bot
             var bruh = new List<object>(Idk);
             for(int i = 0; i < Idk; i++)
             {
-                bruh.Add(Activator.CreateInstance(typeof(Testing)));
+                bruh.Add(Activator.CreateInstance(typeof(Blast)));
             }
         }
     }

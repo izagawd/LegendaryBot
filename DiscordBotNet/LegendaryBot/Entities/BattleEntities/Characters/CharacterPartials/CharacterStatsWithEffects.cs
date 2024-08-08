@@ -114,7 +114,30 @@ public partial class Character
             return percentage;
         }
     }
+    public float MaxHealth
+    {
+        get
+        {
+            float percentage = 100;
+            var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
 
+            float flat = 0;
+
+            foreach (var i in modifiedStats.OfType<MaxHealthPercentageModifierArgs>())
+            {
+                percentage += i.ValueToChangeWith;
+            }
+            foreach (var i in modifiedStats.OfType<MaxHealthPercentageModifierArgs>())
+            {
+                flat += i.ValueToChangeWith;
+            }
+
+            var newMaxHealth = TotalMaxHealth * percentage * 0.01f;
+            newMaxHealth += flat;
+            if (newMaxHealth < 0) newMaxHealth = 0;
+            return newMaxHealth;
+        }
+    }
  
     /// <summary>
     /// 

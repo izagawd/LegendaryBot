@@ -80,9 +80,9 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     {
         get
         {
-            if (!_statusEffects.Any())
+            if (!StatusEffects.Any())
                 return OverrideTurnType.None;
-            return _statusEffects.Select(i => i.OverrideTurnType).Max();
+            return StatusEffects.Select(i => i.OverrideTurnType).Max();
         }
     }
 
@@ -164,7 +164,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public  Blessing? Blessing { get; set; }
 
 
-    public Barrier? Shield => _statusEffects.OfType<Barrier>().FirstOrDefault();
+    public Barrier? Shield => StatusEffects.OfType<Barrier>().FirstOrDefault();
 
     [NotMapped]
     public virtual IEnumerable<Move> MoveList
@@ -209,7 +209,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             if (_health <= 0 )return;
             var tempMaxHealth = MaxHealth;
 
-            if (value <= 0 && _statusEffects.Any(i => i is Immortality))
+            if (value <= 0 && StatusEffects.Any(i => i is Immortality))
                 value = 1;
             _health = value;
             
@@ -219,7 +219,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             
                 CurrentBattle.AddBattleText(new DeathBattleText(this));
                 ShouldTakeExtraTurn = false;
-                _statusEffects.Clear();
+                StatusEffects.Clear();
                 CurrentBattle.InvokeBattleEvent(new CharacterDeathEventArgs(this));
             
             }
@@ -256,15 +256,8 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     
     private List<Gear>? _gears;
-    public List<Gear> Gears
-    {
-        get => _gears ??= [];
-        set
-        {
-            _gears = value;
-        }
-    }
 
+    public List<Gear> Gears => _gears ??= [];
 
 
     /// <summary>
@@ -329,30 +322,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
    
 
-    public float MaxHealth
-    {
-        get
-        {
-            float percentage = 100;
-            var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-
-            float flat = 0;
-
-            foreach (var i in modifiedStats.OfType<MaxHealthPercentageModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            foreach (var i in modifiedStats.OfType<MaxHealthPercentageModifierArgs>())
-            {
-                flat += i.ValueToChangeWith;
-            }
-
-            var newMaxHealth = TotalMaxHealth * percentage * 0.01f;
-            newMaxHealth += flat;
-            if (newMaxHealth < 0) newMaxHealth = 0;
-            return newMaxHealth;
-        }
-    }
+  
 
     /// <summary>
     /// Stats to increase when reaching level milestone. order matters in this case, and it should be exactly 5
@@ -582,10 +552,11 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         }
     }
 
-    [NotMapped] private readonly HashSet<StatusEffect> _statusEffects = [];
+    [NotMapped] private HashSet<StatusEffect>? _statusEffects;
 
+    private HashSet<StatusEffect> StatusEffects => _statusEffects ??= [];
 
-    [NotMapped] public IEnumerable<StatusEffect> StatusEffects => _statusEffects;
+    [NotMapped] public IEnumerable<StatusEffect> StatusEffectsCopy => StatusEffects;
 
     [NotMapped] public virtual DiscordColor Color => DiscordColor.Green;
 
@@ -598,7 +569,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     [NotMapped] public BattleSimulator CurrentBattle => Team?.CurrentBattle!;
 
-    public bool RemoveStatusEffect(StatusEffect statusEffect) => _statusEffects.Remove(statusEffect);
+    public bool RemoveStatusEffect(StatusEffect statusEffect) => StatusEffects.Remove(statusEffect);
 
     
     
@@ -714,7 +685,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     {
         get
         {
-            return _statusEffects.Any(i => i.OverrideTurnType > 0);
+            return StatusEffects.Any(i => i.OverrideTurnType > 0);
         }
     }
 
