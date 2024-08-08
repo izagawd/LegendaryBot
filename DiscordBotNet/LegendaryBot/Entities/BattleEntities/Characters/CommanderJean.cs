@@ -29,6 +29,10 @@ public class CommanderJeanTonfaWhack : BasicAttack
         attackTargetType = AttackTargetType.SingleTarget;
         User.SuperPoints++;
     }
+
+    public CommanderJeanTonfaWhack(Character user) : base(user)
+    {
+    }
 }
 public class CommanderJeanTaser : Skill
 {
@@ -63,6 +67,10 @@ public class CommanderJeanTaser : Skill
         attackTargetType = AttackTargetType.SingleTarget;
         User.SuperPoints += 2;
         text = "I warned you!";
+    }
+
+    public CommanderJeanTaser(Character user) : base(user)
+    {
     }
 }
 public class CommanderJeanGrenade : Ultimate
@@ -111,6 +119,10 @@ public class CommanderJeanGrenade : Ultimate
         User.SuperPoints += 3;
         text = "Grenade!";
     }
+
+    public CommanderJeanGrenade(Character user) : base(user)
+    {
+    }
 }
 
 public class CommanderJeanFiringSquad : Skill
@@ -145,6 +157,10 @@ public class CommanderJeanFiringSquad : Skill
     }
 
     public override int MaxCooldown { get; }
+
+    public CommanderJeanFiringSquad(Character user) : base(user)
+    {
+    }
 }
 public class CommanderJean : Character
 {
@@ -159,9 +175,9 @@ public class CommanderJean : Character
         if(CannotDoAnything) return;
         if (SuperPoints >= 5)
         {
-            var possibleTarget = _firingSquad.GetPossibleTargets().FirstOrDefault();
+            var possibleTarget = FiringSquad.GetPossibleTargets().FirstOrDefault();
             if(possibleTarget is not null)
-                _firingSquad.Utilize(possibleTarget, MoveUsageType.MiscellaneousFollowUpUsage);
+                FiringSquad.Utilize(possibleTarget, MoveUsageType.MiscellaneousFollowUpUsage);
         }
     
     }
@@ -180,17 +196,31 @@ public class CommanderJean : Character
                 yield return i;
             }
 
-            yield return _firingSquad;
+            yield return FiringSquad;
         }
     }
 
     public override Rarity Rarity => Rarity.FiveStar;
-    private Move _firingSquad = new CommanderJeanFiringSquad();
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new CommanderJeanTonfaWhack(this);
+    }
+
+    public override Skill? GenerateSkill()
+    {
+        return new CommanderJeanTaser(this);
+    }
+
+    public override Ultimate? GenerateUltimate()
+    {
+        return new CommanderJeanGrenade(this);
+    }
+
+    public CommanderJeanFiringSquad FiringSquad => _firingSquad ??= new CommanderJeanFiringSquad(this);
+    private CommanderJeanFiringSquad? _firingSquad;
     public CommanderJean()
     {
         TypeId = 15;
-        BasicAttack = new CommanderJeanTonfaWhack();
-        Skill = new CommanderJeanTaser();
-        Ultimate = new CommanderJeanGrenade();
+
     }
 }

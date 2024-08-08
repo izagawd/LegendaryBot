@@ -18,4 +18,8 @@ public abstract class BasicAttack : Move
     {
         return base.Utilize(target, moveUsageType);
     }
+
+    protected BasicAttack(Character user) : base(user)
+    {
+    }
 }

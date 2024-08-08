@@ -29,6 +29,10 @@ public class ThugPunch : BasicAttack
         attackTargetType = AttackTargetType.SingleTarget;
         text = "Uraah!";
     }
+
+    public ThugPunch(Character user) : base(user)
+    {
+    }
 }
 public class ThugInsult : Skill
 {
@@ -53,16 +57,29 @@ public class ThugInsult : Skill
     }
 
     public override int MaxCooldown => 4;
+
+    public ThugInsult(Character user) : base(user)
+    {
+    }
 }
 public class Thug : Character
 {
     public override string Name => "Thug";
 
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new ThugPunch(this);
+    }
+
+    public override Skill? GenerateSkill()
+    {
+        return new ThugInsult(this);
+    }
+
     public Thug()
     {
         TypeId = 9;
-        BasicAttack = new ThugPunch(){User = this};
-        Skill = new ThugInsult();
+
 
     }
 

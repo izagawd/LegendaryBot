@@ -28,6 +28,10 @@ public class GigaPunch : BasicAttack
         });
 
     }
+
+    public GigaPunch(Character user) : base(user)
+    {
+    }
 }
 
 public class MuscleFlex : Ultimate
@@ -50,6 +54,10 @@ public class MuscleFlex : Ultimate
     }
 
     public override int MaxCooldown => 1;
+
+    public MuscleFlex(Character user) : base(user)
+    {
+    }
 }
 
 public class ThumbsUp : Skill
@@ -75,6 +83,10 @@ public class ThumbsUp : Skill
     }
 
     public override int MaxCooldown => 1;
+
+    public ThumbsUp(Character user) : base(user)
+    {
+    }
 }
 public class CoachChad : Character
 {
@@ -84,9 +96,7 @@ public class CoachChad : Character
     public CoachChad()
     {
         TypeId = 11;
-        BasicAttack = new GigaPunch(){User = this};
-        Skill = new ThumbsUp(){User = this};
-        Ultimate  = new MuscleFlex(){User = this};
+
       
     }
 
@@ -94,7 +104,20 @@ public class CoachChad : Character
 
     public override DiscordColor Color => DiscordColor.Purple;
 
+    public override Skill? GenerateSkill()
+    {
+        return new ThumbsUp(this);
+    }
 
+    public override Ultimate? GenerateUltimate()
+    {
+        return new MuscleFlex(this);
+    }
+
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new GigaPunch(this);
+    }
 
     [BattleEventListenerMethod]
     private void HandleRevive(CharacterDeathEventArgs deathEventArgs)

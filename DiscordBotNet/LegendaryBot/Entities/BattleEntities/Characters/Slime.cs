@@ -29,6 +29,10 @@ public class SlimeBodySlam : BasicAttack
         text = "Slime body slam!";
         
     }
+
+    public SlimeBodySlam(Character user) : base(user)
+    {
+    }
 }
 public class Slime : Character
 {
@@ -39,12 +43,16 @@ public class Slime : Character
 
 
     public override Rarity Rarity => Rarity.TwoStar;
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new SlimeBodySlam(this);
+    }
 
 
     public Slime()
     {
         TypeId = 7;
-        BasicAttack = new SlimeBodySlam(){User = this};
+
         
     }
 

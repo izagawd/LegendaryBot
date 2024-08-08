@@ -29,6 +29,10 @@ public class FourthWallBreaker: BasicAttack
         text = "It's the power of being a real human";
 
     }
+
+    public FourthWallBreaker(Character user) : base(user)
+    {
+    }
 }
 
 public class FireBall : Skill
@@ -65,6 +69,10 @@ public class FireBall : Skill
         text = null;
 
     }
+
+    public FireBall(Character user) : base(user)
+    {
+    }
 }
 public class Ignite : Ultimate
 {
@@ -94,7 +102,10 @@ public class Ignite : Ultimate
         attackTargetType = AttackTargetType.SingleTarget;
         text = "Ignite!";
     }
-    
+
+    public Ignite(Character user) : base(user)
+    {
+    }
 }
 public class PlayerDatabaseConfiguration : IEntityTypeConfiguration<Player>
 {
@@ -126,15 +137,26 @@ public class Player : Character
     protected override float BaseSpeedMultiplier => 1.1f;
 
 
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new FourthWallBreaker(this);
+    }
 
+    public override Skill? GenerateSkill()
+    {
+        return new FireBall(this);
+    }
+
+    public override Ultimate? GenerateUltimate()
+    {
+        return new Ignite(this);
+    }
 
     public Player()
     {
         TypeId = 1;
         Element = Element.Fire;
-        BasicAttack = new FourthWallBreaker();
-        Skill = new FireBall();
-        Ultimate = new Ignite();
+
       
     }
 

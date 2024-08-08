@@ -29,4 +29,8 @@ public class BasicAttackSample : BasicAttack
         attackTargetType = AttackTargetType.SingleTarget;
         text = "very basic...";
     }
+
+    public BasicAttackSample(Character user) : base(user)
+    {
+    }
 }

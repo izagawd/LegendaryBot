@@ -17,10 +17,10 @@ using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.VisualBasic;
 using Barrier = DiscordBotNet.LegendaryBot.StatusEffects.Barrier;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-
 
 
 public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character>
@@ -64,7 +64,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 {
 
 
-    
+
     /// <summary>
     /// if not null, will assume this character uses super points.
     /// </summary>
@@ -72,7 +72,11 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public virtual bool UsesSuperPoints => false;
 
     [NotMapped]
-    public int SuperPoints { get; set; }
+    public int SuperPoints
+    {
+        get => BattleData.SuperPoints;
+        set => BattleData.SuperPoints = value;
+    }
     public virtual bool CanSpawnNormally => true;
     public bool CannotDoAnything => IsDead || HighestOverrideTurnType >= OverrideTurnType.CannotMove;
     public virtual string? PassiveDescription => null;
@@ -114,6 +118,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         }
     }
 
+
     /// <summary>
     /// Increases combat readiness
     /// </summary>
@@ -129,7 +134,8 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         return increaseAmount;
     }
 
- 
+
+
     /// <param name="decreaseAmount">amount to decrease</param>
     /// <param name="effectiveness">Use if it is resistable</param>
     /// <param name="announceDecrease">Whether or not to announce the fact that combat readiness was decreased</param>
@@ -537,6 +543,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     }
 
+    
     public Move? this[BattleDecision battleDecision]
     {
         get
@@ -554,6 +561,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             }
         }
     }
+    
     
     public IEnumerable<GearSet> GenerateGearSets()
     {
@@ -589,25 +597,29 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     public bool RemoveStatusEffect(StatusEffect statusEffect) => _statusEffects.Remove(statusEffect);
 
-    public int MaxLevel => 60;
-    [NotMapped]
-    public float TotalAttack { get; set; }
-    [NotMapped]
-    public float TotalDefense { get; set; }
-    [NotMapped]
-    public float TotalMaxHealth { get; set; }
-    [NotMapped]
-    public float TotalSpeed { get; set; }
-    [NotMapped]
-    public float TotalCriticalChance { get; set; }
-    [NotMapped]
-    public float TotalCriticalDamage { get; set; }
-    [NotMapped]
-    public float TotalEffectiveness { get; set; }
-    [NotMapped]
-    public float TotalResistance { get; set; }
-
     
+    
+    
+    
+    
+
+
+    #region Stats
+
+
+    [NotMapped] public CharacterStats Stats => BattleData.Stats;
+    
+    public int MaxLevel => 60;
+    [NotMapped] public ref float TotalAttack =>ref  Stats.TotalAttack;
+    [NotMapped] public ref float TotalDefense => ref Stats.TotalDefense;
+    [NotMapped] public ref float TotalSpeed => ref Stats.TotalSpeed;
+    [NotMapped] public ref float TotalCriticalChance => ref Stats.TotalCriticalChance;
+    [NotMapped] public ref float TotalCriticalDamage => ref Stats.TotalCriticalDamage;
+    [NotMapped] public ref float TotalEffectiveness => ref Stats.TotalEffectiveness;
+    [NotMapped] public ref float TotalResistance => ref Stats.TotalResistance;
+
+    [NotMapped] public ref float TotalMaxHealth => ref Stats.TotalMaxHealth;
+
    
     /// <summary>
     /// Use this to load the build (stats) of the character. if u want to manually set the stats of this character, just
@@ -641,8 +653,11 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         }
         _gearSets = GenerateGearSets().ToList();
     }
+    #endregion
 
-
+    [NotMapped]
+    private CharacterBattleData? _battleData;
+    public CharacterBattleData BattleData => _battleData ??= new CharacterBattleData(this);
 
     public  Type TypeGroup => typeof(Character);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
@@ -650,8 +665,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public virtual Rarity Rarity => Rarity.ThreeStar;
 
 
-    [NotMapped]
-    public   BasicAttack BasicAttack { get; protected set; }
+ 
     
     public string GetNameWithAlphabetIdentifier(bool isEnemy)
     {
@@ -664,12 +678,25 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     }
     
     public string NameWithAlphabet => $"{Name} [{AlphabetIdentifier}]";
-    [NotMapped] public  Skill? Skill { get; protected set; } 
+    public virtual Skill? GenerateSkill()
+    {
+        return null;
+    }
+
+    public abstract BasicAttack GenerateBasicAttack();
+    public virtual Ultimate? GenerateUltimate()
+    {
+        return null;
+    }
+
+    public BasicAttack BasicAttack => BattleData.CharacterMoves.BasicAttack;
+    [NotMapped] public Ultimate? Ultimate => BattleData.CharacterMoves.Ultimate;
+    [NotMapped] public Skill? Skill => BattleData.CharacterMoves.Skill;
     /// <summary>
     /// The position of the player based on combat readiness
     /// </summary>
     public int Position => Array.IndexOf(CurrentBattle.Characters.OrderByDescending(i => i.CombatReadiness).ToArray(),this) +1;
-    [NotMapped] public  Ultimate? Ultimate { get; protected set; }
+
     /// <summary>
     /// Checks if something overrides the player turn eg stun status effect preventing the player from doing anything
     /// </summary>

@@ -36,6 +36,10 @@ public class DoNotResist : BasicAttack
 
 
     }
+
+    public DoNotResist(Character user) : base(user)
+    {
+    }
 }
 
 public class IAmShooting : Skill
@@ -68,6 +72,10 @@ public class IAmShooting : Skill
     }
 
     public override int MaxCooldown => 3;
+
+    public IAmShooting(Character user) : base(user)
+    {
+    }
 }
 public class Police : Character
 {
@@ -75,12 +83,20 @@ public class Police : Character
     public override Rarity Rarity => Rarity.TwoStar;
 
 
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new DoNotResist(this);
+    }
+
+    public override Skill? GenerateSkill()
+    {
+        return new IAmShooting(this);
+    }
 
     public Police()
     {
         TypeId = 4;
-        BasicAttack = new DoNotResist(){User = this};
-        Skill = new IAmShooting(){User = this};
+
      
     }
 

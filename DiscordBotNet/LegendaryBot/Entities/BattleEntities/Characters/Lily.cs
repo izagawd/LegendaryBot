@@ -35,6 +35,10 @@ public class ChamomileSachetWhack : BasicAttack
         }
 
     }
+
+    public ChamomileSachetWhack(Character user) : base(user)
+    {
+    }
 }
 public class BlossomTouch : Skill
 {
@@ -58,6 +62,10 @@ public class BlossomTouch : Skill
         text = $"{User.NameWithAlphabet} used Blossom Touch!";
         attackTargetType = AttackTargetType.None;
 
+    }
+
+    public BlossomTouch(Character user) : base(user)
+    {
     }
 }
 public class LilyOfTheValley : Ultimate
@@ -88,6 +96,10 @@ public class LilyOfTheValley : Ultimate
         attackTargetType = AttackTargetType.None;
 
     }
+
+    public LilyOfTheValley(Character user) : base(user)
+    {
+    }
 }
 public class Lily : Character
 {
@@ -97,6 +109,8 @@ public class Lily : Character
 
  
     public override Rarity Rarity => Rarity.FourStar;
+
+
     public override DiscordColor Color => DiscordColor.HotPink;
     
     protected override IEnumerable<StatType> LevelMilestoneStatIncrease =>
@@ -133,14 +147,24 @@ public class Lily : Character
 
     }
 
+    public override Skill? GenerateSkill()
+    {
+        return new BlossomTouch(this);
+    }
 
+    public override Ultimate? GenerateUltimate()
+    {
+        return new LilyOfTheValley(this);
+    }
+
+    public override BasicAttack GenerateBasicAttack()
+    {
+        return new ChamomileSachetWhack(this);
+    }
     public Lily()
     {
         TypeId = 3;
-        Skill = new BlossomTouch(){User = this};
-        Ultimate  = new LilyOfTheValley(){User = this};
-        BasicAttack = new ChamomileSachetWhack(){User = this};
-        
+
     }
 
     public override Element Element => Element.Earth;
