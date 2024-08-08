@@ -96,28 +96,18 @@ public class CoachChad : Character
     public CoachChad()
     {
         TypeId = 11;
-
-      
+        Skill = new ThumbsUp(this);
+        Ultimate = new MuscleFlex(this);
+        BasicAttack = new GigaPunch(this);
     }
 
     public override bool CanSpawnNormally => false;
 
     public override DiscordColor Color => DiscordColor.Purple;
 
-    public override Skill? GenerateSkill()
-    {
-        return new ThumbsUp(this);
-    }
 
-    public override Ultimate? GenerateUltimate()
-    {
-        return new MuscleFlex(this);
-    }
 
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new GigaPunch(this);
-    }
+
 
     [BattleEventListenerMethod]
     private void HandleRevive(CharacterDeathEventArgs deathEventArgs)

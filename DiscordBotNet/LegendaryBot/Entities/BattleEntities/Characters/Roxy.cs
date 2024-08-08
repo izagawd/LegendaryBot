@@ -116,23 +116,12 @@ public class Roxy : Character
     public Roxy()
     {
         TypeId = 14;
-
+        Skill = new RoxyAggressiveOverload(this);
+        BasicAttack = new RoxyBatWhack(this);
+        Ultimate = new RoxyHeadBatWhack(this);
     }
 
-    public override Skill? GenerateSkill()
-    {
-        return new RoxyAggressiveOverload(this);
-    }
 
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new RoxyBatWhack(this);
-    }
-
-    public override Ultimate? GenerateUltimate()
-    {
-        return new RoxyHeadBatWhack(this);
-    }
 
     [BattleEventListenerMethod]
     public void ShouldProcSkill(CharacterPostUseMoveEventArgs postUseMoveEventArgs)

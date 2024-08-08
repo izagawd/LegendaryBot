@@ -46,7 +46,6 @@ public class UserData :   ICanBeLeveledUp
     {
     
         Inventory = new(this);
-     
         
     }
 
@@ -99,10 +98,7 @@ public class UserData :   ICanBeLeveledUp
     /// </summary>
 
 
-    [NotMapped]
-    private List<Quest>? _quests;
-
-    public List<Quest> Quests => _quests ??= new();
+    public List<Quest> Quests { get; } = new();
     /// <summary>
     /// This is used to refresh quest 
     /// </summary>
@@ -232,19 +228,14 @@ public class UserData :   ICanBeLeveledUp
     
     [NotMapped]
     public UserDataInventoryCombined Inventory { get; }
-    [NotMapped]
-    private ItemContainer? _items;
-    public ItemContainer Items => _items ??= new ItemContainer();
-    [NotMapped]
-    private List<Gear>? _gears;
-    public List<Gear> Gears => _gears ??= new();
-    [NotMapped]
-    private List<Character>? _characters;
-    public List<Character> Characters => _characters ??= new();
 
-    [NotMapped]
-    private List<Blessing>? _blessings;
-    public List<Blessing> Blessings => _blessings ??= new();
+    public ItemContainer Items { get; } = new();
+
+
+    public List<Gear> Gears { get; } = new();
+    public List<Character> Characters { get; } = new();
+
+    public List<Blessing> Blessings { get; } = new();
 }
 public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
 {

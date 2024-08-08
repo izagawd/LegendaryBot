@@ -334,7 +334,9 @@ public static class Bot
 
     private async  static Task DoShitAsync()
     {
-        BenchmarkRunner.Run<MyClass>();
+        TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
+            .OrderBy(i => i.TypeId)
+            .ForEach(i => $"{i.Name} {i.TypeId}".Print());
         StopProgram();
     }
     private static async Task Main(string[] args)

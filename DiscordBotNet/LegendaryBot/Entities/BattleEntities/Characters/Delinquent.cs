@@ -76,19 +76,12 @@ public class Delinquent : Character
 
 
     public override Rarity Rarity => Rarity.TwoStar;
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new BaseballBatWhack(this);
-    }
 
-    public override Skill? GenerateSkill()
-    {
-        return new DelinquentBeatdown(this);
-    }
     
     public Delinquent()
     {
         TypeId = 10;
-
+        Skill = new DelinquentBeatdown(this);
+        BasicAttack = new BaseballBatWhack(this);
     }
 }

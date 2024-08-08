@@ -83,21 +83,14 @@ public class Police : Character
     public override Rarity Rarity => Rarity.TwoStar;
 
 
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new DoNotResist(this);
-    }
 
-    public override Skill? GenerateSkill()
-    {
-        return new IAmShooting(this);
-    }
 
     public Police()
     {
         TypeId = 4;
+        Skill = new IAmShooting(this);
+        BasicAttack = new DoNotResist(this);
 
-     
     }
 
 

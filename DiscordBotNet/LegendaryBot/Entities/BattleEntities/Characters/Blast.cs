@@ -134,24 +134,12 @@ public class Blast : Character
     protected override float BaseSpeedMultiplier => 1.1f;
     protected override float BaseAttackMultiplier => 1.05f;
 
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new MethaneSlap(this);
-    }
-
-    public override Ultimate? GenerateUltimate()
-    {
-        return new ExplosionBlast(this);
-    }
-
-    public override Skill? GenerateSkill()
-    {
-        return new BlowAway(this);
-    }
 
     public Blast()
     {
         TypeId = 2;
-        
+        Skill = new BlowAway(this);
+        Ultimate = new ExplosionBlast(this);
+        BasicAttack = new MethaneSlap(this);
     }
 }

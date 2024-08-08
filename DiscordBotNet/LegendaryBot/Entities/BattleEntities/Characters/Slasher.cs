@@ -117,20 +117,6 @@ public class Slasher : Character
 {
     public override string Name => "Slasher";
     public override Rarity Rarity => Rarity.FourStar;
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new SimpleSlashOfPrecision(this);
-    }
-
-    public override Skill? GenerateSkill()
-    {
-        return new WindSlash(this);
-    }
-
-    public override Ultimate? GenerateUltimate()
-    {
-        return new ConsecutiveSlashesOfPrecision(this);
-    }
 
     public override DiscordColor Color => DiscordColor.Brown;
 
@@ -139,8 +125,10 @@ public class Slasher : Character
     public Slasher()
     {
         TypeId = 6;
+        Ultimate = new ConsecutiveSlashesOfPrecision(this);
+        Skill = new WindSlash(this);
+        BasicAttack = new SimpleSlashOfPrecision(this);
 
-       
     }
 
 }

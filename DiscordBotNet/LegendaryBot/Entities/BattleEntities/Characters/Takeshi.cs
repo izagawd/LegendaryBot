@@ -134,24 +134,13 @@ public class Takeshi : Character
 
     }
 
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new TakeshiStraightPunch(this);
-    }
 
-    public override Skill? GenerateSkill()
-    {
-        return new KarateNeckChop(this);
-    }
-
-    public override Ultimate? GenerateUltimate()
-    {
-        return new TakeshiMeditation(this);
-    }
 
     public Takeshi()
     {
         TypeId = 13;
-
+        Ultimate = new TakeshiMeditation(this);
+        Skill = new KarateNeckChop(this);
+        BasicAttack = new TakeshiStraightPunch(this);
     }
 }

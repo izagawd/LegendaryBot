@@ -124,26 +124,15 @@ public class Thana : Character
     public override Element Element => Element.Earth;
 
 
-    public override Skill? GenerateSkill()
-    {
-        return new YourLifeEnergyIsMine(this);
-    }
 
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new SoulAttack(this);
-    }
-
-    public override Ultimate? GenerateUltimate()
-    {
-        return new Arise(this);
-    }
 
     public Thana()
     {
         TypeId = 8;
+        Ultimate = new Arise(this);
+        BasicAttack = new SoulAttack(this);
+        Skill = new YourLifeEnergyIsMine(this);
 
-        
     }
 
 }

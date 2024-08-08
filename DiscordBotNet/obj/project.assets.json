@@ -3246,11 +3246,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\discordbotnet\\DiscordBotNet.csproj",
+      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\DiscordBotNet.csproj",
       "projectName": "DiscordBotNet",
-      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\discordbotnet\\DiscordBotNet.csproj",
+      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\DiscordBotNet.csproj",
       "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\discordbotnet\\obj\\",
+      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -3271,11 +3271,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3362,6 +3357,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.5, 8.0.5]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[8.0.5, 8.0.5]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.5, 8.0.5]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.5, 8.0.5]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -3370,7 +3383,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100-preview.6.24328.19/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -147,24 +147,13 @@ public class Lily : Character
 
     }
 
-    public override Skill? GenerateSkill()
-    {
-        return new BlossomTouch(this);
-    }
 
-    public override Ultimate? GenerateUltimate()
-    {
-        return new LilyOfTheValley(this);
-    }
-
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new ChamomileSachetWhack(this);
-    }
     public Lily()
     {
         TypeId = 3;
-
+        BasicAttack = new ChamomileSachetWhack(this);
+        Ultimate = new LilyOfTheValley(this);
+        Skill = new BlossomTouch(this);
     }
 
     public override Element Element => Element.Earth;

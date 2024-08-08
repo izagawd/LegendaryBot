@@ -66,20 +66,13 @@ public class Thug : Character
 {
     public override string Name => "Thug";
 
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new ThugPunch(this);
-    }
 
-    public override Skill? GenerateSkill()
-    {
-        return new ThugInsult(this);
-    }
 
     public Thug()
     {
         TypeId = 9;
-
+        BasicAttack = new ThugPunch(this);
+        Skill = new ThugInsult(this);
 
     }
 

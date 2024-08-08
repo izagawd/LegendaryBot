@@ -137,27 +137,16 @@ public class Player : Character
     protected override float BaseSpeedMultiplier => 1.1f;
 
 
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new FourthWallBreaker(this);
-    }
 
-    public override Skill? GenerateSkill()
-    {
-        return new FireBall(this);
-    }
-
-    public override Ultimate? GenerateUltimate()
-    {
-        return new Ignite(this);
-    }
 
     public Player()
     {
         TypeId = 1;
         Element = Element.Fire;
+        Skill = new FireBall(this);
+        Ultimate = new Ignite(this);
+        BasicAttack = new FourthWallBreaker(this);
 
-      
     }
 
 

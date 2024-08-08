@@ -121,25 +121,14 @@ public class RoyalKnight : Character
     public override DiscordColor Color => DiscordColor.Blue;
     public override Element Element => Element.Ice;
 
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new ShieldBash(this);
-    }
 
-    public override Ultimate? GenerateUltimate()
-    {
-        return new IWillProtectUs(this);
-    }
-
-    public override Skill? GenerateSkill()
-    {
-        return new IWillBeYourShield(this);
-    }
 
     public RoyalKnight()
     {
         TypeId = 5;
-
+        Skill = new IWillBeYourShield(this);
+        Ultimate = new IWillProtectUs(this);
+        BasicAttack = new ShieldBash(this);
     }
 
     public override Rarity Rarity => Rarity.ThreeStar;

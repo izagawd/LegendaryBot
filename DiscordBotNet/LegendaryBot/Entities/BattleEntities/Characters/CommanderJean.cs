@@ -197,26 +197,14 @@ public class CommanderJean : Character
     }
 
     public override Rarity Rarity => Rarity.FiveStar;
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new CommanderJeanTonfaWhack(this);
-    }
-
-    public override Skill? GenerateSkill()
-    {
-        return new CommanderJeanTaser(this);
-    }
-
-    public override Ultimate? GenerateUltimate()
-    {
-        return new CommanderJeanGrenade(this);
-    }
 
     public CommanderJeanFiringSquad FiringSquad => _firingSquad ??= new CommanderJeanFiringSquad(this);
     private CommanderJeanFiringSquad? _firingSquad;
     public CommanderJean()
     {
         TypeId = 15;
-
+        Skill = new CommanderJeanTaser(this);
+        Ultimate = new CommanderJeanGrenade(this);
+        BasicAttack = new CommanderJeanTonfaWhack(this);
     }
 }

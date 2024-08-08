@@ -43,17 +43,13 @@ public class Slime : Character
 
 
     public override Rarity Rarity => Rarity.TwoStar;
-    public override BasicAttack GenerateBasicAttack()
-    {
-        return new SlimeBodySlam(this);
-    }
 
 
     public Slime()
     {
         TypeId = 7;
 
-        
+        BasicAttack = new SlimeBodySlam(this);
     }
 
 

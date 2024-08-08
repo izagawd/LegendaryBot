@@ -112,21 +112,15 @@ public class Cheerleader : Character
 {
     public override string Name => "Cheerleader";
     public override Rarity Rarity => Rarity.FourStar;
-
-    public override BasicAttack GenerateBasicAttack()
+    
+    public Cheerleader()
     {
-        return new PomPomAttack(this);
+        TypeId = 12;
+        Skill = new YouCanDoIt(this);
+        BasicAttack = new PomPomAttack(this);
+        Ultimate = new YouCanMakeItEveryone(this);
     }
 
-    public override Skill? GenerateSkill()
-    {
-        return new YouCanDoIt(this);
-    }
-
-    public override Ultimate? GenerateUltimate()
-    {
-        return new YouCanMakeItEveryone(this);
-    }
     
 
 }

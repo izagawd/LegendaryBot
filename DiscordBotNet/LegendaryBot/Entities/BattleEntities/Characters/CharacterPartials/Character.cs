@@ -80,9 +80,9 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     {
         get
         {
-            if (!StatusEffectsChecked.Any())
+            if (!_statusEffects.Any())
                 return OverrideTurnType.None;
-            return StatusEffectsChecked.Select(i => i.OverrideTurnType).Max();
+            return _statusEffects.Select(i => i.OverrideTurnType).Max();
         }
     }
 
@@ -164,7 +164,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public  Blessing? Blessing { get; set; }
 
 
-    public Barrier? Shield => StatusEffectsChecked.OfType<Barrier>().FirstOrDefault();
+    public Barrier? Shield => _statusEffects.OfType<Barrier>().FirstOrDefault();
 
     [NotMapped]
     public virtual IEnumerable<Move> MoveList
@@ -209,7 +209,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             if (_health <= 0 )return;
             var tempMaxHealth = MaxHealth;
 
-            if (value <= 0 && StatusEffectsChecked.Any(i => i is Immortality))
+            if (value <= 0 && _statusEffects.Any(i => i is Immortality))
                 value = 1;
             _health = value;
             
@@ -219,7 +219,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             
                 CurrentBattle.AddBattleText(new DeathBattleText(this));
                 ShouldTakeExtraTurn = false;
-                StatusEffectsChecked.Clear();
+                _statusEffects.Clear();
                 CurrentBattle.InvokeBattleEvent(new CharacterDeathEventArgs(this));
             
             }
@@ -254,10 +254,10 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         
     }
 
-    
-    private List<Gear>? _gears;
 
-    public List<Gear> Gears => _gears ??= [];
+
+
+    public List<Gear> Gears { get; } = new();
 
 
     /// <summary>
@@ -552,11 +552,11 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         }
     }
 
-    [NotMapped] private HashSet<StatusEffect>? _statusEffects;
 
-    private HashSet<StatusEffect> StatusEffectsChecked => _statusEffects ??= [];
 
-    [NotMapped] public IEnumerable<StatusEffect> StatusEffects => StatusEffectsChecked;
+    private HashSet<StatusEffect> _statusEffects = [];
+
+    [NotMapped] public IEnumerable<StatusEffect> StatusEffects => _statusEffects;
 
     [NotMapped] public virtual DiscordColor Color => DiscordColor.Green;
 
@@ -569,7 +569,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     [NotMapped] public BattleSimulator CurrentBattle => Team?.CurrentBattle!;
 
-    public bool RemoveStatusEffect(StatusEffect statusEffect) => StatusEffectsChecked.Remove(statusEffect);
+    public bool RemoveStatusEffect(StatusEffect statusEffect) => _statusEffects.Remove(statusEffect);
 
     
     
@@ -648,45 +648,21 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     }
     
     public string NameWithAlphabet => $"{Name} [{AlphabetIdentifier}]";
-    public virtual Skill? GenerateSkill()
-    {
-        return null;
-    }
 
-    public abstract BasicAttack GenerateBasicAttack();
-    public virtual Ultimate? GenerateUltimate()
-    {
-        return null;
-    }
 
     [NotMapped]
     private BasicAttack? _basicAttack;
 
 
     [NotMapped]
-    public BasicAttack BasicAttack
-    {
-        get
-        {
-            if (_basicAttack is null)
-            {
-                _basicAttack = GenerateBasicAttack();
-                "Yoo".Print();
-            }
+    public BasicAttack BasicAttack { get; protected set; }
 
-            return _basicAttack;
 
-        }
-    }
+    [NotMapped] public Ultimate? Ultimate { get; protected set; }
 
-    [NotMapped]
-    private Ultimate? _ultimate;
-    [NotMapped] public Ultimate? Ultimate => _ultimate ??= GenerateUltimate();
 
-    [NotMapped]
-    private Skill? _skill;
 
-    [NotMapped] public Skill? Skill => _skill ??= GenerateSkill();
+    [NotMapped] public Skill? Skill { get; protected set; }
     /// <summary>
     /// The position of the player based on combat readiness
     /// </summary>
@@ -699,7 +675,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     {
         get
         {
-            return StatusEffectsChecked.Any(i => i.OverrideTurnType > 0);
+            return _statusEffects.Any(i => i.OverrideTurnType > 0);
         }
     }
 
