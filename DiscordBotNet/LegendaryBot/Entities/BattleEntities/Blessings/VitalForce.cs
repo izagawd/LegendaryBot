@@ -32,10 +32,6 @@ public class VitalForce : Blessing, IStatsModifier
     }
     public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
     {
-        yield return new DefensePercentageModifierArgs
-        {
-            CharacterToAffect = Character!,
-            ValueToChangeWith = GetDefenseBoost(LevelMilestone),
-        };
+        yield return new DefensePercentageModifierArgs(Character!, GetDefenseBoost(LevelMilestone));
     }
 }

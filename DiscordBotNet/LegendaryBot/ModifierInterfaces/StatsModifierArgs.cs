@@ -7,10 +7,15 @@ public abstract class StatsModifierArgs
     /// <summary>
     /// The value to either increase or decrease with
     /// </summary>
-    public float ValueToChangeWith { get; init; }
+    public float ValueToChangeWith { get;  }
 
-    public required Character CharacterToAffect { get; init; }
- 
+    public  Character CharacterToAffect { get;  }
+
+    public StatsModifierArgs(Character characterToAffect, float valueToChangeWith)
+    {
+        CharacterToAffect = characterToAffect;
+        ValueToChangeWith = valueToChangeWith;
+    }
 
     
 }

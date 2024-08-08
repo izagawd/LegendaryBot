@@ -36,10 +36,6 @@ public class SimpleAttackSet : GearSet, IStatsModifier
 
     public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
     {
-        yield return new AttackPercentageModifierArgs()
-        {
-            CharacterToAffect = Owner,
-            ValueToChangeWith = AttackIncreaseAttackAmount
-        };
+        yield return new AttackPercentageModifierArgs(Owner, AttackIncreaseAttackAmount);
     }
 }

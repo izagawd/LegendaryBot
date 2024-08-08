@@ -18,12 +18,7 @@ public class AttackDebuff : StatusEffect, IStatsModifier
 
     public  IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
     {
-        yield return new AttackPercentageModifierArgs()
-        {
-            CharacterToAffect = Affected,
-            ValueToChangeWith = -50,
-
-        };
+        yield return new AttackPercentageModifierArgs(Affected, -50);
     }
 
 

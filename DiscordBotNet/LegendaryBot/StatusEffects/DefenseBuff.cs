@@ -17,13 +17,7 @@ public class DefenseBuff: StatusEffect, IStatsModifier
 
     public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
     {
-        yield return
-            new DefensePercentageModifierArgs()
-            {
-                CharacterToAffect = Affected,
-                ValueToChangeWith = 50,
-       
-            };
+        yield return new DefensePercentageModifierArgs(Affected, 50);
     }
 
     public DefenseBuff(Character caster) : base(caster)
