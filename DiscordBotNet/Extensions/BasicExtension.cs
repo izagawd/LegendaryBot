@@ -37,11 +37,7 @@ public static class BasicExtension
         }
     }
 
-    public static string Join(this IEnumerable<string> enumerable, string seperator)
-    {
-        return string.Join(seperator, enumerable);
-    }
-   
+
     public static Color ToImageSharpColor(this DiscordColor color)
     {
         return Color.ParseHex(color.ToString());
@@ -77,18 +73,7 @@ public static class BasicExtension
     {
         return embedBuilder.WithAuthor(user.Username, iconUrl: user.AvatarUrl);
     }
-    public static string Represent<T>(this IEnumerable<T> it,bool print = false)
-    {
-        var a =  "{ " + String.Join(", "
-            , it.Select(i => i?.ToString())) + " }";
-        if (print)
-        {
-            Console.WriteLine(a);
-        }
 
-        return a;
-        
-    }
 
 
     public static int Round(this double theDouble)
