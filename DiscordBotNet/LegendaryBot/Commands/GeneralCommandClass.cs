@@ -113,19 +113,12 @@ public abstract class GeneralCommandClass
 
     private static readonly ParameterExpression _userDataParamExpr = ParameterExpression.Parameter(typeof(UserData),"j");
     
-    /// <summary>
-    /// warning: Save changes will be called on database context
-    /// </summary>
-    /// <param name="userDataIds"></param>
-    protected async Task MakeOccupiedAsync(params ulong[] userDataIds)
-    {
 
-    }
     /// <summary>
     /// warning: Save changes will be called on database context
     /// </summary>
     /// <param name="userDataIds"></param>
-    public async Task MakeOccupiedAsync(params UserData[] userDatas)
+    protected async Task MakeOccupiedAsync(params UserData[] userDatas)
     {
         foreach (var i in userDatas)
         {
@@ -136,7 +129,7 @@ public abstract class GeneralCommandClass
         var expectedUpdateCount = DatabaseContext.ChangeTracker.Entries<UserData>()
             .Count(i => (i.State == EntityState.Modified || i.State == EntityState.Unchanged)
             && userDatas.Contains(i.Entity));
-        
+   
         Expression exprToConc = Expression.Constant(false);
         foreach (var i in userDatas)
         {
@@ -173,7 +166,7 @@ public abstract class GeneralCommandClass
     /// <summary>
     /// This exists cuz it's disposed at the end of a slash Commands and cuz I tend to forget to dispose disposable stuff
     /// </summary>
-    public PostgreSqlContext DatabaseContext { get; set; }
+    public PostgreSqlContext DatabaseContext { get; private set; }
 
 
   
