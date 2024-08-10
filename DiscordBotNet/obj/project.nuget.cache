@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wyekZmwAQpzQMszr9qu+04Rtcvh+P/BMGtxVOoj8EdY3tMITM7252zfyWTVWQwk+N5BW/yUT+3FCdsfIo/vYsA==",
+  "dgSpecHash": "AsW67QCXvs3Wr+dg3Ka8a7SZR+GDl0KRD+bHsiZl4zxM8n54s+GB+7EzeM2t+DW/5lBAdzFobFzPlIEeg9lj2Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\DiscordBotNet.csproj",
   "expectedPackageFiles": [
@@ -69,11 +69,7 @@
     "C:\\Users\\theiz\\.nuget\\packages\\system.text.encodings.web\\8.0.0-preview.2.23128.3\\system.text.encodings.web.8.0.0-preview.2.23128.3.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\system.text.json\\8.0.0-preview.2.23128.3\\system.text.json.8.0.0-preview.2.23128.3.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\ulid\\1.3.4\\ulid.1.3.4.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.5\\microsoft.netcore.app.ref.8.0.5.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.5\\microsoft.windowsdesktop.app.ref.8.0.5.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.5\\microsoft.aspnetcore.app.ref.8.0.5.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.5\\microsoft.netcore.app.host.win-x64.8.0.5.nupkg.sha512"
+    "C:\\Users\\theiz\\.nuget\\packages\\ulid\\1.3.4\\ulid.1.3.4.nupkg.sha512"
   ],
   "logs": []
 }
