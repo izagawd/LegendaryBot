@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.Database.ManyToManyInstances;
 using DiscordBotNet.Database.Models;
 using DSharpPlus.Entities;
@@ -28,6 +29,9 @@ public class PlayerTeamDatabaseConfiguration : IEntityTypeConfiguration<PlayerTe
 }
 public class PlayerTeam : CharacterTeam
 {
+    
+    [Timestamp]
+    public uint Version { get; private set; }
     [NotMapped]
     public bool IsFull => Count >= 4;
     public string TeamName { get;  set; } = "Team1";

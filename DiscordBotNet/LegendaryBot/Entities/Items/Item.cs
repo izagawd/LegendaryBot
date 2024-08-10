@@ -86,6 +86,8 @@ public abstract class Item : IInventoryEntity
         return image;
     }
 
+    [Timestamp]
+    public uint Version { get; private set; }
     
     public int Stacks { get; set; } = 1;
 

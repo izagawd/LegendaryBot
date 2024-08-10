@@ -305,14 +305,23 @@ public static class Bot
         Process.GetCurrentProcess().Kill();
     }
 
-
+    public static void DbLog(string zaLog)
+    {
+        zaLog.Print();
+    }
 
 
     private async  static Task DoShitAsync()
     {
         var post = new PostgreSqlContext();
-        await post.Database.MigrateAsync();
+        var user = await post.UserData.FirstAsync();
+        user.AdventurerLevel += 4;
+   
+        user.AdventurerLevel.Print();
+        await Task.Delay(5000);
+        await post.SaveChangesAsync();
         StopProgram();
+
     }
     private static async Task Main(string[] args)
     {

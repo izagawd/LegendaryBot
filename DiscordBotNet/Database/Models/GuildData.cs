@@ -1,4 +1,5 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -18,6 +19,8 @@ public class GuildDataDatabaseConfig : IEntityTypeConfiguration<GuildData>
 public class GuildData
 {
 
+    [Timestamp]
+    public uint Version { get; private set; }
     public ulong Id { get; set; }
 
 

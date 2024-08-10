@@ -233,6 +233,8 @@ public class UserData :   ICanBeLeveledUp
     public ItemContainer Items { get; } = new();
 
 
+    [Timestamp]
+    public uint Version { get; private set; }
     public List<Gear> Gears { get; } = new();
     public List<Character> Characters { get; } = new();
 
@@ -284,6 +286,7 @@ public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
             .WithOne(i => i.UserData)
             .HasForeignKey(i => i.UserDataId);
 
+        
         
         builder.HasKey(i => i.Id);
 

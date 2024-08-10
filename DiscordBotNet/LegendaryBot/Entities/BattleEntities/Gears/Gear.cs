@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using DiscordBotNet.Database.Models;
@@ -13,6 +14,8 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 {
 
+    [Timestamp]
+    public uint Version { get; private set; }
     public int TypeId { get; protected init; }
 
     public bool CanBeTraded => true;

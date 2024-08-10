@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.Database.Models;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,8 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
 public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 {
 
+    [Timestamp]
+    public uint Version { get; private set; }
     public static Blessing GetRandomBlessing(Dictionary<Rarity,double> rates)
     {
         var groups = TypesFunction

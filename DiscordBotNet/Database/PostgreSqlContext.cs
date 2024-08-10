@@ -82,7 +82,7 @@ public class PostgreSqlContext : DbContext
         // Configure the database provider and connection string
         optionsBuilder
             .UseNpgsql(ConfigurationManager.AppSettings[Bot.DatabaseUrlPathToUse])
-
+            .LogTo(Bot.DbLog,LogLevel.Information)
             .EnableSensitiveDataLogging();
     
     }

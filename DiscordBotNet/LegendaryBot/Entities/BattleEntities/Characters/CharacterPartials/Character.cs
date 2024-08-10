@@ -374,6 +374,8 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         };
 
     
+    [Timestamp]
+    public uint Version { get; private set; }
     public int Level { get; set; } = 1;
     public virtual int CoinsToGainWhenKilled => (Level + 50) * (int) Rarity;
 
