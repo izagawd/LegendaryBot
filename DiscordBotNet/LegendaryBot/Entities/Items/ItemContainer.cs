@@ -6,7 +6,23 @@ namespace DiscordBotNet.LegendaryBot.Entities.Items;
 
 public class ItemContainer : InventoryEntityContainer<Item>
 {
+    public TItem GetOrCreateItem<TItem>() where TItem : Item
+    {
+        return (TItem)GetOrCreateItem(typeof(TItem));
+    }
+    public Item GetOrCreateItem(Type itemType)
+    {
+        if (!itemType.IsAssignableTo(typeof(Item)) || itemType.IsAbstract)
+            throw new Exception();
+        var gotten = List.FirstOrDefault(i => i.GetType() == itemType);
+        if (gotten is null)
+        {
+            gotten =(Item) Activator.CreateInstance(itemType);
+            List.Add(gotten);
+        }
 
+        return gotten;
+    }
     public override void MergeItemStacks()
     {
         var items = List.ToArray();

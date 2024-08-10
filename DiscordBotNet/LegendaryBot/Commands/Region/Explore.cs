@@ -31,6 +31,7 @@ public class Explore : GeneralCommandClass
         var author = ctx.User;
         var userData = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
+            .Include(i => i.Items.Where(j => j is Stamina))
             .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
         
     
@@ -85,49 +86,8 @@ public class Explore : GeneralCommandClass
             await ctx.RespondAsync(embedToBuild);
             return;
         }
-        userData.RefreshEnergyValue();
-        const int requiredEnergy = 40;
-        if (userData.EnergyValue < requiredEnergy)
-        {
-            embedToBuild.WithDescription($"You need at least {requiredEnergy} energy to journey!");
-            await ctx.RespondAsync(embedToBuild);
-            return;
-        }
-
-        var yes = new DiscordButtonComponent(DiscordButtonStyle.Success,
-            "yes", "yes");
-        var no = new DiscordButtonComponent(DiscordButtonStyle.Success,
-            "no", "no");
-
-
 
         await MakeOccupiedAsync(userData);
-        embedToBuild
-            .WithTitle(userData.Name)
-            .WithDescription($"{requiredEnergy} energy will be consumed. Proceed?");
-        var messageBuilder = new DiscordMessageBuilder()
-            .AddComponents(yes, no)
-            .AddEmbed(embedToBuild);
-        await ctx.RespondAsync(messageBuilder);
-
-        var message = await ctx.GetResponseAsync();
-        var result = await message.WaitForButtonAsync();
-
-        if (result.TimedOut || result.Result.Id != "yes")
-        {
-            yes.Disable();
-            no.Disable();
-            if (result.TimedOut)
-            {
-                await message.ModifyAsync(messageBuilder);
-            }
-            else
-            {
-                await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
-                    new DiscordInteractionResponseBuilder(messageBuilder));
-            }
-            return;
-        }
 
         var groups = region.ObtainableCharacters
             .Select(i => (Character) TypesFunction.GetDefaultObject(i))
@@ -146,9 +106,8 @@ public class Explore : GeneralCommandClass
         embedToBuild
             .WithTitle($"Keep your guard up!")
             .WithDescription($"{enemyTeam.First().Name}(s) have appeared!");
-        await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
-            new DiscordInteractionResponseBuilder().AddEmbed(embedToBuild));
-
+        await ctx.RespondAsync(embedToBuild);
+        var message = await ctx.GetResponseAsync();
         await Task.Delay(2500);
         var userTeam = userData.EquippedPlayerTeam!.LoadTeamStats();
 
@@ -169,7 +128,6 @@ public class Explore : GeneralCommandClass
 
 
         var expGainText = userTeam.IncreaseExp(expToGain);
-        userData.EnergyValue -= requiredEnergy;
         if (battleResult.Winners == userTeam)
         {
 

@@ -29,7 +29,8 @@ public enum Gender : byte
 }
 public class UserData :   ICanBeLeveledUp
 {
-    
+
+
     public Gender Gender { get; set; }
     public string Name { get; set; } = "Aether";
 
@@ -191,33 +192,11 @@ public class UserData :   ICanBeLeveledUp
 
 
 
-    public DateTime LastTimeEnergyWasAccessed { get; set; } = DateTime.UtcNow;
-    
-    public int EnergyValue { get; set; } = MaxEnergyValue;
+
 
     
-    private const int MaxEnergyValue = 240;
-    public void RefreshEnergyValue()
-    {
-        if (EnergyValue >= MaxEnergyValue)
-        {
-            LastTimeEnergyWasAccessed = DateTime.UtcNow;
-            return;
-        }
-        // Calculate the total elapsed time in minutes
-        var elapsedTime = DateTime.UtcNow - LastTimeEnergyWasAccessed;
-        var elapsedMinutes = elapsedTime.TotalMinutes;
+ 
 
-        // Determine how much energy has accumulated based on the rate of 1 energy every 6 minutes
-        var newEnergy = (int)(elapsedMinutes / 6);
-
-        // Update the Value with the new energy amount
-        EnergyValue += newEnergy;
-        if (EnergyValue >= MaxEnergyValue)
-            EnergyValue = MaxEnergyValue;
-        // Update LastTimeAccessed to the current time, minus the remaining minutes that didn't add up to a full energy point
-        LastTimeEnergyWasAccessed = DateTime.UtcNow.AddMinutes(-(elapsedMinutes % 6));
-    }
     public Tier Tier { get; set; } = Tier.Unranked;
 
     

@@ -22,7 +22,7 @@ public class Info : GeneralCommandClass
         if(author is null) author = ctx.User;
         
         var userData = await DatabaseContext.UserData
-            .Include(i => i.Items.Where(j => j is Coin || j is DivineShard))
+            .Include(i => i.Items.Where(j => j is Coin || j is DivineShard || j is Stamina))
             .FirstOrDefaultAsync(i => i.Id == author.Id);
 
         if (userData is null || userData.Tier == Tier.Unranked)
@@ -42,7 +42,8 @@ public class Info : GeneralCommandClass
             }
             return;
         }
-        userData.RefreshEnergyValue();
+        var stamina = userData.Items.GetOrCreateItem<Stamina>();
+        stamina.RefreshEnergyValue();
         var embedBuilder = new DiscordEmbedBuilder()
             .WithTitle("Info")
             .WithUser(author)
@@ -51,7 +52,7 @@ public class Info : GeneralCommandClass
             .AddField("Tier", $"`{userData.Tier}`", true)
             .AddField("Date Started", $"`{userData.StartTime}`", true)
             .AddField("Time Till Next Day", $"`{BasicFunctionality.TimeTillNextDay()}`", true)
-            .AddField("Energy", $"`{userData.EnergyValue}`", true)
+            .AddField("Stamina", $"`{stamina.Stacks}`", true)
             .AddField("Divine Shards", $"`{userData.Items.GetItemStacks(typeof(DivineShard))}`")
             .WithImageUrl("attachment://info.png")
             .WithTimestamp(DateTime.Now);
