@@ -33,55 +33,51 @@ public class Color : GeneralCommandClass
     {
         var author = ctx.User;
 
-        var userData = await DatabaseContext.UserData
+        var color = await DatabaseContext.UserData
       
-            .FirstOrDefaultAsync(i => i.Id == author.Id);
+            .Where(i =>  i.Id == ctx.User.Id)
+            .Select(i => new DiscordColor?(i.Color))
+            .FirstOrDefaultAsync();
 
-        if (userData is null)
+        if (color is null)
         {
-            userData = await DatabaseContext.CreateNonExistantUserdataAsync(author.Id);
- 
+            color = (await DatabaseContext.CreateNonExistantUserdataAsync(author.Id)).Color;
+            await DatabaseContext.SaveChangesAsync();
         }
         
         var colorIsValid = true;
-        DiscordColor newColor;
         switch (colorName.ToLower())
         {
             case "blue":
-                newColor = DiscordColor.Blue;
+                color = DiscordColor.Blue;
                 break;
             case "red":
-                newColor = DiscordColor.Red;
+                color = DiscordColor.Red;
                 break;
             case "green":
-                newColor = DiscordColor.Green;
+                color = DiscordColor.Green;
                 break;
             case "orange":
-                newColor = DiscordColor.Orange;
+                color = DiscordColor.Orange;
                 break;
             case "purple":
-                newColor = DiscordColor.Purple;
+                color = DiscordColor.Purple;
                 break;
-            default:
-                newColor = userData.Color;
-                colorIsValid = false;
-                break;
-
         }
         var embed = new DiscordEmbedBuilder()
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
-            .WithColor(newColor)
+            .WithColor(color.Value)
             .WithTimestamp(DateTime.Now);
         if (colorIsValid)
         {
-            userData.Color = newColor;
-            await DatabaseContext.SaveChangesAsync();
+            await DatabaseContext.UserData.ExecuteUpdateAsync(i => i
+                .SetProperty(j => j.Color, color.Value));
             embed.WithTitle("**Success!**");
             embed.WithDescription("`Look at your new color!`");
         }
         else
         {
-            embed.WithColor(userData.Color);
+            embed.WithColor(color.Value);
             embed.WithTitle("**Hmm**");
             embed.WithDescription("`That color is not available`");
         }
