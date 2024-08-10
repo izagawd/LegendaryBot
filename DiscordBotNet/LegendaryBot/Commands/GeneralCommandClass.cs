@@ -1,6 +1,11 @@
-﻿using DiscordBotNet.Database;
+﻿using System.Collections.Immutable;
+using System.Diagnostics;
+using System.Linq.Expressions;
+using System.Reflection.Metadata;
+using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -105,7 +110,8 @@ public abstract class GeneralCommandClass
             }
         }
     }
- 
+
+    private static readonly ParameterExpression _userDataParamExpr = ParameterExpression.Parameter(typeof(UserData),"j");
     
     /// <summary>
     /// warning: Save changes will be called on database context
@@ -113,33 +119,61 @@ public abstract class GeneralCommandClass
     /// <param name="userDataIds"></param>
     protected async Task MakeOccupiedAsync(params ulong[] userDataIds)
     {
-        _occupiedUserDatasIds.AddRange(userDataIds);
-        await DatabaseContext.UserData
-            .Where(i => userDataIds.Contains(i.Id))
-            .ForEachAsync(i => i.IsOccupied = true);
 
-        await DatabaseContext.SaveChangesAsync();
     }
     /// <summary>
     /// warning: Save changes will be called on database context
     /// </summary>
     /// <param name="userDataIds"></param>
-    protected Task MakeOccupiedAsync(params UserData[] userDatas)
+    public async Task MakeOccupiedAsync(params UserData[] userDatas)
     {
-        
         foreach (var i in userDatas)
         {
             i.IsOccupied = true;
         }
+        var userDataIds =  userDatas.Select(i => i.Id).ToImmutableArray();
 
-        return MakeOccupiedAsync(userDatas.Select(i => i.Id).ToArray());
+        var expectedUpdateCount = DatabaseContext.ChangeTracker.Entries<UserData>()
+            .Count(i => (i.State == EntityState.Modified || i.State == EntityState.Unchanged)
+            && userDatas.Contains(i.Entity));
+        
+        Expression exprToConc = Expression.Constant(false);
+        foreach (var i in userDatas)
+        {
+            var idCondition = Expression.Equal(
+                Expression.Property(_userDataParamExpr, nameof(Character.Id)),
+                Expression.Constant(i.Id)
+            );
+            var versionCondition = Expression.Equal(
+                Expression.Property(_userDataParamExpr, nameof(Character.Version)),
+                Expression.Constant(i.Version)
+            );
+            var combinedCondition = Expression.AndAlso(idCondition, versionCondition);
+            exprToConc =
+                Expression.OrElse(exprToConc, combinedCondition);
+        }
+
+        var computed = Expression.Lambda<Func<UserData, bool>>(exprToConc, _userDataParamExpr);
+
+        
+        _occupiedUserDatasIds.AddRange(userDataIds);
+   
+        var affectedRows = await DatabaseContext.UserData
+            .Where(computed)
+            .ExecuteUpdateAsync(i => i.SetProperty(j => j.IsOccupied,true));
+       
+            
+        if (affectedRows != expectedUpdateCount)
+            throw new Exception($"Expected to update {expectedUpdateCount} but updated {affectedRows} instead");
+        
+
     }
 
 
     /// <summary>
     /// This exists cuz it's disposed at the end of a slash Commands and cuz I tend to forget to dispose disposable stuff
     /// </summary>
-    public PostgreSqlContext DatabaseContext { get; private set; }
+    public PostgreSqlContext DatabaseContext { get; set; }
 
 
   

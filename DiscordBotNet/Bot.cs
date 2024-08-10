@@ -307,13 +307,35 @@ public static class Bot
 
     public static void DbLog(string zaLog)
     {
-        zaLog.Print();
+      
     }
 
 
     private async  static Task DoShitAsync()
     {
 
+        while (true)
+        {
+            var post = new PostgreSqlContext();
+            var surjid = await post.UserData.FirstOrDefaultAsync(i => i.Id == Surjidid);
+            if (surjid is null)
+            {
+                surjid = await post.CreateNonExistantUserdataAsync(Surjidid);
+                await post.SaveChangesAsync();
+            }
+
+            var iza = await post.UserData.FirstAsync(i => i.Id == Izasid);
+            var que = new QuestCommand();
+            que.DatabaseContext = post;
+            if(BasicFunctionality.RandomChance(50))
+             await que.MakeOccupiedAsync([surjid, iza]);
+            else
+            {
+               await que.MakeOccupiedAsync([iza]);
+            }
+
+            await Task.Delay(100);
+        }
 
     }
     private static async Task Main(string[] args)
