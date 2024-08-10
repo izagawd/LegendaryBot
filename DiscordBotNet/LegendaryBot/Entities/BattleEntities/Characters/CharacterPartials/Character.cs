@@ -373,7 +373,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             CharacterUrl = ImageUrl
         };
 
-    [ConcurrencyCheck]
+    
     public int Level { get; set; } = 1;
     public virtual int CoinsToGainWhenKilled => (Level + 50) * (int) Rarity;
 
@@ -696,7 +696,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public virtual bool CanBeTraded => true;
 
 
-    [ConcurrencyCheck]
+    
     public int Experience { get; set; }
     /// <summary>
     /// Increases the Exp of a character and returns useful text

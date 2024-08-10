@@ -310,7 +310,9 @@ public static class Bot
 
     private async  static Task DoShitAsync()
     {
-
+        var post = new PostgreSqlContext();
+        await post.Database.MigrateAsync();
+        StopProgram();
     }
     private static async Task Main(string[] args)
     {

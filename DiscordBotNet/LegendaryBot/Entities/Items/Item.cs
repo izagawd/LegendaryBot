@@ -86,7 +86,7 @@ public abstract class Item : IInventoryEntity
         return image;
     }
 
-    [ConcurrencyCheck]
+    
     public int Stacks { get; set; } = 1;
 
 
