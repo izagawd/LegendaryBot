@@ -4,6 +4,7 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
 using DiscordBotNet.LegendaryBot.DialogueNamespace;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
+using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
@@ -34,6 +35,7 @@ public class Begin : GeneralCommandClass
         var author = ctx.User;
 
         var userData = await DatabaseContext.UserData
+            .Include(i => i.Items.Where(j => j is Stamina))
             .Include(j => j.Characters)
             .ThenInclude(j => j.Blessing)
             .Include(i => i.Characters)

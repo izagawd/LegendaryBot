@@ -108,7 +108,7 @@ public static class Bot
                 List<CharacterExpMaterial> characterExpMaterials = [];
                 foreach (var i in Enumerable.Range(0,(int) userData.Tier * 3) )
                 {
-                    characterExpMaterials.Add(new AdventurersKnowledge());
+                    characterExpMaterials.Add(new AdventurersKnowledge(){Stacks = 1});
                 }
 
                 var rewardString = userData.ReceiveRewards(new EntityReward(characterExpMaterials));

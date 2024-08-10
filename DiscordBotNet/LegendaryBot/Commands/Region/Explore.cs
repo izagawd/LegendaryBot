@@ -172,7 +172,7 @@ public class Explore : GeneralCommandClass
             }
             foreach (var _ in Enumerable.Range(0, expMatCount))
             {
-                rewards.Add(new EntityReward([new HerosKnowledge()]));
+                rewards.Add(new EntityReward([new HerosKnowledge(){Stacks = 1}]));
             }
             rewards.Add(new EntityReward([new Coin(){Stacks = 5000}]));
             await DatabaseContext.Items.Where(i => i is HerosKnowledge || i is Coin)

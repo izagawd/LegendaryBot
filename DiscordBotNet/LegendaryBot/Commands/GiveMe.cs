@@ -2,6 +2,7 @@ using System.ComponentModel;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
+using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
@@ -47,9 +48,11 @@ public class GiveMe : GeneralCommandClass
                 return;
             }
             List<EntityReward> rewards = [];
-            foreach (var i in Enumerable.Range(0,(int) amount))
+            foreach (var i in Enumerable.Range(0, amount))
             {
                 var createdType = (IInventoryEntity) Activator.CreateInstance(type)!;
+                if (createdType is Item item)
+                    item.Stacks = 1;
                 if(createdType is Gear gear)
                     gear.Initialize(Rarity.FiveStar);
                 rewards.Add(new EntityReward([createdType]));
