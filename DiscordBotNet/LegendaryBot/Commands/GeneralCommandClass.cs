@@ -107,19 +107,26 @@ public abstract class GeneralCommandClass
     }
  
     
+    /// <summary>
+    /// warning: Save changes will be called on database context
+    /// </summary>
+    /// <param name="userDataIds"></param>
     protected async Task MakeOccupiedAsync(params ulong[] userDataIds)
     {
-
-        await using var tempCtx = new PostgreSqlContext();
-        await tempCtx.UserData
+        _occupiedUserDatasIds.AddRange(userDataIds);
+        await DatabaseContext.UserData
             .Where(i => userDataIds.Contains(i.Id))
             .ForEachAsync(i => i.IsOccupied = true);
-        
-        _occupiedUserDatasIds.AddRange(userDataIds);
-        await tempCtx.SaveChangesAsync();
+
+        await DatabaseContext.SaveChangesAsync();
     }
+    /// <summary>
+    /// warning: Save changes will be called on database context
+    /// </summary>
+    /// <param name="userDataIds"></param>
     protected Task MakeOccupiedAsync(params UserData[] userDatas)
     {
+        
         foreach (var i in userDatas)
         {
             i.IsOccupied = true;

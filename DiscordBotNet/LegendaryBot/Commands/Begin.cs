@@ -58,7 +58,6 @@ public class Begin : GeneralCommandClass
             await NotifyAboutOccupiedAsync(ctx);
             return;
         }
-        await MakeOccupiedAsync(userData);
 
         if (userData.Tier != Tier.Unranked)
         {

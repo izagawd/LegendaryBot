@@ -313,14 +313,7 @@ public static class Bot
 
     private async  static Task DoShitAsync()
     {
-        var post = new PostgreSqlContext();
-        var blast = await post.Characters.FirstAsync();
-        
-        blast.Level.Print();
-        await Task.Delay(5000);
-        blast.Level += 5;
-        await post.SaveChangesAsync();
-        StopProgram();
+
 
     }
     private static async Task Main(string[] args)

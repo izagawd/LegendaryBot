@@ -213,7 +213,7 @@ public class UserData :   ICanBeLeveledUp
 
 
     [Timestamp]
-    public uint Version { get; private set; }
+    public uint Version { get; set; }
     public List<Gear> Gears { get; } = new();
     public List<Character> Characters { get; } = new();
 

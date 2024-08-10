@@ -5,9 +5,10 @@ public abstract class Energy : Item
     public Energy()
     {
         Stacks = MaxEnergyValue;
+        LastTimeUpdated = DateTime.UtcNow;
     }
     public abstract TimeSpan EnergyIncreaseInterval { get; }
-    public DateTime LastTimeUpdated { get; private set; } = DateTime.UtcNow;
+    public DateTime LastTimeUpdated { get; private set; } 
     public abstract int MaxEnergyValue { get; }
     public void RefreshEnergyValue()
     {
