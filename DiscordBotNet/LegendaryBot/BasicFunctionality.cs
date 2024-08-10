@@ -201,58 +201,8 @@ public static class BasicFunctionality
 
         throw new Exception("Unexpected error");
     }
-    /// <summary>
-    /// Makes the first letter of each word in a string capital
-    /// </summary>
-    ///<returns>The computed string</returns>
-
-    public static string FirstLetterCapital(string stringToCapitalize)
-    {
-        var arr = stringToCapitalize.Split(" ");
-        for (var i = 0; i < arr.Length; i++)
-        {
-            arr[i] =char.ToUpper(arr[i][0]) + arr[i].Substring(1);
-        }
-        
-        return string.Join(" ", arr);
-    }
-
-    public static string Robotify(string stringToRobotify)
-    {
-        return FirstLetterCapital(stringToRobotify).Replace(" ", "");
-    }
-        
-    /// <summary>Spaces out a sentence and makes each word start with a capital letter</summary>
-    ///<returns>The computed string</returns>
-    public static string Englishify(this string stringToEnglishify)
-    {
-        string[] newArray; 
-        if (stringToEnglishify.Contains('_'))
-        {
-            newArray = stringToEnglishify.Split("_");
-        
-        }
-        else if(stringToEnglishify.Contains(' '))
-                
-        {
-            newArray = stringToEnglishify.Split(" ");
-        } else
-        {
-            var tempStringBuilder = new StringBuilder();
-            for(var i = 0; i < stringToEnglishify.Length; i++)
-            {
-                tempStringBuilder.Append(stringToEnglishify[i]);
-                if (stringToEnglishify.Length > i + 1 &&  char.IsUpper(stringToEnglishify[i + 1]))
-                {
-                    tempStringBuilder.Append(' ');
-                }
-            }
-            newArray = tempStringBuilder.ToString().Split(" ");
-        }
-        return string.Join(" ", newArray);
 
 
-    }
 
 
     ///<returns>The amount of time till the next day as a string</returns>

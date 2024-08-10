@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
@@ -108,6 +109,8 @@ public class UserData :   ICanBeLeveledUp
     private List<Quote>? _quotes;
     public List<Quote> Quotes => _quotes ??= new();
     public bool IsOccupied { get; set; } = false;
+    
+    [ConcurrencyCheck]
     public int Experience { get; protected set; }
     public int GetRequiredExperienceToNextLevel(int level)
     {
@@ -189,6 +192,7 @@ public class UserData :   ICanBeLeveledUp
 
 
     public DateTime LastTimeEnergyWasAccessed { get; set; } = DateTime.UtcNow;
+    
     public int EnergyValue { get; set; } = MaxEnergyValue;
 
     
@@ -218,6 +222,7 @@ public class UserData :   ICanBeLeveledUp
 
     
     int ICanBeLeveledUp.Level => AdventurerLevel;
+    [ConcurrencyCheck]
     public int AdventurerLevel { get; set; } = 1;
     public DiscordColor Color { get; set; } = DiscordColor.Green;
     public string Language { get; set; } = "english";

@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.Database.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using DiscordBotNet.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SixLabors.Fonts;
@@ -85,7 +86,7 @@ public abstract class Item : IInventoryEntity
         return image;
     }
 
-
+    [ConcurrencyCheck]
     public int Stacks { get; set; } = 1;
 
 
