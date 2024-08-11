@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Data;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection.Metadata;
@@ -120,45 +121,41 @@ public abstract class GeneralCommandClass
     /// <param name="userDataIds"></param>
     protected async Task MakeOccupiedAsync(params UserData[] userDatas)
     {
+        var ids = userDatas.Select(i => i.Id).ToArray();
+        _occupiedUserDatasIds.AddRange(ids);
         foreach (var i in userDatas)
         {
             i.IsOccupied = true;
         }
-        var userDataIds =  userDatas.Select(i => i.Id).ToImmutableArray();
+        var dic = userDatas.ToDictionary(i => i.Id, i => new{i, i.Version});
+        await using var newDb = new PostgreSqlContext();
+        var userDatasToUpdate = await newDb.UserData.Where(i => ids.Contains(i.Id))
+            .ToListAsync();
 
-        var expectedUpdateCount = DatabaseContext.ChangeTracker.Entries<UserData>()
-            .Count(i => (i.State == EntityState.Modified || i.State == EntityState.Unchanged)
-            && userDatas.Contains(i.Entity));
-   
-        Expression exprToConc = Expression.Constant(false);
-        foreach (var i in userDatas)
+        foreach (var i in userDatasToUpdate)
         {
-            var idCondition = Expression.Equal(
-                Expression.Property(_userDataParamExpr, nameof(Character.Id)),
-                Expression.Constant(i.Id)
-            );
-            var versionCondition = Expression.Equal(
-                Expression.Property(_userDataParamExpr, nameof(Character.Version)),
-                Expression.Constant(i.Version)
-            );
-            var combinedCondition = Expression.AndAlso(idCondition, versionCondition);
-            exprToConc =
-                Expression.OrElse(exprToConc, combinedCondition);
+            if (i.Version != dic[i.Id].Version)
+            {
+                throw new DBConcurrencyException();
+            }
+
+            i.IsOccupied = true;
         }
+        await newDb.SaveChangesAsync();
 
-        var computed = Expression.Lambda<Func<UserData, bool>>(exprToConc, _userDataParamExpr);
+        foreach (var i in userDatasToUpdate)
+        {
+            if (dic.TryGetValue(i.Id, out var gotten))
+            {
 
-        
-        _occupiedUserDatasIds.AddRange(userDataIds);
-   
-        var affectedRows = await DatabaseContext.UserData
-            .Where(computed)
-            .ExecuteUpdateAsync(i => i.SetProperty(j => j.IsOccupied,true));
-       
-            
-        if (affectedRows != expectedUpdateCount)
-            throw new Exception($"Expected to update {expectedUpdateCount} but updated {affectedRows} instead");
-        
+                gotten.i.Version = i.Version;
+                DatabaseContext.Entry(gotten.i)
+                    .Property(i => i.Version)
+                    .OriginalValue = gotten.i.Version;
+            }
+        }
+ 
+
 
     }
 

@@ -24,11 +24,11 @@ public class TeamCommand : GeneralCommandClass
     {
         var anon = await DatabaseContext.UserData
             .Include(i => i.EquippedPlayerTeam)
-            .ThenInclude(i => i.Characters)
             .Where(i => i.Id == context.User.Id)
             .Select(i => new
                 
-                {  tier = i.Tier, team = i.PlayerTeams.FirstOrDefault(j => j.TeamName.ToLower()
+                {  tier = i.Tier, team = i.PlayerTeams.
+                    FirstOrDefault(j => j.TeamName.ToLower()
                     .Replace(" ","")== teamName.ToLower()), userData = i })
             .FirstOrDefaultAsync();
 

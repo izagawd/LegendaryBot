@@ -82,7 +82,7 @@ public static class Bot
     private static async Task OnMessageCreatedGiveUserExpMat(DiscordClient client, MessageCreatedEventArgs args)
     {
 
-        
+        if(args.Guild is null) return;
         var permissions = args.Guild.CurrentMember.PermissionsIn(args.Channel);
         if (!permissions.HasFlag(DiscordPermissions.EmbedLinks) || !permissions.HasFlag(DiscordPermissions.SendMessages))
         {
@@ -129,6 +129,7 @@ public static class Bot
     }
     private static async Task OnMessageCreatedSpawnCharacter(DiscordClient client, MessageCreatedEventArgs args)
     {        
+        if(args.Guild is null) return;
         var permissions = args.Guild.CurrentMember.PermissionsIn(args.Channel);
         if (!permissions.HasFlag(DiscordPermissions.EmbedLinks) || !permissions.HasFlag(DiscordPermissions.SendMessages))
         {

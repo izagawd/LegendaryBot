@@ -44,6 +44,7 @@ public class Begin : GeneralCommandClass
             .ThenInclude(i => i.Gears)
             .ThenInclude(i => i.Stats)
             .Include(i => i.EquippedPlayerTeam)
+            .ThenInclude(i => i.Characters)
             .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
         if (userData is null)
         {
