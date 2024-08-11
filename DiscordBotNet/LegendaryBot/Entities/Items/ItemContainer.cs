@@ -17,7 +17,8 @@ public class ItemContainer : InventoryEntityContainer<Item>
         var gotten = List.FirstOrDefault(i => i.GetType() == itemType);
         if (gotten is null)
         {
-            gotten =(Item) Activator.CreateInstance(itemType);
+            gotten =(Item) Activator.CreateInstance(itemType)!;
+            gotten.Stacks = 0;
             List.Add(gotten);
         }
 
