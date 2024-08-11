@@ -51,6 +51,7 @@ public class FarmGear : GeneralCommandClass
                 .WithColor(userData.Color)
                 .WithDescription($"You need at least {requiredStamina} stamina to farm gear")
                 .Build());
+            return;
         }
         await MakeOccupiedAsync(userData);
         List<DiscordButtonComponent> buttonComponents = new List<DiscordButtonComponent>(_tiers.Length);
