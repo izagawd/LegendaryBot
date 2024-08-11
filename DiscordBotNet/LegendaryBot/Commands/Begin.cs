@@ -42,6 +42,7 @@ public class Begin : GeneralCommandClass
             .ThenInclude(j => j.Blessing)
             .Include(i => i.Characters)
             .ThenInclude(i => i.Gears)
+            .ThenInclude(i => i.Stats)
             .Include(i => i.EquippedPlayerTeam)
             .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
         if (userData is null)
@@ -333,7 +334,11 @@ public class Begin : GeneralCommandClass
             return;
         }
 
-        var rewardText = userData.ReceiveRewards(new EntityReward([lily]));
+        var rewardText = "";
+        if (!userData.Characters.Any(i => i.GetType() == typeof(Lily)))
+        {
+            rewardText = userData.ReceiveRewards(new EntityReward([lily]));
+        }
         message = result.Message;
         await DatabaseContext.SaveChangesAsync();
         await message.ModifyAsync(new DiscordMessageBuilder()

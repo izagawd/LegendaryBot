@@ -24,6 +24,7 @@ public class TeamCommand : GeneralCommandClass
     {
         var anon = await DatabaseContext.UserData
             .Include(i => i.EquippedPlayerTeam)
+            .ThenInclude(i => i.Characters)
             .Where(i => i.Id == context.User.Id)
             .Select(i => new
                 
@@ -70,7 +71,9 @@ public class TeamCommand : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower()
                                                    == teamName.ToLower()))
+            .ThenInclude(i => i.Characters)
             .Include(i => i.EquippedPlayerTeam)
+            .ThenInclude(i => i.Characters)
             .Include(i => i.Characters.Where(j => 
                                                   j.Number == characterNumber))
             .FirstOrDefaultAsync(i => i.Id == context.User.Id);
@@ -136,6 +139,7 @@ public class TeamCommand : GeneralCommandClass
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
+            .ThenInclude(i => i.Characters)
             .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -177,7 +181,9 @@ public class TeamCommand : GeneralCommandClass
 
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower() == teamName.ToLower()))
+            .ThenInclude(i => i.Characters)
             .Include(i => i.EquippedPlayerTeam)
+            .ThenInclude(i => i.Characters)
             .Include(i => i.Characters.Where(j =>
                                                   j.Number == characterNumber))
             .FirstOrDefaultAsync(i => i.Id == context.User.Id);

@@ -16,8 +16,7 @@ public class PlayerTeamDatabaseConfiguration : IEntityTypeConfiguration<PlayerTe
             .ValueGeneratedOnAdd();
         entity.HasIndex(i => new { i.UserDataId, i.TeamName })
             .IsUnique();
-        entity    .Navigation(i => i.Characters)
-            .AutoInclude();
+
         entity.HasKey(i => i.Id);
         entity.HasMany<CharacterPartials.Character>(i => i.Characters)
             .WithMany()

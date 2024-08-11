@@ -2,6 +2,7 @@
 using System.Collections.Immutable;
 using DSharpPlus.Entities;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
@@ -298,16 +299,16 @@ public static class Bot
     
     public const string BotTokenToPathUse = UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
     public const string DatabaseUrlPathToUse = UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
-    public const bool UseTestDatabaseAndBot = false;
+    public const bool UseTestDatabaseAndBot = true;
 
-    private static void StopProgram()
+    public static void StopProgram()
     {
         Process.GetCurrentProcess().Kill();
     }
 
     public static void DbLog(string zaLog)
     {
-      
+
     }
 
 

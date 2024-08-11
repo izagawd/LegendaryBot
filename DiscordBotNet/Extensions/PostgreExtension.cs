@@ -30,13 +30,7 @@ public static class PostgreExtension
 
 
 
-    public static IQueryable<UserData> IncludeTeam
-        (this IQueryable<UserData> queryable)
-    {
-        return queryable
-            .Include(i => i.EquippedPlayerTeam);
-    }
-    
+
     public static IIncludableQueryable<UserData,Blessing?> IncludeTeamWithBlessing
         (this IQueryable<UserData> queryable)
     {
