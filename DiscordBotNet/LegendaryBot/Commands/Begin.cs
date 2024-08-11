@@ -9,7 +9,9 @@ using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
+using Microsoft.Diagnostics.Tracing.AutomatedAnalysis;
 using Microsoft.EntityFrameworkCore;
+using Process = System.Diagnostics.Process;
 
 
 namespace DiscordBotNet.LegendaryBot.Commands;
@@ -145,7 +147,7 @@ public class Begin : GeneralCommandClass
             userData.PlayerTeams.AddRange([playerTeam, new PlayerTeam(){TeamName = "Team2"},new PlayerTeam(){TeamName = "Team3"},new PlayerTeam(){TeamName = "Team4"}]);
         
             playerTeam.UserDataId = userData.Id;
-            
+            userData.EquippedPlayerTeam.Add(lily);
             
 
             foreach (var i in userData.PlayerTeams)
@@ -224,7 +226,7 @@ public class Begin : GeneralCommandClass
 
 
         var userTeam = userData.EquippedPlayerTeam;
-        userTeam.Add(lily);
+
         coachChad.TotalMaxHealth = 900;
         coachChad.TotalDefense = 20;
         coachChad.TotalAttack = 1;
@@ -333,10 +335,11 @@ public class Begin : GeneralCommandClass
 
         var rewardText = userData.ReceiveRewards(new EntityReward([lily]));
         message = result.Message;
+        await DatabaseContext.SaveChangesAsync();
         await message.ModifyAsync(new DiscordMessageBuilder()
             .AddEmbed(embedToBuild.WithTitle("Nice!").WithUser(ctx.User).WithDescription(rewardText)
             
             ));
-        await DatabaseContext.SaveChangesAsync();
+ 
     }
 }
