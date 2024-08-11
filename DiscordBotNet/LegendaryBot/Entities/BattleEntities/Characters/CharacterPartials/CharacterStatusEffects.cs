@@ -62,10 +62,7 @@ public partial class Character
             if (added)
             {
                 statusEffect.OnAdded();
-                CurrentBattle.InvokeBattleEvent(new CharacterStatusEffectAppliedEventArgs
-                {
-                    AddedStatusEffect = statusEffect
-                });
+                CurrentBattle.InvokeBattleEvent(new CharacterStatusEffectAppliedEventArgs(statusEffect));
             }
             return inflictResult;
 

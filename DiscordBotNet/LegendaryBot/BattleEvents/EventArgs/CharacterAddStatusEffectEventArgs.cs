@@ -5,6 +5,11 @@ namespace DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 public class CharacterStatusEffectAppliedEventArgs : BattleEventArgs
 {
 
-    public required StatusEffect AddedStatusEffect { get; init; }
+    public StatusEffect AddedStatusEffect { get;}
+
+    public CharacterStatusEffectAppliedEventArgs(StatusEffect addedStatusEffect)
+    {
+        AddedStatusEffect = addedStatusEffect;
+    }
 
 }
