@@ -43,6 +43,7 @@ public class FarmGear : GeneralCommandClass
 
         var stamina = userData.Items.GetOrCreateItem<Stamina>();
         const int requiredStamina = 40;
+        stamina.RefreshEnergyValue();
         if (stamina.Stacks < requiredStamina)
         {
             await context.RespondAsync(new DiscordEmbedBuilder()
