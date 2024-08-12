@@ -46,6 +46,6 @@ public abstract class Quest
     [NotMapped]
     public abstract IEnumerable<Reward> QuestRewards { get; protected set; }
     
-    public ulong UserDataId { get; set; }
+    public long UserDataId { get; set; }
  
 }

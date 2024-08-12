@@ -10,7 +10,7 @@ public class QuoteReaction
     /// <summary>
     /// The ID of the user who reacted to the quote
     /// </summary>
-    public ulong UserDataId { get; set; } 
+    public long UserDataId { get; set; } 
     
     /// <summary>
     /// the quote id that was reacted to
@@ -44,7 +44,7 @@ public class Quote
     
     public long Id { get; set; } 
     public bool IsApproved { get; set; } 
-    public ulong UserDataId { get; set; }
+    public long UserDataId { get; set; }
     public string QuoteValue { get; set; } = "Nothing";
     public UserData UserData { get; set; }
     public List<QuoteReaction> QuoteReactions { get; set; } = []; 

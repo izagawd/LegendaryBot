@@ -49,7 +49,7 @@ public class QuoteCommand : GeneralCommandClass
 
         DiscordButtonComponent like = new(DiscordButtonStyle.Primary,"like",null,false,new DiscordComponentEmoji("👍"));
         DiscordButtonComponent dislike = new(DiscordButtonStyle.Primary, "dislike",null,false,new DiscordComponentEmoji("👎"));
-        var ownerOfQuote = await ctx.Client.GetUserAsync( randomQuote.UserDataId);
+        var ownerOfQuote = await ctx.Client.GetUserAsync(randomQuote.UserData.DiscordId);
         var quoteDate = randomQuote.DateCreated;
         
         var embedBuilder = new DiscordEmbedBuilder()
@@ -70,7 +70,7 @@ public class QuoteCommand : GeneralCommandClass
             if (!YesOrNoArray.Contains(choice)) return;
             await using var newDbContext = new PostgreSqlContext();
             var anonymous = await newDbContext.Set<QuoteReaction>()
-                .Where(j => j.QuoteId == randomQuote.Id && j.UserDataId == interactivityResult.User.Id)
+                .Where(j => j.QuoteId == randomQuote.Id && j.UserData.DiscordId == interactivityResult.User.Id)
                 .Select(j => new
                 {
                     quote = j.Quote, quoteReaction = j,
@@ -82,13 +82,24 @@ public class QuoteCommand : GeneralCommandClass
                 randomQuote = anonymous.quote;
             }
             var isNew = false;
+            
             if (quoteReaction is null)
             {
                 quoteReaction = new QuoteReaction();
                 await newDbContext.Set<QuoteReaction>().AddAsync(quoteReaction);
                 //assigning it to id instead of instance cuz instance might not be of the same dbcontext as newDbContext
                 quoteReaction.QuoteId = randomQuote.Id;
-                quoteReaction.UserDataId = interactivityResult.User.Id;
+                var gottenId = await DatabaseContext.UserData.Where(i => i.DiscordId == interactivityResult.User.Id)
+                    .Select(i =>new long?(i.Id))
+                    .FirstOrDefaultAsync();
+                if (gottenId is null)
+                {
+                    var newUser = await DatabaseContext.CreateNonExistantUserdataAsync(interactivityResult.User.Id);
+                    await DatabaseContext.SaveChangesAsync();
+                    gottenId = newUser.Id;
+                }
+
+                quoteReaction.UserDataId = gottenId.Value;
                 isNew = true;
             }
 
