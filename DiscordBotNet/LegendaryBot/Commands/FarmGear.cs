@@ -3,6 +3,7 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
@@ -71,10 +72,25 @@ public class FarmGear : GeneralCommandClass
             .WithColor(userData.Color)
             .WithTitle($"{userData.Name},")
             .WithDescription("Select the tier of gear farming you want to indulge in");
-        await context.RespondAsync(new DiscordMessageBuilder()
+        var messageBuilder = new DiscordMessageBuilder()
             .AddEmbed(embed)
-            .AddComponents(buttonComponents));
-        
+            .AddComponents(buttonComponents);
+        await context.RespondAsync(messageBuilder);
+        var message = (await context.GetResponseAsync())!;
+        var result = await message.WaitForButtonAsync(context.User);
+        if (result.TimedOut)
+        {
+            foreach (var i in buttonComponents)
+            {
+                i.Disable();
+            }
+            await message.ModifyAsync(messageBuilder);
+            return;
+        }
+
+        await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+            new DiscordInteractionResponseBuilder().WithContent("gay"));
+
 
 
     }
