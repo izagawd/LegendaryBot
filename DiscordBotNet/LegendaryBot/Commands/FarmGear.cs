@@ -90,7 +90,7 @@ public class FarmGear : GeneralCommandClass
 
         await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
             new DiscordInteractionResponseBuilder().WithContent("gay"));
-
+    
 
 
     }
