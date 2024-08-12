@@ -55,7 +55,7 @@ public class DirectionHelping : Quest
 
         var userData = await databaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FirstAsync(i => i.Id == context.User.Id);
+            .FirstAsync(i => i.DiscordId == context.User.Id);
         
         if (dialogueResult.Decision == "right")
         {
@@ -122,7 +122,7 @@ public class DirectionHelping : Quest
             };
        
              await dialogue.LoadAsync(context.User, battleResult.Message);
-             await databaseContext.Items.Where(i => i.UserDataId == context.User.Id && i is Coin)
+             await databaseContext.Items.Where(i => i.UserData.DiscordId  == context.User.Id && i is Coin)
                  .LoadAsync();
             QuestRewards = [new TextReward(userTeam.IncreaseExp(Character.GetExpBasedOnDefeatedCharacters(blastTeam))),
                     new EntityReward([new Coin(){Stacks =Character.GetCoinsBasedOnCharacters(blastTeam)}] )];

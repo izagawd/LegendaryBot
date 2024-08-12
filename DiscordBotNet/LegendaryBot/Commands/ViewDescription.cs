@@ -25,7 +25,7 @@ public class ViewDescription : GeneralCommandClass
         }
 
         var zaColor = await DatabaseContext.UserData
-            .Where(i => i.Id == context.User.Id)
+            .Where(i => i.DiscordId == context.User.Id)
             .Select(i => new DiscordColor?(i.Color))
             .FirstOrDefaultAsync();
         var builder = new DiscordEmbedBuilder()

@@ -276,7 +276,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
 
     public long Id { get; set; }
-    public ulong UserDataId { get; set; }
+    public long UserDataId { get; set; }
 
     public float ShieldPercentage
     {

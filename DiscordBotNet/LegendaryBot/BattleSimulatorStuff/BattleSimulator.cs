@@ -469,7 +469,7 @@ public partial class BattleSimulator
         try
         {
             var team = CharacterTeams
-                .OfType<PlayerTeam>().First(i => i.UserDataId == interaction.User.Id);
+                .OfType<PlayerTeam>().First(i => i.TryGetDiscordId== interaction.User.Id);
             var embed = new DiscordEmbedBuilder()
                 .WithTitle("For real?")
                 .WithColor(DiscordColor.Blue)
@@ -523,7 +523,7 @@ public partial class BattleSimulator
         }, token);
         _ = message.WaitForButtonAsync(args =>
         {
-            if (args.Id == "forfeit" &&  CharacterTeams.Any(i => i.TryGetUserDataId == args.User.Id))
+            if (args.Id == "forfeit" &&  CharacterTeams.Any(i => i.TryGetDiscordId == args.User.Id))
             {
                 _ = HandleForfeitAsync(args.Interaction);
                 return false;
@@ -860,9 +860,9 @@ public partial class BattleSimulator
                 {
                     results = await message.WaitForButtonAsync(e =>
                     {
-                        if (!CharacterTeams.Any(i => i.TryGetUserDataId == e.User.Id)) return false;
+                        if (!CharacterTeams.Any(i => i.TryGetDiscordId == e.User.Id)) return false;
                         if (!Enum.TryParse(e.Id, out BattleDecision localDecision)) return false;
-                        if (e.User.Id == ActiveCharacter.Team.TryGetUserDataId
+                        if (e.User.Id == ActiveCharacter.Team.TryGetDiscordId
                             && ((IEnumerable<BattleDecision>)
                             [
                                 BattleDecision.BasicAttack, BattleDecision.Skill, BattleDecision.Ultimate,
@@ -926,7 +926,7 @@ public partial class BattleSimulator
                     {
                         interactivityResult = await message.WaitForSelectAsync(e =>
                         {
-                            if (e.User.Id == ActiveCharacter.Team.TryGetUserDataId
+                            if (e.User.Id == ActiveCharacter.Team.TryGetDiscordId
                                 && e.Id == selectMoveTarget.CustomId)
                             {
                                 var localTarget = Characters

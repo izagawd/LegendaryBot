@@ -52,7 +52,7 @@ public abstract class Item : IInventoryEntity
 
 
 
-    public ulong UserDataId { get; set; }
+    public long UserDataId { get; set; }
 
 
     public async Task<Image<Rgba32>> GetImageAsync(int? stacks = null)

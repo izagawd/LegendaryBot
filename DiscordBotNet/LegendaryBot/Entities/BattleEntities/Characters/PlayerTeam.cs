@@ -52,15 +52,12 @@ public class PlayerTeam : CharacterTeam
     }
 
 
-    public PlayerTeam(ulong userDataId, params CharacterPartials.Character[] characters) : base(characters)
+    public PlayerTeam(long userDataId, params CharacterPartials.Character[] characters) : base(characters)
     {
         UserDataId = userDataId;
         
     }
-    public PlayerTeam(DiscordUser user,params CharacterPartials.Character[] characters) : this(user.Id,characters)
-    {
 
-    }
     public PlayerTeam(params CharacterPartials.Character[] characters) : base(characters)
     {
 
@@ -71,6 +68,6 @@ public class PlayerTeam : CharacterTeam
         
     }
     public long Id { get; set; } 
-    public ulong UserDataId { get; set; }
+    public long UserDataId { get; set; }
     
 }

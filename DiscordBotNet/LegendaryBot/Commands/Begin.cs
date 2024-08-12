@@ -45,7 +45,7 @@ public class Begin : GeneralCommandClass
             .ThenInclude(i => i.Stats)
             .Include(i => i.EquippedPlayerTeam)
             .ThenInclude(i => i.Characters)
-            .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
         if (userData is null)
         {
             userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);

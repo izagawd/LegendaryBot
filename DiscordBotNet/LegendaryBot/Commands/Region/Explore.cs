@@ -32,7 +32,7 @@ public class Explore : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
             .Include(i => i.Items.Where(j => j is Stamina))
-            .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
         
     
 

@@ -25,7 +25,7 @@ public class Info : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .AsNoTracking()
             .Include(i => i.Items.Where(j => j is Coin || j is DivineShard || j is Stamina))
-            .FirstOrDefaultAsync(i => i.Id == author.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == author.Id);
 
         if (userData is null || userData.Tier == Tier.Unranked)
         {

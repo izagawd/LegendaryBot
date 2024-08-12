@@ -11,9 +11,9 @@ public class CharacterTeam : ISet<Character>
     /// <summary>
     /// If the owner of the team is a real person, this should be their discord id
     /// </summary>
-    public ulong? TryGetUserDataId => (this as PlayerTeam)?.UserDataId;
+    public ulong? TryGetDiscordId => (this as PlayerTeam)?.UserData.DiscordId;
 
-    public bool IsPlayerTeam => TryGetUserDataId is not null;
+    public bool IsPlayerTeam => TryGetDiscordId is not null;
 
     /// <summary>
     /// increases exp of every character in the team and returns useful text

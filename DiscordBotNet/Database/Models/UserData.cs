@@ -37,11 +37,11 @@ public class UserData :   ICanBeLeveledUp
 
 
 
-    public ulong Id { get; set; }
+    public long Id { get; private set; }
     
-    public UserData(ulong id) : this()
+    public UserData(ulong discordId) : this()
     {
-        Id = id;
+        DiscordId = discordId;
     }
 
     public UserData()
@@ -61,9 +61,9 @@ public class UserData :   ICanBeLeveledUp
     {
         if (user is null)
         {
-            user = await Bot.Client.GetUserAsync(Id);
+            user = await Bot.Client.GetUserAsync(DiscordId);
         } 
-        else if (user.Id != Id)
+        else if (user.Id != DiscordId)
         {
             throw new Exception("discord user's ID does not match user data's id");
         }
@@ -199,7 +199,7 @@ public class UserData :   ICanBeLeveledUp
 
     public Tier Tier { get; set; } = Tier.Unranked;
 
-    
+    public ulong DiscordId { get; set; }
     int ICanBeLeveledUp.Level => AdventurerLevel;
     
     public int AdventurerLevel { get; set; } = 1;
@@ -230,7 +230,9 @@ public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
             .WithOne(i => i.UserData)
             .HasForeignKey(i => i.UserDataId)
             .OnDelete(DeleteBehavior.Cascade);
-                    
+
+        builder.HasIndex(i => i.DiscordId)
+            .IsUnique();
         builder
             .HasMany(i => i.Items)
             .WithOne(i => i.UserData)

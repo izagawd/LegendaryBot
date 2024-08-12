@@ -31,7 +31,7 @@ public partial class CharacterCommand : GeneralCommandClass
             .ThenInclude(i => i.Character)
             .Include(i => i.Characters.Where(j => 
                                               j.Number == characterNumber))
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -94,7 +94,7 @@ public partial class CharacterCommand : GeneralCommandClass
             .Include(i => i.Characters.Where(j => 
                                               j.Number == characterNum))
             .ThenInclude(i => i.Blessing)
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -153,7 +153,7 @@ public partial class CharacterCommand : GeneralCommandClass
             .ThenInclude(i => i.Gears)
             .Include(i => i.Gears.Where(j => j.Number == gearNumber))
             .ThenInclude(i =>  i.Stats)
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -223,7 +223,7 @@ public partial class CharacterCommand : GeneralCommandClass
             .Include(i => i.Characters.Where(j => j.Number == characterNumber))
             .ThenInclude(i => i.Gears)
             .ThenInclude(i => i.Stats)
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);

@@ -28,7 +28,7 @@ public class Avatar: GeneralCommandClass
    
    
         var color = await DatabaseContext.UserData
-            .Where(i => i.Id == user.Id)
+            .Where(i => i.DiscordId== user.Id)
             .Select(i => new DiscordColor?(i.Color))
             .FirstOrDefaultAsync();
         if (color is null)

@@ -19,7 +19,7 @@ public class FightCharacter : GeneralCommandClass
             await context.RespondAsync("Only izagawd can use this command");
         }
         var userData =await  DatabaseContext.UserData.IncludeTeamWithAllEquipments()
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);

@@ -25,7 +25,7 @@ public class TutorialCommand : GeneralCommandClass
             .WithUser(ctx.User)
             .WithTitle("Bot guide")
             .WithDescription(tutorialString)
-            .WithColor((await DatabaseContext.UserData.Where(i => i.Id == ctx.User.Id)
+            .WithColor((await DatabaseContext.UserData.Where(i => i.DiscordId == ctx.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
                 .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color));

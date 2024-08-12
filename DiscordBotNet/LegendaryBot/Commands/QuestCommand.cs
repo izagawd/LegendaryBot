@@ -23,7 +23,7 @@ public class QuestCommand : GeneralCommandClass
         await DatabaseContext.SaveChangesAsync();
         var userData = await DatabaseContext.UserData
             .Include(i => i.Quests)
-            .FirstOrDefaultAsync(i => i.Id == author.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == author.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(ctx);

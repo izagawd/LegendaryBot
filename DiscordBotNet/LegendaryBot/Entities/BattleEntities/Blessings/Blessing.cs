@@ -72,7 +72,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 
     
     public long Id { get; set; }
-    public ulong UserDataId { get; set; }
+    public long UserDataId { get; set; }
 
 
     [NotMapped] public virtual int Attack => 20 + (LevelMilestone * 40);

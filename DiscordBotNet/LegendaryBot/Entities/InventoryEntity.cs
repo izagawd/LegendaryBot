@@ -29,6 +29,6 @@ public interface IInventoryEntity : INameHaver
     string ImageUrl { get; }
 
 
-    ulong UserDataId { get; set; }
+    long UserDataId { get; set; }
 
 }

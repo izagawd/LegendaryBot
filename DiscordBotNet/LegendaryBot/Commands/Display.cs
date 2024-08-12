@@ -47,7 +47,7 @@ public class Display : GeneralCommandClass
             .ThenInclude(j => j.Stats)
             .Include(i => i.Characters)
             .ThenInclude(i => i.Blessing)
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -171,7 +171,7 @@ public class Display : GeneralCommandClass
         var simplified = nameFilter.Replace(" ", "").ToLower();
         var userData = await DatabaseContext.UserData
             .Include(i => i.Items)
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id); 
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -218,7 +218,7 @@ public class Display : GeneralCommandClass
     public async ValueTask ExecuteDisplayAllEntities(CommandContext context)
     {
         var color = (await DatabaseContext.UserData
-                .Where(i => i.Id == context.User.Id)
+                .Where(i => i.DiscordId == context.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
             .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color);
@@ -235,7 +235,7 @@ public class Display : GeneralCommandClass
             .ThenInclude(i => i.Character)
             .Include(i => i.Gears)
             .ThenInclude(i =>  i.Stats)
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -257,7 +257,7 @@ public class Display : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.Characters)
             .ThenInclude(i => i.Blessing)
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id); 
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -279,7 +279,7 @@ public class Display : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.Blessings)
             .ThenInclude(i => i.Character)
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
+            .FirstOrDefaultAsync(i => i.DiscordId== context.User.Id); 
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -312,7 +312,7 @@ public class Display : GeneralCommandClass
             .ThenInclude(i => i.Character)
             .Include(i => i.Gears.Where(j => j.Number == gearNumber))
             .ThenInclude(i => i.Stats)
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId== context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -343,7 +343,7 @@ public class Display : GeneralCommandClass
             .Include(i => i.PlayerTeams)
             .ThenInclude(i => i.Characters)
             .ThenInclude(i => i.Blessing)
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id); 
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);

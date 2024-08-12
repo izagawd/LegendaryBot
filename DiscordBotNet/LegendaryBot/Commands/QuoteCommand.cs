@@ -31,7 +31,7 @@ public class QuoteCommand : GeneralCommandClass
         if (anon is null)
         {
             var userColor = (await DatabaseContext.UserData
-                    .Where(i => i.Id == ctx.User.Id)
+                    .Where(i => i.DiscordId == ctx.User.Id)
                     .Select(i => new DiscordColor?(i.Color))
                     .FirstOrDefaultAsync())
                 .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color);
@@ -92,7 +92,7 @@ public class QuoteCommand : GeneralCommandClass
                 isNew = true;
             }
 
-            if (!await newDbContext.UserData.AnyAsync(j => j.Id == interactivityResult.User.Id))
+            if (!await newDbContext.UserData.AnyAsync(j => j.DiscordId == interactivityResult.User.Id))
                 await newDbContext.UserData.AddAsync(new UserData(interactivityResult.User.Id));
             if (!isNew &&
                 ((choice == "like" && quoteReaction.IsLike) || (choice == "dislike" && !quoteReaction.IsLike)))
@@ -136,7 +136,7 @@ public class QuoteCommand : GeneralCommandClass
     BotCommandCategory(BotCommandCategory.Other)]
     public async Task Write(CommandContext ctx, [Parameter("text")] string text)
     {
-        var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+        var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
         if (userData is null)
         {
             userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);

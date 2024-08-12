@@ -24,7 +24,7 @@ public class TeamCommand : GeneralCommandClass
     {
         var anon = await DatabaseContext.UserData
             .Include(i => i.EquippedPlayerTeam)
-            .Where(i => i.Id == context.User.Id)
+            .Where(i => i.DiscordId == context.User.Id)
             .Select(i => new
                 
                 {  tier = i.Tier, team = i.PlayerTeams.
@@ -76,7 +76,7 @@ public class TeamCommand : GeneralCommandClass
             .ThenInclude(i => i.Characters)
             .Include(i => i.Characters.Where(j => 
                                                   j.Number == characterNumber))
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId== context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -140,7 +140,7 @@ public class TeamCommand : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
             .ThenInclude(i => i.Characters)
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id); 
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id); 
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -186,7 +186,7 @@ public class TeamCommand : GeneralCommandClass
             .ThenInclude(i => i.Characters)
             .Include(i => i.Characters.Where(j =>
                                                   j.Number == characterNumber))
-            .FirstOrDefaultAsync(i => i.Id == context.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);

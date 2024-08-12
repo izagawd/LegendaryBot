@@ -15,7 +15,7 @@ public class Roll :  GeneralCommandClass
     {
 
         var color = (await DatabaseContext.UserData
-            .Where(i => i.Id == ctx.User.Id)
+            .Where(i => i.DiscordId == ctx.User.Id)
             .Select(i =>new DiscordColor?(i.Color))
             .FirstOrDefaultAsync())
             .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color);

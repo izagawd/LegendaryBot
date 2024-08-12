@@ -25,7 +25,7 @@ public class Challenge :GeneralCommandClass
 
         var player1User = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FirstOrDefaultAsync(i => i.Id == player1.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == player1.Id);
         if (player1User is null || player1User.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(ctx);
@@ -52,7 +52,7 @@ public class Challenge :GeneralCommandClass
 
         var player2User = await DatabaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FirstOrDefaultAsync(i => i.Id == player2.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == player2.Id);
         
         if (player2User is null || player2User.IsOccupied || player2User.Tier == Tier.Unranked)
         {
@@ -66,7 +66,7 @@ public class Challenge :GeneralCommandClass
         }
 
         await DatabaseContext.UserData
-            .Where(i => i.Id == player2.Id)
+            .Where(i => i.DiscordId == player2.Id)
             .IncludeTeamWithAllEquipments()
             .LoadAsync();
         if (player2User.Tier == Tier.Unranked || player1User.Tier == Tier.Unranked)
@@ -128,7 +128,7 @@ public class Challenge :GeneralCommandClass
         var battleResult = await simulator.StartAsync(message);
         DiscordUser winnerDiscord;
         UserData winnerUserData;
-        if (battleResult.Winners.TryGetUserDataId.GetValueOrDefault(0) == player1.Id)
+        if (battleResult.Winners.TryGetDiscordId.GetValueOrDefault(0) == player1.Id)
         {
             winnerDiscord = player1;
             winnerUserData = player1User;

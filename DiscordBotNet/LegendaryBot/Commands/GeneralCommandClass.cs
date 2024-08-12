@@ -40,7 +40,7 @@ public abstract class GeneralCommandClass
             .WithUser(context.User);
 
         var color = (await DatabaseContext.UserData
-                .Where(i => i.Id == context.User.Id)
+                .Where(i => i.DiscordId == context.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
             .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color);
@@ -57,7 +57,7 @@ public abstract class GeneralCommandClass
             .WithUser(context.User);
 
         var color = (await DatabaseContext.UserData
-                .Where(i => i.Id == context.User.Id)
+                .Where(i => i.DiscordId == context.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
             .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color);
@@ -98,10 +98,10 @@ public abstract class GeneralCommandClass
     {
         DatabaseContext?.Dispose();
     }
-    private List<ulong> _occupiedUserDatasIds  = new();
+    private List<long> _occupiedUserDatasIds  = new();
 
 
-    public IEnumerable<ulong> OccupiedUserDataIds
+    public IEnumerable<long> OccupiedUserDataIds
     {
         get
         {

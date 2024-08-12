@@ -192,7 +192,7 @@ public partial class CharacterCommand
             .Include(includeLambda)
             .ThenInclude(i => i.Blessing)
             .Include(i => i.Items.Where(j =>j is CharacterExpMaterial))
-            .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
    
         if (gottenUserData is null || gottenUserData.Tier == Tier.Unranked)
         {

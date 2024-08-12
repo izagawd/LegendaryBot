@@ -115,7 +115,7 @@ public class Help : GeneralCommandClass
     
     var color = await DatabaseContext
         .UserData
-        .Where(i => i.Id == ctx.User.Id)
+        .Where(i => i.DiscordId == ctx.User.Id)
         .Select(i => new DiscordColor?(i.Color))
         .FirstOrDefaultAsync();
     if (color is null)

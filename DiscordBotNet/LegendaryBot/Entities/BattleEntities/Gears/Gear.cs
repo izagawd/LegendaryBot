@@ -145,7 +145,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public UserData? UserData { get; set; }
     public string ImageUrl { get; }
     public long Id { get; set; }
-    public ulong UserDataId { get; set; }
+    public long UserDataId { get; set; }
     public Character Character { get; set; }
 
 

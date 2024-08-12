@@ -1,4 +1,5 @@
 ﻿using DiscordBotNet.Database.Models;
+using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot;
 using DiscordBotNet.LegendaryBot.Entities;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
@@ -43,7 +44,7 @@ public class PostgreSqlContext : DbContext
 
         var user = await UserData
             .Include(i => i.Quests)
-            .FirstOrDefaultAsync(i => i.Id == userId);
+            .FirstOrDefaultAsync(i => i.DiscordId == userId);
         if(user is null)
             return;
         var rightNowUtc = DateTime.UtcNow;
@@ -70,7 +71,7 @@ public class PostgreSqlContext : DbContext
 
     public async Task<UserData> CreateNonExistantUserdataAsync(ulong id)
     {
-        var user = new UserData() { Id = id };
+        var user = new UserData() { DiscordId = id };
         await UserData.AddAsync(user);
         return user;
     }
@@ -150,6 +151,7 @@ EXECUTE FUNCTION {functionName}();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
         modelBuilder
             .UsePropertyAccessMode(PropertyAccessMode.Property);
         foreach (var i in TypesFunction.AllTypes.Where(i => i.IsAssignableTo(typeof(Quest))))

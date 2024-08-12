@@ -41,7 +41,7 @@ public class GiveMe : GeneralCommandClass
                 .Include(i => i.Blessings)
                 .Include(i => i.Characters)
                 .Include(i => i.Items)
-                .FirstOrDefaultAsync(i => i.Id == ctx.User.Id);
+                .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
             if (userData is null || userData.Tier == Tier.Unranked)
             {
                 await AskToDoBeginAsync(ctx);

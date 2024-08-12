@@ -103,7 +103,7 @@ public static class Bot
                 await using var dbContext = new PostgreSqlContext();
                 var userData =await  dbContext.UserData
                     .Include(i => i.Items.Where(j => j is CharacterExpMaterial))
-                    .FirstOrDefaultAsync(i => i.Id == args.Author.Id);
+                    .FirstOrDefaultAsync(i => i.DiscordId == args.Author.Id);
                 if(userData is null || userData.Tier <= Tier.Unranked)
                     return;
                 List<CharacterExpMaterial> characterExpMaterials = [];
@@ -196,7 +196,7 @@ public static class Bot
                         
                     var localUser = result.Result.User;
                     await using var postgre = new PostgreSqlContext();
-                    var userData = await postgre.UserData.FirstOrDefaultAsync(i => i.Id == localUser.Id);
+                    var userData = await postgre.UserData.FirstOrDefaultAsync(i => i.DiscordId == localUser.Id);
                     bool isNew = userData is null || userData.Tier == Tier.Unranked;
                     if (userData is null)
                     {
@@ -378,7 +378,7 @@ public static class Bot
         DiscordEmbedBuilder? embedBuilder = null;
         await using var dbContext = new PostgreSqlContext();
         var color  = (await dbContext.UserData
-                .Where(i => i.Id == args.Context.User.Id)
+                .Where(i => i.DiscordId == args.Context.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
             .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color);
