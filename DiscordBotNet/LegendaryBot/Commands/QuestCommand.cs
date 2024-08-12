@@ -79,7 +79,7 @@ public class QuestCommand : GeneralCommandClass
         Quest quest = null;
         var buttonResult = await message.WaitForButtonAsync(i =>
         {
-            if (i.User.Id != (ulong)userData.Id) return false;
+            if (i.User.Id != ctx.User.Id) return false;
             if (!possibleCustomIds.Contains(i.Id)) return false;
             quest = userData.Quests[int.Parse(i.Id) -1];
             return true;

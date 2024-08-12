@@ -2,6 +2,7 @@
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
@@ -128,7 +129,7 @@ public class Challenge :GeneralCommandClass
         var battleResult = await simulator.StartAsync(message);
         DiscordUser winnerDiscord;
         UserData winnerUserData;
-        if (battleResult.Winners.TryGetDiscordId.GetValueOrDefault(0) == player1.Id)
+        if ((battleResult.Winners as PlayerTeam).UserData.DiscordId == player1.Id)
         {
             winnerDiscord = player1;
             winnerUserData = player1User;

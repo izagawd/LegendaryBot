@@ -35,7 +35,7 @@ public class PlayerTeam : CharacterTeam
     public bool IsFull => Count >= 4;
     public string TeamName { get;  set; } = "Team1";
 
-    public UserData UserData { get; protected set; }
+    public UserData UserData { get; set; }
     
     /// <summary>
     /// Will be set to userdata 

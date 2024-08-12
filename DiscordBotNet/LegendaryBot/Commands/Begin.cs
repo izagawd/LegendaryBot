@@ -149,6 +149,7 @@ public class Begin : GeneralCommandClass
             userData.PlayerTeams.AddRange([playerTeam, new PlayerTeam(){TeamName = "Team2"},new PlayerTeam(){TeamName = "Team3"},new PlayerTeam(){TeamName = "Team4"}]);
         
             playerTeam.UserDataId = userData.Id;
+            playerTeam.UserData = userData;
             userData.EquippedPlayerTeam.Add(lily);
             
 
