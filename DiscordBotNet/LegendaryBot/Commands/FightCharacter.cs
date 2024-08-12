@@ -26,6 +26,11 @@ public class FightCharacter : GeneralCommandClass
             return;
         }
 
+        if (userData.IsOccupied)
+        {
+            await NotifyAboutOccupiedAsync(context);
+            return;
+        }
         var type =TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
             .Where(i => i.Name.ToLower().Replace(" ","") == enemyName.ToLower().Replace(" ", ""))
             .Select(i => i.GetType())
