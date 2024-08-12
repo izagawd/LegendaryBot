@@ -1,3 +1,5 @@
+using DiscordBotNet.Extensions;
+
 namespace DiscordBotNet.LegendaryBot.Entities.Items;
 
 public abstract class Energy : Item
@@ -18,7 +20,7 @@ public abstract class Energy : Item
 
         // Determine how much energy has accumulated based on the rate of 1 energy every 6 minutes
         var newEnergy = (int)(elapsedTime / EnergyIncreaseInterval);
-
+      
         // Update the Value with the new energy amount
         Stacks += newEnergy;
         if (Stacks >= MaxEnergyValue)

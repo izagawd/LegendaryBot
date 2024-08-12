@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Reflection;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities.Items;
@@ -22,6 +23,7 @@ public class Info : GeneralCommandClass
         if(author is null) author = ctx.User;
         
         var userData = await DatabaseContext.UserData
+            .AsNoTracking()
             .Include(i => i.Items.Where(j => j is Coin || j is DivineShard || j is Stamina))
             .FirstOrDefaultAsync(i => i.Id == author.Id);
 
@@ -44,6 +46,8 @@ public class Info : GeneralCommandClass
         }
         var stamina = userData.Items.GetOrCreateItem<Stamina>();
         stamina.RefreshEnergyValue();
+
+        
         var embedBuilder = new DiscordEmbedBuilder()
             .WithTitle("Info")
             .WithUser(author)
