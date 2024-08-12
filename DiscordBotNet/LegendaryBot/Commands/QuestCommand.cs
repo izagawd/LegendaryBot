@@ -99,11 +99,11 @@ public class QuestCommand : GeneralCommandClass
             quest.Completed = true;
             var expToAdd = 1000;
 
-        
-            var rewardString = userData.ReceiveRewards([..quest.QuestRewards,new UserExperienceReward(expToAdd),
-            new EntityReward([new DivineShard(){Stacks = 10}])]);
             await DatabaseContext.Items.Where(i => i.UserDataId == userData.Id && i is DivineShard)
                 .LoadAsync();
+            var rewardString = userData.ReceiveRewards([..quest.QuestRewards,new UserExperienceReward(expToAdd),
+            new EntityReward([new DivineShard(){Stacks = 10}])]);
+
             embed
                 .WithTitle("Nice!!")
                 .WithDescription("You completed the quest!\n" +rewardString);
