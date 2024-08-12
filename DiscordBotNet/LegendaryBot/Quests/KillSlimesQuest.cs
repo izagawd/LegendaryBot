@@ -27,7 +27,7 @@ public class KillSlimesQuest : Quest
   
         var userData = await databaseContext.UserData
             .IncludeTeamWithAllEquipments()
-            .FirstAsync(i => i.DiscordId == UserDataId);
+            .FirstAsync(i => i.Id == UserDataId);
         foreach (var i in slimeTeam)
         {
             i.SetBotStatsAndLevelBasedOnTier(userData.Tier);
