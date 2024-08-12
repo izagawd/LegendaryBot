@@ -469,7 +469,7 @@ public partial class BattleSimulator
         try
         {
             var team = CharacterTeams
-                .OfType<PlayerTeam>().First(i => i.TryGetDiscordId== interaction.User.Id);
+                .OfType<PlayerTeam>().First(i => i.UserData.DiscordId == interaction.User.Id);
             var embed = new DiscordEmbedBuilder()
                 .WithTitle("For real?")
                 .WithColor(DiscordColor.Blue)
@@ -523,7 +523,7 @@ public partial class BattleSimulator
         }, token);
         _ = message.WaitForButtonAsync(args =>
         {
-            if (args.Id == "forfeit" &&  CharacterTeams.Any(i => i.TryGetDiscordId == args.User.Id))
+            if (args.Id == "forfeit" &&  CharacterTeams.OfType<PlayerTeam>().Any(i => i.UserData.DiscordId == args.User.Id))
             {
                 _ = HandleForfeitAsync(args.Interaction);
                 return false;
@@ -741,7 +741,7 @@ public partial class BattleSimulator
             {
                 i.Disable();
             }
-            if (!(!ActiveCharacter.Team.IsPlayerTeam || ActiveCharacter.IsOverriden) 
+            if (!(ActiveCharacter.Team is not PlayerTeam || ActiveCharacter.IsOverriden) 
                 && shouldDoTurn
                 && _winners is null && !_stopped)
             {
@@ -842,7 +842,7 @@ public partial class BattleSimulator
                 }
             }
 
-            else if (!ActiveCharacter.Team.IsPlayerTeam)
+            else if (ActiveCharacter.Team is not PlayerTeam)
             {
                 ActiveCharacter.NonPlayerCharacterAi(ref target!, ref battleDecision);
 
@@ -860,9 +860,11 @@ public partial class BattleSimulator
                 {
                     results = await message.WaitForButtonAsync(e =>
                     {
-                        if (!CharacterTeams.Any(i => i.TryGetDiscordId == e.User.Id)) return false;
+                        if (!CharacterTeams.OfType<PlayerTeam>().Any(i => i.UserData.DiscordId == e.User.Id)) return false;
                         if (!Enum.TryParse(e.Id, out BattleDecision localDecision)) return false;
-                        if (e.User.Id == ActiveCharacter.Team.TryGetDiscordId
+                        
+                        if (ActiveCharacter.Team is PlayerTeam playerTeam 
+                        && e.User.Id == playerTeam.UserData.DiscordId
                             && ((IEnumerable<BattleDecision>)
                             [
                                 BattleDecision.BasicAttack, BattleDecision.Skill, BattleDecision.Ultimate,
@@ -926,7 +928,8 @@ public partial class BattleSimulator
                     {
                         interactivityResult = await message.WaitForSelectAsync(e =>
                         {
-                            if (e.User.Id == ActiveCharacter.Team.TryGetDiscordId
+                            if (ActiveCharacter.Team is PlayerTeam playerTeam &&
+                                e.User.Id == playerTeam.UserData.DiscordId
                                 && e.Id == selectMoveTarget.CustomId)
                             {
                                 var localTarget = Characters

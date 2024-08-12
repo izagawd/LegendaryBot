@@ -267,8 +267,6 @@ public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
             .WithOne(i => i.UserData)
             .HasForeignKey(i => i.UserDataId);
 
-        
-        
         builder.HasKey(i => i.Id);
 
     }

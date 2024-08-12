@@ -28,7 +28,7 @@ public class PlayerTeamDatabaseConfiguration : IEntityTypeConfiguration<PlayerTe
 }
 public class PlayerTeam : CharacterTeam
 {
-    
+
     [Timestamp]
     public uint Version { get; private set; }
     [NotMapped]
@@ -40,7 +40,7 @@ public class PlayerTeam : CharacterTeam
     /// <summary>
     /// Will be set to userdata 
     /// </summary>
-    public ulong? IsEquipped { get;  set; }
+    public long? IsEquipped { get;  set; }
     public override bool Add(CharacterPartials.Character character)
     {
         if (Count >= 4) return false;

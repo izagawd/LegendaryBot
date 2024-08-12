@@ -316,7 +316,7 @@ public static class Bot
     private async  static Task DoShitAsync()
     {
 
-
+        await new PostgreSqlContext().ResetDatabaseAsync();
 
     }
     private static async Task Main(string[] args)
