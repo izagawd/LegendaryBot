@@ -5,7 +5,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.Items;
 public abstract class Energy : Item
 {
     public abstract TimeSpan EnergyIncreaseInterval { get; }
-    public DateTime LastTimeUpdated { get; private set; } = DateTime.UtcNow;
+    public DateTime LastTimeUpdated { get; private set; } = DateTime.UtcNow.AddDays(-1);
     public abstract int MaxEnergyValue { get; }
     public void RefreshEnergyValue()
     {
