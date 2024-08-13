@@ -68,10 +68,14 @@ public class Thug : Character
 
 
     public override Rarity Rarity => Rarity.TwoStar;
+    public override int TypeId
+    {
+        get => 9;
+        protected init {}
+    }
 
     public Thug()
     {
-        TypeId = 9;
         BasicAttack = new ThugPunch(this);
         Skill = new ThugInsult(this);
 

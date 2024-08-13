@@ -135,10 +135,14 @@ public class Takeshi : Character
     }
 
 
+    public override int TypeId
+    {
+        get => 13;
+        protected init {}
+    }
 
     public Takeshi()
     {
-        TypeId = 13;
         Ultimate = new TakeshiMeditation(this);
         Skill = new KarateNeckChop(this);
         BasicAttack = new TakeshiStraightPunch(this);

@@ -4,10 +4,12 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 
 public class SpeedPercentageGearStat : GearStat
 {
-    public SpeedPercentageGearStat()
+    public override int TypeId
     {
-        TypeId = 12;
+        get => 12;
+        protected init {}
     }
+
     public override int GetMainStatValue(Rarity rarity)
     {
         throw new Exception("Speed percentage should never be a mainstat");

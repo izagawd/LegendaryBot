@@ -44,10 +44,15 @@ public class Slime : Character
 
     public override Rarity Rarity => Rarity.TwoStar;
 
+    public override int TypeId
+    {
+        get => 7;
+        protected init {}
+    }
 
     public Slime()
     {
-        TypeId = 7;
+  
 
         BasicAttack = new SlimeBodySlam(this);
     }

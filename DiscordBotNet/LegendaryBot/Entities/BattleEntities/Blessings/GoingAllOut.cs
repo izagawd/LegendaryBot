@@ -7,6 +7,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class GoingAllOut : Blessing
 {
+    
     public override string Name => "Going All Out";
 
     [BattleEventListenerMethod]
@@ -38,10 +39,12 @@ public class GoingAllOut : Blessing
         
     }
     public override Rarity Rarity => Rarity.FourStar;
-
-    public GoingAllOut()
+    public override int TypeId
     {
-        TypeId = 3;
+        get => 3;
+        protected init {}
     }
+
+
 
 }

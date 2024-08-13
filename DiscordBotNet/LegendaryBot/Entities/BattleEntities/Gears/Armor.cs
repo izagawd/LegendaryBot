@@ -6,10 +6,12 @@ public class Armor : Gear
 {
     public override string Name => "Armor";
 
-    public Armor()
+    public override int TypeId
     {
-        TypeId = 2;
+        get => 2;
+        protected init {}
     }
+
 
     public sealed override IEnumerable<Type> PossibleMainStats => [GearStat.DefenseFlatType];
 }

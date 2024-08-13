@@ -21,7 +21,7 @@ public class GearStatDatabaseConfiguration : IEntityTypeConfiguration<GearStat>
 
 public abstract class GearStat
 {
-    public int TypeId { get; protected init; }
+    public abstract int TypeId { get; protected init; }
     [NotMapped]
     public static Type AttackPercentageType { get; } = typeof(AttackPercentageGearStat);
     [NotMapped]  public static Type AttackFlatType { get; } = typeof(AttackFlatGearStat);

@@ -147,10 +147,15 @@ public class Lily : Character
 
     }
 
+    public override int TypeId
+    {
+        get => 3;
+        protected init {}
+    }
 
     public Lily()
     {
-        TypeId = 3;
+
         BasicAttack = new ChamomileSachetWhack(this);
         Ultimate = new LilyOfTheValley(this);
         Skill = new BlossomTouch(this);

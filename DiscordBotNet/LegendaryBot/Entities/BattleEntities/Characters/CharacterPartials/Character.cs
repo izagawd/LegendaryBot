@@ -95,7 +95,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public int Number { get; set; }
 
  
-    public int TypeId { get; protected init; }
+    public abstract int TypeId { get; protected init; }
 
     public string DisplayString
     {

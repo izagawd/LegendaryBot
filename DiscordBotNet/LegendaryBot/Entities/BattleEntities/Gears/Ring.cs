@@ -6,10 +6,12 @@ public class Ring : Gear
 {
     public override string Name => "Ring";
 
-    public Ring()
+    public override int TypeId
     {
-        TypeId = 5;
+        get => 5;
+        protected init {}
     }
+
     public sealed override IEnumerable<Type> PossibleMainStats =>[
     
         GearStat.AttackPercentageType,

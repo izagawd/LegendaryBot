@@ -6,10 +6,12 @@ public  class Boots : Gear
 {
     public override string Name => "Boots";
 
-    public Boots()
+    public override int TypeId
     {
-        TypeId = 1;
+        get => 1;
+        protected init {}
     }
+
 
     public sealed override IEnumerable<Type> PossibleMainStats =>
     [

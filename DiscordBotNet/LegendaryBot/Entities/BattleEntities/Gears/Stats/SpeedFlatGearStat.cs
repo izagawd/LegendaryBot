@@ -4,10 +4,13 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 
 public class SpeedFlatGearStat : GearStat
 {
-    public SpeedFlatGearStat()
+    public override int TypeId
     {
-        TypeId = 11;
+        get => 11;
+        protected init {}
     }
+
+
     public override int GetMainStatValue(Rarity rarity)
     {
         return ((int) rarity   * 7) + 10;

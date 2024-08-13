@@ -2,9 +2,12 @@ namespace DiscordBotNet.LegendaryBot.Entities.Items;
 
 public class DivineShard : Item
 {
-    public DivineShard()
+    public override int TypeId
     {
-        TypeId = 6;
+        get => 6;
+        protected init {}
     }
+
+
     public override string Name => "Divine Shard";
 }

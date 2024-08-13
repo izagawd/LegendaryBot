@@ -7,11 +7,13 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 public class PowerOfThePhoenix : Blessing
 {
     public override string Name => "Power Of The Phoenix";
-
-    public PowerOfThePhoenix()
+    public override int TypeId
     {
-        TypeId = 1;
+        get => 1;
+        protected init {}
     }
+
+
     public override Rarity Rarity => Rarity.FiveStar;
 
     public int GetHealthPercentRecovering(int levelMilestone)

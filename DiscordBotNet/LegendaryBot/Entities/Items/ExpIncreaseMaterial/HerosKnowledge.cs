@@ -4,10 +4,12 @@ public class HerosKnowledge : CharacterExpMaterial
 {
     public override string Name => "Heros Knowledge";
 
-    public HerosKnowledge()
+    public override int TypeId
     {
-        TypeId = 3;
+        get => 3;
+        protected init {}
     }
+
 
     public override Rarity Rarity => Rarity.FourStar;
     public override int ExpToIncrease => 2500;

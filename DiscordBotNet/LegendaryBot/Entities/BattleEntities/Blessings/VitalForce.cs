@@ -26,10 +26,13 @@ public class VitalForce : Blessing, IStatsModifier
     
     public override Rarity Rarity => Rarity.ThreeStar;
 
-    public VitalForce()
+
+    public override int TypeId
     {
-        TypeId = 4;
+        get => 4;
+        protected init {}
     }
+
     public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
     {
         yield return new DefensePercentageModifierArgs(Character!, GetDefenseBoost(LevelMilestone));

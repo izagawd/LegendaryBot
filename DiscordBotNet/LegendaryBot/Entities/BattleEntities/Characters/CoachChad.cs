@@ -92,10 +92,14 @@ public class CoachChad : Character
 {
     public override string Name => "Coach Chad";
     public override Rarity Rarity => Rarity.FourStar;
+    public override int TypeId
+    {
+        get => 11;
+        protected init {}
+    }
 
     public CoachChad()
     {
-        TypeId = 11;
         Skill = new ThumbsUp(this);
         Ultimate = new MuscleFlex(this);
         BasicAttack = new GigaPunch(this);

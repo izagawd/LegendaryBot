@@ -6,10 +6,12 @@ public class Necklace : Gear
 {
     public override string Name => "Necklace";
 
-    public Necklace()
+    public override int TypeId
     {
-        TypeId = 4;
+        get => 4;
+        protected init {}
     }
+
     public sealed override IEnumerable<Type> PossibleMainStats =>
     [
         GearStat.AttackPercentageType,

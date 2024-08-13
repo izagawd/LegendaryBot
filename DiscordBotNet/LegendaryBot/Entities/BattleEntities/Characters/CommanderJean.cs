@@ -199,10 +199,14 @@ public class CommanderJean : Character
     public override Rarity Rarity => Rarity.FiveStar;
 
     public CommanderJeanFiringSquad FiringSquad { get; }
- 
+    public override int TypeId
+    {
+        get => 15;
+        protected init {}
+    }
+
     public CommanderJean()
     {
-        TypeId = 15;
         Skill = new CommanderJeanTaser(this);
         Ultimate = new CommanderJeanGrenade(this);
         BasicAttack = new CommanderJeanTonfaWhack(this);

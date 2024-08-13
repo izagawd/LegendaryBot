@@ -2,9 +2,12 @@ namespace DiscordBotNet.LegendaryBot.Entities.Items;
 
 public class Coin : Item
 {
-    public Coin()
+    public override int TypeId
     {
-        TypeId = 5;
+        get => 5;
+        protected init {}
     }
+
+
     public override string Name => "Coin";
 }

@@ -16,7 +16,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 
     [Timestamp]
     public uint Version { get; private set; }
-    public int TypeId { get; protected init; }
+    public abstract int TypeId { get; protected init; }
 
     public bool CanBeTraded => true;
 

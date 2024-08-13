@@ -42,9 +42,15 @@ public class Skeleton : Character
 
         public override string Name => "Skeleton Sword Slash";
     }
+    public override int TypeId
+    {
+        get => 16;
+        protected init {}
+    }
+
     public Skeleton()
     {
-        TypeId = 16;
+
         BasicAttack = new SkeletonSwordSlash(this);
     }
     [NotMapped]

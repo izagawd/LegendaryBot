@@ -112,10 +112,15 @@ public class Roxy : Character
     public override string Name => "Roxy";
     protected override float BaseAttackMultiplier => 1.1f;
     public override Rarity Rarity => Rarity.FourStar;
+    public override int TypeId
+    {
+        get => 14;
+        protected init {}
+    }
 
     public Roxy()
     {
-        TypeId = 14;
+
         Skill = new RoxyAggressiveOverload(this);
         BasicAttack = new RoxyBatWhack(this);
         Ultimate = new RoxyHeadBatWhack(this);

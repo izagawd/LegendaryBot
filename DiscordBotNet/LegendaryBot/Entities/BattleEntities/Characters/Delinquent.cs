@@ -77,10 +77,15 @@ public class Delinquent : Character
 
     public override Rarity Rarity => Rarity.TwoStar;
 
-    
+    public override int TypeId
+    {
+        get => 10;
+        protected init {}
+    }
+
     public Delinquent()
     {
-        TypeId = 10;
+
         Skill = new DelinquentBeatdown(this);
         BasicAttack = new BaseballBatWhack(this);
     }

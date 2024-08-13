@@ -5,12 +5,12 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 public class Helmet : Gear
 {
     public override string Name => "Helmet";
-
-    public Helmet()
+    public override int TypeId
     {
-        TypeId = 3;
+        get => 3;
+        protected init {}
     }
-    
+
 
     public sealed override IEnumerable<Type> PossibleMainStats => [GearStat.HealthFlatType];
 }

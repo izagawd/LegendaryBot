@@ -83,11 +83,15 @@ public class Police : Character
     public override Rarity Rarity => Rarity.TwoStar;
 
 
+    public override int TypeId
+    {
+        get => 4;
+        protected init {}
+    }
 
 
     public Police()
     {
-        TypeId = 4;
         Skill = new IAmShooting(this);
         BasicAttack = new DoNotResist(this);
 

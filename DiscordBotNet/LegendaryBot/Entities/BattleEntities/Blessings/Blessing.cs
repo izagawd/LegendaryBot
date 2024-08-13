@@ -60,7 +60,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     public bool CanBeTraded => true;
 
  
-    public  int TypeId { get; protected init; }
+    public abstract int TypeId { get; protected init; }
     public string DisplayString => $"`{Name}`";
     public  Type TypeGroup => typeof(Blessing);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;

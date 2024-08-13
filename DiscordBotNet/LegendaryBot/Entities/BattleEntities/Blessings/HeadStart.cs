@@ -6,11 +6,12 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 public class HeadStart : Blessing
 {
     public override string Name => "Head Start";
-
-    public HeadStart()
+    public override int TypeId
     {
-        TypeId = 2;
+        get => 2;
+        protected init {}
     }
+
 
     public override Rarity Rarity => Rarity.FiveStar;
 

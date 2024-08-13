@@ -113,9 +113,14 @@ public class Cheerleader : Character
     public override string Name => "Cheerleader";
     public override Rarity Rarity => Rarity.FourStar;
     
+    public override int TypeId
+    {
+        get => 12;
+        protected init {}
+    }
+
     public Cheerleader()
     {
-        TypeId = 12;
         Skill = new YouCanDoIt(this);
         BasicAttack = new PomPomAttack(this);
         Ultimate = new YouCanMakeItEveryone(this);

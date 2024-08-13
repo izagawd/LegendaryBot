@@ -29,7 +29,7 @@ public abstract class Item : IInventoryEntity
     public bool CanBeTraded => false;
 
 
-    public int TypeId { get; protected init; }
+    public abstract int TypeId { get; protected init; }
     public string DisplayString => $"`{Name} • Stacks: {Stacks}`";
     public  Type TypeGroup => typeof(Item);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;

@@ -124,11 +124,16 @@ public class Thana : Character
     public override Element Element => Element.Earth;
 
 
+    public override int TypeId
+    {
+        get => 8;
+        protected init {}
+    }
 
 
     public Thana()
     {
-        TypeId = 8;
+
         Ultimate = new Arise(this);
         BasicAttack = new SoulAttack(this);
         Skill = new YourLifeEnergyIsMine(this);

@@ -138,10 +138,14 @@ public class Player : Character
 
 
 
+    public override int TypeId
+    {
+        get => 1;
+        protected init {}
+    }
 
     public Player()
     {
-        TypeId = 1;
         Element = Element.Fire;
         Skill = new FireBall(this);
         Ultimate = new Ignite(this);

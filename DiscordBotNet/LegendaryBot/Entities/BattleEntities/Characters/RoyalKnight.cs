@@ -121,11 +121,16 @@ public class RoyalKnight : Character
     public override DiscordColor Color => DiscordColor.Blue;
     public override Element Element => Element.Ice;
 
+    public override int TypeId
+    {
+        get => 5;
+        protected init {}
+    }
 
 
     public RoyalKnight()
     {
-        TypeId = 5;
+
         Skill = new IWillBeYourShield(this);
         Ultimate = new IWillProtectUs(this);
         BasicAttack = new ShieldBash(this);

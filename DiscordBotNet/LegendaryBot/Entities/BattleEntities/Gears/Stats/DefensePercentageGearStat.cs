@@ -4,10 +4,13 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 
 public class DefensePercentageGearStat : GearStat
 {
-    public DefensePercentageGearStat()
+    public override int TypeId
     {
-        TypeId = 6;
+        get => 6;
+        protected init {}
     }
+
+
     public override int GetMainStatValue(Rarity rarity)
     {
         return ((int) rarity  * 10) + 10;

@@ -121,10 +121,14 @@ public class Slasher : Character
     public override DiscordColor Color => DiscordColor.Brown;
 
     public override Element Element => Element.Earth;
+    public override int TypeId
+    {
+        get => 6;
+        protected init {}
+    }
 
     public Slasher()
     {
-        TypeId = 6;
         Ultimate = new ConsecutiveSlashesOfPrecision(this);
         Skill = new WindSlash(this);
         BasicAttack = new SimpleSlashOfPrecision(this);

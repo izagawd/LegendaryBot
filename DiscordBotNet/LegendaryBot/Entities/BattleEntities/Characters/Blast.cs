@@ -134,10 +134,15 @@ public class Blast : Character
     protected override float BaseSpeedMultiplier => 1.1f;
     protected override float BaseAttackMultiplier => 1.05f;
 
+    public override int TypeId
+    {
+        get => 2;
+        protected init {}
+    }
 
     public Blast()
     {
-        TypeId = 2;
+     
         Skill = new BlowAway(this);
         Ultimate = new ExplosionBlast(this);
         BasicAttack = new MethaneSlap(this);

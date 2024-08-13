@@ -50,10 +50,14 @@ public class Jock : Character
         }
     }
     public override Rarity Rarity => Rarity.TwoStar;
+    public override int TypeId
+    {
+        get => 17;
+        protected init {}
+    }
 
     public Jock()
     {
-        TypeId = 17;
         BasicAttack = new BallThrow(this);
     }
 }
