@@ -18,7 +18,7 @@ public class Roll :  GeneralCommandClass
             .Where(i => i.DiscordId == ctx.User.Id)
             .Select(i =>new DiscordColor?(i.Color))
             .FirstOrDefaultAsync())
-            .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color);
+            ?? TypesFunction.GetDefaultObject<UserData>().Color;
         var random = new Random();
         var embed = new DiscordEmbedBuilder()
             .WithTitle("**Roll**")
