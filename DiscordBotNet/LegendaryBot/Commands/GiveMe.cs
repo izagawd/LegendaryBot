@@ -47,6 +47,12 @@ public class GiveMe : GeneralCommandClass
                 await AskToDoBeginAsync(ctx);
                 return;
             }
+
+            if (userData.IsOccupied)
+            {
+                await NotifyAboutOccupiedAsync(ctx);
+                return;
+            }
             List<EntityReward> rewards = [];
             foreach (var i in Enumerable.Range(0, amount))
             {

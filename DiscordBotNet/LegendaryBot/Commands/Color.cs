@@ -47,6 +47,11 @@ public class Color : GeneralCommandClass
             await DatabaseContext.SaveChangesAsync();
         }
 
+        if (userData.IsOccupied)
+        {
+            await NotifyAboutOccupiedAsync(ctx);
+            return;
+        }
         var color = userData.Color;
         var colorIsValid = true;
         switch (colorName.ToLower())

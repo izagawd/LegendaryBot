@@ -53,9 +53,7 @@ public class Explore : GeneralCommandClass
 
         if (userData.IsOccupied)
         {
-            embedToBuild
-                .WithDescription("You are occupied!");
-            await ctx.RespondAsync(embedToBuild);
+            await NotifyAboutOccupiedAsync(ctx);
             return;
         }
 

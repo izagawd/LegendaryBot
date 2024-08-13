@@ -29,26 +29,26 @@ public class QuestCommand : GeneralCommandClass
             await AskToDoBeginAsync(ctx);
             return;
         }
+
+        if (userData.IsOccupied)
+        {
+            await NotifyAboutOccupiedAsync(ctx);
+            return;
+        }
         var questString = "";
         var embed = new DiscordEmbedBuilder()
             .WithUser(author)
             .WithColor(userData.Color)
             .WithTitle("Hmm")
             .WithDescription("you have no quests");
-        if (userData.Tier == Tier.Unranked)
-        {
-            
-            embed.WithDescription("Use the begin Commands before doing any quests");
-            await ctx.RespondAsync(embed);
-            return;
-        }
+
 
         if (userData.Quests.Count <= 0)
         {
            await ctx.RespondAsync(embed);
            return;
         }
-
+        await MakeOccupiedAsync(userData);
         var count = 1;
         foreach (var i in userData.Quests)
         {

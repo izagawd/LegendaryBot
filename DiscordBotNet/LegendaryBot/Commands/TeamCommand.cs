@@ -27,7 +27,7 @@ public class TeamCommand : GeneralCommandClass
             .Where(i => i.DiscordId == context.User.Id)
             .Select(i => new
                 
-                {  tier = i.Tier, team = i.PlayerTeams.
+                { i.IsOccupied, tier = i.Tier, team = i.PlayerTeams.
                     FirstOrDefault(j => j.TeamName.ToLower()
                     .Replace(" ","")== teamName.ToLower()), userData = i })
             .FirstOrDefaultAsync();
@@ -35,6 +35,11 @@ public class TeamCommand : GeneralCommandClass
         if (anon is null || anon.tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
+            return;
+        }
+        if (anon.IsOccupied)
+        {
+            await NotifyAboutOccupiedAsync(context);
             return;
         }
         var userData = anon.userData;
@@ -80,6 +85,11 @@ public class TeamCommand : GeneralCommandClass
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
+            return;
+        }
+        if (userData.IsOccupied)
+        {
+            await NotifyAboutOccupiedAsync(context);
             return;
         }
         var gottenTeam =  userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower()
@@ -146,6 +156,11 @@ public class TeamCommand : GeneralCommandClass
             await AskToDoBeginAsync(context);
             return;
         }
+        if (userData.IsOccupied)
+        {
+            await NotifyAboutOccupiedAsync(context);
+            return;
+        }
         var embed = new DiscordEmbedBuilder()
             .WithColor(userData.Color)
             .WithUser(context.User)
@@ -190,6 +205,12 @@ public class TeamCommand : GeneralCommandClass
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
+            return;
+        }
+
+        if (userData.IsOccupied)
+        {
+            await NotifyAboutOccupiedAsync(context);
             return;
         }
         var gottenTeam = userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName.ToLower());
