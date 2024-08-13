@@ -80,7 +80,7 @@ public static class TypesFunction
 
     }
     
-    public static ConcurrentDictionary<Type, List<Type>> _subClassesCache = [];
+    private static ConcurrentDictionary<Type, List<Type>> _subClassesCache = [];
 
     public static IEnumerable<Type> AllTypes
     {
