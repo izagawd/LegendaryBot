@@ -41,7 +41,9 @@ public class Display : GeneralCommandClass
     public  async ValueTask ExecuteDisplayCharacterGear(CommandContext context,
         [Parameter("character-num")] int characterNumber)
     {
-        var userData = await DatabaseContext.UserData.Include(i => i.Characters
+        var userData = await DatabaseContext.UserData
+            .AsNoTracking()
+            .Include(i => i.Characters
                 .Where(j => j.Number == characterNumber))
             .ThenInclude(j => j.Gears)
             .ThenInclude(j => j.Stats)
@@ -170,6 +172,7 @@ public class Display : GeneralCommandClass
     {
         var simplified = nameFilter.Replace(" ", "").ToLower();
         var userData = await DatabaseContext.UserData
+            .AsNoTracking()
             .Include(i => i.Items)
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id); 
         if (userData is null || userData.Tier == Tier.Unranked)
@@ -231,6 +234,7 @@ public class Display : GeneralCommandClass
     public async ValueTask ExecuteDisplayGears(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
+            .AsNoTracking()
             .Include(i => i.Gears)
             .ThenInclude(i => i.Character)
             .Include(i => i.Gears)
@@ -255,6 +259,7 @@ public class Display : GeneralCommandClass
     {
         var simplified = nameFilter.Replace(" ", "").ToLower();
         var userData = await DatabaseContext.UserData
+            .AsNoTracking()
             .Include(i => i.Characters)
             .ThenInclude(i => i.Blessing)
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id); 
@@ -277,6 +282,7 @@ public class Display : GeneralCommandClass
     public async ValueTask ExecuteDisplayBlessings(CommandContext context, string nameFilter = "")
     {
         var userData = await DatabaseContext.UserData
+            .AsNoTracking()
             .Include(i => i.Blessings)
             .ThenInclude(i => i.Character)
             .FirstOrDefaultAsync(i => i.DiscordId== context.User.Id); 
@@ -308,6 +314,7 @@ public class Display : GeneralCommandClass
     public async ValueTask ExecuteDisplayGearByNum(CommandContext context, [Parameter("gear-num")] int gearNumber)
     {
         var userData = await DatabaseContext.UserData
+            .AsNoTracking()
             .Include(i => i.Gears.Where(j => j.Number == gearNumber))
             .ThenInclude(i => i.Character)
             .Include(i => i.Gears.Where(j => j.Number == gearNumber))
@@ -340,6 +347,7 @@ public class Display : GeneralCommandClass
     public async ValueTask ExecuteDisplayTeams(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
+            .AsNoTracking()
             .Include(i => i.PlayerTeams)
             .ThenInclude(i => i.Characters)
             .ThenInclude(i => i.Blessing)
@@ -349,8 +357,7 @@ public class Display : GeneralCommandClass
             await AskToDoBeginAsync(context);
             return;
         }
-        var teamStringBuilder = new StringBuilder();
-   
+
 
         var embed = new DiscordEmbedBuilder()
             .WithUser(context.User)
