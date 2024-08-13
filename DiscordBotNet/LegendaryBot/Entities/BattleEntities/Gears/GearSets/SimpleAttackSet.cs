@@ -16,10 +16,10 @@ public class SimpleAttackSet : GearSet, IStatsModifier
 
     public override string FourPieceDescription =>
         $"Increases damage dealt by Basic Attacks by {BasicAttackIncreaseAttackAmount}%";
-
-    public SimpleAttackSet()
+    public override int TypeId
     {
-        TypeId = 1;
+        get => 1;
+        protected init {}
     }
 
 

@@ -9,7 +9,7 @@ public abstract class GearSet  : INameHaver
 {
     public Character Owner { get; set; }
     public bool CanUseFourPiece { get; set; }
-    public int TypeId { get; protected  init; }
+    public abstract int TypeId { get; protected  init; }
     public abstract string Name { get; }
 
     public abstract string TwoPieceDescription { get; }

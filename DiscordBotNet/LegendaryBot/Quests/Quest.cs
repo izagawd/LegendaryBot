@@ -23,7 +23,7 @@ public class QuestDatabaseSetup : IEntityTypeConfiguration<Quest>
 }
 public abstract class Quest
 {
-    public int TypeId { get; protected set; }
+    public abstract int TypeId { get; protected init; }
     private static List<Type> _questTypes = [];
     public static IEnumerable<Type> QuestTypes => _questTypes;
     [NotMapped]
