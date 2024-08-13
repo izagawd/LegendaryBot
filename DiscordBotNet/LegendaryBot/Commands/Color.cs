@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Commands.Trees;
@@ -33,18 +34,20 @@ public class Color : GeneralCommandClass
     {
         var author = ctx.User;
 
-        var color = await DatabaseContext.UserData
+        var userData = await DatabaseContext.UserData
       
             .Where(i =>  i.DiscordId == ctx.User.Id)
-            .Select(i => new DiscordColor?(i.Color))
+            .Select(i => new{i.Color, i.IsOccupied})
             .FirstOrDefaultAsync();
 
-        if (color is null)
+        if (userData is null)
         {
-            color = (await DatabaseContext.CreateNonExistantUserdataAsync(author.Id)).Color;
+            var created = await DatabaseContext.CreateNonExistantUserdataAsync(author.Id);
+            userData = new {   created.Color ,created.IsOccupied,};
             await DatabaseContext.SaveChangesAsync();
         }
-        
+
+        var color = userData.Color;
         var colorIsValid = true;
         switch (colorName.ToLower())
         {
@@ -66,18 +69,18 @@ public class Color : GeneralCommandClass
         }
         var embed = new DiscordEmbedBuilder()
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
-            .WithColor(color.Value)
+            .WithColor(color)
             .WithTimestamp(DateTime.Now);
         if (colorIsValid)
         {
             await DatabaseContext.UserData.ExecuteUpdateAsync(i => i
-                .SetProperty(j => j.Color, color.Value));
+                .SetProperty(j => j.Color, color));
             embed.WithTitle("**Success!**");
             embed.WithDescription("`Look at your new color!`");
         }
         else
         {
-            embed.WithColor(color.Value);
+            embed.WithColor(color);
             embed.WithTitle("**Hmm**");
             embed.WithDescription("`That color is not available`");
         }
