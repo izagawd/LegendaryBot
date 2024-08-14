@@ -207,10 +207,13 @@ main[b-ho4t6m66vw] {
     margin-right: 30px;
     margin-bottom: 30px;
 }
+.some-para[b-aqvrl2yjxd]{
+    margin-left: 30px; font-size: 20px; align-self: center;
+}
 .name-filter[b-aqvrl2yjxd]{
     font-size: 30px;
-    border-radius: 10px;
-    border: 1px solid;
+    border-radius: 7px;
+    border: 0.5px solid;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     margin-left: 30px;
     align-self: center; 
