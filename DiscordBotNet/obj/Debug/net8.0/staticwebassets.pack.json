@@ -1,12 +1,12 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\WebsiteStuff\\Components\\Navigation.razor.js",
-      "PackagePath": "staticwebassets\\WebsiteStuff\\Components\\Navigation.razor.js"
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\WebsiteStuff\\Components\\Navigation\\Navigation.razor.js",
+      "PackagePath": "staticwebassets\\WebsiteStuff\\Components\\Navigation\\Navigation.razor.js"
     },
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
-      "PackagePath": "staticwebassets\\DiscordBotNet.9of5mwq7xx.bundle.scp.css"
+      "PackagePath": "staticwebassets\\DiscordBotNet.jswiv1ppjx.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\app.css",

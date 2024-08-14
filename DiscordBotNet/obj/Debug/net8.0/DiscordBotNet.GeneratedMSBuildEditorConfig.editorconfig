@@ -43,6 +43,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXF9JbXBvcnRzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Components/Navigation.razor]
-build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXENvbXBvbmVudHNcTmF2aWdhdGlvbi5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-i4ugzykgxb
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Components/Navigation/HorizontalNavBar.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXENvbXBvbmVudHNcTmF2aWdhdGlvblxIb3Jpem9udGFsTmF2QmFyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-myibej91lh
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Components/Navigation/Navigation.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXENvbXBvbmVudHNcTmF2aWdhdGlvblxOYXZpZ2F0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-ho4t6m66vw
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Components/Navigation/VerticalNavBar.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXENvbXBvbmVudHNcTmF2aWdhdGlvblxWZXJ0aWNhbE5hdkJhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-y07mak7flh

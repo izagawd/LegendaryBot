@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "q6mqDN+ycsJx1w8tA4IDdThHJAYAPU1RdjOAdvipPio=",
+  "Hash": "05k23KawglTEPvkruYDQ4jLe4uefUHWqzbrPxP3v+eE=",
   "Source": "DiscordBotNet",
   "BasePath": "_content/DiscordBotNet",
   "Mode": "Default",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
-      "Fingerprint": "9of5mwq7xx",
-      "Integrity": "Z2tzXLb9TI7OiIB5Wz5q5BRCcjVehPfwnxeZxcglSqo=",
+      "Fingerprint": "jswiv1ppjx",
+      "Integrity": "fZaZEQGaMyuJpiRXJn6nX4sVYNL10fl80/dM8fz6SNs=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css"
@@ -52,19 +52,19 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "9of5mwq7xx",
-      "Integrity": "Z2tzXLb9TI7OiIB5Wz5q5BRCcjVehPfwnxeZxcglSqo=",
+      "Fingerprint": "jswiv1ppjx",
+      "Integrity": "fZaZEQGaMyuJpiRXJn6nX4sVYNL10fl80/dM8fz6SNs=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\WebsiteStuff\\Components\\Navigation.razor.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\WebsiteStuff\\Components\\Navigation\\Navigation.razor.js",
       "SourceId": "DiscordBotNet",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\",
       "BasePath": "_content/DiscordBotNet",
-      "RelativePath": "WebsiteStuff/Components/Navigation.razor.js",
+      "RelativePath": "WebsiteStuff/Components/Navigation/Navigation.razor.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -77,7 +77,7 @@
       "Integrity": "d16kw/2c4R2MXCGSxq3rubViVB/AchzOvaoa8Rie6i8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "WebsiteStuff\\Components\\Navigation.razor.js"
+      "OriginalItemSpec": "WebsiteStuff\\Components\\Navigation\\Navigation.razor.js"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\app.css",
@@ -5689,96 +5689,6 @@
       ]
     },
     {
-      "Route": "DiscordBotNet.9of5mwq7xx.bundle.scp.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "82"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Z2tzXLb9TI7OiIB5Wz5q5BRCcjVehPfwnxeZxcglSqo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:53:34 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "9of5mwq7xx"
-        },
-        {
-          "Name": "label",
-          "Value": "DiscordBotNet.bundle.scp.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Z2tzXLb9TI7OiIB5Wz5q5BRCcjVehPfwnxeZxcglSqo="
-        }
-      ]
-    },
-    {
-      "Route": "DiscordBotNet.9of5mwq7xx.styles.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "82"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Z2tzXLb9TI7OiIB5Wz5q5BRCcjVehPfwnxeZxcglSqo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:53:34 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "9of5mwq7xx"
-        },
-        {
-          "Name": "label",
-          "Value": "DiscordBotNet.styles.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Z2tzXLb9TI7OiIB5Wz5q5BRCcjVehPfwnxeZxcglSqo="
-        }
-      ]
-    },
-    {
       "Route": "DiscordBotNet.bundle.scp.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
       "Selectors": [],
@@ -5789,7 +5699,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "82"
+          "Value": "1935"
         },
         {
           "Name": "Content-Type",
@@ -5797,11 +5707,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Z2tzXLb9TI7OiIB5Wz5q5BRCcjVehPfwnxeZxcglSqo=\""
+          "Value": "\"fZaZEQGaMyuJpiRXJn6nX4sVYNL10fl80/dM8fz6SNs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:53:34 GMT"
+          "Value": "Wed, 14 Aug 2024 18:40:49 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5811,7 +5721,97 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Z2tzXLb9TI7OiIB5Wz5q5BRCcjVehPfwnxeZxcglSqo="
+          "Value": "sha256-fZaZEQGaMyuJpiRXJn6nX4sVYNL10fl80/dM8fz6SNs="
+        }
+      ]
+    },
+    {
+      "Route": "DiscordBotNet.jswiv1ppjx.bundle.scp.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1935"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fZaZEQGaMyuJpiRXJn6nX4sVYNL10fl80/dM8fz6SNs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 Aug 2024 18:40:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "jswiv1ppjx"
+        },
+        {
+          "Name": "label",
+          "Value": "DiscordBotNet.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fZaZEQGaMyuJpiRXJn6nX4sVYNL10fl80/dM8fz6SNs="
+        }
+      ]
+    },
+    {
+      "Route": "DiscordBotNet.jswiv1ppjx.styles.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1935"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fZaZEQGaMyuJpiRXJn6nX4sVYNL10fl80/dM8fz6SNs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 Aug 2024 18:40:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "jswiv1ppjx"
+        },
+        {
+          "Name": "label",
+          "Value": "DiscordBotNet.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fZaZEQGaMyuJpiRXJn6nX4sVYNL10fl80/dM8fz6SNs="
         }
       ]
     },
@@ -5826,7 +5826,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "82"
+          "Value": "1935"
         },
         {
           "Name": "Content-Type",
@@ -5834,11 +5834,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Z2tzXLb9TI7OiIB5Wz5q5BRCcjVehPfwnxeZxcglSqo=\""
+          "Value": "\"fZaZEQGaMyuJpiRXJn6nX4sVYNL10fl80/dM8fz6SNs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:53:34 GMT"
+          "Value": "Wed, 14 Aug 2024 18:40:49 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5848,7 +5848,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Z2tzXLb9TI7OiIB5Wz5q5BRCcjVehPfwnxeZxcglSqo="
+          "Value": "sha256-fZaZEQGaMyuJpiRXJn6nX4sVYNL10fl80/dM8fz6SNs="
         }
       ]
     },
@@ -10855,8 +10855,8 @@
       ]
     },
     {
-      "Route": "WebsiteStuff/Components/Navigation.razor.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\WebsiteStuff\\Components\\Navigation.razor.js",
+      "Route": "WebsiteStuff/Components/Navigation/Navigation.razor.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\WebsiteStuff\\Components\\Navigation\\Navigation.razor.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
