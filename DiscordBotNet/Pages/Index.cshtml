@@ -2,10 +2,14 @@
 
 
 
+
+
+
 @using DiscordBotNet.Pages.WebComponents
 @model DiscordBotNet.Pages.IndexModel
 @{
     Layout = "Shared/_NavigationLayout";
+    
 }
 <head>
     <link rel="stylesheet" type="text/css" href="css/Home.css">
@@ -14,11 +18,7 @@
 <body>
 
 <div id="welcome_div">
-    @{
-        
-    <Navigator></Navigator>
-    }
-    
+    <component type="typeof(NavigationBar)" render-mode="Static"/>
 
 </div>
 

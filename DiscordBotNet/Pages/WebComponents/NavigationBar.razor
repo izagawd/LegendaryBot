@@ -1,0 +1,60 @@
+
+
+
+<div  id ="navigation_super">
+    <div id="navigation">
+        <a href="/" class="navigation_button" id="navigation_home_button"><h1>Home</h1></a>
+        <a href="/characters" class="navigation_button"><h1>Characters</h1></a>
+        <a href="/team" class="navigation_button"><h1>Team</h1></a>
+        <a href="/blessings" class="navigation_button"><h1>Blessings</h1></a>
+        <a href="/modify" class="navigation_button"><h1>Modify</h1></a>
+        <h1 class="navigation_button">Guilds</h1>
+        <h1 class="navigation_button">Settings</h1>
+    </div>
+</div>
+<style>
+    #navigation{
+        position: absolute;
+        display: flex;
+        margin: auto;
+        left: 0;
+        right: 0;
+
+        height: 80px;
+        width: fit-content;
+    }
+    #navigation_super{
+        width: 100%;
+
+        top: 0;
+        left: 0;
+        height: 80px;
+        z-index: 5;
+        position: fixed;
+        background-color: red;
+    }
+    .navigation_button{
+
+        margin-left: 30px;
+        border: black 5px;
+        text-decoration: none;
+    }
+    .navigation_button{
+        color: black;
+    }
+    .navigation_button:link{
+        color: black;
+    }
+    .navigation_button:hover{
+        color: white;
+    }
+    #navigation_home_button{
+        margin-left: 0px;
+    }
+
+</style>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+

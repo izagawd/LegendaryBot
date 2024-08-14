@@ -205,3 +205,7 @@ C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\DiscordBotNet.staticwebassets.endpoints.json
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\staticwebassets\msbuild.DiscordBotNet.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\Microsoft.AspNetCore.Components.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\Microsoft.Extensions.Options.dll

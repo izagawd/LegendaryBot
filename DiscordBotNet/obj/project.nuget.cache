@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wyekZmwAQpzQMszr9qu+04Rtcvh+P/BMGtxVOoj8EdY3tMITM7252zfyWTVWQwk+N5BW/yUT+3FCdsfIo/vYsA==",
+  "dgSpecHash": "N/KqsNOU8+ECBfMnWn2vR60fPhLvZlY8MfYe2LfiucqpahfkTtD2bxRURJ5FwiYF3OS43h6UGKvoUL2aSb6qmA==",
   "success": true,
   "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\DiscordBotNet.csproj",
   "expectedPackageFiles": [
@@ -21,6 +21,10 @@
     "C:\\Users\\theiz\\.nuget\\packages\\gee.external.capstone\\2.3.0\\gee.external.capstone.2.3.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\iced\\1.17.0\\iced.1.17.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.authentication.certificate\\8.0.7\\microsoft.aspnetcore.authentication.certificate.8.0.7.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.8\\microsoft.aspnetcore.authorization.8.0.8.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.8\\microsoft.aspnetcore.components.8.0.8.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\8.0.8\\microsoft.aspnetcore.components.analyzers.8.0.8.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.metadata\\8.0.8\\microsoft.aspnetcore.metadata.8.0.8.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.codeanalysis.common\\4.1.0\\microsoft.codeanalysis.common.4.1.0.nupkg.sha512",
@@ -40,7 +44,7 @@
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.1\\microsoft.extensions.dependencyinjection.abstractions.8.0.1.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.extensions.logging\\8.0.0\\microsoft.extensions.logging.8.0.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.1\\microsoft.extensions.logging.abstractions.8.0.1.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.extensions.options\\8.0.2\\microsoft.extensions.options.8.0.2.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.io.recyclablememorystream\\3.0.1\\microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",

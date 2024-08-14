@@ -145,10 +145,6 @@
       "PackagePath": "staticwebassets\\css\\Home.css"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\Navigation.css",
-      "PackagePath": "staticwebassets\\css\\Navigation.css"
-    },
-    {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\NeutralHref.css",
       "PackagePath": "staticwebassets\\css\\NeutralHref.css"
     },

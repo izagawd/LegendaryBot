@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rhspxtLVzt54Separ7uAuKakJLjO3aA5VOYQhkpg05k=",
+  "Hash": "a3mCAs68cSdHJ1cnqLg3kl+qFz39TN4IsLkyRAXNpmw=",
   "Source": "DiscordBotNet",
   "BasePath": "_content/DiscordBotNet",
   "Mode": "Default",
@@ -792,27 +792,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Home.css"
-    },
-    {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\Navigation.css",
-      "SourceId": "DiscordBotNet",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\",
-      "BasePath": "_content/DiscordBotNet",
-      "RelativePath": "css/Navigation#[.{fingerprint}]?.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "x9wf7veckc",
-      "Integrity": "24sVv+CW9M3J/cw1asdKi7ux7OB9GMetfeQbkvXS5jE=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Navigation.css"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\NeutralHref.css",
@@ -5027,88 +5006,6 @@
         {
           "Name": "integrity",
           "Value": "sha256-TNRSUW31bCOv4cNR3qvIGnG70S5reeBJQSJVZXVTR6o="
-        }
-      ]
-    },
-    {
-      "Route": "css/Navigation.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\Navigation.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "613"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"24sVv+CW9M3J/cw1asdKi7ux7OB9GMetfeQbkvXS5jE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-24sVv+CW9M3J/cw1asdKi7ux7OB9GMetfeQbkvXS5jE="
-        }
-      ]
-    },
-    {
-      "Route": "css/Navigation.x9wf7veckc.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\Navigation.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "613"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"24sVv+CW9M3J/cw1asdKi7ux7OB9GMetfeQbkvXS5jE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "x9wf7veckc"
-        },
-        {
-          "Name": "label",
-          "Value": "css/Navigation.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-24sVv+CW9M3J/cw1asdKi7ux7OB9GMetfeQbkvXS5jE="
         }
       ]
     },
