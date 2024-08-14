@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Security.Claims;
 using AspNet.Security.OAuth.Discord;
 using DiscordBotNet.Database;
-using DiscordBotNet.Pages.WebComponents;
+using DiscordBotNet.WebsiteStuff;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -12,7 +12,7 @@ namespace DiscordBotNet;
 
 
 
-public static class Website 
+public static class Website
 {
     public const string DomainName = "https://localhost";
     public static async Task<string> RenderImageTagAsync(Image image)
@@ -126,9 +126,8 @@ public static class Website
         ConfigureServices(builder.Services);
 
         var app = builder.Build();
-        app.MapRazorComponents<NavigationBar>()
-            .AddInteractiveServerRenderMode()
-            .AddInteractiveWebAssemblyRenderMode();
+
+     
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
@@ -143,17 +142,19 @@ public static class Website
         app.UseCertificateForwarding();
         app.UseRouting();
         app.UseAuthentication();
-                    
+        app.UseRouting();
+        app.UseAntiforgery();
         app.UseAuthorization();
-        app.UseSession();
-        app.MapRazorPages();
-        
+        app.MapRazorComponents<App>()
+            .AddInteractiveServerRenderMode()
+            .AddInteractiveWebAssemblyRenderMode();  
+     
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            endpoints.MapControllers();
         });
+
+        app.UseSession();
 
         await app.RunAsync(DomainName);
    

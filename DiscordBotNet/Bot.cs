@@ -334,7 +334,7 @@ public static class Bot
             Console.WriteLine($"made all users unoccupied!");
         }
         await StartDiscordBotAsync();
-      
+        
         await Website.StartAsync(args);
 
 

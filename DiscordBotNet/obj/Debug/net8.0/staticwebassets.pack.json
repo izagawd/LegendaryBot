@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
-      "PackagePath": "staticwebassets\\DiscordBotNet.fkfnsml1mf.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\blessings\\BlessingOfThePhoenix.png",
       "PackagePath": "staticwebassets\\battle_images\\blessings\\BlessingOfThePhoenix.png"
     },
