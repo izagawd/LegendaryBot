@@ -211,7 +211,6 @@ public static class Bot
                                  
                     await message.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embed)
                         .AddComponents(claimCharacter));
-                    
                      embed = new DiscordEmbedBuilder()
                         .WithUser(localUser)
                         .WithTitle("Success!")

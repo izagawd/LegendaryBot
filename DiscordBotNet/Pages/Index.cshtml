@@ -1,6 +1,8 @@
 ﻿@page
 
-@using DiscordBotNet
+
+
+@using DiscordBotNet.Pages.WebComponents
 @model DiscordBotNet.Pages.IndexModel
 @{
     Layout = "Shared/_NavigationLayout";
@@ -12,11 +14,11 @@
 <body>
 
 <div id="welcome_div">
-    <p id="welcome">welcome, @User.GetDiscordUserName()!</p>
-    <div id="user_picture_div">
-        <img id="user_picture" src="@User.GetDiscordUserAvatarUrl()"/>
-    </div>
-    <p id="level">Level @Model.UserData.AdventurerLevel</p>
+    @{
+        
+    <Navigator></Navigator>
+    }
+    
 
 </div>
 
