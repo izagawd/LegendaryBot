@@ -3,14 +3,26 @@
     margin-right: 30px;
     margin-bottom: 30px;
 }
+.name-filter{
+    font-size: 30px;
+    border-radius: 10px;
+    border: 1px solid;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-left: 30px;
+    align-self: center; 
+    height: 66%;
+}  
 .filterer{
 
+    box-sizing: border-box;
 
     top: 0;
     left: 0;
-    width: 100%;
-    background-color: red; /* Optional: Change to your desired background color */
-    padding: 0px; /* Optional: Adjust padding */
+
+    border: 1px solid;
+    padding: 0;
+    align-self: center;
+    width: inherit;
     margin: 0;
     height: 80px;
     display: flex;
@@ -18,7 +30,7 @@
 }
 .characters-container{
     display: flex; flex-wrap: wrap;   max-width: fit-content;
-    margin-left: auto;
+    margin-left: 50px;
     margin-right: auto;
     overflow: auto;
 

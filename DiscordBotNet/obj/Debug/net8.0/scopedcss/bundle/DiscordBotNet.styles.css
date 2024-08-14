@@ -1,61 +1,3 @@
-/* _content/DiscordBotNet/WebsiteStuff/Components/Navigation/HorizontalNavBar.razor.rz.scp.css */
-body[b-myibej91lh] {margin: 0;}
-
-ul.sidenav[b-myibej91lh] {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 25%;
-    background-color: #f1f1f1;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-}
-
-ul.sidenav li a[b-myibej91lh] {
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-
-ul.sidenav li a.active[b-myibej91lh] {
-    background-color: #4CAF50;
-    color: white;
-}
-
-ul.sidenav li a:hover:not(.active)[b-myibej91lh] {
-    background-color: #555;
-    color: white;
-}
-
-div.content[b-myibej91lh] {
-    margin-left: 25%;
-    padding: 1px 16px;
-    height: 1000px;
-}
-
-@media screen and (max-width: 900px) {
-    ul.sidenav[b-myibej91lh] {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-
-    ul.sidenav li a[b-myibej91lh] {
-        float: left;
-        padding: 15px;
-    }
-
-    div.content[b-myibej91lh] {margin-left: 0;}
-}
-
-@media screen and (max-width: 400px) {
-    ul.sidenav li a[b-myibej91lh] {
-        text-align: center;
-        float: none;
-    }
-}
 /* _content/DiscordBotNet/WebsiteStuff/Components/Navigation/Navigation.razor.rz.scp.css */
 .page[b-ho4t6m66vw] {
     position: relative;
@@ -259,56 +201,32 @@ main[b-ho4t6m66vw] {
         overflow-y: auto;
     }
 }
-/* _content/DiscordBotNet/WebsiteStuff/Components/Navigation/Suree.razor.rz.scp.css */
-body[b-syw6izhcif]{
-    background-color: red;
-}
-/* _content/DiscordBotNet/WebsiteStuff/Components/Navigation/VerticalNavBar.razor.rz.scp.css */
-body[b-y07mak7flh] {
-    margin: 0;
-}
-
-ul[b-y07mak7flh] {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 25%;
-    background-color: #f1f1f1;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-}
-
-li a[b-y07mak7flh] {
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-
-li a.active[b-y07mak7flh] {
-    background-color: #04AA6D;
-    color: white;
-}
-
-li a:hover:not(.active)[b-y07mak7flh] {
-    background-color: #555;
-    color: white;
-}
 /* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/Characters.razor.rz.scp.css */
 .character-to-display[b-aqvrl2yjxd]{
     max-width: 30%;
     margin-right: 30px;
     margin-bottom: 30px;
 }
+.name-filter[b-aqvrl2yjxd]{
+    font-size: 30px;
+    border-radius: 10px;
+    border: 1px solid;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-left: 30px;
+    align-self: center; 
+    height: 66%;
+}  
 .filterer[b-aqvrl2yjxd]{
 
+    box-sizing: border-box;
 
     top: 0;
     left: 0;
-    width: 100%;
-    background-color: red; /* Optional: Change to your desired background color */
-    padding: 0px; /* Optional: Adjust padding */
+
+    border: 1px solid;
+    padding: 0;
+    align-self: center;
+    width: inherit;
     margin: 0;
     height: 80px;
     display: flex;
@@ -316,7 +234,7 @@ li a:hover:not(.active)[b-y07mak7flh] {
 }
 .characters-container[b-aqvrl2yjxd]{
     display: flex; flex-wrap: wrap;   max-width: fit-content;
-    margin-left: auto;
+    margin-left: 50px;
     margin-right: auto;
     overflow: auto;
 
@@ -325,7 +243,7 @@ li a:hover:not(.active)[b-y07mak7flh] {
 /* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/CharacterSelector.razor.rz.scp.css */
 .image-box[b-ipw2vvjatv] {
 
-    border-radius: 15px; /* Controls the curvature of the edges */
+    border-radius: 10px; /* Controls the curvature of the edges */
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
     background-color: #f0f0f0; /* Optional: adds a background color */
@@ -341,5 +259,5 @@ p[b-ipw2vvjatv] {
     margin-left: 10px;
     font-weight: bold;
     margin-bottom: 0; /* Reduce space between paragraphs */
-    font-size: 14px;     /* Reduce paragraph font size */
+    font-size: 20px;     /* Reduce paragraph font size */
 }

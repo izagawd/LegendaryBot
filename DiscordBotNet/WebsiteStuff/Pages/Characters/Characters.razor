@@ -15,7 +15,8 @@
     private Character[]? CharacterCollection;
 
     private Character[]? UsingCharacterCollection;
-    
+
+    private string _nameFilter = String.Empty;
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
@@ -37,14 +38,22 @@
             CharacterCollection = [];
         }
 
-        "yo".Print();
+       
         UsingCharacterCollection = CharacterCollection;
     }
 
+    private static int count = 0;
+
+    private void RefreshFilters()
+    {
+        UsingCharacterCollection = CharacterCollection
+            .Where(i => i.Name.ToLower().Contains(_nameFilter))
+            .ToArray();
+    }
     private void FilterWithName(string name)
     {
- 
-        UsingCharacterCollection = CharacterCollection.Where(i => i.Name.ToLower().Contains(name.ToLower())).ToArray();
+        _nameFilter = name;
+        RefreshFilters();
      
     }
     
@@ -52,15 +61,15 @@
 }
 
 <Navigation>
-    <button @onclick="() =>  Console.WriteLine('\n')">frfrf</button>
-    <p>deded</p>
+ 
     <div class="filterer">
 
-        <input type="text" @onchange="args => FilterWithName(args.Value?.ToString())"/>
+        <input class="name-filter" type="text" @onchange="args => FilterWithName(args.Value?.ToString())"
+               />
         <p>@inputValue</p>
     </div>
     @{
-        
+    
         if (UsingCharacterCollection is not null)
         {
 
