@@ -316,6 +316,7 @@ public static class Bot
 
     private async  static Task DoShitAsync()
     {
+
         await Website.StartAsync([]);
         StopProgram();
         ;

@@ -229,3 +229,5 @@ C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\ref\DiscordBotNet.dll
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Components\Navigation\Suree.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Components\Navigation\NavMenu.razor.rz.scp.css
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\Characters\CharacterSelector.razor.rz.scp.css
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\Characters\Characters.razor.rz.scp.css

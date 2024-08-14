@@ -295,3 +295,41 @@ li a:hover:not(.active)[b-y07mak7flh] {
     background-color: #555;
     color: white;
 }
+/* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/Characters.razor.rz.scp.css */
+.character-to-display[b-aqvrl2yjxd]{
+    max-width: 30%;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.characters-container[b-aqvrl2yjxd]{
+    display: flex; flex-wrap: wrap;   max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (max-width: 600px) {
+    .characters-container[b-aqvrl2yjxd]{
+        display: flow;
+    }
+    
+}
+/* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/CharacterSelector.razor.rz.scp.css */
+.image-box[b-ipw2vvjatv] {
+
+    border-radius: 15px; /* Controls the curvature of the edges */
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
+    background-color: #f0f0f0; /* Optional: adds a background color */
+}
+
+.image-box img[b-ipw2vvjatv] {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px; /* Match this to the box's border-radius */
+}
+p[b-ipw2vvjatv] {
+    margin-left: 10px;
+    font-weight: bold;
+    margin-bottom: 0; /* Reduce space between paragraphs */
+    font-size: 14px;     /* Reduce paragraph font size */
+}

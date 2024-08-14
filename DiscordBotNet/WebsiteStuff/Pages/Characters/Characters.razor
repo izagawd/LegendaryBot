@@ -1,6 +1,61 @@
 @page "/characters"
-<h3>Characters</h3>
+@using System.Security.Claims
+@using DiscordBotNet.Database
+@using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
+@using DiscordBotNet.WebsiteStuff.Components.Navigation
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.EntityFrameworkCore
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject PostgreSqlContext DbContext
+@code{
 
-@code {
+    private ClaimsPrincipal user;
+    private Character[]? CharacterCollection;
+
+    private Character[]? UsingCharacterCollection;
     
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        user = authState.User;
+        var discordId = user.GetDiscordUserId();
+        var anony = await DbContext.UserData
+            .AsNoTrackingWithIdentityResolution()
+            .Where(i => i.DiscordId == discordId)
+            .Include(i => i.Blessings)
+            .Select(i =>
+                new { i.Characters, i })
+            .FirstOrDefaultAsync();
+        if (anony is not null)
+        {
+            CharacterCollection = anony.Characters.ToArray();
+        }
+        else
+        {
+            CharacterCollection = [];
+        }
+        UsingCharacterCollection = CharacterCollection;
+    }
+
 }
+
+<Navigation>
+    @{
+       
+        if (UsingCharacterCollection is not null)
+        {
+            <div class="characters-container">
+                @foreach (var i in CharacterCollection)
+                {
+                    <div class="character-to-display">
+                        <CharacterSelector Character="i"  Size="150"/>
+                    </div>
+                }
+            </div>
+  
+        }
+
+    }
+
+
+</Navigation>
