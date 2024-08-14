@@ -1,6 +1,25 @@
+@using DiscordBotNet.Extensions
+@using Microsoft.AspNetCore.Components.Web
 
 
 
+<p role="status">Current count: @currentCount</p>
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+
+private int currentCount = 0;
+
+private void IncrementCount()
+{
+currentCount++;
+currentCount.Print();
+}
+}
+
+@if (false)
+{
+    
 <div  id ="navigation_super">
     <div id="navigation">
         <a href="/" class="navigation_button" id="navigation_home_button"><h1>Home</h1></a>
@@ -12,6 +31,8 @@
         <h1 class="navigation_button">Settings</h1>
     </div>
 </div>
+}
+
 <style>
     #navigation{
         position: absolute;

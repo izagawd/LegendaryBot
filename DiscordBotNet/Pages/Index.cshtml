@@ -5,7 +5,11 @@
 
 
 
+@using DiscordBotNet.Extensions
 @using DiscordBotNet.Pages.WebComponents
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model DiscordBotNet.Pages.IndexModel
 @{
     Layout = "Shared/_NavigationLayout";
@@ -18,8 +22,7 @@
 <body>
 
 <div id="welcome_div">
-    <component type="typeof(NavigationBar)" render-mode="Static"/>
-
+    <component type="typeof(NavigationBar)" render-mode="ServerPrerendered"/>
 </div>
 
 </body>

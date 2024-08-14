@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Security.Claims;
 using AspNet.Security.OAuth.Discord;
 using DiscordBotNet.Database;
+using DiscordBotNet.Pages.WebComponents;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -45,6 +46,10 @@ public static class Website
     {
 
         services.AddRazorPages();
+        services.AddRazorComponents()
+            .AddInteractiveServerComponents()
+            .AddInteractiveWebAssemblyComponents();
+        
         services.AddDbContext<PostgreSqlContext>();
         services.AddSession(i =>
             {
@@ -121,6 +126,9 @@ public static class Website
         ConfigureServices(builder.Services);
 
         var app = builder.Build();
+        app.MapRazorComponents<NavigationBar>()
+            .AddInteractiveServerRenderMode()
+            .AddInteractiveWebAssemblyRenderMode();
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
