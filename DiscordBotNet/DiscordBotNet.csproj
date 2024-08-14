@@ -46,6 +46,10 @@
     <Folder Include="LegendaryBot\Commands\GearFarmStuffs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="Pages\WebComponents\App.razor" />
+  </ItemGroup>
+
 
 
 </Project>
