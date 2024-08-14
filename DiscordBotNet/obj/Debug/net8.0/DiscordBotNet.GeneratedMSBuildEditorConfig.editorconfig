@@ -23,24 +23,16 @@ build_property.EffectiveAnalysisLevelStyle = 8.0
 build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXEFwcC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXENvdW50ZXIucmF6b3I=
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Characters/Characters.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXENoYXJhY3RlcnNcQ2hhcmFjdGVycy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXEVycm9yLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Home.razor]
-build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXEhvbWUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/NavigationBar.razor]
-build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXE5hdmlnYXRpb25CYXIucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXFdlYXRoZXIucmF6b3I=
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Home/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXEhvbWVcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Routes.razor]
@@ -50,3 +42,7 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXF9JbXBvcnRzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Components/Navigation.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXENvbXBvbmVudHNcTmF2aWdhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-i4ugzykgxb

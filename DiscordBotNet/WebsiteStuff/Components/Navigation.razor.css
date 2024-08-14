@@ -1,15 +1,14 @@
-/* _content/DiscordBotNet/WebsiteStuff/Components/Navigation.razor.rz.scp.css */
-body[b-i4ugzykgxb] {
+body {
     background-color: #fbfbfb;
 }
 @media (min-width: 991.98px) {
-    main[b-i4ugzykgxb] {
+    main {
         padding-left: 240px;
     }
 }
 
 /* Sidebar */
-.sidebar[b-i4ugzykgxb] {
+.sidebar {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -21,16 +20,16 @@ body[b-i4ugzykgxb] {
 }
 
 @media (max-width: 991.98px) {
-    .sidebar[b-i4ugzykgxb] {
+    .sidebar {
         width: 100%;
     }
 }
-.sidebar .active[b-i4ugzykgxb] {
+.sidebar .active {
     border-radius: 5px;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 }
 
-.sidebar-sticky[b-i4ugzykgxb] {
+.sidebar-sticky {
     position: relative;
     top: 0;
     height: calc(100vh - 48px);

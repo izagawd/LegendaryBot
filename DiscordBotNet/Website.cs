@@ -145,9 +145,12 @@ public static class Website
         app.UseRouting();
         app.UseAntiforgery();
         app.UseAuthorization();
+      
         app.MapRazorComponents<App>()
             .AddInteractiveServerRenderMode()
             .AddInteractiveWebAssemblyRenderMode();  
+
+  
      
         app.UseEndpoints(endpoints =>
         {

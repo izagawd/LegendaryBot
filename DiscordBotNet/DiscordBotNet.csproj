@@ -49,6 +49,8 @@
     <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\WebComponents\NavigationBar.razor" />
+    <_ContentIncludedByDefault Remove="WebsiteStuff\Pages\Layout\MainLayout.razor" />
+    <_ContentIncludedByDefault Remove="WebsiteStuff\Pages\Layout\NavMenu.razor" />
   </ItemGroup>
 
   <ItemGroup>
