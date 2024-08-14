@@ -1,11 +1,13 @@
 @page "/characters"
 @using System.Security.Claims
 @using DiscordBotNet.Database
+@using DiscordBotNet.Extensions
 @using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 @using DiscordBotNet.WebsiteStuff.Components.Navigation
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.EntityFrameworkCore
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@rendermode InteractiveServer
 @inject PostgreSqlContext DbContext
 @code{
 
@@ -34,25 +36,44 @@
         {
             CharacterCollection = [];
         }
+
+        "yo".Print();
         UsingCharacterCollection = CharacterCollection;
     }
 
+    private void FilterWithName(string name)
+    {
+ 
+        UsingCharacterCollection = CharacterCollection.Where(i => i.Name.ToLower().Contains(name.ToLower())).ToArray();
+     
+    }
+    
+    private string inputValue;
 }
 
 <Navigation>
+    <button @onclick="() =>  Console.WriteLine('\n')">frfrf</button>
+    <p>deded</p>
+    <div class="filterer">
+
+        <input type="text" @onchange="args => FilterWithName(args.Value?.ToString())"/>
+        <p>@inputValue</p>
+    </div>
     @{
-       
+        
         if (UsingCharacterCollection is not null)
         {
+
+
             <div class="characters-container">
-                @foreach (var i in CharacterCollection)
+                @foreach (var i in UsingCharacterCollection)
                 {
                     <div class="character-to-display">
-                        <CharacterSelector Character="i"  Size="150"/>
+                        <CharacterSelector Character="i" Size="200"/>
                     </div>
                 }
             </div>
-  
+
         }
 
     }

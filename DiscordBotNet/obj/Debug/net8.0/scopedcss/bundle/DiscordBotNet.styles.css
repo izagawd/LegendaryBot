@@ -298,19 +298,29 @@ li a:hover:not(.active)[b-y07mak7flh] {
 /* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/Characters.razor.rz.scp.css */
 .character-to-display[b-aqvrl2yjxd]{
     max-width: 30%;
-    margin-right: 20px;
-    margin-bottom: 20px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+.filterer[b-aqvrl2yjxd]{
+
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: red; /* Optional: Change to your desired background color */
+    padding: 0px; /* Optional: Adjust padding */
+    margin: 0;
+    height: 80px;
+    display: flex;
+    
 }
 .characters-container[b-aqvrl2yjxd]{
     display: flex; flex-wrap: wrap;   max-width: fit-content;
     margin-left: auto;
     margin-right: auto;
-}
-@media (max-width: 600px) {
-    .characters-container[b-aqvrl2yjxd]{
-        display: flow;
-    }
-    
+    overflow: auto;
+
+    height: 100vh;
 }
 /* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/CharacterSelector.razor.rz.scp.css */
 .image-box[b-ipw2vvjatv] {

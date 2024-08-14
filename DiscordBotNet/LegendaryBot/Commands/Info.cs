@@ -23,7 +23,7 @@ public class Info : GeneralCommandClass
         if(author is null) author = ctx.User;
         
         var userData = await DatabaseContext.UserData
-            .AsNoTracking()
+            .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Items.Where(j => j is Coin || j is DivineShard || j is Stamina))
             .FirstOrDefaultAsync(i => i.DiscordId == author.Id);
 
