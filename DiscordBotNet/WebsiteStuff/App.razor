@@ -3,10 +3,17 @@
 
 <head>
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css"/>
+
+    @{
+        const string stylesCss = nameof(DiscordBotNet) + ".styles.css";
+    }
+    <link rel="stylesheet" href="@stylesCss"/>
+    <HeadOutlet/>
 </head>
 
 <body>
 <Routes/>
+<link href="AssemblyName.styles.css" rel="stylesheet">
 <script src="_framework/blazor.web.js"></script>
 </body>
     

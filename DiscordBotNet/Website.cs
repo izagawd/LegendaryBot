@@ -123,6 +123,7 @@ public static class Website
     public static async Task StartAsync(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        builder.WebHost.UseStaticWebAssets();
         ConfigureServices(builder.Services);
 
         var app = builder.Build();
