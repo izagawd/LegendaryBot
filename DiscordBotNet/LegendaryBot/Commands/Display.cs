@@ -234,7 +234,7 @@ public class Display : GeneralCommandClass
     public async ValueTask ExecuteDisplayGears(CommandContext context)
     {
         var userData = await DatabaseContext.UserData
-          
+            .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Gears)
             .ThenInclude(i => i.Character)
             .Include(i => i.Gears)
