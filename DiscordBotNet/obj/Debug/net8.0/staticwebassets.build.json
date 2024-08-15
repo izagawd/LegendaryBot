@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QaSNR/W5g4hpbE+DNNwVkTXvoL3i969DC2153S42T0Q=",
+  "Hash": "wCYSb7rjwi7rzN9LkhOznZQa2ROW3NG2Oc3eqz5yfiE=",
   "Source": "DiscordBotNet",
   "BasePath": "_content/DiscordBotNet",
   "Mode": "Default",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
-      "Fingerprint": "oor5708w6u",
-      "Integrity": "mP2Jd+R5kBOODwUigMJBBFEvaYPL64BUJSGoidyit7Q=",
+      "Fingerprint": "bqu4xcesua",
+      "Integrity": "bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css"
@@ -52,8 +52,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "oor5708w6u",
-      "Integrity": "mP2Jd+R5kBOODwUigMJBBFEvaYPL64BUJSGoidyit7Q=",
+      "Fingerprint": "bqu4xcesua",
+      "Integrity": "bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css"
@@ -5792,6 +5792,96 @@
       ]
     },
     {
+      "Route": "DiscordBotNet.bqu4xcesua.bundle.scp.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8352"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2024 05:16:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bqu4xcesua"
+        },
+        {
+          "Name": "label",
+          "Value": "DiscordBotNet.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc="
+        }
+      ]
+    },
+    {
+      "Route": "DiscordBotNet.bqu4xcesua.styles.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8352"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2024 05:16:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bqu4xcesua"
+        },
+        {
+          "Name": "label",
+          "Value": "DiscordBotNet.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc="
+        }
+      ]
+    },
+    {
       "Route": "DiscordBotNet.bundle.scp.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
       "Selectors": [],
@@ -5802,7 +5892,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8418"
+          "Value": "8352"
         },
         {
           "Name": "Content-Type",
@@ -5810,11 +5900,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"mP2Jd+R5kBOODwUigMJBBFEvaYPL64BUJSGoidyit7Q=\""
+          "Value": "\"bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 15 Aug 2024 00:27:33 GMT"
+          "Value": "Thu, 15 Aug 2024 05:16:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5824,97 +5914,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-mP2Jd+R5kBOODwUigMJBBFEvaYPL64BUJSGoidyit7Q="
-        }
-      ]
-    },
-    {
-      "Route": "DiscordBotNet.oor5708w6u.bundle.scp.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "8418"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"mP2Jd+R5kBOODwUigMJBBFEvaYPL64BUJSGoidyit7Q=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 15 Aug 2024 00:27:33 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "oor5708w6u"
-        },
-        {
-          "Name": "label",
-          "Value": "DiscordBotNet.bundle.scp.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-mP2Jd+R5kBOODwUigMJBBFEvaYPL64BUJSGoidyit7Q="
-        }
-      ]
-    },
-    {
-      "Route": "DiscordBotNet.oor5708w6u.styles.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "8418"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"mP2Jd+R5kBOODwUigMJBBFEvaYPL64BUJSGoidyit7Q=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 15 Aug 2024 00:27:33 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "oor5708w6u"
-        },
-        {
-          "Name": "label",
-          "Value": "DiscordBotNet.styles.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-mP2Jd+R5kBOODwUigMJBBFEvaYPL64BUJSGoidyit7Q="
+          "Value": "sha256-bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc="
         }
       ]
     },
@@ -5929,7 +5929,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8418"
+          "Value": "8352"
         },
         {
           "Name": "Content-Type",
@@ -5937,11 +5937,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"mP2Jd+R5kBOODwUigMJBBFEvaYPL64BUJSGoidyit7Q=\""
+          "Value": "\"bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 15 Aug 2024 00:27:33 GMT"
+          "Value": "Thu, 15 Aug 2024 05:16:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5951,7 +5951,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-mP2Jd+R5kBOODwUigMJBBFEvaYPL64BUJSGoidyit7Q="
+          "Value": "sha256-bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc="
         }
       ]
     },

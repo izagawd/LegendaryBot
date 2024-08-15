@@ -242,21 +242,17 @@ p[b-j0wxam1tjm] {
     height: 66%;
 }  
 .filterer[b-aqvrl2yjxd]{
-
-    box-sizing: border-box;
+    
+    
 
     top: 0;
     left: 0;
-
+    width: 100%;
     border: 1px solid;
-    padding: 0;
-    align-items: center;
-    text-align: center;
-    
-    width: inherit;
-    margin: 0;
+    margin: auto;
     height: 80px;
     display: flex;
+    justify-content:center;
     
 }
 .characters-container[b-aqvrl2yjxd]{
