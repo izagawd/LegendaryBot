@@ -4,11 +4,13 @@
 @using DiscordBotNet.Extensions
 @using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 @using DiscordBotNet.WebsiteStuff.Components.Navigation
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.EntityFrameworkCore
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @rendermode InteractiveServer
 @inject PostgreSqlContext DbContext
+@attribute [Authorize]
 @code{
 
     private ClaimsPrincipal user;
@@ -96,7 +98,7 @@ margin-left: 30px">
         <input  type="checkbox" style="width:25px; height:25px; align-self: center; margin-left: 30px;" @onchange="b => { reverseOrder = (bool) b.Value ; RefreshFilters(); }"></input>
     </div>
     @{
-        "yo".Print();
+   
         if (UsingCharacterCollection is not null)
         {
 
@@ -105,7 +107,7 @@ margin-left: 30px">
                 @foreach (var i in UsingCharacterCollection)
                 {
                     <div class="character-to-display">
-                        <CharacterSelector Character="i" Size="200"/>
+                        <CharacterIconItem Character="i"/>
                     </div>
                 }
             </div>

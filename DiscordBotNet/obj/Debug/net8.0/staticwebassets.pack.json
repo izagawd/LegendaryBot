@@ -6,7 +6,7 @@
     },
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
-      "PackagePath": "staticwebassets\\DiscordBotNet.9qay2mh4bn.bundle.scp.css"
+      "PackagePath": "staticwebassets\\DiscordBotNet.oor5708w6u.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\app.css",
@@ -79,6 +79,10 @@
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\characters\\Thug.png",
       "PackagePath": "staticwebassets\\battle_images\\characters\\Thug.png"
+    },
+    {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\gears\\Weapon.png",
+      "PackagePath": "staticwebassets\\battle_images\\gears\\Weapon.png"
     },
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\battle_images\\items\\AdventurersKnowledge.png",

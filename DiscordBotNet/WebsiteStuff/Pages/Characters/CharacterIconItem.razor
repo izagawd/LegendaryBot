@@ -4,7 +4,8 @@
 
 @code {
     [Parameter] public Character Character { get; set; }
-    [Parameter] public int Size { get; set; } = 50;
+    [Parameter] public int Size { get; set; } = 200;
+    [Parameter] public bool Linkable { get; set; } = true;
 }
 <div>
     @{
@@ -28,7 +29,19 @@
                 throw new ArgumentOutOfRangeException();
         }
     }
-    <img src="@Character.ImageUrl" style=" background-color: @color;" width="@Size" height="@Size" class="image-box"/>
+   
+    @if (Linkable)
+    {
+        <a href="/character-info/@Character.Number">
+            <img src="@Character.ImageUrl" style=" background-color: @color;" width="@Size" height="@Size" class="image-box"/> 
+        </a>
+    }
+    else
+    {
+        <img src="@Character.ImageUrl" style=" background-color: @color;" width="@Size" height="@Size" class="image-box"/>
+    }
+
+    
     <p>@Character.Name</p>
     <p>Level: @Character.Level</p>
     <p>Number: @Character.Number</p>

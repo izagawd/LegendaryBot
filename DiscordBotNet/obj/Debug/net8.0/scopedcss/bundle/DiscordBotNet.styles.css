@@ -201,6 +201,28 @@ main[b-ho4t6m66vw] {
         overflow-y: auto;
     }
 }
+/* _content/DiscordBotNet/WebsiteStuff/Pages/CharacterInfo/CharacterInfo.razor.rz.scp.css */
+/* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/CharacterIconItem.razor.rz.scp.css */
+.image-box[b-j0wxam1tjm] {
+
+    border-radius: 10px; /* Controls the curvature of the edges */
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
+    background-color: #f0f0f0; /* Optional: adds a background color */
+}
+
+.image-box img[b-j0wxam1tjm] {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px; /* Match this to the box's border-radius */
+}
+p[b-j0wxam1tjm] {
+    margin-left: 10px;
+    font-weight: bold;
+    margin-bottom: 0; /* Reduce space between paragraphs */
+    font-size: 20px;     /* Reduce paragraph font size */
+}
 /* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/Characters.razor.rz.scp.css */
 .character-to-display[b-aqvrl2yjxd]{
     max-width: 30%;
@@ -228,7 +250,9 @@ main[b-ho4t6m66vw] {
 
     border: 1px solid;
     padding: 0;
-    align-self: center;
+    align-items: center;
+    text-align: center;
+    
     width: inherit;
     margin: 0;
     height: 80px;
@@ -238,13 +262,14 @@ main[b-ho4t6m66vw] {
 .characters-container[b-aqvrl2yjxd]{
     display: flex; flex-wrap: wrap;   max-width: fit-content;
     margin-left: 50px;
+    margin-top: 20px;
     margin-right: auto;
     overflow: auto;
 
     height: 100vh;
 }
-/* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/CharacterSelector.razor.rz.scp.css */
-.image-box[b-ipw2vvjatv] {
+/* _content/DiscordBotNet/WebsiteStuff/Pages/Gears/GearIconItem.razor.rz.scp.css */
+.image-box[b-s9gvc6ccel] {
 
     border-radius: 10px; /* Controls the curvature of the edges */
     overflow: hidden;
@@ -252,13 +277,13 @@ main[b-ho4t6m66vw] {
     background-color: #f0f0f0; /* Optional: adds a background color */
 }
 
-.image-box img[b-ipw2vvjatv] {
+.image-box img[b-s9gvc6ccel] {
     width: 100%;
     height: auto;
     display: block;
     border-radius: 10px; /* Match this to the box's border-radius */
 }
-p[b-ipw2vvjatv] {
+p[b-s9gvc6ccel] {
     margin-left: 10px;
     font-weight: bold;
     margin-bottom: 0; /* Reduce space between paragraphs */

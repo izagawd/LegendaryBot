@@ -27,6 +27,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXEVycm9yLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Gears/Gears.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXEdlYXJzXEdlYXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Home/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXEhvbWVcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -47,10 +51,18 @@ build_metadata.AdditionalFiles.CssScope = b-ho4t6m66vw
 build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXENvbXBvbmVudHNcTmF2aWdhdGlvblxOYXZNZW51LnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-c0ypf63qhl
 
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/CharacterInfo/CharacterInfo.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXENoYXJhY3RlckluZm9cQ2hhcmFjdGVySW5mby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-ye6fqlerfl
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Characters/CharacterIconItem.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXENoYXJhY3RlcnNcQ2hhcmFjdGVySWNvbkl0ZW0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-j0wxam1tjm
+
 [C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Characters/Characters.razor]
 build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXENoYXJhY3RlcnNcQ2hhcmFjdGVycy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-aqvrl2yjxd
 
-[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Characters/CharacterSelector.razor]
-build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXENoYXJhY3RlcnNcQ2hhcmFjdGVyU2VsZWN0b3IucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-ipw2vvjatv
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Gears/GearIconItem.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXEdlYXJzXEdlYXJJY29uSXRlbS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-s9gvc6ccel

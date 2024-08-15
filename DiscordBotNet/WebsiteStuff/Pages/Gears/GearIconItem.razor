@@ -1,0 +1,33 @@
+@using DiscordBotNet.LegendaryBot
+@using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears
+
+
+@code {
+    [Parameter] public int Size { get; set; } = 200;
+    [Parameter] public Gear? Gear { get; set; } 
+}
+<div>
+    @{
+        
+        var color = "white";
+        switch (Gear?.Rarity)
+        {
+        
+            case Rarity.TwoStar:
+                color = "green";
+                break;
+            case Rarity.ThreeStar:
+                color = "blue";
+                break;
+            case Rarity.FourStar:
+                color = "purple";
+                break;
+            case Rarity.FiveStar:
+                color = "yellow";
+                break;
+        }
+    }
+    <img src="@Gear?.ImageUrl" style=" background-color: @color;" width="@Size" height="@Size" class="image-box"/>
+    <p>@Gear?.Name</p>
+    <p>Number: @Gear?.Number</p>
+</div>

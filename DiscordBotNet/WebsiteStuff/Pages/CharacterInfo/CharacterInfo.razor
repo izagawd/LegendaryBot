@@ -1,0 +1,80 @@
+@page "/character-info/{CharacterNumber:int}"
+@using System.Security.Claims
+@using DiscordBotNet.Database
+@using DiscordBotNet.Extensions
+@using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
+@using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears
+@using DiscordBotNet.WebsiteStuff.Components.Navigation
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.EntityFrameworkCore
+@using DiscordBotNet.WebsiteStuff.Pages.Characters
+@using DiscordBotNet.WebsiteStuff.Pages.Gears
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@rendermode InteractiveServer
+@inject PostgreSqlContext DbContext
+@code {
+    
+    [Parameter] public int CharacterNumber { get; set; }
+    private ClaimsPrincipal user;
+    
+    public Character  Character { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        user = authState.User;
+        CharacterNumber.Print();
+        var discordId = user.GetDiscordUserId();
+        Character = await DbContext.Characters.Where(i => i.UserData.DiscordId == discordId
+                                                          && i.Number == CharacterNumber)
+            .Include(i => i.Blessing)
+            .Include(i => i.Gears)
+            .ThenInclude(i => i.Stats)
+            .Include(i => i.UserData)
+            .FirstOrDefaultAsync();
+        
+
+    }
+
+}
+@functions {
+
+}
+<Navigation>
+    @if (Character is not null)
+    {
+        <div style="  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto; display: flex; margin-top: 100px">
+            <div>
+                @{
+                    foreach (var i in (Type[])[typeof(Weapon),typeof(Helmet),typeof(Armor)])
+                    {
+                        Gear? gear = Character.Gears.FirstOrDefault(j => j.GetType() == i);
+                        <div style="margin-bottom: 30px;">
+                            <GearIconItem Size="150" Gear="gear"></GearIconItem>
+                        </div>
+                    }
+                    
+
+                }
+            </div>
+            <div style="margin-left: 100px; margin-top: 200px; margin-right: 100px">
+                <CharacterIconItem Character="Character"></CharacterIconItem>
+            </div>
+            <div>
+                @{
+                    foreach (var i in (Type[])[typeof(Necklace),typeof(Ring),typeof(Boots)])
+                    {
+                        Gear? gear = Character.Gears.FirstOrDefault(j => j.GetType() == i);
+                        <div style="margin-bottom: 30px;">
+                            <GearIconItem Size="150" Gear="gear"></GearIconItem>
+                        </div>
+                    }
+                }
+ 
+            </div>
+        </div>
+    }
+    
+</Navigation>
