@@ -3,6 +3,7 @@ using DiscordBotNet.Database;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Entities;
 using DSharpPlus.Commands;
+using Functionality;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

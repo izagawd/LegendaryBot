@@ -2,10 +2,11 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Extensions.Caching.Memory;
+using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using Image = SixLabors.ImageSharp.Image;
 
-namespace DiscordBotNet.LegendaryBot;
+namespace Functionality;
 
 public static class BasicFunctionality
 {
@@ -71,7 +72,7 @@ public static class BasicFunctionality
                     if (cert is not null && !cert.Verify())
                     {
                         return httpRequestMessage.RequestUri is not null
-                               && httpRequestMessage.RequestUri.ToString().Contains(Website.DomainName);
+                               && httpRequestMessage.RequestUri.ToString().Contains(WebsiteNameBuilder.WebsiteDomainName.DomainName);
                     }
                     return cert is not null;
                 };
@@ -80,7 +81,7 @@ public static class BasicFunctionality
             var characterImage = await Image.LoadAsync<Rgba32>(memoryStream);
             var entryOptions = EntryOptions;
 
-            if (!url.Contains(Website.DomainName))
+            if (!url.Contains(WebsiteNameBuilder.WebsiteDomainName.DomainName))
             {
                 entryOptions = ExpiryEntryOptions;
             }
@@ -91,7 +92,7 @@ public static class BasicFunctionality
         catch(HttpRequestException e)
         {
     
-            var alternateImage =  await GetImageFromUrlAsync($"{Website.DomainName}/battle_images/moves/guilotine.png");
+            var alternateImage =  await GetImageFromUrlAsync($"{WebsiteNameBuilder.WebsiteDomainName.DomainName}/battle_images/moves/guilotine.png");
             CachedImages.Set(url,alternateImage,EntryOptions);
             return alternateImage.Clone();
         } 

@@ -1,6 +1,9 @@
-﻿using DSharpPlus.Entities;
+﻿
 
-namespace DiscordBotNet.Extensions;
+
+using DSharpPlus.Entities;
+
+namespace Functionality;
 
 public static class BasicExtension
 {
@@ -42,9 +45,10 @@ public static class BasicExtension
         return string.Join(seperator, enumerable);
     }
    
-    public static Color ToImageSharpColor(this DiscordColor color)
+    public static SixLabors.ImageSharp.Color ToImageSharpColor(this DiscordColor color)
     {
-        return Color.ParseHex(color.ToString());
+
+        return SixLabors.ImageSharp.Color.ParseHex(color.ToString());
     }
 
     public static void CancelIfNotDisposed(this CancellationTokenSource cancellationTokenSource)

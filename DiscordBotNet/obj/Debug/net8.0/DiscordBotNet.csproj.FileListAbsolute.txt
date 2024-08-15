@@ -230,3 +230,7 @@ C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\CharacterInfo\CharacterInfo.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\Characters\CharacterIconItem.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\Gears\GearIconItem.razor.rz.scp.css
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\Functionality.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\WebsiteNameBuilder.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\Functionality.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\WebsiteNameBuilder.pdb

@@ -33,6 +33,7 @@ using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.Commands.Processors.TextCommands;
 using DSharpPlus.Commands.Processors.TextCommands.Parsing;
 using DSharpPlus.VoiceNext;
+using Functionality;
 using Microsoft.EntityFrameworkCore;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 using DiscordEmbedBuilder = DSharpPlus.Entities.DiscordEmbedBuilder;

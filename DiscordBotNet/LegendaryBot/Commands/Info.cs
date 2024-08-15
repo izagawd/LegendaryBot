@@ -5,6 +5,7 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using Functionality;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;

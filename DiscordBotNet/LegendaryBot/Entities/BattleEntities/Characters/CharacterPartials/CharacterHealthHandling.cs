@@ -1,6 +1,7 @@
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.Results;
+using Functionality;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 

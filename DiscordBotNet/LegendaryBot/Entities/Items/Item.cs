@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using DiscordBotNet.Database.Models;
+using Functionality;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SixLabors.Fonts;

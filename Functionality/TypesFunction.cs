@@ -1,11 +1,7 @@
 using System.Collections.Concurrent;
-using System.Collections.Immutable;
-using System.Numerics;
 using System.Reflection;
-using DiscordBotNet.Extensions;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
-namespace DiscordBotNet.LegendaryBot;
+namespace Functionality;
 
 
 [AttributeUsage(AttributeTargets.Method)]

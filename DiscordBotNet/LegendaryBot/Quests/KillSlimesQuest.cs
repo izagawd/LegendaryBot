@@ -6,6 +6,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPar
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Entities;
 using DSharpPlus.Commands;
+using Functionality;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Quests;

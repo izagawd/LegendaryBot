@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Moves;
+using Functionality;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;

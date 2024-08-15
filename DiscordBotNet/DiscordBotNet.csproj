@@ -57,6 +57,10 @@
     <Folder Include="LegendaryBot\Commands\GearFarmStuffs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Functionality\Functionality.csproj" />
+  </ItemGroup>
+
 
 
 </Project>

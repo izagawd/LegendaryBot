@@ -1,4 +1,6 @@
-﻿namespace DiscordBotNet.LegendaryBot;
+﻿using Functionality;
+
+namespace DiscordBotNet.LegendaryBot;
 
 public static  class BattleFunctionality
 {

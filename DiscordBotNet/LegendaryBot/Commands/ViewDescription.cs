@@ -6,6 +6,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPar
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using Functionality;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;

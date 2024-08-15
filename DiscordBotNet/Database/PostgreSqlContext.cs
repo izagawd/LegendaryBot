@@ -9,6 +9,7 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Quests;
+using Functionality;
 using Microsoft.EntityFrameworkCore;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 

@@ -2,6 +2,7 @@
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
+using Functionality;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;

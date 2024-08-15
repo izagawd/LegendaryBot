@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBotNet", "DiscordBotNet\DiscordBotNet.csproj", "{92DE0F58-0ABD-4204-9534-F1100901B50F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientSideWebsite", "ClientSideWebsite\ClientSideWebsite.csproj", "{267DE867-013F-4CA0-8332-8BD58006161C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functionality", "Functionality\Functionality.csproj", "{813B2071-81C2-46B7-ABAF-E4A8F5123172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebsiteNameBuilder", "WebsiteNameBuilder\WebsiteNameBuilder.csproj", "{3FBD24FE-D97D-4A5D-869C-1C1C990112E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +18,17 @@ Global
 		{92DE0F58-0ABD-4204-9534-F1100901B50F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92DE0F58-0ABD-4204-9534-F1100901B50F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92DE0F58-0ABD-4204-9534-F1100901B50F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{267DE867-013F-4CA0-8332-8BD58006161C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267DE867-013F-4CA0-8332-8BD58006161C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267DE867-013F-4CA0-8332-8BD58006161C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267DE867-013F-4CA0-8332-8BD58006161C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{813B2071-81C2-46B7-ABAF-E4A8F5123172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{813B2071-81C2-46B7-ABAF-E4A8F5123172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{813B2071-81C2-46B7-ABAF-E4A8F5123172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{813B2071-81C2-46B7-ABAF-E4A8F5123172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FBD24FE-D97D-4A5D-869C-1C1C990112E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FBD24FE-D97D-4A5D-869C-1C1C990112E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FBD24FE-D97D-4A5D-869C-1C1C990112E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FBD24FE-D97D-4A5D-869C-1C1C990112E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

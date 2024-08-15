@@ -9,6 +9,7 @@ using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using Functionality;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;

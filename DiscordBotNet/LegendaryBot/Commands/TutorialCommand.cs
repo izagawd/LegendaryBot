@@ -3,6 +3,7 @@ using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using Functionality;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;

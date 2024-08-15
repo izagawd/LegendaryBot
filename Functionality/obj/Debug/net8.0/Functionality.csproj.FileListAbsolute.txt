@@ -1,0 +1,16 @@
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\bin\Debug\net8.0\Functionality.deps.json
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\bin\Debug\net8.0\Functionality.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\bin\Debug\net8.0\Functionality.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\bin\Debug\net8.0\WebsiteNameBuilder.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\bin\Debug\net8.0\WebsiteNameBuilder.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\obj\Debug\net8.0\Functionality.csproj.AssemblyReference.cache
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\obj\Debug\net8.0\Functionality.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\obj\Debug\net8.0\Functionality.AssemblyInfoInputs.cache
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\obj\Debug\net8.0\Functionality.AssemblyInfo.cs
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\obj\Debug\net8.0\Functionality.csproj.CoreCompileInputs.cache
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\obj\Debug\net8.0\Functionality.sourcelink.json
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\obj\Debug\net8.0\Function.08CD313B.Up2Date
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\obj\Debug\net8.0\Functionality.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\obj\Debug\net8.0\refint\Functionality.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\obj\Debug\net8.0\Functionality.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\Functionality\obj\Debug\net8.0\ref\Functionality.dll

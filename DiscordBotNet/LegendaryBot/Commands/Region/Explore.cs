@@ -10,6 +10,7 @@ using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
+using Functionality;
 using Microsoft.EntityFrameworkCore;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
