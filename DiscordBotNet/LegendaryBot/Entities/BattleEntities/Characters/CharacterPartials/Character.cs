@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Concurrent;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
@@ -26,6 +28,7 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
     {
 
         entity.HasKey(i => i.Id);
+
         entity.HasIndex(i => new{i.Number, i.UserDataId})
             .IsUnique();
         // generated on add even though a trigger handles it, just in case the trigger doesn't work
@@ -61,7 +64,24 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 {
 
 
+    private static ConcurrentDictionary<int, Character> _cachedDefaultCharacterTypeIds = [];
 
+    public static Character GetDefaultCharacterFromTypeId(int typeId)
+    {
+        if (!_cachedDefaultCharacterTypeIds.TryGetValue(typeId, out var character))
+        {
+            character = TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
+                .FirstOrDefault(i => i.TypeId == typeId);
+            if (character is null)
+            {
+                throw new Exception($"Character with type id {character.TypeId} not found");
+            }
+
+            _cachedDefaultCharacterTypeIds[typeId] = character;
+        }
+
+        return character;
+    }
     /// <summary>
     /// if not null, will assume this character uses super points.
     /// </summary>
