@@ -47,8 +47,7 @@ public static class Website
 
         services.AddRazorPages();
         services.AddRazorComponents()
-            .AddInteractiveServerComponents()
-            .AddInteractiveWebAssemblyComponents();
+            .AddInteractiveServerComponents();
         
         services.AddDbContext<PostgreSqlContext>();
         services.AddSession(i =>
@@ -146,10 +145,9 @@ public static class Website
         app.UseRouting();
         app.UseAntiforgery();
         app.UseAuthorization();
-      
+
         app.MapRazorComponents<App>()
-            .AddInteractiveServerRenderMode()
-            .AddInteractiveWebAssemblyRenderMode();  
+            .AddInteractiveServerRenderMode();
 
   
      
