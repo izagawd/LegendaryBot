@@ -2,17 +2,14 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPar
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.GearSets;
 
-
-
-
-public abstract class GearSet  : INameHaver
+public abstract class GearSet : INameHaver
 {
     public Character Owner { get; set; }
     public bool CanUseFourPiece { get; set; }
-    public abstract int TypeId { get; protected  init; }
-    public abstract string Name { get; }
+    public abstract int TypeId { get; protected init; }
 
     public abstract string TwoPieceDescription { get; }
 
     public abstract string FourPieceDescription { get; }
+    public abstract string Name { get; }
 }

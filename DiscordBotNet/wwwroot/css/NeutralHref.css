@@ -1,8 +1,9 @@
-﻿.the_href{
+﻿.the_href {
     text-decoration: none;
     color: black;
 
 }
-.the_href:hover{
+
+.the_href:hover {
     text-decoration: none;
 }

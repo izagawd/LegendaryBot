@@ -2,9 +2,10 @@
 
 namespace DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
-public class SpeedPercentageModifierArgs: StatsModifierArgs
+public class SpeedPercentageModifierArgs : StatsModifierArgs
 {
-    public SpeedPercentageModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect, valueToChangeWith)
+    public SpeedPercentageModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect,
+        valueToChangeWith)
     {
     }
 }

@@ -2,5 +2,7 @@
 
 public enum MoveUsageType : byte
 {
-    NormalUsage, CounterUsage, MiscellaneousFollowUpUsage
+    NormalUsage,
+    CounterUsage,
+    MiscellaneousFollowUpUsage
 }

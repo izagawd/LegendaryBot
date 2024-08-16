@@ -11,24 +11,24 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class Begin : GeneralCommandClass
 {
-
-
-    private static DiscordTextInputComponent _askForName = new("What is your name?",
+    private static readonly DiscordTextInputComponent _askForName = new("What is your name?",
         "name", TypesFunction.GetDefaultObject<Player>().Name,
         TypesFunction.GetDefaultObject<Player>().Name, min_length: 3, max_length: 15);
 
-    private static DiscordButtonComponent _yes = new DiscordButtonComponent(DiscordButtonStyle.Primary, "yes", "Yes");
-    private static DiscordButtonComponent _no = new DiscordButtonComponent(DiscordButtonStyle.Primary, "no", "No");
-    private static DiscordTextInputComponent _askForGender = new("What's your gender?",
+    private static readonly DiscordButtonComponent _yes = new(DiscordButtonStyle.Primary, "yes", "Yes");
+    private static readonly DiscordButtonComponent _no = new(DiscordButtonStyle.Primary, "no", "No");
+
+    private static readonly DiscordTextInputComponent _askForGender = new("What's your gender?",
         "gender", Gender.Male.ToString(),
         Gender.Male.ToString());
-    [Command("begin"),
-    BotCommandCategory(BotCommandCategory.Battle), Description("Use this Commands to begin your journey")]
+
+    [Command("begin")]
+    [BotCommandCategory(BotCommandCategory.Battle)]
+    [Description("Use this Commands to begin your journey")]
     public async ValueTask Execute(CommandContext ctx)
     {
         DiscordEmbedBuilder embedToBuild = new();
@@ -48,9 +48,8 @@ public class Begin : GeneralCommandClass
         {
             userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);
             await DatabaseContext.SaveChangesAsync();
-           
         }
-           
+
 
         var userColor = userData.Color;
         embedToBuild
@@ -58,32 +57,30 @@ public class Begin : GeneralCommandClass
             .WithColor(userColor);
         if (userData.IsOccupied)
         {
-
             await NotifyAboutOccupiedAsync(ctx);
             return;
         }
 
         if (userData.Tier != Tier.Unranked)
         {
-
             embedToBuild
                 .WithTitle("Hmm")
                 .WithDescription("`You have already begun`");
-     
+
 
             await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedToBuild.Build()));
             return;
         }
-    
-        
+
+
         await MakeOccupiedAsync(userData);
         embedToBuild.WithTitle($"{ctx.User.Username}, ")
             .WithDescription("Are you ready to embark on this journey?");
         await ctx.RespondAsync(new DiscordMessageBuilder()
             .AddEmbed(embedToBuild)
-            .AddComponents([_yes,_no])
+            .AddComponents([_yes, _no])
         );
-        var message =(await ctx.GetResponseAsync())!;
+        var message = (await ctx.GetResponseAsync())!;
         var interactionResult = await message.WaitForButtonAsync(ctx.User, new TimeSpan(0, 10, 0));
         if (interactionResult.TimedOut)
         {
@@ -99,21 +96,19 @@ public class Begin : GeneralCommandClass
                 new DiscordInteractionResponseBuilder().AddEmbed(embedToBuild));
             return;
         }
+
         var modalId = "begin_input_name_modal";
         await interactionResult.Result.Interaction.CreateResponseAsync(
             DiscordInteractionResponseType.Modal,
             new DiscordInteractionResponseBuilder()
                 .WithTitle("Start of your journey, o powerful one")
-                .AddComponents( (IEnumerable<DiscordActionRowComponent>) 
-                    [new DiscordActionRowComponent([_askForName]),new DiscordActionRowComponent([_askForGender])])
+                .AddComponents((IEnumerable<DiscordActionRowComponent>)
+                    [new DiscordActionRowComponent([_askForName]), new DiscordActionRowComponent([_askForGender])])
                 .WithCustomId(modalId));
         var done = await ctx.Client.GetInteractivity()
             .WaitForModalAsync(modalId,
-            ctx.User, new TimeSpan(0, 5, 0));
-        if (done.TimedOut)
-        {
-            return;
-        }
+                ctx.User, new TimeSpan(0, 5, 0));
+        if (done.TimedOut) return;
         userData.Name = done.Result.Values["name"];
 
         var interactionToRespondTo = done.Result.Interaction;
@@ -125,6 +120,7 @@ public class Begin : GeneralCommandClass
                     .WithContent("You can only input male or female for gender"));
             return;
         }
+
         userData.Gender = gottenGender;
         var lily = new Lily();
         lily.Level = 5;
@@ -138,52 +134,49 @@ public class Begin : GeneralCommandClass
             player.UserDataId = userData.Id;
         }
 
-        var thePlayer =(Player)  userData.Characters.First(i => i is Player);
+        var thePlayer = (Player)userData.Characters.First(i => i is Player);
         if (userData.EquippedPlayerTeam is null)
         {
             var playerTeam = new PlayerTeam();
-            
+
             userData.EquippedPlayerTeam = playerTeam;
-            userData.PlayerTeams.AddRange([playerTeam, new PlayerTeam(){TeamName = "Team2"},new PlayerTeam(){TeamName = "Team3"},new PlayerTeam(){TeamName = "Team4"}]);
-        
+            userData.PlayerTeams.AddRange([
+                playerTeam, new PlayerTeam { TeamName = "Team2" }, new PlayerTeam { TeamName = "Team3" },
+                new PlayerTeam { TeamName = "Team4" }
+            ]);
+
             playerTeam.UserDataId = userData.Id;
             playerTeam.UserData = userData;
             userData.EquippedPlayerTeam.Add(lily);
-            
 
-            foreach (var i in userData.PlayerTeams)
-            {
-                i.Add(thePlayer);
-            }
+
+            foreach (var i in userData.PlayerTeams) i.Add(thePlayer);
         }
 
-        if (!userData.EquippedPlayerTeam.Any())
-        {
-            userData.EquippedPlayerTeam.Add(thePlayer);
-        }
+        if (!userData.EquippedPlayerTeam.Any()) userData.EquippedPlayerTeam.Add(thePlayer);
         var coachChad = new CoachChad();
 
         coachChad.Level = 5;
         var coachChadProfile = new DialogueProfile
         {
             CharacterColor = coachChad.Color, CharacterName = coachChad.Name,
-            CharacterUrl = coachChad.ImageUrl,
+            CharacterUrl = coachChad.ImageUrl
         };
         var lilyDialogueProfile = lily.DialogueProfile;
-        
+
         DialogueNormalArgument[] dialogueArguments =
         [
-            new()
+            new DialogueNormalArgument
             {
                 DialogueProfile = coachChadProfile,
                 DialogueTexts =
-                    [
-                        $"Hey {userData.Name}! my name is Chad. So you want to register as an adventurer? That's great!",
-                        "But before you go on your adventure, I would need to confirm if you are strong enough to **Battle**!",
-                        "Lily will accompany you just for this fight. When you feel like you have gotten the hang of **BATTLE**, click on **FORFEIT!**"
-                    ]
+                [
+                    $"Hey {userData.Name}! my name is Chad. So you want to register as an adventurer? That's great!",
+                    "But before you go on your adventure, I would need to confirm if you are strong enough to **Battle**!",
+                    "Lily will accompany you just for this fight. When you feel like you have gotten the hang of **BATTLE**, click on **FORFEIT!**"
+                ]
             },
-            new()
+            new DialogueNormalArgument
             {
                 DialogueProfile = lilyDialogueProfile,
                 DialogueTexts = [$"Let's give it our all {userData.Name}!"]
@@ -191,20 +184,18 @@ public class Begin : GeneralCommandClass
         ];
 
 
-
         Dialogue theDialogue = new()
         {
             NormalArguments = dialogueArguments,
 
             Title = "Tutorial",
-            RespondInteraction = true,
-
+            RespondInteraction = true
         };
         var result = await theDialogue.LoadAsync(ctx.User, interactionToRespondTo);
 
         if (result.TimedOut)
         {
-            theDialogue = new Dialogue()
+            theDialogue = new Dialogue
             {
                 Title = "Beginning Of Journey",
                 NormalArguments =
@@ -212,16 +203,17 @@ public class Begin : GeneralCommandClass
                     new DialogueNormalArgument
                     {
                         DialogueProfile = coachChadProfile,
-                        DialogueTexts = [
+                        DialogueTexts =
+                        [
                             "I can't believe you slept off..."
-                        ],
+                        ]
                     }
                 ],
                 RemoveButtonsAtEnd = true
             };
 
 
-            await theDialogue.LoadAsync(ctx.User,result.Message);
+            await theDialogue.LoadAsync(ctx.User, result.Message);
             return;
         }
 
@@ -232,7 +224,7 @@ public class Begin : GeneralCommandClass
         coachChad.TotalDefense = 20;
         coachChad.TotalAttack = 1;
         coachChad.TotalSpeed = 100;
-        var battleResult = await new BattleSimulator(userTeam.LoadTeamStats(), 
+        var battleResult = await new BattleSimulator(userTeam.LoadTeamStats(),
             new CharacterTeam(characters: coachChad)).StartAsync(result.Message);
 
         if (battleResult.TimedOut is not null)
@@ -242,7 +234,7 @@ public class Begin : GeneralCommandClass
                 Title = "Begin!",
                 NormalArguments =
                 [
-                    new()
+                    new DialogueNormalArgument
                     {
                         DialogueProfile = coachChadProfile,
                         DialogueTexts = ["I can't believe you slept off during a battle..."]
@@ -250,18 +242,17 @@ public class Begin : GeneralCommandClass
                 ],
                 RemoveButtonsAtEnd = true
             };
-    
-            
+
 
             await theDialogue.LoadAsync(ctx.User, result.Message);
             return;
         }
 
-        theDialogue = new Dialogue()
+        theDialogue = new Dialogue
         {
-
-            NormalArguments =        [
-                new ()
+            NormalArguments =
+            [
+                new DialogueNormalArgument
                 {
                     DialogueProfile = coachChadProfile,
                     DialogueTexts =
@@ -271,28 +262,31 @@ public class Begin : GeneralCommandClass
                         "I will see you later then! My coach job is done for today! let's go and report it, lily!"
                     ]
                 },
-                new()
+                new DialogueNormalArgument
                 {
                     DialogueProfile = lilyDialogueProfile,
-                    DialogueTexts = [$"Actually, I want to journey with {userData.Name}. They seem interesting!",
-                    "I hope you don't mind me quitting the job to journey with them"]
-                    
+                    DialogueTexts =
+                    [
+                        $"Actually, I want to journey with {userData.Name}. They seem interesting!",
+                        "I hope you don't mind me quitting the job to journey with them"
+                    ]
                 },
-                new()
+                new DialogueNormalArgument
                 {
                     DialogueProfile = coachChadProfile,
-                    DialogueTexts = [$"Very well, absolutely no problem there. I'll go report for you then",
-                    $"Go have fun with {userData.Name}, lily! and see you later! ***i take my leave***"]
-                    
+                    DialogueTexts =
+                    [
+                        "Very well, absolutely no problem there. I'll go report for you then",
+                        $"Go have fun with {userData.Name}, lily! and see you later! ***i take my leave***"
+                    ]
                 },
-                new()
+                new DialogueNormalArgument
                 {
                     DialogueProfile = lilyDialogueProfile,
-                    DialogueTexts = [$"Now, let's go!"]
-                    
+                    DialogueTexts = ["Now, let's go!"]
                 }
             ],
-            RemoveButtonsAtEnd = false, 
+            RemoveButtonsAtEnd = false,
             RespondInteraction = false,
             Title = "Tutorial"
         };
@@ -302,14 +296,12 @@ public class Begin : GeneralCommandClass
         {
             userData.Tier = Tier.Bronze;
             userData.LastTimeQuestWasChecked = DateTime.UtcNow.AddDays(-1);
-        };
-      
+        }
 
-       
-      
+        ;
 
-      
-        result =  await theDialogue.LoadAsync(ctx.User, result.Message);
+
+        result = await theDialogue.LoadAsync(ctx.User, result.Message);
         if (result.TimedOut)
         {
             theDialogue = new Dialogue
@@ -325,8 +317,7 @@ public class Begin : GeneralCommandClass
 
                         [
                             "You slept off after becoming an adventurer... you are strange..."
-                        ],
-   
+                        ]
                     }
                 ]
             };
@@ -336,15 +327,11 @@ public class Begin : GeneralCommandClass
 
         var rewardText = "";
         if (!userData.Characters.Any(i => i.GetType() == typeof(Lily)))
-        {
             rewardText = userData.ReceiveRewards(new EntityReward([lily]));
-        }
         message = result.Message;
         await DatabaseContext.SaveChangesAsync();
         await message.ModifyAsync(new DiscordMessageBuilder()
             .AddEmbed(embedToBuild.WithTitle("Nice!").WithUser(ctx.User).WithDescription(rewardText)
-            
             ));
- 
     }
 }

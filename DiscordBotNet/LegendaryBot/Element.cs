@@ -2,5 +2,7 @@
 
 public enum Element : byte
 {
-    Fire,Ice, Earth
+    Fire,
+    Ice,
+    Earth
 }

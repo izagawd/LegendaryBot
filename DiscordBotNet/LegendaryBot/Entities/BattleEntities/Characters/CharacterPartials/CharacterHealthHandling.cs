@@ -7,7 +7,7 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.Characte
 public partial class Character
 {
     /// <summary>
-    /// Recovers the health of this character
+    ///     Recovers the health of this character
     /// </summary>
     /// <param name="toRecover">Amount to recover</param>
     /// <param name="recoveryText">text to say when health recovered. use $ to represent health recovered</param>
@@ -21,14 +21,14 @@ public partial class Character
         Health += healthToRecover;
         if (recoveryText is null)
             recoveryText = $"{NameWithAlphabet} recovered $ health!";
-        if(announceHealing)
-            CurrentBattle.AddBattleText(recoveryText.Replace("$",healthToRecover.ToString()));
-        
+        if (announceHealing)
+            CurrentBattle.AddBattleText(recoveryText.Replace("$", healthToRecover.ToString()));
+
         return healthToRecover;
     }
 
 
-        public void TakeDamageWhileConsideringShield(int damage)
+    public void TakeDamageWhileConsideringShield(int damage)
     {
         var shield = Shield;
 
@@ -54,26 +54,30 @@ public partial class Character
             // If no shield, damage affects health directly
             Health -= damage;
         }
+
         shield.SetShieldValue(shieldValue);
     }
+
     public static float DamageFormula(float potentialDamage, float defense)
     {
-        return (potentialDamage * 375) / (300 + defense);
+        return potentialDamage * 375 / (300 + defense);
     }
 
     /// <summary>
-    /// Used to damage this character
+    ///     Used to damage this character
     /// </summary>
     /// <param name="damage">The potential damage</param>
-    /// <param name="damageText">if there is a text for the damage, then use this. Use $ in the string and it will be replaced with the damage dealt</param>
+    /// <param name="damageText">
+    ///     if there is a text for the damage, then use this. Use $ in the string and it will be replaced
+    ///     with the damage dealt
+    /// </param>
     /// <param name="caster">The character causing the damage</param>
     /// <param name="canCrit">Whether the damage can cause a critical hit or not</param>
     /// <param name="damageElement">The element of the damage</param>
     /// <returns>The results of the damage</returns>
-    public  DamageResult Damage(DamageArgs damageArgs)
+    public DamageResult Damage(DamageArgs damageArgs)
     {
         if (IsDead)
-        {
             try
             {
                 throw new Exception("Attempting to damage dead character");
@@ -81,32 +85,33 @@ public partial class Character
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return new DamageResult()
-                    { CanBeCountered = false, DamageDealt = 0, DamageSource = damageArgs.DamageSource, DamageReceiver = this };
+                return new DamageResult
+                {
+                    CanBeCountered = false, DamageDealt = 0, DamageSource = damageArgs.DamageSource,
+                    DamageReceiver = this
+                };
             }
-        }
+
         CurrentBattle.InvokeBattleEvent(new CharacterPreDamageEventArgs(damageArgs));
         var damageText = damageArgs.DamageText;
-        if (damageText is null)
-        {
-            damageText = $"{NameWithAlphabet} took $ damage!";
-        }
+        if (damageText is null) damageText = $"{NameWithAlphabet} took $ damage!";
 
         var didCrit = false;
-        float damage = damageArgs.Damage;
+        var damage = damageArgs.Damage;
         if (!damageArgs.IsFixedDamage)
         {
-            var defenseToIgnore = Math.Clamp(damageArgs.DefenseToIgnore,0,100);
+            var defenseToIgnore = Math.Clamp(damageArgs.DefenseToIgnore, 0, 100);
             var defenseToUse = (100 - defenseToIgnore) * 0.01f * Defense;
             var damageModifyPercentage = 0;
-        
+
             var computedDamage = DamageFormula(damageArgs.Damage, defenseToUse);
 
             var advantageLevel = ElementalAdvantage.Neutral;
-            if(damageArgs.ElementToDamageWith is not null)
+            if (damageArgs.ElementToDamageWith is not null)
                 advantageLevel = BattleFunctionality.GetAdvantageLevel(damageArgs.ElementToDamageWith.Value, Element);
 
-            switch (advantageLevel){
+            switch (advantageLevel)
+            {
                 case ElementalAdvantage.Disadvantage:
                     damageModifyPercentage -= 30;
                     break;
@@ -114,18 +119,13 @@ public partial class Character
                     damageModifyPercentage += 30;
                     break;
             }
-    
 
 
-            computedDamage = (computedDamage * 0.01f * (damageModifyPercentage + 100));
+            computedDamage = computedDamage * 0.01f * (damageModifyPercentage + 100);
             var chance = damageArgs.CriticalChance;
-            if (damageArgs.AlwaysCrits)
-            {
-                chance = 100;
-            }
+            if (damageArgs.AlwaysCrits) chance = 100;
             if (BasicFunctionality.RandomChance(chance) && damageArgs.CanCrit)
             {
-
                 computedDamage *= damageArgs.CriticalDamage / 100.0f;
                 didCrit = true;
             }
@@ -140,6 +140,7 @@ public partial class Character
                     damageText = "It's not that effective... " + damageText;
                     break;
             }
+
             if (didCrit)
                 damageText = "A critical hit! " + damageText;
         }
@@ -148,26 +149,23 @@ public partial class Character
         if (moveUsageType is not null)
         {
             if (moveUsageType == MoveUsageType.CounterUsage)
-            {
-                damageText = "Counter Attack! " +damageText;
-            } else if (moveUsageType == MoveUsageType.MiscellaneousFollowUpUsage)
-            {
+                damageText = "Counter Attack! " + damageText;
+            else if (moveUsageType == MoveUsageType.MiscellaneousFollowUpUsage)
                 damageText = "Extra Attack! " + damageText;
-            }
         }
-      
-        
-        damageText =  damageText.Replace("$", damage.Round().ToString());
+
+
+        damageText = damageText.Replace("$", damage.Round().ToString());
         CurrentBattle.AddBattleText(damageText);
         TakeDamageWhileConsideringShield(damage.Round());
         var damageResult = new DamageResult
         {
-                DamageSource = damageArgs.DamageSource,
-                IsFixedDamage = damageArgs.IsFixedDamage,
-                WasCrit = didCrit,
-                DamageDealt = damage,
-                DamageReceiver = this,
-                CanBeCountered = damageArgs.CanBeCountered, 
+            DamageSource = damageArgs.DamageSource,
+            IsFixedDamage = damageArgs.IsFixedDamage,
+            WasCrit = didCrit,
+            DamageDealt = damage,
+            DamageReceiver = this,
+            CanBeCountered = damageArgs.CanBeCountered
         };
         damageArgs.DamageSource.OnPostDamage(damageResult);
         CurrentBattle.InvokeBattleEvent(new CharacterPostDamageEventArgs(damageResult));

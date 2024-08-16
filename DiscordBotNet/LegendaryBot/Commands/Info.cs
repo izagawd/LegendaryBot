@@ -10,17 +10,13 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class Info : GeneralCommandClass
 {
+    [Command("info")]
+    [Description("Use to see basic details about yourself or a player")]
+    [BotCommandCategory()]
+    public async ValueTask Execute(CommandContext ctx, [Parameter("user")] DiscordUser? author = null)
+    {
+        if (author is null) author = ctx.User;
 
-
- 
-    [Command("info"), Description("Use to see basic details about yourself or a player"),
-    BotCommandCategory(BotCommandCategory.Other)]
-    public async ValueTask Execute(CommandContext ctx,[Parameter("user")]DiscordUser? author = null)
-    {  
-
-            
-        if(author is null) author = ctx.User;
-        
         var userData = await DatabaseContext.UserData
             .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Items.Where(j => j is Coin || j is DivineShard || j is Stamina))
@@ -41,12 +37,14 @@ public class Info : GeneralCommandClass
                     .WithColor(TypesFunction.GetDefaultObject<UserData>().Color);
                 await ctx.RespondAsync(embed);
             }
+
             return;
         }
+
         var stamina = userData.Items.GetOrCreateItem<Stamina>();
         stamina.RefreshEnergyValue();
 
-        
+
         var embedBuilder = new DiscordEmbedBuilder()
             .WithTitle("Info")
             .WithUser(author)
@@ -61,7 +59,7 @@ public class Info : GeneralCommandClass
             .WithTimestamp(DateTime.Now);
         using var image = await userData.GetInfoAsync(author);
         await using var stream = new MemoryStream();
-    
+
         await image.SaveAsPngAsync(stream);
         stream.Position = 0;
         var response = new DiscordInteractionResponseBuilder()
@@ -69,9 +67,4 @@ public class Info : GeneralCommandClass
             .AddFile("info.png", stream);
         await ctx.RespondAsync(response);
     }
-
-
-
-
-
 }

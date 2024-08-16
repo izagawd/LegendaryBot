@@ -2,9 +2,10 @@
 
 namespace DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
-public class MaxHealthFlatModifierArgs: StatsModifierArgs
+public class MaxHealthFlatModifierArgs : StatsModifierArgs
 {
-    public MaxHealthFlatModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect, valueToChangeWith)
+    public MaxHealthFlatModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect,
+        valueToChangeWith)
     {
     }
 }

@@ -1,18 +1,17 @@
 @using DiscordBotNet.LegendaryBot
 @using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 
-
 @code {
     [Parameter] public Character Character { get; set; }
     [Parameter] public int Size { get; set; } = 200;
     [Parameter] public bool Linkable { get; set; } = true;
 }
+
 <div>
     @{
         var color = "white";
         switch (Character.Rarity)
         {
-        
             case Rarity.TwoStar:
                 color = "green";
                 break;
@@ -29,11 +28,11 @@
                 throw new ArgumentOutOfRangeException();
         }
     }
-   
+
     @if (Linkable)
     {
         <a href="/character-info/@Character.Number">
-            <img src="@Character.ImageUrl" style=" background-color: @color;" width="@Size" height="@Size" class="image-box"/> 
+            <img src="@Character.ImageUrl" style=" background-color: @color;" width="@Size" height="@Size" class="image-box"/>
         </a>
     }
     else
@@ -41,7 +40,7 @@
         <img src="@Character.ImageUrl" style=" background-color: @color;" width="@Size" height="@Size" class="image-box"/>
     }
 
-    
+
     <p>@Character.Name</p>
     <p>Level: @Character.Level</p>
     <p>Number: @Character.Number</p>

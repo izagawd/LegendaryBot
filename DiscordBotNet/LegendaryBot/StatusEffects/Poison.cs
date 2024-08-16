@@ -6,12 +6,24 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Poison : StatusEffect, IDetonatable
 {
+    public Poison(Character caster) : base(caster)
+    {
+    }
+
     public override string Name => "Poison";
     public override string Description => "Deals damage equivalent to 5% of the affected's max health";
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
 
     public override bool ExecuteStatusEffectAfterTurn => false;
 
+    public override bool IsStackable => true;
+
+    public DamageResult? Detonate(Character detonator)
+    {
+        var removed = Affected.RemoveStatusEffect(this);
+        if (removed) return DoDamage();
+        return null;
+    }
 
 
     public override void PassTurn()
@@ -19,7 +31,6 @@ public class Poison : StatusEffect, IDetonatable
         base.PassTurn();
 
         DoDamage();
-
     }
 
     private DamageResult? DoDamage()
@@ -29,20 +40,7 @@ public class Poison : StatusEffect, IDetonatable
             IsFixedDamage = true,
             ElementToDamageWith = null,
             CanCrit = false,
-            DamageText = $"{Affected} took $ damage from being poisoned!",
-           
+            DamageText = $"{Affected} took $ damage from being poisoned!"
         });
-    }
-
-    public override bool IsStackable => true;
-    public DamageResult? Detonate( Character detonator)
-    {
-        var removed = Affected.RemoveStatusEffect(this);
-        if (removed) return DoDamage();
-        return null;
-    }
-
-    public Poison(Character caster) : base(caster)
-    {
     }
 }

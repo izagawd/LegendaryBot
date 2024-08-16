@@ -11,10 +11,8 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 
 public class QuestCommand : GeneralCommandClass
 {
-
-
-    [Command("quest"),
-    BotCommandCategory(BotCommandCategory.Battle)]
+    [Command("quest")]
+    [BotCommandCategory(BotCommandCategory.Battle)]
     public async ValueTask Execute(CommandContext ctx)
     {
         var author = ctx.User;
@@ -35,6 +33,7 @@ public class QuestCommand : GeneralCommandClass
             await NotifyAboutOccupiedAsync(ctx);
             return;
         }
+
         var questString = "";
         var embed = new DiscordEmbedBuilder()
             .WithUser(author)
@@ -45,9 +44,10 @@ public class QuestCommand : GeneralCommandClass
 
         if (userData.Quests.Count <= 0)
         {
-           await ctx.RespondAsync(embed);
-           return;
+            await ctx.RespondAsync(embed);
+            return;
         }
+
         await MakeOccupiedAsync(userData);
         var count = 1;
         foreach (var i in userData.Quests)
@@ -60,13 +60,13 @@ public class QuestCommand : GeneralCommandClass
         }
 
         var questsShouldDisable = userData.Quests.Select(i => i.Completed).ToList();
-        while(questsShouldDisable.Count < 4)
+        while (questsShouldDisable.Count < 4)
             questsShouldDisable.Add(true);
         var one = new DiscordButtonComponent(DiscordButtonStyle.Primary, "1", "1",
             questsShouldDisable[0]);
-        var two = new DiscordButtonComponent(DiscordButtonStyle.Primary, "2", "2",questsShouldDisable[1]);
-        var three = new DiscordButtonComponent(DiscordButtonStyle.Primary, "3", "3",questsShouldDisable[2]);
-        var four = new DiscordButtonComponent(DiscordButtonStyle.Primary, "4", "4",questsShouldDisable[3]);
+        var two = new DiscordButtonComponent(DiscordButtonStyle.Primary, "2", "2", questsShouldDisable[1]);
+        var three = new DiscordButtonComponent(DiscordButtonStyle.Primary, "3", "3", questsShouldDisable[2]);
+        var four = new DiscordButtonComponent(DiscordButtonStyle.Primary, "4", "4", questsShouldDisable[3]);
         embed
             .WithTitle("These are your available quests. They refresh at midnight UTC")
             .WithDescription(questString);
@@ -74,26 +74,23 @@ public class QuestCommand : GeneralCommandClass
             .AddComponents([one, two, three, four])
             .AddEmbed(embed));
         IEnumerable<string> possibleCustomIds = ["1", "2", "3", "4"];
-        var message =await ctx.GetResponseAsync();
-        
+        var message = await ctx.GetResponseAsync();
+
         Quest quest = null;
         var buttonResult = await message.WaitForButtonAsync(i =>
         {
             if (i.User.Id != ctx.User.Id) return false;
             if (!possibleCustomIds.Contains(i.Id)) return false;
-            quest = userData.Quests[int.Parse(i.Id) -1];
+            quest = userData.Quests[int.Parse(i.Id) - 1];
             return true;
         });
-        if (quest is null)
-        {
-            return;
-        }
+        if (quest is null) return;
 
         await buttonResult.Result
             .Interaction
             .CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
         var succeeded = await quest.StartQuest(DatabaseContext, ctx, message);
-        
+
         if (succeeded)
         {
             quest.Completed = true;
@@ -101,20 +98,22 @@ public class QuestCommand : GeneralCommandClass
 
             await DatabaseContext.Items.Where(i => i.UserDataId == userData.Id && i is DivineShard)
                 .LoadAsync();
-            var rewardString = userData.ReceiveRewards([..quest.QuestRewards,new UserExperienceReward(expToAdd),
-            new EntityReward([new DivineShard(){Stacks = 10}])]);
+            var rewardString = userData.ReceiveRewards([
+                ..quest.QuestRewards, new UserExperienceReward(expToAdd),
+                new EntityReward([new DivineShard { Stacks = 10 }])
+            ]);
 
             embed
                 .WithTitle("Nice!!")
-                .WithDescription("You completed the quest!\n" +rewardString);
+                .WithDescription("You completed the quest!\n" + rewardString);
             await DatabaseContext.SaveChangesAsync();
             await message.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embed));
             return;
         }
+
         embed
             .WithTitle("Damn")
             .WithDescription("You failed");
         await message.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embed));
-       
     }
 }

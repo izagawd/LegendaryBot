@@ -8,13 +8,15 @@ using DSharpPlus.Interactivity.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
+
 [Command("quote")]
 public class QuoteCommand : GeneralCommandClass
 {
-    private static readonly string[] YesOrNoArray = ["like", "dislike" ];
+    private static readonly string[] YesOrNoArray = ["like", "dislike"];
 
-    [Command("read"), Description("Read a random quote"),
-    BotCommandCategory(BotCommandCategory.Other)]
+    [Command("read")]
+    [Description("Read a random quote")]
+    [BotCommandCategory()]
     public async Task Read(CommandContext ctx)
     {
         var anon = await DatabaseContext.Quote
@@ -39,7 +41,7 @@ public class QuoteCommand : GeneralCommandClass
                 .WithUser(ctx.User)
                 .WithColor(userColor)
                 .WithTitle("Hmm")
-                .WithDescription($"There are no quotes yet. try adding one of your own with /quote write!");
+                .WithDescription("There are no quotes yet. try adding one of your own with /quote write!");
             await ctx.RespondAsync(embed);
             return;
         }
@@ -47,24 +49,28 @@ public class QuoteCommand : GeneralCommandClass
         var counts = new { anon.likes, anon.dislikes };
         var randomQuote = anon.quote;
 
-        DiscordButtonComponent like = new(DiscordButtonStyle.Primary,"like",null,false,new DiscordComponentEmoji("👍"));
-        DiscordButtonComponent dislike = new(DiscordButtonStyle.Primary, "dislike",null,false,new DiscordComponentEmoji("👎"));
+        DiscordButtonComponent like = new(DiscordButtonStyle.Primary, "like", null, false,
+            new DiscordComponentEmoji("👍"));
+        DiscordButtonComponent dislike = new(DiscordButtonStyle.Primary, "dislike", null, false,
+            new DiscordComponentEmoji("👎"));
         var ownerOfQuote = await ctx.Client.GetUserAsync(randomQuote.UserData.DiscordId);
         var quoteDate = randomQuote.DateCreated;
-        
+
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ownerOfQuote)
             .WithColor(randomQuote.UserData.Color)
             .WithTitle($"{ownerOfQuote.Username}'s quote")
             .WithDescription(randomQuote.QuoteValue)
-            .WithFooter($"Date and Time Created: {quoteDate:MM/dd/yyyy HH:mm:ss}\nLikes: {counts.likes} Dislikes: {counts.dislikes}");
-        await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder).AddComponents(like,dislike));
+            .WithFooter(
+                $"Date and Time Created: {quoteDate:MM/dd/yyyy HH:mm:ss}\nLikes: {counts.likes} Dislikes: {counts.dislikes}");
+        await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder)
+            .AddComponents(like, dislike));
         var message = (await ctx.GetResponseAsync())!;
         using var source = new CancellationTokenSource(new TimeSpan(0, 5, 0));
         while (true)
         {
-            var result = await message.WaitForButtonAsync( source.Token);
-            if(result.TimedOut) return;
+            var result = await message.WaitForButtonAsync(source.Token);
+            if (result.TimedOut) return;
             var interactivityResult = result.Result;
             var choice = interactivityResult.Interaction.Data.CustomId;
             if (!YesOrNoArray.Contains(choice)) return;
@@ -73,16 +79,13 @@ public class QuoteCommand : GeneralCommandClass
                 .Where(j => j.QuoteId == randomQuote.Id && j.UserData.DiscordId == interactivityResult.User.Id)
                 .Select(j => new
                 {
-                    quote = j.Quote, quoteReaction = j,
+                    quote = j.Quote, quoteReaction = j
                 })
                 .FirstOrDefaultAsync();
             var quoteReaction = anonymous?.quoteReaction;
-            if (anonymous?.quote is not null)
-            {
-                randomQuote = anonymous.quote;
-            }
+            if (anonymous?.quote is not null) randomQuote = anonymous.quote;
             var isNew = false;
-            
+
             if (quoteReaction is null)
             {
                 quoteReaction = new QuoteReaction();
@@ -90,7 +93,7 @@ public class QuoteCommand : GeneralCommandClass
                 //assigning it to id instead of instance cuz instance might not be of the same dbcontext as newDbContext
                 quoteReaction.QuoteId = randomQuote.Id;
                 var gottenId = await DatabaseContext.UserData.Where(i => i.DiscordId == interactivityResult.User.Id)
-                    .Select(i =>new long?(i.Id))
+                    .Select(i => new long?(i.Id))
                     .FirstOrDefaultAsync();
                 if (gottenId is null)
                 {
@@ -107,18 +110,11 @@ public class QuoteCommand : GeneralCommandClass
                 await newDbContext.UserData.AddAsync(new UserData(interactivityResult.User.Id));
             if (!isNew &&
                 ((choice == "like" && quoteReaction.IsLike) || (choice == "dislike" && !quoteReaction.IsLike)))
-            {
                 newDbContext.Set<QuoteReaction>().Remove(quoteReaction);
-
-            }
             else if (choice == "like")
-            {
                 quoteReaction.IsLike = true;
-            }
             else
-            {
                 quoteReaction.IsLike = false;
-            }
 
             await newDbContext.SaveChangesAsync();
             var localCounts = await newDbContext.Quote.Where(i => i.Id == randomQuote.Id)
@@ -134,28 +130,22 @@ public class QuoteCommand : GeneralCommandClass
 
             await interactivityResult.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
                 new DiscordInteractionResponseBuilder()
-
                     .AddEmbed(embedBuilder)
                     .AddComponents(like, dislike));
-          
-
-
         }
-
     }
-    [Command("write"), Description("write a quote for everyone to see!"),
-    BotCommandCategory(BotCommandCategory.Other)]
+
+    [Command("write")]
+    [Description("write a quote for everyone to see!")]
+    [BotCommandCategory()]
     public async Task Write(CommandContext ctx, [Parameter("text")] string text)
     {
         var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
-        if (userData is null)
-        {
-            userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);
-        }
+        if (userData is null) userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
             .WithColor(userData.Color);
-  
+
         if (text.Length > 200)
         {
             embedBuilder
@@ -164,7 +154,8 @@ public class QuoteCommand : GeneralCommandClass
 
             await ctx.RespondAsync(embedBuilder);
             return;
-        } 
+        }
+
         if (text.Length <= 0)
         {
             embedBuilder
@@ -173,7 +164,8 @@ public class QuoteCommand : GeneralCommandClass
             await ctx.RespondAsync(embedBuilder);
             return;
         }
-        userData.Quotes.Add(new Quote{QuoteValue = text});
+
+        userData.Quotes.Add(new Quote { QuoteValue = text });
         await DatabaseContext.SaveChangesAsync();
         embedBuilder
             .WithTitle("Success!")

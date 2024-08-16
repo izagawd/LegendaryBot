@@ -2,9 +2,10 @@
 
 namespace DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
-public class DefenseFlatModifierArgs: StatsModifierArgs
+public class DefenseFlatModifierArgs : StatsModifierArgs
 {
-    public DefenseFlatModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect, valueToChangeWith)
+    public DefenseFlatModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect,
+        valueToChangeWith)
     {
     }
 }

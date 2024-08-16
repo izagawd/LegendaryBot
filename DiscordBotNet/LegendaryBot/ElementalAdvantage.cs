@@ -2,6 +2,7 @@
 
 public enum ElementalAdvantage : byte
 {
-    Advantage,Disadvantage,Neutral
+    Advantage,
+    Disadvantage,
+    Neutral
 }
-

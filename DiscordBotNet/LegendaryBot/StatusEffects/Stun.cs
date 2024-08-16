@@ -5,14 +5,17 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class Stun : StatusEffect
 {
+    public Stun(Character caster) : base(caster)
+    {
+    }
+
     public override string Name => "Stun";
     public override string Description => "Makes affected not able to move";
 
 
-
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
 
-    
+
     public override bool IsStackable => false;
     public override OverrideTurnType OverrideTurnType => OverrideTurnType.CannotMove;
 
@@ -22,9 +25,5 @@ public class Stun : StatusEffect
         decision = BattleDecision.Other;
         Affected.CurrentBattle.AddBattleText($"{Affected} cannot move because they are stunned!");
         return "dizzy...";
-    }
-
-    public Stun(Character caster) : base(caster)
-    {
     }
 }

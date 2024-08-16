@@ -4,6 +4,9 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.Characte
 
 public partial class Character
 {
+    public const int MilestoneFlatAttackIncrease = 30;
+    public const int MilestoneFlatHealthIncrease = 80;
+
     [NotMapped]
     public int LevelMilestone
     {
@@ -25,49 +28,33 @@ public partial class Character
         }
     }
 
-    [NotMapped]
-    public float BaseAttack => GetBaseAttack(Level, LevelMilestone);
+    [NotMapped] public float BaseAttack => GetBaseAttack(Level, LevelMilestone);
 
-    [NotMapped]
-    public float BaseEffectiveness => GetBaseEffectiveness(Level, LevelMilestone);
+    [NotMapped] public float BaseEffectiveness => GetBaseEffectiveness(Level, LevelMilestone);
 
-    [NotMapped]
-    public float BaseSpeed => GetBaseSpeed(Level, LevelMilestone);
+    [NotMapped] public float BaseSpeed => GetBaseSpeed(Level, LevelMilestone);
 
-    [NotMapped]
-    public float BaseResistance => GetBaseResistance(Level, LevelMilestone);
+    [NotMapped] public float BaseResistance => GetBaseResistance(Level, LevelMilestone);
 
-    [NotMapped]
-    public float BaseCriticalChance => GetBaseCriticalChance(Level, LevelMilestone);
+    [NotMapped] public float BaseCriticalChance => GetBaseCriticalChance(Level, LevelMilestone);
 
-    [NotMapped]
-    public float BaseCriticalDamage => GetBaseCriticalDamage(Level, LevelMilestone);
+    [NotMapped] public float BaseCriticalDamage => GetBaseCriticalDamage(Level, LevelMilestone);
 
-    [NotMapped]
-    public  float BaseDefense => GetBaseDefense(Level,LevelMilestone);
+    [NotMapped] public float BaseDefense => GetBaseDefense(Level, LevelMilestone);
 
-    [NotMapped]
-    public  float BaseMaxHealth => GetBaseMaxHealth(Level,LevelMilestone);
-
-    
-    [NotMapped]
-    protected virtual float BaseAttackMultiplier => 1.0f;
+    [NotMapped] public float BaseMaxHealth => GetBaseMaxHealth(Level, LevelMilestone);
 
 
-
-    [NotMapped]
-    protected virtual float BaseSpeedMultiplier =>  1.0f;
+    [NotMapped] protected virtual float BaseAttackMultiplier => 1.0f;
 
 
+    [NotMapped] protected virtual float BaseSpeedMultiplier => 1.0f;
 
-    [NotMapped]
-    protected virtual float BaseDefenseMultiplier => 1.0f;
 
-    [NotMapped]
-    protected virtual float BaseMaxHealthMultiplier => 1.0f;
+    [NotMapped] protected virtual float BaseDefenseMultiplier => 1.0f;
 
-    public const int MilestoneFlatAttackIncrease = 30;
-    public const int MilestoneFlatHealthIncrease = 80;
+    [NotMapped] protected virtual float BaseMaxHealthMultiplier => 1.0f;
+
     public static int GetStatIncreaseMilestoneValue(StatType statType)
     {
         switch (statType)
@@ -88,13 +75,12 @@ public partial class Character
             default:
                 throw new ArgumentOutOfRangeException(nameof(statType), statType, null);
         }
-        
     }
-    
+
     public float GetBaseAttack(int level, int levelMilestone)
     {
-        float toCompute = 89 + ((level - 1) * 12);
-  
+        float toCompute = 89 + (level - 1) * 12;
+
 
         var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Attack);
         var percentageToUse = count * GetStatIncreaseMilestoneValue(StatType.Attack);
@@ -105,7 +91,7 @@ public partial class Character
         return toCompute;
     }
 
- 
+
     public float GetBaseEffectiveness(int level, int levelMilestone)
     {
         float toCompute = 0;
@@ -142,8 +128,8 @@ public partial class Character
         if (statType != StatType.Speed)
             asString += '%';
         return asString;
-
     }
+
     public float GetBaseCriticalChance(int level, int levelMilestone)
     {
         float toCompute = 15;
@@ -164,7 +150,7 @@ public partial class Character
 
     public float GetBaseDefense(int level, int levelMilestone)
     {
-        var toCompute = 70 + ((level - 1) * 8.5f);
+        var toCompute = 70 + (level - 1) * 8.5f;
         var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Defense);
         var percentageToUse = count * GetStatIncreaseMilestoneValue(StatType.Defense);
 
@@ -174,13 +160,13 @@ public partial class Character
 
     public float GetBaseMaxHealth(int level, int levelMilestone)
     {
-        float toCompute = 295 + ((level - 1) * 75);
+        float toCompute = 295 + (level - 1) * 75;
 
         var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.MaxHealth);
         var percentageToUse = count * GetStatIncreaseMilestoneValue(StatType.MaxHealth);
         toCompute *= BaseMaxHealthMultiplier;
         toCompute += toCompute * percentageToUse * 0.01f;
-        
+
         toCompute += MilestoneFlatHealthIncrease * levelMilestone;
         return toCompute;
     }

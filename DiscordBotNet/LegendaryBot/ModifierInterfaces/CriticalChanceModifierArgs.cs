@@ -2,9 +2,10 @@
 
 namespace DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
-public class CriticalChanceModifierArgs: StatsModifierArgs
+public class CriticalChanceModifierArgs : StatsModifierArgs
 {
-    public CriticalChanceModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect, valueToChangeWith)
+    public CriticalChanceModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect,
+        valueToChangeWith)
     {
     }
 }

@@ -1,4 +1,4 @@
-﻿#team_main_div{
+﻿#team_main_div {
     position: relative;
     display: flex;
     top: 100px;
@@ -6,31 +6,39 @@
     width: 80%;
     overflow-x: scroll;
 }
-.character_in_team_div{
+
+.character_in_team_div {
     margin-right: 20px;
 }
-.character_div{
+
+.character_div {
 
     margin-right: 20px;
     display: flex;
 }
-#team_select_div{
+
+#team_select_div {
     position: relative;
     top: 140px;
 }
-.super_character_div{
+
+.super_character_div {
     border: 3px solid black;
 }
-.character_details{
-    position: relative; margin-left: 20px;
-}
-.image_class{
 
-    width:110px;
-    height:110px;
+.character_details {
+    position: relative;
+    margin-left: 20px;
 }
-#character_list_div{
-    
+
+.image_class {
+
+    width: 110px;
+    height: 110px;
+}
+
+#character_list_div {
+
     background-color: gray;
     position: relative;
     left: 80%;
@@ -41,7 +49,7 @@
     overflow-y: scroll;
 }
 
-.character_in_list_div{
+.character_in_list_div {
 
     margin-top: 10px;
     margin-bottom: 10px;

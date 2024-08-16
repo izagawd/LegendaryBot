@@ -2,5 +2,7 @@
 
 public enum OverrideTurnType : byte
 {
-    None, ControlDecision, CannotMove
+    None,
+    ControlDecision,
+    CannotMove
 }

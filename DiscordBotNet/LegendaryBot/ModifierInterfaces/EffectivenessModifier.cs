@@ -2,9 +2,10 @@
 
 namespace DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
-public class EffectivenessModifierArgs: StatsModifierArgs
+public class EffectivenessModifierArgs : StatsModifierArgs
 {
-    public EffectivenessModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect, valueToChangeWith)
+    public EffectivenessModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect,
+        valueToChangeWith)
     {
     }
 }

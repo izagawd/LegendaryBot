@@ -2,27 +2,27 @@
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 
-public class CriticalDamageGearStat  : GearStat
+public class CriticalDamageGearStat : GearStat
 {
     public override int TypeId
     {
         get => 4;
-        protected init {}
+        protected init { }
     }
+
+    public override StatType StatType => StatType.CriticalDamage;
+    public override bool IsPercentage => true;
 
 
     public override int GetMainStatValue(Rarity rarity)
     {
-        return ((int) rarity  * 11) + 10;
+        return (int)rarity * 11 + 10;
     }
 
     public override void AddStats(Character character)
     {
         character.TotalCriticalDamage += Value;
     }
-
-    public override StatType StatType => StatType.CriticalDamage;
-    public override bool IsPercentage => true;
 
     public override int GetMaximumSubstatLevelIncrease(Rarity rarity)
     {

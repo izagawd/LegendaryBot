@@ -2,11 +2,12 @@
 
 namespace DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
-public class ResistanceModifierArgs: StatsModifierArgs
+public class ResistanceModifierArgs : StatsModifierArgs
 {
-    float ResistancePercentage { get; }
-
-    public ResistanceModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect, valueToChangeWith)
+    public ResistanceModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect,
+        valueToChangeWith)
     {
     }
+
+    private float ResistancePercentage { get; }
 }

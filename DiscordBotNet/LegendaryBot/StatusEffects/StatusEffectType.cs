@@ -2,5 +2,6 @@
 
 public enum StatusEffectType : byte
 {
-    Buff,Debuff
+    Buff,
+    Debuff
 }

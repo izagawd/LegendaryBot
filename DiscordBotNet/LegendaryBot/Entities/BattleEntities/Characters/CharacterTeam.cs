@@ -7,45 +7,24 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class CharacterTeam : ISet<Character>
 {
-
-    /// <summary>
-    /// increases exp of every character in the team and returns useful text
-    /// </summary>
-    /// <param name="exp"></param>
-    /// <returns></returns>
-    public string IncreaseExp(int exp)
+    public CharacterTeam(params Character[] characters)
     {
-        exp /= Count;
-        var text = "";
-        foreach (var i in this)
-        {
-            text += i.IncreaseExp(exp) + "\n";
-        }
-
-        return text;
+        Characters = characters.ToHashSet();
+        foreach (var i in Characters) i.Team = this;
     }
 
-    [NotMapped]
-    public BattleSimulator CurrentBattle { get; set; }
+
+    public CharacterTeam(IEnumerable<Character> characters) : this(characters.ToArray())
+    {
+    }
+
+    [NotMapped] public BattleSimulator CurrentBattle { get; set; }
 
     public HashSet<Character> Characters { get; set; } = [];
+
     public IEnumerator<Character> GetEnumerator()
     {
         return Characters.GetEnumerator();
-    }
- 
-
-
-    public CharacterTeam LoadTeamStats()
-    {
-        foreach (var i in Characters)
-        {
-            i.Team = this;
-            i.LoadStats();
-        }
-
-        return this;
-
     }
 
 
@@ -55,26 +34,14 @@ public class CharacterTeam : ISet<Character>
     }
 
 
-
-        /// <param name="character"></param>
-
-        /// <returns></returns>
-
+    /// <param name="character"></param>
+    /// <returns></returns>
     public virtual bool Add(Character character)
     {
         character.Team = this;
         return Characters.Add(character);
     }
 
-    public void AddRange(IEnumerable<Character> characters)
-    {
-        
-        
-        foreach (var i in characters)
-        {
-            Add(i);
-        }
-    }
     public void ExceptWith(IEnumerable<Character> other)
     {
         Characters.ExceptWith(other);
@@ -136,22 +103,6 @@ public class CharacterTeam : ISet<Character>
         Characters.Clear();
     }
 
-    public CharacterTeam(params Character[] characters)
-    {
-
-        Characters = characters.ToHashSet();
-        foreach (var i in Characters)
-        {
-            i.Team = this;
-        }
-    }
-
-
-    public CharacterTeam(IEnumerable<Character> characters) : this(characters.ToArray())
-    {
-        
-    }
-
 
     public bool Contains(Character character)
     {
@@ -160,7 +111,7 @@ public class CharacterTeam : ISet<Character>
 
     public void CopyTo(Character[] array, int arrayIndex)
     {
-        Characters.CopyTo(array,arrayIndex);
+        Characters.CopyTo(array, arrayIndex);
     }
 
     public bool Remove(Character character)
@@ -170,4 +121,35 @@ public class CharacterTeam : ISet<Character>
 
     public int Count => Characters.Count;
     public bool IsReadOnly { get; }
+
+    /// <summary>
+    ///     increases exp of every character in the team and returns useful text
+    /// </summary>
+    /// <param name="exp"></param>
+    /// <returns></returns>
+    public string IncreaseExp(int exp)
+    {
+        exp /= Count;
+        var text = "";
+        foreach (var i in this) text += i.IncreaseExp(exp) + "\n";
+
+        return text;
+    }
+
+
+    public CharacterTeam LoadTeamStats()
+    {
+        foreach (var i in Characters)
+        {
+            i.Team = this;
+            i.LoadStats();
+        }
+
+        return this;
+    }
+
+    public void AddRange(IEnumerable<Character> characters)
+    {
+        foreach (var i in characters) Add(i);
+    }
 }

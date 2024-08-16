@@ -7,7 +7,7 @@ public class DivineKnowledge : CharacterExpMaterial
     public override int TypeId
     {
         get => 2;
-        protected init {}
+        protected init { }
     }
 
     public override Rarity Rarity => Rarity.FiveStar;

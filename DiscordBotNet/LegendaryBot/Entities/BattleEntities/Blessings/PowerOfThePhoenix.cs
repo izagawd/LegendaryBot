@@ -7,10 +7,11 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 public class PowerOfThePhoenix : Blessing
 {
     public override string Name => "Power Of The Phoenix";
+
     public override int TypeId
     {
         get => 1;
-        protected init {}
+        protected init { }
     }
 
 
@@ -26,22 +27,19 @@ public class PowerOfThePhoenix : Blessing
         if (levelMilestone >= 1) return 5;
         return 4;
     }
+
     [BattleEventListenerMethod]
-    public  void HealOnTurnBegin(TurnStartEventArgs eventArgs)
+    public void HealOnTurnBegin(TurnStartEventArgs eventArgs)
     {
-    
         if (eventArgs.Character != Character) return;
 
-         Character!.RecoverHealth((GetHealthPercentRecovering(LevelMilestone) *  0.01 * Character.MaxHealth).Round(),$"{Character.NameWithAlphabet} recovered $ health via the blessing of the phoenix");
-  
-
+        Character!.RecoverHealth((GetHealthPercentRecovering(LevelMilestone) * 0.01 * Character.MaxHealth).Round(),
+            $"{Character.NameWithAlphabet} recovered $ health via the blessing of the phoenix");
     }
 
     public override string GetDescription(int levelMilestone)
     {
-        return $"At the start of the character's turn, they recover {GetHealthPercentRecovering(levelMilestone)}% of their health";
+        return
+            $"At the start of the character's turn, they recover {GetHealthPercentRecovering(levelMilestone)}% of their health";
     }
-
-  
-
 }

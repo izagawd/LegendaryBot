@@ -5,37 +5,44 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
-
-
 public class SlimeBodySlam : BasicAttack
 {
-    public override string Name => "Slime Body Slam";
-    public override string GetDescription(Character character) => "Slams it's body on the enemy, with a 10% chance to inflict poison";
-    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
+    public SlimeBodySlam(Character user) : base(user)
     {
-        target.Damage(new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(moveUsageContext))
+    }
+
+    public override string Name => "Slime Body Slam";
+
+    public override string GetDescription(Character character)
+    {
+        return "Slams it's body on the enemy, with a 10% chance to inflict poison";
+    }
+
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
+        out AttackTargetType attackTargetType, out string? text)
+    {
+        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(moveUsageContext))
         {
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
-            DamageText = $"{User.NameWithAlphabet} slams at {target.NameWithAlphabet} and dealt $ damage!",
+            DamageText = $"{User.NameWithAlphabet} slams at {target.NameWithAlphabet} and dealt $ damage!"
         });
         if (BasicFunctionality.RandomChance(10))
-        {
-            target.AddStatusEffect(new Poison(User){ Duration = 1}, User.Effectiveness);
-        }
+            target.AddStatusEffect(new Poison(User) { Duration = 1 }, User.Effectiveness);
         attackTargetType = AttackTargetType.SingleTarget;
 
         text = "Slime body slam!";
-        
-    }
-
-    public SlimeBodySlam(Character user) : base(user)
-    {
     }
 }
+
 public class Slime : Character
 {
+    public Slime()
+    {
+        BasicAttack = new SlimeBodySlam(this);
+    }
+
     public override string Name => "Slime";
     protected override float BaseSpeedMultiplier => 0.8f;
     protected override float BaseMaxHealthMultiplier => 0.7f;
@@ -47,15 +54,6 @@ public class Slime : Character
     public override int TypeId
     {
         get => 7;
-        protected init {}
+        protected init { }
     }
-
-    public Slime()
-    {
-  
-
-        BasicAttack = new SlimeBodySlam(this);
-    }
-
-
 }

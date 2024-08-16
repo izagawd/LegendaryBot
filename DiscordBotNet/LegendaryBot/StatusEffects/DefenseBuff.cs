@@ -3,24 +3,21 @@ using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.
 
 namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
-public class DefenseBuff: StatusEffect, IStatsModifier
+public class DefenseBuff : StatusEffect, IStatsModifier
 {
+    public DefenseBuff(Character caster) : base(caster)
+    {
+    }
+
     public override string Name => "Defense Buff";
     public override bool IsStackable => false;
-   
-
 
 
     public override StatusEffectType EffectType => StatusEffectType.Buff;
 
 
-
     public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
     {
         yield return new DefensePercentageModifierArgs(Affected, 50);
-    }
-
-    public DefenseBuff(Character caster) : base(caster)
-    {
     }
 }

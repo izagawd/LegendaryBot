@@ -5,21 +5,23 @@
 @using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 @using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears
 @using DiscordBotNet.WebsiteStuff.Components.Navigation
-@using Microsoft.AspNetCore.Components.Authorization
-@using Microsoft.EntityFrameworkCore
 @using DiscordBotNet.WebsiteStuff.Pages.Characters
 @using DiscordBotNet.WebsiteStuff.Pages.Gears
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.EntityFrameworkCore
 
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @rendermode InteractiveServer
 @inject PostgreSqlContext DbContext
+
 @code {
-    
+
     [Parameter] public int CharacterNumber { get; set; }
     private ClaimsPrincipal user;
-    
-    public Character  Character { get; set; }
-    protected async override Task OnInitializedAsync()
+
+    public Character Character { get; set; }
+
+    protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         user = authState.User;
@@ -32,14 +34,14 @@
             .ThenInclude(i => i.Stats)
             .Include(i => i.UserData)
             .FirstOrDefaultAsync();
-        
-
     }
 
 }
+
 @functions {
 
 }
+
 <Navigation>
     @if (Character is not null)
     {
@@ -48,15 +50,13 @@
   margin-right: auto; display: flex; margin-top: 100px">
             <div>
                 @{
-                    foreach (var i in (Type[])[typeof(Weapon),typeof(Helmet),typeof(Armor)])
+                    foreach (var i in (Type[]) [typeof(Weapon), typeof(Helmet), typeof(Armor)])
                     {
-                        Gear? gear = Character.Gears.FirstOrDefault(j => j.GetType() == i);
+                        var gear = Character.Gears.FirstOrDefault(j => j.GetType() == i);
                         <div style="margin-bottom: 30px;">
                             <GearIconItem Size="150" Gear="gear"></GearIconItem>
                         </div>
                     }
-                    
-
                 }
             </div>
             <div style="margin-left: 100px; margin-top: 200px; margin-right: 100px">
@@ -64,17 +64,17 @@
             </div>
             <div>
                 @{
-                    foreach (var i in (Type[])[typeof(Necklace),typeof(Ring),typeof(Boots)])
+                    foreach (var i in (Type[]) [typeof(Necklace), typeof(Ring), typeof(Boots)])
                     {
-                        Gear? gear = Character.Gears.FirstOrDefault(j => j.GetType() == i);
+                        var gear = Character.Gears.FirstOrDefault(j => j.GetType() == i);
                         <div style="margin-bottom: 30px;">
                             <GearIconItem Size="150" Gear="gear"></GearIconItem>
                         </div>
                     }
                 }
- 
+
             </div>
         </div>
     }
-    
+
 </Navigation>

@@ -1,7 +1,5 @@
 ﻿using DiscordBotNet.Database.Models;
-
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
@@ -11,7 +9,7 @@ public static class PostgreExtension
 {
     public static Task<T?> RandomOrDefaultAsync<T>(this IQueryable<T> queryable)
     {
-       return queryable.OrderBy(i => EF.Functions.Random()).FirstOrDefaultAsync();
+        return queryable.OrderBy(i => EF.Functions.Random()).FirstOrDefaultAsync();
     }
 
     public static T? RandomOrDefault<T>(this IQueryable<T> queryable)
@@ -23,15 +21,14 @@ public static class PostgreExtension
     {
         return queryable.OrderBy(i => EF.Functions.Random()).FirstAsync();
     }
+
     public static T Random<T>(this IQueryable<T> queryable)
     {
         return queryable.OrderBy(i => EF.Functions.Random()).First();
     }
 
 
-
-
-    public static IIncludableQueryable<UserData,Blessing?> IncludeTeamWithBlessing
+    public static IIncludableQueryable<UserData, Blessing?> IncludeTeamWithBlessing
         (this IQueryable<UserData> queryable)
     {
         return queryable
@@ -41,9 +38,8 @@ public static class PostgreExtension
     }
 
     /// <summary>
-    /// Note: this also includes their gear stats
+    ///     Note: this also includes their gear stats
     /// </summary>
-
     public static IQueryable<UserData> IncludeTeamWithGears
         (this IQueryable<UserData> queryable)
     {
@@ -57,20 +53,8 @@ public static class PostgreExtension
     public static IQueryable<UserData> IncludeTeamWithAllEquipments
         (this IQueryable<UserData> queryable)
     {
-
         return queryable
             .IncludeTeamWithBlessing()
             .IncludeTeamWithGears();
-
     }
-
-
-
-
-
-
-
-
-
-
 }

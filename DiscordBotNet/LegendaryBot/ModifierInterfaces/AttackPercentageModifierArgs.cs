@@ -2,9 +2,10 @@
 
 namespace DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
-public class AttackPercentageModifierArgs  : StatsModifierArgs
+public class AttackPercentageModifierArgs : StatsModifierArgs
 {
-    public AttackPercentageModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect, valueToChangeWith)
+    public AttackPercentageModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect,
+        valueToChangeWith)
     {
     }
 }

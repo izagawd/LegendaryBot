@@ -9,7 +9,7 @@ public class Armor : Gear
     public override int TypeId
     {
         get => 2;
-        protected init {}
+        protected init { }
     }
 
 

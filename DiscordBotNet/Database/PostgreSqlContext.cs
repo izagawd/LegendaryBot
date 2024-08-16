@@ -14,17 +14,8 @@ using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace DiscordBotNet.Database;
 
-
-
 public class PostgreSqlContext : DbContext
 {
-    
-    
-
-    
-
-
-
     public DbSet<UserData> UserData { get; set; }
     public DbSet<GuildData> GuildDatas { get; set; }
     public DbSet<Blessing> Blessings { get; set; }
@@ -35,20 +26,19 @@ public class PostgreSqlContext : DbContext
     public DbSet<Quote> Quote { get; set; }
 
     /// <summary>
-    /// this should be called before any query if u want to ever use this method
+    ///     this should be called before any query if u want to ever use this method
     /// </summary>
     /// <param name="userId"> the user id u want  to refresh to a new day</param>
-    public  async Task CheckForNewDayAsync(ulong userId)
+    public async Task CheckForNewDayAsync(ulong userId)
     {
-
         var user = await UserData
             .Include(i => i.Quests)
             .FirstOrDefaultAsync(i => i.DiscordId == userId);
-        if(user is null)
+        if (user is null)
             return;
         var rightNowUtc = DateTime.UtcNow;
         if (user.LastTimeQuestWasChecked.Date == rightNowUtc.Date) return;
-        
+
         user.Quests.Clear();
         var availableQuests = TypesFunction.GetDefaultObjectsAndSubclasses<Quest>()
             .Select(i => i.GetType())
@@ -56,45 +46,37 @@ public class PostgreSqlContext : DbContext
             .OrderBy(_ => BasicFunctionality.GetRandomNumberInBetween(0, 100))
             .Take(4);
 
-        foreach (var i in availableQuests)
-        {
-            user.Quests.Add((Quest) Activator.CreateInstance(i)!);
-        }
-   
+        foreach (var i in availableQuests) user.Quests.Add((Quest)Activator.CreateInstance(i)!);
 
-        
+
         user.LastTimeQuestWasChecked = DateTime.UtcNow;
-
-
     }
 
     public async Task<UserData> CreateNonExistantUserdataAsync(ulong id)
     {
-        var user = new UserData() { DiscordId = id };
+        var user = new UserData { DiscordId = id };
         await UserData.AddAsync(user);
         return user;
     }
- 
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        
         // Configure the database provider and connection string
         optionsBuilder
             .UseNpgsql(ConfigurationManager.AppSettings[Bot.DatabaseUrlPathToUse])
-            .LogTo(Bot.DbLog,LogLevel.Information)
+            .LogTo(Bot.DbLog, LogLevel.Information)
             .EnableSensitiveDataLogging();
-    
     }
 
     /// <param name="tableName">WARNING: case insensitive</param>
     /// <param name="userDataIdColumnName">case sensitive</param>
     /// <param name="numberColumnName">case sensitive</param>
-    private async Task SetupNumberIncrementorForAsync(string tableName, string userDataIdColumnName ,
-        string numberColumnName )
+    private async Task SetupNumberIncrementorForAsync(string tableName, string userDataIdColumnName,
+        string numberColumnName)
     {
         var functionName = $"set_number_for_new_{tableName.ToLower()}_row";
-        #pragma warning disable EF1002
+#pragma warning disable EF1002
         await Database.ExecuteSqlRawAsync(@$"
 CREATE OR REPLACE FUNCTION {functionName}()
 RETURNS TRIGGER AS $$
@@ -116,57 +98,45 @@ EXECUTE FUNCTION {functionName}();
 ");
 #pragma warning restore EF1002
     }
+
     public async Task ResetDatabaseAsync()
     {
         if (!Bot.UseTestDatabaseAndBot)
-        {
             throw new Exception("Cannot reset database. you are on the main server right now");
-        }
         await Database.EnsureDeletedAsync();
         await Database.EnsureCreatedAsync();
         await SetupDatabaseTriggersAsync();
-
     }
 
     private async Task SetupDatabaseTriggersAsync()
     {
         await SetupNumberIncrementorForGearAsync();
         await SetupNumberIncrementorForCharacterAsync();
-
     }
 
     private Task SetupNumberIncrementorForCharacterAsync()
     {
         return SetupNumberIncrementorForAsync(nameof(Characters),
-            nameof(Character.UserDataId),nameof(Character.Number));
+            nameof(Character.UserDataId), nameof(Character.Number));
     }
+
     private Task SetupNumberIncrementorForGearAsync()
     {
-        return SetupNumberIncrementorForAsync(nameof(Gears),nameof(Gear.UserDataId),
+        return SetupNumberIncrementorForAsync(nameof(Gears), nameof(Gear.UserDataId),
             nameof(Gear.Number));
     }
-    
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
         modelBuilder
             .UsePropertyAccessMode(PropertyAccessMode.Property);
-        foreach (var i in TypesFunction.AllTypes.Where(i => i.IsAssignableTo(typeof(Quest))))
-        {
-            modelBuilder.Entity(i);
-        }
+        foreach (var i in TypesFunction.AllTypes.Where(i => i.IsAssignableTo(typeof(Quest)))) modelBuilder.Entity(i);
         foreach (var entityType in TypesFunction
                      .AllTypes
                      .Where(i => i.IsClass && i.IsAssignableTo(typeof(IInventoryEntity))))
-        {
             modelBuilder.Entity(entityType);
-        }
-        foreach (var i in TypesFunction.AllTypes.Where(i => i.IsAssignableTo(typeof(GearStat))))
-        {
-            modelBuilder.Entity(i);
-        }
+        foreach (var i in TypesFunction.AllTypes.Where(i => i.IsAssignableTo(typeof(GearStat)))) modelBuilder.Entity(i);
 
         modelBuilder
             .ApplyConfiguration(new ItemDatabaseConfiguration())

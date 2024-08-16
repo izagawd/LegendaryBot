@@ -5,28 +5,22 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.Characte
 
 public partial class Character
 {
-    
     public void AddStatusEffects(IEnumerable<StatusEffect> statusEffects, float? effectiveness)
     {
-
-        foreach (var i in statusEffects)
-        {
-            AddStatusEffect(i, effectiveness);
-        }
-        
+        foreach (var i in statusEffects) AddStatusEffect(i, effectiveness);
     }
 
     public static bool TryToResist(float effectiveness, float resistance)
     {
-        var percentToResistance =resistance -effectiveness;
+        var percentToResistance = resistance - effectiveness;
         if (percentToResistance < 0) percentToResistance = 0;
         return BasicFunctionality.RandomChance(percentToResistance);
-
     }
+
     /// <param name="statusEffect">The status effect to add</param>
     /// <param name="effectiveness">the effectiveness of the caster. Null to ignore effect resistance</param>
     /// <returns>true if the status effect was successfully added</returns>
-    public StatusEffectInflictResult AddStatusEffect(StatusEffect statusEffect,float? effectiveness)
+    public StatusEffectInflictResult AddStatusEffect(StatusEffect statusEffect, float? effectiveness)
     {
         var inflictResult = StatusEffectInflictResult.Failed;
         if (statusEffect is null) return StatusEffectInflictResult.Failed;
@@ -40,35 +34,28 @@ public partial class Character
             var added = false;
             if (effectiveness is not null && statusEffect.EffectType == StatusEffectType.Debuff)
             {
-                if (!TryToResist(effectiveness.Value,Resistance))
-                {
+                if (!TryToResist(effectiveness.Value, Resistance))
                     added = _statusEffects.Add(statusEffect);
-                }
                 else
-                {
                     inflictResult = StatusEffectInflictResult.Resisted;
-                }
-                
             }
             else
             {
                 added = _statusEffects.Add(statusEffect);
-                
             }
 
             if (added)
                 inflictResult = StatusEffectInflictResult.Succeeded;
-            CurrentBattle.AddBattleText(new StatusEffectInflictBattleText([this],inflictResult, [statusEffect]));
+            CurrentBattle.AddBattleText(new StatusEffectInflictBattleText([this], inflictResult, [statusEffect]));
             if (added)
             {
                 statusEffect.OnAdded();
                 CurrentBattle.InvokeBattleEvent(new CharacterStatusEffectAppliedEventArgs(statusEffect));
             }
+
             return inflictResult;
-
-
         }
-        
+
         if (!statusEffect.IsStackable && arrayOfType.Any())
         {
             void DoOptimize()
@@ -78,45 +65,45 @@ public partial class Character
                 _statusEffects.Remove(onlyStatus);
                 _statusEffects.Add(optimizedOne);
                 inflictResult = StatusEffectInflictResult.Optimized;
-                CurrentBattle.AddBattleText(new StatusEffectInflictBattleText([this],inflictResult, [optimizedOne]));
+                CurrentBattle.AddBattleText(new StatusEffectInflictBattleText([this], inflictResult, [optimizedOne]));
             }
+
             if (statusEffect.EffectType == StatusEffectType.Debuff && effectiveness is not null)
             {
                 if (!TryToResist(effectiveness.Value, Resistance))
-                {
                     DoOptimize();
-                }
                 else
-                {
                     inflictResult = StatusEffectInflictResult.Resisted;
-                }
             }
             else
             {
                 DoOptimize();
             }
+
             return inflictResult;
         }
+
         inflictResult = StatusEffectInflictResult.Failed;
-        CurrentBattle.AddBattleText(new StatusEffectInflictBattleText([this],inflictResult, [statusEffect]));
+        CurrentBattle.AddBattleText(new StatusEffectInflictBattleText([this], inflictResult, [statusEffect]));
         return inflictResult;
     }
+
     /// <summary>
-    /// Dispells (removes) a debuff from the character
+    ///     Dispells (removes) a debuff from the character
     /// </summary>
     /// <param name="statusEffect">The status effect to remove</param>
-    /// <param name="effectiveness">If not null, will do some rng based on effectiveness to see whether or not to dispell debuff</param>
+    /// <param name="effectiveness">
+    ///     If not null, will do some rng based on effectiveness to see whether or not to dispell
+    ///     debuff
+    /// </param>
     /// <returns>true if status effect was successfully dispelled</returns>
     public bool DispellStatusEffect(StatusEffect statusEffect, int? effectiveness = null)
     {
         if (effectiveness is null || statusEffect.EffectType == StatusEffectType.Debuff)
             return _statusEffects.Remove(statusEffect);
 
-        if (!BattleFunctionality.CheckForResist(effectiveness.Value,Resistance))
-        {
+        if (!BattleFunctionality.CheckForResist(effectiveness.Value, Resistance))
             return _statusEffects.Remove(statusEffect);
-        }
         return false;
-        
     }
 }

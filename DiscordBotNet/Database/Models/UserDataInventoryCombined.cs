@@ -6,12 +6,10 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 
 namespace DiscordBotNet.Database.Models;
+
 public struct UserDataInventoryCombined : IInventoryEntityContainer<IInventoryEntity>
 {
-
-
-    private UserData _userData;
-
+    private readonly UserData _userData;
 
 
     public UserDataInventoryCombined(UserData userData)
@@ -29,22 +27,13 @@ public struct UserDataInventoryCombined : IInventoryEntityContainer<IInventoryEn
         foreach (var i in _userData.Characters)
         {
             yield return i;
-;        }
-
-        foreach (var i in _userData.Items)
-        {
-            yield return i;
+            ;
         }
 
-        foreach (var i in _userData.Gears)
-        {
-            yield return i;
-        }
-        foreach (var i in _userData.Blessings)
-        {
-            yield return i;
-        }
-        
+        foreach (var i in _userData.Items) yield return i;
+
+        foreach (var i in _userData.Gears) yield return i;
+        foreach (var i in _userData.Blessings) yield return i;
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -75,11 +64,9 @@ public struct UserDataInventoryCombined : IInventoryEntityContainer<IInventoryEn
 
     public void AddRange(IEnumerable<IInventoryEntity> inventoryEntities)
     {
-        foreach (var i in inventoryEntities)
-        {
-            Add(i);
-        }
+        foreach (var i in inventoryEntities) Add(i);
     }
+
     public void Clear()
     {
         _userData.Characters.Clear();
@@ -106,30 +93,31 @@ public struct UserDataInventoryCombined : IInventoryEntityContainer<IInventoryEn
         {
             case Character character:
                 return _userData.Characters.Remove(character);
-            
+
             case Item item:
                 return _userData.Items.Remove(item);
-            
+
             case Gear gear:
                 return _userData.Gears.Remove(gear);
-            
+
             case Blessing blessing:
                 return _userData.Blessings.Remove(blessing);
             default:
                 throw new Exception("Weird");
-            
         }
     }
+
     public void CopyTo(IInventoryEntity[] array, int arrayIndex)
     {
         throw new NotImplementedException();
     }
 
- 
 
     public int Count => _userData.Items.Count + _userData.Characters.Count + _userData.Blessings.Count +
                         _userData.Gears.Count;
+
     public bool IsReadOnly => false;
+
     public int IndexOf(IInventoryEntity inventoryEntity)
     {
         throw new NotImplementedException();

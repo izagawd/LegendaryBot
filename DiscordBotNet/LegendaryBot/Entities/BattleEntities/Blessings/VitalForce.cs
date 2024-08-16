@@ -6,6 +6,21 @@ public class VitalForce : Blessing, IStatsModifier
 {
     public override string Name => "Vital Force";
 
+
+    public override Rarity Rarity => Rarity.ThreeStar;
+
+
+    public override int TypeId
+    {
+        get => 4;
+        protected init { }
+    }
+
+    public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
+    {
+        yield return new DefensePercentageModifierArgs(Character!, GetDefenseBoost(LevelMilestone));
+    }
+
     public override string GetDescription(int levelMilestone)
     {
         return $"Defense is increased by {GetDefenseBoost(levelMilestone)}%";
@@ -20,21 +35,5 @@ public class VitalForce : Blessing, IStatsModifier
         if (levelMilestone >= 2) return 6;
         if (levelMilestone >= 1) return 5;
         return 4;
-        
-    }
-    
-    
-    public override Rarity Rarity => Rarity.ThreeStar;
-
-
-    public override int TypeId
-    {
-        get => 4;
-        protected init {}
-    }
-
-    public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
-    {
-        yield return new DefensePercentageModifierArgs(Character!, GetDefenseBoost(LevelMilestone));
     }
 }

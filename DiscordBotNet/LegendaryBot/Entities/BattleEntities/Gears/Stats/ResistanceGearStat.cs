@@ -7,13 +7,16 @@ public class ResistanceGearStat : GearStat
     public override int TypeId
     {
         get => 10;
-        protected init {}
+        protected init { }
     }
+
+    public override StatType StatType => StatType.Resistance;
+    public override bool IsPercentage => true;
 
 
     public override int GetMainStatValue(Rarity rarity)
     {
-        return ((int) rarity * 10) + 10;
+        return (int)rarity * 10 + 10;
     }
 
     public override void AddStats(Character character)
@@ -21,8 +24,6 @@ public class ResistanceGearStat : GearStat
         character.TotalResistance += Value;
     }
 
-    public override StatType StatType => StatType.Resistance;
-    public override bool IsPercentage => true;
     public override int GetMaximumSubstatLevelIncrease(Rarity rarity)
     {
         switch (rarity)

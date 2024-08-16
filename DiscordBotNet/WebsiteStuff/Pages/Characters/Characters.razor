@@ -10,6 +10,7 @@
 @rendermode InteractiveServer
 @inject PostgreSqlContext DbContext
 @attribute [Authorize]
+
 @code{
 
     private ClaimsPrincipal user;
@@ -17,7 +18,8 @@
 
     private Character[]? UsingCharacterCollection;
 
-    private string _nameFilter = String.Empty;
+    private string _nameFilter = string.Empty;
+
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
@@ -39,7 +41,7 @@
             CharacterCollection = [];
         }
 
-       
+
         UsingCharacterCollection = CharacterCollection;
     }
 
@@ -47,7 +49,7 @@
 
     private void RefreshFilters()
     {
-        IEnumerable<Character> theEnumerable = CharacterCollection
+        var theEnumerable = CharacterCollection
             .Where(i => i.Name.ToLower().Contains(_nameFilter));
         switch (SortingMethod)
         {
@@ -57,20 +59,17 @@
             case "level":
                 theEnumerable = theEnumerable.OrderBy(i => i.Level);
                 break;
-                
         }
 
         if (reverseOrder)
             theEnumerable = theEnumerable.Reverse();
         UsingCharacterCollection = theEnumerable.ToArray();
-      
-
     }
+
     private void FilterWithName(ChangeEventArgs eventArgs)
     {
         _nameFilter = eventArgs.Value?.ToString();
         RefreshFilters();
-     
     }
 
     private void SelectChange(ChangeEventArgs eventArgs)
@@ -78,32 +77,29 @@
         SortingMethod = eventArgs.Value?.ToString();
         RefreshFilters();
     }
-    
+
     public string SortingMethod = "level";
-    public bool reverseOrder = false;
+    public bool reverseOrder;
 }
 
 <Navigation>
- 
+
     <div class="filterer">
-    
+
         <input class="name-filter" type="text" @onchange="FilterWithName"/>
         <p class="some-para">Sort By</p>
-        <select  @onchange="SelectChange" name="Sort By" style="width: 100px; height:35px; align-self: center;
+        <select @onchange="SelectChange" name="Sort By" style="width: 100px; height:35px; align-self: center;
 margin-left: 30px">
             <option value="level">Level</option>
             <option value="name">Name</option>
         </select>
         <p class="some-para">Reverse Order</p>
-        <input  type="checkbox" style="width:25px; height:25px; align-self: center; margin-left: 30px;" @onchange="b => { reverseOrder = (bool) b.Value ; RefreshFilters(); }"></input>
+        <input type="checkbox" style="width:25px; height:25px; align-self: center; margin-left: 30px;" @onchange="b => { reverseOrder = (bool)b.Value; RefreshFilters(); }"></input>
     </div>
     @SortingMethod
     @{
-   
         if (UsingCharacterCollection is not null)
         {
-
-
             <div class="characters-container">
                 @foreach (var i in UsingCharacterCollection)
                 {
@@ -112,9 +108,7 @@ margin-left: 30px">
                     </div>
                 }
             </div>
-
         }
-
     }
 
 

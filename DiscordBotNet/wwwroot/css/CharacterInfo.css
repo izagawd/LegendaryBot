@@ -1,4 +1,4 @@
-﻿#super_character_div{
+﻿#super_character_div {
     display: flex;
     position: relative;
 
@@ -6,8 +6,8 @@
     top: 100px;
     width: 73%;
 }
-#character_details
-{
+
+#character_details {
     display: flex;
     position: fixed;
 
@@ -15,28 +15,36 @@
     top: 40%;
     width: 73%;
 }
-.blessing_div{
+
+.blessing_div {
     display: flex;
     border: 3px solid black;
 
 }
-#character_with_blessing{
-    position: relative; display: flex; margin-right: 60px; border: 3px solid black;
+
+#character_with_blessing {
+    position: relative;
+    display: flex;
+    margin-right: 60px;
+    border: 3px solid black;
 }
-#blessing_list_div{
+
+#blessing_list_div {
     top: 10%;
     background-color: grey;
-    position: fixed; 
-    left: 73%; 
-    width: 27%; 
-    height: 80%; 
+    position: fixed;
+    left: 73%;
+    width: 27%;
+    height: 80%;
     overflow-y: scroll;
 }
-.image_class{
-    width:110px;
-    height:110px;
+
+.image_class {
+    width: 110px;
+    height: 110px;
 }
-.blessing_details{
+
+.blessing_details {
     width: 40%;
     margin-left: 15px;
     margin-right: 15px;

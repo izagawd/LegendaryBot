@@ -7,22 +7,22 @@ public class AttackPercentageGearStat : GearStat
     public override int TypeId
     {
         get => 2;
-        protected init {}
-    }
-
-
-    public override int GetMainStatValue(Rarity rarity)
-    {
-        return ((int)rarity  * 10) + 10;
-    }
-    
-    public override void AddStats(Character character)
-    {
-        character.TotalAttack += Value * 0.01f * character.BaseAttack;
+        protected init { }
     }
 
     public override StatType StatType => StatType.Attack;
     public override bool IsPercentage => true;
+
+
+    public override int GetMainStatValue(Rarity rarity)
+    {
+        return (int)rarity * 10 + 10;
+    }
+
+    public override void AddStats(Character character)
+    {
+        character.TotalAttack += Value * 0.01f * character.BaseAttack;
+    }
 
     public override int GetMaximumSubstatLevelIncrease(Rarity rarity)
     {

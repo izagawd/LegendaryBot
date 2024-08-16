@@ -9,7 +9,7 @@ public class Necklace : Gear
     public override int TypeId
     {
         get => 4;
-        protected init {}
+        protected init { }
     }
 
     public sealed override IEnumerable<Type> PossibleMainStats =>
@@ -18,6 +18,6 @@ public class Necklace : Gear
         GearStat.HealthPercentageType,
         GearStat.CriticalChanceType,
         GearStat.CriticalDamageType,
-        GearStat.DefensePercentageType,
+        GearStat.DefensePercentageType
     ];
 }

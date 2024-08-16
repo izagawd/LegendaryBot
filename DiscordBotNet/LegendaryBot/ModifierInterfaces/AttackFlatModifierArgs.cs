@@ -4,7 +4,8 @@ namespace DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
 public class AttackFlatModifierArgs : StatsModifierArgs
 {
-    public AttackFlatModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect, valueToChangeWith)
+    public AttackFlatModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect,
+        valueToChangeWith)
     {
     }
 }

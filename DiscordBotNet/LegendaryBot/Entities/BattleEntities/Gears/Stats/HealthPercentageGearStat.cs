@@ -7,17 +7,18 @@ public class HealthPercentageGearStat : GearStat
     public override int TypeId
     {
         get => 9;
-        protected init {}
-    }
-
-
-    public override int GetMainStatValue(Rarity rarity)
-    {
-        return ((int) rarity  * 10) + 10;
+        protected init { }
     }
 
     public override StatType StatType => StatType.MaxHealth;
     public override bool IsPercentage => true;
+
+
+    public override int GetMainStatValue(Rarity rarity)
+    {
+        return (int)rarity * 10 + 10;
+    }
+
     public override void AddStats(Character character)
     {
         character.TotalMaxHealth += Value * 0.01f * character.BaseMaxHealth;

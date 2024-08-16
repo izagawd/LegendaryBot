@@ -1,4 +1,3 @@
-
 using System.Globalization;
 using System.Security.Claims;
 using AspNet.Security.OAuth.Discord;
@@ -9,21 +8,20 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace DiscordBotNet;
 
-
-
-
 public static class Website
 {
     public const string DomainName = "https://localhost";
+
     public static async Task<string> RenderImageTagAsync(Image image)
     {
         if (image == null) throw new ArgumentNullException(nameof(image));
 
         await using var stream = new MemoryStream();
-        await image.SaveAsPngAsync(stream);  // Save the image to a stream
+        await image.SaveAsPngAsync(stream); // Save the image to a stream
         var base64Image = Convert.ToBase64String(stream.ToArray());
-        return  $"data:image/png;base64,{base64Image}";
+        return $"data:image/png;base64,{base64Image}";
     }
+
     public static string GetDiscordUserName(this ClaimsPrincipal user)
     {
         var claim = user.FindFirst(i => i.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name");
@@ -36,36 +34,31 @@ public static class Website
             i.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
         return ulong.Parse(claim!.Value);
     }
+
     public static string GetDiscordUserAvatarUrl(this ClaimsPrincipal user)
     {
         var claim = user.FindFirst(i =>
             i.Type == "urn:discord:avatar:url");
         return claim?.Value!;
     }
+
     public static void ConfigureServices(IServiceCollection services)
     {
-
         services.AddRazorPages();
         services.AddRazorComponents()
             .AddInteractiveServerComponents();
-        
+
         services.AddDbContext<PostgreSqlContext>();
-        services.AddSession(i =>
-            {
-                i.IdleTimeout = TimeSpan.MaxValue;
-            }
-  
+        services.AddSession(i => { i.IdleTimeout = TimeSpan.MaxValue; }
         );
 
         services.AddAuthentication(options =>
             {
-
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = DiscordAuthenticationDefaults.AuthenticationScheme;
             })
             .AddDiscord(options =>
             {
-
                 options.ClientId = "340054610989416460";
                 options.ClientSecret = "n-Jy3ogvEmMnaFRIVmguqzpLgW8pYp2m";
                 options.SaveTokens = true;
@@ -79,15 +72,7 @@ public static class Website
                         user.GetString("avatar"),
                         user.GetString("avatar")!.StartsWith("a_") ? "gif" : "png"));
             })
-            .AddCookie(options =>
-            {
-
-            }).AddCertificate(options =>
-            {
-
-                options.Validate();
-            });
-
+            .AddCookie(options => { }).AddCertificate(options => { options.Validate(); });
     }
 
 
@@ -97,14 +82,12 @@ public static class Website
         {
             var handler = new HttpClientHandler();
             handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback = 
+            handler.ServerCertificateCustomValidationCallback =
                 (httpRequestMessage, cert, cetChain, policyErrors) =>
                 {
                     if (cert is not null && !cert.Verify())
-                    {
                         return httpRequestMessage.RequestUri is not null
                                && httpRequestMessage.RequestUri.ToString().Contains(DomainName);
-                    }
                     return cert is not null;
                 };
             using var webClient = new HttpClient(handler);
@@ -116,7 +99,6 @@ public static class Website
         {
             return false;
         }
- 
     }
 
     public static async Task StartAsync(string[] args)
@@ -127,13 +109,14 @@ public static class Website
 
         var app = builder.Build();
 
-     
+
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
+
         app.UseExceptionHandler("/Error");
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
@@ -149,17 +132,11 @@ public static class Website
         app.MapRazorComponents<App>()
             .AddInteractiveServerRenderMode();
 
-  
-     
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllers();
-        });
+
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
         app.UseSession();
 
         await app.RunAsync(DomainName);
-   
-
     }
 }

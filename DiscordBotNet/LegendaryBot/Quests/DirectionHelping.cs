@@ -6,8 +6,8 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Rewards;
-using DSharpPlus.Entities;
 using DSharpPlus.Commands;
+using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Quests;
@@ -17,12 +17,15 @@ public class DirectionHelping : Quest
     public override int TypeId
     {
         get => 2;
-        protected init {}
+        protected init { }
     }
 
 
     public override string Title => "Direction Helping";
     public override string Description => "You are tasked with giving people directions";
+
+    public override IEnumerable<Reward> QuestRewards { get; protected set; } = [];
+
     public override async Task<bool> StartQuest(PostgreSqlContext databaseContext, CommandContext context,
         DiscordMessage messageToEdit)
     {
@@ -30,7 +33,6 @@ public class DirectionHelping : Quest
         var profile = blast.DialogueProfile;
         var decisionArgument = new DialogueDecisionArgument
         {
-            
             DialogueProfile = profile,
             ActionRows =
             [
@@ -43,7 +45,7 @@ public class DirectionHelping : Quest
                         "(Point Left)")
                 ])
             ],
-            DialogueText 
+            DialogueText
                 = "Yo, human, do you know where I can find the nearest restaurant? I think it's right but I'm not sure"
         };
         var dialogue = new Dialogue
@@ -53,40 +55,44 @@ public class DirectionHelping : Quest
             Skippable = false
         };
 
-        
+
         var dialogueResult = await dialogue.LoadAsync(context.User, messageToEdit);
 
         var userData = await databaseContext.UserData
             .IncludeTeamWithAllEquipments()
             .FirstAsync(i => i.DiscordId == context.User.Id);
-        
+
         if (dialogueResult.Decision == "right")
         {
-            dialogue = new Dialogue()
+            dialogue = new Dialogue
             {
                 Title = "directions",
 
                 NormalArguments =
                 [
-                    new DialogueNormalArgument()
+                    new DialogueNormalArgument
                     {
                         DialogueProfile = profile,
-                        DialogueTexts = [$"Guess I don't have to make an explosion out of you",
-                        $"I knew the direction, I just wanted to see if {userData.Tier} tiers were smart",
-                        $"Get stronger so trying to detonate you will be more interesting, {userData.Name}."]
+                        DialogueTexts =
+                        [
+                            "Guess I don't have to make an explosion out of you",
+                            $"I knew the direction, I just wanted to see if {userData.Tier} tiers were smart",
+                            $"Get stronger so trying to detonate you will be more interesting, {userData.Name}."
+                        ]
                     }
                 ]
             };
             await dialogue.LoadAsync(context.User, dialogueResult.Message);
             return true;
         }
-        dialogue = new Dialogue()
+
+        dialogue = new Dialogue
         {
             Title = "directions",
 
             NormalArguments =
             [
-                new DialogueNormalArgument()
+                new DialogueNormalArgument
                 {
                     DialogueProfile = profile,
                     DialogueTexts = ["Wrong... you are so dumb, guess i'll detonate you"]
@@ -101,18 +107,18 @@ public class DirectionHelping : Quest
 
         var userTeam = userData.EquippedPlayerTeam;
         userTeam.LoadTeamStats();
-        var battle = new BattleSimulator(userTeam,blastTeam);
+        var battle = new BattleSimulator(userTeam, blastTeam);
 
         var battleResult = await battle.StartAsync(dialogueResult.Message);
 
         if (battleResult.Winners == userTeam)
         {
-            dialogue = new Dialogue()
+            dialogue = new Dialogue
             {
                 Title = "direction",
                 NormalArguments =
                 [
-                    new DialogueNormalArgument()
+                    new DialogueNormalArgument
                     {
                         DialogueProfile = profile,
                         DialogueTexts =
@@ -123,24 +129,26 @@ public class DirectionHelping : Quest
                     }
                 ]
             };
-       
-             await dialogue.LoadAsync(context.User, battleResult.Message);
-             await databaseContext.Items.Where(i => i.UserData.DiscordId  == context.User.Id && i is Coin)
-                 .LoadAsync();
-            QuestRewards = [new TextReward(userTeam.IncreaseExp(Character.GetExpBasedOnDefeatedCharacters(blastTeam))),
-                    new EntityReward([new Coin(){Stacks =Character.GetCoinsBasedOnCharacters(blastTeam)}] )];
-            
+
+            await dialogue.LoadAsync(context.User, battleResult.Message);
+            await databaseContext.Items.Where(i => i.UserData.DiscordId == context.User.Id && i is Coin)
+                .LoadAsync();
+            QuestRewards =
+            [
+                new TextReward(userTeam.IncreaseExp(Character.GetExpBasedOnDefeatedCharacters(blastTeam))),
+                new EntityReward([new Coin { Stacks = Character.GetCoinsBasedOnCharacters(blastTeam) }])
+            ];
+
             return true;
         }
 
-        dialogue = new Dialogue()
+        dialogue = new Dialogue
         {
             Title = "direction",
             NormalArguments =
             [
-                new DialogueNormalArgument()
+                new DialogueNormalArgument
                 {
-                    
                     DialogueProfile = profile,
                     DialogueTexts =
                     [
@@ -149,11 +157,9 @@ public class DirectionHelping : Quest
                 }
             ]
         };
-         await dialogue.LoadAsync(context.User, battleResult.Message);
+        await dialogue.LoadAsync(context.User, battleResult.Message);
 
-        
+
         return false;
     }
-
-    public override IEnumerable<Reward> QuestRewards { get; protected set; } = [];
 }

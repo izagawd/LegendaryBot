@@ -12,9 +12,10 @@
     display: block;
     border-radius: 10px; /* Match this to the box's border-radius */
 }
+
 p {
     margin-left: 10px;
     font-weight: bold;
     margin-bottom: 0; /* Reduce space between paragraphs */
-    font-size: 20px;     /* Reduce paragraph font size */
+    font-size: 20px; /* Reduce paragraph font size */
 }

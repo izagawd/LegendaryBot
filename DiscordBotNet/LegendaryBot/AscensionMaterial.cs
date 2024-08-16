@@ -1,2 +1,1 @@
 namespace DiscordBotNet.LegendaryBot;
-

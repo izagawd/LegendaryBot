@@ -7,7 +7,7 @@ public class HerosKnowledge : CharacterExpMaterial
     public override int TypeId
     {
         get => 3;
-        protected init {}
+        protected init { }
     }
 
 

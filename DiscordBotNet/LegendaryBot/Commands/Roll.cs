@@ -6,19 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
-public class Roll :  GeneralCommandClass
+public class Roll : GeneralCommandClass
 {
-
-    [Command("roll"), Description("roll a random number form 0 - 100!"),
-    BotCommandCategory(BotCommandCategory.Other)]
+    [Command("roll")]
+    [Description("roll a random number form 0 - 100!")]
+    [BotCommandCategory()]
     public async ValueTask Execute(CommandContext ctx)
     {
-
-        var color = (await DatabaseContext.UserData
-            .Where(i => i.DiscordId == ctx.User.Id)
-            .Select(i =>new DiscordColor?(i.Color))
-            .FirstOrDefaultAsync())
-            ?? TypesFunction.GetDefaultObject<UserData>().Color;
+        var color = await DatabaseContext.UserData
+                        .Where(i => i.DiscordId == ctx.User.Id)
+                        .Select(i => new DiscordColor?(i.Color))
+                        .FirstOrDefaultAsync()
+                    ?? TypesFunction.GetDefaultObject<UserData>().Color;
         var random = new Random();
         var embed = new DiscordEmbedBuilder()
             .WithTitle("**Roll**")
@@ -27,6 +26,4 @@ public class Roll :  GeneralCommandClass
             .WithDescription($"{random.Next(0, 100)}:game_die:");
         await ctx.RespondAsync(embed.Build());
     }
-
-
 }

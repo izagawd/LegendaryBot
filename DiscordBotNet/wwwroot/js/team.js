@@ -1,14 +1,15 @@
 ﻿let draggedElement
-function dragStart(event){
+
+function dragStart(event) {
 
     draggedElement = event.target;
 }
 
 
-function RemoveFromTeam(event){
- 
-    if(draggedElement.className.includes("character_in_list_div")) return;
-    
+function RemoveFromTeam(event) {
+
+    if (draggedElement.className.includes("character_in_list_div")) return;
+
     let id = draggedElement.id;
     $.ajax({
         type: 'POST',
@@ -24,10 +25,11 @@ function RemoveFromTeam(event){
         }
     })
 }
-function AddToTeam(event){
 
-    if(!draggedElement.className.includes("character_in_list_div")) return;
-    
+function AddToTeam(event) {
+
+    if (!draggedElement.className.includes("character_in_list_div")) return;
+
     let id = draggedElement.id;
 
     $.ajax({
@@ -37,7 +39,7 @@ function AddToTeam(event){
         data: JSON.stringify(id),
         success: function (result) {
             location.reload()
-    
+
             // Handle the result if needed
         },
         error: function (error) {

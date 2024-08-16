@@ -5,7 +5,7 @@ public class DivineShard : Item
     public override int TypeId
     {
         get => 6;
-        protected init {}
+        protected init { }
     }
 
 

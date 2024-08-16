@@ -2,13 +2,20 @@
 
 public class BattleText
 {
- 
-    public static implicit operator BattleText(string text) => new(text);
-    public virtual string Text { get; } 
-
     public BattleText(string text)
     {
         Text = text;
+    }
+
+    protected BattleText()
+    {
+    }
+
+    public virtual string Text { get; }
+
+    public static implicit operator BattleText(string text)
+    {
+        return new BattleText(text);
     }
 
     public static IEnumerable<BattleText> Combine(IEnumerable<BattleText> battleTexts)
@@ -31,20 +38,16 @@ public class BattleText
                 lastBattleTextInstance = possibleMerged;
             }
         }
+
         toReturnList.Add(lastBattleTextInstance);
         return toReturnList;
     }
-    /// <summary>
-    /// This comes before the argument in the order
-    /// </summary>
 
+    /// <summary>
+    ///     This comes before the argument in the order
+    /// </summary>
     public virtual BattleText? Merge(BattleText battleTextInstance)
     {
         return null;
     }
-
-    protected BattleText(){}
 }
-
-
-

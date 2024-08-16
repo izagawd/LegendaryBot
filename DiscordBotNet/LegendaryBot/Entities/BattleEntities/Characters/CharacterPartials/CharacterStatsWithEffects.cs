@@ -3,12 +3,8 @@ using DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
-
-
 public partial class Character
 {
-    
-  
     public float Speed
     {
         get
@@ -18,14 +14,8 @@ public partial class Character
 
             float flat = 0;
 
-            foreach (var i in modifiedStats.OfType<SpeedPercentageModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            foreach (var i in modifiedStats.OfType<SpeedFlatModifierArgs>())
-            {
-                flat += i.ValueToChangeWith;
-            }
+            foreach (var i in modifiedStats.OfType<SpeedPercentageModifierArgs>()) percentage += i.ValueToChangeWith;
+            foreach (var i in modifiedStats.OfType<SpeedFlatModifierArgs>()) flat += i.ValueToChangeWith;
 
             var newSpeed = TotalSpeed * percentage * 0.01f;
             newSpeed += flat;
@@ -34,7 +24,8 @@ public partial class Character
         }
     }
 
-    public float Defense { 
+    public float Defense
+    {
         get
         {
             float percentage = 100;
@@ -42,78 +33,61 @@ public partial class Character
 
             float flat = 0;
 
-            foreach (var i in modifiedStats.OfType<DefensePercentageModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            foreach (var i in modifiedStats.OfType<DefenseFlatModifierArgs>())
-            {
-                flat += i.ValueToChangeWith;
-            }
+            foreach (var i in modifiedStats.OfType<DefensePercentageModifierArgs>()) percentage += i.ValueToChangeWith;
+            foreach (var i in modifiedStats.OfType<DefenseFlatModifierArgs>()) flat += i.ValueToChangeWith;
 
             var newDefense = TotalDefense * percentage * 0.01f;
             newDefense += flat;
             if (newDefense < 0) newDefense = 0;
             return newDefense;
-        } 
+        }
     }
 
 
-    public float Attack { 
-        get     
+    public float Attack
+    {
+        get
         {
             float percentage = 100;
             var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
 
             float flat = 0;
 
-            foreach (var i in modifiedStats.OfType<AttackPercentageModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            foreach (var i in modifiedStats.OfType<AttackFlatModifierArgs>())
-            {
-                flat += i.ValueToChangeWith;
-            }
+            foreach (var i in modifiedStats.OfType<AttackPercentageModifierArgs>()) percentage += i.ValueToChangeWith;
+            foreach (var i in modifiedStats.OfType<AttackFlatModifierArgs>()) flat += i.ValueToChangeWith;
 
             var newAttack = TotalAttack * percentage * 0.01f;
             newAttack += flat;
             if (newAttack < 0) newAttack = 0;
             return newAttack;
-        } 
+        }
     }
 
 
-    public float CriticalDamage {
+    public float CriticalDamage
+    {
         get
         {
-       
             var percentage = TotalCriticalDamage;
 
-            foreach (var i in GetAllStatsModifierArgs<CriticalDamageModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
+            foreach (var i in GetAllStatsModifierArgs<CriticalDamageModifierArgs>()) percentage += i.ValueToChangeWith;
             return percentage;
         }
     }
 
- 
+
     [NotMapped]
     public float Effectiveness
     {
         get
         {
-       
             var percentage = TotalEffectiveness;
             var modifiedStats = GetAllStatsModifierArgs<StatsModifierArgs>().ToArray();
-            foreach (var i in modifiedStats.OfType<EffectivenessModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
+            foreach (var i in modifiedStats.OfType<EffectivenessModifierArgs>()) percentage += i.ValueToChangeWith;
             return percentage;
         }
     }
+
     public float MaxHealth
     {
         get
@@ -124,13 +98,8 @@ public partial class Character
             float flat = 0;
 
             foreach (var i in modifiedStats.OfType<MaxHealthPercentageModifierArgs>())
-            {
                 percentage += i.ValueToChangeWith;
-            }
-            foreach (var i in modifiedStats.OfType<MaxHealthPercentageModifierArgs>())
-            {
-                flat += i.ValueToChangeWith;
-            }
+            foreach (var i in modifiedStats.OfType<MaxHealthPercentageModifierArgs>()) flat += i.ValueToChangeWith;
 
             var newMaxHealth = TotalMaxHealth * percentage * 0.01f;
             newMaxHealth += flat;
@@ -138,49 +107,41 @@ public partial class Character
             return newMaxHealth;
         }
     }
- 
+
+
+    [NotMapped]
+    public float CriticalChance
+    {
+        get
+        {
+            var percentage = TotalCriticalChance;
+            foreach (var i in GetAllStatsModifierArgs<CriticalChanceModifierArgs>()) percentage += i.ValueToChangeWith;
+            return percentage;
+        }
+    }
+
+    [NotMapped]
+    public float Resistance
+    {
+        get
+        {
+            var percentage = TotalResistance;
+            foreach (var i in GetAllStatsModifierArgs<ResistanceModifierArgs>()) percentage += i.ValueToChangeWith;
+            return percentage;
+        }
+    }
+
     /// <summary>
-    /// 
     /// </summary>
     /// <typeparam name="T">the type of stats modifier you want</typeparam>
     public IEnumerable<T> GetAllStatsModifierArgs<T>() where T : StatsModifierArgs
     {
-       
         if (CurrentBattle is not null)
-        {
             return CurrentBattle
                 .GetAllStatsModifierArgsInBattle()
                 .OfType<T>()
                 .Where(i => i.CharacterToAffect == this);
-        }
 
         return [];
-    }
-
-
-    [NotMapped]
-    public float CriticalChance {
-        get
-        {
-            var percentage = TotalCriticalChance;
-            foreach (var i  in GetAllStatsModifierArgs<CriticalChanceModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            return percentage;
-        }
-        
-    }
-    [NotMapped]
-    public float Resistance {
-        get
-        {
-            var percentage = TotalResistance;
-            foreach (var i in GetAllStatsModifierArgs<ResistanceModifierArgs>())
-            {
-                percentage += i.ValueToChangeWith;
-            }
-            return percentage;
-        } 
     }
 }

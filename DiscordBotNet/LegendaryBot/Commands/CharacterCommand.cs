@@ -11,26 +11,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 
-[Command("character"), Description("some commands related to character")]
+[Command("character")]
+[Description("some commands related to character")]
 public partial class CharacterCommand : GeneralCommandClass
 {
     private static readonly ImmutableArray<string> _possibleGears = TypesFunction
         .GetDefaultObjectsAndSubclasses<Gear>()
         .Select(i => i.Name.ToLower().Replace(" ", "")).ToImmutableArray();
-    
-    
-    [Command("equip-blessing"), Description("Use this Command make a character equip a blessing"),
-    BotCommandCategory(BotCommandCategory.Character)]
+
+
+    [Command("equip-blessing")]
+    [Description("Use this Command make a character equip a blessing")]
+    [BotCommandCategory(BotCommandCategory.Character)]
     public async ValueTask ExecuteEquipBlessing(CommandContext context,
         [Parameter("character-num")] int characterNumber,
         [Parameter("blessing-name")] string blessingName)
     {
-
         var userData = await DatabaseContext.UserData
             .Include(i => i.Blessings)
             .ThenInclude(i => i.Character)
-            .Include(i => i.Characters.Where(j => 
-                                              j.Number == characterNumber))
+            .Include(i => i.Characters.Where(j =>
+                j.Number == characterNumber))
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -46,7 +47,7 @@ public partial class CharacterCommand : GeneralCommandClass
 
         var simplifiedName = blessingName.Replace(" ", "").ToLower();
         var possibleBlessings = userData.Blessings
-            .Where(i => i.Name.ToLower().Replace(" ","") == simplifiedName)
+            .Where(i => i.Name.ToLower().Replace(" ", "") == simplifiedName)
             .ToArray();
         var embed = new DiscordEmbedBuilder()
             .WithTitle("Equipping blessing")
@@ -62,12 +63,13 @@ public partial class CharacterCommand : GeneralCommandClass
         var blessing = possibleBlessings.FirstOrDefault(i => i.Character == null);
         if (blessing is null)
         {
-            embed.WithDescription($"Blessing with name {blessingName} found, but there isn't any that isn't already equipped by a character");
+            embed.WithDescription(
+                $"Blessing with name {blessingName} found, but there isn't any that isn't already equipped by a character");
             await context.RespondAsync(embed);
             return;
         }
 
-        
+
         var character = userData.Characters.FirstOrDefault();
         if (character is null)
         {
@@ -75,24 +77,23 @@ public partial class CharacterCommand : GeneralCommandClass
             await context.RespondAsync(embed);
             return;
         }
-        
+
         character.Blessing = blessing;
         await DatabaseContext.SaveChangesAsync();
         embed.WithDescription(
             $"{character.Name} [{character.Number}] has successfully equipped {blessing.Name}!");
         await context.RespondAsync(embed);
-
     }
-     
-        [Command("remove-blessing"), Description("Use this Command make a character equip a blessing"),
-        BotCommandCategory(BotCommandCategory.Character)]
+
+    [Command("remove-blessing")]
+    [Description("Use this Command make a character equip a blessing")]
+    [BotCommandCategory(BotCommandCategory.Character)]
     public async ValueTask ExecuteRemoveBlessing(CommandContext context,
         [Parameter("character-num")] int characterNum)
     {
-
         var userData = await DatabaseContext.UserData
-            .Include(i => i.Characters.Where(j => 
-                                              j.Number == characterNum))
+            .Include(i => i.Characters.Where(j =>
+                j.Number == characterNum))
             .ThenInclude(i => i.Blessing)
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
@@ -103,16 +104,16 @@ public partial class CharacterCommand : GeneralCommandClass
 
         if (userData.IsOccupied)
         {
-           await NotifyAboutOccupiedAsync(context);
-           return;
+            await NotifyAboutOccupiedAsync(context);
+            return;
         }
 
-   
+
         var embed = new DiscordEmbedBuilder()
             .WithTitle("Removing blessing")
             .WithUser(context.User)
             .WithColor(userData.Color);
-  
+
         var character = userData.Characters.FirstOrDefault();
         if (character is null)
         {
@@ -120,9 +121,11 @@ public partial class CharacterCommand : GeneralCommandClass
             await context.RespondAsync(embed);
             return;
         }
+
         if (character.Blessing is null)
         {
-            embed.WithDescription($"Character {character.Name} [{character.Number}] does not have any blessing equipped");
+            embed.WithDescription(
+                $"Character {character.Name} [{character.Number}] does not have any blessing equipped");
             await context.RespondAsync(embed);
             return;
         }
@@ -134,32 +137,31 @@ public partial class CharacterCommand : GeneralCommandClass
         embed.WithDescription(
             $"{character.Name} [{character.Number}] has successfully removed {prevBlessing.Name}!");
         await context.RespondAsync(embed);
-
     }
-     
-    
-    [Command("equip-gear"), Description("Use this Command make a character equip a gear"),
-    BotCommandCategory(BotCommandCategory.Character)]
+
+
+    [Command("equip-gear")]
+    [Description("Use this Command make a character equip a gear")]
+    [BotCommandCategory(BotCommandCategory.Character)]
     public async ValueTask ExecuteEquipGear(CommandContext context,
         [Parameter("character-num")] int characterNumber,
         [Parameter("gear-num")] int gearNumber)
     {
-
         var userData = await DatabaseContext.UserData
             .Include(i => i.Gears)
-            .Include(i => 
-                i.Characters.Where(j => 
-                j.Number == characterNumber))
+            .Include(i =>
+                i.Characters.Where(j =>
+                    j.Number == characterNumber))
             .ThenInclude(i => i.Gears)
             .Include(i => i.Gears.Where(j => j.Number == gearNumber))
-            .ThenInclude(i =>  i.Stats)
+            .ThenInclude(i => i.Stats)
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
         }
-        
+
         if (userData.IsOccupied)
         {
             await NotifyAboutOccupiedAsync(context);
@@ -177,7 +179,7 @@ public partial class CharacterCommand : GeneralCommandClass
             await context.RespondAsync(embed);
             return;
         }
-        
+
         var gear = userData.Gears.FirstOrDefault(i => i.Number == gearNumber);
         if (gear is null)
         {
@@ -185,40 +187,28 @@ public partial class CharacterCommand : GeneralCommandClass
             await context.RespondAsync(embed);
             return;
         }
+
         character.Gears.RemoveAll(i => i.GetType() == gear.GetType());
         character.Gears.Add(gear);
         var stringBuilder =
             new StringBuilder(
                 $"{character.Name} [{character.Number}] has successfully equipped {gear.Name} that has the following stats:\n{gear.DisplayString}");
-     
-     
+
 
         await DatabaseContext.SaveChangesAsync();
         embed.WithDescription(stringBuilder.ToString());
         await context.RespondAsync(embed);
-
     }
-    class GearTypeProvider : IChoiceProvider
-    {
-        private static readonly IReadOnlyDictionary<string, object> _daysOfTheWeek = new Dictionary<string, object>
-        {
-            {"Armor" , "armor"},
-            {"Weapon" , "weapon"},
-                {"Ring" , "ring"},
-                {"Necklace" , "necklace"},
-                {"Boots" ,"boots"},
-                {"Helmet" , "helmet"},
-        }.AsReadOnly();
 
-        public ValueTask<IReadOnlyDictionary<string, object>> ProvideAsync(CommandParameter parameter) => ValueTask.FromResult(_daysOfTheWeek);
-    }
-        [Command("remove-gear"), Description("Use this Command make a character remove an equipped gear"),
-         BotCommandCategory(BotCommandCategory.Character)]
+    [Command("remove-gear")]
+    [Description("Use this Command make a character remove an equipped gear")]
+    [BotCommandCategory(BotCommandCategory.Character)]
     public async ValueTask ExecuteRemoveGear(CommandContext context,
         [Parameter("character-num")] int characterNumber,
-        [Parameter("gear-type"), SlashChoiceProvider<GearTypeProvider>] string gearType)
+        [Parameter("gear-type")] [SlashChoiceProvider<GearTypeProvider>]
+        string gearType)
     {
-        gearType = gearType.ToLower().Replace(" ","");
+        gearType = gearType.ToLower().Replace(" ", "");
         var userData = await DatabaseContext.UserData
             .Include(i => i.Characters.Where(j => j.Number == characterNumber))
             .ThenInclude(i => i.Gears)
@@ -229,7 +219,7 @@ public partial class CharacterCommand : GeneralCommandClass
             await AskToDoBeginAsync(context);
             return;
         }
-        
+
         if (userData.IsOccupied)
         {
             await NotifyAboutOccupiedAsync(context);
@@ -254,23 +244,41 @@ public partial class CharacterCommand : GeneralCommandClass
             await context.RespondAsync(embed);
             return;
         }
-        var gear = userData.Gears.FirstOrDefault(i => i.Name.ToLower().Replace(" ","") == gearType);
+
+        var gear = userData.Gears.FirstOrDefault(i => i.Name.ToLower().Replace(" ", "") == gearType);
         if (gear is null)
         {
             embed.WithDescription($"Your character does not have any **{gearType}** equipped");
             await context.RespondAsync(embed);
             return;
         }
+
         character.Gears.Remove(gear);
         var stringBuilder =
             new StringBuilder(
                 $"{character.Name} [{character.Number}] has successfully removed {gear.Name} that has the following stats:\n{gear.DisplayString}");
-     
-     
+
 
         await DatabaseContext.SaveChangesAsync();
         embed.WithDescription(stringBuilder.ToString());
         await context.RespondAsync(embed);
+    }
 
+    private class GearTypeProvider : IChoiceProvider
+    {
+        private static readonly IReadOnlyDictionary<string, object> _daysOfTheWeek = new Dictionary<string, object>
+        {
+            { "Armor", "armor" },
+            { "Weapon", "weapon" },
+            { "Ring", "ring" },
+            { "Necklace", "necklace" },
+            { "Boots", "boots" },
+            { "Helmet", "helmet" }
+        }.AsReadOnly();
+
+        public ValueTask<IReadOnlyDictionary<string, object>> ProvideAsync(CommandParameter parameter)
+        {
+            return ValueTask.FromResult(_daysOfTheWeek);
+        }
     }
 }

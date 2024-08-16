@@ -7,17 +7,18 @@ public class SpeedFlatGearStat : GearStat
     public override int TypeId
     {
         get => 11;
-        protected init {}
-    }
-
-
-    public override int GetMainStatValue(Rarity rarity)
-    {
-        return ((int) rarity   * 7) + 10;
+        protected init { }
     }
 
     public override StatType StatType => StatType.Speed;
     public override bool IsPercentage => false;
+
+
+    public override int GetMainStatValue(Rarity rarity)
+    {
+        return (int)rarity * 7 + 10;
+    }
+
     public override void AddStats(Character character)
     {
         character.TotalSpeed += Value;
@@ -35,7 +36,6 @@ public class SpeedFlatGearStat : GearStat
                 return 3;
             default:
                 return 4;
-
         }
     }
 

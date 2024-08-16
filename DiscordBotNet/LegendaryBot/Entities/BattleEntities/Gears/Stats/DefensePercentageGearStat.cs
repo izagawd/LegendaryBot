@@ -7,17 +7,18 @@ public class DefensePercentageGearStat : GearStat
     public override int TypeId
     {
         get => 6;
-        protected init {}
-    }
-
-
-    public override int GetMainStatValue(Rarity rarity)
-    {
-        return ((int) rarity  * 10) + 10;
+        protected init { }
     }
 
     public override StatType StatType => StatType.Defense;
     public override bool IsPercentage => true;
+
+
+    public override int GetMainStatValue(Rarity rarity)
+    {
+        return (int)rarity * 10 + 10;
+    }
+
     public override void AddStats(Character character)
     {
         character.TotalDefense += Value * 0.01f * character.BaseDefense;

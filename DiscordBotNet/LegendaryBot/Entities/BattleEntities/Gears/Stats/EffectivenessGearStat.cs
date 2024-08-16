@@ -7,17 +7,18 @@ public class EffectivenessGearStat : GearStat
     public override int TypeId
     {
         get => 7;
-        protected init {}
-    }
-
-
-    public override int GetMainStatValue(Rarity rarity)
-    {
-        return ((int) rarity  * 10) + 10;
+        protected init { }
     }
 
     public override StatType StatType => StatType.Effectiveness;
     public override bool IsPercentage => true;
+
+
+    public override int GetMainStatValue(Rarity rarity)
+    {
+        return (int)rarity * 10 + 10;
+    }
+
     public override void AddStats(Character character)
     {
         character.TotalEffectiveness += Value;

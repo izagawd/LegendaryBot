@@ -5,7 +5,7 @@ public class Stamina : Energy
     public override int TypeId
     {
         get => 7;
-        protected init {}
+        protected init { }
     }
 
     public override string Name => "Stamina";

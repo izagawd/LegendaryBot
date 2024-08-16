@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.Database.ManyToManyInstances;
 using DiscordBotNet.Database.Models;
+using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,56 +18,53 @@ public class PlayerTeamDatabaseConfiguration : IEntityTypeConfiguration<PlayerTe
             .IsUnique();
 
         entity.HasKey(i => i.Id);
-        entity.HasMany<CharacterPartials.Character>(i => i.Characters)
+        entity.HasMany<Character>(i => i.Characters)
             .WithMany()
             .UsingEntity<CharacterPlayerTeam>(i
-                => i.HasOne<CharacterPartials.Character>().WithMany().HasForeignKey(j => j.CharacterId), i =>
+                => i.HasOne<Character>().WithMany().HasForeignKey(j => j.CharacterId), i =>
                 i.HasOne<PlayerTeam>().WithMany().HasForeignKey(j => j.PlayerTeamId), i =>
                 i.HasKey(j => new { j.CharacterId, j.PlayerTeamId }));
     }
 }
+
 public class PlayerTeam : CharacterTeam
 {
-
-    [Timestamp]
-    public uint Version { get; private set; }
-    [NotMapped]
-    public bool IsFull => Count >= 4;
-    public string TeamName { get;  set; } = "Team1";
-
-    public UserData UserData { get; set; }
-    
-    /// <summary>
-    /// Will be set to userdata 
-    /// </summary>
-    public long? IsEquipped { get;  set; }
-    public override bool Add(CharacterPartials.Character character)
-    {
-        if (Count >= 4) return false;
- 
-        if(UserDataId != 0)
-            character.UserDataId = UserDataId;
-
-        return base.Add(character);
-    }
-
-
-    public PlayerTeam(long userDataId, params CharacterPartials.Character[] characters) : base(characters)
+    public PlayerTeam(long userDataId, params Character[] characters) : base(characters)
     {
         UserDataId = userDataId;
-        
     }
 
-    public PlayerTeam(params CharacterPartials.Character[] characters) : base(characters)
+    public PlayerTeam(params Character[] characters) : base(characters)
     {
-
     }
 
     public PlayerTeam()
     {
-        
     }
-    public long Id { get; set; } 
+
+    [Timestamp] public uint Version { get; private set; }
+
+    [NotMapped] public bool IsFull => Count >= 4;
+
+    public string TeamName { get; set; } = "Team1";
+
+    public UserData UserData { get; set; }
+
+    /// <summary>
+    ///     Will be set to userdata
+    /// </summary>
+    public long? IsEquipped { get; set; }
+
+    public long Id { get; set; }
     public long UserDataId { get; set; }
-    
+
+    public override bool Add(Character character)
+    {
+        if (Count >= 4) return false;
+
+        if (UserDataId != 0)
+            character.UserDataId = UserDataId;
+
+        return base.Add(character);
+    }
 }

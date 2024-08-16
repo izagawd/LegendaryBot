@@ -1,18 +1,16 @@
 @using DiscordBotNet.LegendaryBot
 @using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears
 
-
 @code {
     [Parameter] public int Size { get; set; } = 200;
-    [Parameter] public Gear? Gear { get; set; } 
+    [Parameter] public Gear? Gear { get; set; }
 }
+
 <div>
     @{
-        
         var color = "white";
         switch (Gear?.Rarity)
         {
-        
             case Rarity.TwoStar:
                 color = "green";
                 break;

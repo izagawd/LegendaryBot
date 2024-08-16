@@ -7,13 +7,19 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class PomPomAttack : BasicAttack
 {
+    public PomPomAttack(Character user) : base(user)
+    {
+    }
+
     public override string Name => "Pom Pom Attack";
+
     public override string GetDescription(Character character)
     {
         return "Caster hits the enemy with a pom-pom... and that it";
     }
 
-    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, out string? text)
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
+        out AttackTargetType attackTargetType, out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 0.8f, new MoveDamageSource(moveUsageContext))
         {
@@ -25,15 +31,17 @@ public class PomPomAttack : BasicAttack
         attackTargetType = AttackTargetType.SingleTarget;
         text = null;
     }
-
-    public PomPomAttack(Character user) : base(user)
-    {
-    }
 }
 
-public class  YouCanDoIt : Skill
+public class YouCanDoIt : Skill
 {
+    public YouCanDoIt(Character user) : base(user)
+    {
+    }
+
     public override string Name => "You Can Do It";
+    public override int MaxCooldown => 2;
+
     public override string GetDescription(Character character)
     {
         return "Increases the combat readiness of a single target by 100%, increasing their attack for 2 turns. " +
@@ -45,31 +53,35 @@ public class  YouCanDoIt : Skill
         return User.Team.Where(i => !i.IsDead && i != User);
     }
 
-    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, 
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType, out string? text)
     {
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} wants {target.NameWithAlphabet} to prevail!");
         target.IncreaseCombatReadiness(100);
-        target.AddStatusEffect(new AttackBuff(User) { Duration = 2 , }, User.Effectiveness);
+        target.AddStatusEffect(new AttackBuff(User) { Duration = 2 }, User.Effectiveness);
 
         attackTargetType = AttackTargetType.SingleTarget;
 
         text = "You can do it!";
     }
-    public override int MaxCooldown => 2;
-
-    public YouCanDoIt(Character user) : base(user)
-    {
-    }
 }
 
 public class YouCanMakeItEveryone : Ultimate
 {
+    public YouCanMakeItEveryone(Character user) : base(user)
+    {
+    }
+
     public override string Name => "You Can Make It Everyone";
     private int CombatIncreaseAmount => 30;
+
+
+    public override int MaxCooldown => 4;
+
     public override string GetDescription(Character character)
     {
-        return $"Encourages all allies, increasing their combat readiness by {CombatIncreaseAmount}%, and increases their attack for 2 turns";
+        return
+            $"Encourages all allies, increasing their combat readiness by {CombatIncreaseAmount}%, and increases their attack for 2 turns";
     }
 
     public override IEnumerable<Character> GetPossibleTargets()
@@ -83,42 +95,19 @@ public class YouCanMakeItEveryone : Ultimate
         User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} encourages her allies!");
 
 
-
-    
-        foreach (var i in GetPossibleTargets())
-        {
-            i.IncreaseCombatReadiness(CombatIncreaseAmount);
-        }
+        foreach (var i in GetPossibleTargets()) i.IncreaseCombatReadiness(CombatIncreaseAmount);
 
         var eff = User.Effectiveness;
-        foreach (var i in GetPossibleTargets())
-        {
-            i.AddStatusEffect(new AttackBuff(User) { Duration = 2, },eff);
-        }
+        foreach (var i in GetPossibleTargets()) i.AddStatusEffect(new AttackBuff(User) { Duration = 2 }, eff);
 
 
         attackTargetType = AttackTargetType.AOE;
         text = null;
     }
-
-
-    public override int MaxCooldown => 4;
-
-    public YouCanMakeItEveryone(Character user) : base(user)
-    {
-    }
 }
+
 public class Cheerleader : Character
 {
-    public override string Name => "Cheerleader";
-    public override Rarity Rarity => Rarity.FourStar;
-    
-    public override int TypeId
-    {
-        get => 12;
-        protected init {}
-    }
-
     public Cheerleader()
     {
         Skill = new YouCanDoIt(this);
@@ -126,6 +115,12 @@ public class Cheerleader : Character
         Ultimate = new YouCanMakeItEveryone(this);
     }
 
-    
+    public override string Name => "Cheerleader";
+    public override Rarity Rarity => Rarity.FourStar;
 
+    public override int TypeId
+    {
+        get => 12;
+        protected init { }
+    }
 }

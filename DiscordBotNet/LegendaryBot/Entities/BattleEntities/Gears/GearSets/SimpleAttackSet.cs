@@ -15,10 +15,16 @@ public class SimpleAttackSet : GearSet, IStatsModifier
 
     public override string FourPieceDescription =>
         $"Increases damage dealt by Basic Attacks by {BasicAttackIncreaseAttackAmount}%";
+
     public override int TypeId
     {
         get => 1;
-        protected init {}
+        protected init { }
+    }
+
+    public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
+    {
+        yield return new AttackPercentageModifierArgs(Owner, AttackIncreaseAttackAmount);
     }
 
 
@@ -26,15 +32,7 @@ public class SimpleAttackSet : GearSet, IStatsModifier
     public void OnDamaging(CharacterPreDamageEventArgs preDamageEventArgs)
     {
         if (CanUseFourPiece && preDamageEventArgs.DamageArgs.DamageSource is MoveDamageSource moveDamageSource
-            && moveDamageSource.Move.User == Owner && moveDamageSource.Move is BasicAttack)
-        {
-            preDamageEventArgs.DamageArgs.Damage *= 1 + (BasicAttackIncreaseAttackAmount * 0.01f);
-        }
-            
-    }
-
-    public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
-    {
-        yield return new AttackPercentageModifierArgs(Owner, AttackIncreaseAttackAmount);
+                            && moveDamageSource.Move.User == Owner && moveDamageSource.Move is BasicAttack)
+            preDamageEventArgs.DamageArgs.Damage *= 1 + BasicAttackIncreaseAttackAmount * 0.01f;
     }
 }

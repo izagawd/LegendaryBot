@@ -7,21 +7,24 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class GoingAllOut : Blessing
 {
-    
     public override string Name => "Going All Out";
+    public override Rarity Rarity => Rarity.FourStar;
+
+    public override int TypeId
+    {
+        get => 3;
+        protected init { }
+    }
 
     [BattleEventListenerMethod]
-    public  void IncreaseUlt(CharacterPreDamageEventArgs eventArgs)
+    public void IncreaseUlt(CharacterPreDamageEventArgs eventArgs)
     {
         var usedMove = (eventArgs.DamageArgs.DamageSource as MoveDamageSource)?.Move as Ultimate;
-        if(usedMove is null) return;
+        if (usedMove is null) return;
         if (usedMove.User == Character)
-        {
             eventArgs.DamageArgs.Damage *= (100 + GetUltimateDamageBoostPercent(LevelMilestone)) * 0.01f;
-        }
-
-        
     }
+
     public override string GetDescription(int levelMilestone)
     {
         return $"Damage dealt by ultimate is increased by {GetUltimateDamageBoostPercent(levelMilestone)}%";
@@ -36,15 +39,5 @@ public class GoingAllOut : Blessing
         if (levelMilestone >= 2) return 12;
         if (levelMilestone >= 1) return 10;
         return 8;
-        
     }
-    public override Rarity Rarity => Rarity.FourStar;
-    public override int TypeId
-    {
-        get => 3;
-        protected init {}
-    }
-
-
-
 }

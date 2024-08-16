@@ -2,11 +2,12 @@
 
 namespace DiscordBotNet.LegendaryBot.ModifierInterfaces;
 
-public class SpeedFlatModifierArgs: StatsModifierArgs
+public class SpeedFlatModifierArgs : StatsModifierArgs
 {
-    public float FlatSpeed { get; }
-
-    public SpeedFlatModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect, valueToChangeWith)
+    public SpeedFlatModifierArgs(Character characterToAffect, float valueToChangeWith) : base(characterToAffect,
+        valueToChangeWith)
     {
     }
+
+    public float FlatSpeed { get; }
 }

@@ -10,51 +10,19 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class Skeleton : Character
 {
-    class SkeletonSwordSlash : BasicAttack
+    public Skeleton()
     {
-        public SkeletonSwordSlash(Character user) : base(user)
-        {
-        }
-
-        public override string GetDescription(Character character)
-        {
-            return "Slashes the opponent, with a 25% chance to inflict bleed";
-        }
-
-        protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType,
-            out string? text)
-        {
-            target.Damage(new DamageArgs(User.Attack * 1.7F, new MoveDamageSource(moveUsageContext))
-            {
-                CriticalChance = User.CriticalChance,
-                CriticalDamage = User.CriticalDamage,
-                ElementToDamageWith = User.Element,
-
-            });
-            if (BasicFunctionality.RandomChance(25))
-            {
-                target.AddStatusEffect(new Bleed(User),User.Effectiveness);
-            }
-
-            attackTargetType = AttackTargetType.SingleTarget;
-            text = "Skeleton Attack!";
-        }
-
-        public override string Name => "Skeleton Sword Slash";
+        BasicAttack = new SkeletonSwordSlash(this);
     }
+
     public override int TypeId
     {
         get => 16;
-        protected init {}
+        protected init { }
     }
 
-    public Skeleton()
-    {
+    [NotMapped] public bool HasDied { get; private set; } = true;
 
-        BasicAttack = new SkeletonSwordSlash(this);
-    }
-    [NotMapped]
-    public bool HasDied { get; private set; } = true;
     public override string Name => "Skeleton";
 
     [BattleEventListenerMethod]
@@ -66,5 +34,34 @@ public class Skeleton : Character
             Revive();
         }
     }
-    
+
+    private class SkeletonSwordSlash : BasicAttack
+    {
+        public SkeletonSwordSlash(Character user) : base(user)
+        {
+        }
+
+        public override string Name => "Skeleton Sword Slash";
+
+        public override string GetDescription(Character character)
+        {
+            return "Slashes the opponent, with a 25% chance to inflict bleed";
+        }
+
+        protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
+            out AttackTargetType attackTargetType,
+            out string? text)
+        {
+            target.Damage(new DamageArgs(User.Attack * 1.7F, new MoveDamageSource(moveUsageContext))
+            {
+                CriticalChance = User.CriticalChance,
+                CriticalDamage = User.CriticalDamage,
+                ElementToDamageWith = User.Element
+            });
+            if (BasicFunctionality.RandomChance(25)) target.AddStatusEffect(new Bleed(User), User.Effectiveness);
+
+            attackTargetType = AttackTargetType.SingleTarget;
+            text = "Skeleton Attack!";
+        }
+    }
 }

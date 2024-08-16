@@ -10,17 +10,20 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears;
 
-
 public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 {
-
-    [Timestamp]
-    public uint Version { get; private set; }
-    public abstract int TypeId { get; protected init; }
-
-    public bool CanBeTraded => true;
+    private static Dictionary<int, Type> _gearSetCache = [];
 
     private int _gearSetTypeId;
+
+    static Gear()
+    {
+        foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<GearSet>())
+            _gearSetCache[i.TypeId] = i.GetType();
+    }
+
+    [Timestamp] public uint Version { get; private set; }
+
     public int GearSetTypeId
     {
         get => _gearSetTypeId;
@@ -29,19 +32,9 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
             if (!_gearSetCache.Keys.Contains(value))
                 throw new Exception($"No gear set type with typeid {value}");
             _gearSetTypeId = value;
-        } 
-    }
-
-    private static Dictionary<int, Type> _gearSetCache= [];
-
-    static Gear()
-    {
-        foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<GearSet>())
-        {
-            _gearSetCache[i.TypeId] = i.GetType();
         }
-        
     }
+
     [NotMapped]
     public Type GearSetType
     {
@@ -54,6 +47,38 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
         }
     }
 
+    [NotMapped] public IEnumerable<GearStat> Substats => Stats.Except([MainStat]);
+
+
+    [NotMapped] public virtual IEnumerable<Type> PossibleMainStats => [];
+    public Character Character { get; set; }
+
+
+    public static IEnumerable<Type> AllGearTypes
+    {
+        get
+        {
+            yield return typeof(Armor);
+            yield return typeof(Boots);
+            yield return typeof(Weapon);
+            yield return typeof(Ring);
+            yield return typeof(Necklace);
+            yield return typeof(Helmet);
+        }
+    }
+
+    public GearStat MainStat { get; set; }
+
+    public List<GearStat> Stats { get; set; } = [];
+
+
+    public long? CharacterId { get; set; }
+    public int Number { get; set; }
+    public long Id { get; set; }
+    public abstract int TypeId { get; protected init; }
+
+    public bool CanBeTraded => true;
+
     public string DisplayString
     {
         get
@@ -64,20 +89,17 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
             if (Number == 0)
                 numberToUse = "";
             else
-            {
                 numberToUse = $"{Number} • ";
-            }
 
             var setName = ((GearSet)TypesFunction.GetDefaultObject(GearSetType)).Name;
-            bool shouldSpace = false;
-            var stringToUse =new StringBuilder($"```{numberToUse}{Name}".PadRight(12) +
-                                               $" • {MainStat.AsNameAndValue()} • " +
-                                               $"Rarity: {(int) Rarity}\u2b50\nSet: {setName}\nSubstats:");
+            var shouldSpace = false;
+            var stringToUse = new StringBuilder($"```{numberToUse}{Name}".PadRight(12) +
+                                                $" • {MainStat.AsNameAndValue()} • " +
+                                                $"Rarity: {(int)Rarity}\u2b50\nSet: {setName}\nSubstats:");
             foreach (var j in Substats)
             {
                 if (shouldSpace)
                 {
-                    
                     shouldSpace = false;
                 }
                 else
@@ -95,18 +117,24 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 
             if (Character is not null)
                 stringToUse.Append($"\nEquipped By: {Character.Name} [{Character.Number}]");
-            stringToUse.Append($"```");
+            stringToUse.Append("```");
             return stringToUse.ToString();
         }
     }
 
-    public  Type TypeGroup => typeof(Gear);
+    public Type TypeGroup => typeof(Gear);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
-    [NotMapped] public IEnumerable<GearStat> Substats => Stats.Except([MainStat]);
 
-    
-    
-    
+
+    public string Description { get; }
+    public Rarity Rarity { get; private set; }
+
+
+    public abstract string Name { get; }
+    public UserData? UserData { get; set; }
+    public string ImageUrl => $"{Website.DomainName}/battle_images/gears/{GetType().Name}.png";
+    public long UserDataId { get; set; }
+
 
     private void AddSubstat()
     {
@@ -122,31 +150,15 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     }
 
 
-
     private GearStat GenerateArtifactPossibleSubStat(Rarity rarity)
     {
         var typesToConsider = GearStat.AllGearStatTypes.Except(
-            [..Stats.Select(i => i.GetType()),GearStat.SpeedPercentageType]);
+            [..Stats.Select(i => i.GetType()), GearStat.SpeedPercentageType]);
         var chosenType = BasicFunctionality.RandomChoice(typesToConsider);
-        var created = (GearStat) Activator.CreateInstance(chosenType)!;
+        var created = (GearStat)Activator.CreateInstance(chosenType)!;
         created.Increase(rarity);
         return created;
     }
-
-
-    [NotMapped] public virtual IEnumerable<Type> PossibleMainStats => [];
-
-
-    public string Description { get; }
-    public Rarity Rarity { get; private set; }
-
-
-    public abstract string Name { get; }
-    public UserData? UserData { get; set; }
-    public string ImageUrl => $"{Website.DomainName}/battle_images/gears/{GetType().Name}.png";
-    public long Id { get; set; }
-    public long UserDataId { get; set; }
-    public Character Character { get; set; }
 
 
     public void Initialize(Rarity rarity, Type? desiredGearSet = null, Type? desiredMainStat = null)
@@ -154,31 +166,24 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
         if (Stats.Count != 0) return;
         Rarity = rarity;
 
-       
+
         if (desiredGearSet is null)
-        {
             GearSetType =
                 BasicFunctionality.RandomChoice(
                         TypesFunction.GetDefaultObjectsAndSubclasses<GearSet>())
                     .GetType();
-        } else if (!desiredGearSet.IsAssignableTo(typeof(GearSet)))
-        {
-            throw new ArgumentException($"{nameof(desiredGearSet)} inputted is not subclass of type {typeof(GearSet).FullName}");
-        }
+        else if (!desiredGearSet.IsAssignableTo(typeof(GearSet)))
+            throw new ArgumentException(
+                $"{nameof(desiredGearSet)} inputted is not subclass of type {typeof(GearSet).FullName}");
         else
-        {
             GearSetType = desiredGearSet;
-        }
         if (desiredMainStat is null)
-        {
             desiredMainStat = BasicFunctionality.RandomChoice(PossibleMainStats);
-        } else if (!PossibleMainStats.Contains(desiredMainStat))
-        {
+        else if (!PossibleMainStats.Contains(desiredMainStat))
             throw new Exception("Inputted desired main stat not possible for this artifact type");
-        }
         MainStat = (GearStat)Activator.CreateInstance(desiredMainStat)!;
         Stats.Add(MainStat);
- 
+
         switch (Rarity)
         {
             case Rarity.FiveStar:
@@ -198,53 +203,21 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
                 break;
         }
 
-        foreach (var _ in Enumerable.Range(0,6))
-        {
-            AddSubstat();
-        }
+        foreach (var _ in Enumerable.Range(0, 6)) AddSubstat();
         MainStat.SetMainStatValue(Rarity);
-       
     }
-
-
-    
-    public static IEnumerable<Type> AllGearTypes
-    {
-        get
-        {
-            yield return typeof(Armor);
-            yield return typeof(Boots);
-            yield return typeof(Weapon);
-            yield return typeof(Ring);
-            yield return typeof(Necklace);
-            yield return typeof(Helmet);
-        }
-    }
-    
-    public GearStat MainStat { get; set; } 
-
-    public List<GearStat> Stats { get; set; } = [];
-
-
-
-    public long? CharacterId { get; set; }
-    public int Number { get; set; }
 }
 
 public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
 {
-
-
     public void Configure(EntityTypeBuilder<Gear> entity)
     {
         entity.HasKey(i => i.Id);
         var starting = entity.HasDiscriminator(i => i.TypeId);
         foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<Gear>())
-        {
             starting = starting.HasValue(i.GetType(), i.TypeId);
-        }
 
-        entity.HasIndex(i => new{i.TypeId, i.CharacterId})
+        entity.HasIndex(i => new { i.TypeId, i.CharacterId })
             .IsUnique();
         entity.HasOne(i => i.MainStat)
             .WithOne()
@@ -260,8 +233,5 @@ public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
         // generated on add even though a trigger handles it, just in case the trigger doesn't work
         entity.Property(i => i.Number)
             .ValueGeneratedOnAdd();
-
     }
-
-
 }

@@ -3,21 +3,29 @@ using DiscordBotNet.LegendaryBot.Results;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace DiscordBotNet.LegendaryBot.Moves;
+
 /// <summary>
-/// A sample class for basic attack
+///     A sample class for basic attack
 /// </summary>
 public class BasicAttackSample : BasicAttack
 {
+    public BasicAttackSample(Character user) : base(user)
+    {
+    }
+
     public override string Name => "Basic Attack Sample";
-    public override string GetDescription(Character character) => "Take that!";
-    
-    protected  override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType, 
+
+    public override string GetDescription(Character character)
+    {
+        return "Take that!";
+    }
+
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
+        out AttackTargetType attackTargetType,
         out string? text)
     {
- 
-        target.Damage(       new DamageArgs(User.Attack * 1.7f,new MoveDamageSource(moveUsageContext))
+        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(moveUsageContext))
         {
-
             ElementToDamageWith = User.Element,
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
@@ -28,9 +36,5 @@ public class BasicAttackSample : BasicAttack
         });
         attackTargetType = AttackTargetType.SingleTarget;
         text = "very basic...";
-    }
-
-    public BasicAttackSample(Character user) : base(user)
-    {
     }
 }

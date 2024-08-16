@@ -9,14 +9,20 @@ namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class RoxyBatWhack : BasicAttack
 {
+    public RoxyBatWhack(Character user) : base(user)
+    {
+    }
+
     public override string Name => "Roxy Bat Whack";
     public int SkillUseChance => 50;
+
     public override string GetDescription(Character character)
     {
         return $"Whacks the target with a bat, with a {SkillUseChance}% chance to use their skill";
     }
 
-    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
+        out AttackTargetType attackTargetType,
         out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(moveUsageContext))
@@ -25,21 +31,24 @@ public class RoxyBatWhack : BasicAttack
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
             Damage = User.Attack * 1.7f,
-            DamageText = $"{User.NameWithAlphabet} whacks {target.NameWithAlphabet} with her bat very hard, dealing $ damage!"
+            DamageText =
+                $"{User.NameWithAlphabet} whacks {target.NameWithAlphabet} with her bat very hard, dealing $ damage!"
         });
         attackTargetType = AttackTargetType.SingleTarget;
         text = "Dont get in my way!";
     }
-
-    public RoxyBatWhack(Character user) : base(user)
-    {
-    }
 }
-
 
 public class RoxyAggressiveOverload : Skill
 {
+    public RoxyAggressiveOverload(Character user) : base(user)
+    {
+    }
+
     public override string Name => "Roxy Aggressive Overload";
+
+    public override int MaxCooldown => 3;
+
     public override string GetDescription(Character character)
     {
         return "Aggressively whacks the target with their bat non stop!";
@@ -50,7 +59,8 @@ public class RoxyAggressiveOverload : Skill
         return CurrentBattle.Characters.Where(i => !i.IsDead && i.Team != User.Team);
     }
 
-    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
+        out AttackTargetType attackTargetType,
         out string? text)
     {
         target.Damage(new DamageArgs(User.Attack * 2.5f, new MoveDamageSource(moveUsageContext))
@@ -58,22 +68,24 @@ public class RoxyAggressiveOverload : Skill
             CriticalChance = User.CriticalChance,
             CriticalDamage = User.CriticalDamage,
             ElementToDamageWith = User.Element,
-            DamageText = $"{User.NameWithAlphabet} aggressively whacks {target.NameWithAlphabet} with their bat non stop, dealing $ damage!\nits so brutal to watch..."
+            DamageText =
+                $"{User.NameWithAlphabet} aggressively whacks {target.NameWithAlphabet} with their bat non stop, dealing $ damage!\nits so brutal to watch..."
         });
         text = "HRRAAH";
         attackTargetType = AttackTargetType.SingleTarget;
-    }
-
-    public override int MaxCooldown => 3;
-
-    public RoxyAggressiveOverload(Character user) : base(user)
-    {
     }
 }
 
 public class RoxyHeadBatWhack : Ultimate
 {
+    public RoxyHeadBatWhack(Character user) : base(user)
+    {
+    }
+
     public override string Name => "Roxy Head Bat Whack";
+
+    public override int MaxCooldown => 5;
+
     public override string GetDescription(Character character)
     {
         return "Caster whacks enemy on the head, dealing increadible damage, stunning them for 1 turn";
@@ -84,7 +96,8 @@ public class RoxyHeadBatWhack : Ultimate
         return CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
     }
 
-    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext, out AttackTargetType attackTargetType,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
+        out AttackTargetType attackTargetType,
         out string? text)
     {
         target.Damage(
@@ -93,57 +106,47 @@ public class RoxyHeadBatWhack : Ultimate
                 CriticalChance = User.CriticalChance,
                 CriticalDamage = User.CriticalDamage,
                 ElementToDamageWith = User.Element,
-                DamageText = $"{User.NameWithAlphabet} whacks {target.NameWithAlphabet} in the head, dealing $ damage.. ouch"
+                DamageText =
+                    $"{User.NameWithAlphabet} whacks {target.NameWithAlphabet} in the head, dealing $ damage.. ouch"
             });
         target.AddStatusEffect(new Stun(User),
             User.Effectiveness);
         text = "Can you move after THIS??";
         attackTargetType = AttackTargetType.SingleTarget;
     }
-
-    public override int MaxCooldown => 5;
-
-    public RoxyHeadBatWhack(Character user) : base(user)
-    {
-    }
 }
+
 public class Roxy : Character
 {
-    public override string Name => "Roxy";
-    protected override float BaseAttackMultiplier => 1.1f;
-    public override Rarity Rarity => Rarity.FourStar;
-    public override int TypeId
-    {
-        get => 14;
-        protected init {}
-    }
-
     public Roxy()
     {
-
         Skill = new RoxyAggressiveOverload(this);
         BasicAttack = new RoxyBatWhack(this);
         Ultimate = new RoxyHeadBatWhack(this);
     }
 
+    public override string Name => "Roxy";
+    protected override float BaseAttackMultiplier => 1.1f;
+    public override Rarity Rarity => Rarity.FourStar;
+
+    public override int TypeId
+    {
+        get => 14;
+        protected init { }
+    }
 
 
     [BattleEventListenerMethod]
     public void ShouldProcSkill(CharacterPostUseMoveEventArgs postUseMoveEventArgs)
     {
-        if(CannotDoAnything) return;
-        if(postUseMoveEventArgs.User != this) return;
+        if (CannotDoAnything) return;
+        if (postUseMoveEventArgs.User != this) return;
         if (postUseMoveEventArgs.Move is RoxyBatWhack roxyBatWhack)
         {
-           
             var damageResult = postUseMoveEventArgs.DamageResults.First();
-            if(damageResult.DamageReceiver.IsDead) return;
-            if(BasicFunctionality.RandomChance(roxyBatWhack.SkillUseChance))
-            {
+            if (damageResult.DamageReceiver.IsDead) return;
+            if (BasicFunctionality.RandomChance(roxyBatWhack.SkillUseChance))
                 Skill!.Utilize(damageResult.DamageReceiver, MoveUsageType.MiscellaneousFollowUpUsage);
-            }
-           
         }
-        
     }
 }

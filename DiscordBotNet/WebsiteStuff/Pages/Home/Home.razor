@@ -1,5 +1,4 @@
 ﻿@page "/"
-@attribute [Authorize]
 @using System.Security.Claims
 @using DiscordBotNet.Database
 @using DiscordBotNet.LegendaryBot.Entities.Items
@@ -7,41 +6,42 @@
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.EntityFrameworkCore
+@attribute [Authorize]
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject PostgreSqlContext DbContext
 <title>Home</title>
+
 @code {
-private ClaimsPrincipal user;
+    private ClaimsPrincipal user;
 
-private int coinsValue = 0;
-private int divineShardsValue = 0;
-private int staminaValue = 0;
-protected override async Task OnInitializedAsync()
-{
-    var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-    user = authState.User;
-    var discordId = user.GetDiscordUserId();
-    var selected = await DbContext.UserData
+    private int coinsValue;
+    private int divineShardsValue;
+    private int staminaValue;
 
-        .Where(i => i.DiscordId == discordId)
-        .Select(i => new
-        {
-            coinsCount = i.Items.Where(j => j is Coin)
-                .Select(j => new int?(j.Stacks)).FirstOrDefault(),
-            divineShardsCount = i.Items.Where(j => j is DivineShard)
-                .Select(j =>  new int?(j.Stacks)).FirstOrDefault(),
-            staminaValue = i.Items.Where(j => j is Stamina)
-                .Select(j =>  new int?(j.Stacks)).FirstOrDefault(),
-
-        }).FirstOrDefaultAsync();
-    if (selected is not null)
+    protected override async Task OnInitializedAsync()
     {
-        coinsValue = selected.coinsCount.GetValueOrDefault(0);
-        staminaValue = selected.staminaValue.GetValueOrDefault(0);
-        divineShardsValue = selected.divineShardsCount.GetValueOrDefault(0);
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        user = authState.User;
+        var discordId = user.GetDiscordUserId();
+        var selected = await DbContext.UserData
+            .Where(i => i.DiscordId == discordId)
+            .Select(i => new
+            {
+                coinsCount = i.Items.Where(j => j is Coin)
+                    .Select(j => new int?(j.Stacks)).FirstOrDefault(),
+                divineShardsCount = i.Items.Where(j => j is DivineShard)
+                    .Select(j => new int?(j.Stacks)).FirstOrDefault(),
+                staminaValue = i.Items.Where(j => j is Stamina)
+                    .Select(j => new int?(j.Stacks)).FirstOrDefault()
+            }).FirstOrDefaultAsync();
+        if (selected is not null)
+        {
+            coinsValue = selected.coinsCount.GetValueOrDefault(0);
+            staminaValue = selected.staminaValue.GetValueOrDefault(0);
+            divineShardsValue = selected.divineShardsCount.GetValueOrDefault(0);
+        }
     }
 
-}
 }
 
 <Navigation>

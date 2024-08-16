@@ -9,14 +9,12 @@ public class Weapon : Gear
     public override int TypeId
     {
         get => 6;
-        protected init {}
+        protected init { }
     }
 
-  
+
     public sealed override IEnumerable<Type> PossibleMainStats =>
     [
-        GearStat.AttackFlatType,
-       
-       
+        GearStat.AttackFlatType
     ];
 }

@@ -5,6 +5,10 @@ namespace DiscordBotNet.LegendaryBot.StatusEffects;
 
 public class AttackDebuff : StatusEffect, IStatsModifier
 {
+    public AttackDebuff(Character caster) : base(caster)
+    {
+    }
+
     public override string Name => "Attack Debuff";
 
     public override bool IsStackable => false;
@@ -12,17 +16,8 @@ public class AttackDebuff : StatusEffect, IStatsModifier
     public override StatusEffectType EffectType => StatusEffectType.Debuff;
 
 
-
-
- 
-
-    public  IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
+    public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
     {
         yield return new AttackPercentageModifierArgs(Affected, -50);
-    }
-
-
-    public AttackDebuff(Character caster) : base(caster)
-    {
     }
 }

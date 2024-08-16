@@ -11,6 +11,7 @@ namespace DiscordBotNet.LegendaryBot.Commands;
 public class FarmGear : GeneralCommandClass
 {
     private readonly ImmutableArray<Tier> _tiers = [Tier.Gold, Tier.Platinum, Tier.Diamond, Tier.Divine];
+
     [Command("farm-gear")]
     public async ValueTask ExecuteAsync(CommandContext context)
     {
@@ -55,8 +56,9 @@ public class FarmGear : GeneralCommandClass
                 .Build());
             return;
         }
+
         await MakeOccupiedAsync(userData);
-        List<DiscordButtonComponent> buttonComponents = new List<DiscordButtonComponent>(_tiers.Length);
+        var buttonComponents = new List<DiscordButtonComponent>(_tiers.Length);
 
         foreach (var i in _tiers)
         {
@@ -80,18 +82,12 @@ public class FarmGear : GeneralCommandClass
         var result = await message.WaitForButtonAsync(context.User);
         if (result.TimedOut)
         {
-            foreach (var i in buttonComponents)
-            {
-                i.Disable();
-            }
+            foreach (var i in buttonComponents) i.Disable();
             await message.ModifyAsync(messageBuilder);
             return;
         }
 
         await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
             new DiscordInteractionResponseBuilder().WithContent("gay"));
-    
-
-
     }
-}   
+}

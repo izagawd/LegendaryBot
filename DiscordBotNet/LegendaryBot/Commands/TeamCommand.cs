@@ -5,20 +5,14 @@ using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
-[Command("team"), Description("idk")]
+
+[Command("team")]
+[Description("idk")]
 public class TeamCommand : GeneralCommandClass
 {
-    
-    
-    
-    
-    
-    
-
-
-
-    [Command("equip-team"), Description("Use this Commands to change teams"),
-    BotCommandCategory( BotCommandCategory.Team)]
+    [Command("equip-team")]
+    [Description("Use this Commands to change teams")]
+    [BotCommandCategory(BotCommandCategory.Team)]
     public async ValueTask ExecuteEquip(CommandContext context,
         [Parameter("team-name")] string teamName)
     {
@@ -26,10 +20,12 @@ public class TeamCommand : GeneralCommandClass
             .Include(i => i.EquippedPlayerTeam)
             .Where(i => i.DiscordId == context.User.Id)
             .Select(i => new
-                
-                { i.IsOccupied, tier = i.Tier, team = i.PlayerTeams.
-                    FirstOrDefault(j => j.TeamName.ToLower()
-                    .Replace(" ","")== teamName.ToLower()), userData = i })
+
+            {
+                i.IsOccupied, tier = i.Tier, team = i.PlayerTeams.FirstOrDefault(j => j.TeamName.ToLower()
+                    .Replace(" ", "") == teamName.ToLower()),
+                userData = i
+            })
             .FirstOrDefaultAsync();
 
         if (anon is null || anon.tier == Tier.Unranked)
@@ -37,11 +33,13 @@ public class TeamCommand : GeneralCommandClass
             await AskToDoBeginAsync(context);
             return;
         }
+
         if (anon.IsOccupied)
         {
             await NotifyAboutOccupiedAsync(context);
             return;
         }
+
         var userData = anon.userData;
         var embed = new DiscordEmbedBuilder()
             .WithUser(context.User)
@@ -60,41 +58,40 @@ public class TeamCommand : GeneralCommandClass
         embed.WithTitle("Success!")
             .WithDescription($"Team {anon.team.TeamName} is now equipped!");
         await context.RespondAsync(embed);
-
     }
 
     [Command("remove-character")]
     [BotCommandCategory(BotCommandCategory.Team)]
     public async ValueTask ExecuteRemoveFromTeam(CommandContext context,
-        [Parameter("character-num"), Description("Number of the character")] int characterNumber,
-        [Parameter("team-name"),  Description("Name of team you want to remove character from")]
+        [Parameter("character-num")] [Description("Number of the character")]
+        int characterNumber,
+        [Parameter("team-name")] [Description("Name of team you want to remove character from")]
         string teamName)
     {
-    
-
-  
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower()
                                                    == teamName.ToLower()))
             .ThenInclude(i => i.Characters)
             .Include(i => i.EquippedPlayerTeam)
             .ThenInclude(i => i.Characters)
-            .Include(i => i.Characters.Where(j => 
-                                                  j.Number == characterNumber))
-            .FirstOrDefaultAsync(i => i.DiscordId== context.User.Id);
+            .Include(i => i.Characters.Where(j =>
+                j.Number == characterNumber))
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
         }
+
         if (userData.IsOccupied)
         {
             await NotifyAboutOccupiedAsync(context);
             return;
         }
-        var gottenTeam =  userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower()
-                                                                   == teamName.ToLower());
-        
+
+        var gottenTeam = userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower()
+                                                                  == teamName.ToLower());
+
 
         var embed = new DiscordEmbedBuilder()
             .WithUser(context.User)
@@ -113,6 +110,7 @@ public class TeamCommand : GeneralCommandClass
             await context.RespondAsync(embed);
             return;
         }
+
         var character = userData
             .Characters
             .FirstOrDefault(i => i.Number == characterNumber);
@@ -126,41 +124,43 @@ public class TeamCommand : GeneralCommandClass
 
         if (!gottenTeam.Contains(character))
         {
-            embed.WithDescription($"Character {character} with number {characterNumber} is not in team {gottenTeam.TeamName}");
+            embed.WithDescription(
+                $"Character {character} with number {characterNumber} is not in team {gottenTeam.TeamName}");
             return;
         }
+
         gottenTeam.Remove(character);
-        
+
         await DatabaseContext.SaveChangesAsync();
 
-        embed.WithTitle("Success!").WithDescription($"{character} with number {characterNumber} has been removed from team {gottenTeam.TeamName}!");
+        embed.WithTitle("Success!")
+            .WithDescription(
+                $"{character} with number {characterNumber} has been removed from team {gottenTeam.TeamName}!");
         await context.RespondAsync(embed);
-
     }
 
-    [Command("rename-team"), BotCommandCategory(BotCommandCategory.Team)]
-
-    
+    [Command("rename-team")]
+    [BotCommandCategory(BotCommandCategory.Team)]
     public async ValueTask ExecuteRenameTeam(CommandContext context,
-        [Parameter("team-name")]
-        string teamName,
-        [Parameter("new-name")]
-        string newName)
+        [Parameter("team-name")] string teamName,
+        [Parameter("new-name")] string newName)
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
             .ThenInclude(i => i.Characters)
-            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id); 
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
         }
+
         if (userData.IsOccupied)
         {
             await NotifyAboutOccupiedAsync(context);
             return;
         }
+
         var embed = new DiscordEmbedBuilder()
             .WithColor(userData.Color)
             .WithUser(context.User)
@@ -186,21 +186,22 @@ public class TeamCommand : GeneralCommandClass
             .WithDescription($"Team {teamName} is now {newName!}");
 
         await context.RespondAsync(embed);
-
     }
-    [Command("add-character"), Description("adds a character to a team!"), BotCommandCategory(BotCommandCategory.Team)]
-    public async ValueTask ExecuteAddToTeam(CommandContext context, [Parameter("character-num"), Description("Id of character you want to add")] int characterNumber,
+
+    [Command("add-character")]
+    [Description("adds a character to a team!")]
+    [BotCommandCategory(BotCommandCategory.Team)]
+    public async ValueTask ExecuteAddToTeam(CommandContext context,
+        [Parameter("character-num")] [Description("Id of character you want to add")] int characterNumber,
         [Parameter("team-name")] string teamName)
     {
-
-
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower() == teamName.ToLower()))
             .ThenInclude(i => i.Characters)
             .Include(i => i.EquippedPlayerTeam)
             .ThenInclude(i => i.Characters)
             .Include(i => i.Characters.Where(j =>
-                                                  j.Number == characterNumber))
+                j.Number == characterNumber))
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -213,8 +214,9 @@ public class TeamCommand : GeneralCommandClass
             await NotifyAboutOccupiedAsync(context);
             return;
         }
+
         var gottenTeam = userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName.ToLower());
-        
+
 
         var embed = new DiscordEmbedBuilder()
             .WithUser(context.User)
@@ -233,6 +235,7 @@ public class TeamCommand : GeneralCommandClass
             await context.RespondAsync(embed);
             return;
         }
+
         var character = userData
             .Characters
             .FirstOrDefault(i => i.Number == characterNumber);
@@ -248,6 +251,5 @@ public class TeamCommand : GeneralCommandClass
 
         embed.WithTitle("Success!").WithDescription($"{character} has been added to team {gottenTeam.TeamName}!");
         await context.RespondAsync(embed);
-
     }
 }

@@ -7,15 +7,17 @@ public class SpeedPercentageGearStat : GearStat
     public override int TypeId
     {
         get => 12;
-        protected init {}
+        protected init { }
     }
+
+    public override StatType StatType => StatType.Speed;
+    public override bool IsPercentage => true;
 
     public override int GetMainStatValue(Rarity rarity)
     {
         throw new Exception("Speed percentage should never be a mainstat");
     }
-    public override StatType StatType => StatType.Speed;
-    public override bool IsPercentage => true;
+
     public override void AddStats(Character character)
     {
         character.TotalSpeed += Value * 0.01f * character.BaseSpeed;
