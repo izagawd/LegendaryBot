@@ -2,7 +2,6 @@
 using DiscordBotNet.Database.Models;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
-using Functionality;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;

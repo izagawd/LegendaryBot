@@ -1,8 +1,6 @@
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-using Functionality;
-using Range = Perfolizer.Mathematics.RangeEstimators.Range;
 
 namespace DiscordBotNet.LegendaryBot.Commands;
 

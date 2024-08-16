@@ -1,14 +1,13 @@
 @page "/characters"
 @using System.Security.Claims
 @using DiscordBotNet.Database
-@using DiscordBotNet.Extensions
 @using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 @using DiscordBotNet.WebsiteStuff.Components.Navigation
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.EntityFrameworkCore
 @inject AuthenticationStateProvider AuthenticationStateProvider
-@rendermode InteractiveServer
+@rendermode InteractiveWebAssembly
 @inject PostgreSqlContext DbContext
 @attribute [Authorize]
 @code{
@@ -79,6 +78,7 @@
         SortingMethod = eventArgs.Value?.ToString();
         RefreshFilters();
     }
+    
     public string SortingMethod = "level";
     public bool reverseOrder = false;
 }
@@ -97,6 +97,7 @@ margin-left: 30px">
         <p class="some-para">Reverse Order</p>
         <input  type="checkbox" style="width:25px; height:25px; align-self: center; margin-left: 30px;" @onchange="b => { reverseOrder = (bool) b.Value ; RefreshFilters(); }"></input>
     </div>
+    @SortingMethod
     @{
    
         if (UsingCharacterCollection is not null)

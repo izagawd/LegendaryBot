@@ -5,7 +5,6 @@ using DiscordBotNet.Database.Models;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.GearSets;
 using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears.Stats;
-using Functionality;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

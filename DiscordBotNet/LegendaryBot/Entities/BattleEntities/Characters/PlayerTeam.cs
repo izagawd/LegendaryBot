@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using DiscordBotNet.Database.ManyToManyInstances;
 using DiscordBotNet.Database.Models;
-using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

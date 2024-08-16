@@ -9,10 +9,7 @@ using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using Functionality;
-using Microsoft.Diagnostics.Tracing.AutomatedAnalysis;
 using Microsoft.EntityFrameworkCore;
-using Process = System.Diagnostics.Process;
 
 
 namespace DiscordBotNet.LegendaryBot.Commands;

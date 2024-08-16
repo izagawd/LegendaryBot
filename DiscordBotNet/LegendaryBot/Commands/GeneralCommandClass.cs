@@ -1,15 +1,10 @@
-﻿using System.Collections.Immutable;
-using System.Data;
-using System.Diagnostics;
+﻿using System.Data;
 using System.Linq.Expressions;
-using System.Reflection.Metadata;
 using DiscordBotNet.Database;
 using DiscordBotNet.Database.Models;
 using DiscordBotNet.Extensions;
-using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
-using Functionality;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBotNet.LegendaryBot.Commands;

@@ -1,5 +1,3 @@
-using DiscordBotNet.Extensions;
-
 namespace DiscordBotNet.LegendaryBot.Entities.Items;
 
 public abstract class Energy : Item

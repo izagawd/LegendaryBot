@@ -5,7 +5,6 @@ using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPar
 using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
-using Functionality;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters;
 

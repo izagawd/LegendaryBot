@@ -3,8 +3,6 @@ using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
-using Functionality;
-using Polly.Retry;
 using Barrier = DiscordBotNet.LegendaryBot.StatusEffects.Barrier;
 using Character = DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 

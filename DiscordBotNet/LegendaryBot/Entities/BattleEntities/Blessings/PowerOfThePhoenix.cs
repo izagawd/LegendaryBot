@@ -1,7 +1,6 @@
 ﻿using DiscordBotNet.Extensions;
 using DiscordBotNet.LegendaryBot.BattleEvents.EventArgs;
 using DiscordBotNet.LegendaryBot.BattleSimulatorStuff;
-using Functionality;
 
 namespace DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings;
 
