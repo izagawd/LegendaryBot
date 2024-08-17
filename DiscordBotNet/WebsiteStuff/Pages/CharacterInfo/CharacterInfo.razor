@@ -1,7 +1,6 @@
 @page "/character-info/{CharacterNumber:int}"
 @using System.Security.Claims
 @using DiscordBotNet.Database
-@using DiscordBotNet.Extensions
 @using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 @using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears
 @using DiscordBotNet.WebsiteStuff.Components.Navigation
@@ -23,9 +22,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         user = authState.User;
-        CharacterNumber.Print();
+
         var discordId = user.GetDiscordUserId();
         Character = await DbContext.Characters.Where(i => i.UserData.DiscordId == discordId
                                                           && i.Number == CharacterNumber)
@@ -38,9 +38,6 @@
 
 }
 
-@functions {
-
-}
 
 <Navigation>
     @if (Character is not null)

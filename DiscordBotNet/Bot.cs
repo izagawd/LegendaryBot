@@ -341,10 +341,10 @@ public static class Bot
             while (currentCommand.Parent is not null)
             {
                 currentCommand = currentCommand.Parent;
-                nameToUse = currentCommand.Name.Print() + " " + nameToUse;
+                nameToUse = currentCommand.Name + " " + nameToUse;
             }
 
-            embedBuilder = Help.GenerateEmbedForCommandFailure(nameToUse.Print());
+            embedBuilder = Help.GenerateEmbedForCommandFailure(nameToUse);
 
             embedBuilder?.WithTitle($"You didnt properly use command `{nameToUse}`.\nDetails of `{nameToUse}`\n"
                                     + embedBuilder.Title);

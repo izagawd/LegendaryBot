@@ -1,29 +1,56 @@
 @page "/characters"
-@using System.Security.Claims
 @using DiscordBotNet.Database
+
 @using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 @using DiscordBotNet.WebsiteStuff.Components.Navigation
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Mvc.Razor
 @using Microsoft.EntityFrameworkCore
 @inject AuthenticationStateProvider AuthenticationStateProvider
-@rendermode InteractiveServer
+
 @inject PostgreSqlContext DbContext
+@inject IJSRuntime JS
 @attribute [Authorize]
 
 @code{
 
-    private ClaimsPrincipal user;
     private Character[]? CharacterCollection;
 
     private Character[]? UsingCharacterCollection;
 
     private string _nameFilter = string.Empty;
+    
+    class RazorCharacterDetail
+    {
+        public string Name;
+        public int Level;
+        public int Number;
+        public RazorCharacterDetail(Character character)
+        {
+            Name = character.Name;
+            Level = character.Level;
+            Number = character.Number;
+        }
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (CharacterCollection is not null)
+        {
+            await JS.InvokeVoidAsync("setTotalCharacters", [
+                (object[])
+                [CharacterCollection.Select(i => new RazorCharacterDetail(i)).ToArray()]
+            ]);
+
+        }
+     ;
+    }
 
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        user = authState.User;
+        var user = authState.User;
         var discordId = user.GetDiscordUserId();
         var anony = await DbContext.UserData
             .AsNoTrackingWithIdentityResolution()
@@ -41,8 +68,10 @@
             CharacterCollection = [];
         }
 
+   
 
         UsingCharacterCollection = CharacterCollection;
+
     }
 
     private static int count = 0;
@@ -78,32 +107,34 @@
         RefreshFilters();
     }
 
-    public string SortingMethod = "level";
+    public const string initialSorting = "level";
+    public string SortingMethod = initialSorting;
     public bool reverseOrder;
 }
+<button onclick="killAll()">ddddddd</button>
 
 <Navigation>
-
     <div class="filterer">
 
-        <input class="name-filter" type="text" @onchange="FilterWithName"/>
+        <input class="name-filter" type="text" onchange="setNewNameFilter(this.value)"/>
         <p class="some-para">Sort By</p>
-        <select @onchange="SelectChange" name="Sort By" style="width: 100px; height:35px; align-self: center;
+        <select onchange="changeSortingOrder(this.value)" name="Sort By" style="width: 100px; height:35px; align-self: center;
 margin-left: 30px">
             <option value="level">Level</option>
             <option value="name">Name</option>
         </select>
         <p class="some-para">Reverse Order</p>
-        <input type="checkbox" style="width:25px; height:25px; align-self: center; margin-left: 30px;" @onchange="b => { reverseOrder = (bool)b.Value; RefreshFilters(); }"></input>
+        <input type="checkbox" style="width:25px; height:25px; align-self: center; margin-left: 30px;" 
+               onchange="reverseTheOrder()"/>
     </div>
-    @SortingMethod
+
     @{
         if (UsingCharacterCollection is not null)
         {
             <div class="characters-container">
                 @foreach (var i in UsingCharacterCollection)
                 {
-                    <div class="character-to-display">
+                    <div class="character-to-display" id="@i.Number">
                         <CharacterIconItem Character="i"/>
                     </div>
                 }
@@ -113,3 +144,69 @@ margin-left: 30px">
 
 
 </Navigation>
+
+<script>
+
+    var characterSel =document.querySelectorAll('.character-to-display');
+    var totalCharacters = [
+    
+        @if (CharacterCollection is not null)
+        {
+            foreach (var i in CharacterCollection)
+            {
+                @: {name: "@i.Name", level: @i.Level, number: @i.Number, imageUrl: "@i.ImageUrl",
+                @:div:  document.getElementById('@i.Number')},
+            }
+        } 
+    ]
+    let nameFilter = "";
+    let reverseOrder = false;
+    let sortingType = "@initialSorting"
+    var mainParent = document.querySelector('.characters-container')
+    function setNewNameFilter(newValue){
+        nameFilter = newValue;
+        sort()
+    }
+    function reverseTheOrder(){
+        reverseOrder = !reverseOrder
+        sort()
+    }
+    function changeSortingOrder(newSortingOrder){
+        sortingType = newSortingOrder;
+        sort()
+    }
+    function sort(){
+
+        while (mainParent.firstChild) {
+            mainParent.removeChild(mainParent.firstChild);
+        }
+        console.log(mainParent.children.length)
+        
+        var charsToUse = totalCharacters.filter(i => i.name.toLowerCase().includes(nameFilter.toLowerCase()))
+        switch (sortingType){
+            case "name":
+                charsToUse = charsToUse.sort((a, b) => {
+                    if (a.name < b.name) return -1;
+                    if (a.name > b.name) return 1;
+                    return 0;
+                });
+                break;
+            case "level":
+                charsToUse = charsToUse.sort((a, b) => {
+                    if (a.level < b.level) return -1;
+                    if (a.level > b.level) return 1;
+                    return 0;
+                });
+                break;
+        }
+        if (reverseOrder){
+            charsToUse.reverse()
+        }
+        for (var j of charsToUse){
+            mainParent.appendChild(j.div)
+        }
+    }
+ 
+    
+
+</script>
