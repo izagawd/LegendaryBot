@@ -5,12 +5,9 @@
 @using DiscordBotNet.WebsiteStuff.Components.Navigation
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
-@using Microsoft.AspNetCore.Mvc.Razor
 @using Microsoft.EntityFrameworkCore
 @inject AuthenticationStateProvider AuthenticationStateProvider
-
 @inject PostgreSqlContext DbContext
-@inject IJSRuntime JS
 @attribute [Authorize]
 
 @code{
@@ -21,31 +18,7 @@
 
     private string _nameFilter = string.Empty;
     
-    class RazorCharacterDetail
-    {
-        public string Name;
-        public int Level;
-        public int Number;
-        public RazorCharacterDetail(Character character)
-        {
-            Name = character.Name;
-            Level = character.Level;
-            Number = character.Number;
-        }
-    }
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
 
-        if (CharacterCollection is not null)
-        {
-            await JS.InvokeVoidAsync("setTotalCharacters", [
-                (object[])
-                [CharacterCollection.Select(i => new RazorCharacterDetail(i)).ToArray()]
-            ]);
-
-        }
-     ;
-    }
 
     protected override async Task OnInitializedAsync()
     {
