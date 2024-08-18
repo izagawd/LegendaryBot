@@ -22,8 +22,6 @@
         <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="8.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.8" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4"/>
         <PackageReference Include="SixLabors.Fonts" Version="2.0.4"/>

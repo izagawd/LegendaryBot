@@ -46,8 +46,7 @@ public static class Website
     {
         services.AddRazorPages();
         services.AddRazorComponents()
-            .AddInteractiveServerComponents()
-            .AddInteractiveWebAssemblyComponents();
+            .AddInteractiveServerComponents();
             
 
         services.AddDbContext<PostgreSqlContext>();
@@ -132,8 +131,7 @@ public static class Website
         app.UseAuthorization();
 
         app.MapRazorComponents<App>()
-            .AddInteractiveServerRenderMode()
-            .AddInteractiveWebAssemblyRenderMode();
+            .AddInteractiveServerRenderMode();
 
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
