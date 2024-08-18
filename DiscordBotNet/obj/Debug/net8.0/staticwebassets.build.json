@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ABZHGCbo+IO/bhfgT0Q134qz557i3F4nbYFe0wSNwJE=",
+  "Hash": "kf6yXFe1jE9HmSYOfpbgNdT7HdUFcNWP60PTj7X5y3c=",
   "Source": "DiscordBotNet",
   "BasePath": "_content/DiscordBotNet",
   "Mode": "Default",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
-      "Fingerprint": "bqu4xcesua",
-      "Integrity": "bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc=",
+      "Fingerprint": "po9spmmrqr",
+      "Integrity": "CRFhLwxBAgwxQ4lfHtZK0p9T38catk0IqoeFRjmwy2U=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css"
@@ -52,8 +52,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "bqu4xcesua",
-      "Integrity": "bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc=",
+      "Fingerprint": "po9spmmrqr",
+      "Integrity": "CRFhLwxBAgwxQ4lfHtZK0p9T38catk0IqoeFRjmwy2U=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css"
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "llwaq5loaa",
-      "Integrity": "d16kw/2c4R2MXCGSxq3rubViVB/AchzOvaoa8Rie6i8=",
+      "Fingerprint": "9b4guoweq9",
+      "Integrity": "K8icz+12A13J3zbwbgM6QG5jovsnAMYXFjbD4gT3JBk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "WebsiteStuff\\Components\\Navigation\\Navigation.razor.js"
@@ -94,8 +94,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "da95v2qkru",
-      "Integrity": "u9qEka1auR7E3rd3/8/j8hkQdSOYj9bRJ4nYiFDR1sE=",
+      "Fingerprint": "jg20dzf58c",
+      "Integrity": "jSrd+1MBicmWURK5c6x+rjowhaCNLT8HmoerYNbzxDU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\app.css"
@@ -808,8 +808,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "6gzpyzhau4",
-      "Integrity": "SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0=",
+      "Fingerprint": "bpk8xqwxhs",
+      "Integrity": "z8OR40MowJ8GgK6P89Y+hiJK5+cclzFHzLhFQLL92bg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
@@ -850,8 +850,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "da95v2qkru",
-      "Integrity": "u9qEka1auR7E3rd3/8/j8hkQdSOYj9bRJ4nYiFDR1sE=",
+      "Fingerprint": "jg20dzf58c",
+      "Integrity": "jSrd+1MBicmWURK5c6x+rjowhaCNLT8HmoerYNbzxDU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\app.css"
@@ -871,8 +871,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "vmhx46jhoh",
-      "Integrity": "h6Oq4aPSC6slsfUT9upgjcLFuxaNE98Czn9HGnGXCQM=",
+      "Fingerprint": "eeex9v1675",
+      "Integrity": "2iM4G2SsAwqqX6i33u8fqSsWMF/AzoWk7/RZgkCI8js=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\CharacterInfo.css"
@@ -892,8 +892,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "6pe709l323",
-      "Integrity": "KhpaprvW72h7370hRtHzbPamQDmCzcWjmKCRIbyN7oo=",
+      "Fingerprint": "gtaehagnl2",
+      "Integrity": "vPgxC9OnnWysHAeKImvNCGqnlyI+Vv7dV6lCIhn8O+Y=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\CharactersnBlessings.css"
@@ -913,8 +913,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "058ur3g3kd",
-      "Integrity": "TNRSUW31bCOv4cNR3qvIGnG70S5reeBJQSJVZXVTR6o=",
+      "Fingerprint": "phfjsj8lx8",
+      "Integrity": "06KlztZX7XzEfWCcy8ZvSRNWWusYCkjlM17sMK0r3VY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Home.css"
@@ -934,8 +934,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "urnddee4vo",
-      "Integrity": "mr5WtUOo9PRkKn1PBHsasXb5c+NR2vcYXrPDYKgCp50=",
+      "Fingerprint": "khxym2v3cs",
+      "Integrity": "+FNkEt2xf63ZEAamXlqbRe0vkpKeQVUBr/5lAAjH32Q=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\NeutralHref.css"
@@ -955,8 +955,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "c2tiyv64ts",
-      "Integrity": "pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=",
+      "Fingerprint": "k5cby9tuo3",
+      "Integrity": "SIhDntcqgi8C5vWpfCUNGekWL9mgpVqrcOe/6JLWp2g=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -976,8 +976,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "3g2c7ovb0x",
-      "Integrity": "nfHQBPdyuU6lZwHNr7TPcthrZaxfKsCg+ecQAZ3NMTk=",
+      "Fingerprint": "rq11m40asz",
+      "Integrity": "E6UltaHjQcoU19ADhCiShGL4gjkjcVIOupsHCUNeY5s=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Team.css"
@@ -1018,8 +1018,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "nwe3zuuad2",
-      "Integrity": "NwlKuNWbn989rl/Emo5PrdTmgnvHPb5Zk6vBKE8XWwY=",
+      "Fingerprint": "g2mihr0k6t",
+      "Integrity": "OD2n5S1NRs8HNy6pMp5HGUSfkPLa4n9r9D95lsUp+hU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\info.js"
@@ -1039,8 +1039,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "xtxxf3hu2r",
-      "Integrity": "hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=",
+      "Fingerprint": "fr7q2aak1r",
+      "Integrity": "y/Ngd8W21UpuCUhEqGbUKDEqFnNfTjAfb24GhJJGUyM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
@@ -1060,8 +1060,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "8n05nui9hp",
-      "Integrity": "fF5b/KjhO7q9ltKCXoHQUNJd4F+id5vA/+J4woMaZn4=",
+      "Fingerprint": "jcknr123cm",
+      "Integrity": "PbozVu0GDSGzM6oYTppZ5OoRtTvf0bzraZH12KU5cq0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\team.js"
@@ -1081,8 +1081,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "nakmwdwsxp",
-      "Integrity": "P4Ski6RrsG4nxKfPqaVoyRMoesl9UzArmfT+4fLqKHY=",
+      "Fingerprint": "7k6ljy32ms",
+      "Integrity": "iYDgcGEpX5bttn6LKukJZ7TStCmsVf0fLg4E1g8TzBE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
@@ -1123,8 +1123,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "5p029spbuu",
-      "Integrity": "96ayIUEnpKr7n5BIsFK5vJ3qXMXFgvRl9/CBcHs6/Ts=",
+      "Fingerprint": "unj9p35syc",
+      "Integrity": "ysBT/JYxH9gcMnwxT4+MB4sPxOx/JMg9wi77FA13T9A=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
@@ -1165,8 +1165,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "e6q6xbwqzk",
-      "Integrity": "+ugQREUkP4Wnp1VX2L2lvw0Q2mgKYvYAZr1c2or+ysM=",
+      "Fingerprint": "j32eacmijn",
+      "Integrity": "4SPba1Ju63uFulAEbmc8HmdKhu+R4h5ikdWNdvAW0vc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
@@ -1207,8 +1207,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "dy6jgresuo",
-      "Integrity": "9eX2dpELXvYs+6il2MHwf5OOPVOZjxVK1b1GWgL0B0k=",
+      "Fingerprint": "n1oizzvkh6",
+      "Integrity": "O6lb2kXarGgVw4/RDD42yYPhZIwREthThQFKGmD+3j0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
@@ -1249,8 +1249,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "mk8rdyw69w",
-      "Integrity": "Jtl65EICD4ds6dQZbx1ongvMXj8D127HCg5XRBXXYGw=",
+      "Fingerprint": "s82mc6klak",
+      "Integrity": "JGfKuGd8+U2/GXFrbp/A4sSz1KZ75KVx2BFZVAkfq68=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
@@ -1291,8 +1291,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "z7kmom2977",
-      "Integrity": "359CMPAICGkV+zve4A4HJMha3bwqTFTjl+QC1KJK5DQ=",
+      "Fingerprint": "f8imaxxbri",
+      "Integrity": "z0OApR88UEocYXTXHU7Ueycaiib9XbDUmel9Gx0gbx4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
@@ -1333,8 +1333,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "97yrjpyf9r",
-      "Integrity": "G0PQCDL7ETO6rITRlBIHDKvvSuJFn5p6h+WmbPX5xr4=",
+      "Fingerprint": "1gwhbet9r7",
+      "Integrity": "f07oEWXNCjPrYJq/NwSX/MMVciysefdaLlbfleYM+Yg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
@@ -1375,8 +1375,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "y53cy5s2zj",
-      "Integrity": "BnHmEJpgor1n0UuwNdXG2VhHdV1r9MibuqBVHsgp9a8=",
+      "Fingerprint": "npxfuf8dg6",
+      "Integrity": "a5KlgysZ4fQXw4rzIvXDHErFDPeHRSLccP7kX6HuvSQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
@@ -1417,8 +1417,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "z9shlbduue",
-      "Integrity": "mcVOHRq7FsWaycSfboGsTpzuQZ3cIOR/GDHYxL6q2Yg=",
+      "Fingerprint": "tv2n0hj3wu",
+      "Integrity": "p70pCNFO4MD947SUsSAVfN2LKbV8eMKRWzW14wVui9A=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
@@ -1459,8 +1459,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "2yn17lgxub",
-      "Integrity": "ekoF4YNq4OUU4BoZ6FG2LTKD68LJvW49arNgykHOZfM=",
+      "Fingerprint": "16095smhkz",
+      "Integrity": "5+ExmMkiaI3keYQRLhNibJ5ZXnNuWRbwrXOAZoTXMFg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
@@ -1501,8 +1501,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ophe14yye5",
-      "Integrity": "1N1aPW6sTYexHfJCcDS4iElpPdWahP2Fr+Um56w0PjI=",
+      "Fingerprint": "l7idwsdw6j",
+      "Integrity": "j4LKCOTzEzvNF3Co5SBe9tEABQMRqMa8xnQKVdA4Xp4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
@@ -1543,8 +1543,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ik6i2hrs65",
-      "Integrity": "wseUsl7uipUzPYc/DBMMTMFA7hBTcxpw29RKOxLzXSc=",
+      "Fingerprint": "u3xrusw2ol",
+      "Integrity": "Wi5ZuFSHLfx6dlEgjvW3BY9TC/1NqdBjj+XFifSSqN4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
@@ -1585,8 +1585,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ozu22stjof",
-      "Integrity": "ZMvmWDSU4zY1Z29EQGm5Mubfz/YxF4hiReGqx84o4tA=",
+      "Fingerprint": "ep4vw8e62x",
+      "Integrity": "kslt8tgch9Bn+KKv8vJwQLyXACsF6bs7Awy6Qyqa7S4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
@@ -1627,8 +1627,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "6gzpyzhau4",
-      "Integrity": "SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0=",
+      "Fingerprint": "bpk8xqwxhs",
+      "Integrity": "z8OR40MowJ8GgK6P89Y+hiJK5+cclzFHzLhFQLL92bg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
@@ -1669,8 +1669,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "gjcw7pocpk",
-      "Integrity": "hA1uBYAPgKq7OVoXF7sqU9NtylyP0K7AJn0a4zQcTbg=",
+      "Fingerprint": "h67en9gpj2",
+      "Integrity": "J2mYhgFdBOuXrvDyGGhiiKK85Q8z3LJZJxPd3hcKKZ8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
@@ -1711,8 +1711,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "6l4ir0ityv",
-      "Integrity": "ukKL5IDSyNoXFyp0wkgXeBpBITyM7JsCE6Dp96H1vI8=",
+      "Fingerprint": "9b9oa1qrmt",
+      "Integrity": "22wR6QTidoeiRZXp6zkRQyMSUb/FB+Av11jqmZJF6uU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
@@ -1753,8 +1753,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "f6zq8v6eb3",
-      "Integrity": "l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo=",
+      "Fingerprint": "f6djh3l98o",
+      "Integrity": "iQlK3EogYK3LCl2CrGVczQH7t6fFj5yr3q2vaGTf5JU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
@@ -1795,8 +1795,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "89qbw8ngem",
-      "Integrity": "rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM=",
+      "Fingerprint": "25iw1kog22",
+      "Integrity": "KuvCVS19rfTjoLgMyDDCdOkRRlhNrY4psEM4uezts2M=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
@@ -1837,8 +1837,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "n5w6o92d9r",
-      "Integrity": "SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA=",
+      "Fingerprint": "caxhzk37yp",
+      "Integrity": "PHomoY8p9x6zoqjBFjiNVwJ6lGxSROwwu98KxR81H1I=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
@@ -1879,8 +1879,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "jqwzsa9uv6",
-      "Integrity": "hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU=",
+      "Fingerprint": "um2aeqy4ik",
+      "Integrity": "Kj4irQWPwfSb5NFeos/h0IroI5/nIg0HtAjQ+w4v6TE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
@@ -1921,8 +1921,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "1piudyfv7h",
-      "Integrity": "JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w=",
+      "Fingerprint": "ju8mx746cq",
+      "Integrity": "S9N9fGFGt0piUSdzF5SUX62wvr5Wdx1gW0/FyLYCiBw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
@@ -1963,8 +1963,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "4908xmbfjr",
-      "Integrity": "uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU=",
+      "Fingerprint": "zwph15dxgs",
+      "Integrity": "c4Ll6eSIg6Eothk8pCWAF8aE923EvtU11pqjBy+NjNM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
@@ -2005,8 +2005,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "81b7ukuj9c",
-      "Integrity": "ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk=",
+      "Fingerprint": "z6qzljqjd0",
+      "Integrity": "WzAxfJw1u28FEBxQHehmzGhSq5tlXc9ZQXM/ZkTD69A=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
@@ -2026,8 +2026,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "03hjc8e09r",
-      "Integrity": "xJbBMLGhYbXlPrrrddrSVmduyF6KEtbxEsYxw7hYZV4=",
+      "Fingerprint": "73m6tmcwis",
+      "Integrity": "U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
@@ -2047,8 +2047,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "48y08845bh",
-      "Integrity": "RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk=",
+      "Fingerprint": "4v8eqarkd7",
+      "Integrity": "YJa7W8EiQdQpkk93iGEjjnLSUWRpRJbSfzfURh1kxz4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
@@ -2068,8 +2068,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "356vix0kms",
-      "Integrity": "16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=",
+      "Fingerprint": "l3n5xuwxn8",
+      "Integrity": "z8IfXovWVa6ZfuyRYTi3B7HSkLgycsAqlcn4IbjIcxA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
@@ -2089,8 +2089,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "wus95c49fh",
-      "Integrity": "qLDpf9Urms7R6rnASrjHz38WdQfOvSOmTgLDfzQSzIQ=",
+      "Fingerprint": "ipjdn5j2gz",
+      "Integrity": "BgCzKSBtNZRN6IhjWxj+nz9egwVlph07+cxh7acWJN0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
@@ -2110,8 +2110,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "sjab29p8z5",
-      "Integrity": "2F/T6dcoSumcuA/fcU4W36VpSKPtq4nQf/0/vNFsC+w=",
+      "Fingerprint": "3rqbzy5c3x",
+      "Integrity": "0Yg/eibVdKyxkuVo1Qwh0DspoUCHvSbm/oOoYVz32BQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
@@ -2131,8 +2131,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "d2pxujwhw3",
-      "Integrity": "27gs04nyeNuL9zc/GLQLjdbZqhNGvH+xIYgnYVPIawE=",
+      "Fingerprint": "vgqn64cqva",
+      "Integrity": "v3vzy/qFfFdauR9Rv22gb+bOcB6VFIRkobT+7Rc2nE4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
@@ -2152,8 +2152,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "4dm14o4hmc",
-      "Integrity": "eItLFOyfQ4d/OGzEnGchi2ZMVF8EhGgzS0k7fSOPifQ=",
+      "Fingerprint": "59qolqi738",
+      "Integrity": "F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
@@ -2173,8 +2173,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "x0q3zqp4vz",
-      "Integrity": "geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=",
+      "Fingerprint": "xzw0cte36n",
+      "Integrity": "85iHjKszi4aWOL2sGurna/OsEbK4nabgtovBpkVzNEA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
@@ -2194,8 +2194,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "7s2n0ol71w",
-      "Integrity": "KSI/3xxCrCexCupdzQJRP1B6Iqg+2NA+X2u38cQdqq8=",
+      "Fingerprint": "acycv0530u",
+      "Integrity": "JjiurWgtmt+DORXDT+GbEwz/ro0FhsFFmbVOaAUheCI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
@@ -2215,8 +2215,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ehgnz7f14e",
-      "Integrity": "zp0HUArZHsK1JMJwdk7EyaM+eDINjTdOxADt5Ij2JRs=",
+      "Fingerprint": "dd6z7egasc",
+      "Integrity": "/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
@@ -2257,8 +2257,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "mlv21k5csn",
-      "Integrity": "hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=",
+      "Fingerprint": "jfsiqqwiad",
+      "Integrity": "kR0ThRjy07+hq4p08nfdkjN+pI94Gj2rK5lyE0buITU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
@@ -2276,7 +2276,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2591"
+          "Value": "2581"
         },
         {
           "Name": "Content-Type",
@@ -2284,11 +2284,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"u9qEka1auR7E3rd3/8/j8hkQdSOYj9bRJ4nYiFDR1sE=\""
+          "Value": "\"jSrd+1MBicmWURK5c6x+rjowhaCNLT8HmoerYNbzxDU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:23:15 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2298,12 +2298,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-u9qEka1auR7E3rd3/8/j8hkQdSOYj9bRJ4nYiFDR1sE="
+          "Value": "sha256-jSrd+1MBicmWURK5c6x+rjowhaCNLT8HmoerYNbzxDU="
         }
       ]
     },
     {
-      "Route": "app.da95v2qkru.css",
+      "Route": "app.jg20dzf58c.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\app.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -2313,7 +2313,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2591"
+          "Value": "2581"
         },
         {
           "Name": "Content-Type",
@@ -2321,11 +2321,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"u9qEka1auR7E3rd3/8/j8hkQdSOYj9bRJ4nYiFDR1sE=\""
+          "Value": "\"jSrd+1MBicmWURK5c6x+rjowhaCNLT8HmoerYNbzxDU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:23:15 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2335,7 +2335,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "da95v2qkru"
+          "Value": "jg20dzf58c"
         },
         {
           "Name": "label",
@@ -2343,7 +2343,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-u9qEka1auR7E3rd3/8/j8hkQdSOYj9bRJ4nYiFDR1sE="
+          "Value": "sha256-jSrd+1MBicmWURK5c6x+rjowhaCNLT8HmoerYNbzxDU="
         }
       ]
     },
@@ -2370,7 +2370,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2407,7 +2407,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2452,7 +2452,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2497,7 +2497,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2534,7 +2534,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 15 Jan 2024 02:06:20 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2579,7 +2579,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 15 Jan 2024 02:06:20 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2616,7 +2616,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2661,7 +2661,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2698,7 +2698,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 29 Jul 2024 06:56:26 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2743,7 +2743,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 29 Jul 2024 06:56:26 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2780,7 +2780,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2825,7 +2825,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2862,7 +2862,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2907,7 +2907,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2944,7 +2944,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Jul 2024 22:08:52 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2989,7 +2989,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Jul 2024 22:08:52 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3026,7 +3026,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Jul 2024 22:08:43 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3071,7 +3071,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Jul 2024 22:08:43 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3108,7 +3108,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3153,7 +3153,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3190,7 +3190,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 29 Jul 2024 06:57:19 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3235,7 +3235,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 29 Jul 2024 06:57:19 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3272,7 +3272,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3317,7 +3317,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3354,7 +3354,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3399,7 +3399,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3436,7 +3436,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3481,7 +3481,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3518,7 +3518,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 24 Jul 2024 13:15:30 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3563,7 +3563,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 24 Jul 2024 13:15:30 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3600,7 +3600,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3637,7 +3637,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3682,7 +3682,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3719,7 +3719,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3764,7 +3764,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 28 Mar 2024 07:17:51 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3809,7 +3809,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 28 Mar 2024 07:17:51 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3846,7 +3846,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 13 Jul 2024 06:46:58 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3891,7 +3891,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 13 Jul 2024 06:46:58 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3928,7 +3928,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 13 Jul 2024 06:49:44 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3973,7 +3973,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 13 Jul 2024 06:49:44 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4010,7 +4010,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 13 Jul 2024 06:48:13 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4055,7 +4055,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 13 Jul 2024 06:48:13 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4092,7 +4092,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4137,7 +4137,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4174,7 +4174,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4219,7 +4219,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4256,7 +4256,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4301,7 +4301,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4338,7 +4338,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4383,7 +4383,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4420,7 +4420,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 28 Mar 2024 07:17:51 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4465,7 +4465,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 28 Mar 2024 07:17:51 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4502,7 +4502,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 28 Mar 2024 07:23:15 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4539,7 +4539,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 28 Mar 2024 07:23:15 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4584,7 +4584,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4621,7 +4621,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4666,7 +4666,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4711,7 +4711,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4748,7 +4748,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4785,7 +4785,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4830,7 +4830,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4867,7 +4867,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4912,7 +4912,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4949,7 +4949,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4994,7 +4994,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5031,7 +5031,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5054,7 +5054,7 @@
       ]
     },
     {
-      "Route": "bootstrap/bootstrap.min.6gzpyzhau4.css",
+      "Route": "bootstrap/bootstrap.min.bpk8xqwxhs.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\bootstrap\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -5064,7 +5064,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "162726"
+          "Value": "162720"
         },
         {
           "Name": "Content-Type",
@@ -5072,11 +5072,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0=\""
+          "Value": "\"z8OR40MowJ8GgK6P89Y+hiJK5+cclzFHzLhFQLL92bg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:22:31 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5086,7 +5086,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "6gzpyzhau4"
+          "Value": "bpk8xqwxhs"
         },
         {
           "Name": "label",
@@ -5094,7 +5094,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0="
+          "Value": "sha256-z8OR40MowJ8GgK6P89Y+hiJK5+cclzFHzLhFQLL92bg="
         }
       ]
     },
@@ -5109,7 +5109,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "162726"
+          "Value": "162720"
         },
         {
           "Name": "Content-Type",
@@ -5117,11 +5117,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0=\""
+          "Value": "\"z8OR40MowJ8GgK6P89Y+hiJK5+cclzFHzLhFQLL92bg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:22:31 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5131,7 +5131,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0="
+          "Value": "sha256-z8OR40MowJ8GgK6P89Y+hiJK5+cclzFHzLhFQLL92bg="
         }
       ]
     },
@@ -5158,7 +5158,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:22:31 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5203,7 +5203,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:22:31 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5228,7 +5228,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2591"
+          "Value": "2581"
         },
         {
           "Name": "Content-Type",
@@ -5236,11 +5236,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"u9qEka1auR7E3rd3/8/j8hkQdSOYj9bRJ4nYiFDR1sE=\""
+          "Value": "\"jSrd+1MBicmWURK5c6x+rjowhaCNLT8HmoerYNbzxDU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:16:45 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5250,12 +5250,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-u9qEka1auR7E3rd3/8/j8hkQdSOYj9bRJ4nYiFDR1sE="
+          "Value": "sha256-jSrd+1MBicmWURK5c6x+rjowhaCNLT8HmoerYNbzxDU="
         }
       ]
     },
     {
-      "Route": "css/app.da95v2qkru.css",
+      "Route": "css/app.jg20dzf58c.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\app.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -5265,7 +5265,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2591"
+          "Value": "2581"
         },
         {
           "Name": "Content-Type",
@@ -5273,11 +5273,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"u9qEka1auR7E3rd3/8/j8hkQdSOYj9bRJ4nYiFDR1sE=\""
+          "Value": "\"jSrd+1MBicmWURK5c6x+rjowhaCNLT8HmoerYNbzxDU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:16:45 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5287,7 +5287,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "da95v2qkru"
+          "Value": "jg20dzf58c"
         },
         {
           "Name": "label",
@@ -5295,7 +5295,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-u9qEka1auR7E3rd3/8/j8hkQdSOYj9bRJ4nYiFDR1sE="
+          "Value": "sha256-jSrd+1MBicmWURK5c6x+rjowhaCNLT8HmoerYNbzxDU="
         }
       ]
     },
@@ -5310,7 +5310,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "770"
+          "Value": "800"
         },
         {
           "Name": "Content-Type",
@@ -5318,11 +5318,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"h6Oq4aPSC6slsfUT9upgjcLFuxaNE98Czn9HGnGXCQM=\""
+          "Value": "\"2iM4G2SsAwqqX6i33u8fqSsWMF/AzoWk7/RZgkCI8js=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5332,12 +5332,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-h6Oq4aPSC6slsfUT9upgjcLFuxaNE98Czn9HGnGXCQM="
+          "Value": "sha256-2iM4G2SsAwqqX6i33u8fqSsWMF/AzoWk7/RZgkCI8js="
         }
       ]
     },
     {
-      "Route": "css/CharacterInfo.vmhx46jhoh.css",
+      "Route": "css/CharacterInfo.eeex9v1675.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\CharacterInfo.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -5347,7 +5347,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "770"
+          "Value": "800"
         },
         {
           "Name": "Content-Type",
@@ -5355,11 +5355,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"h6Oq4aPSC6slsfUT9upgjcLFuxaNE98Czn9HGnGXCQM=\""
+          "Value": "\"2iM4G2SsAwqqX6i33u8fqSsWMF/AzoWk7/RZgkCI8js=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5369,7 +5369,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "vmhx46jhoh"
+          "Value": "eeex9v1675"
         },
         {
           "Name": "label",
@@ -5377,52 +5377,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-h6Oq4aPSC6slsfUT9upgjcLFuxaNE98Czn9HGnGXCQM="
-        }
-      ]
-    },
-    {
-      "Route": "css/CharactersnBlessings.6pe709l323.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\CharactersnBlessings.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "777"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"KhpaprvW72h7370hRtHzbPamQDmCzcWjmKCRIbyN7oo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "6pe709l323"
-        },
-        {
-          "Name": "label",
-          "Value": "css/CharactersnBlessings.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-KhpaprvW72h7370hRtHzbPamQDmCzcWjmKCRIbyN7oo="
+          "Value": "sha256-2iM4G2SsAwqqX6i33u8fqSsWMF/AzoWk7/RZgkCI8js="
         }
       ]
     },
@@ -5437,7 +5392,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "777"
+          "Value": "788"
         },
         {
           "Name": "Content-Type",
@@ -5445,11 +5400,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"KhpaprvW72h7370hRtHzbPamQDmCzcWjmKCRIbyN7oo=\""
+          "Value": "\"vPgxC9OnnWysHAeKImvNCGqnlyI+Vv7dV6lCIhn8O+Y=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5459,13 +5414,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-KhpaprvW72h7370hRtHzbPamQDmCzcWjmKCRIbyN7oo="
+          "Value": "sha256-vPgxC9OnnWysHAeKImvNCGqnlyI+Vv7dV6lCIhn8O+Y="
         }
       ]
     },
     {
-      "Route": "css/Home.058ur3g3kd.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\Home.css",
+      "Route": "css/CharactersnBlessings.gtaehagnl2.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\CharactersnBlessings.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5474,7 +5429,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "383"
+          "Value": "788"
         },
         {
           "Name": "Content-Type",
@@ -5482,11 +5437,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"TNRSUW31bCOv4cNR3qvIGnG70S5reeBJQSJVZXVTR6o=\""
+          "Value": "\"vPgxC9OnnWysHAeKImvNCGqnlyI+Vv7dV6lCIhn8O+Y=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5496,15 +5451,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "058ur3g3kd"
+          "Value": "gtaehagnl2"
         },
         {
           "Name": "label",
-          "Value": "css/Home.css"
+          "Value": "css/CharactersnBlessings.css"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-TNRSUW31bCOv4cNR3qvIGnG70S5reeBJQSJVZXVTR6o="
+          "Value": "sha256-vPgxC9OnnWysHAeKImvNCGqnlyI+Vv7dV6lCIhn8O+Y="
         }
       ]
     },
@@ -5519,7 +5474,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "383"
+          "Value": "393"
         },
         {
           "Name": "Content-Type",
@@ -5527,11 +5482,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"TNRSUW31bCOv4cNR3qvIGnG70S5reeBJQSJVZXVTR6o=\""
+          "Value": "\"06KlztZX7XzEfWCcy8ZvSRNWWusYCkjlM17sMK0r3VY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5541,7 +5496,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-TNRSUW31bCOv4cNR3qvIGnG70S5reeBJQSJVZXVTR6o="
+          "Value": "sha256-06KlztZX7XzEfWCcy8ZvSRNWWusYCkjlM17sMK0r3VY="
+        }
+      ]
+    },
+    {
+      "Route": "css/Home.phfjsj8lx8.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\Home.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "393"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"06KlztZX7XzEfWCcy8ZvSRNWWusYCkjlM17sMK0r3VY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "phfjsj8lx8"
+        },
+        {
+          "Name": "label",
+          "Value": "css/Home.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-06KlztZX7XzEfWCcy8ZvSRNWWusYCkjlM17sMK0r3VY="
         }
       ]
     },
@@ -5556,7 +5556,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "114"
+          "Value": "118"
         },
         {
           "Name": "Content-Type",
@@ -5564,11 +5564,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"mr5WtUOo9PRkKn1PBHsasXb5c+NR2vcYXrPDYKgCp50=\""
+          "Value": "\"+FNkEt2xf63ZEAamXlqbRe0vkpKeQVUBr/5lAAjH32Q=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5578,12 +5578,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-mr5WtUOo9PRkKn1PBHsasXb5c+NR2vcYXrPDYKgCp50="
+          "Value": "sha256-+FNkEt2xf63ZEAamXlqbRe0vkpKeQVUBr/5lAAjH32Q="
         }
       ]
     },
     {
-      "Route": "css/NeutralHref.urnddee4vo.css",
+      "Route": "css/NeutralHref.khxym2v3cs.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\NeutralHref.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -5593,7 +5593,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "114"
+          "Value": "118"
         },
         {
           "Name": "Content-Type",
@@ -5601,11 +5601,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"mr5WtUOo9PRkKn1PBHsasXb5c+NR2vcYXrPDYKgCp50=\""
+          "Value": "\"+FNkEt2xf63ZEAamXlqbRe0vkpKeQVUBr/5lAAjH32Q=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5615,7 +5615,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "urnddee4vo"
+          "Value": "khxym2v3cs"
         },
         {
           "Name": "label",
@@ -5623,52 +5623,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-mr5WtUOo9PRkKn1PBHsasXb5c+NR2vcYXrPDYKgCp50="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.c2tiyv64ts.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "362"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "c2tiyv64ts"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0="
+          "Value": "sha256-+FNkEt2xf63ZEAamXlqbRe0vkpKeQVUBr/5lAAjH32Q="
         }
       ]
     },
@@ -5683,7 +5638,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "362"
+          "Value": "380"
         },
         {
           "Name": "Content-Type",
@@ -5691,11 +5646,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=\""
+          "Value": "\"SIhDntcqgi8C5vWpfCUNGekWL9mgpVqrcOe/6JLWp2g=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5705,13 +5660,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0="
+          "Value": "sha256-SIhDntcqgi8C5vWpfCUNGekWL9mgpVqrcOe/6JLWp2g="
         }
       ]
     },
     {
-      "Route": "css/Team.3g2c7ovb0x.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\Team.css",
+      "Route": "css/site.k5cby9tuo3.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5720,7 +5675,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "799"
+          "Value": "380"
         },
         {
           "Name": "Content-Type",
@@ -5728,11 +5683,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"nfHQBPdyuU6lZwHNr7TPcthrZaxfKsCg+ecQAZ3NMTk=\""
+          "Value": "\"SIhDntcqgi8C5vWpfCUNGekWL9mgpVqrcOe/6JLWp2g=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 01 Jan 2024 02:31:34 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5742,15 +5697,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3g2c7ovb0x"
+          "Value": "k5cby9tuo3"
         },
         {
           "Name": "label",
-          "Value": "css/Team.css"
+          "Value": "css/site.css"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-nfHQBPdyuU6lZwHNr7TPcthrZaxfKsCg+ecQAZ3NMTk="
+          "Value": "sha256-SIhDntcqgi8C5vWpfCUNGekWL9mgpVqrcOe/6JLWp2g="
         }
       ]
     },
@@ -5765,7 +5720,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "799"
+          "Value": "825"
         },
         {
           "Name": "Content-Type",
@@ -5773,11 +5728,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"nfHQBPdyuU6lZwHNr7TPcthrZaxfKsCg+ecQAZ3NMTk=\""
+          "Value": "\"E6UltaHjQcoU19ADhCiShGL4gjkjcVIOupsHCUNeY5s=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 01 Jan 2024 02:31:34 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5787,13 +5742,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-nfHQBPdyuU6lZwHNr7TPcthrZaxfKsCg+ecQAZ3NMTk="
+          "Value": "sha256-E6UltaHjQcoU19ADhCiShGL4gjkjcVIOupsHCUNeY5s="
         }
       ]
     },
     {
-      "Route": "DiscordBotNet.bqu4xcesua.bundle.scp.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
+      "Route": "css/Team.rq11m40asz.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\css\\Team.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5802,7 +5757,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8352"
+          "Value": "825"
         },
         {
           "Name": "Content-Type",
@@ -5810,11 +5765,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc=\""
+          "Value": "\"E6UltaHjQcoU19ADhCiShGL4gjkjcVIOupsHCUNeY5s=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 15 Aug 2024 19:08:55 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5824,60 +5779,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "bqu4xcesua"
+          "Value": "rq11m40asz"
         },
         {
           "Name": "label",
-          "Value": "DiscordBotNet.bundle.scp.css"
+          "Value": "css/Team.css"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc="
-        }
-      ]
-    },
-    {
-      "Route": "DiscordBotNet.bqu4xcesua.styles.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "8352"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 15 Aug 2024 19:08:23 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "bqu4xcesua"
-        },
-        {
-          "Name": "label",
-          "Value": "DiscordBotNet.styles.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc="
+          "Value": "sha256-E6UltaHjQcoU19ADhCiShGL4gjkjcVIOupsHCUNeY5s="
         }
       ]
     },
@@ -5892,7 +5802,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8352"
+          "Value": "8310"
         },
         {
           "Name": "Content-Type",
@@ -5900,11 +5810,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc=\""
+          "Value": "\"CRFhLwxBAgwxQ4lfHtZK0p9T38catk0IqoeFRjmwy2U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 15 Aug 2024 19:08:55 GMT"
+          "Value": "Sun, 18 Aug 2024 13:24:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5914,7 +5824,97 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc="
+          "Value": "sha256-CRFhLwxBAgwxQ4lfHtZK0p9T38catk0IqoeFRjmwy2U="
+        }
+      ]
+    },
+    {
+      "Route": "DiscordBotNet.po9spmmrqr.bundle.scp.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DiscordBotNet.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8310"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"CRFhLwxBAgwxQ4lfHtZK0p9T38catk0IqoeFRjmwy2U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 Aug 2024 13:24:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "po9spmmrqr"
+        },
+        {
+          "Name": "label",
+          "Value": "DiscordBotNet.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-CRFhLwxBAgwxQ4lfHtZK0p9T38catk0IqoeFRjmwy2U="
+        }
+      ]
+    },
+    {
+      "Route": "DiscordBotNet.po9spmmrqr.styles.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DiscordBotNet.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8310"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"CRFhLwxBAgwxQ4lfHtZK0p9T38catk0IqoeFRjmwy2U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 Aug 2024 13:24:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "po9spmmrqr"
+        },
+        {
+          "Name": "label",
+          "Value": "DiscordBotNet.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-CRFhLwxBAgwxQ4lfHtZK0p9T38catk0IqoeFRjmwy2U="
         }
       ]
     },
@@ -5929,7 +5929,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8352"
+          "Value": "8310"
         },
         {
           "Name": "Content-Type",
@@ -5937,11 +5937,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc=\""
+          "Value": "\"CRFhLwxBAgwxQ4lfHtZK0p9T38catk0IqoeFRjmwy2U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 15 Aug 2024 19:08:23 GMT"
+          "Value": "Sun, 18 Aug 2024 13:24:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5951,7 +5951,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-bTrHX+a2nruhHO2ArXyPn8XEQcCz+Fkb5ftYckZx+Yc="
+          "Value": "sha256-CRFhLwxBAgwxQ4lfHtZK0p9T38catk0IqoeFRjmwy2U="
         }
       ]
     },
@@ -5978,7 +5978,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6023,7 +6023,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6038,6 +6038,51 @@
       ]
     },
     {
+      "Route": "js/info.g2mihr0k6t.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\js\\info.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1143"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OD2n5S1NRs8HNy6pMp5HGUSfkPLa4n9r9D95lsUp+hU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g2mihr0k6t"
+        },
+        {
+          "Name": "label",
+          "Value": "js/info.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OD2n5S1NRs8HNy6pMp5HGUSfkPLa4n9r9D95lsUp+hU="
+        }
+      ]
+    },
+    {
       "Route": "js/info.js",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\js\\info.js",
       "Selectors": [],
@@ -6048,7 +6093,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1150"
+          "Value": "1143"
         },
         {
           "Name": "Content-Type",
@@ -6056,11 +6101,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"NwlKuNWbn989rl/Emo5PrdTmgnvHPb5Zk6vBKE8XWwY=\""
+          "Value": "\"OD2n5S1NRs8HNy6pMp5HGUSfkPLa4n9r9D95lsUp+hU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6070,13 +6115,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-NwlKuNWbn989rl/Emo5PrdTmgnvHPb5Zk6vBKE8XWwY="
+          "Value": "sha256-OD2n5S1NRs8HNy6pMp5HGUSfkPLa4n9r9D95lsUp+hU="
         }
       ]
     },
     {
-      "Route": "js/info.nwe3zuuad2.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\js\\info.js",
+      "Route": "js/site.fr7q2aak1r.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\js\\site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6085,7 +6130,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1150"
+          "Value": "227"
         },
         {
           "Name": "Content-Type",
@@ -6093,11 +6138,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"NwlKuNWbn989rl/Emo5PrdTmgnvHPb5Zk6vBKE8XWwY=\""
+          "Value": "\"y/Ngd8W21UpuCUhEqGbUKDEqFnNfTjAfb24GhJJGUyM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6107,15 +6152,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "nwe3zuuad2"
+          "Value": "fr7q2aak1r"
         },
         {
           "Name": "label",
-          "Value": "js/info.js"
+          "Value": "js/site.js"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-NwlKuNWbn989rl/Emo5PrdTmgnvHPb5Zk6vBKE8XWwY="
+          "Value": "sha256-y/Ngd8W21UpuCUhEqGbUKDEqFnNfTjAfb24GhJJGUyM="
         }
       ]
     },
@@ -6130,7 +6175,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "231"
+          "Value": "227"
         },
         {
           "Name": "Content-Type",
@@ -6138,11 +6183,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=\""
+          "Value": "\"y/Ngd8W21UpuCUhEqGbUKDEqFnNfTjAfb24GhJJGUyM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6152,57 +6197,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
+          "Value": "sha256-y/Ngd8W21UpuCUhEqGbUKDEqFnNfTjAfb24GhJJGUyM="
         }
       ]
     },
     {
-      "Route": "js/site.xtxxf3hu2r.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\js\\site.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "231"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "xtxxf3hu2r"
-        },
-        {
-          "Name": "label",
-          "Value": "js/site.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
-        }
-      ]
-    },
-    {
-      "Route": "js/team.8n05nui9hp.js",
+      "Route": "js/team.jcknr123cm.js",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\js\\team.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -6212,7 +6212,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1130"
+          "Value": "1126"
         },
         {
           "Name": "Content-Type",
@@ -6220,11 +6220,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"fF5b/KjhO7q9ltKCXoHQUNJd4F+id5vA/+J4woMaZn4=\""
+          "Value": "\"PbozVu0GDSGzM6oYTppZ5OoRtTvf0bzraZH12KU5cq0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 01 Jan 2024 02:18:28 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6234,7 +6234,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "8n05nui9hp"
+          "Value": "jcknr123cm"
         },
         {
           "Name": "label",
@@ -6242,7 +6242,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-fF5b/KjhO7q9ltKCXoHQUNJd4F+id5vA/+J4woMaZn4="
+          "Value": "sha256-PbozVu0GDSGzM6oYTppZ5OoRtTvf0bzraZH12KU5cq0="
         }
       ]
     },
@@ -6257,7 +6257,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1130"
+          "Value": "1126"
         },
         {
           "Name": "Content-Type",
@@ -6265,11 +6265,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"fF5b/KjhO7q9ltKCXoHQUNJd4F+id5vA/+J4woMaZn4=\""
+          "Value": "\"PbozVu0GDSGzM6oYTppZ5OoRtTvf0bzraZH12KU5cq0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 01 Jan 2024 02:18:28 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6279,7 +6279,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-fF5b/KjhO7q9ltKCXoHQUNJd4F+id5vA/+J4woMaZn4="
+          "Value": "sha256-PbozVu0GDSGzM6oYTppZ5OoRtTvf0bzraZH12KU5cq0="
+        }
+      ]
+    },
+    {
+      "Route": "lib/bootstrap/dist/css/bootstrap-grid.7k6ljy32ms.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "84912"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iYDgcGEpX5bttn6LKukJZ7TStCmsVf0fLg4E1g8TzBE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7k6ljy32ms"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/bootstrap/dist/css/bootstrap-grid.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-iYDgcGEpX5bttn6LKukJZ7TStCmsVf0fLg4E1g8TzBE="
         }
       ]
     },
@@ -6294,7 +6339,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "75534"
+          "Value": "84912"
         },
         {
           "Name": "Content-Type",
@@ -6302,11 +6347,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"P4Ski6RrsG4nxKfPqaVoyRMoesl9UzArmfT+4fLqKHY=\""
+          "Value": "\"iYDgcGEpX5bttn6LKukJZ7TStCmsVf0fLg4E1g8TzBE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6316,7 +6361,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-P4Ski6RrsG4nxKfPqaVoyRMoesl9UzArmfT+4fLqKHY="
+          "Value": "sha256-iYDgcGEpX5bttn6LKukJZ7TStCmsVf0fLg4E1g8TzBE="
         }
       ]
     },
@@ -6343,7 +6388,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6380,7 +6425,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6403,51 +6448,6 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.5p029spbuu.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "51325"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"96ayIUEnpKr7n5BIsFK5vJ3qXMXFgvRl9/CBcHs6/Ts=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "5p029spbuu"
-        },
-        {
-          "Name": "label",
-          "Value": "lib/bootstrap/dist/css/bootstrap-grid.min.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-96ayIUEnpKr7n5BIsFK5vJ3qXMXFgvRl9/CBcHs6/Ts="
-        }
-      ]
-    },
-    {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "Selectors": [],
@@ -6458,7 +6458,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "51325"
+          "Value": "51319"
         },
         {
           "Name": "Content-Type",
@@ -6466,11 +6466,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"96ayIUEnpKr7n5BIsFK5vJ3qXMXFgvRl9/CBcHs6/Ts=\""
+          "Value": "\"ysBT/JYxH9gcMnwxT4+MB4sPxOx/JMg9wi77FA13T9A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6480,7 +6480,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-96ayIUEnpKr7n5BIsFK5vJ3qXMXFgvRl9/CBcHs6/Ts="
+          "Value": "sha256-ysBT/JYxH9gcMnwxT4+MB4sPxOx/JMg9wi77FA13T9A="
         }
       ]
     },
@@ -6507,7 +6507,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6552,7 +6552,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6567,8 +6567,8 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap-grid.nakmwdwsxp.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.unj9p35syc.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6577,7 +6577,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "75534"
+          "Value": "51319"
         },
         {
           "Name": "Content-Type",
@@ -6585,11 +6585,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"P4Ski6RrsG4nxKfPqaVoyRMoesl9UzArmfT+4fLqKHY=\""
+          "Value": "\"ysBT/JYxH9gcMnwxT4+MB4sPxOx/JMg9wi77FA13T9A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6599,15 +6599,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "nakmwdwsxp"
+          "Value": "unj9p35syc"
         },
         {
           "Name": "label",
-          "Value": "lib/bootstrap/dist/css/bootstrap-grid.css"
+          "Value": "lib/bootstrap/dist/css/bootstrap-grid.min.css"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-P4Ski6RrsG4nxKfPqaVoyRMoesl9UzArmfT+4fLqKHY="
+          "Value": "sha256-ysBT/JYxH9gcMnwxT4+MB4sPxOx/JMg9wi77FA13T9A="
         }
       ]
     },
@@ -6622,7 +6622,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "75607"
+          "Value": "84987"
         },
         {
           "Name": "Content-Type",
@@ -6630,11 +6630,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"+ugQREUkP4Wnp1VX2L2lvw0Q2mgKYvYAZr1c2or+ysM=\""
+          "Value": "\"4SPba1Ju63uFulAEbmc8HmdKhu+R4h5ikdWNdvAW0vc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6644,7 +6644,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-+ugQREUkP4Wnp1VX2L2lvw0Q2mgKYvYAZr1c2or+ysM="
+          "Value": "sha256-4SPba1Ju63uFulAEbmc8HmdKhu+R4h5ikdWNdvAW0vc="
         }
       ]
     },
@@ -6671,7 +6671,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6716,7 +6716,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6731,7 +6731,7 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.e6q6xbwqzk.css",
+      "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.j32eacmijn.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -6741,7 +6741,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "75607"
+          "Value": "84987"
         },
         {
           "Name": "Content-Type",
@@ -6749,11 +6749,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"+ugQREUkP4Wnp1VX2L2lvw0Q2mgKYvYAZr1c2or+ysM=\""
+          "Value": "\"4SPba1Ju63uFulAEbmc8HmdKhu+R4h5ikdWNdvAW0vc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6763,7 +6763,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "e6q6xbwqzk"
+          "Value": "j32eacmijn"
         },
         {
           "Name": "label",
@@ -6771,7 +6771,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-+ugQREUkP4Wnp1VX2L2lvw0Q2mgKYvYAZr1c2or+ysM="
+          "Value": "sha256-4SPba1Ju63uFulAEbmc8HmdKhu+R4h5ikdWNdvAW0vc="
         }
       ]
     },
@@ -6786,7 +6786,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "51400"
+          "Value": "51394"
         },
         {
           "Name": "Content-Type",
@@ -6794,11 +6794,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9eX2dpELXvYs+6il2MHwf5OOPVOZjxVK1b1GWgL0B0k=\""
+          "Value": "\"O6lb2kXarGgVw4/RDD42yYPhZIwREthThQFKGmD+3j0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6808,7 +6808,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-9eX2dpELXvYs+6il2MHwf5OOPVOZjxVK1b1GWgL0B0k="
+          "Value": "sha256-O6lb2kXarGgVw4/RDD42yYPhZIwREthThQFKGmD+3j0="
         }
       ]
     },
@@ -6835,7 +6835,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6872,7 +6872,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6895,7 +6895,7 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.dy6jgresuo.css",
+      "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.n1oizzvkh6.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -6905,7 +6905,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "51400"
+          "Value": "51394"
         },
         {
           "Name": "Content-Type",
@@ -6913,11 +6913,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9eX2dpELXvYs+6il2MHwf5OOPVOZjxVK1b1GWgL0B0k=\""
+          "Value": "\"O6lb2kXarGgVw4/RDD42yYPhZIwREthThQFKGmD+3j0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6927,7 +6927,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "dy6jgresuo"
+          "Value": "n1oizzvkh6"
         },
         {
           "Name": "label",
@@ -6935,7 +6935,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-9eX2dpELXvYs+6il2MHwf5OOPVOZjxVK1b1GWgL0B0k="
+          "Value": "sha256-O6lb2kXarGgVw4/RDD42yYPhZIwREthThQFKGmD+3j0="
         }
       ]
     },
@@ -6950,7 +6950,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6276"
+          "Value": "6628"
         },
         {
           "Name": "Content-Type",
@@ -6958,11 +6958,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Jtl65EICD4ds6dQZbx1ongvMXj8D127HCg5XRBXXYGw=\""
+          "Value": "\"JGfKuGd8+U2/GXFrbp/A4sSz1KZ75KVx2BFZVAkfq68=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6972,7 +6972,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Jtl65EICD4ds6dQZbx1ongvMXj8D127HCg5XRBXXYGw="
+          "Value": "sha256-JGfKuGd8+U2/GXFrbp/A4sSz1KZ75KVx2BFZVAkfq68="
         }
       ]
     },
@@ -6999,7 +6999,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7044,7 +7044,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7069,7 +7069,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4653"
+          "Value": "4646"
         },
         {
           "Name": "Content-Type",
@@ -7077,11 +7077,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"359CMPAICGkV+zve4A4HJMha3bwqTFTjl+QC1KJK5DQ=\""
+          "Value": "\"z0OApR88UEocYXTXHU7Ueycaiib9XbDUmel9Gx0gbx4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7091,7 +7091,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-359CMPAICGkV+zve4A4HJMha3bwqTFTjl+QC1KJK5DQ="
+          "Value": "sha256-z0OApR88UEocYXTXHU7Ueycaiib9XbDUmel9Gx0gbx4="
         }
       ]
     },
@@ -7118,7 +7118,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7155,7 +7155,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7178,7 +7178,7 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.z7kmom2977.css",
+      "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.f8imaxxbri.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -7188,7 +7188,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4653"
+          "Value": "4646"
         },
         {
           "Name": "Content-Type",
@@ -7196,11 +7196,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"359CMPAICGkV+zve4A4HJMha3bwqTFTjl+QC1KJK5DQ=\""
+          "Value": "\"z0OApR88UEocYXTXHU7Ueycaiib9XbDUmel9Gx0gbx4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7210,7 +7210,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "z7kmom2977"
+          "Value": "f8imaxxbri"
         },
         {
           "Name": "label",
@@ -7218,57 +7218,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-359CMPAICGkV+zve4A4HJMha3bwqTFTjl+QC1KJK5DQ="
+          "Value": "sha256-z0OApR88UEocYXTXHU7Ueycaiib9XbDUmel9Gx0gbx4="
         }
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap-reboot.mk8rdyw69w.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "6276"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Jtl65EICD4ds6dQZbx1ongvMXj8D127HCg5XRBXXYGw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "mk8rdyw69w"
-        },
-        {
-          "Name": "label",
-          "Value": "lib/bootstrap/dist/css/bootstrap-reboot.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Jtl65EICD4ds6dQZbx1ongvMXj8D127HCg5XRBXXYGw="
-        }
-      ]
-    },
-    {
-      "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.97yrjpyf9r.css",
+      "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.1gwhbet9r7.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -7278,7 +7233,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6250"
+          "Value": "6607"
         },
         {
           "Name": "Content-Type",
@@ -7286,11 +7241,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"G0PQCDL7ETO6rITRlBIHDKvvSuJFn5p6h+WmbPX5xr4=\""
+          "Value": "\"f07oEWXNCjPrYJq/NwSX/MMVciysefdaLlbfleYM+Yg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7300,7 +7255,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "97yrjpyf9r"
+          "Value": "1gwhbet9r7"
         },
         {
           "Name": "label",
@@ -7308,7 +7263,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-G0PQCDL7ETO6rITRlBIHDKvvSuJFn5p6h+WmbPX5xr4="
+          "Value": "sha256-f07oEWXNCjPrYJq/NwSX/MMVciysefdaLlbfleYM+Yg="
         }
       ]
     },
@@ -7323,7 +7278,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6250"
+          "Value": "6607"
         },
         {
           "Name": "Content-Type",
@@ -7331,11 +7286,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"G0PQCDL7ETO6rITRlBIHDKvvSuJFn5p6h+WmbPX5xr4=\""
+          "Value": "\"f07oEWXNCjPrYJq/NwSX/MMVciysefdaLlbfleYM+Yg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7345,7 +7300,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-G0PQCDL7ETO6rITRlBIHDKvvSuJFn5p6h+WmbPX5xr4="
+          "Value": "sha256-f07oEWXNCjPrYJq/NwSX/MMVciysefdaLlbfleYM+Yg="
         }
       ]
     },
@@ -7372,7 +7327,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7417,7 +7372,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7442,7 +7397,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4725"
+          "Value": "4718"
         },
         {
           "Name": "Content-Type",
@@ -7450,11 +7405,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"BnHmEJpgor1n0UuwNdXG2VhHdV1r9MibuqBVHsgp9a8=\""
+          "Value": "\"a5KlgysZ4fQXw4rzIvXDHErFDPeHRSLccP7kX6HuvSQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7464,7 +7419,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-BnHmEJpgor1n0UuwNdXG2VhHdV1r9MibuqBVHsgp9a8="
+          "Value": "sha256-a5KlgysZ4fQXw4rzIvXDHErFDPeHRSLccP7kX6HuvSQ="
         }
       ]
     },
@@ -7491,7 +7446,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7528,7 +7483,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7551,7 +7506,7 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.y53cy5s2zj.css",
+      "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.npxfuf8dg6.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -7561,7 +7516,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4725"
+          "Value": "4718"
         },
         {
           "Name": "Content-Type",
@@ -7569,11 +7524,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"BnHmEJpgor1n0UuwNdXG2VhHdV1r9MibuqBVHsgp9a8=\""
+          "Value": "\"a5KlgysZ4fQXw4rzIvXDHErFDPeHRSLccP7kX6HuvSQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7583,7 +7538,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "y53cy5s2zj"
+          "Value": "npxfuf8dg6"
         },
         {
           "Name": "label",
@@ -7591,7 +7546,52 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-BnHmEJpgor1n0UuwNdXG2VhHdV1r9MibuqBVHsgp9a8="
+          "Value": "sha256-a5KlgysZ4fQXw4rzIvXDHErFDPeHRSLccP7kX6HuvSQ="
+        }
+      ]
+    },
+    {
+      "Route": "lib/bootstrap/dist/css/bootstrap-reboot.s82mc6klak.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6628"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JGfKuGd8+U2/GXFrbp/A4sSz1KZ75KVx2BFZVAkfq68=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "s82mc6klak"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/bootstrap/dist/css/bootstrap-reboot.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JGfKuGd8+U2/GXFrbp/A4sSz1KZ75KVx2BFZVAkfq68="
         }
       ]
     },
@@ -7606,7 +7606,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "76449"
+          "Value": "84387"
         },
         {
           "Name": "Content-Type",
@@ -7614,11 +7614,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"mcVOHRq7FsWaycSfboGsTpzuQZ3cIOR/GDHYxL6q2Yg=\""
+          "Value": "\"p70pCNFO4MD947SUsSAVfN2LKbV8eMKRWzW14wVui9A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7628,7 +7628,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-mcVOHRq7FsWaycSfboGsTpzuQZ3cIOR/GDHYxL6q2Yg="
+          "Value": "sha256-p70pCNFO4MD947SUsSAVfN2LKbV8eMKRWzW14wVui9A="
         }
       ]
     },
@@ -7655,7 +7655,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7700,7 +7700,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7715,7 +7715,7 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.2yn17lgxub.css",
+      "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.16095smhkz.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -7725,7 +7725,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "53485"
+          "Value": "53479"
         },
         {
           "Name": "Content-Type",
@@ -7733,11 +7733,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ekoF4YNq4OUU4BoZ6FG2LTKD68LJvW49arNgykHOZfM=\""
+          "Value": "\"5+ExmMkiaI3keYQRLhNibJ5ZXnNuWRbwrXOAZoTXMFg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7747,7 +7747,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "2yn17lgxub"
+          "Value": "16095smhkz"
         },
         {
           "Name": "label",
@@ -7755,7 +7755,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ekoF4YNq4OUU4BoZ6FG2LTKD68LJvW49arNgykHOZfM="
+          "Value": "sha256-5+ExmMkiaI3keYQRLhNibJ5ZXnNuWRbwrXOAZoTXMFg="
         }
       ]
     },
@@ -7770,7 +7770,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "53485"
+          "Value": "53479"
         },
         {
           "Name": "Content-Type",
@@ -7778,11 +7778,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ekoF4YNq4OUU4BoZ6FG2LTKD68LJvW49arNgykHOZfM=\""
+          "Value": "\"5+ExmMkiaI3keYQRLhNibJ5ZXnNuWRbwrXOAZoTXMFg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7792,7 +7792,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ekoF4YNq4OUU4BoZ6FG2LTKD68LJvW49arNgykHOZfM="
+          "Value": "sha256-5+ExmMkiaI3keYQRLhNibJ5ZXnNuWRbwrXOAZoTXMFg="
         }
       ]
     },
@@ -7819,7 +7819,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7856,7 +7856,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7889,7 +7889,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "76307"
+          "Value": "84245"
         },
         {
           "Name": "Content-Type",
@@ -7897,11 +7897,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"1N1aPW6sTYexHfJCcDS4iElpPdWahP2Fr+Um56w0PjI=\""
+          "Value": "\"j4LKCOTzEzvNF3Co5SBe9tEABQMRqMa8xnQKVdA4Xp4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7911,7 +7911,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-1N1aPW6sTYexHfJCcDS4iElpPdWahP2Fr+Um56w0PjI="
+          "Value": "sha256-j4LKCOTzEzvNF3Co5SBe9tEABQMRqMa8xnQKVdA4Xp4="
         }
       ]
     },
@@ -7938,7 +7938,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7983,7 +7983,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7998,6 +7998,51 @@
       ]
     },
     {
+      "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.l7idwsdw6j.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "84245"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"j4LKCOTzEzvNF3Co5SBe9tEABQMRqMa8xnQKVdA4Xp4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "l7idwsdw6j"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-j4LKCOTzEzvNF3Co5SBe9tEABQMRqMa8xnQKVdA4Xp4="
+        }
+      ]
+    },
+    {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "Selectors": [],
@@ -8008,7 +8053,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "53413"
+          "Value": "53407"
         },
         {
           "Name": "Content-Type",
@@ -8016,11 +8061,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"wseUsl7uipUzPYc/DBMMTMFA7hBTcxpw29RKOxLzXSc=\""
+          "Value": "\"Wi5ZuFSHLfx6dlEgjvW3BY9TC/1NqdBjj+XFifSSqN4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8030,7 +8075,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-wseUsl7uipUzPYc/DBMMTMFA7hBTcxpw29RKOxLzXSc="
+          "Value": "sha256-Wi5ZuFSHLfx6dlEgjvW3BY9TC/1NqdBjj+XFifSSqN4="
         }
       ]
     },
@@ -8057,7 +8102,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8102,7 +8147,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8117,7 +8162,7 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.ik6i2hrs65.css",
+      "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.u3xrusw2ol.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -8127,7 +8172,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "53413"
+          "Value": "53407"
         },
         {
           "Name": "Content-Type",
@@ -8135,11 +8180,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"wseUsl7uipUzPYc/DBMMTMFA7hBTcxpw29RKOxLzXSc=\""
+          "Value": "\"Wi5ZuFSHLfx6dlEgjvW3BY9TC/1NqdBjj+XFifSSqN4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8149,7 +8194,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "ik6i2hrs65"
+          "Value": "u3xrusw2ol"
         },
         {
           "Name": "label",
@@ -8157,57 +8202,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-wseUsl7uipUzPYc/DBMMTMFA7hBTcxpw29RKOxLzXSc="
+          "Value": "sha256-Wi5ZuFSHLfx6dlEgjvW3BY9TC/1NqdBjj+XFifSSqN4="
         }
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.ophe14yye5.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "76307"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"1N1aPW6sTYexHfJCcDS4iElpPdWahP2Fr+Um56w0PjI=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ophe14yye5"
-        },
-        {
-          "Name": "label",
-          "Value": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-1N1aPW6sTYexHfJCcDS4iElpPdWahP2Fr+Um56w0PjI="
-        }
-      ]
-    },
-    {
-      "Route": "lib/bootstrap/dist/css/bootstrap-utilities.z9shlbduue.css",
+      "Route": "lib/bootstrap/dist/css/bootstrap-utilities.tv2n0hj3wu.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -8217,7 +8217,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "76449"
+          "Value": "84387"
         },
         {
           "Name": "Content-Type",
@@ -8225,11 +8225,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"mcVOHRq7FsWaycSfboGsTpzuQZ3cIOR/GDHYxL6q2Yg=\""
+          "Value": "\"p70pCNFO4MD947SUsSAVfN2LKbV8eMKRWzW14wVui9A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8239,7 +8239,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "z9shlbduue"
+          "Value": "tv2n0hj3wu"
         },
         {
           "Name": "label",
@@ -8247,7 +8247,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-mcVOHRq7FsWaycSfboGsTpzuQZ3cIOR/GDHYxL6q2Yg="
+          "Value": "sha256-p70pCNFO4MD947SUsSAVfN2LKbV8eMKRWzW14wVui9A="
         }
       ]
     },
@@ -8262,7 +8262,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "215356"
+          "Value": "233710"
         },
         {
           "Name": "Content-Type",
@@ -8270,11 +8270,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZMvmWDSU4zY1Z29EQGm5Mubfz/YxF4hiReGqx84o4tA=\""
+          "Value": "\"kslt8tgch9Bn+KKv8vJwQLyXACsF6bs7Awy6Qyqa7S4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8284,7 +8284,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ZMvmWDSU4zY1Z29EQGm5Mubfz/YxF4hiReGqx84o4tA="
+          "Value": "sha256-kslt8tgch9Bn+KKv8vJwQLyXACsF6bs7Awy6Qyqa7S4="
         }
       ]
     },
@@ -8311,7 +8311,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8356,7 +8356,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8371,8 +8371,8 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap.min.6gzpyzhau4.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Route": "lib/bootstrap/dist/css/bootstrap.ep4vw8e62x.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8381,7 +8381,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "162726"
+          "Value": "233710"
         },
         {
           "Name": "Content-Type",
@@ -8389,11 +8389,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0=\""
+          "Value": "\"kslt8tgch9Bn+KKv8vJwQLyXACsF6bs7Awy6Qyqa7S4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8403,7 +8403,52 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "6gzpyzhau4"
+          "Value": "ep4vw8e62x"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/bootstrap/dist/css/bootstrap.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kslt8tgch9Bn+KKv8vJwQLyXACsF6bs7Awy6Qyqa7S4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/bootstrap/dist/css/bootstrap.min.bpk8xqwxhs.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "162720"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"z8OR40MowJ8GgK6P89Y+hiJK5+cclzFHzLhFQLL92bg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bpk8xqwxhs"
         },
         {
           "Name": "label",
@@ -8411,7 +8456,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0="
+          "Value": "sha256-z8OR40MowJ8GgK6P89Y+hiJK5+cclzFHzLhFQLL92bg="
         }
       ]
     },
@@ -8426,7 +8471,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "162726"
+          "Value": "162720"
         },
         {
           "Name": "Content-Type",
@@ -8434,11 +8479,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0=\""
+          "Value": "\"z8OR40MowJ8GgK6P89Y+hiJK5+cclzFHzLhFQLL92bg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8448,7 +8493,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0="
+          "Value": "sha256-z8OR40MowJ8GgK6P89Y+hiJK5+cclzFHzLhFQLL92bg="
         }
       ]
     },
@@ -8475,7 +8520,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8520,7 +8565,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8535,51 +8580,6 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap.ozu22stjof.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "215356"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZMvmWDSU4zY1Z29EQGm5Mubfz/YxF4hiReGqx84o4tA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ozu22stjof"
-        },
-        {
-          "Name": "label",
-          "Value": "lib/bootstrap/dist/css/bootstrap.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-ZMvmWDSU4zY1Z29EQGm5Mubfz/YxF4hiReGqx84o4tA="
-        }
-      ]
-    },
-    {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "Selectors": [],
@@ -8590,7 +8590,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "214999"
+          "Value": "233357"
         },
         {
           "Name": "Content-Type",
@@ -8598,11 +8598,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"hA1uBYAPgKq7OVoXF7sqU9NtylyP0K7AJn0a4zQcTbg=\""
+          "Value": "\"J2mYhgFdBOuXrvDyGGhiiKK85Q8z3LJZJxPd3hcKKZ8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8612,7 +8612,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-hA1uBYAPgKq7OVoXF7sqU9NtylyP0K7AJn0a4zQcTbg="
+          "Value": "sha256-J2mYhgFdBOuXrvDyGGhiiKK85Q8z3LJZJxPd3hcKKZ8="
         }
       ]
     },
@@ -8639,7 +8639,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8684,7 +8684,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8699,7 +8699,7 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap.rtl.gjcw7pocpk.css",
+      "Route": "lib/bootstrap/dist/css/bootstrap.rtl.h67en9gpj2.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -8709,7 +8709,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "214999"
+          "Value": "233357"
         },
         {
           "Name": "Content-Type",
@@ -8717,11 +8717,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"hA1uBYAPgKq7OVoXF7sqU9NtylyP0K7AJn0a4zQcTbg=\""
+          "Value": "\"J2mYhgFdBOuXrvDyGGhiiKK85Q8z3LJZJxPd3hcKKZ8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8731,7 +8731,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "gjcw7pocpk"
+          "Value": "h67en9gpj2"
         },
         {
           "Name": "label",
@@ -8739,12 +8739,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-hA1uBYAPgKq7OVoXF7sqU9NtylyP0K7AJn0a4zQcTbg="
+          "Value": "sha256-J2mYhgFdBOuXrvDyGGhiiKK85Q8z3LJZJxPd3hcKKZ8="
         }
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.6l4ir0ityv.css",
+      "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.9b9oa1qrmt.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -8754,7 +8754,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "162831"
+          "Value": "162825"
         },
         {
           "Name": "Content-Type",
@@ -8762,11 +8762,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ukKL5IDSyNoXFyp0wkgXeBpBITyM7JsCE6Dp96H1vI8=\""
+          "Value": "\"22wR6QTidoeiRZXp6zkRQyMSUb/FB+Av11jqmZJF6uU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8776,7 +8776,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "6l4ir0ityv"
+          "Value": "9b9oa1qrmt"
         },
         {
           "Name": "label",
@@ -8784,7 +8784,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ukKL5IDSyNoXFyp0wkgXeBpBITyM7JsCE6Dp96H1vI8="
+          "Value": "sha256-22wR6QTidoeiRZXp6zkRQyMSUb/FB+Av11jqmZJF6uU="
         }
       ]
     },
@@ -8799,7 +8799,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "162831"
+          "Value": "162825"
         },
         {
           "Name": "Content-Type",
@@ -8807,11 +8807,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ukKL5IDSyNoXFyp0wkgXeBpBITyM7JsCE6Dp96H1vI8=\""
+          "Value": "\"22wR6QTidoeiRZXp6zkRQyMSUb/FB+Av11jqmZJF6uU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8821,7 +8821,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ukKL5IDSyNoXFyp0wkgXeBpBITyM7JsCE6Dp96H1vI8="
+          "Value": "sha256-22wR6QTidoeiRZXp6zkRQyMSUb/FB+Av11jqmZJF6uU="
         }
       ]
     },
@@ -8848,7 +8848,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8893,7 +8893,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8908,52 +8908,7 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/js/bootstrap.1piudyfv7h.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "153194"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "1piudyfv7h"
-        },
-        {
-          "Name": "label",
-          "Value": "lib/bootstrap/dist/js/bootstrap.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w="
-        }
-      ]
-    },
-    {
-      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.f6zq8v6eb3.js",
+      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.f6djh3l98o.js",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -8963,7 +8918,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "215272"
+          "Value": "243938"
         },
         {
           "Name": "Content-Type",
@@ -8971,11 +8926,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo=\""
+          "Value": "\"iQlK3EogYK3LCl2CrGVczQH7t6fFj5yr3q2vaGTf5JU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8985,7 +8940,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "f6zq8v6eb3"
+          "Value": "f6djh3l98o"
         },
         {
           "Name": "label",
@@ -8993,7 +8948,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo="
+          "Value": "sha256-iQlK3EogYK3LCl2CrGVczQH7t6fFj5yr3q2vaGTf5JU="
         }
       ]
     },
@@ -9008,7 +8963,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "215272"
+          "Value": "243938"
         },
         {
           "Name": "Content-Type",
@@ -9016,11 +8971,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo=\""
+          "Value": "\"iQlK3EogYK3LCl2CrGVczQH7t6fFj5yr3q2vaGTf5JU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9030,7 +8985,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo="
+          "Value": "sha256-iQlK3EogYK3LCl2CrGVczQH7t6fFj5yr3q2vaGTf5JU="
         }
       ]
     },
@@ -9057,7 +9012,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9102,7 +9057,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9117,7 +9072,7 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.89qbw8ngem.js",
+      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.25iw1kog22.js",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -9127,7 +9082,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "78474"
+          "Value": "78468"
         },
         {
           "Name": "Content-Type",
@@ -9135,11 +9090,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM=\""
+          "Value": "\"KuvCVS19rfTjoLgMyDDCdOkRRlhNrY4psEM4uezts2M=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9149,7 +9104,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "89qbw8ngem"
+          "Value": "25iw1kog22"
         },
         {
           "Name": "label",
@@ -9157,7 +9112,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM="
+          "Value": "sha256-KuvCVS19rfTjoLgMyDDCdOkRRlhNrY4psEM4uezts2M="
         }
       ]
     },
@@ -9172,7 +9127,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "78474"
+          "Value": "78468"
         },
         {
           "Name": "Content-Type",
@@ -9180,11 +9135,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM=\""
+          "Value": "\"KuvCVS19rfTjoLgMyDDCdOkRRlhNrY4psEM4uezts2M=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9194,7 +9149,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM="
+          "Value": "sha256-KuvCVS19rfTjoLgMyDDCdOkRRlhNrY4psEM4uezts2M="
         }
       ]
     },
@@ -9221,7 +9176,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9266,7 +9221,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9281,6 +9236,51 @@
       ]
     },
     {
+      "Route": "lib/bootstrap/dist/js/bootstrap.esm.caxhzk37yp.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "156941"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PHomoY8p9x6zoqjBFjiNVwJ6lGxSROwwu98KxR81H1I=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "caxhzk37yp"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/bootstrap/dist/js/bootstrap.esm.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PHomoY8p9x6zoqjBFjiNVwJ6lGxSROwwu98KxR81H1I="
+        }
+      ]
+    },
+    {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "Selectors": [],
@@ -9291,7 +9291,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "143996"
+          "Value": "156941"
         },
         {
           "Name": "Content-Type",
@@ -9299,11 +9299,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA=\""
+          "Value": "\"PHomoY8p9x6zoqjBFjiNVwJ6lGxSROwwu98KxR81H1I=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9313,7 +9313,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA="
+          "Value": "sha256-PHomoY8p9x6zoqjBFjiNVwJ6lGxSROwwu98KxR81H1I="
         }
       ]
     },
@@ -9340,7 +9340,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9385,7 +9385,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9400,51 +9400,6 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.jqwzsa9uv6.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "72022"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "jqwzsa9uv6"
-        },
-        {
-          "Name": "label",
-          "Value": "lib/bootstrap/dist/js/bootstrap.esm.min.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU="
-        }
-      ]
-    },
-    {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "Selectors": [],
@@ -9455,7 +9410,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "72022"
+          "Value": "72016"
         },
         {
           "Name": "Content-Type",
@@ -9463,11 +9418,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU=\""
+          "Value": "\"Kj4irQWPwfSb5NFeos/h0IroI5/nIg0HtAjQ+w4v6TE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9477,7 +9432,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU="
+          "Value": "sha256-Kj4irQWPwfSb5NFeos/h0IroI5/nIg0HtAjQ+w4v6TE="
         }
       ]
     },
@@ -9504,7 +9459,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9541,7 +9496,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9564,8 +9519,8 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/js/bootstrap.esm.n5w6o92d9r.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.um2aeqy4ik.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -9574,7 +9529,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "143996"
+          "Value": "72016"
         },
         {
           "Name": "Content-Type",
@@ -9582,11 +9537,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA=\""
+          "Value": "\"Kj4irQWPwfSb5NFeos/h0IroI5/nIg0HtAjQ+w4v6TE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9596,15 +9551,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "n5w6o92d9r"
+          "Value": "um2aeqy4ik"
         },
         {
           "Name": "label",
-          "Value": "lib/bootstrap/dist/js/bootstrap.esm.js"
+          "Value": "lib/bootstrap/dist/js/bootstrap.esm.min.js"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA="
+          "Value": "sha256-Kj4irQWPwfSb5NFeos/h0IroI5/nIg0HtAjQ+w4v6TE="
         }
       ]
     },
@@ -9619,7 +9574,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "153194"
+          "Value": "174250"
         },
         {
           "Name": "Content-Type",
@@ -9627,11 +9582,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w=\""
+          "Value": "\"S9N9fGFGt0piUSdzF5SUX62wvr5Wdx1gW0/FyLYCiBw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9641,7 +9596,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w="
+          "Value": "sha256-S9N9fGFGt0piUSdzF5SUX62wvr5Wdx1gW0/FyLYCiBw="
         }
       ]
     },
@@ -9668,7 +9623,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9713,7 +9668,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9728,8 +9683,8 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/js/bootstrap.min.4908xmbfjr.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Route": "lib/bootstrap/dist/js/bootstrap.ju8mx746cq.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -9738,7 +9693,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "59517"
+          "Value": "174250"
         },
         {
           "Name": "Content-Type",
@@ -9746,11 +9701,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU=\""
+          "Value": "\"S9N9fGFGt0piUSdzF5SUX62wvr5Wdx1gW0/FyLYCiBw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9760,15 +9715,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "4908xmbfjr"
+          "Value": "ju8mx746cq"
         },
         {
           "Name": "label",
-          "Value": "lib/bootstrap/dist/js/bootstrap.min.js"
+          "Value": "lib/bootstrap/dist/js/bootstrap.js"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU="
+          "Value": "sha256-S9N9fGFGt0piUSdzF5SUX62wvr5Wdx1gW0/FyLYCiBw="
         }
       ]
     },
@@ -9783,7 +9738,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "59517"
+          "Value": "59511"
         },
         {
           "Name": "Content-Type",
@@ -9791,11 +9746,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU=\""
+          "Value": "\"c4Ll6eSIg6Eothk8pCWAF8aE923EvtU11pqjBy+NjNM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9805,7 +9760,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU="
+          "Value": "sha256-c4Ll6eSIg6Eothk8pCWAF8aE923EvtU11pqjBy+NjNM="
         }
       ]
     },
@@ -9832,7 +9787,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9869,7 +9824,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9892,6 +9847,51 @@
       ]
     },
     {
+      "Route": "lib/bootstrap/dist/js/bootstrap.min.zwph15dxgs.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "59511"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"c4Ll6eSIg6Eothk8pCWAF8aE923EvtU11pqjBy+NjNM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zwph15dxgs"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/bootstrap/dist/js/bootstrap.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-c4Ll6eSIg6Eothk8pCWAF8aE923EvtU11pqjBy+NjNM="
+        }
+      ]
+    },
+    {
       "Route": "lib/bootstrap/LICENSE",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\LICENSE",
       "Selectors": [],
@@ -9902,7 +9902,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1153"
+          "Value": "1131"
         },
         {
           "Name": "Content-Type",
@@ -9910,11 +9910,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk=\""
+          "Value": "\"WzAxfJw1u28FEBxQHehmzGhSq5tlXc9ZQXM/ZkTD69A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9924,12 +9924,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk="
+          "Value": "sha256-WzAxfJw1u28FEBxQHehmzGhSq5tlXc9ZQXM/ZkTD69A="
         }
       ]
     },
     {
-      "Route": "lib/bootstrap/LICENSE.81b7ukuj9c",
+      "Route": "lib/bootstrap/LICENSE.z6qzljqjd0",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\bootstrap\\LICENSE",
       "Selectors": [],
       "ResponseHeaders": [
@@ -9939,7 +9939,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1153"
+          "Value": "1131"
         },
         {
           "Name": "Content-Type",
@@ -9947,11 +9947,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk=\""
+          "Value": "\"WzAxfJw1u28FEBxQHehmzGhSq5tlXc9ZQXM/ZkTD69A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9961,7 +9961,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "81b7ukuj9c"
+          "Value": "z6qzljqjd0"
         },
         {
           "Name": "label",
@@ -9969,12 +9969,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk="
+          "Value": "sha256-WzAxfJw1u28FEBxQHehmzGhSq5tlXc9ZQXM/ZkTD69A="
         }
       ]
     },
     {
-      "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.03hjc8e09r.js",
+      "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.73m6tmcwis.js",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -9984,7 +9984,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "19820"
+          "Value": "19780"
         },
         {
           "Name": "Content-Type",
@@ -9992,11 +9992,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"xJbBMLGhYbXlPrrrddrSVmduyF6KEtbxEsYxw7hYZV4=\""
+          "Value": "\"U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10006,7 +10006,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "03hjc8e09r"
+          "Value": "73m6tmcwis"
         },
         {
           "Name": "label",
@@ -10014,7 +10014,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-xJbBMLGhYbXlPrrrddrSVmduyF6KEtbxEsYxw7hYZV4="
+          "Value": "sha256-U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY="
         }
       ]
     },
@@ -10029,7 +10029,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "19820"
+          "Value": "19780"
         },
         {
           "Name": "Content-Type",
@@ -10037,11 +10037,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"xJbBMLGhYbXlPrrrddrSVmduyF6KEtbxEsYxw7hYZV4=\""
+          "Value": "\"U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10051,12 +10051,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-xJbBMLGhYbXlPrrrddrSVmduyF6KEtbxEsYxw7hYZV4="
+          "Value": "sha256-U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY="
         }
       ]
     },
     {
-      "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.48y08845bh.js",
+      "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.4v8eqarkd7.js",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -10066,7 +10066,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5831"
+          "Value": "5824"
         },
         {
           "Name": "Content-Type",
@@ -10074,11 +10074,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk=\""
+          "Value": "\"YJa7W8EiQdQpkk93iGEjjnLSUWRpRJbSfzfURh1kxz4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10088,7 +10088,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "48y08845bh"
+          "Value": "4v8eqarkd7"
         },
         {
           "Name": "label",
@@ -10096,7 +10096,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk="
+          "Value": "sha256-YJa7W8EiQdQpkk93iGEjjnLSUWRpRJbSfzfURh1kxz4="
         }
       ]
     },
@@ -10111,7 +10111,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5831"
+          "Value": "5824"
         },
         {
           "Name": "Content-Type",
@@ -10119,11 +10119,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk=\""
+          "Value": "\"YJa7W8EiQdQpkk93iGEjjnLSUWRpRJbSfzfURh1kxz4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10133,12 +10133,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk="
+          "Value": "sha256-YJa7W8EiQdQpkk93iGEjjnLSUWRpRJbSfzfURh1kxz4="
         }
       ]
     },
     {
-      "Route": "lib/jquery-validation-unobtrusive/LICENSE.356vix0kms.txt",
+      "Route": "lib/jquery-validation-unobtrusive/LICENSE.l3n5xuwxn8.txt",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
@@ -10148,7 +10148,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1139"
+          "Value": "1116"
         },
         {
           "Name": "Content-Type",
@@ -10156,11 +10156,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=\""
+          "Value": "\"z8IfXovWVa6ZfuyRYTi3B7HSkLgycsAqlcn4IbjIcxA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10170,7 +10170,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "356vix0kms"
+          "Value": "l3n5xuwxn8"
         },
         {
           "Name": "label",
@@ -10178,7 +10178,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+          "Value": "sha256-z8IfXovWVa6ZfuyRYTi3B7HSkLgycsAqlcn4IbjIcxA="
         }
       ]
     },
@@ -10193,7 +10193,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1139"
+          "Value": "1116"
         },
         {
           "Name": "Content-Type",
@@ -10201,11 +10201,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=\""
+          "Value": "\"z8IfXovWVa6ZfuyRYTi3B7HSkLgycsAqlcn4IbjIcxA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10215,7 +10215,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+          "Value": "sha256-z8IfXovWVa6ZfuyRYTi3B7HSkLgycsAqlcn4IbjIcxA="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.ipjdn5j2gz.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "49148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BgCzKSBtNZRN6IhjWxj+nz9egwVlph07+cxh7acWJN0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ipjdn5j2gz"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/additional-methods.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-BgCzKSBtNZRN6IhjWxj+nz9egwVlph07+cxh7acWJN0="
         }
       ]
     },
@@ -10230,7 +10275,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "43184"
+          "Value": "49148"
         },
         {
           "Name": "Content-Type",
@@ -10238,11 +10283,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"qLDpf9Urms7R6rnASrjHz38WdQfOvSOmTgLDfzQSzIQ=\""
+          "Value": "\"BgCzKSBtNZRN6IhjWxj+nz9egwVlph07+cxh7acWJN0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10252,7 +10297,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-qLDpf9Urms7R6rnASrjHz38WdQfOvSOmTgLDfzQSzIQ="
+          "Value": "sha256-BgCzKSBtNZRN6IhjWxj+nz9egwVlph07+cxh7acWJN0="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.min.3rqbzy5c3x.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18464"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0Yg/eibVdKyxkuVo1Qwh0DspoUCHvSbm/oOoYVz32BQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 16 Aug 2024 13:46:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3rqbzy5c3x"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/additional-methods.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-0Yg/eibVdKyxkuVo1Qwh0DspoUCHvSbm/oOoYVz32BQ="
         }
       ]
     },
@@ -10267,7 +10357,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "18467"
+          "Value": "18464"
         },
         {
           "Name": "Content-Type",
@@ -10275,11 +10365,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"2F/T6dcoSumcuA/fcU4W36VpSKPtq4nQf/0/vNFsC+w=\""
+          "Value": "\"0Yg/eibVdKyxkuVo1Qwh0DspoUCHvSbm/oOoYVz32BQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10289,142 +10379,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-2F/T6dcoSumcuA/fcU4W36VpSKPtq4nQf/0/vNFsC+w="
-        }
-      ]
-    },
-    {
-      "Route": "lib/jquery-validation/dist/additional-methods.min.sjab29p8z5.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "18467"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"2F/T6dcoSumcuA/fcU4W36VpSKPtq4nQf/0/vNFsC+w=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "sjab29p8z5"
-        },
-        {
-          "Name": "label",
-          "Value": "lib/jquery-validation/dist/additional-methods.min.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-2F/T6dcoSumcuA/fcU4W36VpSKPtq4nQf/0/vNFsC+w="
-        }
-      ]
-    },
-    {
-      "Route": "lib/jquery-validation/dist/additional-methods.wus95c49fh.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "43184"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"qLDpf9Urms7R6rnASrjHz38WdQfOvSOmTgLDfzQSzIQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "wus95c49fh"
-        },
-        {
-          "Name": "label",
-          "Value": "lib/jquery-validation/dist/additional-methods.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-qLDpf9Urms7R6rnASrjHz38WdQfOvSOmTgLDfzQSzIQ="
-        }
-      ]
-    },
-    {
-      "Route": "lib/jquery-validation/dist/jquery.validate.d2pxujwhw3.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "50276"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"27gs04nyeNuL9zc/GLQLjdbZqhNGvH+xIYgnYVPIawE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "d2pxujwhw3"
-        },
-        {
-          "Name": "label",
-          "Value": "lib/jquery-validation/dist/jquery.validate.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-27gs04nyeNuL9zc/GLQLjdbZqhNGvH+xIYgnYVPIawE="
+          "Value": "sha256-0Yg/eibVdKyxkuVo1Qwh0DspoUCHvSbm/oOoYVz32BQ="
         }
       ]
     },
@@ -10439,7 +10394,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "50276"
+          "Value": "67394"
         },
         {
           "Name": "Content-Type",
@@ -10447,11 +10402,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"27gs04nyeNuL9zc/GLQLjdbZqhNGvH+xIYgnYVPIawE=\""
+          "Value": "\"v3vzy/qFfFdauR9Rv22gb+bOcB6VFIRkobT+7Rc2nE4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10461,12 +10416,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-27gs04nyeNuL9zc/GLQLjdbZqhNGvH+xIYgnYVPIawE="
+          "Value": "sha256-v3vzy/qFfFdauR9Rv22gb+bOcB6VFIRkobT+7Rc2nE4="
         }
       ]
     },
     {
-      "Route": "lib/jquery-validation/dist/jquery.validate.min.4dm14o4hmc.js",
+      "Route": "lib/jquery-validation/dist/jquery.validate.min.59qolqi738.js",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -10476,7 +10431,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "23264"
+          "Value": "23261"
         },
         {
           "Name": "Content-Type",
@@ -10484,11 +10439,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"eItLFOyfQ4d/OGzEnGchi2ZMVF8EhGgzS0k7fSOPifQ=\""
+          "Value": "\"F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10498,7 +10453,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "4dm14o4hmc"
+          "Value": "59qolqi738"
         },
         {
           "Name": "label",
@@ -10506,7 +10461,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-eItLFOyfQ4d/OGzEnGchi2ZMVF8EhGgzS0k7fSOPifQ="
+          "Value": "sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A="
         }
       ]
     },
@@ -10521,7 +10476,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "23264"
+          "Value": "23261"
         },
         {
           "Name": "Content-Type",
@@ -10529,11 +10484,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"eItLFOyfQ4d/OGzEnGchi2ZMVF8EhGgzS0k7fSOPifQ=\""
+          "Value": "\"F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10543,7 +10498,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-eItLFOyfQ4d/OGzEnGchi2ZMVF8EhGgzS0k7fSOPifQ="
+          "Value": "sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.vgqn64cqva.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "67394"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"v3vzy/qFfFdauR9Rv22gb+bOcB6VFIRkobT+7Rc2nE4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vgqn64cqva"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/jquery.validate.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-v3vzy/qFfFdauR9Rv22gb+bOcB6VFIRkobT+7Rc2nE4="
         }
       ]
     },
@@ -10558,7 +10558,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1117"
+          "Value": "1095"
         },
         {
           "Name": "Content-Type",
@@ -10566,11 +10566,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=\""
+          "Value": "\"85iHjKszi4aWOL2sGurna/OsEbK4nabgtovBpkVzNEA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10580,12 +10580,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw="
+          "Value": "sha256-85iHjKszi4aWOL2sGurna/OsEbK4nabgtovBpkVzNEA="
         }
       ]
     },
     {
-      "Route": "lib/jquery-validation/LICENSE.x0q3zqp4vz.md",
+      "Route": "lib/jquery-validation/LICENSE.xzw0cte36n.md",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "Selectors": [],
       "ResponseHeaders": [
@@ -10595,7 +10595,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1117"
+          "Value": "1095"
         },
         {
           "Name": "Content-Type",
@@ -10603,11 +10603,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=\""
+          "Value": "\"85iHjKszi4aWOL2sGurna/OsEbK4nabgtovBpkVzNEA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10617,7 +10617,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "x0q3zqp4vz"
+          "Value": "xzw0cte36n"
         },
         {
           "Name": "label",
@@ -10625,12 +10625,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw="
+          "Value": "sha256-85iHjKszi4aWOL2sGurna/OsEbK4nabgtovBpkVzNEA="
         }
       ]
     },
     {
-      "Route": "lib/jquery/dist/jquery.7s2n0ol71w.js",
+      "Route": "lib/jquery/dist/jquery.acycv0530u.js",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -10640,7 +10640,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "299461"
+          "Value": "413772"
         },
         {
           "Name": "Content-Type",
@@ -10648,11 +10648,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"KSI/3xxCrCexCupdzQJRP1B6Iqg+2NA+X2u38cQdqq8=\""
+          "Value": "\"JjiurWgtmt+DORXDT+GbEwz/ro0FhsFFmbVOaAUheCI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10662,7 +10662,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "7s2n0ol71w"
+          "Value": "acycv0530u"
         },
         {
           "Name": "label",
@@ -10670,7 +10670,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-KSI/3xxCrCexCupdzQJRP1B6Iqg+2NA+X2u38cQdqq8="
+          "Value": "sha256-JjiurWgtmt+DORXDT+GbEwz/ro0FhsFFmbVOaAUheCI="
         }
       ]
     },
@@ -10685,7 +10685,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "299461"
+          "Value": "413772"
         },
         {
           "Name": "Content-Type",
@@ -10693,11 +10693,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"KSI/3xxCrCexCupdzQJRP1B6Iqg+2NA+X2u38cQdqq8=\""
+          "Value": "\"JjiurWgtmt+DORXDT+GbEwz/ro0FhsFFmbVOaAUheCI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10707,7 +10707,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-KSI/3xxCrCexCupdzQJRP1B6Iqg+2NA+X2u38cQdqq8="
+          "Value": "sha256-JjiurWgtmt+DORXDT+GbEwz/ro0FhsFFmbVOaAUheCI="
         }
       ]
     },
@@ -10734,7 +10734,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10757,7 +10757,7 @@
       ]
     },
     {
-      "Route": "lib/jquery/dist/jquery.min.ehgnz7f14e.js",
+      "Route": "lib/jquery/dist/jquery.min.dd6z7egasc.js",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -10767,7 +10767,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "89503"
+          "Value": "89501"
         },
         {
           "Name": "Content-Type",
@@ -10775,11 +10775,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zp0HUArZHsK1JMJwdk7EyaM+eDINjTdOxADt5Ij2JRs=\""
+          "Value": "\"/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10789,7 +10789,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "ehgnz7f14e"
+          "Value": "dd6z7egasc"
         },
         {
           "Name": "label",
@@ -10797,7 +10797,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-zp0HUArZHsK1JMJwdk7EyaM+eDINjTdOxADt5Ij2JRs="
+          "Value": "sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         }
       ]
     },
@@ -10812,7 +10812,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "89503"
+          "Value": "89501"
         },
         {
           "Name": "Content-Type",
@@ -10820,11 +10820,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zp0HUArZHsK1JMJwdk7EyaM+eDINjTdOxADt5Ij2JRs=\""
+          "Value": "\"/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10834,7 +10834,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-zp0HUArZHsK1JMJwdk7EyaM+eDINjTdOxADt5Ij2JRs="
+          "Value": "sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         }
       ]
     },
@@ -10861,7 +10861,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10876,7 +10876,7 @@
       ]
     },
     {
-      "Route": "lib/jquery/LICENSE.mlv21k5csn.txt",
+      "Route": "lib/jquery/LICENSE.jfsiqqwiad.txt",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
@@ -10886,7 +10886,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1117"
+          "Value": "1097"
         },
         {
           "Name": "Content-Type",
@@ -10894,11 +10894,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=\""
+          "Value": "\"kR0ThRjy07+hq4p08nfdkjN+pI94Gj2rK5lyE0buITU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10908,7 +10908,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "mlv21k5csn"
+          "Value": "jfsiqqwiad"
         },
         {
           "Name": "label",
@@ -10916,7 +10916,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk="
+          "Value": "sha256-kR0ThRjy07+hq4p08nfdkjN+pI94Gj2rK5lyE0buITU="
         }
       ]
     },
@@ -10931,7 +10931,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1117"
+          "Value": "1097"
         },
         {
           "Name": "Content-Type",
@@ -10939,11 +10939,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=\""
+          "Value": "\"kR0ThRjy07+hq4p08nfdkjN+pI94Gj2rK5lyE0buITU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 Dec 2023 06:17:17 GMT"
+          "Value": "Fri, 16 Aug 2024 13:46:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10953,7 +10953,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk="
+          "Value": "sha256-kR0ThRjy07+hq4p08nfdkjN+pI94Gj2rK5lyE0buITU="
         }
       ]
     },
@@ -10972,7 +10972,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "67"
+          "Value": "65"
         },
         {
           "Name": "Content-Type",
@@ -10980,17 +10980,17 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"d16kw/2c4R2MXCGSxq3rubViVB/AchzOvaoa8Rie6i8=\""
+          "Value": "\"K8icz+12A13J3zbwbgM6QG5jovsnAMYXFjbD4gT3JBk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 Aug 2024 17:27:57 GMT"
+          "Value": "Sun, 18 Aug 2024 12:57:28 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-d16kw/2c4R2MXCGSxq3rubViVB/AchzOvaoa8Rie6i8="
+          "Value": "sha256-K8icz+12A13J3zbwbgM6QG5jovsnAMYXFjbD4gT3JBk="
         },
         {
           "Name": "script-type",

@@ -1,7 +1,8 @@
 .character-to-display {
-    max-width: 30%;
+
     margin-right: 30px;
     margin-bottom: 30px;
+    width: fit-content;
 }
 
 .some-para {
