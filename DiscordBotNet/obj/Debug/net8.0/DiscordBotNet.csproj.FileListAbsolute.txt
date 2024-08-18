@@ -202,9 +202,6 @@ C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\Characters\Characters.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\CharacterInfo\CharacterInfo.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\DiscordBotNet.staticwebassets.endpoints.json
-C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\Microsoft.AspNetCore.Components.WebAssembly.dll
-C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
-C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\Microsoft.JSInterop.WebAssembly.dll
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\Characters\CharacterTile.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\Gears\GearTile.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\staticwebassets.build.endpoints.json

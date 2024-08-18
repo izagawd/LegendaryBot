@@ -55,10 +55,7 @@
         <Folder Include="LegendaryBot\Commands\GearFarmStuffs\"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Shared\Shared.csproj" />
-      <ProjectReference Include="..\WebAssemblyPart\WebAssemblyPart.csproj" />
-    </ItemGroup>
+
 
 
 </Project>
