@@ -1,5 +1,7 @@
 @page "/characters"
 @using DiscordBotNet.Database
+@using DiscordBotNet.LegendaryBot
+@using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters
 
 
 @using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
@@ -11,33 +13,36 @@
 @inject PostgreSqlContext DbContext
 @attribute [Authorize]
 @code{
-    private Character[]? CharacterCollection;
-    private Character[]? UsingCharacterCollection;
+
+    private class CharacterPageDto
+    {
+         public string Name { get; set; }
+         public int Number { get; set; }
+        public Rarity Rarity { get; set; }
+        public string ImageUrl { get; set; }
+         public int Level { get; set; }
+    }
+    private CharacterPageDto[]? CharacterCollection;
+    private CharacterPageDto[]? UsingCharacterCollection;
     private string _nameFilter = string.Empty;
-    
+    private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         var discordId = user.GetDiscordUserId();
-        var anony = await DbContext.UserData
+        CharacterCollection  = await DbContext.Characters
             .AsNoTrackingWithIdentityResolution()
-            .Where(i => i.DiscordId == discordId)
-            .Include(i => i.Blessings)
-            .Select(i =>
-                new { i.Characters, i })
-            .FirstOrDefaultAsync();
-        if (anony is not null)
-        {
-            CharacterCollection = anony.Characters.ToArray();
-        }
-        else
-        {
-            CharacterCollection = [];
-        }
-
-   
-
+            .Where(i => i.UserData.DiscordId == discordId)
+            .Select(i => new CharacterPageDto()
+            {
+                ImageUrl = i.TypeId == PlayerTypeId ? Player.GetImageUrl(i.UserData.Gender) : Character.GetDefaultCharacterFromTypeId(i.TypeId).ImageUrl,
+                Level = i.Level,
+                Name = i.TypeId == PlayerTypeId ? i.UserData.Name : Character.GetDefaultCharacterFromTypeId(i.TypeId).Name,
+                Number = i.Number,
+                Rarity = Character.GetDefaultCharacterFromTypeId(i.TypeId).Rarity
+            })
+            .ToArrayAsync();
         UsingCharacterCollection = CharacterCollection;
 
     }
@@ -103,7 +108,8 @@ margin-left: 30px">
                 @foreach (var i in UsingCharacterCollection)
                 {
                     <div class="character-to-display" id="@i.Number">
-                        <CharacterTile Character="i"/>
+                        <CharacterTile Name=@i.Name Number="i.Number" Level="i.Level"
+                                       ImageUrl=@i.ImageUrl Rarity="i.Rarity"/>
                     </div>
                 }
             </div>

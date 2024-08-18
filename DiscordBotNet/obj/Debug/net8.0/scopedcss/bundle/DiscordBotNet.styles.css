@@ -1,5 +1,3 @@
-@import '_content/WebAssemblyParts/WebAssemblyParts.bundle.scp.css';
-
 /* _content/DiscordBotNet/WebsiteStuff/Components/Navigation/Navigation.razor.rz.scp.css */
 .page[b-ho4t6m66vw] {
     position: relative;
@@ -204,28 +202,6 @@ main[b-ho4t6m66vw] {
     }
 }
 /* _content/DiscordBotNet/WebsiteStuff/Pages/CharacterInfo/CharacterInfo.razor.rz.scp.css */
-/* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/CharacterIconItem.razor.rz.scp.css */
-.image-box[b-j0wxam1tjm] {
-
-    border-radius: 10px; /* Controls the curvature of the edges */
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
-    background-color: #f0f0f0; /* Optional: adds a background color */
-}
-
-.image-box img[b-j0wxam1tjm] {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 10px; /* Match this to the box's border-radius */
-}
-
-p[b-j0wxam1tjm] {
-    margin-left: 10px;
-    font-weight: bold;
-    margin-bottom: 0; /* Reduce space between paragraphs */
-    font-size: 20px; /* Reduce paragraph font size */
-}
 /* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/Characters.razor.rz.scp.css */
 .character-to-display[b-aqvrl2yjxd] {
 
@@ -275,8 +251,8 @@ p[b-j0wxam1tjm] {
 
     height: 100vh;
 }
-/* _content/DiscordBotNet/WebsiteStuff/Pages/Gears/GearIconItem.razor.rz.scp.css */
-.image-box[b-s9gvc6ccel] {
+/* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/CharacterTile.razor.rz.scp.css */
+.image-box[b-sgaogkfw2b] {
 
     border-radius: 10px; /* Controls the curvature of the edges */
     overflow: hidden;
@@ -284,14 +260,36 @@ p[b-j0wxam1tjm] {
     background-color: #f0f0f0; /* Optional: adds a background color */
 }
 
-.image-box img[b-s9gvc6ccel] {
+.image-box img[b-sgaogkfw2b] {
     width: 100%;
     height: auto;
     display: block;
     border-radius: 10px; /* Match this to the box's border-radius */
 }
 
-p[b-s9gvc6ccel] {
+p[b-sgaogkfw2b] {
+    margin-left: 10px;
+    font-weight: bold;
+    margin-bottom: 0; /* Reduce space between paragraphs */
+    font-size: 20px; /* Reduce paragraph font size */
+}
+/* _content/DiscordBotNet/WebsiteStuff/Pages/Gears/GearTile.razor.rz.scp.css */
+.image-box[b-ec2uajycin] {
+
+    border-radius: 10px; /* Controls the curvature of the edges */
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
+    background-color: #f0f0f0; /* Optional: adds a background color */
+}
+
+.image-box img[b-ec2uajycin] {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px; /* Match this to the box's border-radius */
+}
+
+p[b-ec2uajycin] {
     margin-left: 10px;
     font-weight: bold;
     margin-bottom: 0; /* Reduce space between paragraphs */

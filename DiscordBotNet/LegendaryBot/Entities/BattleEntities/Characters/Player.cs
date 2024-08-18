@@ -1,4 +1,5 @@
-﻿using DiscordBotNet.LegendaryBot.Moves;
+﻿using DiscordBotNet.Database.Models;
+using DiscordBotNet.LegendaryBot.Moves;
 using DiscordBotNet.LegendaryBot.Results;
 using DiscordBotNet.LegendaryBot.StatusEffects;
 using DSharpPlus.Entities;
@@ -156,8 +157,13 @@ public class Player : Character
         protected init { }
     }
 
-
-    public override string ImageUrl => $"{Website.DomainName}/battle_images/characters/Player{UserData?.Gender}.png";
+    public static string GetImageUrl(Gender gender)
+    {
+        return gender == Gender.Male
+            ? $"{Website.DomainName}/battle_images/characters/PlayerMale.png"
+            : $"{Website.DomainName}/battle_images/characters/PlayerFemale.png";
+    }
+    public override string ImageUrl =>GetImageUrl(UserData?.Gender ?? Gender.Male) ;
 
 
     public override string Name => UserData?.Name ?? "Player";
