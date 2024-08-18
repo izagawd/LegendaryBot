@@ -60,7 +60,7 @@ public static class Bot
     private static readonly ConcurrentDictionary<ulong, CharacterExpGainInfo> _expMatGive = new();
 
 
-    public static InteractivityExtension Interactivity { get; private set; } = null!;
+
     public static DiscordClient Client { get; private set; }
 
 
@@ -212,38 +212,40 @@ public static class Bot
     {
         Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings[BotTokenToPathUse]!,
                 DiscordIntents.All)
+            .UseInteractivity(new InteractivityConfiguration
+            {
+                Timeout = TimeSpan.FromMinutes(2)
+            })
+            .UseCommands( commandsExtension =>
+            {
+                var slashCommandProcessor = new SlashCommandProcessor();
+                slashCommandProcessor.AddConverters(typeof(Bot).Assembly);
+                commandsExtension.AddProcessor(slashCommandProcessor);
+                TextCommandProcessor textCommandProcessor = new(new TextCommandConfiguration
+                {
+                    // The default behavior is that the bot reacts to direct mentions
+                    // and to the "!" prefix.
+                    // If you want to change it, you first set if the bot should react to mentions
+                    // and then you can provide as many prefixes as you want.
+                    PrefixResolver = new DefaultPrefixResolver(true, "&").ResolvePrefixAsync,
+                    IgnoreBots = true
+                });
+                textCommandProcessor.AddConverters(typeof(Bot).Assembly);
+                commandsExtension.AddProcessor(textCommandProcessor);
+                commandsExtension.AddCommands(typeof(Bot).Assembly);
+                commandsExtension.CommandExecuted += OnCommandsExtensionOnCommandExecuted;
+                commandsExtension.CommandErrored += OnCommandError;
+            }, new CommandsConfiguration
+            {
+                UseDefaultCommandErrorHandler = false
+            })
             .ConfigureEventHandlers(i =>
                 i.HandleSocketOpened(OnReady)
                     .HandleMessageCreated(OnMessageCreatedSpawnCharacter)
                     .HandleMessageCreated(OnMessageCreatedGiveUserExpMat))
             .Build();
-        var commandsExtension = Client.UseCommands(new CommandsConfiguration
-        {
-            UseDefaultCommandErrorHandler = false
-        });
-        var slashCommandProcessor = new SlashCommandProcessor();
-        slashCommandProcessor.AddConverters(typeof(Bot).Assembly);
-        commandsExtension.AddProcessor(slashCommandProcessor);
-        TextCommandProcessor textCommandProcessor = new(new TextCommandConfiguration
-        {
-            // The default behavior is that the bot reacts to direct mentions
-            // and to the "!" prefix.
-            // If you want to change it, you first set if the bot should react to mentions
-            // and then you can provide as many prefixes as you want.
-            PrefixResolver = new DefaultPrefixResolver(true, "&").ResolvePrefixAsync,
-            IgnoreBots = true
-        });
-        textCommandProcessor.AddConverters(typeof(Bot).Assembly);
-        commandsExtension.AddProcessor(textCommandProcessor);
-        commandsExtension.AddCommands(typeof(Bot).Assembly);
-        commandsExtension.CommandExecuted += OnCommandsExtensionOnCommandExecuted;
-        commandsExtension.CommandErrored += OnCommandError;
-        Client.UseVoiceNext(new VoiceNextConfiguration { AudioFormat = AudioFormat.Default });
-        var interactivityConfiguration = new InteractivityConfiguration
-        {
-            Timeout = TimeSpan.FromMinutes(2)
-        };
-        Interactivity = Client.UseInteractivity(interactivityConfiguration);
+ 
+
         await Client.ConnectAsync();
     }
 
@@ -300,10 +302,7 @@ public static class Bot
             var stopwatch = new Stopwatch();
             Console.WriteLine("Making all users unoccupied...");
             stopwatch.Start();
-            await ctx.UserData
-                .ExecuteUpdateAsync(i => i.SetProperty(j => j.IsOccupied,
-                    _ => false));
-
+            await ctx.UserData.ExecuteUpdateAsync(i => i.SetProperty(j => j.IsOccupied, _ => false));
             Console.WriteLine("made all users unoccupied!");
         }
 

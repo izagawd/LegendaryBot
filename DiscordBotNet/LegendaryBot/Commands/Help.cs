@@ -19,10 +19,11 @@ public class Help : GeneralCommandClass
 
     private static void RefreshCommandsCategoryCache()
     {
-        if ((Bot.Client.GetCommandsExtension()?.Commands.Count).GetValueOrDefault(0) <= 0)
+        var commandsExtension = Bot.Client.ServiceProvider.GetRequiredService<CommandsExtension>();
+        if (commandsExtension.Commands.Count <= 0)
             throw new Exception("no command has been registered yet");
         _commandsThatDoesShit = [];
-        foreach (var i in Bot.Client.GetCommandsExtension()!.Commands.Values)
+        foreach (var i in commandsExtension.Commands.Values)
             if (i.Method is null)
             {
                 foreach (var j in i.Subcommands)
@@ -52,7 +53,7 @@ public class Help : GeneralCommandClass
     public static DiscordEmbedBuilder? GenerateEmbedForCommandFailure(string cmd)
     {
         var splitted = cmd.Split(' ');
-        if (!Bot.Client.GetCommandsExtension()!.Commands.TryGetValue(splitted[0], out var gottenCommand)) return null;
+        if (!Bot.Client.ServiceProvider.GetRequiredService<CommandsExtension>()!.Commands.TryGetValue(splitted[0], out var gottenCommand)) return null;
 
         if (splitted.Length > 1)
         {

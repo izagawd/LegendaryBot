@@ -46,7 +46,9 @@ public static class Website
     {
         services.AddRazorPages();
         services.AddRazorComponents()
-            .AddInteractiveServerComponents();
+            .AddInteractiveServerComponents()
+            .AddInteractiveWebAssemblyComponents();
+            
 
         services.AddDbContext<PostgreSqlContext>();
         services.AddSession(i => { i.IdleTimeout = TimeSpan.MaxValue; }
@@ -130,7 +132,8 @@ public static class Website
         app.UseAuthorization();
 
         app.MapRazorComponents<App>()
-            .AddInteractiveServerRenderMode();
+            .AddInteractiveServerRenderMode()
+            .AddInteractiveWebAssemblyRenderMode();
 
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

@@ -8,6 +8,7 @@ using DiscordBotNet.LegendaryBot.Entities.Items;
 using DiscordBotNet.LegendaryBot.Rewards;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -105,7 +106,8 @@ public class Begin : GeneralCommandClass
                 .AddComponents((IEnumerable<DiscordActionRowComponent>)
                     [new DiscordActionRowComponent([_askForName]), new DiscordActionRowComponent([_askForGender])])
                 .WithCustomId(modalId));
-        var done = await ctx.Client.GetInteractivity()
+        var done = await ctx.Client.ServiceProvider
+            .GetService<InteractivityExtension>()
             .WaitForModalAsync(modalId,
                 ctx.User, new TimeSpan(0, 5, 0));
         if (done.TimedOut) return;
