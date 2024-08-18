@@ -3,15 +3,13 @@
 
 @using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 @using DiscordBotNet.WebsiteStuff.Components.Navigation
-@using DSharpPlus.Entities
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.EntityFrameworkCore
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject PostgreSqlContext DbContext
 @attribute [Authorize]
-@rendermode InteractiveServer
-@inject IJSRuntime JS
+
 @code{
 
     private Character[]? CharacterCollection;
@@ -20,10 +18,7 @@
 
     private string _nameFilter = string.Empty;
 
-    protected override  async Task OnAfterRenderAsync(bool firstRender)
-    {
 
-    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -73,7 +68,6 @@
         UsingCharacterCollection = theEnumerable.ToArray();
     }
 
-  
     private void FilterWithName(ChangeEventArgs eventArgs)
     {
         _nameFilter = eventArgs.Value?.ToString();
@@ -123,9 +117,8 @@ margin-left: 30px">
 
 
 </Navigation>
-@if (true)
-{
-    <script>
+
+<script>
 
     var characterSel =document.querySelectorAll('.character-to-display');
     var totalCharacters = [
@@ -190,5 +183,3 @@ margin-left: 30px">
     
 
 </script>
-}
-
