@@ -36,9 +36,9 @@ public static class Bot
     private const int MessagesTillExecution = 30;
     private const float MessageCoolDown = 1.5f;
 
-    public const string BotTokenToPathUse = UseTestDatabaseAndBot ? "TestBotToken" : "BotToken";
-    public const string DatabaseUrlPathToUse = UseTestDatabaseAndBot ? "LocalConnectionString" : "ConnectionString";
-    public const bool UseTestDatabaseAndBot = true;
+    public const string BotTokenToPathUse = IsTesting ? "TestBotToken" : "BotToken";
+    public const string DatabaseUrlPathToUse = IsTesting ? "LocalConnectionString" : "ConnectionString";
+    public const bool IsTesting = true;
 
     /// <summary>
     ///     This is my discord user Id because it's too long to memorize
