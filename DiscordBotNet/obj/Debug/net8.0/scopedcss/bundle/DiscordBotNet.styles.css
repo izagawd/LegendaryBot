@@ -1,3 +1,69 @@
+/* _content/DiscordBotNet/WebsiteStuff/Components/BlessingTile.razor.rz.scp.css */
+.image-box[b-1xqegj86i4] {
+
+    border-radius: 10px; /* Controls the curvature of the edges */
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
+    background-color: #f0f0f0; /* Optional: adds a background color */
+}
+
+.image-box img[b-1xqegj86i4] {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px; /* Match this to the box's border-radius */
+}
+
+p[b-1xqegj86i4] {
+    margin-left: 10px;
+    font-weight: bold;
+    margin-bottom: 0; /* Reduce space between paragraphs */
+    font-size: 20px; /* Reduce paragraph font size */
+}
+/* _content/DiscordBotNet/WebsiteStuff/Components/CharacterTile.razor.rz.scp.css */
+.image-box[b-l36tcekeew] {
+
+    border-radius: 10px; /* Controls the curvature of the edges */
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
+    background-color: #f0f0f0; /* Optional: adds a background color */
+}
+
+.image-box img[b-l36tcekeew] {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px; /* Match this to the box's border-radius */
+}
+
+p[b-l36tcekeew] {
+    margin-left: 10px;
+    font-weight: bold;
+    margin-bottom: 0; /* Reduce space between paragraphs */
+    font-size: 20px; /* Reduce paragraph font size */
+}
+/* _content/DiscordBotNet/WebsiteStuff/Components/GearTile.razor.rz.scp.css */
+.image-box[b-unkrzjxup1] {
+
+    border-radius: 10px; /* Controls the curvature of the edges */
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
+    background-color: #f0f0f0; /* Optional: adds a background color */
+}
+
+.image-box img[b-unkrzjxup1] {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px; /* Match this to the box's border-radius */
+}
+
+p[b-unkrzjxup1] {
+    margin-left: 10px;
+    font-weight: bold;
+    margin-bottom: 0; /* Reduce space between paragraphs */
+    font-size: 20px; /* Reduce paragraph font size */
+}
 /* _content/DiscordBotNet/WebsiteStuff/Components/Navigation/Navigation.razor.rz.scp.css */
 .page[b-ho4t6m66vw] {
     position: relative;
@@ -202,21 +268,30 @@ main[b-ho4t6m66vw] {
     }
 }
 /* _content/DiscordBotNet/WebsiteStuff/Pages/CharacterInfo/CharacterInfo.razor.rz.scp.css */
-/* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/Characters.razor.rz.scp.css */
-.character-to-display[b-aqvrl2yjxd] {
+.gear-equipped-tile[b-ye6fqlerfl]{
+    margin-bottom: 30px;
+}
+.collection-class[b-ye6fqlerfl]{
+    background-color: gray; overflow: auto;
+    width: 200px;
+    height: 100vh;
+}
+
+/* _content/DiscordBotNet/WebsiteStuff/Pages/Characters.razor.rz.scp.css */
+.character-to-display[b-bn22d621kj] {
 
     margin-right: 30px;
     margin-bottom: 30px;
     width: fit-content;
 }
 
-.some-para[b-aqvrl2yjxd] {
+.some-para[b-bn22d621kj] {
     margin-left: 30px;
     font-size: 20px;
     align-self: center;
 }
 
-.name-filter[b-aqvrl2yjxd] {
+.name-filter[b-bn22d621kj] {
     font-size: 30px;
     border-radius: 7px;
     border: 0.5px solid;
@@ -226,7 +301,7 @@ main[b-ho4t6m66vw] {
     height: 66%;
 }
 
-.filterer[b-aqvrl2yjxd] {
+.filterer[b-bn22d621kj] {
 
 
     top: 0;
@@ -240,7 +315,7 @@ main[b-ho4t6m66vw] {
 
 }
 
-.characters-container[b-aqvrl2yjxd] {
+.characters-container[b-bn22d621kj] {
     display: flex;
     flex-wrap: wrap;
     max-width: fit-content;
@@ -250,48 +325,4 @@ main[b-ho4t6m66vw] {
     overflow: auto;
 
     height: 100vh;
-}
-/* _content/DiscordBotNet/WebsiteStuff/Pages/Characters/CharacterTile.razor.rz.scp.css */
-.image-box[b-sgaogkfw2b] {
-
-    border-radius: 10px; /* Controls the curvature of the edges */
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
-    background-color: #f0f0f0; /* Optional: adds a background color */
-}
-
-.image-box img[b-sgaogkfw2b] {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 10px; /* Match this to the box's border-radius */
-}
-
-p[b-sgaogkfw2b] {
-    margin-left: 10px;
-    font-weight: bold;
-    margin-bottom: 0; /* Reduce space between paragraphs */
-    font-size: 20px; /* Reduce paragraph font size */
-}
-/* _content/DiscordBotNet/WebsiteStuff/Pages/Gears/GearTile.razor.rz.scp.css */
-.image-box[b-ec2uajycin] {
-
-    border-radius: 10px; /* Controls the curvature of the edges */
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
-    background-color: #f0f0f0; /* Optional: adds a background color */
-}
-
-.image-box img[b-ec2uajycin] {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 10px; /* Match this to the box's border-radius */
-}
-
-p[b-ec2uajycin] {
-    margin-left: 10px;
-    font-weight: bold;
-    margin-bottom: 0; /* Reduce space between paragraphs */
-    font-size: 20px; /* Reduce paragraph font size */
 }

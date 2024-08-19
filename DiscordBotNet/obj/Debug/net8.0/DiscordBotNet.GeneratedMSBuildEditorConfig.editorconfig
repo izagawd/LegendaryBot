@@ -43,6 +43,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXF9JbXBvcnRzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Components/BlessingTile.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXENvbXBvbmVudHNcQmxlc3NpbmdUaWxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-1xqegj86i4
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Components/CharacterTile.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXENvbXBvbmVudHNcQ2hhcmFjdGVyVGlsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-l36tcekeew
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Components/GearTile.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXENvbXBvbmVudHNcR2VhclRpbGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-unkrzjxup1
+
 [C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Components/Navigation/Navigation.razor]
 build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXENvbXBvbmVudHNcTmF2aWdhdGlvblxOYXZpZ2F0aW9uLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-ho4t6m66vw
@@ -55,14 +67,6 @@ build_metadata.AdditionalFiles.CssScope = b-c0ypf63qhl
 build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXENoYXJhY3RlckluZm9cQ2hhcmFjdGVySW5mby5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-ye6fqlerfl
 
-[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Characters/Characters.razor]
-build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXENoYXJhY3RlcnNcQ2hhcmFjdGVycy5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-aqvrl2yjxd
-
-[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Characters/CharacterTile.razor]
-build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXENoYXJhY3RlcnNcQ2hhcmFjdGVyVGlsZS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-sgaogkfw2b
-
-[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Gears/GearTile.razor]
-build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXEdlYXJzXEdlYXJUaWxlLnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-ec2uajycin
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/DiscordBotNet/WebsiteStuff/Pages/Characters.razor]
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXENoYXJhY3RlcnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-bn22d621kj

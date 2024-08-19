@@ -199,10 +199,11 @@ C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\DiscordBotNet.genruntimeconfig.cache
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\ref\DiscordBotNet.dll
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Components\Navigation\NavMenu.razor.rz.scp.css
-C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\Characters\Characters.razor.rz.scp.css
-C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\CharacterInfo\CharacterInfo.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\DiscordBotNet.staticwebassets.endpoints.json
-C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\Characters\CharacterTile.razor.rz.scp.css
-C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\Gears\GearTile.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\staticwebassets\msbuild.DiscordBotNet.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Components\CharacterTile.razor.rz.scp.css
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Components\GearTile.razor.rz.scp.css
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\Characters.razor.rz.scp.css
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\CharacterInfo\CharacterInfo.razor.rz.scp.css
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Components\BlessingTile.razor.rz.scp.css

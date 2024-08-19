@@ -101,7 +101,7 @@ EXECUTE FUNCTION {functionName}();
 
     public async Task ResetDatabaseAsync()
     {
-        if (!Bot.UseTestDatabaseAndBot)
+        if (!Bot.IsTesting)
             throw new Exception("Cannot reset database. you are on the main server right now");
         await Database.EnsureDeletedAsync();
         await Database.EnsureCreatedAsync();

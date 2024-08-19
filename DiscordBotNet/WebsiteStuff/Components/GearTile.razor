@@ -4,6 +4,7 @@
 @code {
     [Parameter] public int Size { get; set; } = 200;
     [Parameter] public Gear? Gear { get; set; }
+    [Parameter] public Type? SupposedGearType { get; set; }
 }
 
 <div>
@@ -25,7 +26,14 @@
                 break;
         }
     }
-    <img src="@Gear?.ImageUrl" style=" background-color: @color;" width="@Size" height="@Size" class="image-box"/>
-    <p>@Gear?.Name</p>
+    @code
+
+    {
+
+    }
+<img src="@Gear?.ImageUrl" style=" background-color: @color;" width="@Size" height="@Size" class="image-box"/>
+    <p>@(Gear?.Name ?? TypesFunction.GetDefaultObjectsAndSubclasses<Gear>().FirstOrDefault(i => i.GetType() == SupposedGearType)?.Name
+)</p>
     <p>Number: @Gear?.Number</p>
+
 </div>
