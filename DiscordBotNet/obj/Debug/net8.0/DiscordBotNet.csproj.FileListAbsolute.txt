@@ -207,3 +207,13 @@ C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\Characters.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\CharacterInfo\CharacterInfo.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\obj\Debug\net8.0\scopedcss\WebsiteStuff\Components\BlessingTile.razor.rz.scp.css
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\BasicFunctions.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\PublicInfo.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\BasicFunctions.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\PublicInfo.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\DatabaseManagement.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\DiscordBot.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\DiscordBot.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\DatabaseManagement.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\Entities.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\Entities.pdb

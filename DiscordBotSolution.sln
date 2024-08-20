@@ -2,6 +2,16 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBotNet", "DiscordBotNet\DiscordBotNet.csproj", "{92DE0F58-0ABD-4204-9534-F1100901B50F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicFunctions", "BasicFunctions\BasicFunctions.csproj", "{79B90897-3AAD-4784-8A1C-243D127CE2AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicInfo", "PublicInfo\PublicInfo.csproj", "{7331CFD9-5E52-474D-B851-80FB37B58B12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot", "DiscordBot\DiscordBot.csproj", "{97500B8A-322F-467C-8610-9856FC332BB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseManagement", "DatabaseManagement\DatabaseManagement.csproj", "{4508BF40-C385-41D1-945D-15D92312E343}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{5D4C46E1-CFB3-428E-A9F5-B7BC2F51200D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +22,25 @@ Global
 		{92DE0F58-0ABD-4204-9534-F1100901B50F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92DE0F58-0ABD-4204-9534-F1100901B50F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92DE0F58-0ABD-4204-9534-F1100901B50F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79B90897-3AAD-4784-8A1C-243D127CE2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79B90897-3AAD-4784-8A1C-243D127CE2AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79B90897-3AAD-4784-8A1C-243D127CE2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79B90897-3AAD-4784-8A1C-243D127CE2AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7331CFD9-5E52-474D-B851-80FB37B58B12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7331CFD9-5E52-474D-B851-80FB37B58B12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7331CFD9-5E52-474D-B851-80FB37B58B12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7331CFD9-5E52-474D-B851-80FB37B58B12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97500B8A-322F-467C-8610-9856FC332BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97500B8A-322F-467C-8610-9856FC332BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97500B8A-322F-467C-8610-9856FC332BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97500B8A-322F-467C-8610-9856FC332BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4508BF40-C385-41D1-945D-15D92312E343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4508BF40-C385-41D1-945D-15D92312E343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4508BF40-C385-41D1-945D-15D92312E343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4508BF40-C385-41D1-945D-15D92312E343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D4C46E1-CFB3-428E-A9F5-B7BC2F51200D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D4C46E1-CFB3-428E-A9F5-B7BC2F51200D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D4C46E1-CFB3-428E-A9F5-B7BC2F51200D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D4C46E1-CFB3-428E-A9F5-B7BC2F51200D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

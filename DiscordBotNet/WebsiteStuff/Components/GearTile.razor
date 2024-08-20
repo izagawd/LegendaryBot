@@ -1,5 +1,6 @@
-@using DiscordBotNet.LegendaryBot
-@using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears
+@using BattleManagemen.LegendaryBot
+@using Entities.LegendaryBot
+@using Entities.LegendaryBot.Entities.BattleEntities.Gears
 
 @code {
     [Parameter] public int Size { get; set; } = 200;
@@ -26,14 +27,18 @@
                 break;
         }
     }
+
     @code
 
     {
 
     }
-<img src="@Gear?.ImageUrl" style=" background-color: @color;" width="@Size" height="@Size" class="image-box"/>
-    <p>@(Gear?.Name ?? TypesFunction.GetDefaultObjectsAndSubclasses<Gear>().FirstOrDefault(i => i.GetType() == SupposedGearType)?.Name
-)</p>
+
+    <img src="@Gear?.ImageUrl" style=" background-color: @color;" width="@Size" height="@Size" class="image-box"/>
+    <p>
+        @(Gear?.Name ?? TypesFunction.GetDefaultObjectsAndSubclasses<Gear>().FirstOrDefault(i => i.GetType() == SupposedGearType)?.Name
+        )
+    </p>
     <p>Number: @Gear?.Number</p>
 
 </div>

@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Security.Claims;
 using AspNet.Security.OAuth.Discord;
-using DiscordBotNet.Database;
+using DatabaseManagement;
 using DiscordBotNet.WebsiteStuff;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -47,7 +47,7 @@ public static class Website
         services.AddRazorPages();
         services.AddRazorComponents()
             .AddInteractiveServerComponents();
-            
+
 
         services.AddDbContext<PostgreSqlContext>();
         services.AddSession(i => { i.IdleTimeout = TimeSpan.MaxValue; }

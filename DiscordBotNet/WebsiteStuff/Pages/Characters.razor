@@ -1,41 +1,45 @@
 @page "/characters"
-@using DiscordBotNet.Database
-@using DiscordBotNet.LegendaryBot
-@using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters
-
-@rendermode InteractiveServer
-@using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
+@using BattleManagemen.LegendaryBot
+@using DatabaseManagement
+@using DiscordBotNet.WebsiteStuff.Components
 @using DiscordBotNet.WebsiteStuff.Components.Navigation
+@using Entities.LegendaryBot
+@using Entities.LegendaryBot.Entities.BattleEntities.Characters
+@using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.EntityFrameworkCore
-@using DiscordBotNet.WebsiteStuff.Components
+
+@rendermode InteractiveServer
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject PostgreSqlContext DbContext
 @attribute [Authorize]
+
 @code{
-    
+
     private class CharacterPageDto
     {
-         public string Name { get; set; }
-         public int Number { get; set; }
+        public string Name { get; set; }
+        public int Number { get; set; }
         public Rarity Rarity { get; set; }
         public string ImageUrl { get; set; }
-         public int Level { get; set; }
+        public int Level { get; set; }
     }
+
     private CharacterPageDto[]? CharacterCollection;
     private CharacterPageDto[]? UsingCharacterCollection;
     private string _nameFilter = string.Empty;
     private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
+
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         var discordId = user.GetDiscordUserId();
-        CharacterCollection  = await DbContext.Characters
+        CharacterCollection = await DbContext.Characters
             .AsNoTrackingWithIdentityResolution()
             .Where(i => i.UserData.DiscordId == discordId)
-            .Select(i => new CharacterPageDto()
+            .Select(i => new CharacterPageDto
             {
                 ImageUrl = i.TypeId == PlayerTypeId ? Player.GetImageUrl(i.UserData.Gender) : Character.GetDefaultCharacterFromTypeId(i.TypeId).ImageUrl,
                 Level = i.Level,
@@ -46,9 +50,10 @@
             .ToArrayAsync();
         RefreshFilters();
     }
+
     private void RefreshFilters()
     {
-        if(CharacterCollection is null)
+        if (CharacterCollection is null)
             return;
         var theEnumerable = CharacterCollection
             .Where(i => i.Name.ToLower().Contains(_nameFilter));
@@ -84,12 +89,11 @@
         reverseOrder = (bool)eventArgs.Value!;
         RefreshFilters();
     }
+
     public const string initialSorting = "level";
     public string SortingMethod = initialSorting;
-    public bool reverseOrder = false;
+    public bool reverseOrder;
 }
-
-
 
 
 <Navigation>
@@ -103,7 +107,7 @@ margin-left: 30px">
             <option value="name">Name</option>
         </select>
         <p class="some-para">Reverse Order</p>
-        <input type="checkbox" style="width:25px; height:25px; align-self: center; margin-left: 30px;" value="@reverseOrder" 
+        <input type="checkbox" style="width:25px; height:25px; align-self: center; margin-left: 30px;" value="@reverseOrder"
                @onchange="ReverseOrder"/>
     </div>
 

@@ -268,11 +268,13 @@ main[b-ho4t6m66vw] {
     }
 }
 /* _content/DiscordBotNet/WebsiteStuff/Pages/CharacterInfo/CharacterInfo.razor.rz.scp.css */
-.gear-equipped-tile[b-ye6fqlerfl]{
+.gear-equipped-tile[b-ye6fqlerfl] {
     margin-bottom: 30px;
 }
-.collection-class[b-ye6fqlerfl]{
-    background-color: gray; overflow: auto;
+
+.collection-class[b-ye6fqlerfl] {
+    background-color: gray;
+    overflow: auto;
     width: 200px;
     height: 100vh;
 }

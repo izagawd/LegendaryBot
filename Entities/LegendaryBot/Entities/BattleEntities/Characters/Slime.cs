@@ -1,0 +1,62 @@
+﻿using BasicFunctionality;
+using Entities.LegendaryBot.Moves;
+using Entities.LegendaryBot.Results;
+using Entities.LegendaryBot.StatusEffects;
+using Character = Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+
+namespace Entities.LegendaryBot.Entities.BattleEntities.Characters;
+
+using Character = Character;
+
+public class SlimeBodySlam : BasicAttack
+{
+    public SlimeBodySlam(Character user) : base(user)
+    {
+    }
+
+    public override string Name => "Slime Body Slam";
+
+    public override string GetDescription(Character character)
+    {
+        return "Slams it's body on the enemy, with a 10% chance to inflict poison";
+    }
+
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
+        out AttackTargetType attackTargetType, out string? text)
+    {
+        target.Damage(new DamageArgs(User.Attack * 1.7f, new MoveDamageSource(moveUsageContext))
+        {
+            ElementToDamageWith = User.Element,
+            CriticalChance = User.CriticalChance,
+            CriticalDamage = User.CriticalDamage,
+            DamageText = $"{User.NameWithAlphabet} slams at {target.NameWithAlphabet} and dealt $ damage!"
+        });
+        if (BasicFunctions.RandomChance(10))
+            target.AddStatusEffect(new Poison(User) { Duration = 1 }, User.Effectiveness);
+        attackTargetType = AttackTargetType.SingleTarget;
+
+        text = "Slime body slam!";
+    }
+}
+
+public class Slime : Character
+{
+    public Slime()
+    {
+        BasicAttack = new SlimeBodySlam(this);
+    }
+
+    public override string Name => "Slime";
+    protected override float BaseSpeedMultiplier => 0.8f;
+    protected override float BaseMaxHealthMultiplier => 0.7f;
+    protected override float BaseAttackMultiplier => 0.4f;
+
+
+    public override Rarity Rarity => Rarity.TwoStar;
+
+    public override int TypeId
+    {
+        get => 7;
+        protected init { }
+    }
+}

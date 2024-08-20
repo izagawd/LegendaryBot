@@ -1,21 +1,20 @@
 @page "/character-info/{CharacterNumber:int}"
 @using System.Security.Claims
-@using DiscordBotNet.Database
-@using DiscordBotNet.Extensions
-@using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Blessings
-@using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
-@using DiscordBotNet.LegendaryBot.Entities.BattleEntities.Gears
+@using DatabaseManagement
+@using DiscordBotNet.WebsiteStuff.Components
 @using DiscordBotNet.WebsiteStuff.Components.Navigation
-
+@using Entities.LegendaryBot.Entities.BattleEntities.Blessings
+@using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
+@using Entities.LegendaryBot.Entities.BattleEntities.Gears
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.EntityFrameworkCore
-@using DiscordBotNet.WebsiteStuff.Components
 
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @rendermode InteractiveServer
 @inject PostgreSqlContext DbContext
 
 @code {
+
     private enum DisplayType : byte
     {
         None,
@@ -29,14 +28,15 @@
     private ClaimsPrincipal user;
     public Character Character { get; set; }
 
-    public Gear[]?  TotalGears { get; set; }
-    public Blessing[]?  TotalBlessings { get; set; }
+    public Gear[]? TotalGears { get; set; }
+    public Blessing[]? TotalBlessings { get; set; }
 
     public IEnumerable<Gear>? NonEquippedGear => TotalGears?.Except(Character.Gears);
 
     public IEnumerable<Blessing>? NonEquippedBlessings => TotalBlessings?.Except([Character.Blessing!]);
     public object? DraggedItem;
-    public async Task OnDragStart( object? draggedObject, Type supposedType)
+
+    public async Task OnDragStart(object? draggedObject, Type supposedType)
     {
         DraggedItem = draggedObject;
         if (draggedObject is Gear || supposedType.IsAssignableTo(typeof(Gear)))
@@ -46,21 +46,21 @@
                 TotalGears = await DbContext.Gears.Where(i => i.UserDataId == Character.UserDataId)
                     .ToArrayAsync();
             }
+
             displayType = DisplayType.Gears;
-        } else if (draggedObject is Blessing || supposedType.IsAssignableTo(typeof(Blessing)))
+        }
+        else if (draggedObject is Blessing || supposedType.IsAssignableTo(typeof(Blessing)))
         {
             if (TotalBlessings is null)
                 TotalBlessings = await DbContext.Blessings.Where(i => i.UserDataId == Character.UserDataId)
                     .ToArrayAsync();
             displayType = DisplayType.Blessings;
         }
-
     }
 
 
     protected override async Task OnInitializedAsync()
     {
-        
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         user = authState.User;
 
@@ -78,12 +78,12 @@
 
 
 <Navigation>
+
     @code
 
     {
         private async Task ReplaceGear(Gear? gearToReplace, Type slotType)
         {
-
             if (DraggedItem is Gear gear && gear.GetType() == slotType)
             {
                 Character.Gears.Remove(gearToReplace);
@@ -92,7 +92,8 @@
             }
         }
     }
-@if (Character is not null)
+
+    @if (Character is not null)
     {
         <div style="display: flex">
             <div style="  max-width: fit-content;
@@ -103,28 +104,29 @@
                         foreach (var i in (Type[]) [typeof(Weapon), typeof(Helmet), typeof(Armor)])
                         {
                             var gear = Character.Gears.FirstOrDefault(j => j.GetType() == i);
-                            <div ondragover="event.preventDefault();" @ondrop="() => ReplaceGear(gear,i)"  class="gear-equipped-tile" @ondragstart="args => 
-                            OnDragStart(gear, typeof(Gear))">
-                                <GearTile SupposedGearType="i"  Gear="gear"></GearTile>
+                            <div ondragover="event.preventDefault();" @ondrop="() => ReplaceGear(gear, i)" class="gear-equipped-tile" @ondragstart="args => OnDragStart(gear, typeof(Gear))">
+                                <GearTile SupposedGearType="i" Gear="gear"></GearTile>
                             </div>
                         }
                     }
                 </div>
                 <div style="margin-left: 100px; margin-top: 200px; margin-right: 100px">
                     <CharacterTile Level="Character.Level" Name=@Character.Name Number="Character.Number" Rarity="Character.Rarity"
-                                   ImageUrl=@Character.ImageUrl></CharacterTile>
+                                   ImageUrl=@Character.ImageUrl>
+                    </CharacterTile>
                 </div>
                 <div>
                     @{
                         foreach (var i in (Type[]) [typeof(Necklace), typeof(Ring), typeof(Boots)])
                         {
                             var gear = Character.Gears.FirstOrDefault(j => j.GetType() == i);
-                            <div  ondragover="event.preventDefault();" @ondrop="() => ReplaceGear(gear,i)"  @ondragstart="args => OnDragStart(gear, typeof(Gear))" class="gear-equipped-tile">
-                                <GearTile SupposedGearType="i"  Gear="gear"></GearTile>
+                            <div ondragover="event.preventDefault();" @ondrop="() => ReplaceGear(gear, i)" @ondragstart="args => OnDragStart(gear, typeof(Gear))" class="gear-equipped-tile">
+                                <GearTile SupposedGearType="i" Gear="gear"></GearTile>
                             </div>
                         }
                     }
                 </div>
+
                 @code
 
                 {
@@ -135,7 +137,6 @@
                             Character.Blessing = blessing;
                             await DbContext.SaveChangesAsync();
                         }
-               
                     }
                 }
 
@@ -157,52 +158,51 @@
                     }
                 }
             }
+
             <div style="margin-right: 100px;" ondragover="event.preventDefault()"
                  @ondrop="ReplaceBlessingAsync" @ondragstart="_ => OnDragStart(Character.Blessing, typeof(Blessing))">
                 <BlessingTile Blessing="Character.Blessing"></BlessingTile>
             </div>
             <div @ondrop="UnequipAsync" ondragover="event.preventDefault()" class="collection-class">
+
                 @code
 
-                    {
-                private async Task UnequipAsync()
                 {
-                    if (DraggedItem is Gear gear && gear.Character == Character)
+                    private async Task UnequipAsync()
                     {
-                    Character.Gears.Remove(gear);
-                    await DbContext.SaveChangesAsync();
-                    } else if (DraggedItem is Blessing blessing && blessing.Character == Character)
-                    {
-                        Character.Blessing = null;
-                        await DbContext.SaveChangesAsync();
+                        if (DraggedItem is Gear gear && gear.Character == Character)
+                        {
+                            Character.Gears.Remove(gear);
+                            await DbContext.SaveChangesAsync();
+                        }
+                        else if (DraggedItem is Blessing blessing && blessing.Character == Character)
+                        {
+                            Character.Blessing = null;
+                            await DbContext.SaveChangesAsync();
+                        }
                     }
-
-
                 }
-                }
+
                 @if (displayType == DisplayType.Gears)
                 {
                     @foreach (var i in NonEquippedGear)
                     {
-                   
                         <div @ondragstart="() => OnDragStart(i, typeof(Gear))">
                             <GearTile Gear="i"></GearTile>
                         </div>
-
                     }
-                } else if (displayType == DisplayType.Blessings)
+                }
+                else if (displayType == DisplayType.Blessings)
                 {
                     @foreach (var i in NonEquippedBlessings)
                     {
                         <div @ondragstart="() => OnDragStart(i, typeof(Blessing))">
                             <BlessingTile Blessing="i"></BlessingTile>
                         </div>
-
                     }
                 }
             </div>
         </div>
-
     }
 
 

@@ -1,0 +1,12 @@
+C:\Users\theiz\Documents\coding\DiscordBotSolution\PublicInfo\bin\Debug\net8.0\PublicInfo.deps.json
+C:\Users\theiz\Documents\coding\DiscordBotSolution\PublicInfo\bin\Debug\net8.0\PublicInfo.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\PublicInfo\bin\Debug\net8.0\PublicInfo.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\PublicInfo\obj\Debug\net8.0\PublicInfo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\theiz\Documents\coding\DiscordBotSolution\PublicInfo\obj\Debug\net8.0\PublicInfo.AssemblyInfoInputs.cache
+C:\Users\theiz\Documents\coding\DiscordBotSolution\PublicInfo\obj\Debug\net8.0\PublicInfo.AssemblyInfo.cs
+C:\Users\theiz\Documents\coding\DiscordBotSolution\PublicInfo\obj\Debug\net8.0\PublicInfo.csproj.CoreCompileInputs.cache
+C:\Users\theiz\Documents\coding\DiscordBotSolution\PublicInfo\obj\Debug\net8.0\PublicInfo.sourcelink.json
+C:\Users\theiz\Documents\coding\DiscordBotSolution\PublicInfo\obj\Debug\net8.0\PublicInfo.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\PublicInfo\obj\Debug\net8.0\refint\PublicInfo.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\PublicInfo\obj\Debug\net8.0\PublicInfo.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\PublicInfo\obj\Debug\net8.0\ref\PublicInfo.dll

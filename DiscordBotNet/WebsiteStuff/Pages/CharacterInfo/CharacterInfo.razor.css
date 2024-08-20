@@ -1,8 +1,10 @@
-.gear-equipped-tile{
+.gear-equipped-tile {
     margin-bottom: 30px;
 }
-.collection-class{
-    background-color: gray; overflow: auto;
+
+.collection-class {
+    background-color: gray;
+    overflow: auto;
     width: 200px;
     height: 100vh;
 }

@@ -774,23 +774,23 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\Team.css'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\DiscordBotNet.yp1zqzufx7.bundle.scp.css'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\DiscordBotNet.l68e3k5951.bundle.scp.css'))">
       <SourceType>Package</SourceType>
       <SourceId>DiscordBotNet</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/DiscordBotNet</BasePath>
-      <RelativePath>DiscordBotNet.yp1zqzufx7.bundle.scp.css</RelativePath>
+      <RelativePath>DiscordBotNet.l68e3k5951.bundle.scp.css</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>Reference</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ProjectBundle</AssetTraitValue>
-      <Fingerprint>yp1zqzufx7</Fingerprint>
-      <Integrity>dlnem+Zwfm9KDp2Gh7IWsHzYHwErgBIOtdHzrkEbdQ4=</Integrity>
+      <Fingerprint>l68e3k5951</Fingerprint>
+      <Integrity>E5xfzd9foxbZ44fbs4QHS6SxNQr97VxryyNPgCkSJ18=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\DiscordBotNet.yp1zqzufx7.bundle.scp.css'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\DiscordBotNet.l68e3k5951.bundle.scp.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico'))">
       <SourceType>Package</SourceType>
@@ -1452,8 +1452,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>ju8mx746cq</Fingerprint>
-      <Integrity>S9N9fGFGt0piUSdzF5SUX62wvr5Wdx1gW0/FyLYCiBw=</Integrity>
+      <Fingerprint>ny000v5jn9</Fingerprint>
+      <Integrity>3/A+1jjBGtULXrqZzmBeTvdhLy1GpWaOpw8pcKZHxhw=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\js\bootstrap.js'))</OriginalItemSpec>
@@ -1470,8 +1470,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>f6djh3l98o</Fingerprint>
-      <Integrity>iQlK3EogYK3LCl2CrGVczQH7t6fFj5yr3q2vaGTf5JU=</Integrity>
+      <Fingerprint>iqvqykbi7p</Fingerprint>
+      <Integrity>KoUwVIzw/4F1JtWq57vNwnQvbo4oKCTHPQhdmhkqBrI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\js\bootstrap.bundle.js'))</OriginalItemSpec>
@@ -1542,8 +1542,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>caxhzk37yp</Fingerprint>
-      <Integrity>PHomoY8p9x6zoqjBFjiNVwJ6lGxSROwwu98KxR81H1I=</Integrity>
+      <Fingerprint>0rkk7v32ai</Fingerprint>
+      <Integrity>DJmn/liRgVQSqf0X5MT6mzVyHXRG/oA8Zd/Ko/hTv9A=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\js\bootstrap.esm.js'))</OriginalItemSpec>

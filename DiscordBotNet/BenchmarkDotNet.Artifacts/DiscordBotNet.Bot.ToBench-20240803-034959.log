@@ -1,4 +1,0 @@
-// Validating benchmarks:
-// Benchmark ToBench.DoTheThing: DefaultJob
-//    * Benchmark ToBench.DoTheThing returns a deferred execution result (IEnumerable<Player>). You need to either change the method declaration to return a materialized result or consume it on your own. You can use .Consume() extension method to do that.
-
