@@ -5,7 +5,6 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>aspnet-BlazorApp1-3E2DC2CD-4FDA-43CB-BF2B-F93C686161A3</UserSecretsId>
-        <OutputType>Library</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
@@ -84,7 +83,6 @@
     <ItemGroup>
       <AdditionalFiles Include="WebsiteStuff\App.razor" />
       <AdditionalFiles Include="WebsiteStuff\Pages\CharacterInfo\CharacterInfo.razor" />
-      <AdditionalFiles Include="WebsiteStuff\Pages\Characters.razor" />
       <AdditionalFiles Include="WebsiteStuff\Pages\Error.razor" />
       <AdditionalFiles Include="WebsiteStuff\Pages\Gears\Gears.razor" />
       <AdditionalFiles Include="WebsiteStuff\Pages\Home\Home.razor" />

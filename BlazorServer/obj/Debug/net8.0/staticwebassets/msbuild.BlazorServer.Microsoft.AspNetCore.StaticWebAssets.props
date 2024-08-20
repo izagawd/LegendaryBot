@@ -612,23 +612,23 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\battle_images\status_effects\Stun.png'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\BlazorServer.h7kutcdcqh.bundle.scp.css'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\BlazorServer.xi6ycuqclh.bundle.scp.css'))">
       <SourceType>Package</SourceType>
       <SourceId>BlazorServer</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/BlazorServer</BasePath>
-      <RelativePath>BlazorServer.h7kutcdcqh.bundle.scp.css</RelativePath>
+      <RelativePath>BlazorServer.xi6ycuqclh.bundle.scp.css</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>Reference</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ProjectBundle</AssetTraitValue>
-      <Fingerprint>h7kutcdcqh</Fingerprint>
-      <Integrity>zX7JWpEkW1hV0MM4JbwPLmLbUcn5zxVZ51UN9YO0Uz8=</Integrity>
+      <Fingerprint>xi6ycuqclh</Fingerprint>
+      <Integrity>ibnWNiZSKk9vVBvPeu6AjMz89v5uoWtVcFGSxBp6K4o=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\BlazorServer.h7kutcdcqh.bundle.scp.css'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\BlazorServer.xi6ycuqclh.bundle.scp.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\bootstrap\bootstrap.min.css'))">
       <SourceType>Package</SourceType>

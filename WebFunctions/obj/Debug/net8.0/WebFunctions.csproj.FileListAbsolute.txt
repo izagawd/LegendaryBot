@@ -1,0 +1,12 @@
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebFunctions\bin\Debug\net8.0\WebFunctions.deps.json
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebFunctions\bin\Debug\net8.0\WebFunctions.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebFunctions\bin\Debug\net8.0\WebFunctions.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebFunctions\obj\Debug\net8.0\WebFunctions.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebFunctions\obj\Debug\net8.0\WebFunctions.AssemblyInfoInputs.cache
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebFunctions\obj\Debug\net8.0\WebFunctions.AssemblyInfo.cs
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebFunctions\obj\Debug\net8.0\WebFunctions.csproj.CoreCompileInputs.cache
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebFunctions\obj\Debug\net8.0\WebFunctions.sourcelink.json
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebFunctions\obj\Debug\net8.0\WebFunctions.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebFunctions\obj\Debug\net8.0\refint\WebFunctions.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebFunctions\obj\Debug\net8.0\WebFunctions.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebFunctions\obj\Debug\net8.0\ref\WebFunctions.dll

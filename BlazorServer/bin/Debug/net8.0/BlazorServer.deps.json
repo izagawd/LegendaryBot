@@ -136,7 +136,7 @@
         }
       },
       "Microsoft.AspNetCore.Components.Analyzers/8.0.8": {},
-      "Microsoft.AspNetCore.Components.Authorization/8.0.6": {
+      "Microsoft.AspNetCore.Components.Authorization/8.0.8": {
         "dependencies": {
           "Microsoft.AspNetCore.Authorization": "8.0.8",
           "Microsoft.AspNetCore.Components": "8.0.8"
@@ -144,7 +144,7 @@
         "runtime": {
           "lib/net8.0/Microsoft.AspNetCore.Components.Authorization.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.624.26909"
+            "fileVersion": "8.0.824.36908"
           }
         }
       },
@@ -190,15 +190,15 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Components.WebAssembly.Authentication/8.0.6": {
+      "Microsoft.AspNetCore.Components.WebAssembly.Authentication/8.0.8": {
         "dependencies": {
-          "Microsoft.AspNetCore.Components.Authorization": "8.0.6",
+          "Microsoft.AspNetCore.Components.Authorization": "8.0.8",
           "Microsoft.AspNetCore.Components.Web": "8.0.8"
         },
         "runtime": {
           "lib/net8.0/Microsoft.AspNetCore.Components.WebAssembly.Authentication.dll": {
-            "assemblyVersion": "8.0.6.0",
-            "fileVersion": "8.0.624.26909"
+            "assemblyVersion": "8.0.8.0",
+            "fileVersion": "8.0.824.36908"
           }
         }
       },
@@ -1138,7 +1138,9 @@
       "WebAssemblyApp/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Components.WebAssembly": "8.0.8",
-          "Microsoft.AspNetCore.Components.WebAssembly.Authentication": "8.0.6"
+          "Microsoft.AspNetCore.Components.WebAssembly.Authentication": "8.0.8",
+          "WebComponents": "1.0.0",
+          "WebFunctions": "1.0.0"
         },
         "runtime": {
           "WebAssemblyApp.dll": {
@@ -1153,6 +1155,14 @@
         },
         "runtime": {
           "WebComponents.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "WebFunctions/1.0.0": {
+        "runtime": {
+          "WebFunctions.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -1243,12 +1253,12 @@
       "path": "microsoft.aspnetcore.components.analyzers/8.0.8",
       "hashPath": "microsoft.aspnetcore.components.analyzers.8.0.8.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Components.Authorization/8.0.6": {
+    "Microsoft.AspNetCore.Components.Authorization/8.0.8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-2uNzQDPudD9wARV1Zw92gY+WcNV2zMzDW6wM+4Ax9hMeLfaSJQockQyyxjzt2VL0MOE06S14yknx4ApryMFYqA==",
-      "path": "microsoft.aspnetcore.components.authorization/8.0.6",
-      "hashPath": "microsoft.aspnetcore.components.authorization.8.0.6.nupkg.sha512"
+      "sha512": "sha512-1PISsw6JLsYb3gz4P/aitTMAOeasS0uQDvpwF9MsZlE1DcOYgM0U/RuP/SwzGGu5cAYHswL6X0A2qI/0b+cdzQ==",
+      "path": "microsoft.aspnetcore.components.authorization/8.0.8",
+      "hashPath": "microsoft.aspnetcore.components.authorization.8.0.8.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Components.Forms/8.0.8": {
       "type": "package",
@@ -1271,12 +1281,12 @@
       "path": "microsoft.aspnetcore.components.webassembly/8.0.8",
       "hashPath": "microsoft.aspnetcore.components.webassembly.8.0.8.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Components.WebAssembly.Authentication/8.0.6": {
+    "Microsoft.AspNetCore.Components.WebAssembly.Authentication/8.0.8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-BSL+kMb+KMLH11cdKPP7SwlwckcRnR6y8E8Xr1IuTxnnuuzkcg+meK4gu54ntsk2bR+QpNJSdaXdqDMT/uCQ9g==",
-      "path": "microsoft.aspnetcore.components.webassembly.authentication/8.0.6",
-      "hashPath": "microsoft.aspnetcore.components.webassembly.authentication.8.0.6.nupkg.sha512"
+      "sha512": "sha512-HV5B3MNwljB3jJVQ9wqsIJ4kOqvISB2WAnNdEiLdNCkRBQrKmaZIeHXI6KU2ujWjPfHqLj7P7gfv9q0s9oI4Uw==",
+      "path": "microsoft.aspnetcore.components.webassembly.authentication/8.0.8",
+      "hashPath": "microsoft.aspnetcore.components.webassembly.authentication.8.0.8.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Components.WebAssembly.Server/8.0.8": {
       "type": "package",
@@ -1822,6 +1832,11 @@
       "sha512": ""
     },
     "WebComponents/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WebFunctions/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

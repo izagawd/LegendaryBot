@@ -12,38 +12,24 @@ public static class Website
 {
 
 
-    public static string GetDiscordUserName(this ClaimsPrincipal user)
-    {
-        var claim = user.FindFirst(i => i.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name");
-        return claim?.Value!;
-    }
 
-    public static ulong GetDiscordUserId(this ClaimsPrincipal user)
+    public static async Task Main(string[] args)
     {
-        var claim = user.FindFirst(i =>
-            i.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
-        return ulong.Parse(claim!.Value);
+        await StartAsync(args);
     }
-
-    public static string GetDiscordUserAvatarUrl(this ClaimsPrincipal user)
-    {
-        var claim = user.FindFirst(i =>
-            i.Type == "urn:discord:avatar:url");
-        return claim?.Value!;
-    }
-
     public static void ConfigureServices(IServiceCollection services)
     {
         services.AddRazorPages();
         services.AddRazorComponents()
             .AddInteractiveServerComponents()
             .AddInteractiveWebAssemblyComponents();
-
+        services.AddScoped(i => new HttpClient(){BaseAddress = new Uri(PublicInfo.Information.DomainName)});
 
         services.AddDbContext<PostgreSqlContext>();
         services.AddSession(i => { i.IdleTimeout = TimeSpan.MaxValue; }
         );
 
+        
         services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;

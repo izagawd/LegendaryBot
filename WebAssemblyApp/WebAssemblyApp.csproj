@@ -10,7 +10,12 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.6"/>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="8.0.6"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="8.0.8" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\WebComponents\WebComponents.csproj" />
+      <ProjectReference Include="..\WebFunctions\WebFunctions.csproj" />
     </ItemGroup>
 
 </Project>

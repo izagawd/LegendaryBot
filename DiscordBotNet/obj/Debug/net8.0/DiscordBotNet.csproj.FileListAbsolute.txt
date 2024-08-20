@@ -307,3 +307,8 @@ C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\WebAssemblyApp.dll
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\BlazorServer.pdb
 C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\WebAssemblyApp.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\BlazorServer.deps.json
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\BlazorServer.runtimeconfig.json
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\BlazorServer.exe
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\WebFunctions.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\DiscordBotNet\bin\Debug\net8.0\WebFunctions.pdb

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ruygUWcMZGyVkUrSIs3XzgcCqreXJyxXmRFpR5/9yE1BijIOBYA2sESCSiscugYcZ7JNgzgLkpEqpSeSk55YqQ==",
+  "dgSpecHash": "CXQmexi5xUciu6ffp/YLcmlwkcKMNlOH4vPIUAmws5NolagYCXOOlCuF0NhtqnWgRaLhLsi8B0IxRYvTBSSJGg==",
   "success": true,
   "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DiscordBotNet\\DiscordBotNet.csproj",
   "expectedPackageFiles": [
@@ -25,11 +25,11 @@
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.8\\microsoft.aspnetcore.authorization.8.0.8.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.8\\microsoft.aspnetcore.components.8.0.8.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\8.0.8\\microsoft.aspnetcore.components.analyzers.8.0.8.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components.authorization\\8.0.6\\microsoft.aspnetcore.components.authorization.8.0.6.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components.authorization\\8.0.8\\microsoft.aspnetcore.components.authorization.8.0.8.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\8.0.8\\microsoft.aspnetcore.components.forms.8.0.8.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components.web\\8.0.8\\microsoft.aspnetcore.components.web.8.0.8.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\8.0.8\\microsoft.aspnetcore.components.webassembly.8.0.8.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.authentication\\8.0.6\\microsoft.aspnetcore.components.webassembly.authentication.8.0.6.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.authentication\\8.0.8\\microsoft.aspnetcore.components.webassembly.authentication.8.0.8.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.server\\8.0.8\\microsoft.aspnetcore.components.webassembly.server.8.0.8.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.6\\microsoft.aspnetcore.cryptography.internal.8.0.6.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.6\\microsoft.aspnetcore.cryptography.keyderivation.8.0.6.nupkg.sha512",

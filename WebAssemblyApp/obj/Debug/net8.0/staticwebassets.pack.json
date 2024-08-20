@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
     },
     {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebAssemblyApp.bundle.scp.css",
+      "PackagePath": "staticwebassets\\WebAssemblyApp.15gtlz91m6.bundle.scp.css"
+    },
+    {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\wwwroot\\appsettings.Development.json",
       "PackagePath": "staticwebassets\\appsettings.Development.json"
     },

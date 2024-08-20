@@ -174,11 +174,11 @@
           "buildTransitive/netstandard2.0/Microsoft.AspNetCore.Components.Analyzers.targets": {}
         }
       },
-      "Microsoft.AspNetCore.Components.Authorization/8.0.6": {
+      "Microsoft.AspNetCore.Components.Authorization/8.0.8": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Authorization": "8.0.6",
-          "Microsoft.AspNetCore.Components": "8.0.6"
+          "Microsoft.AspNetCore.Authorization": "8.0.8",
+          "Microsoft.AspNetCore.Components": "8.0.8"
         },
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.Components.Authorization.dll": {
@@ -251,11 +251,11 @@
           "build/net8.0/Microsoft.AspNetCore.Components.WebAssembly.props": {}
         }
       },
-      "Microsoft.AspNetCore.Components.WebAssembly.Authentication/8.0.6": {
+      "Microsoft.AspNetCore.Components.WebAssembly.Authentication/8.0.8": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Components.Authorization": "8.0.6",
-          "Microsoft.AspNetCore.Components.Web": "8.0.6"
+          "Microsoft.AspNetCore.Components.Authorization": "8.0.8",
+          "Microsoft.AspNetCore.Components.Web": "8.0.8"
         },
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.Components.WebAssembly.Authentication.dll": {
@@ -1838,7 +1838,9 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "Microsoft.AspNetCore.Components.WebAssembly": "8.0.6",
-          "Microsoft.AspNetCore.Components.WebAssembly.Authentication": "8.0.6"
+          "Microsoft.AspNetCore.Components.WebAssembly.Authentication": "8.0.8",
+          "WebComponents": "1.0.0",
+          "WebFunctions": "1.0.0"
         },
         "compile": {
           "bin/placeholder/WebAssemblyApp.dll": {}
@@ -1858,6 +1860,16 @@
         },
         "runtime": {
           "bin/placeholder/WebComponents.dll": {}
+        }
+      },
+      "WebFunctions/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/WebFunctions.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebFunctions.dll": {}
         }
       }
     }
@@ -2052,10 +2064,10 @@
         "microsoft.aspnetcore.components.analyzers.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Components.Authorization/8.0.6": {
-      "sha512": "2uNzQDPudD9wARV1Zw92gY+WcNV2zMzDW6wM+4Ax9hMeLfaSJQockQyyxjzt2VL0MOE06S14yknx4ApryMFYqA==",
+    "Microsoft.AspNetCore.Components.Authorization/8.0.8": {
+      "sha512": "1PISsw6JLsYb3gz4P/aitTMAOeasS0uQDvpwF9MsZlE1DcOYgM0U/RuP/SwzGGu5cAYHswL6X0A2qI/0b+cdzQ==",
       "type": "package",
-      "path": "microsoft.aspnetcore.components.authorization/8.0.6",
+      "path": "microsoft.aspnetcore.components.authorization/8.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2063,7 +2075,7 @@
         "THIRD-PARTY-NOTICES.txt",
         "lib/net8.0/Microsoft.AspNetCore.Components.Authorization.dll",
         "lib/net8.0/Microsoft.AspNetCore.Components.Authorization.xml",
-        "microsoft.aspnetcore.components.authorization.8.0.6.nupkg.sha512",
+        "microsoft.aspnetcore.components.authorization.8.0.8.nupkg.sha512",
         "microsoft.aspnetcore.components.authorization.nuspec"
       ]
     },
@@ -2114,10 +2126,10 @@
         "microsoft.aspnetcore.components.webassembly.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Components.WebAssembly.Authentication/8.0.6": {
-      "sha512": "BSL+kMb+KMLH11cdKPP7SwlwckcRnR6y8E8Xr1IuTxnnuuzkcg+meK4gu54ntsk2bR+QpNJSdaXdqDMT/uCQ9g==",
+    "Microsoft.AspNetCore.Components.WebAssembly.Authentication/8.0.8": {
+      "sha512": "HV5B3MNwljB3jJVQ9wqsIJ4kOqvISB2WAnNdEiLdNCkRBQrKmaZIeHXI6KU2ujWjPfHqLj7P7gfv9q0s9oI4Uw==",
       "type": "package",
-      "path": "microsoft.aspnetcore.components.webassembly.authentication/8.0.6",
+      "path": "microsoft.aspnetcore.components.webassembly.authentication/8.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2129,7 +2141,7 @@
         "buildTransitive/Microsoft.AspNetCore.Components.WebAssembly.Authentication.props",
         "lib/net8.0/Microsoft.AspNetCore.Components.WebAssembly.Authentication.dll",
         "lib/net8.0/Microsoft.AspNetCore.Components.WebAssembly.Authentication.xml",
-        "microsoft.aspnetcore.components.webassembly.authentication.8.0.6.nupkg.sha512",
+        "microsoft.aspnetcore.components.webassembly.authentication.8.0.8.nupkg.sha512",
         "microsoft.aspnetcore.components.webassembly.authentication.nuspec",
         "staticwebassets/AuthenticationService.js"
       ]
@@ -4355,6 +4367,11 @@
       "type": "project",
       "path": "../WebComponents/WebComponents.csproj",
       "msbuildProject": "../WebComponents/WebComponents.csproj"
+    },
+    "WebFunctions/1.0.0": {
+      "type": "project",
+      "path": "../WebFunctions/WebFunctions.csproj",
+      "msbuildProject": "../WebFunctions/WebFunctions.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4470,6 +4487,10 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.7, 8.0.7]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
             "version": "[8.0.7, 8.0.7]"
           },
           {

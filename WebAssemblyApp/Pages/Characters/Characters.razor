@@ -1,0 +1,129 @@
+@page "/characters"
+
+@using Microsoft.AspNetCore.Authorization
+@using WebComponents.Components.Navigation
+@using WebFunctions
+
+
+@inject HttpClient Http
+@rendermode InteractiveWebAssembly
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@attribute [Authorize]
+
+@code{
+
+
+
+    private CharacterPageDto[]? CharacterCollection;
+    private CharacterPageDto[]? UsingCharacterCollection;
+    private string _nameFilter = string.Empty;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
+        CharacterCollection = await Http.GetFromJsonAsync<CharacterPageDto[]>($"api/characters-collection?discordId={user.GetDiscordUserId()}");
+        UsingCharacterCollection = CharacterCollection;
+    }
+
+    private void RefreshFilters()
+    {
+        if (CharacterCollection is null)
+            return;
+        var theEnumerable = CharacterCollection
+            .Where(i => i.Name.ToLower().Contains(_nameFilter));
+        switch (SortingMethod)
+        {
+            case "name":
+                theEnumerable = theEnumerable.OrderBy(i => i.Name);
+                break;
+            case "level":
+                theEnumerable = theEnumerable.OrderBy(i => i.Level);
+                break;
+        }
+
+        if (reverseOrder)
+            theEnumerable = theEnumerable.Reverse();
+        UsingCharacterCollection = theEnumerable.ToArray();
+    }
+
+    private void FilterWithName(ChangeEventArgs eventArgs)
+    {
+        _nameFilter = ((string)eventArgs.Value!).ToLower();
+        RefreshFilters();
+    }
+
+    private void SelectChange(ChangeEventArgs eventArgs)
+    {
+        SortingMethod = (string)eventArgs.Value!;
+        RefreshFilters();
+    }
+
+    public void ReverseOrder(ChangeEventArgs eventArgs)
+    {
+        reverseOrder = (bool)eventArgs.Value!;
+        RefreshFilters();
+    }
+
+    public const string initialSorting = "level";
+    public string SortingMethod = initialSorting;
+    public bool reverseOrder;
+}
+
+
+<Navigation>
+    @if (OperatingSystem.IsBrowser())
+    {
+        <h1>BROWSER BITCH</h1>
+    }
+    <div class="filterer">
+
+        <input class="name-filter" type="text" @onchange="FilterWithName"/>
+        <p class="some-para">Sort By</p>
+        <select @onchange="SelectChange" name="Sort By" style="width: 100px; height:35px; align-self: center;
+margin-left: 30px">
+            <option value="level">Level</option>
+            <option value="name">Name</option>
+        </select>
+        <p class="some-para">Reverse Order</p>
+        <input type="checkbox" style="width:25px; height:25px; align-self: center; margin-left: 30px;" value="@reverseOrder"
+               @onchange="ReverseOrder"/>
+    </div>
+
+    @code{
+
+        private RenderFragment RenderCharacter(CharacterPageDto character)
+        {
+            return @<div class="character-to-display">
+
+
+                       <a href="/character-info/@character.Number">
+                           <img src="@character.ImageUrl" width="200" height="200" style=" background-color: @character.Color;" class="image-box"/>
+                       </a>
+
+                       <p class="character-image-p">@character.Name</p>
+                       <p class="character-image-p">Level: @character.Level </p>
+                       <p class="character-image-p">Number: @character.Number</p>
+                   </div>;
+
+
+        }
+
+    }
+
+    @{
+        if (UsingCharacterCollection is not null)
+        {
+            <div class="characters-container">
+                @foreach (var i in UsingCharacterCollection)
+                {
+                    @RenderCharacter(i)
+                    ;
+                }
+            </div>
+        }
+    }
+
+
+</Navigation>
