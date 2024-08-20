@@ -1,0 +1,16 @@
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\bin\Debug\net8.0\ImageFunctions.deps.json
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\bin\Debug\net8.0\ImageFunctions.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\bin\Debug\net8.0\ImageFunctions.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\bin\Debug\net8.0\PublicInfo.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\bin\Debug\net8.0\PublicInfo.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\obj\Debug\net8.0\ImageFunctions.csproj.AssemblyReference.cache
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\obj\Debug\net8.0\ImageFunctions.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\obj\Debug\net8.0\ImageFunctions.AssemblyInfoInputs.cache
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\obj\Debug\net8.0\ImageFunctions.AssemblyInfo.cs
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\obj\Debug\net8.0\ImageFunctions.csproj.CoreCompileInputs.cache
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\obj\Debug\net8.0\ImageFunctions.sourcelink.json
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\obj\Debug\net8.0\ImageFun.6E12A8AC.Up2Date
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\obj\Debug\net8.0\ImageFunctions.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\obj\Debug\net8.0\refint\ImageFunctions.dll
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\obj\Debug\net8.0\ImageFunctions.pdb
+C:\Users\theiz\Documents\coding\DiscordBotSolution\ImageFunctions\obj\Debug\net8.0\ref\ImageFunctions.dll
