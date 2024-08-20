@@ -10,8 +10,6 @@ namespace DiscordBotNet;
 
 public static class Website
 {
-    public const string DomainName = "https://localhost";
-
     public static async Task<string> RenderImageTagAsync(Image image)
     {
         if (image == null) throw new ArgumentNullException(nameof(image));
@@ -88,12 +86,12 @@ public static class Website
                 {
                     if (cert is not null && !cert.Verify())
                         return httpRequestMessage.RequestUri is not null
-                               && httpRequestMessage.RequestUri.ToString().Contains(DomainName);
+                               && httpRequestMessage.RequestUri.ToString().Contains(PublicInfo.Information.DomainName);
                     return cert is not null;
                 };
             using var webClient = new HttpClient(handler);
 
-            var checkingResponse = await webClient.GetAsync(DomainName);
+            var checkingResponse = await webClient.GetAsync(PublicInfo.Information.DomainName);
             return checkingResponse.IsSuccessStatusCode;
         }
         catch
@@ -138,6 +136,6 @@ public static class Website
 
         app.UseSession();
 
-        await app.RunAsync(DomainName);
+        await app.RunAsync(PublicInfo.Information.DomainName);
     }
 }

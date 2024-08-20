@@ -39,7 +39,7 @@ public class UserData : ICanBeLeveledUp
     public string Name { get; set; } = "Aether";
 
 
-    public long Id { get; }
+    public long Id { get; set; }
 
     public PlayerTeam? EquippedPlayerTeam { get; set; }
 
