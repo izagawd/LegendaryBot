@@ -1,0 +1,68 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = BlazorServer
+build_property.RootNamespace = BlazorServer
+build_property.ProjectDir = C:\Users\theiz\Documents\coding\DiscordBotSolution\BlazorServer\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\theiz\Documents\coding\DiscordBotSolution\BlazorServer
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/BlazorServer/WebsiteStuff/App.razor]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXEFwcC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/BlazorServer/WebsiteStuff/Pages/CharacterInfo/CharacterInfo.razor]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXENoYXJhY3RlckluZm9cQ2hhcmFjdGVySW5mby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = b-u8twmt6746
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/BlazorServer/WebsiteStuff/Pages/Characters.razor]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXENoYXJhY3RlcnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = b-o7mzxfzsc3
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/BlazorServer/WebsiteStuff/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXEVycm9yLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/BlazorServer/WebsiteStuff/Pages/Gears/Gears.razor]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXEdlYXJzXEdlYXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/BlazorServer/WebsiteStuff/Pages/Home/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFBhZ2VzXEhvbWVcSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/BlazorServer/WebsiteStuff/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXFJvdXRlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/theiz/Documents/coding/DiscordBotSolution/BlazorServer/WebsiteStuff/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = V2Vic2l0ZVN0dWZmXF9JbXBvcnRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = 

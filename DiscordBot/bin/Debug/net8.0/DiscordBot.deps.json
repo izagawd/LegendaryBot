@@ -339,10 +339,7 @@
           "SixLabors.ImageSharp.Drawing": "2.1.4"
         },
         "runtime": {
-          "BasicFunctions.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "BasicFunctions.dll": {}
         }
       },
       "DatabaseManagement/1.0.0": {
@@ -353,10 +350,7 @@
           "System.Configuration.ConfigurationManager": "8.0.0"
         },
         "runtime": {
-          "DatabaseManagement.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "DatabaseManagement.dll": {}
         }
       },
       "Entities/1.0.0": {
@@ -370,18 +364,12 @@
           "SixLabors.ImageSharp": "3.1.5"
         },
         "runtime": {
-          "Entities.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "Entities.dll": {}
         }
       },
       "PublicInfo/1.0.0": {
         "runtime": {
-          "PublicInfo.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "PublicInfo.dll": {}
         }
       }
     }

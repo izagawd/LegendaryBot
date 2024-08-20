@@ -1,0 +1,81 @@
+/* _content/BlazorServer/WebsiteStuff/Pages/CharacterInfo/CharacterInfo.razor.rz.scp.css */
+.gear-equipped-tile[b-u8twmt6746] {
+    margin-bottom: 30px;
+}
+
+.collection-class[b-u8twmt6746] {
+    background-color: gray;
+    overflow: auto;
+    width: 200px;
+    height: 100vh;
+}
+
+/* _content/BlazorServer/WebsiteStuff/Pages/Characters.razor.rz.scp.css */
+.character-to-display[b-o7mzxfzsc3] {
+
+    margin-right: 30px;
+    margin-bottom: 30px;
+    width: fit-content;
+}
+.image-box[b-o7mzxfzsc3] {
+
+    border-radius: 10px; /* Controls the curvature of the edges */
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
+    background-color: #f0f0f0; /* Optional: adds a background color */
+}
+
+.image-box img[b-o7mzxfzsc3] {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px; /* Match this to the box's border-radius */
+}
+
+.character-image-p[b-o7mzxfzsc3] {
+    margin-left: 10px;
+    font-weight: bold;
+    margin-bottom: 0; /* Reduce space between paragraphs */
+    font-size: 20px; /* Reduce paragraph font size */
+}
+.some-para[b-o7mzxfzsc3] {
+    margin-left: 30px;
+    font-size: 20px;
+    align-self: center;
+}
+
+.name-filter[b-o7mzxfzsc3] {
+    font-size: 30px;
+    border-radius: 7px;
+    border: 0.5px solid;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-left: 30px;
+    align-self: center;
+    height: 66%;
+}
+
+.filterer[b-o7mzxfzsc3] {
+
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 1px solid;
+    margin: auto;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.characters-container[b-o7mzxfzsc3] {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: fit-content;
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-right: auto;
+    overflow: auto;
+
+    height: 100vh;
+}
