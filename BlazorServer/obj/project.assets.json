@@ -4396,11 +4396,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BlazorServer\\BlazorServer.csproj",
+      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\BlazorServer.csproj",
       "projectName": "BlazorServer",
-      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BlazorServer\\BlazorServer.csproj",
+      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\BlazorServer.csproj",
       "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BlazorServer\\obj\\",
+      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4415,17 +4415,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DatabaseManagement\\DatabaseManagement.csproj": {
-              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DatabaseManagement\\DatabaseManagement.csproj"
+            "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DatabaseManagement\\DatabaseManagement.csproj": {
+              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DatabaseManagement\\DatabaseManagement.csproj"
             },
-            "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj": {
-              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj"
+            "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj": {
+              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj"
             },
-            "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\WebAssemblyApp.csproj": {
-              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\WebAssemblyApp.csproj"
+            "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\WebAssemblyApp.csproj": {
+              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\WebAssemblyApp.csproj"
             },
-            "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj": {
-              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj"
+            "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\WebComponents.csproj": {
+              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\WebComponents.csproj"
             }
           }
         }

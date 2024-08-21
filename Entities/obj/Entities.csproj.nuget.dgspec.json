@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\Entities.csproj": {}
+    "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\Entities\\Entities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BasicFunctions\\BasicFunctions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BasicFunctions\\BasicFunctions.csproj",
         "projectName": "BasicFunctions",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BasicFunctions\\BasicFunctions.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BasicFunctions\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj"
               }
             }
           }
@@ -89,14 +89,14 @@
         }
       }
     },
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\Entities.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\Entities.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\Entities.csproj",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\Entities\\Entities.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -111,11 +111,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BasicFunctions\\BasicFunctions.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BasicFunctions\\BasicFunctions.csproj"
               },
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj"
               }
             }
           }
@@ -185,14 +185,14 @@
         }
       }
     },
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj",
         "projectName": "PublicInfo",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"

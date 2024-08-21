@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebFunctions\\WebFunctions.csproj",
+      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj",
       "projectName": "WebFunctions",
-      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebFunctions\\WebFunctions.csproj",
+      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj",
       "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebFunctions\\obj\\",
+      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"

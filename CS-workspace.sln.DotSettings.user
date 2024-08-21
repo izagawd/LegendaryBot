@@ -1,6 +1,0 @@
-﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005Ctheiz_005COneDrive_005CDocuments_005Ccoding_005CCS_002Dworkspace_005CDiscordBotNet_005CConfigFiles_005CApp_002Econfig/@EntryIndexedValue">True</s:Boolean>
-	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=92DE0F58_002D0ABD_002D4204_002D9534_002DF1100901B50F_002Fd_003ALegendaryBot_002Fd_003Acommand_002Ff_003ABaseCommandClass_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
-  &lt;Assembly Path="C:\Users\theiz\.nuget\packages\aspnet.security.oauth.discord\8.0.0\lib\net8.0\AspNet.Security.OAuth.Discord.dll" /&gt;&#xD;
-&lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1DCbjX9+HJjAcxIwIhT3QKg7t0wiBzFzfcSP3CdQ0Cz8BT1WGQIAkwoa1SbxicxQT9Rxhg+DNL8rXm04qr3Lig==",
+  "dgSpecHash": "ZFLlZjETI3l5IqV2JcQfoq9RMGfMFDsiWQbcgQZaMwDtQqZMOMAD+hGCUrufYO1/eD9WjcLcPmTFiWDh0LX30Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DiscordBot\\DiscordBot.csproj",
+  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DiscordBot\\DiscordBot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theiz\\.nuget\\packages\\communitytoolkit.highperformance\\8.2.2\\communitytoolkit.highperformance.8.2.2.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\concurrenthashset\\1.3.0\\concurrenthashset.1.3.0.nupkg.sha512",

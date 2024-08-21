@@ -2061,11 +2061,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\WebAssemblyApp.csproj",
+      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\WebAssemblyApp.csproj",
       "projectName": "WebAssemblyApp",
-      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\WebAssemblyApp.csproj",
+      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\WebAssemblyApp.csproj",
       "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\obj\\",
+      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -2080,11 +2080,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj": {
-              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj"
+            "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\WebComponents.csproj": {
+              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\WebComponents.csproj"
             },
-            "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebFunctions\\WebFunctions.csproj": {
-              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebFunctions\\WebFunctions.csproj"
+            "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj": {
+              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj"
             }
           }
         }

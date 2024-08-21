@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4aA7CGQcWWYcZddxNdGN8cVVul1A9Z1JQOszeVCqCW6PmfYJDiLkwAwqefO9j4xfGzQJoInZPz2QaZB3bbGfig==",
+  "dgSpecHash": "sckyQBfgSC9xqmRUMBTx79QBbFlELCIs/wPJ+5XqnzJsdDLQXcfFm4XhBd5Kom/SaMGHrWditgngDZyBRn9DWw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\WebAssemblyApp.csproj",
+  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\WebAssemblyApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.8\\microsoft.aspnetcore.authorization.8.0.8.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.8\\microsoft.aspnetcore.components.8.0.8.nupkg.sha512",

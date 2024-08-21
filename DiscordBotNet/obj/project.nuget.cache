@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JDtpsKSJWhfv0coJgaqnufmD5TAsX1fC8nyoPN+rzCoJSnXOmsX5pc6lgHxZ+5zXYywRtrqLkwGtSwAuvIteFQ==",
+  "dgSpecHash": "Y0w7aY5D0mkL1EnvOLPvMsFmrHLkRu80cBZc/1XTGfQOzGKi8MCfgLe2104Jc5XG8aIZMwH+ZImgPHOHTSTlGA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DiscordBotNet\\DiscordBotNet.csproj",
+  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DiscordBotNet\\DiscordBotNet.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theiz\\.nuget\\packages\\aspnet.security.oauth.discord\\8.1.0\\aspnet.security.oauth.discord.8.1.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\benchmarkdotnet\\0.14.0\\benchmarkdotnet.0.14.0.nupkg.sha512",

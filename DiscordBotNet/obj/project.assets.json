@@ -5393,11 +5393,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DiscordBotNet\\DiscordBotNet.csproj",
+      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DiscordBotNet\\DiscordBotNet.csproj",
       "projectName": "DiscordBotNet",
-      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DiscordBotNet\\DiscordBotNet.csproj",
+      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DiscordBotNet\\DiscordBotNet.csproj",
       "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DiscordBotNet\\obj\\",
+      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DiscordBotNet\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -5412,17 +5412,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj": {
-              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj"
+            "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BasicFunctions\\BasicFunctions.csproj": {
+              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BasicFunctions\\BasicFunctions.csproj"
             },
-            "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BlazorServer\\BlazorServer.csproj": {
-              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BlazorServer\\BlazorServer.csproj"
+            "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\BlazorServer.csproj": {
+              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\BlazorServer.csproj"
             },
-            "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DiscordBot\\DiscordBot.csproj": {
-              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DiscordBot\\DiscordBot.csproj"
+            "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DiscordBot\\DiscordBot.csproj": {
+              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DiscordBot\\DiscordBot.csproj"
             },
-            "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj": {
-              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj"
+            "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\WebComponents.csproj": {
+              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\WebComponents.csproj"
             }
           }
         }

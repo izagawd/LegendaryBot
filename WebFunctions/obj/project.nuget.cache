@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WvIoVcGHF4VeZXVH1+NEYix6v7UTFrRorXvyQWgWhGbPXCKWRV/6d5T9gKKs/OhOxA/LNoYkPqKEBtRtO9qPwQ==",
+  "dgSpecHash": "g0MHBBcClarHVSBpfEUk4Iuy0BsL+nSUQhokJ7fzsArPRsdYYkUeocc26ze/vGqwnbDCQY3FB0YbSl8spZRZtw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebFunctions\\WebFunctions.csproj",
+  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.7\\microsoft.netcore.app.ref.8.0.7.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.7\\microsoft.windowsdesktop.app.ref.8.0.7.nupkg.sha512",
