@@ -1,4 +1,4 @@
-﻿/DiscordBotNet/ConfigFiles/App.config
-/DiscordBotNet/ConfigFiles
-/DiscordBotNet/bin
-/DiscordBotNet/obj
+﻿/PrivateInfo/App.config
+
+[Oo]bj/
+[Bb]in/
