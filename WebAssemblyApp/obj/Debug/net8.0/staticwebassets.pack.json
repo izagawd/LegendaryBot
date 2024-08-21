@@ -1,19 +1,19 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
       "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebAssemblyApp.bundle.scp.css",
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebAssemblyApp.bundle.scp.css",
       "PackagePath": "staticwebassets\\WebAssemblyApp.15gtlz91m6.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\wwwroot\\appsettings.Development.json",
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\wwwroot\\appsettings.Development.json",
       "PackagePath": "staticwebassets\\appsettings.Development.json"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\wwwroot\\appsettings.json",
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\wwwroot\\appsettings.json",
       "PackagePath": "staticwebassets\\appsettings.json"
     },
     {

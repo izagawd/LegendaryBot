@@ -8,9 +8,11 @@
     <base href="/"/>
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css"/>
     <link rel="stylesheet" href="app.css"/>
+
     @code{
         public static readonly string stylesCss = Assembly.GetEntryAssembly().GetName().Name + ".styles.css";
     }
+
     <link rel="stylesheet" href="@stylesCss"/>
     <HeadOutlet/>
 </head>

@@ -14,7 +14,6 @@ using Entities.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using Entities.LegendaryBot.Rewards;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace DiscordBot.Commands.Region;
 
 public class Explore : GeneralCommandClass

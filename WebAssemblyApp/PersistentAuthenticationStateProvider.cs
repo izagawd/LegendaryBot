@@ -21,10 +21,7 @@ internal class PersistentAuthenticationStateProvider : AuthenticationStateProvid
 
     public PersistentAuthenticationStateProvider(PersistentComponentState state)
     {
-        if (!state.TryTakeFromJson<UserInfo>(nameof(UserInfo), out var userInfo) || userInfo is null)
-        {
-            return;
-        }
+        if (!state.TryTakeFromJson<UserInfo>(nameof(UserInfo), out var userInfo) || userInfo is null) return;
 
         Claim[] claims =
         [
@@ -35,8 +32,11 @@ internal class PersistentAuthenticationStateProvider : AuthenticationStateProvid
 
         authenticationStateTask = Task.FromResult(
             new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claims,
-                authenticationType: nameof(PersistentAuthenticationStateProvider)))));
+                nameof(PersistentAuthenticationStateProvider)))));
     }
 
-    public override Task<AuthenticationState> GetAuthenticationStateAsync() => authenticationStateTask;
+    public override Task<AuthenticationState> GetAuthenticationStateAsync()
+    {
+        return authenticationStateTask;
+    }
 }

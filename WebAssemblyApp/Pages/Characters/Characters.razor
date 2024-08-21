@@ -1,5 +1,4 @@
 @page "/characters"
-
 @using Microsoft.AspNetCore.Authorization
 @using WebComponents.Components.Navigation
 @using WebFunctions
@@ -12,7 +11,6 @@
 @attribute [Authorize]
 
 @code{
-
 
 
     private CharacterPageDto[]? CharacterCollection;
@@ -40,6 +38,7 @@
             return theEnumerable;
         }
     }
+
     private string _nameFilter = string.Empty;
 
 
@@ -47,8 +46,8 @@
     {
         var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
         CharacterCollection = await Http.GetFromJsonAsync<CharacterPageDto[]>($"api/characters-collection?discordId={user.GetDiscordUserId()}");
-
     }
+
     private void FilterWithName(ChangeEventArgs eventArgs)
     {
         _nameFilter = ((string)eventArgs.Value!).ToLower();
@@ -96,16 +95,14 @@ margin-left: 30px">
             return @<div class="character-to-display">
 
 
-                       <a href="/character-info/@character.Number">
-                           <img src="@character.ImageUrl" width="200" height="200" style=" background-color: @character.Color;" class="image-box"/>
-                       </a>
+                <a href="/character-info/@character.Number">
+                    <img src="@character.ImageUrl" width="200" height="200" style=" background-color: @character.Color;" class="image-box"/>
+                </a>
 
-                       <p class="character-image-p">@character.Name</p>
-                       <p class="character-image-p">Level: @character.Level </p>
-                       <p class="character-image-p">Number: @character.Number</p>
-                   </div>;
-
-
+                <p class="character-image-p">@character.Name</p>
+                <p class="character-image-p">Level: @character.Level </p>
+                <p class="character-image-p">Number: @character.Number</p>
+            </div>;
         }
 
     }

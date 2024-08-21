@@ -1,0 +1,31 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = WebAssemblyApp
+build_property.RootNamespace = WebAssemblyApp
+build_property.ProjectDir = C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/theiz/Documents/coding/LegendaryBot/WebAssemblyApp/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/theiz/Documents/coding/LegendaryBot/WebAssemblyApp/Pages/Characters/Characters.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2hhcmFjdGVyc1xDaGFyYWN0ZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-gbuuicddjv

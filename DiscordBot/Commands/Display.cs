@@ -17,7 +17,6 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 
-
 namespace DiscordBot.Commands;
 
 [Command("display")]
@@ -38,7 +37,6 @@ public class Display : GeneralCommandClass
         foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<IInventoryEntity>()
                      .Select(i =>
                      {
-                         
                          Type type = null;
                          if (i is Character)
                              type = typeof(Character);

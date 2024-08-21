@@ -16,8 +16,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Components\Navigation\Navigation.razor" />
-      <AdditionalFiles Include="Components\Navigation\NavMenu.razor" />
+        <AdditionalFiles Include="Components\Navigation\Navigation.razor"/>
+        <AdditionalFiles Include="Components\Navigation\NavMenu.razor"/>
     </ItemGroup>
 
 </Project>

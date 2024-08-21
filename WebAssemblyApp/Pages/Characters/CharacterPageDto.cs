@@ -17,7 +17,7 @@ public class CharacterPageDto
                 case 2: return "green";
                 case 3: return "blue";
                 case 4: return "purple";
-                    default:
+                default:
                     return "yellow";
             }
         }

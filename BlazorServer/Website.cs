@@ -1,35 +1,34 @@
 using System.Globalization;
-using System.Security.Claims;
 using AspNet.Security.OAuth.Discord;
 using BlazorServer.WebsiteStuff;
 using DatabaseManagement;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using PublicInfo;
+using _Imports = WebAssemblyApp._Imports;
 
 namespace BlazorServer;
 
 public static class Website
 {
-
-
-
     public static async Task Main(string[] args)
     {
         await StartAsync(args);
     }
+
     public static void ConfigureServices(IServiceCollection services)
     {
         services.AddRazorPages();
         services.AddRazorComponents()
             .AddInteractiveServerComponents()
             .AddInteractiveWebAssemblyComponents();
-        services.AddScoped(i => new HttpClient(){BaseAddress = new Uri(PublicInfo.Information.DomainName)});
+        services.AddScoped(i => new HttpClient { BaseAddress = new Uri(Information.DomainName) });
 
         services.AddDbContext<PostgreSqlContext>();
         services.AddSession(i => { i.IdleTimeout = TimeSpan.MaxValue; }
         );
 
-        
+
         services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -65,12 +64,12 @@ public static class Website
                 {
                     if (cert is not null && !cert.Verify())
                         return httpRequestMessage.RequestUri is not null
-                               && httpRequestMessage.RequestUri.ToString().Contains(PublicInfo.Information.DomainName);
+                               && httpRequestMessage.RequestUri.ToString().Contains(Information.DomainName);
                     return cert is not null;
                 };
             using var webClient = new HttpClient(handler);
 
-            var checkingResponse = await webClient.GetAsync(PublicInfo.Information.DomainName);
+            var checkingResponse = await webClient.GetAsync(Information.DomainName);
             return checkingResponse.IsSuccessStatusCode;
         }
         catch
@@ -110,13 +109,13 @@ public static class Website
         app.MapRazorComponents<App>()
             .AddInteractiveServerRenderMode()
             .AddInteractiveWebAssemblyRenderMode()
-            .AddAdditionalAssemblies(typeof(WebAssemblyApp._Imports).Assembly);
+            .AddAdditionalAssemblies(typeof(_Imports).Assembly);
 
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
         app.UseSession();
 
-        await app.RunAsync(PublicInfo.Information.DomainName);
+        await app.RunAsync(Information.DomainName);
     }
 }

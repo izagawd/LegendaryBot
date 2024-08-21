@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Release\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Release\\net8.0\\compressed\\r78lf4fbkr.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\WebAssemblyApp.bundle.scp.css",
+      "PackagePath": "staticwebassets\\WebAssemblyApp.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\wwwroot\\appsettings.Development.json",
+      "PackagePath": "staticwebassets\\appsettings.Development.json"
+    },
+    {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\wwwroot\\appsettings.json",
+      "PackagePath": "staticwebassets\\appsettings.json"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.WebAssemblyApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.WebAssemblyApp.props",
+      "PackagePath": "build\\WebAssemblyApp.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.WebAssemblyApp.props",
+      "PackagePath": "buildMultiTargeting\\WebAssemblyApp.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.WebAssemblyApp.props",
+      "PackagePath": "buildTransitive\\WebAssemblyApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

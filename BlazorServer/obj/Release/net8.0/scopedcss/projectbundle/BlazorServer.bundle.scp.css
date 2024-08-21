@@ -1,0 +1,12 @@
+/* _content/BlazorServer/WebsiteStuff/Pages/CharacterInfo/CharacterInfo.razor.rz.scp.css */
+.gear-equipped-tile[b-u8twmt6746] {
+    margin-bottom: 30px;
+}
+
+.collection-class[b-u8twmt6746] {
+    background-color: gray;
+    overflow: auto;
+    width: 200px;
+    height: 100vh;
+}
+

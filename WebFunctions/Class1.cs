@@ -23,5 +23,4 @@ public static class Functions
             i.Type == "urn:discord:avatar:url");
         return claim?.Value!;
     }
-
 }
