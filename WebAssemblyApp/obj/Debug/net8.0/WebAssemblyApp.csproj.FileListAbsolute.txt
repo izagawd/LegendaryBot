@@ -2114,12 +2114,7 @@ C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compr
 C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\q7v5yxzxbp-lfu7j35m59.gz
 C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\rctf64e22q-oyz0vx2fzb.gz
 C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\h2z58z4bgr-5a2s7h00ox.gz
-C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\8mw56fquq0-zfdb7jkyr8.gz
 C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\qzu90273kd-jz9ydom11d.gz
-C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\xsh0wykrpu-9nnba9vuh0.gz
-C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\9ixqfwxkjz-2o27ovmp05.gz
-C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\yeh25km0cy-q50g7jk82n.gz
-C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\5nr4nupufv-r7r1187nxc.gz
 C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\staticwebassets.build.endpoints.json
@@ -2134,3 +2129,8 @@ C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\WebAs
 C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\refint\WebAssemblyApp.dll
 C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\WebAssemblyApp.pdb
 C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\ref\WebAssemblyApp.dll
+C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\8mw56fquq0-0vi1qvd65k.gz
+C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\xsh0wykrpu-jd67pjuq4v.gz
+C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\9ixqfwxkjz-dp7fy9l1jv.gz
+C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\yeh25km0cy-eeqsa0cgis.gz
+C:\Users\theiz\Documents\coding\DiscordBot\WebAssemblyApp\obj\Debug\net8.0\compressed\5nr4nupufv-n5bahhom59.gz
