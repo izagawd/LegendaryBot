@@ -6,7 +6,7 @@
 
 
 @inject HttpClient Http
-@rendermode InteractiveWebAssembly
+@rendermode InteractiveServer
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 @attribute [Authorize]
@@ -16,7 +16,30 @@
 
 
     private CharacterPageDto[]? CharacterCollection;
-    private CharacterPageDto[]? UsingCharacterCollection;
+
+    private IEnumerable<CharacterPageDto> UsingCharacterCollection
+    {
+        get
+        {
+            if (CharacterCollection is null)
+                return [];
+            var theEnumerable = CharacterCollection
+                .Where(i => i.Name.ToLower().Contains(_nameFilter));
+            switch (SortingMethod)
+            {
+                case "name":
+                    theEnumerable = theEnumerable.OrderBy(i => i.Name);
+                    break;
+                case "level":
+                    theEnumerable = theEnumerable.OrderBy(i => i.Level);
+                    break;
+            }
+
+            if (reverseOrder)
+                theEnumerable = theEnumerable.Reverse();
+            return theEnumerable;
+        }
+    }
     private string _nameFilter = string.Empty;
 
 
@@ -24,46 +47,21 @@
     {
         var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
         CharacterCollection = await Http.GetFromJsonAsync<CharacterPageDto[]>($"api/characters-collection?discordId={user.GetDiscordUserId()}");
-        UsingCharacterCollection = CharacterCollection;
+
     }
-
-    private void RefreshFilters()
-    {
-        if (CharacterCollection is null)
-            return;
-        var theEnumerable = CharacterCollection
-            .Where(i => i.Name.ToLower().Contains(_nameFilter));
-        switch (SortingMethod)
-        {
-            case "name":
-                theEnumerable = theEnumerable.OrderBy(i => i.Name);
-                break;
-            case "level":
-                theEnumerable = theEnumerable.OrderBy(i => i.Level);
-                break;
-        }
-
-        if (reverseOrder)
-            theEnumerable = theEnumerable.Reverse();
-        UsingCharacterCollection = theEnumerable.ToArray();
-    }
-
     private void FilterWithName(ChangeEventArgs eventArgs)
     {
         _nameFilter = ((string)eventArgs.Value!).ToLower();
-        RefreshFilters();
     }
 
     private void SelectChange(ChangeEventArgs eventArgs)
     {
         SortingMethod = (string)eventArgs.Value!;
-        RefreshFilters();
     }
 
     public void ReverseOrder(ChangeEventArgs eventArgs)
     {
         reverseOrder = (bool)eventArgs.Value!;
-        RefreshFilters();
     }
 
     public const string initialSorting = "level";
