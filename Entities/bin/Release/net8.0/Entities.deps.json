@@ -250,12 +250,18 @@
           "SixLabors.ImageSharp.Drawing": "2.1.4"
         },
         "runtime": {
-          "BasicFunctions.dll": {}
+          "BasicFunctions.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "PublicInfo/1.0.0": {
         "runtime": {
-          "PublicInfo.dll": {}
+          "PublicInfo.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

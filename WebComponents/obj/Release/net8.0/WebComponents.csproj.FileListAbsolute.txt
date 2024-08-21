@@ -15,7 +15,6 @@ C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\st
 C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\staticwebassets\msbuild.buildMultiTargeting.WebComponents.props
 C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\staticwebassets\msbuild.buildTransitive.WebComponents.props
 C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\staticwebassets.pack.json
-C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\scopedcss\Component1.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\scopedcss\Components\Navigation\Navigation.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\scopedcss\Components\Navigation\NavMenu.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\scopedcss\bundle\WebComponents.styles.css
@@ -24,3 +23,6 @@ C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\We
 C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\refint\WebComponents.dll
 C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\WebComponents.pdb
 C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\ref\WebComponents.dll
+C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\bin\Release\net8.0\WebComponents.staticwebassets.endpoints.json
+C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\staticwebassets.build.endpoints.json
+C:\Users\theiz\Documents\coding\LegendaryBot\WebComponents\obj\Release\net8.0\staticwebassets\msbuild.WebComponents.Microsoft.AspNetCore.StaticWebAssetEndpoints.props

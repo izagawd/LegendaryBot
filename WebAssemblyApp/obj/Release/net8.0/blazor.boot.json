@@ -1,21 +1,22 @@
 {
   "mainAssemblyName": "WebAssemblyApp",
   "resources": {
-    "hash": "sha256-74JU6AQDokUMeJJem8vKoaeOylaH4RbW3JOU7scYqbg=",
+    "hash": "sha256-4m3DM2b0GPnCaJAHw60nfRrj/IuH0z1Q7ADplfcratI=",
     "jsModuleNative": {
-      "dotnet.native.8.0.6.ikedd18ycr.js": "sha256-YU6M9+jtDVnB8/wtrgIndOstzNh778Ls8g9XnbjorSk="
+      "dotnet.native.js": "sha256-juC5sA7gHTLXFEhAKgdM2/RavswpwCtDfjYGsAz2FXg="
     },
     "jsModuleRuntime": {
-      "dotnet.runtime.8.0.6.83243ioin5.js": "sha256-+E96dgYQl8OrHQb4yNZ7QwNr3SZzLSP8lwKRzwSiMsw="
+      "dotnet.runtime.js": "sha256-0Dpj/NkVD5WqSC16ZvJLmlc38iv9+Je+umYBVOycPVU="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-QvXWDxAxKcwrwr5J00t53OFtgShscemIYbvFu+ry5Ug="
+      "dotnet.native.wasm": "sha256-OcUTcd7qQceenWEF93409WZcaXp2qQbEyhdchog4RUE="
     },
     "icu": {
       "icudt_CJK.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
       "icudt_EFIGS.dat": "sha256-8fItetYY8kQ0ww6oxwTLiT3oXlBwHKumbeP2pRF4yTc=",
       "icudt_no_CJK.dat": "sha256-L7sV7NEYP37/Qr2FPCePo5cJqRgTXRwGHuwF5Q+0Nfs="
     },
+    "coreAssembly": {},
     "assembly": {
       "Microsoft.AspNetCore.Authorization.wasm": "sha256-H1yH7iBNYt/rilvQT6qsv2frcFFOBUKBnRrGQ1AIHnI=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-kPAmhH4D4UN/DyWkGyB1Sxs7tQyVDV150swtUfTSJJ8=",
@@ -210,18 +211,18 @@
       "mscorlib.wasm": "sha256-masKveCdoRSahF99doEQk7H3YN2wHLVIE4M/Zu8OoD8=",
       "netstandard.wasm": "sha256-z1EJOmgVhSpTopn7Tek/0P//MKGF1I3NUD/sh4oLnwY=",
       "System.Private.CoreLib.wasm": "sha256-tuIWpR30u0OoEVtv4pXZ47mEpI2AmFBIyYFPnqDZZfw=",
-      "WebComponents.wasm": "sha256-tFvUsXwZUzXowLEyzOrQuf+tOR2mEYKUyTvHwpyUnM8=",
-      "WebFunctions.wasm": "sha256-DAuhJPxl9hKbImYGzO5sDvfkPD447ddmAInXtmL4Egw=",
-      "WebAssemblyApp.wasm": "sha256-DunRguzmoNA6uB6FtfFJQ/QYlcz7LE2K9X0qHZh7Yc8="
+      "WebComponents.wasm": "sha256-GPb0CAdHNp9X3NrYQ/X0pUGPWejQWy1NUUWzdl2pIJ0=",
+      "WebFunctions.wasm": "sha256-z89pqmESJaRTv59mAz+vzF2LOQEYwHCyuusf8WoqOnI=",
+      "WebAssemblyApp.wasm": "sha256-WFYXSiPdIFSIcqiaSDtK6hNpZUSZhlNB8TJgnrZILys="
     },
     "pdb": {
-      "WebComponents.pdb": "sha256-IZhmUU24EiDVWmgUPggHsLAe+QkvuEZuAj4pmcQqt7k=",
-      "WebFunctions.pdb": "sha256-E5pTCJlHoDrrzFamxZ/L6ai1IKslvacpNqsXdEvgZy8=",
-      "WebAssemblyApp.pdb": "sha256-CDfGsT6AhJRwOmpC6dVSZsj+yhmTQZouN4yadofHybs="
+      "WebComponents.pdb": "sha256-gUAajpSuwLfhPVCa0LdjUYj3ecK/OwHnSheY0cyBhco=",
+      "WebFunctions.pdb": "sha256-g0DPf7BER6fSzURxEqjmsxkbHIDGtAv6dYHR70/d+AU=",
+      "WebAssemblyApp.pdb": "sha256-Q1uaYJun+47U8dgd4dczjQhhJ3Cln+1MT2gtBwdiRVY="
     }
   },
   "cacheBootResources": true,
-  "debugLevel": 0,
+  "debugLevel": -1,
   "appsettings": [
     "../appsettings.Development.json",
     "../appsettings.json"

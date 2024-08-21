@@ -18,4 +18,10 @@
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <None Include="..\PrivateInfo\App.config">
+            <Link>App.config</Link>
+        </None>
+    </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gGYFvXPKEGskcs9B9H1/GwuC+/1/qjoI4tnbasy7eKg=",
+  "Hash": "2u3+iHnfNQOOCcw/e9zXgRUkiojD08RWF7ohhATR/Y0=",
   "Source": "WebComponents",
   "BasePath": "_content/WebComponents",
   "Mode": "Default",
@@ -26,11 +26,13 @@
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeBehavior": "",
       "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "9b4guoweq9",
+      "Integrity": "K8icz+12A13J3zbwbgM6QG5jovsnAMYXFjbD4gT3JBk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "Components\\Navigation\\Navigation.razor.js"
@@ -41,7 +43,7 @@
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Release\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/WebComponents",
-      "RelativePath": "WebComponents.styles.css",
+      "RelativePath": "WebComponents#[.{fingerprint}]?.styles.css",
       "AssetKind": "All",
       "AssetMode": "CurrentProject",
       "AssetRole": "Primary",
@@ -50,6 +52,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
+      "Fingerprint": "3q3i2fask8",
+      "Integrity": "pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Release\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css"
@@ -60,7 +64,7 @@
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/WebComponents",
-      "RelativePath": "WebComponents.bundle.scp.css",
+      "RelativePath": "WebComponents#[.{fingerprint}]!.bundle.scp.css",
       "AssetKind": "All",
       "AssetMode": "Reference",
       "AssetRole": "Primary",
@@ -69,47 +73,321 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
+      "Fingerprint": "3q3i2fask8",
+      "Integrity": "pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\background.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\AYOO.json",
       "SourceId": "WebComponents",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\",
       "BasePath": "_content/WebComponents",
-      "RelativePath": "background.png",
+      "RelativePath": "AYOO#[.{fingerprint}]?.json",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeBehavior": "",
       "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "h0altkoohp",
+      "Integrity": "D01AGKWJnredrhqfBcstrHKhzJJwavM5fIa8hEzz/rE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\background.png"
+      "OriginalItemSpec": "wwwroot\\AYOO.json"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "AYOO.h0altkoohp.json",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\AYOO.json",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D01AGKWJnredrhqfBcstrHKhzJJwavM5fIa8hEzz/rE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 21 Aug 2024 12:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "h0altkoohp"
+        },
+        {
+          "Name": "label",
+          "Value": "AYOO.json"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-D01AGKWJnredrhqfBcstrHKhzJJwavM5fIa8hEzz/rE="
+        }
+      ]
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\exampleJsInterop.js",
-      "SourceId": "WebComponents",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\",
-      "BasePath": "_content/WebComponents",
-      "RelativePath": "exampleJsInterop.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\exampleJsInterop.js"
+      "Route": "AYOO.json",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\AYOO.json",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D01AGKWJnredrhqfBcstrHKhzJJwavM5fIa8hEzz/rE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 21 Aug 2024 12:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-D01AGKWJnredrhqfBcstrHKhzJJwavM5fIa8hEzz/rE="
+        }
+      ]
+    },
+    {
+      "Route": "Components/Navigation/Navigation.razor.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\Components\\Navigation\\Navigation.razor.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "65"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"K8icz+12A13J3zbwbgM6QG5jovsnAMYXFjbD4gT3JBk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 21 Aug 2024 11:23:52 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-K8icz+12A13J3zbwbgM6QG5jovsnAMYXFjbD4gT3JBk="
+        },
+        {
+          "Name": "script-type",
+          "Value": "module"
+        }
+      ]
+    },
+    {
+      "Route": "WebComponents.3q3i2fask8.bundle.scp.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5786"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 21 Aug 2024 13:43:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3q3i2fask8"
+        },
+        {
+          "Name": "label",
+          "Value": "WebComponents.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0="
+        }
+      ]
+    },
+    {
+      "Route": "WebComponents.3q3i2fask8.styles.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Release\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5786"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 21 Aug 2024 13:43:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3q3i2fask8"
+        },
+        {
+          "Name": "label",
+          "Value": "WebComponents.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0="
+        }
+      ]
+    },
+    {
+      "Route": "WebComponents.bundle.scp.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5786"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 21 Aug 2024 13:43:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0="
+        }
+      ]
+    },
+    {
+      "Route": "WebComponents.styles.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Release\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5786"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 21 Aug 2024 13:43:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0="
+        }
+      ]
     }
   ]
 }

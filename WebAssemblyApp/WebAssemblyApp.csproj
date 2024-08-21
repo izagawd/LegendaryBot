@@ -18,4 +18,8 @@
         <ProjectReference Include="..\WebFunctions\WebFunctions.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Remove="wwwroot\bla.json" />
+    </ItemGroup>
+
 </Project>

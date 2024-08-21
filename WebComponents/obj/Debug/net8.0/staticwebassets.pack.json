@@ -1,20 +1,12 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\Components\\Navigation\\Navigation.razor.js",
-      "PackagePath": "staticwebassets\\Components\\Navigation\\Navigation.razor.js"
-    },
-    {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
-      "PackagePath": "staticwebassets\\WebComponents.ola7dwyb00.bundle.scp.css"
+      "PackagePath": "staticwebassets\\WebComponents.3q3i2fask8.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\background.png",
-      "PackagePath": "staticwebassets\\background.png"
-    },
-    {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\exampleJsInterop.js",
-      "PackagePath": "staticwebassets\\exampleJsInterop.js"
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\AYOO.json",
+      "PackagePath": "staticwebassets\\AYOO.json"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebComponents.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

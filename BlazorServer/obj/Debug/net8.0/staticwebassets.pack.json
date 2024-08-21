@@ -9,8 +9,8 @@
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\battle_images\\blessings\\PowerOfThePhoenix.png",
-      "PackagePath": "staticwebassets\\battle_images\\blessings\\PowerOfThePhoenix.png"
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\battle_images\\blessings\\BlessingOfThePhoenix.png",
+      "PackagePath": "staticwebassets\\battle_images\\blessings\\BlessingOfThePhoenix.png"
     },
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\battle_images\\characters\\Blast.png",
@@ -75,10 +75,6 @@
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\battle_images\\characters\\Thug.png",
       "PackagePath": "staticwebassets\\battle_images\\characters\\Thug.png"
-    },
-    {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\battle_images\\gears\\Weapon.png",
-      "PackagePath": "staticwebassets\\battle_images\\gears\\Weapon.png"
     },
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\battle_images\\items\\AdventurersKnowledge.png",

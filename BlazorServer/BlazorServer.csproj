@@ -4,14 +4,10 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>aspnet-BlazorApp1-3E2DC2CD-4FDA-43CB-BF2B-F93C686161A3</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Update="Data\app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
-    </ItemGroup>
-
-    <ItemGroup>
+        <ProjectReference Include="..\DiscordBot\DiscordBot.csproj" />
         <ProjectReference Include="..\WebAssemblyApp\WebAssemblyApp.csproj"/>
         <PackageReference Include="AspNet.Security.OAuth.Discord" Version="8.1.0"/>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="8.0.8"/>
@@ -19,6 +15,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8"/>
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.6"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6"/>
+        <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6"/>
         <ProjectReference Include="..\DatabaseManagement\DatabaseManagement.csproj"/>
@@ -27,67 +24,117 @@
     </ItemGroup>
 
     <ItemGroup>
-        <_ContentIncludedByDefault Remove="BlazorApp1\obj\BlazorApp1.csproj.nuget.dgspec.json"/>
-        <_ContentIncludedByDefault Remove="BlazorApp1\obj\project.assets.json"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\AccessDenied.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\ConfirmEmail.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\ConfirmEmailChange.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\ExternalLogin.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\ForgotPassword.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\ForgotPasswordConfirmation.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\InvalidPasswordReset.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\InvalidUser.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Lockout.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Login.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\LoginWith2fa.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\LoginWithRecoveryCode.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\ChangePassword.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\DeletePersonalData.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\Disable2fa.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\Email.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\EnableAuthenticator.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\ExternalLogins.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\GenerateRecoveryCodes.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\Index.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\PersonalData.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\ResetAuthenticator.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\SetPassword.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\TwoFactorAuthentication.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\_Imports.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\Register.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\RegisterConfirmation.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\ResendEmailConfirmation.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\ResetPassword.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\ResetPasswordConfirmation.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Pages\_Imports.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Shared\AccountLayout.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Shared\ExternalLoginPicker.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Shared\ManageLayout.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Shared\ManageNavMenu.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Shared\ShowRecoveryCodes.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Account\Shared\StatusMessage.razor"/>
-        <_ContentIncludedByDefault Remove="Components\App.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Layout\MainLayout.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Layout\NavMenu.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Pages\Error.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Pages\Home.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Pages\Weather.razor"/>
-        <_ContentIncludedByDefault Remove="Components\Routes.razor"/>
-        <_ContentIncludedByDefault Remove="Components\_Imports.razor"/>
-        <_ContentIncludedByDefault Remove="wwwroot\app.css"/>
-        <_ContentIncludedByDefault Remove="wwwroot\bootstrap\bootstrap.min.css"/>
-        <_ContentIncludedByDefault Remove="wwwroot\bootstrap\bootstrap.min.css.map"/>
-        <_ContentIncludedByDefault Remove="wwwroot\favicon.png"/>
+        <None Include="..\PrivateInfo\App.config">
+            <Link>App.config</Link>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="WebsiteStuff\App.razor"/>
-        <AdditionalFiles Include="WebsiteStuff\Pages\CharacterInfo\CharacterInfo.razor"/>
-        <AdditionalFiles Include="WebsiteStuff\Pages\Error.razor"/>
-        <AdditionalFiles Include="WebsiteStuff\Pages\Gears\Gears.razor"/>
-        <AdditionalFiles Include="WebsiteStuff\Pages\Home\Home.razor"/>
-        <AdditionalFiles Include="WebsiteStuff\Routes.razor"/>
-        <AdditionalFiles Include="WebsiteStuff\_Imports.razor"/>
+        <_ContentIncludedByDefault Remove="wwwroot\app.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\blessings\PowerOfThePhoenix.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\Blast.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\Cheerleader.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\CoachChad.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\CommanderJean.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\Delinquent.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\Lily.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\PlayerFemale.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\PlayerMale.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\Police.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\Roxy.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\RoyalKnight.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\Slasher.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\Slime.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\Takeshi.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\Thana.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\characters\Thug.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\gears\Weapon.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\items\AdventurersKnowledge.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\items\DivineKnowledge.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\items\HerosKnowledge.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\moves\DancingFlames.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\moves\GooeyStrike.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\moves\guilotine.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\moves\VolcanicEruption.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\status_effects\AttackBuff.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\status_effects\AttackDebuff.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\status_effects\Bomb.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\status_effects\Burn.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\status_effects\Immortality.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\status_effects\Poison.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\status_effects\Sleep.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\battle_images\status_effects\Stun.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\bootstrap\bootstrap.min.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\bootstrap\bootstrap.min.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\css\app.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\css\CharacterInfo.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\css\CharactersnBlessings.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\css\Home.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\css\NeutralHref.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\css\site.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\css\Team.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\favicon.ico"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\info.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\site.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\team.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\LICENSE"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\additional-methods.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\additional-methods.min.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\LICENSE.md"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt"/>
     </ItemGroup>
+
 
 </Project>

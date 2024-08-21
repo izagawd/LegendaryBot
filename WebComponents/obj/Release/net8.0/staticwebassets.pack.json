@@ -6,15 +6,15 @@
     },
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
-      "PackagePath": "staticwebassets\\WebComponents.bundle.scp.css"
+      "PackagePath": "staticwebassets\\WebComponents.3q3i2fask8.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\background.png",
-      "PackagePath": "staticwebassets\\background.png"
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\AYOO.json",
+      "PackagePath": "staticwebassets\\AYOO.json"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\exampleJsInterop.js",
-      "PackagePath": "staticwebassets\\exampleJsInterop.js"
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.WebComponents.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.WebComponents.Microsoft.AspNetCore.StaticWebAssets.props",

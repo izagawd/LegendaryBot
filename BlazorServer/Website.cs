@@ -4,6 +4,7 @@ using BlazorServer.WebsiteStuff;
 using DatabaseManagement;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.FileProviders;
 using PublicInfo;
 using _Imports = WebAssemblyApp._Imports;
 
@@ -11,10 +12,7 @@ namespace BlazorServer;
 
 public static class Website
 {
-    public static async Task Main(string[] args)
-    {
-        await StartAsync(args);
-    }
+
 
     public static void ConfigureServices(IServiceCollection services)
     {
@@ -80,39 +78,41 @@ public static class Website
 
     public static async Task StartAsync(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+        {
+            Args = args
+        });
         builder.WebHost.UseStaticWebAssets();
         ConfigureServices(builder.Services);
 
         var app = builder.Build();
 
-
-        if (!app.Environment.IsDevelopment())
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseWebAssemblyDebugging();
+            app.UseMigrationsEndPoint();
+        }
+        else
         {
             app.UseExceptionHandler("/Error");
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
 
-        app.UseExceptionHandler("/Error");
-        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-        app.UseHsts();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-        app.UseCertificateForwarding();
+
         app.UseRouting();
         app.UseAuthentication();
-        app.UseRouting();
-        app.UseAntiforgery();
         app.UseAuthorization();
+        app.UseAntiforgery();
 
         app.MapRazorComponents<App>()
             .AddInteractiveServerRenderMode()
             .AddInteractiveWebAssemblyRenderMode()
             .AddAdditionalAssemblies(typeof(_Imports).Assembly);
 
-
-        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        app.MapControllers();
+        app.MapRazorPages();
 
         app.UseSession();
 

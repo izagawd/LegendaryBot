@@ -20,3 +20,4 @@ C:\Users\theiz\Documents\coding\LegendaryBot\DiscordBot\obj\Release\net8.0\Disco
 C:\Users\theiz\Documents\coding\LegendaryBot\DiscordBot\obj\Release\net8.0\refint\DiscordBot.dll
 C:\Users\theiz\Documents\coding\LegendaryBot\DiscordBot\obj\Release\net8.0\DiscordBot.pdb
 C:\Users\theiz\Documents\coding\LegendaryBot\DiscordBot\obj\Release\net8.0\ref\DiscordBot.dll
+C:\Users\theiz\Documents\coding\LegendaryBot\DiscordBot\bin\Release\net8.0\DiscordBot.dll.config
