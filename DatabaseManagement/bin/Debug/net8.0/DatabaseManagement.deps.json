@@ -337,7 +337,10 @@
           "SixLabors.ImageSharp.Drawing": "2.1.4"
         },
         "runtime": {
-          "BasicFunctions.dll": {}
+          "BasicFunctions.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Entities/1.0.0": {
@@ -351,12 +354,18 @@
           "SixLabors.ImageSharp": "3.1.5"
         },
         "runtime": {
-          "Entities.dll": {}
+          "Entities.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "PublicInfo/1.0.0": {
         "runtime": {
-          "PublicInfo.dll": {}
+          "PublicInfo.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

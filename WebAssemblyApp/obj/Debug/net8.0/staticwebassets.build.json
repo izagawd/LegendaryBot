@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0EJa7gJVx5+7QyqryeWfQHCtpySGOsmfrPwZlGI6BXc=",
+  "Hash": "euMwMtG2oDXUsHS6GS64Kch8qmGAa1ZVnmT5F87M3HU=",
   "Source": "WebAssemblyApp",
   "BasePath": "/",
   "Mode": "Default",
@@ -71,8 +71,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "manifest",
-      "Fingerprint": "dilwocxa35",
-      "Integrity": "5YzUUAsA6EZZkPeYJT3leInm7OanmUz1N2AyJITGPSU=",
+      "Fingerprint": "85rhyl09m5",
+      "Integrity": "VEbyok2WDhC0MacC597qME8VJ5Sk1cUl4bPk68fuAu8=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net8.0\\blazor.boot.json"
@@ -4355,8 +4355,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "q17xe7z04m",
-      "Integrity": "7htU4erLUkJtD9+S8/OiKKYkVOvlJw2ymZFl8B+84Z4=",
+      "Fingerprint": "jtz9zve18n",
+      "Integrity": "lxynlELogDB9B5msLsOol5jhF8Mu9k0obbVxK82rE5A=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net8.0\\WebAssemblyApp.pdb"
@@ -4376,8 +4376,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "3i3to2wjvq",
-      "Integrity": "BSn36AUFNhWxlbcHSzoIDGD/e6nkNr7LnvGs9fc/nwM=",
+      "Fingerprint": "ldsn2crz2h",
+      "Integrity": "l64M9owgwEfqd0WkfTFrfPRdVdUMdEKBL2eDDBtWhJI=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\webcil\\WebAssemblyApp.wasm"
@@ -4439,8 +4439,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "eeihuzn8gn",
-      "Integrity": "ms7VXWsL8giuRtsSDleFdm23uojF7TveUW363AK3cfc=",
+      "Fingerprint": "xqckdvjfmr",
+      "Integrity": "d4mERNGaNHPj1pKjueY+8D11qoKPKgBMkrRD4g+fFYo=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebFunctions\\bin\\Debug\\net8.0\\WebFunctions.pdb"
@@ -4460,8 +4460,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "k1rvipqd7y",
-      "Integrity": "qNAt3WM6YUAIM/3OSo99E0pAj9dYTshKLPl/GbFbTSs=",
+      "Fingerprint": "h1tb4q6nz5",
+      "Integrity": "xbNs2YP5w9E77ggMxJoze7FO53uymwtORsKOXrMJW8Y=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\webcil\\WebFunctions.wasm"
@@ -5076,7 +5076,7 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_CJK.dat"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-dilwocxa35.gz",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-85rhyl09m5.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -5090,8 +5090,8 @@
       "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.boot.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "b944rx0wwh",
-      "Integrity": "cfL92YYzujbPbMdK2lkwK2RCX7fVzPOiQXiJsOkKgIQ=",
+      "Fingerprint": "vvedaec15v",
+      "Integrity": "m84CeGLJMFgr+ltjZbhHHM//q0mNm7cpKClbpFP1DbA=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.boot.json"
@@ -5538,7 +5538,7 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Net.Quic.wasm"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-k1rvipqd7y.gz",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-h1tb4q6nz5.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -5552,8 +5552,8 @@
       "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebFunctions.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "ybz44hfybe",
-      "Integrity": "IpynTIFfrYi9hinYzz7RaoiwECZgiejttkemYhDPk90=",
+      "Fingerprint": "2js9a4l2sj",
+      "Integrity": "Ul1NADZkd62EXQhRtDCtXM3SHloB2HCB+sQ+ycosZDI=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebFunctions.wasm"
@@ -5727,7 +5727,7 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Net.WebProxy.wasm"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-3i3to2wjvq.gz",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-ldsn2crz2h.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -5741,8 +5741,8 @@
       "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebAssemblyApp.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "8mptwdim0t",
-      "Integrity": "8DogghuZlwQdh0s08OlFRZ2l/Jho8XNmq7UrXSqIZMI=",
+      "Fingerprint": "fv3x3loxku",
+      "Integrity": "JVcgkdD8GQH8UoGEZEPppodnY7M4cI1o8K7Vg5RcSWM=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebAssemblyApp.wasm"
@@ -8667,7 +8667,7 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Text.Encoding.Extensions.wasm"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-eeihuzn8gn.gz",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-xqckdvjfmr.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -8681,8 +8681,8 @@
       "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebFunctions.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "pk6h4xyrfx",
-      "Integrity": "dzxaeBODXhO54cvD9I0Plg/F/ucgBXZBxAuGyaW9oN4=",
+      "Fingerprint": "l1nejexxlc",
+      "Integrity": "KacSm2edLEEh9R4V0v1p5JSoy99zkDConJNCeBZgunI=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebFunctions.pdb"
@@ -8772,7 +8772,7 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Runtime.Intrinsics.wasm"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-q17xe7z04m.gz",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-jtz9zve18n.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -8786,8 +8786,8 @@
       "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebAssemblyApp.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "rlj9isa145",
-      "Integrity": "f+06VDy7SgZnHnWRvDxajJiGdh1x7yDWhQRNY9S7at8=",
+      "Fingerprint": "f57ox7wus5",
+      "Integrity": "M/eGILsCpvVPit+nXKqGBNKdvFiTHIk08Mb2oWIuYqg=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebAssemblyApp.pdb"
@@ -9431,11 +9431,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"5YzUUAsA6EZZkPeYJT3leInm7OanmUz1N2AyJITGPSU=\""
+          "Value": "\"VEbyok2WDhC0MacC597qME8VJ5Sk1cUl4bPk68fuAu8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:48:50 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:46 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9445,18 +9445,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-5YzUUAsA6EZZkPeYJT3leInm7OanmUz1N2AyJITGPSU="
+          "Value": "sha256-VEbyok2WDhC0MacC597qME8VJ5Sk1cUl4bPk68fuAu8="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-dilwocxa35.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-85rhyl09m5.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000111296605"
+          "Quality": "0.000111209964"
         }
       ],
       "ResponseHeaders": [
@@ -9466,15 +9466,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8984"
+          "Value": "8991"
         },
         {
           "Name": "ETag",
-          "Value": "\"cfL92YYzujbPbMdK2lkwK2RCX7fVzPOiQXiJsOkKgIQ=\""
+          "Value": "\"m84CeGLJMFgr+ltjZbhHHM//q0mNm7cpKClbpFP1DbA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:47:34 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9494,19 +9494,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"5YzUUAsA6EZZkPeYJT3leInm7OanmUz1N2AyJITGPSU=\""
+          "Value": "W/\"VEbyok2WDhC0MacC597qME8VJ5Sk1cUl4bPk68fuAu8=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-5YzUUAsA6EZZkPeYJT3leInm7OanmUz1N2AyJITGPSU="
+          "Value": "sha256-VEbyok2WDhC0MacC597qME8VJ5Sk1cUl4bPk68fuAu8="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json.gz",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-dilwocxa35.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-85rhyl09m5.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -9515,7 +9515,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8984"
+          "Value": "8991"
         },
         {
           "Name": "Content-Type",
@@ -9523,11 +9523,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"cfL92YYzujbPbMdK2lkwK2RCX7fVzPOiQXiJsOkKgIQ=\""
+          "Value": "\"m84CeGLJMFgr+ltjZbhHHM//q0mNm7cpKClbpFP1DbA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:47:34 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9545,7 +9545,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-cfL92YYzujbPbMdK2lkwK2RCX7fVzPOiQXiJsOkKgIQ="
+          "Value": "sha256-m84CeGLJMFgr+ltjZbhHHM//q0mNm7cpKClbpFP1DbA="
         }
       ]
     },
@@ -37371,7 +37371,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "22372"
+          "Value": "22344"
         },
         {
           "Name": "Content-Type",
@@ -37379,11 +37379,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"7htU4erLUkJtD9+S8/OiKKYkVOvlJw2ymZFl8B+84Z4=\""
+          "Value": "\"lxynlELogDB9B5msLsOol5jhF8Mu9k0obbVxK82rE5A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:48:50 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:46 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -37393,18 +37393,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-7htU4erLUkJtD9+S8/OiKKYkVOvlJw2ymZFl8B+84Z4="
+          "Value": "sha256-lxynlELogDB9B5msLsOol5jhF8Mu9k0obbVxK82rE5A="
         }
       ]
     },
     {
       "Route": "_framework/WebAssemblyApp.pdb",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-q17xe7z04m.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-jtz9zve18n.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000066015316"
+          "Quality": "0.000066041474"
         }
       ],
       "ResponseHeaders": [
@@ -37414,15 +37414,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "15147"
+          "Value": "15141"
         },
         {
           "Name": "ETag",
-          "Value": "\"f+06VDy7SgZnHnWRvDxajJiGdh1x7yDWhQRNY9S7at8=\""
+          "Value": "\"M/eGILsCpvVPit+nXKqGBNKdvFiTHIk08Mb2oWIuYqg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:47:33 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -37442,19 +37442,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"7htU4erLUkJtD9+S8/OiKKYkVOvlJw2ymZFl8B+84Z4=\""
+          "Value": "W/\"lxynlELogDB9B5msLsOol5jhF8Mu9k0obbVxK82rE5A=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-7htU4erLUkJtD9+S8/OiKKYkVOvlJw2ymZFl8B+84Z4="
+          "Value": "sha256-lxynlELogDB9B5msLsOol5jhF8Mu9k0obbVxK82rE5A="
         }
       ]
     },
     {
       "Route": "_framework/WebAssemblyApp.pdb.gz",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-q17xe7z04m.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-jtz9zve18n.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -37463,7 +37463,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "15147"
+          "Value": "15141"
         },
         {
           "Name": "Content-Type",
@@ -37471,11 +37471,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"f+06VDy7SgZnHnWRvDxajJiGdh1x7yDWhQRNY9S7at8=\""
+          "Value": "\"M/eGILsCpvVPit+nXKqGBNKdvFiTHIk08Mb2oWIuYqg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:47:33 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -37493,7 +37493,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-f+06VDy7SgZnHnWRvDxajJiGdh1x7yDWhQRNY9S7at8="
+          "Value": "sha256-M/eGILsCpvVPit+nXKqGBNKdvFiTHIk08Mb2oWIuYqg="
         }
       ]
     },
@@ -37508,7 +37508,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "19733"
+          "Value": "20245"
         },
         {
           "Name": "Content-Type",
@@ -37516,11 +37516,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"BSn36AUFNhWxlbcHSzoIDGD/e6nkNr7LnvGs9fc/nwM=\""
+          "Value": "\"l64M9owgwEfqd0WkfTFrfPRdVdUMdEKBL2eDDBtWhJI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:48:50 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:46 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -37530,18 +37530,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-BSn36AUFNhWxlbcHSzoIDGD/e6nkNr7LnvGs9fc/nwM="
+          "Value": "sha256-l64M9owgwEfqd0WkfTFrfPRdVdUMdEKBL2eDDBtWhJI="
         }
       ]
     },
     {
       "Route": "_framework/WebAssemblyApp.wasm",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-3i3to2wjvq.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-ldsn2crz2h.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000108944329"
+          "Quality": "0.000107839965"
         }
       ],
       "ResponseHeaders": [
@@ -37551,15 +37551,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9178"
+          "Value": "9272"
         },
         {
           "Name": "ETag",
-          "Value": "\"8DogghuZlwQdh0s08OlFRZ2l/Jho8XNmq7UrXSqIZMI=\""
+          "Value": "\"JVcgkdD8GQH8UoGEZEPppodnY7M4cI1o8K7Vg5RcSWM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:47:34 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -37579,19 +37579,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"BSn36AUFNhWxlbcHSzoIDGD/e6nkNr7LnvGs9fc/nwM=\""
+          "Value": "W/\"l64M9owgwEfqd0WkfTFrfPRdVdUMdEKBL2eDDBtWhJI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-BSn36AUFNhWxlbcHSzoIDGD/e6nkNr7LnvGs9fc/nwM="
+          "Value": "sha256-l64M9owgwEfqd0WkfTFrfPRdVdUMdEKBL2eDDBtWhJI="
         }
       ]
     },
     {
       "Route": "_framework/WebAssemblyApp.wasm.gz",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-3i3to2wjvq.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-ldsn2crz2h.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -37600,7 +37600,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9178"
+          "Value": "9272"
         },
         {
           "Name": "Content-Type",
@@ -37608,11 +37608,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"8DogghuZlwQdh0s08OlFRZ2l/Jho8XNmq7UrXSqIZMI=\""
+          "Value": "\"JVcgkdD8GQH8UoGEZEPppodnY7M4cI1o8K7Vg5RcSWM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:47:34 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -37630,7 +37630,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-8DogghuZlwQdh0s08OlFRZ2l/Jho8XNmq7UrXSqIZMI="
+          "Value": "sha256-JVcgkdD8GQH8UoGEZEPppodnY7M4cI1o8K7Vg5RcSWM="
         }
       ]
     },
@@ -37927,11 +37927,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ms7VXWsL8giuRtsSDleFdm23uojF7TveUW363AK3cfc=\""
+          "Value": "\"d4mERNGaNHPj1pKjueY+8D11qoKPKgBMkrRD4g+fFYo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:07:25 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -37941,18 +37941,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ms7VXWsL8giuRtsSDleFdm23uojF7TveUW363AK3cfc="
+          "Value": "sha256-d4mERNGaNHPj1pKjueY+8D11qoKPKgBMkrRD4g+fFYo="
         }
       ]
     },
     {
       "Route": "_framework/WebFunctions.pdb",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-eeihuzn8gn.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-xqckdvjfmr.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000152532032"
+          "Quality": "0.000152718387"
         }
       ],
       "ResponseHeaders": [
@@ -37962,15 +37962,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6555"
+          "Value": "6547"
         },
         {
           "Name": "ETag",
-          "Value": "\"dzxaeBODXhO54cvD9I0Plg/F/ucgBXZBxAuGyaW9oN4=\""
+          "Value": "\"KacSm2edLEEh9R4V0v1p5JSoy99zkDConJNCeBZgunI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:07:25 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -37990,19 +37990,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"ms7VXWsL8giuRtsSDleFdm23uojF7TveUW363AK3cfc=\""
+          "Value": "W/\"d4mERNGaNHPj1pKjueY+8D11qoKPKgBMkrRD4g+fFYo=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ms7VXWsL8giuRtsSDleFdm23uojF7TveUW363AK3cfc="
+          "Value": "sha256-d4mERNGaNHPj1pKjueY+8D11qoKPKgBMkrRD4g+fFYo="
         }
       ]
     },
     {
       "Route": "_framework/WebFunctions.pdb.gz",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-eeihuzn8gn.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-xqckdvjfmr.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -38011,7 +38011,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6555"
+          "Value": "6547"
         },
         {
           "Name": "Content-Type",
@@ -38019,11 +38019,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"dzxaeBODXhO54cvD9I0Plg/F/ucgBXZBxAuGyaW9oN4=\""
+          "Value": "\"KacSm2edLEEh9R4V0v1p5JSoy99zkDConJNCeBZgunI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:07:25 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -38041,7 +38041,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-dzxaeBODXhO54cvD9I0Plg/F/ucgBXZBxAuGyaW9oN4="
+          "Value": "sha256-KacSm2edLEEh9R4V0v1p5JSoy99zkDConJNCeBZgunI="
         }
       ]
     },
@@ -38064,11 +38064,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"qNAt3WM6YUAIM/3OSo99E0pAj9dYTshKLPl/GbFbTSs=\""
+          "Value": "\"xbNs2YP5w9E77ggMxJoze7FO53uymwtORsKOXrMJW8Y=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:07:26 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:46 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -38078,18 +38078,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-qNAt3WM6YUAIM/3OSo99E0pAj9dYTshKLPl/GbFbTSs="
+          "Value": "sha256-xbNs2YP5w9E77ggMxJoze7FO53uymwtORsKOXrMJW8Y="
         }
       ]
     },
     {
       "Route": "_framework/WebFunctions.wasm",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-k1rvipqd7y.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-h1tb4q6nz5.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000450856628"
+          "Quality": "0.000450450450"
         }
       ],
       "ResponseHeaders": [
@@ -38099,15 +38099,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2217"
+          "Value": "2219"
         },
         {
           "Name": "ETag",
-          "Value": "\"IpynTIFfrYi9hinYzz7RaoiwECZgiejttkemYhDPk90=\""
+          "Value": "\"Ul1NADZkd62EXQhRtDCtXM3SHloB2HCB+sQ+ycosZDI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:07:26 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -38127,19 +38127,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"qNAt3WM6YUAIM/3OSo99E0pAj9dYTshKLPl/GbFbTSs=\""
+          "Value": "W/\"xbNs2YP5w9E77ggMxJoze7FO53uymwtORsKOXrMJW8Y=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-qNAt3WM6YUAIM/3OSo99E0pAj9dYTshKLPl/GbFbTSs="
+          "Value": "sha256-xbNs2YP5w9E77ggMxJoze7FO53uymwtORsKOXrMJW8Y="
         }
       ]
     },
     {
       "Route": "_framework/WebFunctions.wasm.gz",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-k1rvipqd7y.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-h1tb4q6nz5.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -38148,7 +38148,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2217"
+          "Value": "2219"
         },
         {
           "Name": "Content-Type",
@@ -38156,11 +38156,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"IpynTIFfrYi9hinYzz7RaoiwECZgiejttkemYhDPk90=\""
+          "Value": "\"Ul1NADZkd62EXQhRtDCtXM3SHloB2HCB+sQ+ycosZDI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 23:07:26 GMT"
+          "Value": "Wed, 21 Aug 2024 08:26:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -38178,7 +38178,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-IpynTIFfrYi9hinYzz7RaoiwECZgiejttkemYhDPk90="
+          "Value": "sha256-Ul1NADZkd62EXQhRtDCtXM3SHloB2HCB+sQ+ycosZDI="
         }
       ]
     },

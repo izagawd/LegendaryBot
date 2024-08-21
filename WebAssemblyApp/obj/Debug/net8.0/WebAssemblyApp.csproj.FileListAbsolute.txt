@@ -1059,10 +1059,10 @@ C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\bin\Debug\net8
 C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\bin\Debug\net8.0\WebFunctions.dll
 C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\bin\Debug\net8.0\WebFunctions.pdb
 C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\webcil\WebFunctions.wasm
-C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\compressed\8mw56fquq0-k1rvipqd7y.gz
-C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\compressed\xsh0wykrpu-eeihuzn8gn.gz
 C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\compressed\h2z58z4bgr-luyxej2lss.gz
 C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\compressed\qzu90273kd-h975upuynq.gz
-C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\compressed\9ixqfwxkjz-3i3to2wjvq.gz
-C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\compressed\yeh25km0cy-q17xe7z04m.gz
-C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\compressed\5nr4nupufv-dilwocxa35.gz
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\compressed\8mw56fquq0-h1tb4q6nz5.gz
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\compressed\xsh0wykrpu-xqckdvjfmr.gz
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\compressed\9ixqfwxkjz-ldsn2crz2h.gz
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\compressed\yeh25km0cy-jtz9zve18n.gz
+C:\Users\theiz\Documents\coding\DiscordBotSolution\WebAssemblyApp\obj\Debug\net8.0\compressed\5nr4nupufv-85rhyl09m5.gz
