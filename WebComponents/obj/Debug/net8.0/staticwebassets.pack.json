@@ -1,19 +1,19 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\Components\\Navigation\\Navigation.razor.js",
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\Components\\Navigation\\Navigation.razor.js",
       "PackagePath": "staticwebassets\\Components\\Navigation\\Navigation.razor.js"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
       "PackagePath": "staticwebassets\\WebComponents.ola7dwyb00.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\wwwroot\\background.png",
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\wwwroot\\background.png",
       "PackagePath": "staticwebassets\\background.png"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\wwwroot\\exampleJsInterop.js",
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\wwwroot\\exampleJsInterop.js",
       "PackagePath": "staticwebassets\\exampleJsInterop.js"
     },
     {

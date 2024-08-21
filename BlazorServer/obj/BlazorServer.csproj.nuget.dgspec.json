@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BlazorServer\\BlazorServer.csproj": {}
+    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BlazorServer\\BlazorServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BasicFunctions\\BasicFunctions.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BasicFunctions\\BasicFunctions.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj",
         "projectName": "BasicFunctions",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BasicFunctions\\BasicFunctions.csproj",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BasicFunctions\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\PublicInfo.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\PublicInfo.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj"
               }
             }
           }
@@ -89,14 +89,14 @@
         }
       }
     },
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BlazorServer\\BlazorServer.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BlazorServer\\BlazorServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BlazorServer\\BlazorServer.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BlazorServer\\BlazorServer.csproj",
         "projectName": "BlazorServer",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BlazorServer\\BlazorServer.csproj",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BlazorServer\\BlazorServer.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BlazorServer\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BlazorServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -111,17 +111,17 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DatabaseManagement\\DatabaseManagement.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DatabaseManagement\\DatabaseManagement.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DatabaseManagement\\DatabaseManagement.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DatabaseManagement\\DatabaseManagement.csproj"
               },
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\PublicInfo.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\PublicInfo.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj"
               },
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\WebAssemblyApp.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\WebAssemblyApp.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\WebAssemblyApp.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\WebAssemblyApp.csproj"
               },
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\WebComponents.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\WebComponents.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj"
               }
             }
           }
@@ -210,14 +210,14 @@
         }
       }
     },
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DatabaseManagement\\DatabaseManagement.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DatabaseManagement\\DatabaseManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DatabaseManagement\\DatabaseManagement.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DatabaseManagement\\DatabaseManagement.csproj",
         "projectName": "DatabaseManagement",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DatabaseManagement\\DatabaseManagement.csproj",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DatabaseManagement\\DatabaseManagement.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DatabaseManagement\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DatabaseManagement\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -232,8 +232,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\Entities\\Entities.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\Entities.csproj"
               }
             }
           }
@@ -295,14 +295,14 @@
         }
       }
     },
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\Entities\\Entities.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\Entities\\Entities.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\Entities\\Entities.csproj",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\Entities.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\Entities\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -317,11 +317,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BasicFunctions\\BasicFunctions.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BasicFunctions\\BasicFunctions.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj"
               },
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\PublicInfo.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\PublicInfo.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj"
               }
             }
           }
@@ -391,14 +391,14 @@
         }
       }
     },
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\PublicInfo.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\PublicInfo.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj",
         "projectName": "PublicInfo",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\PublicInfo.csproj",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -458,14 +458,14 @@
         }
       }
     },
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\WebAssemblyApp.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\WebAssemblyApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\WebAssemblyApp.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\WebAssemblyApp.csproj",
         "projectName": "WebAssemblyApp",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\WebAssemblyApp.csproj",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\WebAssemblyApp.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebAssemblyApp\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebAssemblyApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -480,11 +480,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\WebComponents.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\WebComponents.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj"
               },
-              "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebFunctions\\WebFunctions.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebFunctions\\WebFunctions.csproj"
+              "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebFunctions\\WebFunctions.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebFunctions\\WebFunctions.csproj"
               }
             }
           }
@@ -563,14 +563,14 @@
         }
       }
     },
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\WebComponents.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\WebComponents.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj",
         "projectName": "WebComponents",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\WebComponents.csproj",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\WebComponents.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -636,14 +636,14 @@
         }
       }
     },
-    "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebFunctions\\WebFunctions.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebFunctions\\WebFunctions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebFunctions\\WebFunctions.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebFunctions\\WebFunctions.csproj",
         "projectName": "WebFunctions",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebFunctions\\WebFunctions.csproj",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebFunctions\\WebFunctions.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebFunctions\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebFunctions\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"

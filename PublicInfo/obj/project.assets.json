@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\PublicInfo.csproj",
+      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj",
       "projectName": "PublicInfo",
-      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\PublicInfo.csproj",
+      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj",
       "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\obj\\",
+      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"

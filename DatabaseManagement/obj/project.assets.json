@@ -1335,11 +1335,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DatabaseManagement\\DatabaseManagement.csproj",
+      "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DatabaseManagement\\DatabaseManagement.csproj",
       "projectName": "DatabaseManagement",
-      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DatabaseManagement\\DatabaseManagement.csproj",
+      "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DatabaseManagement\\DatabaseManagement.csproj",
       "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\DatabaseManagement\\obj\\",
+      "outputPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\DatabaseManagement\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1354,8 +1354,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\Entities\\Entities.csproj": {
-              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\Entities\\Entities.csproj"
+            "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\Entities.csproj": {
+              "projectPath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\Entities\\Entities.csproj"
             }
           }
         }

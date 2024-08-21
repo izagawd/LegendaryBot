@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kQb1hMZMg3KQQP49/LD82B7h/URSUjAQKRcDU/zt4CJBDskTiEtDGB6WiyViBe533VVIFeLUPa86/VREHpH/Rw==",
+  "dgSpecHash": "1OFGwnoqXJB+wTQAOqqRgRfvSmZnpGscPGh6UJ30A5xv8qqzVz3Ky3hkObhNgEjcmMMa9brXVkLi7CKigR1QdQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\PublicInfo\\PublicInfo.csproj",
+  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\PublicInfo\\PublicInfo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.7\\microsoft.netcore.app.ref.8.0.7.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.7\\microsoft.windowsdesktop.app.ref.8.0.7.nupkg.sha512",

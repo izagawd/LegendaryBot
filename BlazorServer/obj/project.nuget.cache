@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GDJGhIbWK8DQZnVWhyE1xSGUh1uV8S6tUCWg5edXHPu3RaP2yvZt7D1Qosd2yKXVGv1CEA6TWZ879dNXFigXMg==",
+  "dgSpecHash": "vzivTWIIefTBGjs2mudiT4zzkciG6X+HEhJzk/7xYmwMXAWRL+8kWYCZycBXOllTEldupQluTpUFmMuiMNxmug==",
   "success": true,
-  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BlazorServer\\BlazorServer.csproj",
+  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BlazorServer\\BlazorServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theiz\\.nuget\\packages\\aspnet.security.oauth.discord\\8.1.0\\aspnet.security.oauth.discord.8.1.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\communitytoolkit.highperformance\\8.2.2\\communitytoolkit.highperformance.8.2.2.nupkg.sha512",

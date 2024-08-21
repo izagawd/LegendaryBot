@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dwabqKol8PguCK5DXnxJyxwSO35LMkkqSDJwje2xb8A=",
+  "Hash": "M73d/JzxTWdNi8VVuAl0sHjNk9RVkTBeruu3OtUGBnY=",
   "Source": "WebComponents",
   "BasePath": "_content/WebComponents",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "WebComponents\\wwwroot",
       "Source": "WebComponents",
-      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\wwwroot\\",
       "BasePath": "_content/WebComponents",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\Components\\Navigation\\Navigation.razor.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\Components\\Navigation\\Navigation.razor.js",
       "SourceId": "WebComponents",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\",
       "BasePath": "_content/WebComponents",
       "RelativePath": "Components/Navigation/Navigation.razor.js",
       "AssetKind": "All",
@@ -38,10 +38,10 @@
       "OriginalItemSpec": "Components\\Navigation\\Navigation.razor.js"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css",
       "SourceId": "WebComponents",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/WebComponents",
       "RelativePath": "WebComponents#[.{fingerprint}]?.styles.css",
       "AssetKind": "All",
@@ -56,13 +56,13 @@
       "Integrity": "lEF84LOZ31+Yu9xLOrv4S4hJr36miQzsrsmXRpXAx0c=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css"
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
       "SourceId": "WebComponents",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/WebComponents",
       "RelativePath": "WebComponents#[.{fingerprint}]!.bundle.scp.css",
       "AssetKind": "All",
@@ -77,13 +77,13 @@
       "Integrity": "lEF84LOZ31+Yu9xLOrv4S4hJr36miQzsrsmXRpXAx0c=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\wwwroot\\background.png",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\wwwroot\\background.png",
       "SourceId": "WebComponents",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\wwwroot\\",
       "BasePath": "_content/WebComponents",
       "RelativePath": "background#[.{fingerprint}]?.png",
       "AssetKind": "All",
@@ -101,10 +101,10 @@
       "OriginalItemSpec": "wwwroot\\background.png"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\wwwroot\\exampleJsInterop.js",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\wwwroot\\exampleJsInterop.js",
       "SourceId": "WebComponents",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\wwwroot\\",
       "BasePath": "_content/WebComponents",
       "RelativePath": "exampleJsInterop#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -125,7 +125,7 @@
   "Endpoints": [
     {
       "Route": "background.png",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\wwwroot\\background.png",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\wwwroot\\background.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -146,7 +146,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 21:59:45 GMT"
+          "Value": "Wed, 21 Aug 2024 09:38:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -162,7 +162,7 @@
     },
     {
       "Route": "background.x2rx4ajns0.png",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\wwwroot\\background.png",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\wwwroot\\background.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -183,7 +183,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 21:59:45 GMT"
+          "Value": "Wed, 21 Aug 2024 09:38:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -207,7 +207,7 @@
     },
     {
       "Route": "Components/Navigation/Navigation.razor.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\Components\\Navigation\\Navigation.razor.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\Components\\Navigation\\Navigation.razor.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -232,7 +232,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 18 Aug 2024 21:34:50 GMT"
+          "Value": "Wed, 21 Aug 2024 09:38:44 GMT"
         }
       ],
       "EndpointProperties": [
@@ -248,7 +248,7 @@
     },
     {
       "Route": "exampleJsInterop.6pqz8bsss0.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\wwwroot\\exampleJsInterop.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\wwwroot\\exampleJsInterop.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -269,7 +269,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 21:59:46 GMT"
+          "Value": "Wed, 21 Aug 2024 09:38:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -293,7 +293,7 @@
     },
     {
       "Route": "exampleJsInterop.js",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\wwwroot\\exampleJsInterop.js",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\wwwroot\\exampleJsInterop.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -314,7 +314,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 21:59:46 GMT"
+          "Value": "Wed, 21 Aug 2024 09:38:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -330,7 +330,7 @@
     },
     {
       "Route": "WebComponents.bundle.scp.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -351,7 +351,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 22:06:40 GMT"
+          "Value": "Wed, 21 Aug 2024 09:38:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -367,7 +367,7 @@
     },
     {
       "Route": "WebComponents.ola7dwyb00.bundle.scp.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -388,7 +388,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 22:06:40 GMT"
+          "Value": "Wed, 21 Aug 2024 09:38:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -412,7 +412,7 @@
     },
     {
       "Route": "WebComponents.ola7dwyb00.styles.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -433,7 +433,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 22:06:40 GMT"
+          "Value": "Wed, 21 Aug 2024 09:38:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -457,7 +457,7 @@
     },
     {
       "Route": "WebComponents.styles.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -478,7 +478,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 20 Aug 2024 22:06:40 GMT"
+          "Value": "Wed, 21 Aug 2024 09:38:44 GMT"
         },
         {
           "Name": "Cache-Control",

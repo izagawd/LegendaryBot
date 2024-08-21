@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "poIBloLbXXffCcXg1ydc1HZcUG0X0BrzOZjufJhrfzBz4SnRlqQZA5c0U6mP/6oL4VtZ3RGy74ZlfReimptcIA==",
+  "dgSpecHash": "xQWXy9PqISu6jNpGdpSotSQdGQUnyO2JxVBGOlvoxQwJ79H0eV8t6nG0CWx7EQ1xrzIL1DJnHfpAHwmmF/QEEA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBotSolution\\BasicFunctions\\BasicFunctions.csproj",
+  "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\DiscordBot\\BasicFunctions\\BasicFunctions.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theiz\\.nuget\\packages\\communitytoolkit.highperformance\\8.2.2\\communitytoolkit.highperformance.8.2.2.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\dsharpplus\\5.0.0-nightly-02356\\dsharpplus.5.0.0-nightly-02356.nupkg.sha512",
