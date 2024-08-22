@@ -1,4 +1,5 @@
 /* Main container */
+
 .navigator-container {
     position: sticky;
     width: 280px;
@@ -96,7 +97,8 @@ p{
         display: none;
     }
     .navigator-container{
-
+        border-right-style: none;
+        border-bottom-style: solid;
 
         display: flex;
         width: 100%;

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5DCAVKWf4e7JyUYtJnKsTX7qCWOGCjnnpBcBI04wRik=",
+  "Hash": "qLyhXFwwwtaXaAHO8Anjnfs1w/loePerpK+OSdLS71s=",
   "Source": "WebComponents",
   "BasePath": "_content/WebComponents",
   "Mode": "Default",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
-      "Fingerprint": "4qoep26l2e",
-      "Integrity": "rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4=",
+      "Fingerprint": "4ebgy6zqp8",
+      "Integrity": "rIdt4/IgiDE2Xj2Nyjvb5BqV/tYrI2QuDaLWF9uWo9w=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css"
@@ -52,8 +52,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "4qoep26l2e",
-      "Integrity": "rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4=",
+      "Fingerprint": "4ebgy6zqp8",
+      "Integrity": "rIdt4/IgiDE2Xj2Nyjvb5BqV/tYrI2QuDaLWF9uWo9w=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css"
@@ -61,7 +61,7 @@
   ],
   "Endpoints": [
     {
-      "Route": "WebComponents.4qoep26l2e.bundle.scp.css",
+      "Route": "WebComponents.4ebgy6zqp8.bundle.scp.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -71,7 +71,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2452"
+          "Value": "2524"
         },
         {
           "Name": "Content-Type",
@@ -79,11 +79,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4=\""
+          "Value": "\"rIdt4/IgiDE2Xj2Nyjvb5BqV/tYrI2QuDaLWF9uWo9w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 22 Aug 2024 12:28:11 GMT"
+          "Value": "Thu, 22 Aug 2024 15:16:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -93,7 +93,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "4qoep26l2e"
+          "Value": "4ebgy6zqp8"
         },
         {
           "Name": "label",
@@ -101,12 +101,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4="
+          "Value": "sha256-rIdt4/IgiDE2Xj2Nyjvb5BqV/tYrI2QuDaLWF9uWo9w="
         }
       ]
     },
     {
-      "Route": "WebComponents.4qoep26l2e.styles.css",
+      "Route": "WebComponents.4ebgy6zqp8.styles.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WebComponents.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -116,7 +116,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2452"
+          "Value": "2524"
         },
         {
           "Name": "Content-Type",
@@ -124,11 +124,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4=\""
+          "Value": "\"rIdt4/IgiDE2Xj2Nyjvb5BqV/tYrI2QuDaLWF9uWo9w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 22 Aug 2024 12:28:11 GMT"
+          "Value": "Thu, 22 Aug 2024 15:16:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -138,7 +138,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "4qoep26l2e"
+          "Value": "4ebgy6zqp8"
         },
         {
           "Name": "label",
@@ -146,7 +146,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4="
+          "Value": "sha256-rIdt4/IgiDE2Xj2Nyjvb5BqV/tYrI2QuDaLWF9uWo9w="
         }
       ]
     },
@@ -161,7 +161,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2452"
+          "Value": "2524"
         },
         {
           "Name": "Content-Type",
@@ -169,11 +169,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4=\""
+          "Value": "\"rIdt4/IgiDE2Xj2Nyjvb5BqV/tYrI2QuDaLWF9uWo9w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 22 Aug 2024 12:28:11 GMT"
+          "Value": "Thu, 22 Aug 2024 15:16:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -183,7 +183,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4="
+          "Value": "sha256-rIdt4/IgiDE2Xj2Nyjvb5BqV/tYrI2QuDaLWF9uWo9w="
         }
       ]
     },
@@ -198,7 +198,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2452"
+          "Value": "2524"
         },
         {
           "Name": "Content-Type",
@@ -206,11 +206,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4=\""
+          "Value": "\"rIdt4/IgiDE2Xj2Nyjvb5BqV/tYrI2QuDaLWF9uWo9w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 22 Aug 2024 12:28:11 GMT"
+          "Value": "Thu, 22 Aug 2024 15:16:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -220,7 +220,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4="
+          "Value": "sha256-rIdt4/IgiDE2Xj2Nyjvb5BqV/tYrI2QuDaLWF9uWo9w="
         }
       ]
     }

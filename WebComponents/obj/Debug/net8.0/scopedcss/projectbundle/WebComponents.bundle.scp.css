@@ -1,5 +1,6 @@
 /* _content/WebComponents/Components/Navigation/Navigation.razor.rz.scp.css */
 /* Main container */
+
 .navigator-container[b-x4veywg1kk] {
     position: sticky;
     width: 280px;
@@ -97,7 +98,8 @@ p[b-x4veywg1kk]{
         display: none;
     }
     .navigator-container[b-x4veywg1kk]{
-
+        border-right-style: none;
+        border-bottom-style: solid;
 
         display: flex;
         width: 100%;

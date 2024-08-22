@@ -3,11 +3,19 @@
 <html lang="en">
 
 <head>
+    <style>
+        html, body{
+            height: 100%;
+            
+        }
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <base href="/"/>
-    <link rel="stylesheet" href="bootstrap/bootstrap.min.css"/>
-    <link rel="stylesheet" href="app.css"/>
+
 
     @code{
         public static readonly string stylesCss = Assembly.GetEntryAssembly().GetName().Name + ".styles.css";
@@ -17,7 +25,7 @@
     <HeadOutlet/>
 </head>
 
-<body>
+<body style="margin: 0; height: 100%">
 
 <Routes/>
 

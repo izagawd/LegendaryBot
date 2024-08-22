@@ -3222,8 +3222,8 @@ C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\com
 C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\xsh0wykrpu-nflrx4hls7.gz
 C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\staticwebassets\msbuild.WebAssemblyApp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\h2z58z4bgr-3c87cjsww2.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\qzu90273kd-hxyepihxg1.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\9ixqfwxkjz-di03esuars.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\yeh25km0cy-may7qo1tbf.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\5nr4nupufv-uzz55jre0l.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\h2z58z4bgr-88fgt9oesp.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\qzu90273kd-x51kd4erpt.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\9ixqfwxkjz-kyc7quzsko.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\yeh25km0cy-fb7xrgl2a8.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\5nr4nupufv-yib9a8r0r8.gz

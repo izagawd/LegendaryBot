@@ -2,16 +2,22 @@
 @using Microsoft.AspNetCore.Authorization
 @using WebComponents.Components.Navigation
 @using WebFunctions
-
+@rendermode  InteractiveServer
 
 @inject HttpClient Http
-@rendermode InteractiveServer
+
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 @attribute [Authorize]
 
 @code{
 
+    private enum SortType
+    {
+        
+        Name,
+        Level
+    }
 
     private CharacterPageDto[]? CharacterCollection;
 
@@ -23,12 +29,12 @@
                 return [];
             var theEnumerable = CharacterCollection
                 .Where(i => i.Name.ToLower().Contains(_nameFilter));
-            switch (SortingMethod)
+            switch (SortTypeVal)
             {
-                case "name":
+                case SortType.Name:
                     theEnumerable = theEnumerable.OrderBy(i => i.Name);
                     break;
-                case "level":
+                case SortType.Level:
                     theEnumerable = theEnumerable.OrderBy(i => i.Level);
                     break;
             }
@@ -44,6 +50,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        CharacterCollection = [ new CharacterPageDto() { Name = "Bitch", Level = 1 },  new CharacterPageDto() { Name = "Ayoo", Level = 2 },];
+        return;
         var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
         CharacterCollection = await Http.GetFromJsonAsync<CharacterPageDto[]>($"api/characters-collection?discordId={user.GetDiscordUserId()}");
     }
@@ -55,7 +63,7 @@
 
     private void SelectChange(ChangeEventArgs eventArgs)
     {
-        SortingMethod = (string)eventArgs.Value!;
+        SortTypeVal = Enum.Parse<SortType>((string)eventArgs.Value!);
     }
 
     public void ReverseOrder(ChangeEventArgs eventArgs)
@@ -63,8 +71,8 @@
         reverseOrder = (bool)eventArgs.Value!;
     }
 
-    public const string initialSorting = "level";
-    public string SortingMethod = initialSorting;
+
+    private SortType SortTypeVal { get; set; } = SortType.Level;
     public bool reverseOrder;
 }
 
@@ -72,30 +80,38 @@
 <Navigation>
     
 
-    <div class="filterer-outer">
-        <div class="filterer-inner">
-            <div class="input-div">
+    <div class="filterer-outer" style="height: @(displayAdvancedFilter ? "80px" : "280px");">
+
+        <div class="filter-basic">
+            <div class="input-div filterer-percentage">
                 <span class="material-symbols-outlined name-filter-search-icon">
                     search
                 </span>
-                <input class="name-filter" placeholder=" Search" type="text" @onchange="FilterWithName"/>
-
-            
-                
-                <div>
-                    <button>
-                        ClickMe
-                    </button>
-                    <div style="display: inline-block">
-                        <p>yo</p>
-                        <p>bitch</p>
-                    </div>
-                </div>
+                <input class="name-filter" placeholder="Search" type="text" @onchange="FilterWithName"/>
             </div>
- 
+         
+            <button class="advanced-filter-button" @onclick="() => displayAdvancedFilter = !displayAdvancedFilter">
+                Adv Filt
+            </button>
         </div>
+        @code
+
+        {
+            private bool displayAdvancedFilter = false;
+        }
+        <p>Sort By</p>
+        <select @onchange="SelectChange" class="filterer-percentage" style="height: 30px">
+
+            @foreach (var i in Enum.GetValues<SortType>())
+            {
+            <option selected="@(SortTypeVal == i)" value="@i">@i</option>
+            }
+
+        </select>
+        <p>Reverse Order</p>
+        <input type="checkbox" style="width: 25px; height: 25px"/>
     </div>
-    
+
 
     @code{
 
