@@ -3224,6 +3224,6 @@ C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\sta
 C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\staticwebassets\msbuild.WebAssemblyApp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
 C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\h2z58z4bgr-88fgt9oesp.gz
 C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\qzu90273kd-x51kd4erpt.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\9ixqfwxkjz-kyc7quzsko.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\yeh25km0cy-fb7xrgl2a8.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\5nr4nupufv-yib9a8r0r8.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\9ixqfwxkjz-o1fyx9mhli.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\yeh25km0cy-4o2li9d1j6.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\5nr4nupufv-n3uyzqea4q.gz
