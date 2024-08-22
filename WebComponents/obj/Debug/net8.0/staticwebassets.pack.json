@@ -2,11 +2,7 @@
   "Files": [
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
-      "PackagePath": "staticwebassets\\WebComponents.3q3i2fask8.bundle.scp.css"
-    },
-    {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\AYOO.json",
-      "PackagePath": "staticwebassets\\AYOO.json"
+      "PackagePath": "staticwebassets\\WebComponents.4qoep26l2e.bundle.scp.css"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebComponents.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

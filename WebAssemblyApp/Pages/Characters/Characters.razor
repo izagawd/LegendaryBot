@@ -70,23 +70,32 @@
 
 
 <Navigation>
-    @if (OperatingSystem.IsBrowser())
-    {
-        <h1>BROWSER BITCH</h1>
-    }
-    <div class="filterer">
+    
 
-        <input class="name-filter" type="text" @onchange="FilterWithName"/>
-        <p class="some-para">Sort By</p>
-        <select @onchange="SelectChange" name="Sort By" style="width: 100px; height:35px; align-self: center;
-margin-left: 30px">
-            <option value="level">Level</option>
-            <option value="name">Name</option>
-        </select>
-        <p class="some-para">Reverse Order</p>
-        <input type="checkbox" style="width:25px; height:25px; align-self: center; margin-left: 30px;" value="@reverseOrder"
-               @onchange="ReverseOrder"/>
+    <div class="filterer-outer">
+        <div class="filterer-inner">
+            <div class="input-div">
+                <span class="material-symbols-outlined name-filter-search-icon">
+                    search
+                </span>
+                <input class="name-filter" placeholder=" Search" type="text" @onchange="FilterWithName"/>
+
+            
+                
+                <div>
+                    <button>
+                        ClickMe
+                    </button>
+                    <div style="display: inline-block">
+                        <p>yo</p>
+                        <p>bitch</p>
+                    </div>
+                </div>
+            </div>
+ 
+        </div>
     </div>
+    
 
     @code{
 
@@ -95,14 +104,14 @@ margin-left: 30px">
             return @<div class="character-to-display">
 
 
-                <a href="/character-info/@character.Number">
-                    <img src="@character.ImageUrl" width="200" height="200" style=" background-color: @character.Color;" class="image-box"/>
-                </a>
+                       <a href="/character-info/@character.Number">
+                           <img src="@character.ImageUrl" width="200" height="200" style=" background-color: @character.Color;" class="image-box"/>
+                       </a>
 
-                <p class="character-image-p">@character.Name</p>
-                <p class="character-image-p">Level: @character.Level </p>
-                <p class="character-image-p">Number: @character.Number</p>
-            </div>;
+                       <p class="character-image-p">@character.Name</p>
+                       <p class="character-image-p">Level: @character.Level </p>
+                       <p class="character-image-p">Number: @character.Number</p>
+                   </div>;
         }
 
     }
@@ -111,8 +120,17 @@ margin-left: 30px">
         if (UsingCharacterCollection is not null)
         {
             <div class="characters-container">
+                @if (OperatingSystem.IsBrowser())
+                {
+                <h1>BROWSER BITCH</h1>
+                }
+                else
+                {
+                <h1>damn</h1>
+                }
                 @foreach (var i in UsingCharacterCollection)
                 {
+
                     @RenderCharacter(i)
                     ;
                 }

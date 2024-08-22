@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AGH4aCC0KxyectKSvjmcWopR3dTDkN2tz2HMRGyOXaI=",
+  "Hash": "spdYSOj18c8VnjLNJnn0V+gzTHsyi5maVlr2r6yImdo=",
   "Source": "BlazorServer",
   "BasePath": "_content/BlazorServer",
   "Mode": "Default",
@@ -89,8 +89,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
-      "Fingerprint": "51jeys6x9x",
-      "Integrity": "J7aGtiA5+/e6Gs+PqIbSXgpGiOac3abAJienIYqc0I4=",
+      "Fingerprint": "r2uccjl8to",
+      "Integrity": "vdT94rLwTPaXsadwYxkimAJ1QcmYDQP8AwC85pBgOKM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\obj\\Debug\\net8.0\\scopedcss\\bundle\\BlazorServer.styles.css"
@@ -110,8 +110,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "xi6ycuqclh",
-      "Integrity": "ibnWNiZSKk9vVBvPeu6AjMz89v5uoWtVcFGSxBp6K4o=",
+      "Fingerprint": "ua3y9v5b9m",
+      "Integrity": "yiX+ekKlkX69F1I9ITq38nhztZN2g8tErQB9GohMT0o=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorServer.bundle.scp.css"
@@ -1018,6 +1018,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\home.png",
+      "SourceId": "BlazorServer",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\",
+      "BasePath": "_content/BlazorServer",
+      "RelativePath": "home#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "imdoktr3nn",
+      "Integrity": "+vI6x1ClhzB08FC+RjUEKWPJv0HitQCXEjxs/nOEb80=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\home.png"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\js\\info.js",
@@ -2294,8 +2315,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "manifest",
-      "Fingerprint": "5azm84hivz",
-      "Integrity": "43t8LC7ZM1HERHw/r3S4Dz4KoOolGkA1VUJIYXvEdR0=",
+      "Fingerprint": "uzz55jre0l",
+      "Integrity": "esZwu3KCUhhLlF0TZuuQJcuw2oqzQCHMb5Qfod15OnE=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.boot.json"
@@ -2679,6 +2700,27 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.WebAssembly.wasm"
     },
     {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Connections.Abstractions.wasm",
+      "SourceId": "WebAssemblyApp",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.Connections.Abstractions.wasm",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "WasmResource",
+      "AssetTraitValue": "runtime",
+      "Fingerprint": "4kqn2nxw5c",
+      "Integrity": "NPQ2NAXt1xpY19eBK6BIDSkmHtv64NeNIvAEAZdBXKc=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Connections.Abstractions.wasm"
+    },
+    {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Metadata.wasm",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Project",
@@ -2698,6 +2740,69 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Metadata.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.SignalR.Client.Core.wasm",
+      "SourceId": "WebAssemblyApp",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.SignalR.Client.Core.wasm",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "WasmResource",
+      "AssetTraitValue": "runtime",
+      "Fingerprint": "ac3s1dy7yl",
+      "Integrity": "Fis+eW5XYKCySyo+QII+3xZ+Hy77HN0hAK8fcgZXp4c=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.SignalR.Client.Core.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.SignalR.Common.wasm",
+      "SourceId": "WebAssemblyApp",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.SignalR.Common.wasm",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "WasmResource",
+      "AssetTraitValue": "runtime",
+      "Fingerprint": "j493lpis20",
+      "Integrity": "86kmUlSmkAgnB0ZopC9A2Z4/lQzqArtAy4LhVAo1ROc=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.SignalR.Common.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.SignalR.Protocols.Json.wasm",
+      "SourceId": "WebAssemblyApp",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.SignalR.Protocols.Json.wasm",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "WasmResource",
+      "AssetTraitValue": "runtime",
+      "Fingerprint": "vxzviwqw08",
+      "Integrity": "sznoDoxrzzRge/0zLIHcSoxWGlnX+nhxB1IYeeXyG+c=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.SignalR.Protocols.Json.wasm"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.CSharp.wasm",
@@ -2866,6 +2971,27 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.Extensions.DependencyInjection.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.Extensions.Features.wasm",
+      "SourceId": "WebAssemblyApp",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.Extensions.Features.wasm",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "WasmResource",
+      "AssetTraitValue": "runtime",
+      "Fingerprint": "8hmo3rqwbf",
+      "Integrity": "NKnb5Yd8sKP3nN9uvMM7Z4wg4VnbiyNC93qfwKCP3ks=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.Extensions.Features.wasm"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.Extensions.FileProviders.Abstractions.wasm",
@@ -6578,8 +6704,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "qfrxrj2yii",
-      "Integrity": "2i/9GYy9DpH/8VkpRztkr77KVB+Bh2z09JsqCaFThAw=",
+      "Fingerprint": "may7qo1tbf",
+      "Integrity": "oky9tGjpDx+020z86QrLab925FQsQmPtBEE6kKtA2nY=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebAssemblyApp.pdb"
@@ -6599,8 +6725,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "h3derw5ocb",
-      "Integrity": "zQTMqq6FktdrfiabekPJv68hsiPO2l/sDeoA0qmLnUU=",
+      "Fingerprint": "di03esuars",
+      "Integrity": "q7yvSD4Nb1mgygTO5XbaracRpaB3oAczH01cdaevgUk=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebAssemblyApp.wasm"
@@ -6620,8 +6746,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "z1i5hn2372",
-      "Integrity": "pzeEra37q8ZojXkikk91u94qAi8KziYdS7bLoN58i+M=",
+      "Fingerprint": "hxyepihxg1",
+      "Integrity": "VTml1ZdhULxwX5xgJQsq/89iVWV1RKzdCEu6bGDyndM=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebComponents.pdb"
@@ -6641,8 +6767,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "jls10lnlcq",
-      "Integrity": "B2t6xDo+ZCc8ifD0KHsKG/qVYJOpx2FlKC0zaQdXvTs=",
+      "Fingerprint": "3c87cjsww2",
+      "Integrity": "DWInihJCEhKjULA1KzTuIhqimffCN96Ugs43BEoM4EY=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebComponents.wasm"
@@ -6662,8 +6788,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "13rckeixrm",
-      "Integrity": "4/8YHkORyRrqVFdTAwLqp/3cp1Gx5GmEAfMtIXwvY3Y=",
+      "Fingerprint": "nflrx4hls7",
+      "Integrity": "Q0afgxXOqHQkNK8YaAa9dPS5w+QG4XkQlPGYuaIQ2k4=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebFunctions.pdb"
@@ -6683,8 +6809,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "x15yhhjcxu",
-      "Integrity": "6+xMgyAmDeDYeCS48uJwbDxBBUN4lba+oCQlvvmNf6s=",
+      "Fingerprint": "lrjrbkjzlf",
+      "Integrity": "L7jbG3JgqZbV1wNkkyGeGOTSkx9pE9ZfFaw7Q1lA2OA=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebFunctions.wasm"
@@ -6814,6 +6940,27 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\0tdm7p4dws-feg7kid814.gz"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\13yqsw927t-vxzviwqw08.gz",
+      "SourceId": "WebAssemblyApp",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.SignalR.Protocols.Json.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.SignalR.Protocols.Json.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "y99flfum2t",
+      "Integrity": "tg2IwkvVSAddimJxEeay7hwqGBLGDJtyJ9k1AwJp9Kc=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\13yqsw927t-vxzviwqw08.gz"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\18q3f5ohj8-do1x9qyhqe.gz",
@@ -7299,7 +7446,7 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5lht1wysj1-tjcz0u77k5.gz"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-5azm84hivz.gz",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-uzz55jre0l.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Project",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -7313,11 +7460,11 @@
       "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.boot.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "05ivy4ghhi",
-      "Integrity": "bGDrfgIK6B3S0c/fHVZeoQrWLL1+jKyx8PFRtTqPel8=",
+      "Fingerprint": "10vgv9hfmu",
+      "Integrity": "8RN643ZUTIlX57YirAnybypNZtcZThnksALVDj40/bE=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-5azm84hivz.gz"
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-uzz55jre0l.gz"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5v60og0xbp-pv5snxb7ya.gz",
@@ -7381,6 +7528,27 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\6o9dt8s7ur-6xphb9oqrk.gz"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\6q6stqezfg-4kqn2nxw5c.gz",
+      "SourceId": "WebAssemblyApp",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.Connections.Abstractions.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Connections.Abstractions.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "kxiy7rxptq",
+      "Integrity": "WJeVeyIg61oz+OZGzAbW9BzMrQ0p85fSiY1TCi8EK08=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\6q6stqezfg-4kqn2nxw5c.gz"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\6qw0avnkgm-mt7elncvw1.gz",
@@ -7761,7 +7929,7 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8jiwoecuv3-lbcqv7x4to.gz"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-x15yhhjcxu.gz",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-lrjrbkjzlf.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Project",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -7775,11 +7943,11 @@
       "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebFunctions.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "7zcfk755ly",
-      "Integrity": "c48FZ3bMTMs5Kr+GcGzA2W7xHSmpdvHU6zQHfXe0+XE=",
+      "Fingerprint": "svefk409lo",
+      "Integrity": "6KJk/306KA3FaNRH3U+PB973OsypJ3i6HrvsyRKjJJs=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-x15yhhjcxu.gz"
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-lrjrbkjzlf.gz"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8q2hm0ftjm-wgcl5uege2.gz",
@@ -7866,6 +8034,27 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\92df1aw5p3-1b34hl5wtf.gz"
     },
     {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\96w7dpk7e0-ac3s1dy7yl.gz",
+      "SourceId": "WebAssemblyApp",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.SignalR.Client.Core.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.SignalR.Client.Core.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "655zq09bgc",
+      "Integrity": "NlFIGuHQRlasedGc4y2KDrF/me0Ww+kbPlvo59IDFAI=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\96w7dpk7e0-ac3s1dy7yl.gz"
+    },
+    {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\97p9apsmgc-s83lveyza9.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Project",
@@ -7950,7 +8139,7 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9i1r5lnqgs-2adx6a65ky.gz"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-h3derw5ocb.gz",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-di03esuars.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Project",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -7964,11 +8153,11 @@
       "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebAssemblyApp.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "94ifnv9rxa",
-      "Integrity": "h1N8mmsbkRmeckVnpIe7j4GHzETKORl6bcZchw9834Q=",
+      "Fingerprint": "pk401smcuq",
+      "Integrity": "1/ff9xWbW7/mK49QeDsm3udoavcj9Ce3dR8fvT3ZyFA=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-h3derw5ocb.gz"
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-di03esuars.gz"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9my77x9urw-nk5nk0qomw.gz",
@@ -9021,7 +9210,7 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\gtk01bxjt5-n4wmay8xvt.gz"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h2z58z4bgr-jls10lnlcq.gz",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h2z58z4bgr-3c87cjsww2.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Project",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -9035,11 +9224,32 @@
       "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebComponents.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "byx5dpx3nh",
-      "Integrity": "IzySDgFG+Tp03cuETFZjoEc/hre9qcazwxN5xebZXYA=",
+      "Fingerprint": "t7gr0qf1s6",
+      "Integrity": "J51Tv5uJGo2Z26vD98UMC1mlDVkegMQ2MnVtHxZfZHA=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h2z58z4bgr-jls10lnlcq.gz"
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h2z58z4bgr-3c87cjsww2.gz"
+    },
+    {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h5ah1zbapw-j493lpis20.gz",
+      "SourceId": "WebAssemblyApp",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.SignalR.Common.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.SignalR.Common.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "9zkuitk1hy",
+      "Integrity": "tSssj6thlx8Gp1u+eruL/ghJwgOT8mI5Vb9sf4z/uyk=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h5ah1zbapw-j493lpis20.gz"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h60tyq6svf-lrw2479b1d.gz",
@@ -10092,7 +10302,7 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\qz2p76h5ya-0v0n8az6z6.gz"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\qzu90273kd-z1i5hn2372.gz",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\qzu90273kd-hxyepihxg1.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Project",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -10106,11 +10316,11 @@
       "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebComponents.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "9uh05h3sxx",
-      "Integrity": "r2yZZt8qtbv/GjDqpSc0wp+uisxPZkiBaCYKw4G1vc8=",
+      "Fingerprint": "jl4l7570n7",
+      "Integrity": "eeqLzIBHRY7CgemRuvIO9t3KJ1Qlomc/rMGfI3PKsVU=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\qzu90273kd-z1i5hn2372.gz"
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\qzu90273kd-hxyepihxg1.gz"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\r0ouo6m2cz-r52w068r1t.gz",
@@ -10533,6 +10743,27 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\uw0k7465fa-62ffx9inc4.gz"
     },
     {
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\uz8dvvfqq2-8hmo3rqwbf.gz",
+      "SourceId": "WebAssemblyApp",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.Extensions.Features.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.Extensions.Features.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "yzqheypcv8",
+      "Integrity": "7sgf6cuac7YBIyyQwpJsA4S6AriHyDMPvhtvx2VKiPw=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\uz8dvvfqq2-8hmo3rqwbf.gz"
+    },
+    {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\v00ajrum8x-c5bn5y4wyr.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Project",
@@ -10890,7 +11121,7 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xp6pqj4rjm-4c2349mqck.gz"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-13rckeixrm.gz",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-nflrx4hls7.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Project",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -10904,11 +11135,11 @@
       "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebFunctions.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "qob7p7asj0",
-      "Integrity": "FvR2fd/bVK62IwR79StFj1WY+M2WhZgS7bxPSDWNpRM=",
+      "Fingerprint": "mhqtj8e85o",
+      "Integrity": "Wh4LWO0qVndCB+XL3rPk9M4JfsrsPM1W8W0lhorFO08=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-13rckeixrm.gz"
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-nflrx4hls7.gz"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xz2qz8icdb-d42q7esc23.gz",
@@ -10995,7 +11226,7 @@
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yb133s9jg4-weyqkl79nv.gz"
     },
     {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-qfrxrj2yii.gz",
+      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-may7qo1tbf.gz",
       "SourceId": "WebAssemblyApp",
       "SourceType": "Project",
       "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -11009,11 +11240,11 @@
       "RelatedAsset": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\WebAssemblyApp.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "hmqic85ihd",
-      "Integrity": "tyy5RfIWjoecfOlD+kYxifXvhQEzpP4wvbCmCjzG1Ng=",
+      "Fingerprint": "k06iql17tz",
+      "Integrity": "9IyiUjGpgMJeft3LS8Dc9/hYVs5LrROZQtqFMqSq1rk=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-qfrxrj2yii.gz"
+      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-may7qo1tbf.gz"
     },
     {
       "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yey4z418bd-nxcikbw5ua.gz",
@@ -11156,8 +11387,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "15gtlz91m6",
-      "Integrity": "C5joYrYuxtam8Z3wa9yMUh6ahFmmEmfoTroXZRGfF0s=",
+      "Fingerprint": "2k59gl6n2r",
+      "Integrity": "Yigwnb4YV7QJMSakM9V9XHbNmbWifsrdLfvFwIgB64I=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebAssemblyApp.bundle.scp.css"
@@ -11219,32 +11450,11 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "3q3i2fask8",
-      "Integrity": "pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0=",
+      "Fingerprint": "4qoep26l2e",
+      "Integrity": "rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css"
-    },
-    {
-      "Identity": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\AYOO.json",
-      "SourceId": "WebComponents",
-      "SourceType": "Project",
-      "ContentRoot": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\",
-      "BasePath": "_content/WebComponents",
-      "RelativePath": "AYOO#[.{fingerprint}]?.json",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "h0altkoohp",
-      "Integrity": "D01AGKWJnredrhqfBcstrHKhzJJwavM5fIa8hEzz/rE=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\AYOO.json"
     }
   ],
   "Endpoints": [
@@ -11286,89 +11496,7 @@
       ]
     },
     {
-      "Route": "_content/WebComponents/AYOO.h0altkoohp.json",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\AYOO.json",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "21"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/json"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"D01AGKWJnredrhqfBcstrHKhzJJwavM5fIa8hEzz/rE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 12:55:47 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "h0altkoohp"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-D01AGKWJnredrhqfBcstrHKhzJJwavM5fIa8hEzz/rE="
-        },
-        {
-          "Name": "label",
-          "Value": "_content/WebComponents/AYOO.json"
-        }
-      ]
-    },
-    {
-      "Route": "_content/WebComponents/AYOO.json",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\wwwroot\\AYOO.json",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "21"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/json"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"D01AGKWJnredrhqfBcstrHKhzJJwavM5fIa8hEzz/rE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 12:55:47 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-D01AGKWJnredrhqfBcstrHKhzJJwavM5fIa8hEzz/rE="
-        }
-      ]
-    },
-    {
-      "Route": "_content/WebComponents/WebComponents.3q3i2fask8.bundle.scp.css",
+      "Route": "_content/WebComponents/WebComponents.4qoep26l2e.bundle.scp.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebComponents.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -11382,7 +11510,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5786"
+          "Value": "2452"
         },
         {
           "Name": "Content-Type",
@@ -11390,21 +11518,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0=\""
+          "Value": "\"rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 12:52:20 GMT"
+          "Value": "Thu, 22 Aug 2024 12:28:11 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3q3i2fask8"
+          "Value": "4qoep26l2e"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0="
+          "Value": "sha256-rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4="
         },
         {
           "Name": "label",
@@ -11427,7 +11555,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5786"
+          "Value": "2452"
         },
         {
           "Name": "Content-Type",
@@ -11435,17 +11563,17 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0=\""
+          "Value": "\"rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 12:52:20 GMT"
+          "Value": "Thu, 22 Aug 2024 12:28:11 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-pZ4GzCX+EW6vt2WZ4p6QgxVz62kCpfx64/Plrjq6im0="
+          "Value": "sha256-rBWwrdmzERF2/SM8ylD9xwMc8UvuDn/SmVprvvbxHF4="
         }
       ]
     },
@@ -11464,7 +11592,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "20317"
+          "Value": "20864"
         },
         {
           "Name": "Content-Type",
@@ -11472,28 +11600,28 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"43t8LC7ZM1HERHw/r3S4Dz4KoOolGkA1VUJIYXvEdR0=\""
+          "Value": "\"esZwu3KCUhhLlF0TZuuQJcuw2oqzQCHMb5Qfod15OnE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 16:32:08 GMT"
+          "Value": "Thu, 22 Aug 2024 12:36:35 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-43t8LC7ZM1HERHw/r3S4Dz4KoOolGkA1VUJIYXvEdR0="
+          "Value": "sha256-esZwu3KCUhhLlF0TZuuQJcuw2oqzQCHMb5Qfod15OnE="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-5azm84hivz.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-uzz55jre0l.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000111296605"
+          "Quality": "0.000108601216"
         }
       ],
       "ResponseHeaders": [
@@ -11511,15 +11639,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8984"
+          "Value": "9207"
         },
         {
           "Name": "ETag",
-          "Value": "\"bGDrfgIK6B3S0c/fHVZeoQrWLL1+jKyx8PFRtTqPel8=\""
+          "Value": "\"8RN643ZUTIlX57YirAnybypNZtcZThnksALVDj40/bE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:21:04 GMT"
+          "Value": "Thu, 22 Aug 2024 12:32:19 GMT"
         },
         {
           "Name": "Vary",
@@ -11531,19 +11659,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"43t8LC7ZM1HERHw/r3S4Dz4KoOolGkA1VUJIYXvEdR0=\""
+          "Value": "W/\"esZwu3KCUhhLlF0TZuuQJcuw2oqzQCHMb5Qfod15OnE=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-43t8LC7ZM1HERHw/r3S4Dz4KoOolGkA1VUJIYXvEdR0="
+          "Value": "sha256-esZwu3KCUhhLlF0TZuuQJcuw2oqzQCHMb5Qfod15OnE="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json.gz",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-5azm84hivz.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\5nr4nupufv-uzz55jre0l.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -11560,7 +11688,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8984"
+          "Value": "9207"
         },
         {
           "Name": "Content-Type",
@@ -11568,11 +11696,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"bGDrfgIK6B3S0c/fHVZeoQrWLL1+jKyx8PFRtTqPel8=\""
+          "Value": "\"8RN643ZUTIlX57YirAnybypNZtcZThnksALVDj40/bE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:21:04 GMT"
+          "Value": "Thu, 22 Aug 2024 12:32:19 GMT"
         },
         {
           "Name": "Vary",
@@ -11582,7 +11710,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-bGDrfgIK6B3S0c/fHVZeoQrWLL1+jKyx8PFRtTqPel8="
+          "Value": "sha256-8RN643ZUTIlX57YirAnybypNZtcZThnksALVDj40/bE="
         }
       ]
     },
@@ -14053,6 +14181,143 @@
       ]
     },
     {
+      "Route": "_framework/Microsoft.AspNetCore.Connections.Abstractions.wasm",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Connections.Abstractions.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29461"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NPQ2NAXt1xpY19eBK6BIDSkmHtv64NeNIvAEAZdBXKc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-NPQ2NAXt1xpY19eBK6BIDSkmHtv64NeNIvAEAZdBXKc="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.Connections.Abstractions.wasm",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\6q6stqezfg-4kqn2nxw5c.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000076745971"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13029"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WJeVeyIg61oz+OZGzAbW9BzMrQ0p85fSiY1TCi8EK08=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"NPQ2NAXt1xpY19eBK6BIDSkmHtv64NeNIvAEAZdBXKc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-NPQ2NAXt1xpY19eBK6BIDSkmHtv64NeNIvAEAZdBXKc="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.Connections.Abstractions.wasm.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\6q6stqezfg-4kqn2nxw5c.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13029"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WJeVeyIg61oz+OZGzAbW9BzMrQ0p85fSiY1TCi8EK08=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WJeVeyIg61oz+OZGzAbW9BzMrQ0p85fSiY1TCi8EK08="
+        }
+      ]
+    },
+    {
       "Route": "_framework/Microsoft.AspNetCore.Metadata.wasm",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Metadata.wasm",
       "Selectors": [],
@@ -14186,6 +14451,417 @@
         {
           "Name": "integrity",
           "Value": "sha256-tpK/qY4bS0wu+/m2EnJg9vc2pgKd0eBNzRwalQ5s68g="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.SignalR.Client.Core.wasm",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.SignalR.Client.Core.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "187157"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Fis+eW5XYKCySyo+QII+3xZ+Hy77HN0hAK8fcgZXp4c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Fis+eW5XYKCySyo+QII+3xZ+Hy77HN0hAK8fcgZXp4c="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.SignalR.Client.Core.wasm",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\96w7dpk7e0-ac3s1dy7yl.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000014311270"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "69874"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NlFIGuHQRlasedGc4y2KDrF/me0Ww+kbPlvo59IDFAI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Fis+eW5XYKCySyo+QII+3xZ+Hy77HN0hAK8fcgZXp4c=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Fis+eW5XYKCySyo+QII+3xZ+Hy77HN0hAK8fcgZXp4c="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.SignalR.Client.Core.wasm.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\96w7dpk7e0-ac3s1dy7yl.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "69874"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NlFIGuHQRlasedGc4y2KDrF/me0Ww+kbPlvo59IDFAI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-NlFIGuHQRlasedGc4y2KDrF/me0Ww+kbPlvo59IDFAI="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.SignalR.Common.wasm",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.SignalR.Common.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "32021"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"86kmUlSmkAgnB0ZopC9A2Z4/lQzqArtAy4LhVAo1ROc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-86kmUlSmkAgnB0ZopC9A2Z4/lQzqArtAy4LhVAo1ROc="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.SignalR.Common.wasm",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h5ah1zbapw-j493lpis20.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000066853857"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14957"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tSssj6thlx8Gp1u+eruL/ghJwgOT8mI5Vb9sf4z/uyk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"86kmUlSmkAgnB0ZopC9A2Z4/lQzqArtAy4LhVAo1ROc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-86kmUlSmkAgnB0ZopC9A2Z4/lQzqArtAy4LhVAo1ROc="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.SignalR.Common.wasm.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h5ah1zbapw-j493lpis20.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14957"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tSssj6thlx8Gp1u+eruL/ghJwgOT8mI5Vb9sf4z/uyk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tSssj6thlx8Gp1u+eruL/ghJwgOT8mI5Vb9sf4z/uyk="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.SignalR.Protocols.Json.wasm",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.SignalR.Protocols.Json.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "26901"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"sznoDoxrzzRge/0zLIHcSoxWGlnX+nhxB1IYeeXyG+c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-sznoDoxrzzRge/0zLIHcSoxWGlnX+nhxB1IYeeXyG+c="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.SignalR.Protocols.Json.wasm",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\13yqsw927t-vxzviwqw08.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000078672016"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "12710"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tg2IwkvVSAddimJxEeay7hwqGBLGDJtyJ9k1AwJp9Kc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"sznoDoxrzzRge/0zLIHcSoxWGlnX+nhxB1IYeeXyG+c=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-sznoDoxrzzRge/0zLIHcSoxWGlnX+nhxB1IYeeXyG+c="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.SignalR.Protocols.Json.wasm.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\13yqsw927t-vxzviwqw08.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "12710"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tg2IwkvVSAddimJxEeay7hwqGBLGDJtyJ9k1AwJp9Kc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tg2IwkvVSAddimJxEeay7hwqGBLGDJtyJ9k1AwJp9Kc="
         }
       ]
     },
@@ -15282,6 +15958,143 @@
         {
           "Name": "integrity",
           "Value": "sha256-SCGjOWsjRt5omga0s79MGCujd9VwxpJlzhWzATFRaCA="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.Extensions.Features.wasm",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.Extensions.Features.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15637"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NKnb5Yd8sKP3nN9uvMM7Z4wg4VnbiyNC93qfwKCP3ks=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-NKnb5Yd8sKP3nN9uvMM7Z4wg4VnbiyNC93qfwKCP3ks="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.Extensions.Features.wasm",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\uz8dvvfqq2-8hmo3rqwbf.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000141482739"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7067"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7sgf6cuac7YBIyyQwpJsA4S6AriHyDMPvhtvx2VKiPw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"NKnb5Yd8sKP3nN9uvMM7Z4wg4VnbiyNC93qfwKCP3ks=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-NKnb5Yd8sKP3nN9uvMM7Z4wg4VnbiyNC93qfwKCP3ks="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.Extensions.Features.wasm.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\uz8dvvfqq2-8hmo3rqwbf.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7067"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7sgf6cuac7YBIyyQwpJsA4S6AriHyDMPvhtvx2VKiPw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 07:42:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7sgf6cuac7YBIyyQwpJsA4S6AriHyDMPvhtvx2VKiPw="
         }
       ]
     },
@@ -39412,7 +40225,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "22980"
+          "Value": "22700"
         },
         {
           "Name": "Content-Type",
@@ -39420,28 +40233,28 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"2i/9GYy9DpH/8VkpRztkr77KVB+Bh2z09JsqCaFThAw=\""
+          "Value": "\"oky9tGjpDx+020z86QrLab925FQsQmPtBEE6kKtA2nY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 16:32:08 GMT"
+          "Value": "Thu, 22 Aug 2024 12:36:34 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-2i/9GYy9DpH/8VkpRztkr77KVB+Bh2z09JsqCaFThAw="
+          "Value": "sha256-oky9tGjpDx+020z86QrLab925FQsQmPtBEE6kKtA2nY="
         }
       ]
     },
     {
       "Route": "_framework/WebAssemblyApp.pdb",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-qfrxrj2yii.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-may7qo1tbf.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000063496095"
+          "Quality": "0.000064994151"
         }
       ],
       "ResponseHeaders": [
@@ -39459,15 +40272,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "15748"
+          "Value": "15385"
         },
         {
           "Name": "ETag",
-          "Value": "\"tyy5RfIWjoecfOlD+kYxifXvhQEzpP4wvbCmCjzG1Ng=\""
+          "Value": "\"9IyiUjGpgMJeft3LS8Dc9/hYVs5LrROZQtqFMqSq1rk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:18:53 GMT"
+          "Value": "Thu, 22 Aug 2024 12:32:18 GMT"
         },
         {
           "Name": "Vary",
@@ -39479,19 +40292,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"2i/9GYy9DpH/8VkpRztkr77KVB+Bh2z09JsqCaFThAw=\""
+          "Value": "W/\"oky9tGjpDx+020z86QrLab925FQsQmPtBEE6kKtA2nY=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-2i/9GYy9DpH/8VkpRztkr77KVB+Bh2z09JsqCaFThAw="
+          "Value": "sha256-oky9tGjpDx+020z86QrLab925FQsQmPtBEE6kKtA2nY="
         }
       ]
     },
     {
       "Route": "_framework/WebAssemblyApp.pdb.gz",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-qfrxrj2yii.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\yeh25km0cy-may7qo1tbf.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -39508,7 +40321,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "15748"
+          "Value": "15385"
         },
         {
           "Name": "Content-Type",
@@ -39516,11 +40329,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"tyy5RfIWjoecfOlD+kYxifXvhQEzpP4wvbCmCjzG1Ng=\""
+          "Value": "\"9IyiUjGpgMJeft3LS8Dc9/hYVs5LrROZQtqFMqSq1rk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:18:53 GMT"
+          "Value": "Thu, 22 Aug 2024 12:32:18 GMT"
         },
         {
           "Name": "Vary",
@@ -39530,7 +40343,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-tyy5RfIWjoecfOlD+kYxifXvhQEzpP4wvbCmCjzG1Ng="
+          "Value": "sha256-9IyiUjGpgMJeft3LS8Dc9/hYVs5LrROZQtqFMqSq1rk="
         }
       ]
     },
@@ -39557,28 +40370,28 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zQTMqq6FktdrfiabekPJv68hsiPO2l/sDeoA0qmLnUU=\""
+          "Value": "\"q7yvSD4Nb1mgygTO5XbaracRpaB3oAczH01cdaevgUk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:18:53 GMT"
+          "Value": "Thu, 22 Aug 2024 12:36:34 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-zQTMqq6FktdrfiabekPJv68hsiPO2l/sDeoA0qmLnUU="
+          "Value": "sha256-q7yvSD4Nb1mgygTO5XbaracRpaB3oAczH01cdaevgUk="
         }
       ]
     },
     {
       "Route": "_framework/WebAssemblyApp.wasm",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-h3derw5ocb.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-di03esuars.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000109577033"
+          "Quality": "0.000109015589"
         }
       ],
       "ResponseHeaders": [
@@ -39596,15 +40409,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9125"
+          "Value": "9172"
         },
         {
           "Name": "ETag",
-          "Value": "\"h1N8mmsbkRmeckVnpIe7j4GHzETKORl6bcZchw9834Q=\""
+          "Value": "\"1/ff9xWbW7/mK49QeDsm3udoavcj9Ce3dR8fvT3ZyFA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:18:53 GMT"
+          "Value": "Thu, 22 Aug 2024 12:32:18 GMT"
         },
         {
           "Name": "Vary",
@@ -39616,19 +40429,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"zQTMqq6FktdrfiabekPJv68hsiPO2l/sDeoA0qmLnUU=\""
+          "Value": "W/\"q7yvSD4Nb1mgygTO5XbaracRpaB3oAczH01cdaevgUk=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-zQTMqq6FktdrfiabekPJv68hsiPO2l/sDeoA0qmLnUU="
+          "Value": "sha256-q7yvSD4Nb1mgygTO5XbaracRpaB3oAczH01cdaevgUk="
         }
       ]
     },
     {
       "Route": "_framework/WebAssemblyApp.wasm.gz",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-h3derw5ocb.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\9ixqfwxkjz-di03esuars.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -39645,7 +40458,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9125"
+          "Value": "9172"
         },
         {
           "Name": "Content-Type",
@@ -39653,11 +40466,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"h1N8mmsbkRmeckVnpIe7j4GHzETKORl6bcZchw9834Q=\""
+          "Value": "\"1/ff9xWbW7/mK49QeDsm3udoavcj9Ce3dR8fvT3ZyFA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:18:53 GMT"
+          "Value": "Thu, 22 Aug 2024 12:32:18 GMT"
         },
         {
           "Name": "Vary",
@@ -39667,7 +40480,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-h1N8mmsbkRmeckVnpIe7j4GHzETKORl6bcZchw9834Q="
+          "Value": "sha256-1/ff9xWbW7/mK49QeDsm3udoavcj9Ce3dR8fvT3ZyFA="
         }
       ]
     },
@@ -39686,7 +40499,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "15536"
+          "Value": "15276"
         },
         {
           "Name": "Content-Type",
@@ -39694,28 +40507,28 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pzeEra37q8ZojXkikk91u94qAi8KziYdS7bLoN58i+M=\""
+          "Value": "\"VTml1ZdhULxwX5xgJQsq/89iVWV1RKzdCEu6bGDyndM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:21:02 GMT"
+          "Value": "Thu, 22 Aug 2024 12:29:28 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-pzeEra37q8ZojXkikk91u94qAi8KziYdS7bLoN58i+M="
+          "Value": "sha256-VTml1ZdhULxwX5xgJQsq/89iVWV1RKzdCEu6bGDyndM="
         }
       ]
     },
     {
       "Route": "_framework/WebComponents.pdb",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\qzu90273kd-z1i5hn2372.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\qzu90273kd-hxyepihxg1.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000095047999"
+          "Quality": "0.000100200401"
         }
       ],
       "ResponseHeaders": [
@@ -39733,15 +40546,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "10520"
+          "Value": "9979"
         },
         {
           "Name": "ETag",
-          "Value": "\"r2yZZt8qtbv/GjDqpSc0wp+uisxPZkiBaCYKw4G1vc8=\""
+          "Value": "\"eeqLzIBHRY7CgemRuvIO9t3KJ1Qlomc/rMGfI3PKsVU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:21:02 GMT"
+          "Value": "Thu, 22 Aug 2024 12:29:28 GMT"
         },
         {
           "Name": "Vary",
@@ -39753,19 +40566,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"pzeEra37q8ZojXkikk91u94qAi8KziYdS7bLoN58i+M=\""
+          "Value": "W/\"VTml1ZdhULxwX5xgJQsq/89iVWV1RKzdCEu6bGDyndM=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-pzeEra37q8ZojXkikk91u94qAi8KziYdS7bLoN58i+M="
+          "Value": "sha256-VTml1ZdhULxwX5xgJQsq/89iVWV1RKzdCEu6bGDyndM="
         }
       ]
     },
     {
       "Route": "_framework/WebComponents.pdb.gz",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\qzu90273kd-z1i5hn2372.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\qzu90273kd-hxyepihxg1.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -39782,7 +40595,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "10520"
+          "Value": "9979"
         },
         {
           "Name": "Content-Type",
@@ -39790,11 +40603,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"r2yZZt8qtbv/GjDqpSc0wp+uisxPZkiBaCYKw4G1vc8=\""
+          "Value": "\"eeqLzIBHRY7CgemRuvIO9t3KJ1Qlomc/rMGfI3PKsVU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:21:02 GMT"
+          "Value": "Thu, 22 Aug 2024 12:29:28 GMT"
         },
         {
           "Name": "Vary",
@@ -39804,7 +40617,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-r2yZZt8qtbv/GjDqpSc0wp+uisxPZkiBaCYKw4G1vc8="
+          "Value": "sha256-eeqLzIBHRY7CgemRuvIO9t3KJ1Qlomc/rMGfI3PKsVU="
         }
       ]
     },
@@ -39823,7 +40636,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8469"
+          "Value": "7445"
         },
         {
           "Name": "Content-Type",
@@ -39831,28 +40644,28 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"B2t6xDo+ZCc8ifD0KHsKG/qVYJOpx2FlKC0zaQdXvTs=\""
+          "Value": "\"DWInihJCEhKjULA1KzTuIhqimffCN96Ugs43BEoM4EY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:21:04 GMT"
+          "Value": "Thu, 22 Aug 2024 12:29:30 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-B2t6xDo+ZCc8ifD0KHsKG/qVYJOpx2FlKC0zaQdXvTs="
+          "Value": "sha256-DWInihJCEhKjULA1KzTuIhqimffCN96Ugs43BEoM4EY="
         }
       ]
     },
     {
       "Route": "_framework/WebComponents.wasm",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h2z58z4bgr-jls10lnlcq.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h2z58z4bgr-3c87cjsww2.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000292483182"
+          "Quality": "0.000301477238"
         }
       ],
       "ResponseHeaders": [
@@ -39870,15 +40683,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3418"
+          "Value": "3316"
         },
         {
           "Name": "ETag",
-          "Value": "\"IzySDgFG+Tp03cuETFZjoEc/hre9qcazwxN5xebZXYA=\""
+          "Value": "\"J51Tv5uJGo2Z26vD98UMC1mlDVkegMQ2MnVtHxZfZHA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:21:04 GMT"
+          "Value": "Thu, 22 Aug 2024 12:29:30 GMT"
         },
         {
           "Name": "Vary",
@@ -39890,19 +40703,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"B2t6xDo+ZCc8ifD0KHsKG/qVYJOpx2FlKC0zaQdXvTs=\""
+          "Value": "W/\"DWInihJCEhKjULA1KzTuIhqimffCN96Ugs43BEoM4EY=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-B2t6xDo+ZCc8ifD0KHsKG/qVYJOpx2FlKC0zaQdXvTs="
+          "Value": "sha256-DWInihJCEhKjULA1KzTuIhqimffCN96Ugs43BEoM4EY="
         }
       ]
     },
     {
       "Route": "_framework/WebComponents.wasm.gz",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h2z58z4bgr-jls10lnlcq.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\h2z58z4bgr-3c87cjsww2.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -39919,7 +40732,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3418"
+          "Value": "3316"
         },
         {
           "Name": "Content-Type",
@@ -39927,11 +40740,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"IzySDgFG+Tp03cuETFZjoEc/hre9qcazwxN5xebZXYA=\""
+          "Value": "\"J51Tv5uJGo2Z26vD98UMC1mlDVkegMQ2MnVtHxZfZHA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:21:04 GMT"
+          "Value": "Thu, 22 Aug 2024 12:29:30 GMT"
         },
         {
           "Name": "Vary",
@@ -39941,7 +40754,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-IzySDgFG+Tp03cuETFZjoEc/hre9qcazwxN5xebZXYA="
+          "Value": "sha256-J51Tv5uJGo2Z26vD98UMC1mlDVkegMQ2MnVtHxZfZHA="
         }
       ]
     },
@@ -39968,28 +40781,28 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"4/8YHkORyRrqVFdTAwLqp/3cp1Gx5GmEAfMtIXwvY3Y=\""
+          "Value": "\"Q0afgxXOqHQkNK8YaAa9dPS5w+QG4XkQlPGYuaIQ2k4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:13:16 GMT"
+          "Value": "Thu, 22 Aug 2024 07:44:45 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-4/8YHkORyRrqVFdTAwLqp/3cp1Gx5GmEAfMtIXwvY3Y="
+          "Value": "sha256-Q0afgxXOqHQkNK8YaAa9dPS5w+QG4XkQlPGYuaIQ2k4="
         }
       ]
     },
     {
       "Route": "_framework/WebFunctions.pdb",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-13rckeixrm.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-nflrx4hls7.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000139684313"
+          "Quality": "0.000139606310"
         }
       ],
       "ResponseHeaders": [
@@ -40007,15 +40820,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "7158"
+          "Value": "7162"
         },
         {
           "Name": "ETag",
-          "Value": "\"FvR2fd/bVK62IwR79StFj1WY+M2WhZgS7bxPSDWNpRM=\""
+          "Value": "\"Wh4LWO0qVndCB+XL3rPk9M4JfsrsPM1W8W0lhorFO08=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:13:16 GMT"
+          "Value": "Thu, 22 Aug 2024 07:44:45 GMT"
         },
         {
           "Name": "Vary",
@@ -40027,19 +40840,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"4/8YHkORyRrqVFdTAwLqp/3cp1Gx5GmEAfMtIXwvY3Y=\""
+          "Value": "W/\"Q0afgxXOqHQkNK8YaAa9dPS5w+QG4XkQlPGYuaIQ2k4=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-4/8YHkORyRrqVFdTAwLqp/3cp1Gx5GmEAfMtIXwvY3Y="
+          "Value": "sha256-Q0afgxXOqHQkNK8YaAa9dPS5w+QG4XkQlPGYuaIQ2k4="
         }
       ]
     },
     {
       "Route": "_framework/WebFunctions.pdb.gz",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-13rckeixrm.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\xsh0wykrpu-nflrx4hls7.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -40056,7 +40869,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "7158"
+          "Value": "7162"
         },
         {
           "Name": "Content-Type",
@@ -40064,11 +40877,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"FvR2fd/bVK62IwR79StFj1WY+M2WhZgS7bxPSDWNpRM=\""
+          "Value": "\"Wh4LWO0qVndCB+XL3rPk9M4JfsrsPM1W8W0lhorFO08=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:13:16 GMT"
+          "Value": "Thu, 22 Aug 2024 07:44:45 GMT"
         },
         {
           "Name": "Vary",
@@ -40078,7 +40891,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-FvR2fd/bVK62IwR79StFj1WY+M2WhZgS7bxPSDWNpRM="
+          "Value": "sha256-Wh4LWO0qVndCB+XL3rPk9M4JfsrsPM1W8W0lhorFO08="
         }
       ]
     },
@@ -40105,28 +40918,28 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"6+xMgyAmDeDYeCS48uJwbDxBBUN4lba+oCQlvvmNf6s=\""
+          "Value": "\"L7jbG3JgqZbV1wNkkyGeGOTSkx9pE9ZfFaw7Q1lA2OA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:13:20 GMT"
+          "Value": "Thu, 22 Aug 2024 07:44:47 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-6+xMgyAmDeDYeCS48uJwbDxBBUN4lba+oCQlvvmNf6s="
+          "Value": "sha256-L7jbG3JgqZbV1wNkkyGeGOTSkx9pE9ZfFaw7Q1lA2OA="
         }
       ]
     },
     {
       "Route": "_framework/WebFunctions.wasm",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-x15yhhjcxu.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-lrjrbkjzlf.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000450045005"
+          "Quality": "0.000451263538"
         }
       ],
       "ResponseHeaders": [
@@ -40144,15 +40957,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2221"
+          "Value": "2215"
         },
         {
           "Name": "ETag",
-          "Value": "\"c48FZ3bMTMs5Kr+GcGzA2W7xHSmpdvHU6zQHfXe0+XE=\""
+          "Value": "\"6KJk/306KA3FaNRH3U+PB973OsypJ3i6HrvsyRKjJJs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:13:20 GMT"
+          "Value": "Thu, 22 Aug 2024 07:44:47 GMT"
         },
         {
           "Name": "Vary",
@@ -40164,19 +40977,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"6+xMgyAmDeDYeCS48uJwbDxBBUN4lba+oCQlvvmNf6s=\""
+          "Value": "W/\"L7jbG3JgqZbV1wNkkyGeGOTSkx9pE9ZfFaw7Q1lA2OA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-6+xMgyAmDeDYeCS48uJwbDxBBUN4lba+oCQlvvmNf6s="
+          "Value": "sha256-L7jbG3JgqZbV1wNkkyGeGOTSkx9pE9ZfFaw7Q1lA2OA="
         }
       ]
     },
     {
       "Route": "_framework/WebFunctions.wasm.gz",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-x15yhhjcxu.gz",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\compressed\\8mw56fquq0-lrjrbkjzlf.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -40193,7 +41006,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2221"
+          "Value": "2215"
         },
         {
           "Name": "Content-Type",
@@ -40201,11 +41014,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"c48FZ3bMTMs5Kr+GcGzA2W7xHSmpdvHU6zQHfXe0+XE=\""
+          "Value": "\"6KJk/306KA3FaNRH3U+PB973OsypJ3i6HrvsyRKjJJs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:13:20 GMT"
+          "Value": "Thu, 22 Aug 2024 07:44:47 GMT"
         },
         {
           "Name": "Vary",
@@ -40215,7 +41028,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-c48FZ3bMTMs5Kr+GcGzA2W7xHSmpdvHU6zQHfXe0+XE="
+          "Value": "sha256-6KJk/306KA3FaNRH3U+PB973OsypJ3i6HrvsyRKjJJs="
         }
       ]
     },
@@ -43227,7 +44040,44 @@
       ]
     },
     {
-      "Route": "BlazorServer.51jeys6x9x.styles.css",
+      "Route": "BlazorServer.bundle.scp.css",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorServer.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "368"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yiX+ekKlkX69F1I9ITq38nhztZN2g8tErQB9GohMT0o=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 21 Aug 2024 17:12:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-yiX+ekKlkX69F1I9ITq38nhztZN2g8tErQB9GohMT0o="
+        }
+      ]
+    },
+    {
+      "Route": "BlazorServer.r2uccjl8to.styles.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\obj\\Debug\\net8.0\\scopedcss\\bundle\\BlazorServer.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -43241,7 +44091,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "420"
+          "Value": "498"
         },
         {
           "Name": "Content-Type",
@@ -43249,66 +44099,29 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"J7aGtiA5+/e6Gs+PqIbSXgpGiOac3abAJienIYqc0I4=\""
+          "Value": "\"vdT94rLwTPaXsadwYxkimAJ1QcmYDQP8AwC85pBgOKM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:21:07 GMT"
+          "Value": "Thu, 22 Aug 2024 12:28:16 GMT"
         },
         {
           "Name": "Link",
-          "Value": "<WebAssemblyApp.15gtlz91m6.bundle.scp.css>; rel=\"preload\"; as=\"style\", <_content/WebComponents/WebComponents.3q3i2fask8.bundle.scp.css>; rel=\"preload\"; as=\"style\""
+          "Value": "<WebAssemblyApp.2k59gl6n2r.bundle.scp.css>; rel=\"preload\"; as=\"style\", <_content/WebComponents/WebComponents.4qoep26l2e.bundle.scp.css>; rel=\"preload\"; as=\"style\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "51jeys6x9x"
+          "Value": "r2uccjl8to"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-J7aGtiA5+/e6Gs+PqIbSXgpGiOac3abAJienIYqc0I4="
+          "Value": "sha256-vdT94rLwTPaXsadwYxkimAJ1QcmYDQP8AwC85pBgOKM="
         },
         {
           "Name": "label",
           "Value": "BlazorServer.styles.css"
-        }
-      ]
-    },
-    {
-      "Route": "BlazorServer.bundle.scp.css",
-      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorServer.bundle.scp.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "290"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ibnWNiZSKk9vVBvPeu6AjMz89v5uoWtVcFGSxBp6K4o=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 11:23:49 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-ibnWNiZSKk9vVBvPeu6AjMz89v5uoWtVcFGSxBp6K4o="
         }
       ]
     },
@@ -43327,7 +44140,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "420"
+          "Value": "498"
         },
         {
           "Name": "Content-Type",
@@ -43335,26 +44148,26 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"J7aGtiA5+/e6Gs+PqIbSXgpGiOac3abAJienIYqc0I4=\""
+          "Value": "\"vdT94rLwTPaXsadwYxkimAJ1QcmYDQP8AwC85pBgOKM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 15:21:07 GMT"
+          "Value": "Thu, 22 Aug 2024 12:28:16 GMT"
         },
         {
           "Name": "Link",
-          "Value": "<WebAssemblyApp.15gtlz91m6.bundle.scp.css>; rel=\"preload\"; as=\"style\", <_content/WebComponents/WebComponents.3q3i2fask8.bundle.scp.css>; rel=\"preload\"; as=\"style\""
+          "Value": "<WebAssemblyApp.2k59gl6n2r.bundle.scp.css>; rel=\"preload\"; as=\"style\", <_content/WebComponents/WebComponents.4qoep26l2e.bundle.scp.css>; rel=\"preload\"; as=\"style\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-J7aGtiA5+/e6Gs+PqIbSXgpGiOac3abAJienIYqc0I4="
+          "Value": "sha256-vdT94rLwTPaXsadwYxkimAJ1QcmYDQP8AwC85pBgOKM="
         }
       ]
     },
     {
-      "Route": "BlazorServer.xi6ycuqclh.bundle.scp.css",
+      "Route": "BlazorServer.ua3y9v5b9m.bundle.scp.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorServer.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -43364,7 +44177,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "290"
+          "Value": "368"
         },
         {
           "Name": "Content-Type",
@@ -43372,11 +44185,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ibnWNiZSKk9vVBvPeu6AjMz89v5uoWtVcFGSxBp6K4o=\""
+          "Value": "\"yiX+ekKlkX69F1I9ITq38nhztZN2g8tErQB9GohMT0o=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 11:23:49 GMT"
+          "Value": "Wed, 21 Aug 2024 17:12:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -43386,7 +44199,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "xi6ycuqclh"
+          "Value": "ua3y9v5b9m"
         },
         {
           "Name": "label",
@@ -43394,7 +44207,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ibnWNiZSKk9vVBvPeu6AjMz89v5uoWtVcFGSxBp6K4o="
+          "Value": "sha256-yiX+ekKlkX69F1I9ITq38nhztZN2g8tErQB9GohMT0o="
         }
       ]
     },
@@ -44215,6 +45028,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="
+        }
+      ]
+    },
+    {
+      "Route": "home.imdoktr3nn.png",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\home.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "63933"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+vI6x1ClhzB08FC+RjUEKWPJv0HitQCXEjxs/nOEb80=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 09:15:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "imdoktr3nn"
+        },
+        {
+          "Name": "label",
+          "Value": "home.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+vI6x1ClhzB08FC+RjUEKWPJv0HitQCXEjxs/nOEb80="
+        }
+      ]
+    },
+    {
+      "Route": "home.png",
+      "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\home.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "63933"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+vI6x1ClhzB08FC+RjUEKWPJv0HitQCXEjxs/nOEb80=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 Aug 2024 09:15:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+vI6x1ClhzB08FC+RjUEKWPJv0HitQCXEjxs/nOEb80="
         }
       ]
     },
@@ -49139,7 +50034,7 @@
       ]
     },
     {
-      "Route": "WebAssemblyApp.15gtlz91m6.bundle.scp.css",
+      "Route": "WebAssemblyApp.2k59gl6n2r.bundle.scp.css",
       "AssetFile": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebAssemblyApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebAssemblyApp.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -49153,7 +50048,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1571"
+          "Value": "2021"
         },
         {
           "Name": "Content-Type",
@@ -49161,21 +50056,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"C5joYrYuxtam8Z3wa9yMUh6ahFmmEmfoTroXZRGfF0s=\""
+          "Value": "\"Yigwnb4YV7QJMSakM9V9XHbNmbWifsrdLfvFwIgB64I=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 11:23:51 GMT"
+          "Value": "Thu, 22 Aug 2024 12:15:43 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "15gtlz91m6"
+          "Value": "2k59gl6n2r"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-C5joYrYuxtam8Z3wa9yMUh6ahFmmEmfoTroXZRGfF0s="
+          "Value": "sha256-Yigwnb4YV7QJMSakM9V9XHbNmbWifsrdLfvFwIgB64I="
         },
         {
           "Name": "label",
@@ -49198,7 +50093,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1571"
+          "Value": "2021"
         },
         {
           "Name": "Content-Type",
@@ -49206,17 +50101,17 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"C5joYrYuxtam8Z3wa9yMUh6ahFmmEmfoTroXZRGfF0s=\""
+          "Value": "\"Yigwnb4YV7QJMSakM9V9XHbNmbWifsrdLfvFwIgB64I=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 21 Aug 2024 11:23:51 GMT"
+          "Value": "Thu, 22 Aug 2024 12:15:43 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-C5joYrYuxtam8Z3wa9yMUh6ahFmmEmfoTroXZRGfF0s="
+          "Value": "sha256-Yigwnb4YV7QJMSakM9V9XHbNmbWifsrdLfvFwIgB64I="
         }
       ]
     }

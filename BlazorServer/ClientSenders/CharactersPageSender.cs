@@ -1,9 +1,11 @@
+using System.Net.Http.Headers;
 using BattleManagemen.LegendaryBot;
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WebAssemblyApp.Pages.Characters;
 
 namespace BlazorServer.ClientSenders;
@@ -12,6 +14,8 @@ namespace BlazorServer.ClientSenders;
 public class CharactersPageSender : ControllerBase
 {
     private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
+
+
 
     [Route("api/characters-collection")]
     [HttpGet]

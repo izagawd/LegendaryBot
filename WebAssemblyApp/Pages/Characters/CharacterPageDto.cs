@@ -1,5 +1,5 @@
 namespace WebAssemblyApp.Pages.Characters;
-
+[Serializable]
 public class CharacterPageDto
 {
     public string Name { get; set; }

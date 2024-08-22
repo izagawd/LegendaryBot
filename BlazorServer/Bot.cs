@@ -31,6 +31,11 @@ public static class Bot
 
     private static async Task Main(string[] args)
     {
+        if (args.Length > 0 && args[0] == "test-website")
+        {
+            await Website.StartAsync(args);
+            return;
+        }
         await DoShitAsync();
         await using (var ctx = new PostgreSqlContext())
         {

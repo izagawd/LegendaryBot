@@ -46,6 +46,7 @@ public static class Website
                         user.GetString("id"),
                         user.GetString("avatar"),
                         user.GetString("avatar")!.StartsWith("a_") ? "gif" : "png"));
+                
             })
             .AddCookie(options => { }).AddCertificate(options => { options.Validate(); });
     }
