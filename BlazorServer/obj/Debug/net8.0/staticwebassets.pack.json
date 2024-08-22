@@ -153,6 +153,10 @@
       "PackagePath": "staticwebassets\\css\\Team.css"
     },
     {
+      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

@@ -80,7 +80,7 @@
 <Navigation>
     
 
-    <div class="filterer-outer" style="height: @(displayAdvancedFilter ? "80px" : "280px");">
+    <div class="filterer-outer" style="height: @(!displayAdvancedFilter ? "80px" : "280px");">
 
         <div class="filter-basic">
             <div class="input-div filterer-percentage">
@@ -121,7 +121,7 @@
 
 
                        <a href="/character-info/@character.Number">
-                           <img src="@character.ImageUrl" width="200" height="200" style=" background-color: @character.Color;" class="image-box"/>
+                           <img src="@character.ImageUrl"  style="background-color: @character.Color;" class="image-box"/>
                        </a>
 
                        <p class="character-image-p">@character.Name</p>
