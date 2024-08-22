@@ -50,8 +50,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        CharacterCollection = [ new CharacterPageDto() { Name = "Bitch", Level = 1 },  new CharacterPageDto() { Name = "Ayoo", Level = 2 },];
-        return;
+
         var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
         CharacterCollection = await Http.GetFromJsonAsync<CharacterPageDto[]>($"api/characters-collection?discordId={user.GetDiscordUserId()}");
     }
@@ -136,14 +135,7 @@
         if (UsingCharacterCollection is not null)
         {
             <div class="characters-container">
-                @if (OperatingSystem.IsBrowser())
-                {
-                <h1>BROWSER BITCH</h1>
-                }
-                else
-                {
-                <h1>damn</h1>
-                }
+
                 @foreach (var i in UsingCharacterCollection)
                 {
 
