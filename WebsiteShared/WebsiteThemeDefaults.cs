@@ -29,6 +29,7 @@ public abstract class WebsiteThemeDefaults
     {
         return isDarkMode ? Dark : Light;
     }
+    protected WebsiteThemeDefaults(){}
 }
 
 
