@@ -1,7 +1,10 @@
 ﻿using System.Diagnostics;
+using System.Text.Json;
+using BasicFunctionality;
 using BlazorServer;
 using DatabaseManagement;
 using Microsoft.EntityFrameworkCore;
+using WebsiteShared;
 
 namespace DiscordBotNet;
 
@@ -26,18 +29,20 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-        ;
+
+       
     }
 
     private static async Task Main(string[] args)
     {
+        await DoShitAsync();
         if (args.Length > 0 && args[0] == "test-website")
         {
             await Website.StartAsync(args);
             return;
         }
 
-        await DoShitAsync();
+
         await using (var ctx = new PostgreSqlContext())
         {
             var stopwatch = new Stopwatch();

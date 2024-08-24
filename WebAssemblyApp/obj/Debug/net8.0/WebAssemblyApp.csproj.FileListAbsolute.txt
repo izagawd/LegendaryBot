@@ -3220,10 +3220,10 @@ C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\bin\Debug\net8.0\Web
 C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\bin\Debug\net8.0\WebsiteShared.dll
 C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\bin\Debug\net8.0\WebsiteShared.pdb
 C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\webcil\WebsiteShared.wasm
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\8mw56fquq0-5kzkxpspnc.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\xsh0wykrpu-9s1vdsk463.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\8qvap86r0h-x0xll8qadh.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\dak0m8xoyx-ojdnazh3e1.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\9ixqfwxkjz-dypdqgdd82.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\yeh25km0cy-u82ggk809r.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\5nr4nupufv-mbtxftn2sl.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\8mw56fquq0-h8irn5265b.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\8qvap86r0h-692po7c704.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\xsh0wykrpu-rgmgpxvd4k.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\dak0m8xoyx-mneddqswo5.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\9ixqfwxkjz-133pcdrbhk.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\yeh25km0cy-rfxyxij72n.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\5nr4nupufv-p69biuperx.gz
