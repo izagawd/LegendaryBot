@@ -36,6 +36,7 @@ public static class Bot
             await Website.StartAsync(args);
             return;
         }
+
         await DoShitAsync();
         await using (var ctx = new PostgreSqlContext())
         {

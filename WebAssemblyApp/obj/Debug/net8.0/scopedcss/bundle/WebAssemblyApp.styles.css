@@ -1,4 +1,4 @@
-@import '_content/WebsiteShared/WebsiteShared.n608s3ik28.bundle.scp.css';
+@import '_content/WebsiteShared/WebsiteShared.fwvifgyfws.bundle.scp.css';
 
 /* /Pages/Characters/Characters.razor.rz.scp.css */
 .character-to-display[b-gbuuicddjv] {
@@ -7,14 +7,15 @@
     margin-bottom: 30px;
     width: fit-content;
 }
-.advanced-filter-button[b-gbuuicddjv]{
+
+.advanced-filter-button[b-gbuuicddjv] {
     border-radius: 15px;
     height: 40px;
     width: 100px;
     margin-top: 20px;
     margin-right: 30px;
     border: 0;
-    
+
     background-color: white;
 }
 
@@ -40,37 +41,42 @@
     margin-bottom: 0; /* Reduce space between paragraphs */
     font-size: 20px; /* Reduce paragraph font size */
 }
-@media only screen and (max-width: 600px)  {
-    .image-box[b-gbuuicddjv]{
+
+@media only screen and (max-width: 600px) {
+    .image-box[b-gbuuicddjv] {
         width: 100px;
         height: 100px;
     }
-    .character-image-p[b-gbuuicddjv]{
+
+    .character-image-p[b-gbuuicddjv] {
         font-size: 10px;
     }
 
 }
+
 .some-para[b-gbuuicddjv] {
     margin-left: 30px;
     font-size: 20px;
     align-self: center;
 }
+
 .name-filter-search-icon[b-gbuuicddjv] {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
-    
-}
-:root[b-gbuuicddjv] {
-    --almost-black:  #1A1A1A;
-    
+
 }
 
-.filterer-percentage[b-gbuuicddjv]{
+:root[b-gbuuicddjv] {
+    --almost-black: #1A1A1A;
+
+}
+
+.filterer-percentage[b-gbuuicddjv] {
     width: 85%;
 }
 
-.input-div[b-gbuuicddjv]{
+.input-div[b-gbuuicddjv] {
 
     margin-top: 20px;
 
@@ -85,6 +91,7 @@
     border-width: 2px;
     border-style: solid;
 }
+
 .name-filter[b-gbuuicddjv] {
 
     background-color: gray;
@@ -92,14 +99,14 @@
     outline: none;
     font-size: 20px;
     border: none;
-    
+
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
     height: 66%;
 }
 
-.filterer-outer[b-gbuuicddjv]{
+.filterer-outer[b-gbuuicddjv] {
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -111,33 +118,39 @@
     height: fit-content;
     overflow-y: hidden;
     overflow-x: hidden;
-    
+
 }
-.filterer-outer > *[b-gbuuicddjv]{
+
+.filterer-outer > *[b-gbuuicddjv] {
     margin-left: 20px;
 }
-.filterer-outer > p[b-gbuuicddjv]{
+
+.filterer-outer > p[b-gbuuicddjv] {
     color: white;
     font-size: 20px;
 }
-.advanced-filter[b-gbuuicddjv]{
+
+.advanced-filter[b-gbuuicddjv] {
 
     overflow-y: hidden;
     margin: auto;
     width: fit-content;
 }
-.advanced-filter p[b-gbuuicddjv]{
+
+.advanced-filter p[b-gbuuicddjv] {
     color: white;
 }
-.advanced-filters-show[b-gbuuicddjv]{
+
+.advanced-filters-show[b-gbuuicddjv] {
     display: inline-block;
 }
+
 .filter-basic[b-gbuuicddjv] {
-    
-    
+
+
     width: 100%;
     display: flex;
- 
+
     height: 80px;
 
 
@@ -148,7 +161,7 @@
     flex-wrap: wrap;
     max-width: fit-content;
     margin-left: 50px;
-    padding-top:  20px;
+    padding-top: 20px;
     margin-right: auto;
     overflow: auto;
 

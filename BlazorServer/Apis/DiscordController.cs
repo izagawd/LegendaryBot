@@ -42,15 +42,11 @@ public class DiscordController : Controller
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToAction("Index", "Home");
     }
-    
+
     [HttpGet("get-user-data")]
     public async Task<IActionResult> GetUserData()
     {
-        
-        if (!User.Identity.IsAuthenticated)
-        {
-            return Login(); // User is not authenticated
-        }
+        if (!User.Identity.IsAuthenticated) return Login(); // User is not authenticated
         // Get user info from the claims
         var userId = User.GetDiscordUserId(); // Assuming you have an extension method
         var userName = User.FindFirstValue("name");

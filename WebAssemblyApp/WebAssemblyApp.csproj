@@ -11,16 +11,16 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.6"/>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="8.0.8"/>
-        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="8.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="8.0.8"/>
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\WebFunctions\WebFunctions.csproj"/>
-        <ProjectReference Include="..\WebsiteShared\WebsiteShared.csproj" />
+        <ProjectReference Include="..\WebsiteShared\WebsiteShared.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Content Remove="wwwroot\bla.json" />
+        <Content Remove="wwwroot\bla.json"/>
     </ItemGroup>
 
 </Project>

@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DiscordBot\DiscordBot.csproj" />
+        <ProjectReference Include="..\DiscordBot\DiscordBot.csproj"/>
         <ProjectReference Include="..\WebAssemblyApp\WebAssemblyApp.csproj"/>
         <PackageReference Include="AspNet.Security.OAuth.Discord" Version="8.1.0"/>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="8.0.8"/>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8"/>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.8"/>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8"/>
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.6"/>

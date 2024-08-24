@@ -3,7 +3,7 @@
 .navigator-container {
     position: sticky;
     width: 280px;
-    
+
     border-right-style: solid;
     border-width: 1px;
     border-color: darkgray;
@@ -11,31 +11,45 @@
     background-color: #1A1A1A;
 }
 
-.navigator-outer{
-    display:  flex; width: 100%; height: 100%;
+.navigator-outer {
+    display: flex;
+    width: 100%;
+    height: 100%;
 }
-.nav-link-icon{
+
+.nav-link-icon {
     color: white;
-    width: 25px; height: 25px; margin-top:  auto;
+    width: 25px;
+    height: 25px;
+    margin-top: auto;
     margin-bottom: auto;
-    margin-right: 17px; margin-left: 17px;
+    margin-right: 17px;
+    margin-left: 17px;
 }
-.navigator-inner{
-    display: flex; width: 100%; height: 70px;
+
+.navigator-inner {
+    display: flex;
+    width: 100%;
+    height: 70px;
     margin-bottom: 10px;
 }
 
 
-.navigator-inner p{
-    margin: auto; color: lightgray; font-size: 22px;
+.navigator-inner p {
+    margin: auto;
+    color: lightgray;
+    font-size: 22px;
 }
+
 .link-container a:link {
     text-decoration: none;
 }
+
 .link-container a:visited {
     text-decoration: none;
 }
-.link-container a{
+
+.link-container a {
     transition: 0.3s;
 }
 
@@ -43,6 +57,7 @@
     text-decoration: none;
 
 }
+
 /* Individual link container */
 .link-container {
     height: 60px;
@@ -52,9 +67,10 @@
 
 }
 
-.link-container a:hover{
+.link-container a:hover {
     background-color: black;
 }
+
 /* Link styling */
 .link-container a {
 
@@ -66,10 +82,12 @@
     height: 100%;
     border-radius: 50px 50px 50px 50px;
 }
-p{
+
+p {
     font-weight: bold;
 }
-.link-container a p{
+
+.link-container a p {
 
     margin-top: auto;
     margin-bottom: auto;
@@ -78,25 +96,29 @@ p{
 }
 
 @media only screen and (max-width: 600px) {
-    .link-container a{
+    .link-container a {
         width: 50px;
         height: 50px;
         margin: auto;
         border-radius: 10px 10px 10px 10px;
     }
-    .link-container{
+
+    .link-container {
         margin: auto;
         width: 70px;
         height: 70%;
     }
-    .link-container a p{
+
+    .link-container a p {
         display: none;
 
     }
-    .navigator-inner{
+
+    .navigator-inner {
         display: none;
     }
-    .navigator-container{
+
+    .navigator-container {
         border-right-style: none;
         border-bottom-style: solid;
 
@@ -104,10 +126,12 @@ p{
         width: 100%;
         height: 70px;
     }
-    .navigator-outer{
-        display:  block;
+
+    .navigator-outer {
+        display: block;
     }
-    .nav-link-icon{
+
+    .nav-link-icon {
         margin: auto;
         width: 25px;
         height: 25px;

@@ -1,8 +1,5 @@
 @page "/characters"
-
-@using System.Net.Http.Headers
 @using Microsoft.AspNetCore.Authorization
-
 @using WebFunctions
 @using WebsiteShared.Components.Navigation
 
@@ -16,21 +13,21 @@
 @code{
 
     private CharacterPageDto[]? CharacterCollection;
+
     protected override async Task OnInitializedAsync()
     {
         var user = (await Auth.GetAuthenticationStateAsync()).User;
-            CharacterCollection =
-                await Http.GetFromJsonAsync<CharacterPageDto[]>(
-                    $"CharactersPage/get-characters?discordId={user.GetDiscordUserId()}");
+        CharacterCollection =
+            await Http.GetFromJsonAsync<CharacterPageDto[]>(
+                $"CharactersPage/get-characters?discordId={user.GetDiscordUserId()}");
     }
+
     private enum SortType
     {
-        
         Name,
         Level
     }
 
- 
 
     private IEnumerable<CharacterPageDto> UsingCharacterCollection
     {
@@ -81,7 +78,7 @@
 
 
 <Navigation>
-    
+
 
     <div class="filterer-outer" style="height: @(!displayAdvancedFilter ? "80px" : "280px");">
 
@@ -92,22 +89,24 @@
                 </span>
                 <input class="name-filter" placeholder="Search" type="text" @onchange="FilterWithName"/>
             </div>
-         
+
             <button class="advanced-filter-button" @onclick="() => displayAdvancedFilter = !displayAdvancedFilter">
                 Adv Filt
             </button>
         </div>
+
         @code
 
         {
-            private bool displayAdvancedFilter = false;
+            private bool displayAdvancedFilter;
         }
+
         <p>Sort By</p>
         <select @onchange="SelectChange" class="filterer-percentage" style="height: 30px">
 
             @foreach (var i in Enum.GetValues<SortType>())
             {
-            <option selected="@(SortTypeVal == i)" value="@i">@i</option>
+                <option selected="@(SortTypeVal == i)" value="@i">@i</option>
             }
 
         </select>
@@ -123,14 +122,14 @@
             return @<div class="character-to-display">
 
 
-                       <a href="/character-info/@character.Number">
-                           <img src="@character.ImageUrl"  style="background-color: @character.Color;" class="image-box"/>
-                       </a>
+                <a href="/character-info/@character.Number">
+                    <img src="@character.ImageUrl" style="background-color: @character.Color;" class="image-box"/>
+                </a>
 
-                       <p class="character-image-p">@character.Name</p>
-                       <p class="character-image-p">Level: @character.Level </p>
-                       <p class="character-image-p">Number: @character.Number</p>
-                   </div>;
+                <p class="character-image-p">@character.Name</p>
+                <p class="character-image-p">Level: @character.Level </p>
+                <p class="character-image-p">Number: @character.Number</p>
+            </div>;
         }
 
     }
@@ -142,7 +141,6 @@
 
                 @foreach (var i in UsingCharacterCollection)
                 {
-
                     @RenderCharacter(i)
                     ;
                 }
