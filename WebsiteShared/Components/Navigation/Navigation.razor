@@ -4,6 +4,10 @@
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
+    [Parameter]
+    [EditorRequired] public WebsiteTheme Theme { get; set; }
+    private string TextColor => Theme == WebsiteTheme.Dark ? "lightgrey" : "black";
+    private string LinkContainerHovBgColorClass => Theme == WebsiteTheme.Dark ? "link-container-dark" : "link-container-light";
     private class DirectoryStorer
 
     {
@@ -31,20 +35,21 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
 </HeadContent>
 <div class="navigator-outer">
-    <div class="navigator-container">
+    <div class="navigator-container" style="background-color: @Theme.GetThemeDefaults().DefaultBackgroundColor ; 
+        border-color: @(Theme == WebsiteTheme.Dark ? "darkgray" : "black")">
         <div class="navigator-inner">
-            <p>Legendary!!</p>
+            <p style="color: @TextColor;">Legendary!!</p>
         </div>
 
         @foreach (var i in Directories)
         {
-            <div class="link-container">
+            <div class="link-container @LinkContainerHovBgColorClass">
 
                 <a href="@i.Directory">
-                    <span class="material-symbols-outlined nav-link-icon">
+                    <span class="material-symbols-outlined nav-link-icon" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
                         @i.Icon
                     </span>
-                    <p>@i.Name</p>
+                    <p style="color: @TextColor">@i.Name</p>
                 </a>
             </div>
         }

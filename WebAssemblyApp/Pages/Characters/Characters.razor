@@ -1,6 +1,7 @@
 @page "/characters"
 @using Microsoft.AspNetCore.Authorization
 @using WebFunctions
+@using WebsiteShared
 @using WebsiteShared.Components.Navigation
 
 @rendermode  InteractiveWebAssembly
@@ -77,7 +78,7 @@
 }
 
 
-<Navigation>
+<Navigation Theme="WebsiteTheme.Dark">
 
 
     <div class="filterer-outer" style="height: @(!displayAdvancedFilter ? "80px" : "280px");">
