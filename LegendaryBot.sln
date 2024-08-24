@@ -10,8 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseManagement", "Datab
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{5D4C46E1-CFB3-428E-A9F5-B7BC2F51200D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebComponents", "WebComponents\WebComponents.csproj", "{348AC1DC-2A61-428F-BF04-A607BD9353DA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServer", "BlazorServer\BlazorServer.csproj", "{36994237-6DDF-42EE-95BF-07BC20D2AD76}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAssemblyApp", "WebAssemblyApp\WebAssemblyApp.csproj", "{D824C858-926A-4CB5-8D32-0D98C55A0468}"
@@ -19,6 +17,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFunctions", "WebFunctions\WebFunctions.csproj", "{8DD9B7C6-733B-4D08-A2EB-70091C6F34F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateInfo", "PrivateInfo\PrivateInfo.csproj", "{62FE7A20-99CA-4397-9349-C78944E46847}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebsiteShared", "WebsiteShared\WebsiteShared.csproj", "{D5DE888E-E327-4FF3-BBEE-5B9FFA25F00F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,10 +46,6 @@ Global
 		{5D4C46E1-CFB3-428E-A9F5-B7BC2F51200D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D4C46E1-CFB3-428E-A9F5-B7BC2F51200D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D4C46E1-CFB3-428E-A9F5-B7BC2F51200D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{348AC1DC-2A61-428F-BF04-A607BD9353DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{348AC1DC-2A61-428F-BF04-A607BD9353DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{348AC1DC-2A61-428F-BF04-A607BD9353DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{348AC1DC-2A61-428F-BF04-A607BD9353DA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{36994237-6DDF-42EE-95BF-07BC20D2AD76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{36994237-6DDF-42EE-95BF-07BC20D2AD76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36994237-6DDF-42EE-95BF-07BC20D2AD76}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -66,5 +62,9 @@ Global
 		{62FE7A20-99CA-4397-9349-C78944E46847}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62FE7A20-99CA-4397-9349-C78944E46847}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62FE7A20-99CA-4397-9349-C78944E46847}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5DE888E-E327-4FF3-BBEE-5B9FFA25F00F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5DE888E-E327-4FF3-BBEE-5B9FFA25F00F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5DE888E-E327-4FF3-BBEE-5B9FFA25F00F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5DE888E-E327-4FF3-BBEE-5B9FFA25F00F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

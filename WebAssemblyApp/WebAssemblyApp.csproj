@@ -15,8 +15,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\WebComponents\WebComponents.csproj"/>
         <ProjectReference Include="..\WebFunctions\WebFunctions.csproj"/>
+        <ProjectReference Include="..\WebsiteShared\WebsiteShared.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -26,11 +26,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\WebComponents.csproj": {
-                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\WebComponents.csproj"
-              },
               "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj": {
                 "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj"
+              },
+              "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebsiteShared\\WebsiteShared.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebsiteShared\\WebsiteShared.csproj"
               }
             }
           }
@@ -113,14 +113,14 @@
         }
       }
     },
-    "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\WebComponents.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\WebComponents.csproj",
-        "projectName": "WebComponents",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\WebComponents.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj",
+        "projectName": "WebFunctions",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebComponents\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -146,12 +146,6 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "dependencies": {
-            "Microsoft.AspNetCore.Components.Web": {
-              "target": "Package",
-              "version": "[8.0.6, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -186,14 +180,14 @@
         }
       }
     },
-    "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj": {
+    "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebsiteShared\\WebsiteShared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj",
-        "projectName": "WebFunctions",
-        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj",
+        "projectUniqueName": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebsiteShared\\WebsiteShared.csproj",
+        "projectName": "WebsiteShared",
+        "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebsiteShared\\WebsiteShared.csproj",
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\obj\\",
+        "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebsiteShared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -219,6 +213,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.Web": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

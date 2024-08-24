@@ -95,12 +95,13 @@ public static class Extensions
         return (int)Math.Round(theFloat);
     }
 
-    public static T Print<T>(this T idk)
+    public static T Print<T>(this T idk) 
     {
         Console.WriteLine(idk);
         return idk;
     }
 
+    
     public static TExpressionResult Map<TObject, TExpressionResult>(this TObject theObject,
         Func<TObject, TExpressionResult> expression)
     {

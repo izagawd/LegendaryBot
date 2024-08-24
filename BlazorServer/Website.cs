@@ -1,11 +1,21 @@
 using System.Globalization;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Text.Json;
 using AspNet.Security.OAuth.Discord;
+using BlazorApp4.Components.Account;
 using BlazorServer.WebsiteStuff;
 using DatabaseManagement;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OAuth;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.IdentityModel.Tokens;
 using PublicInfo;
+using WebFunctions;
 using _Imports = WebAssemblyApp._Imports;
 
 namespace BlazorServer;
@@ -16,12 +26,14 @@ public static class Website
 
     public static void ConfigureServices(IServiceCollection services)
     {
+     
         services.AddRazorPages();
         services.AddRazorComponents()
             .AddInteractiveServerComponents()
             .AddInteractiveWebAssemblyComponents();
-        services.AddScoped(i => new HttpClient { BaseAddress = new Uri(Information.DomainName) });
+        services.AddScoped(i =>  new HttpClient { BaseAddress = new Uri(Information.DomainName) });
 
+        services.AddScoped<AuthenticationStateProvider, LegendaryAuthenticationStateProvider>();
         services.AddDbContext<PostgreSqlContext>();
         services.AddSession(i => { i.IdleTimeout = TimeSpan.MaxValue; }
         );
@@ -31,14 +43,17 @@ public static class Website
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = DiscordAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
             .AddDiscord(options =>
             {
+                
                 options.ClientId = "340054610989416460";
                 options.ClientSecret = "n-Jy3ogvEmMnaFRIVmguqzpLgW8pYp2m";
                 options.SaveTokens = true;
                 options.CallbackPath = "/signin-discord";
                 options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                
                 options.ClaimActions.MapCustomJson("urn:discord:avatar:url", user =>
                     string.Format(
                         CultureInfo.InvariantCulture,
@@ -46,9 +61,11 @@ public static class Website
                         user.GetString("id"),
                         user.GetString("avatar"),
                         user.GetString("avatar")!.StartsWith("a_") ? "gif" : "png"));
-                
             })
+            
             .AddCookie(options => { }).AddCertificate(options => { options.Validate(); });
+        DiscordAuthenticationOptions options;
+
     }
 
 
@@ -104,6 +121,7 @@ public static class Website
 
         app.UseRouting();
         app.UseAuthentication();
+        
         app.UseAuthorization();
         app.UseAntiforgery();
 
@@ -111,7 +129,8 @@ public static class Website
             .AddInteractiveServerRenderMode()
             .AddInteractiveWebAssemblyRenderMode()
             .AddAdditionalAssemblies(typeof(_Imports).Assembly);
-
+    
+        
         app.MapControllers();
         app.MapRazorPages();
 

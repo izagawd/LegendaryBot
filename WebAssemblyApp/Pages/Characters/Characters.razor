@@ -1,17 +1,28 @@
 @page "/characters"
+
+@using System.Net.Http.Headers
 @using Microsoft.AspNetCore.Authorization
-@using WebComponents.Components.Navigation
+
 @using WebFunctions
-@rendermode  InteractiveServer
+@using WebsiteShared.Components.Navigation
 
+@rendermode  InteractiveWebAssembly
+
+@attribute [Authorize(AuthenticationSchemes = "Discord")]
+
+@inject AuthenticationStateProvider Auth
 @inject HttpClient Http
-
-@inject AuthenticationStateProvider AuthenticationStateProvider
-
-@attribute [Authorize]
 
 @code{
 
+    private CharacterPageDto[]? CharacterCollection;
+    protected override async Task OnInitializedAsync()
+    {
+        var user = (await Auth.GetAuthenticationStateAsync()).User;
+            CharacterCollection =
+                await Http.GetFromJsonAsync<CharacterPageDto[]>(
+                    $"CharactersPage/get-characters?discordId={user.GetDiscordUserId()}");
+    }
     private enum SortType
     {
         
@@ -19,7 +30,7 @@
         Level
     }
 
-    private CharacterPageDto[]? CharacterCollection;
+ 
 
     private IEnumerable<CharacterPageDto> UsingCharacterCollection
     {
@@ -47,13 +58,6 @@
 
     private string _nameFilter = string.Empty;
 
-
-    protected override async Task OnInitializedAsync()
-    {
-
-        var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
-        CharacterCollection = await Http.GetFromJsonAsync<CharacterPageDto[]>($"api/characters-collection?discordId={user.GetDiscordUserId()}");
-    }
 
     private void FilterWithName(ChangeEventArgs eventArgs)
     {
