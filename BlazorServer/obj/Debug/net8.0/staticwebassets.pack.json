@@ -133,32 +133,8 @@
       "PackagePath": "staticwebassets\\battle_images\\status_effects\\Stun.png"
     },
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\css\\CharacterInfo.css",
-      "PackagePath": "staticwebassets\\css\\CharacterInfo.css"
-    },
-    {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\css\\CharactersnBlessings.css",
-      "PackagePath": "staticwebassets\\css\\CharactersnBlessings.css"
-    },
-    {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\css\\Home.css",
-      "PackagePath": "staticwebassets\\css\\Home.css"
-    },
-    {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\css\\NeutralHref.css",
-      "PackagePath": "staticwebassets\\css\\NeutralHref.css"
-    },
-    {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\css\\Team.css",
-      "PackagePath": "staticwebassets\\css\\Team.css"
-    },
-    {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\css\\app.css",
       "PackagePath": "staticwebassets\\css\\app.css"
-    },
-    {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\favicon.ico",

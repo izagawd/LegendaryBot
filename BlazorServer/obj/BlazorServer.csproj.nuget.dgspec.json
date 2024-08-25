@@ -580,6 +580,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj": {
+                "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj"
+              },
               "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj": {
                 "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj"
               },

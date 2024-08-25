@@ -1367,6 +1367,7 @@
           "Microsoft.AspNetCore.Components.WebAssembly": "8.0.8",
           "Microsoft.AspNetCore.Components.WebAssembly.Authentication": "8.0.8",
           "Microsoft.AspNetCore.SignalR.Client.Core": "8.0.8",
+          "PublicInfo": "1.0.0",
           "WebFunctions": "1.0.0",
           "WebsiteShared": "1.0.0"
         },

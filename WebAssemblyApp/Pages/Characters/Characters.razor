@@ -19,8 +19,7 @@
     {
         var user = (await Auth.GetAuthenticationStateAsync()).User;
         CharacterCollection =
-            await Http.GetFromJsonAsync<CharacterPageDto[]>(
-                $"CharactersPage/get-characters?discordId={user.GetDiscordUserId()}");
+            await Http.GetFromJsonAsync<CharacterPageDto[]>($"CharactersPage/get-characters?discordId={user.GetDiscordUserId()}");
     }
 
     private enum SortType

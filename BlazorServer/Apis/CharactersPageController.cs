@@ -2,6 +2,7 @@ using BattleManagemen.LegendaryBot;
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAssemblyApp.Pages.Characters;
@@ -10,12 +11,12 @@ namespace BlazorServer.ClientSenders;
 
 [Route("[controller]")]
 [ApiController]
-public class CharactersPageController : Controller
+public class CharactersPageController : ControllerBase
 {
     private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
-
-
+    
     [HttpGet("get-characters")]
+
     public async Task<ActionResult<CharacterPageDto[]>> GetCharactersAsync([FromQuery] ulong discordId)
     {
         await using var post = new PostgreSqlContext();

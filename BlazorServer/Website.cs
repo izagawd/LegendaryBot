@@ -1,10 +1,13 @@
 using System.Globalization;
+using System.Net.Http.Headers;
+using System.Text.Json;
 using AspNet.Security.OAuth.Discord;
 using BlazorApp4.Components.Account;
 using BlazorServer.WebsiteStuff;
 using DatabaseManagement;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Components.Authorization;
 using PublicInfo;
 using _Imports = WebAssemblyApp._Imports;
@@ -48,6 +51,21 @@ public static class Website
                         user.GetString("id"),
                         user.GetString("avatar"),
                         user.GetString("avatar")!.StartsWith("a_") ? "gif" : "png"));
+                options.Events = new OAuthEvents
+                {
+                    OnCreatingTicket = async context =>
+                    {
+                        var request = new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
+                        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.AccessToken);
+
+                        var response = await context.Backchannel.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted);
+                        response.EnsureSuccessStatusCode();
+
+                        var user = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+                        context.RunClaimActions(user.RootElement);
+                    }
+                };
             })
             .AddCookie(options => { }).AddCertificate(options => { options.Validate(); });
         DiscordAuthenticationOptions options;

@@ -18,6 +18,7 @@ public enum WebsiteTheme : byte
 
 public abstract class WebsiteThemeDefaults
 {
+    public const float ThemeTransitionTime = 0.3f;
     public bool IsDarkMode => GetType() == typeof(DarkThemeDefaults);
     public abstract string DefaultBackgroundColor { get; }
     

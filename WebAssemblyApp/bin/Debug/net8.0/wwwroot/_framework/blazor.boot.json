@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "WebAssemblyApp",
   "resources": {
-    "hash": "sha256-Jan/lYgyZnxfE0EyJZ12hO3f9nGQcjUeZX1ozzjOpWw=",
+    "hash": "sha256-rvHCBxPEfppKt00JESAfIWxbpZUKn2x+695k+1xx7l4=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-juC5sA7gHTLXFEhAKgdM2/RavswpwCtDfjYGsAz2FXg="
     },
@@ -216,14 +216,16 @@
       "mscorlib.wasm": "sha256-masKveCdoRSahF99doEQk7H3YN2wHLVIE4M/Zu8OoD8=",
       "netstandard.wasm": "sha256-z1EJOmgVhSpTopn7Tek/0P//MKGF1I3NUD/sh4oLnwY=",
       "System.Private.CoreLib.wasm": "sha256-tuIWpR30u0OoEVtv4pXZ47mEpI2AmFBIyYFPnqDZZfw=",
+      "PublicInfo.wasm": "sha256-z2EXKxfk6hTOStSvDvub/c5ZtBNeZZbgOSOt3N6/2Ds=",
       "WebFunctions.wasm": "sha256-7x+Fl40lk0v+w8e3df93XUf2niAAMROLLSObTDa6Yvs=",
-      "WebsiteShared.wasm": "sha256-A+7deLTOJUDYqDtflU8HFqXzISY0J9wu+ik6OM5XXn8=",
-      "WebAssemblyApp.wasm": "sha256-wKq3O8s/qaKhtFGZzH13t+1tWE7Nski58cZYCWJ44HI="
+      "WebsiteShared.wasm": "sha256-A4rIEzjxqn+XOOGgXjW5h6BqAwdE9etK3Y7kVOLKjpM=",
+      "WebAssemblyApp.wasm": "sha256-0LV0VeNXrNg5lOV+72PA2GNxafc1enlaVdS/9KiFFwI="
     },
     "pdb": {
+      "PublicInfo.pdb": "sha256-IV6qcu3hvviF1GvkC7aodKET7qj3tpXPJPBqyCz8FsA=",
       "WebFunctions.pdb": "sha256-RR1U8x0X4SflPoTAVBpwovlcR5f0hj0CcLOLhALk2Ig=",
-      "WebsiteShared.pdb": "sha256-+lEUuZyn/LhrUIOKK06w4C0+aop9pcEhvkDlReuxDTc=",
-      "WebAssemblyApp.pdb": "sha256-7qB4kkj6zlcLDgoFABw4hPS0FtS//6hLxtqZl64ZIAs="
+      "WebsiteShared.pdb": "sha256-zTnzUXcSX+6CNkf48D1DVwcEuT69ZS53gMdxyVhOND0=",
+      "WebAssemblyApp.pdb": "sha256-TsevPZCaSt10w0jaTC8fnNiAwps4XzWC0+UFbzIKMG8="
     }
   },
   "cacheBootResources": true,
