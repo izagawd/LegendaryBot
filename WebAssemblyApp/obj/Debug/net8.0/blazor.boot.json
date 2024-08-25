@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "WebAssemblyApp",
   "resources": {
-    "hash": "sha256-rvHCBxPEfppKt00JESAfIWxbpZUKn2x+695k+1xx7l4=",
+    "hash": "sha256-i7WNdDozLAis2ls74bFY16n88+vcFKFS+BrMcEz/Mi8=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-juC5sA7gHTLXFEhAKgdM2/RavswpwCtDfjYGsAz2FXg="
     },
@@ -218,14 +218,14 @@
       "System.Private.CoreLib.wasm": "sha256-tuIWpR30u0OoEVtv4pXZ47mEpI2AmFBIyYFPnqDZZfw=",
       "PublicInfo.wasm": "sha256-z2EXKxfk6hTOStSvDvub/c5ZtBNeZZbgOSOt3N6/2Ds=",
       "WebFunctions.wasm": "sha256-7x+Fl40lk0v+w8e3df93XUf2niAAMROLLSObTDa6Yvs=",
-      "WebsiteShared.wasm": "sha256-A4rIEzjxqn+XOOGgXjW5h6BqAwdE9etK3Y7kVOLKjpM=",
-      "WebAssemblyApp.wasm": "sha256-0LV0VeNXrNg5lOV+72PA2GNxafc1enlaVdS/9KiFFwI="
+      "WebsiteShared.wasm": "sha256-jl8Vcs9De41b3XwZgUfmlsLKBNDd4fKccD5tIGZVTx4=",
+      "WebAssemblyApp.wasm": "sha256-JQvp3PmOz+OCGCfHhIVvL1m99dJK8MXlvUreOdgtH2M="
     },
     "pdb": {
       "PublicInfo.pdb": "sha256-IV6qcu3hvviF1GvkC7aodKET7qj3tpXPJPBqyCz8FsA=",
       "WebFunctions.pdb": "sha256-RR1U8x0X4SflPoTAVBpwovlcR5f0hj0CcLOLhALk2Ig=",
-      "WebsiteShared.pdb": "sha256-zTnzUXcSX+6CNkf48D1DVwcEuT69ZS53gMdxyVhOND0=",
-      "WebAssemblyApp.pdb": "sha256-TsevPZCaSt10w0jaTC8fnNiAwps4XzWC0+UFbzIKMG8="
+      "WebsiteShared.pdb": "sha256-AL8MFoirb0fk+p71RlsjTLh3UA+QCXhW7Xjqm+E1xvA=",
+      "WebAssemblyApp.pdb": "sha256-QY3DH4J/n3s/BjfljnLUx1dSmnFfGdmRXa6N6HXmhR0="
     }
   },
   "cacheBootResources": true,

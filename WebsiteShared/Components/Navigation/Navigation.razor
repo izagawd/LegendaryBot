@@ -6,8 +6,8 @@
 
     [Parameter]
     [EditorRequired] public WebsiteTheme Theme { get; set; }
-    private string TextColor => Theme == WebsiteTheme.Dark ? "lightgrey" : "black";
-    private string LinkContainerHovBgColorClass => Theme == WebsiteTheme.Dark ? "link-container-dark" : "link-container-light";
+    private string TextColor => Theme == WebsiteTheme.Dark ? "white" : "black";
+    private string IconHovBgColorClass => Theme == WebsiteTheme.Dark ? "icon-clickable-dark" : "icon-clickable-light";
     private class DirectoryStorer
 
     {
@@ -25,9 +25,11 @@
 
     private static readonly ImmutableArray<DirectoryStorer> Directories =
     [
+        
         new DirectoryStorer("Home", "/", "home"),
         new DirectoryStorer("Characters", "/characters", "settings_accessibility")
     ];
+
 
 }
 
@@ -43,7 +45,7 @@
 
         @foreach (var i in Directories)
         {
-            <div class="link-container @LinkContainerHovBgColorClass">
+            <div class="link-container icon-clickable @IconHovBgColorClass">
 
                 <a href="@i.Directory">
                     <span class="material-symbols-outlined nav-link-icon" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
@@ -53,11 +55,12 @@
                 </a>
             </div>
         }
-        <div>
+        <div class="icon-clickable dark-mode-changer-div @IconHovBgColorClass" @onclick="() => { if (Theme == WebsiteTheme.Dark) Theme = WebsiteTheme.Light;else Theme = WebsiteTheme.Dark; StateHasChanged(); }">
+                <span class="material-symbols-outlined" style="margin: auto; user-select: none;  color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
+                    dark_mode
+                </span>
             
-            <span class="material-symbols-outlined" style=" color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
-                dark_mode
-            </span>
+
         </div>
     </div>
 
