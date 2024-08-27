@@ -108,7 +108,7 @@
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-    background-color: #1A1A1A;
+
     position: sticky;
     border-bottom-style: solid;
     border-bottom-width: 3px;
@@ -165,3 +165,4 @@
 
     height: 100vh;
 }
+/* /Pages/Home.razor.rz.scp.css */

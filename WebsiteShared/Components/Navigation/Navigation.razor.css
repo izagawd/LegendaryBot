@@ -1,7 +1,7 @@
 /* Main container */
 
 .navigator-container {
-    position: sticky;
+  
     width: 280px;
     display: flex;
     flex-direction: column;
@@ -10,7 +10,14 @@
 
     height: 100%;
 }
-
+.dark-mode-toggle-button{
+    margin: auto; user-select: none;
+}
+.child-content-stuff{
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+}
 .navigator-outer {
     display: flex;
     width: 100%;
@@ -129,7 +136,7 @@ p {
         height: 70px;
     }
     .navigator-outer {
-        display: block;
+        flex-direction: column;
     }
     .nav-link-icon {
         margin: auto;

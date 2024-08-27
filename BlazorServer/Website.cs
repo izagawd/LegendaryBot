@@ -25,9 +25,10 @@ public static class Website
             .AddInteractiveServerComponents()
             .AddInteractiveWebAssemblyComponents();
 
-        services.AddHttpClient(Information.HttpClientStuff, i => i.BaseAddress =
+        services.AddHttpClient("WebApi", i => i.BaseAddress =
             new Uri(Information.DomainName));
-        services.AddScoped(i => i.GetRequiredService<IHttpClientFactory>().CreateClient(Information.HttpClientStuff));
+        services.AddScoped(i => i.GetRequiredService<IHttpClientFactory>()
+            .CreateClient());
         services.AddScoped<AuthenticationStateProvider, LegendaryAuthenticationStateProvider>();
         services.AddDbContext<PostgreSqlContext>();
         services.AddSession(i => { i.IdleTimeout = TimeSpan.MaxValue; }
@@ -54,15 +55,19 @@ public static class Website
                         user.GetString("id"),
                         user.GetString("avatar"),
                         user.GetString("avatar")!.StartsWith("a_") ? "gif" : "png"));
-                options.Events.OnTicketReceived = async context =>
+                options.Events.OnCreatingTicket = context =>
                 {
-                    var token = context.Properties.GetTokenValue("access_token");
-                    context.Principal?.AddIdentity(new ClaimsIdentity([new Claim("discord_access_token", token)]));
+                    context.Principal.AddIdentity(new ClaimsIdentity([
+                        new Claim("discord_access_token",
+                            context.AccessToken)
+                    ]));
+                    return Task.CompletedTask;
                 };
 
 
             })
-            .AddCookie(options => { }).AddCertificate(options => { options.Validate(); });
+            .AddCookie(options => { })
+            .AddCertificate(options => { options.Validate(); });
         DiscordAuthenticationOptions options;
     }
 

@@ -1,15 +1,3 @@
-@import 'WebAssemblyApp.aewttnldbs.bundle.scp.css';
-@import '_content/WebsiteShared/WebsiteShared.bfn38vuex9.bundle.scp.css';
-
-/* _content/BlazorServer/WebsiteStuff/Pages/CharacterInfo/CharacterInfo.razor.rz.scp.css */
-.gear-equipped-tile[b-u8twmt6746] {
-    margin-bottom: 30px;
-}
-
-.collection-class[b-u8twmt6746] {
-    background-color: gray;
-    overflow: auto;
-    width: 200px;
-    height: 100vh;
-}
+@import 'WebAssemblyApp.8zartbyrd3.bundle.scp.css';
+@import '_content/WebsiteShared/WebsiteShared.wfcm2rht35.bundle.scp.css';
 

@@ -1,4 +1,4 @@
-@import '_content/WebsiteShared/WebsiteShared.bfn38vuex9.bundle.scp.css';
+@import '_content/WebsiteShared/WebsiteShared.wfcm2rht35.bundle.scp.css';
 
 /* /Pages/Characters/Characters.razor.rz.scp.css */
 .character-to-display[b-gbuuicddjv] {
@@ -110,7 +110,7 @@
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-    background-color: #1A1A1A;
+
     position: sticky;
     border-bottom-style: solid;
     border-bottom-width: 3px;
@@ -167,3 +167,4 @@
 
     height: 100vh;
 }
+/* /Pages/Home.razor.rz.scp.css */

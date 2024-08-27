@@ -24,17 +24,17 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-sx/yK74jOqFtGm7JszXGGRNGQdpmtBDyhnOHT8oDQ9k="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"232"},{"Name":"Content-Type","Value":"application/json"},{"Name":"ETag","Value":"\u0022sx/yK74jOqFtGm7JszXGGRNGQdpmtBDyhnOHT8oDQ9k=\u0022"},{"Name":"Last-Modified","Value":"Sat, 24 Aug 2024 09:10:00 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="WebAssemblyApp.aewttnldbs.bundle.scp.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\WebAssemblyApp.aewttnldbs.bundle.scp.css'))</AssetFile>
+    <StaticWebAssetEndpoint Include="WebAssemblyApp.8zartbyrd3.bundle.scp.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\WebAssemblyApp.8zartbyrd3.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"aewttnldbs"},{"Name":"integrity","Value":"sha256-vi3\u002BSxa1HCei0QJWNeUP/XTxtZ8\u002BxNuUrfpdFJfxh3w="},{"Name":"label","Value":"WebAssemblyApp.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"3192"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022vi3\u002BSxa1HCei0QJWNeUP/XTxtZ8\u002BxNuUrfpdFJfxh3w=\u0022"},{"Name":"Last-Modified","Value":"Sat, 24 Aug 2024 12:06:41 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"8zartbyrd3"},{"Name":"integrity","Value":"sha256-rGY2/2atAmO3VcYcjs54ggf\u002B1MQpv7TksgNaPnd\u002B2xw="},{"Name":"label","Value":"WebAssemblyApp.bundle.scp.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"3198"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022rGY2/2atAmO3VcYcjs54ggf\u002B1MQpv7TksgNaPnd\u002B2xw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 27 Aug 2024 12:23:07 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="WebAssemblyApp.bundle.scp.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\WebAssemblyApp.aewttnldbs.bundle.scp.css'))</AssetFile>
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\WebAssemblyApp.8zartbyrd3.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-vi3\u002BSxa1HCei0QJWNeUP/XTxtZ8\u002BxNuUrfpdFJfxh3w="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"3192"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022vi3\u002BSxa1HCei0QJWNeUP/XTxtZ8\u002BxNuUrfpdFJfxh3w=\u0022"},{"Name":"Last-Modified","Value":"Sat, 24 Aug 2024 12:06:41 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-rGY2/2atAmO3VcYcjs54ggf\u002B1MQpv7TksgNaPnd\u002B2xw="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"3198"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022rGY2/2atAmO3VcYcjs54ggf\u002B1MQpv7TksgNaPnd\u002B2xw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 27 Aug 2024 12:23:07 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_framework/blazor.webassembly.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\_framework\blazor.webassembly.js'))</AssetFile>
