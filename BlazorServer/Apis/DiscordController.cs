@@ -13,11 +13,7 @@ public class DiscordController : Controller
     [HttpGet("login")]
     public IActionResult Login()
     {
-        var properties = new AuthenticationProperties
-        {
-            RedirectUri = Url.Action("Callback")
-        };
-        return Challenge(properties, DiscordAuthenticationDefaults.AuthenticationScheme);
+        return Ok();
     }
 
     [HttpGet("callback")]
@@ -25,9 +21,10 @@ public class DiscordController : Controller
     {
         var authenticateResult = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
+        
         if (!authenticateResult.Succeeded)
             return BadRequest(); // Handle failure
-
+        
         // Get user info from the claims
         var userId = authenticateResult.Principal.GetDiscordUserId();
         var userName = authenticateResult.Principal.FindFirstValue("name");
@@ -47,11 +44,6 @@ public class DiscordController : Controller
     public async Task<IActionResult> GetUserData()
     {
         if (!User.Identity.IsAuthenticated) return Login(); // User is not authenticated
-        // Get user info from the claims
-        var userId = User.GetDiscordUserId(); // Assuming you have an extension method
-        var userName = User.FindFirstValue("name");
-        var dic = User.Claims.ToDictionary(i => i.Type, i => i.Value);
-        dic["token"] = await HttpContext.GetTokenAsync("access_token");
-        return Ok(dic);
+        return Ok(User.Claims.DistinctBy(i => i.Type).ToDictionary(i => i.Type, i => i.Value));
     }
 }

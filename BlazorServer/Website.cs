@@ -1,10 +1,12 @@
 using System.Globalization;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text.Json;
 using AspNet.Security.OAuth.Discord;
 using BlazorApp4.Components.Account;
 using BlazorServer.WebsiteStuff;
 using DatabaseManagement;
+using Humanizer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OAuth;
@@ -22,14 +24,16 @@ public static class Website
         services.AddRazorComponents()
             .AddInteractiveServerComponents()
             .AddInteractiveWebAssemblyComponents();
-        services.AddScoped(i => new HttpClient { BaseAddress = new Uri(Information.DomainName) });
 
+        services.AddHttpClient(Information.HttpClientStuff, i => i.BaseAddress =
+            new Uri(Information.DomainName));
+        services.AddScoped(i => i.GetRequiredService<IHttpClientFactory>().CreateClient(Information.HttpClientStuff));
         services.AddScoped<AuthenticationStateProvider, LegendaryAuthenticationStateProvider>();
         services.AddDbContext<PostgreSqlContext>();
         services.AddSession(i => { i.IdleTimeout = TimeSpan.MaxValue; }
         );
 
-
+        
         services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -42,8 +46,7 @@ public static class Website
                 options.ClientSecret = "n-Jy3ogvEmMnaFRIVmguqzpLgW8pYp2m";
                 options.SaveTokens = true;
                 options.CallbackPath = "/signin-discord";
-                options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-
+   
                 options.ClaimActions.MapCustomJson("urn:discord:avatar:url", user =>
                     string.Format(
                         CultureInfo.InvariantCulture,
@@ -51,21 +54,13 @@ public static class Website
                         user.GetString("id"),
                         user.GetString("avatar"),
                         user.GetString("avatar")!.StartsWith("a_") ? "gif" : "png"));
-                options.Events = new OAuthEvents
+                options.Events.OnTicketReceived = async context =>
                 {
-                    OnCreatingTicket = async context =>
-                    {
-                        var request = new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
-                        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.AccessToken);
-
-                        var response = await context.Backchannel.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted);
-                        response.EnsureSuccessStatusCode();
-
-                        var user = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-                        context.RunClaimActions(user.RootElement);
-                    }
+                    var token = context.Properties.GetTokenValue("access_token");
+                    context.Principal?.AddIdentity(new ClaimsIdentity([new Claim("discord_access_token", token)]));
                 };
+
+
             })
             .AddCookie(options => { }).AddCertificate(options => { options.Validate(); });
         DiscordAuthenticationOptions options;

@@ -584,7 +584,6 @@ C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\appse
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\DiscordBot.dll
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\DiscordBot.pdb
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\DiscordBot.dll.config
-C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\DiscordLogin.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
@@ -606,3 +605,6 @@ C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\Websi
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\WebsiteShared.staticwebassets.endpoints.json
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\WebsiteShared.dll
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\WebsiteShared.pdb
+C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\Microsoft.Extensions.Http.Polly.dll
+C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\Polly.dll
+C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\bin\Debug\net8.0\Polly.Extensions.Http.dll

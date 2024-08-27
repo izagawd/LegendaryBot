@@ -17,6 +17,7 @@ internal sealed class LegendaryAuthenticationStateProvider : ServerAuthenticatio
 
     private Task<AuthenticationState>? authenticationStateTask;
 
+
     public LegendaryAuthenticationStateProvider(
         PersistentComponentState persistentComponentState)
 
@@ -44,12 +45,15 @@ internal sealed class LegendaryAuthenticationStateProvider : ServerAuthenticatio
         if (authenticationStateTask is null)
             throw new UnreachableException($"Authentication state not set in {nameof(OnPersistingAsync)}().");
 
+        
         var authenticationState = await authenticationStateTask;
         var principal = authenticationState.User;
 
         if (principal.Identity?.IsAuthenticated == true)
         {
-            var dictionaryClaims = principal.Claims.ToDictionary(i => i.Type, i => i.Value);
+            var dictionaryClaims = principal.Claims
+                .DistinctBy(i => i.Type)
+                .ToDictionary(i => i.Type, i => i.Value);
 
             state.PersistAsJson("claims", dictionaryClaims);
         }

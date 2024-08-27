@@ -1,10 +1,14 @@
 @page "/characters"
+
+@using System.Net.Http.Headers
+@using System.Text
 @using Microsoft.AspNetCore.Authorization
-@using WebFunctions
+@using PublicInfo
+
 @using WebsiteShared
 @using WebsiteShared.Components.Navigation
 
-@rendermode  InteractiveAuto
+@rendermode  InteractiveWebAssembly
 
 @attribute [Authorize(AuthenticationSchemes = "Discord")]
 
@@ -13,13 +17,14 @@
 
 @code{
 
+    string token = "";
     private CharacterPageDto[]? CharacterCollection;
 
     protected override async Task OnInitializedAsync()
     {
-        var user = (await Auth.GetAuthenticationStateAsync()).User;
-        CharacterCollection =
-            await Http.GetFromJsonAsync<CharacterPageDto[]>($"CharactersPage/get-characters?discordId={user.GetDiscordUserId()}");
+
+        CharacterCollection = await Http.GetFromJsonAsync<CharacterPageDto[]>("CharactersPage/get-characters");
+
     }
 
     private enum SortType
@@ -79,7 +84,7 @@
 
 <Navigation Theme="WebsiteTheme.Dark">
 
-
+    <h1>@token</h1>
     <div class="filterer-outer" style="height: @(!displayAdvancedFilter ? "80px" : "280px");">
 
         <div class="filter-basic">
