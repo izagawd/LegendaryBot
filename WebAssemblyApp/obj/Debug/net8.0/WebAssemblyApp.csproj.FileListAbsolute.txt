@@ -3267,8 +3267,8 @@ C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\com
 C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\vjh0yo6wfb-z23g6a4lww.gz
 C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\zam5j409uf-tms8xuirjq.gz
 C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\scopedcss\Pages\Home.razor.rz.scp.css
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\9ixqfwxkjz-u6cf5zk3ij.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\yeh25km0cy-wz1vywqaz0.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\8qvap86r0h-actv30qavf.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\dak0m8xoyx-wf4sejtwzl.gz
-C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\5nr4nupufv-3lvkamo6t9.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\8qvap86r0h-e51f7zg7a3.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\dak0m8xoyx-k40cln21nh.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\9ixqfwxkjz-k1f67ovgdn.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\yeh25km0cy-az1846va7g.gz
+C:\Users\theiz\Documents\coding\LegendaryBot\WebAssemblyApp\obj\Debug\net8.0\compressed\5nr4nupufv-ppkclmx2g5.gz

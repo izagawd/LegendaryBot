@@ -14,9 +14,10 @@
     margin: auto; user-select: none;
 }
 .child-content-stuff{
+    
     width: 100%; 
     height: 100%; 
-    overflow: auto;
+    overflow: scroll;
 }
 .navigator-outer {
     display: flex;

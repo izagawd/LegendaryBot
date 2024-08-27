@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorServer.bundle.scp.css",
-      "PackagePath": "staticwebassets\\BlazorServer.xi6ycuqclh.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BlazorServer\\wwwroot\\battle_images\\blessings\\BlessingOfThePhoenix.png",
       "PackagePath": "staticwebassets\\battle_images\\blessings\\BlessingOfThePhoenix.png"
     },

@@ -427,9 +427,7 @@ C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\obj\Debug\net8.0\Blazo
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\obj\Debug\net8.0\BlazorServer.AssemblyInfo.cs
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\obj\Debug\net8.0\BlazorServer.csproj.CoreCompileInputs.cache
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\obj\Debug\net8.0\BlazorServer.sourcelink.json
-C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\obj\Debug\net8.0\scopedcss\WebsiteStuff\Pages\CharacterInfo\CharacterInfo.razor.rz.scp.css
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\obj\Debug\net8.0\scopedcss\bundle\BlazorServer.styles.css
-C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\obj\Debug\net8.0\scopedcss\projectbundle\BlazorServer.bundle.scp.css
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\theiz\Documents\coding\LegendaryBot\BlazorServer\obj\Debug\net8.0\staticwebassets\msbuild.BlazorServer.Microsoft.AspNetCore.StaticWebAssets.props
