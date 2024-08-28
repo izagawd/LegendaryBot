@@ -27,6 +27,7 @@ public class CharactersPageController : ControllerBase
 
     [HttpGet("get-characters")]
 
+    [Authorize]
     public async Task<ActionResult<CharacterPageDto[]>> GetCharactersAsync()
     {
 

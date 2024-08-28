@@ -11,27 +11,15 @@ namespace WebsiteApi.ClientSenders;
 public class DiscordController : Controller
 {
     [HttpGet("login")]
-    public IActionResult Login()
+    public IActionResult Login([FromQuery]string redirectUri)
     {
-        return Ok();
+        return Challenge(new AuthenticationProperties()
+        { 
+RedirectUri = redirectUri
+        }, "Discord");
     }
 
-    [HttpGet("callback")]
-    public async Task<IActionResult> Callback()
-    {
-        var authenticateResult = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-        
-        if (!authenticateResult.Succeeded)
-            return BadRequest(); // Handle failure
-        
-        // Get user info from the claims
-        var userId = authenticateResult.Principal.GetDiscordUserId();
-        var userName = authenticateResult.Principal.FindFirstValue("name");
-
-        // Do something with the user information
-        return Ok(new { userId, userName });
-    }
 
     [HttpGet("logout")]
     public async Task<IActionResult> Logout()
@@ -43,7 +31,7 @@ public class DiscordController : Controller
     [HttpGet("get-user-data")]
     public async Task<IActionResult> GetUserData()
     {
-        if (!User.Identity.IsAuthenticated) return Login(); // User is not authenticated
+        if (!User.Identity?.IsAuthenticated ?? false) return Unauthorized();
         return Ok(User.Claims.DistinctBy(i => i.Type).ToDictionary(i => i.Type, i => i.Value));
     }
 }

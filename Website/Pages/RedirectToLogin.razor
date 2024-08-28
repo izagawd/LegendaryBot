@@ -1,0 +1,11 @@
+@page "/RedirectToLogin"
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject NavigationManager Man
+@inject HttpClient HttpClient
+@code {
+    protected override void OnInitialized()
+    {
+        Man.NavigateTo(PublicInfo.Information.ApiDomainName + $"/Discord/login?redirectUri={Uri.EscapeDataString(Man.Uri)}");
+    }
+
+}
