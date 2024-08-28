@@ -33,12 +33,12 @@ public class ClientAuthStateProvider : AuthenticationStateProvider
 
   
 
+
         var user = new ClaimsPrincipal();
         var state = new AuthenticationState(user);
         Dictionary<string,string>? content;
         try
         {
-
             content = await _http.GetFromJsonAsync<Dictionary<string,string>>("Discord/get-user-data");
             user.AddIdentity(new ClaimsIdentity(content.Select(i => new Claim(i.Key,i.Value))));
         }
@@ -47,7 +47,6 @@ public class ClientAuthStateProvider : AuthenticationStateProvider
             Console.WriteLine(e);
             return state;
         }
-        NotifyAuthenticationStateChanged(Task.FromResult(state));
         return state;
     }
 }
