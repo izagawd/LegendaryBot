@@ -53,7 +53,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     public Type TypeGroup => typeof(Blessing);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
     public long UserDataId { get; set; }
-    public virtual string ImageUrl => $"{Information.DomainName}/battle_images/blessings/{GetType().Name}.png";
+    public virtual string ImageUrl => $"{Information.ApiDomainName}/battle_images/blessings/{GetType().Name}.png";
     public abstract string Name { get; }
 
     public static Blessing GetRandomBlessing(Dictionary<Rarity, double> rates)

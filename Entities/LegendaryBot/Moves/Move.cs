@@ -40,7 +40,7 @@ public abstract class Move : INameHaver
     /// </summary>
 
 
-    public virtual string IconUrl => $"{Information.DomainName}/battle_images/moves/{GetType().Name}.png";
+    public virtual string IconUrl => $"{Information.ApiDomainName}/battle_images/moves/{GetType().Name}.png";
 
 
     protected static ConcurrentDictionary<string, Image<Rgba32>> _croppedCombatImages { get; } = new();

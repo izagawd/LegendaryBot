@@ -25,4 +25,10 @@
         <Content Remove="wwwroot\bla.json"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Characters\Characters.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Counter.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Home.razor" />
+    </ItemGroup>
+
 </Project>

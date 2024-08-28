@@ -28,7 +28,7 @@ public abstract class StatusEffect : INameHaver
         Caster = caster;
     }
 
-    public virtual string IconUrl => $"{Information.DomainName}/battle_images/status_effects/{GetType().Name}.png";
+    public virtual string IconUrl => $"{Information.ApiDomainName}/battle_images/status_effects/{GetType().Name}.png";
 
     /// <summary>
     ///     The character currently affected by the status effect

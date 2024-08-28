@@ -1,0 +1,75 @@
+@using System.Collections.Immutable
+@using WebsiteShared
+@inject WebsiteThemeService WebsiteThemeService
+@code {
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    public WebsiteTheme Theme
+    {
+        get => WebsiteThemeService.WebsiteTheme;
+        set => WebsiteThemeService.WebsiteTheme = value;
+    }
+
+    private string TextColor => Theme == WebsiteTheme.Dark ? "white" : "black";
+    private string IconHovBgColorClass => Theme == WebsiteTheme.Dark ? "icon-clickable-dark" : "icon-clickable-light";
+    private class DirectoryStorer
+
+    {
+        public string Name { get; }
+        public string Directory { get; }
+        public string Icon { get; }
+
+        public DirectoryStorer(string name, string directory, string icon)
+        {
+            Name = name;
+            Directory = directory;
+            Icon = icon;
+        }
+    }
+
+    private static readonly ImmutableArray<DirectoryStorer> Directories =
+    [
+        
+        new DirectoryStorer("Home", "/", "home"),
+        new DirectoryStorer("Characters", "/characters", "settings_accessibility")
+    ];
+
+
+}
+<HeadContent>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+</HeadContent>
+<div class="navigator-outer" style="background-color: @Theme.GetThemeDefaults().DefaultBackgroundColor;">
+    <div class="navigator-container" style="border-color: @(Theme == WebsiteTheme.Dark ? "darkgray" : "black")">
+        <div class="navigator-inner">
+            <p style="color: @TextColor;">Legendary!!</p>
+        </div>
+        @foreach (var i in Directories)
+        {
+            <div class="link-container icon-clickable @IconHovBgColorClass">
+
+                <a href="@i.Directory">
+                    <span class="material-symbols-outlined nav-link-icon" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
+                        @i.Icon
+                    </span>
+                    <p style="color: @TextColor">@i.Name</p>
+                </a>
+            </div>
+        }
+        <div class="icon-clickable dark-mode-changer-div @IconHovBgColorClass" @onclick="() => { if (Theme == WebsiteTheme.Dark) Theme = WebsiteTheme.Light;else Theme = WebsiteTheme.Dark; StateHasChanged(); }">
+                <span class="material-symbols-outlined dark-mode-toggle-button" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
+                    dark_mode
+                </span>
+        </div>
+    </div>
+
+    @if (ChildContent is not null)
+    {
+        <div class="child-content-stuff">
+            @ChildContent
+        </div>
+    }
+
+
+</div>

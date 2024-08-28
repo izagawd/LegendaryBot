@@ -1,0 +1,157 @@
+@page "/characters"
+
+
+
+@using System.Net.Http.Headers
+@using System.Security.Principal
+@using Microsoft.AspNetCore.Authorization
+@using PublicInfo
+
+@using WebAssemblyApp.Pages.Characters
+@using Website.Components.Navigation
+@using WebsiteShared
+
+
+
+
+
+
+@inject HttpClient Http
+
+@code{
+
+    private CharacterPageDto[]? CharacterCollection;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        CharacterCollection = await Http.GetFromJsonAsync<CharacterPageDto[]>("CharactersPage/get-characters");
+    }
+
+    private enum SortType
+    {
+        Name,
+        Level
+    }
+
+
+    private IEnumerable<CharacterPageDto> UsingCharacterCollection
+    {
+        get
+        {
+            if (CharacterCollection is null)
+                return [];
+            var theEnumerable = CharacterCollection
+                .Where(i => i.Name.ToLower().Contains(_nameFilter));
+            switch (SortTypeVal)
+            {
+                case SortType.Name:
+                    theEnumerable = theEnumerable.OrderBy(i => i.Name);
+                    break;
+                case SortType.Level:
+                    theEnumerable = theEnumerable.OrderBy(i => i.Level);
+                    break;
+            }
+
+            if (reverseOrder)
+                theEnumerable = theEnumerable.Reverse();
+            return theEnumerable;
+        }
+    }
+
+    private string _nameFilter = string.Empty;
+
+
+    private void FilterWithName(ChangeEventArgs eventArgs)
+    {
+        _nameFilter = ((string)eventArgs.Value!).ToLower();
+    }
+
+    private void SelectChange(ChangeEventArgs eventArgs)
+    {
+        SortTypeVal = Enum.Parse<SortType>((string)eventArgs.Value!);
+    }
+
+    public void ReverseOrder(ChangeEventArgs eventArgs)
+    {
+        reverseOrder = (bool)eventArgs.Value!;
+    }
+
+
+    private SortType SortTypeVal { get; set; } = SortType.Level;
+    public bool reverseOrder;
+}
+
+
+<Navigation>
+
+    <div class="filterer-outer" style="height: @(!displayAdvancedFilter ? "80px" : "280px");">
+
+        <div class="filter-basic">
+            <div class="input-div filterer-percentage">
+                <span class="material-symbols-outlined name-filter-search-icon">
+                    search
+                </span>
+                <input class="name-filter" placeholder="Search" type="text" @onchange="FilterWithName"/>
+            </div>
+
+            <button class="advanced-filter-button" @onclick="() => displayAdvancedFilter = !displayAdvancedFilter">
+                Adv Filt
+            </button>
+        </div>
+
+        @code
+
+        {
+            private bool displayAdvancedFilter;
+        }
+
+        <p>Sort By</p>
+        <select @onchange="SelectChange" class="filterer-percentage" style="height: 30px">
+
+            @foreach (var i in Enum.GetValues<SortType>())
+            {
+                <option selected="@(SortTypeVal == i)" value="@i">@i</option>
+            }
+
+        </select>
+        <p>Reverse Order</p>
+        <input type="checkbox" @onchange="ReverseOrder" style="width: 25px; height: 25px"/>
+    </div>
+
+
+    @code{
+
+        private RenderFragment RenderCharacter(CharacterPageDto character)
+        {
+            return @<div class="character-to-display">
+
+
+                <a href="/character-info/@character.Number">
+                    <img src="@character.ImageUrl" style="background-color: @character.Color;" class="image-box"/>
+                </a>
+
+                <p class="character-image-p">@character.Name</p>
+                <p class="character-image-p">Level: @character.Level </p>
+                <p class="character-image-p">Number: @character.Number</p>
+            </div>;
+        }
+
+    }
+
+    @{
+        if (UsingCharacterCollection is not null)
+        {
+            <div class="characters-container">
+
+                @foreach (var i in UsingCharacterCollection)
+                {
+                    @RenderCharacter(i)
+                    ;
+                }
+            </div>
+        }
+    }
+
+
+</Navigation>

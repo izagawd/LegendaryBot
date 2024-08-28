@@ -350,7 +350,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     public abstract string Name { get; }
 
-    public virtual string ImageUrl => $"{Information.DomainName}/battle_images/characters/{GetType().Name}.png";
+    public virtual string ImageUrl => $"{Information.ApiDomainName}/battle_images/characters/{GetType().Name}.png";
 
 
     public Type TypeGroup => typeof(Character);

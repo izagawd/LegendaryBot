@@ -40,7 +40,7 @@ public static class ImageFunctions
                 {
                     if (cert is not null && !cert.Verify())
                         return httpRequestMessage.RequestUri is not null
-                               && httpRequestMessage.RequestUri.ToString().Contains(Information.DomainName);
+                               && httpRequestMessage.RequestUri.ToString().Contains(Information.ApiDomainName);
                     return cert is not null;
                 };
             using var webClient = new HttpClient(handler);
@@ -48,7 +48,7 @@ public static class ImageFunctions
             var characterImage = await Image.LoadAsync<Rgba32>(memoryStream);
             var entryOptions = EntryOptions;
 
-            if (!url.Contains(Information.DomainName)) entryOptions = ExpiryEntryOptions;
+            if (!url.Contains(Information.ApiDomainName)) entryOptions = ExpiryEntryOptions;
 
             CachedImages.Set(url, characterImage, entryOptions);
             return characterImage.Clone();
@@ -56,7 +56,7 @@ public static class ImageFunctions
         catch (HttpRequestException e)
         {
             var alternateImage =
-                await GetImageFromUrlAsync($"{Information.DomainName}/battle_images/moves/guilotine.png");
+                await GetImageFromUrlAsync($"{Information.ApiDomainName}/battle_images/moves/guilotine.png");
             CachedImages.Set(url, alternateImage, EntryOptions);
             return alternateImage.Clone();
         }

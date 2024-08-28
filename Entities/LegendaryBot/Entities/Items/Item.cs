@@ -42,7 +42,7 @@ public abstract class Item : IInventoryEntity
 
     public abstract string Name { get; }
     public UserData? UserData { get; set; }
-    public string ImageUrl => $"{Information.DomainName}/battle_images/items/{GetType().Name}.png";
+    public string ImageUrl => $"{Information.ApiDomainName}/battle_images/items/{GetType().Name}.png";
 
 
     public long UserDataId { get; set; }

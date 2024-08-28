@@ -158,8 +158,8 @@ public class Player : Character
     public static string GetImageUrl(Gender gender)
     {
         return gender == Gender.Male
-            ? $"{Information.DomainName}/battle_images/characters/PlayerMale.png"
-            : $"{Information.DomainName}/battle_images/characters/PlayerFemale.png";
+            ? $"{Information.ApiDomainName}/battle_images/characters/PlayerMale.png"
+            : $"{Information.ApiDomainName}/battle_images/characters/PlayerFemale.png";
     }
 
 
