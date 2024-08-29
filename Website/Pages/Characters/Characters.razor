@@ -10,7 +10,7 @@
 @using WebAssemblyApp.Pages.Characters
 @using Website.Components.Navigation
 @using WebsiteShared
-
+@inject WebsiteThemeService WebsiteThemeService
 
 
 
@@ -83,7 +83,8 @@
 
 <Navigation>
 
-    <div class="filterer-outer" style="height: @(!displayAdvancedFilter ? "80px" : "280px");">
+    <div class="filterer-outer @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")" 
+         style="height: @(!displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
 
         <div class="filter-basic">
             <div class="input-div filterer-percentage">
@@ -92,8 +93,11 @@
                 </span>
                 <input class="name-filter" placeholder="Search" type="text" @onchange="FilterWithName"/>
             </div>
-
-            <button class="advanced-filter-button" @onclick="() => displayAdvancedFilter = !displayAdvancedFilter">
+            @{
+                var butTxtCol = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "black" : "white";
+                var advButColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "#525252";
+            }   
+            <button style="background-color: @advButColor; color: @butTxtCol " class="advanced-filter-button" @onclick="() => displayAdvancedFilter = !displayAdvancedFilter">
                 Adv Filt
             </button>
         </div>
@@ -128,10 +132,13 @@
                 <a href="/character-info/@character.Number">
                     <img src="@character.ImageUrl" style="background-color: @character.Color;" class="image-box"/>
                 </a>
-
-                <p class="character-image-p">@character.Name</p>
-                <p class="character-image-p">Level: @character.Level </p>
-                <p class="character-image-p">Number: @character.Number</p>
+                @{
+                    var pColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "dark";
+                    
+                }
+                <p style="color: @pColor" class="character-image-p">@character.Name</p>
+                <p style="color: @pColor" class="character-image-p">Level: @character.Level </p>
+                <p style="color: @pColor" class="character-image-p">Number: @character.Number</p>
             </div>;
         }
 

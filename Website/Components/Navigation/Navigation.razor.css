@@ -3,11 +3,12 @@
 .navigator-container {
   
     width: 250px;
+    min-width: auto;
     display: flex;
     flex-direction: column;
     border-right-style: solid;
     border-width: 1px;
-    max-width: 250px;
+
     height: 100%;
 }
 .dark-mode-toggle-button{
