@@ -94,7 +94,9 @@
 .icon-clickable-light:hover {
     background-color: lightgrey;
 }
-
+.dark-mode-changer-div > *{
+    font-size: 32px;
+}
 
 /* Link styling */
 .link-container a {
@@ -154,6 +156,7 @@ p {
     .navigator-container {
         border-right-style: none;
         border-bottom-style: solid;
+        border-bottom-color: inherit;
 
         width: 100%;
         height: fit-content;
@@ -161,6 +164,14 @@ p {
     }
     .navigator-outer {
         flex-direction: column;
+    }
+    .link-container, .additional-cont{
+        border-bottom: white 1px solid;
+        border-bottom-color: inherit;
+    }
+    .dark-mode-changer-div{
+        border-right: white 1px solid;
+        border-right-color: inherit;
     }
     .nav-link-icon {
         margin-left: 0;
@@ -173,6 +184,7 @@ p {
     }
     .dark-mode-changer-div{
         border-radius: 0;
+       
     }
     .link-cont-hide{
         display: none;
