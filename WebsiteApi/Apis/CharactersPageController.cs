@@ -30,11 +30,12 @@ public class CharactersPageController : ControllerBase
     [Authorize]
     public async Task<ActionResult<CharacterPageDto[]>> GetCharactersAsync()
     {
-
+        if (!User.Identity?.IsAuthenticated ?? false)
+            return Unauthorized();
         await using var post = new PostgreSqlContext();
-
+        var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Characters
-            .Where(i => i.UserData.DiscordId == 216230858783326209)
+            .Where(i => i.UserData.DiscordId == zaId)
             .Select(i => new CharacterPageDto
             {
                 ImageUrl = i.TypeId == PlayerTypeId

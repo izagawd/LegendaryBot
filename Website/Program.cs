@@ -16,24 +16,28 @@ public class Program
         builder.RootComponents.Add<App>("#app");
         builder.RootComponents.Add<HeadOutlet>("head::after");
         builder.Services.AddBlazoredLocalStorage();
-        builder.Services.AddAuthorizationCore();
+
         builder.Services.AddScoped<WebsiteThemeService>();
-        builder.Services.AddScoped<AuthenticationStateProvider, ClientAuthStateProvider>();
+
         builder.Services
             .AddScoped(sp =>
             {
-                var storage =sp.GetRequiredService<ISyncLocalStorageService>();
-                var client =  new HttpClient
+                var locStor = sp.GetRequiredService<ISyncLocalStorageService>();
+                var client = new HttpClient
                 {
                     BaseAddress =
                         new Uri(Information.ApiDomainName)
                 };
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Discord",
-                    storage.GetItemAsString(ClientAuthStateProvider.DiscordAccessTokenKey));
+                client.DefaultRequestHeaders.Add("Access-Control-Allow-Flight","*");
+                client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin","*");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
+                     locStor.GetItem<string>(WebsiteConstants.DiscordTokenKey));
                 return client;
-            });
 
-   
+            });
+        builder.Services.AddScoped<AuthenticationStateProvider, DiscordAuthenticationStateProvider>();
+        builder.Services.AddAuthorizationCore();
+
 
         await builder.Build().RunAsync();
     }

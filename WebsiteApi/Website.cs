@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
 using AspNet.Security.OAuth.Discord;
-using BlazorApp4.Components.Account;
+
 
 using DatabaseManagement;
 using Humanizer;
@@ -18,6 +18,7 @@ namespace WebsiteApi;
 
 public static class Website
 {
+    public const string DiscordAuthScheme = "Discord";
     public static void ConfigureServices(IServiceCollection services)
     {
 
@@ -26,52 +27,33 @@ public static class Website
             new Uri(Information.ApiDomainName));
         services.AddScoped(i => i.GetRequiredService<IHttpClientFactory>()
             .CreateClient());
-        services.AddScoped<AuthenticationStateProvider, LegendaryAuthenticationStateProvider>();
+
         services.AddDbContext<PostgreSqlContext>();
         services.AddCors(options =>
         {
             options.AddPolicy("AllowAllOrigins",
                 policy =>
                 {
-                    policy.AllowAnyOrigin()
+                    policy.WithOrigins(Information.WebsiteDomainName+"/*",Information.WebsiteDomainName)
                         .AllowAnyMethod()
-                        .AllowAnyHeader();
+                        .AllowAnyHeader()
+                        .AllowCredentials();
                 });
         });
-        
+     
         services.AddControllers();
         services.AddAuthentication(options =>
             {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = DiscordAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.RequireAuthenticatedSignIn = false;
+                options.DefaultScheme = DiscordAuthScheme;
+                options.DefaultChallengeScheme = null;
+                options.DefaultAuthenticateScheme = DiscordAuthScheme;
             })
-            .AddDiscord(options =>
-            {
-                options.ClientId = "340054610989416460";
-                options.ClientSecret = "n-Jy3ogvEmMnaFRIVmguqzpLgW8pYp2m";
-                options.SaveTokens = true;
-                options.CallbackPath = "/signin-discord";
-   
-                options.ClaimActions.MapCustomJson("urn:discord:avatar:url", user =>
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "https://cdn.discordapp.com/avatars/{0}/{1}.{2}",
-                        user.GetString("id"),
-                        user.GetString("avatar"),
-                        user.GetString("avatar")!.StartsWith("a_") ? "gif" : "png"));
-                options.Events.OnCreatingTicket = context =>
+            .AddScheme<AuthenticationSchemeOptions,CustomAuthenticationHandler>(DiscordAuthScheme,
+                i =>
                 {
-                    context.Principal.AddIdentity(new ClaimsIdentity([
-                        new Claim("discord_access_token",
-                            context.AccessToken)
-                    ]));
-                    return Task.CompletedTask;
-                };
-
-
-            })
-            .AddCookie(options => { })
+                    
+                })
             .AddCertificate(options => { options.Validate(); });
         DiscordAuthenticationOptions options;
     }
@@ -129,10 +111,10 @@ public static class Website
         app.UseStaticFiles();
 
         app.UseRouting();
-
+        app.UseCors("AllowAllOrigins");
         app.UseAuthentication();
         app.UseAuthorization();
-        app.UseCors("AllowAllOrigins");
+       
         app.MapControllers();
         
 

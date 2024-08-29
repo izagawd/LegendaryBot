@@ -1,0 +1,30 @@
+@page "/authentication/callback"
+@using System.Text.Json.Nodes
+@using Blazored.LocalStorage
+
+@inject  NavigationManager Navigation
+@inject  HttpClient HttpClient
+@inject ILocalStorageService StorageService
+<h1>Logging in...</h1>
+@code {
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = new Uri(Navigation.Uri);
+        
+        // Extract query parameters
+        var queryParams = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        
+        // Retrieve the specific parameter value
+        var code = queryParams["code"];
+        var token = await HttpClient.GetFromJsonAsync<JsonObject>($"Discord/get-token?code={code}&redirectUri=" +
+                                                              Uri.EscapeDataString(PublicInfo.Information.WebsiteDomainName+"/authentication/callback"));
+        if (token is not null)
+        {
+            await StorageService.SetItemAsync(WebsiteConstants.DiscordTokenKey,
+                token["access_token"]?.GetValue<string>());
+        }
+    }
+    
+
+}

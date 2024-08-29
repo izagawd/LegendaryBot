@@ -1,11 +1,20 @@
 @page "/RedirectToLogin"
+@using Blazored.LocalStorage
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using PublicInfo
 @inject NavigationManager Man
 @inject HttpClient HttpClient
+@inject AuthenticationStateProvider provider
+@inject ILocalStorageService StorageService
 @code {
-    protected override void OnInitialized()
+
+    protected override async Task OnInitializedAsync()
     {
-        Man.NavigateTo(PublicInfo.Information.ApiDomainName + $"/Discord/login?redirectUri={Uri.EscapeDataString(Man.Uri)}");
+ 
+        Man
+            .NavigateTo($"https://discord.com/oauth2/authorize?client_id={Information.DiscordClientId}&scope=identify&response_type=code&redirect_uri=" +
+                        $"{Uri.EscapeDataString($"{Information.WebsiteDomainName}/authentication/callback")}");
+
     }
-    
+
 }

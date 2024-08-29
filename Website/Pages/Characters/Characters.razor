@@ -13,11 +13,9 @@
 
 
 
-@attribute [Authorize]
-
 
 @inject HttpClient Http
-
+@attribute [Authorize]
 @code{
 
     private CharacterPageDto[]? CharacterCollection;
@@ -25,7 +23,7 @@
     protected override async Task OnInitializedAsync()
     {
 
-        CharacterCollection = await Http.GetFromJsonAsync<CharacterPageDto[]>("CharactersPage/get-characters");
+    
     }
 
     private enum SortType

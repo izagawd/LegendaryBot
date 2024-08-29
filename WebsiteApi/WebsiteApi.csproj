@@ -19,6 +19,7 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6"/>
         <ProjectReference Include="..\DatabaseManagement\DatabaseManagement.csproj"/>
+        <ProjectReference Include="..\PrivateInfo\PrivateInfo.csproj" />
         <ProjectReference Include="..\PublicInfo\PublicInfo.csproj"/>
         <ProjectReference Include="..\WebFunctions\WebFunctions.csproj" />
         <ProjectReference Include="..\Website\Website.csproj" />
