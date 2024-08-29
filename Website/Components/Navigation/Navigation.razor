@@ -11,6 +11,8 @@
         set => WebsiteThemeService.WebsiteTheme = value;
     }
 
+    
+    bool ShowMore = true;
     private string TextColor => Theme == WebsiteTheme.Dark ? "white" : "black";
     private string IconHovBgColorClass => Theme == WebsiteTheme.Dark ? "icon-clickable-dark" : "icon-clickable-light";
     private class DirectoryStorer
@@ -41,19 +43,23 @@
 
 
 }
+
 <HeadContent>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
 </HeadContent>
 <div class="navigator-outer @(Theme == WebsiteTheme.Dark ? "navigator-outer-dark" : "navigator-outer-light")" style="background-color: @Theme.GetThemeDefaults().DefaultBackgroundColor;">
-    <div class="navigator-container" style="border-color: @(Theme == WebsiteTheme.Dark ? "darkgray" : "black")">
+    <div class="navigator-container @(ShowMore ? "show-more" : "")" style="border-color: @(Theme == WebsiteTheme.Dark ? "darkgray" : "black")">
         <div class="navigator-inner">
             <p style="color: @TextColor;">Legendary!!</p>
         </div>
+        @{
+            var or = 2;
+        }
         @foreach (var i in Directories)
         {
-            <div class="link-container icon-clickable @IconHovBgColorClass">
+            <div style="order: @(or++)" class="link-container icon-clickable  @IconHovBgColorClass @(!ShowMore ? "link-cont-hide" : "")">
 
-                <a href="@i.Directory">
+                <a href="@i.Directory" class="link-a">
                     <span class="material-symbols-outlined nav-link-icon" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
                         @i.Icon
                     </span>
@@ -61,11 +67,20 @@
                 </a>
             </div>
         }
-        <div class="icon-clickable dark-mode-changer-div @IconHovBgColorClass" @onclick="() => { if (Theme == WebsiteTheme.Dark) Theme = WebsiteTheme.Light;else Theme = WebsiteTheme.Dark; StateHasChanged(); }">
-                <span class="material-symbols-outlined dark-mode-toggle-button" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
-                    dark_mode
-                </span>
-        </div>
+        <div class="additional-cont">
+            <div class="icon-clickable dark-mode-changer-div @IconHovBgColorClass" @onclick="() => { if (Theme == WebsiteTheme.Dark) Theme = WebsiteTheme.Light;else Theme = WebsiteTheme.Dark;  }">
+            <span class="material-symbols-outlined toggle-button" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
+                dark_mode
+            </span>
+            </div>
+
+            <div class="more-options icon-clickable dark-mode-changer-div @IconHovBgColorClass" @onclick="() => ShowMore = !ShowMore">
+            <span class="material-symbols-outlined toggle-button" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
+                menu
+            </span>
+            </div>
+        </div> 
+
     </div>
 
     @if (ChildContent is not null)
