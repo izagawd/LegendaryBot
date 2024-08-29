@@ -2,18 +2,19 @@
 @using Blazored.LocalStorage
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using PublicInfo
-@inject NavigationManager Man
+@inject NavigationManager Nav
 @inject HttpClient HttpClient
 @inject AuthenticationStateProvider provider
 @inject ILocalStorageService StorageService
+@inject NavigationService NavService
 @code {
 
     protected override async Task OnInitializedAsync()
     {
- 
-        Man
-            .NavigateTo($"https://discord.com/oauth2/authorize?client_id={Information.DiscordClientId}&scope=identify&response_type=code&redirect_uri=" +
-                        $"{Uri.EscapeDataString($"{Information.WebsiteDomainName}/authentication/callback")}");
+
+        NavService.InitialLocation = Nav.Uri;
+        Nav.NavigateTo($"https://discord.com/oauth2/authorize?client_id={Information.DiscordClientId}&scope=identify&response_type=code&redirect_uri=" +
+                       $"{Uri.EscapeDataString($"{Information.WebsiteDomainName}/authentication/callback")}");
 
     }
 

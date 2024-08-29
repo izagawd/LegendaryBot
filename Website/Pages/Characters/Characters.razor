@@ -22,8 +22,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        CharacterCollection = await Http.GetFromJsonAsync<CharacterPageDto[]>("/CharactersPage/get-characters");
 
-    
     }
 
     private enum SortType

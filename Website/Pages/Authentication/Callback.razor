@@ -5,9 +5,10 @@
 @inject  NavigationManager Navigation
 @inject  HttpClient HttpClient
 @inject ILocalStorageService StorageService
+@inject NavigationService NavService
+@inject AuthenticationStateProvider prov
 <h1>Logging in...</h1>
 @code {
-    
     protected override async Task OnInitializedAsync()
     {
         var uri = new Uri(Navigation.Uri);
@@ -23,7 +24,15 @@
         {
             await StorageService.SetItemAsync(WebsiteConstants.DiscordTokenKey,
                 token["access_token"]?.GetValue<string>());
+
+            if (NavService.InitialLocation is not null)
+            {
+                Navigation.NavigateTo(NavService.InitialLocation,true);
+                NavService.InitialLocation = null;
+            }
+
         }
+        
     }
     
 

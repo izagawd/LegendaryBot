@@ -1,5 +1,6 @@
 using System.Net.Http.Headers;
 using Blazored.LocalStorage;
+using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -16,7 +17,7 @@ public class Program
         builder.RootComponents.Add<App>("#app");
         builder.RootComponents.Add<HeadOutlet>("head::after");
         builder.Services.AddBlazoredLocalStorage();
-
+        builder.Services.AddBlazoredSessionStorage();
         builder.Services.AddScoped<WebsiteThemeService>();
 
         builder.Services
@@ -38,7 +39,7 @@ public class Program
         builder.Services.AddScoped<AuthenticationStateProvider, DiscordAuthenticationStateProvider>();
         builder.Services.AddAuthorizationCore();
 
-
+        builder.Services.AddScoped<NavigationService>();
         await builder.Build().RunAsync();
     }
 }
