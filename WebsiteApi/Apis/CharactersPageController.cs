@@ -18,15 +18,9 @@ namespace WebsiteApi.ClientSenders;
 public class CharactersPageController : ControllerBase
 {
 
-    [HttpGet("anime")]
-    public async Task<IActionResult> GetJson()
-    {
-        return Ok(new { Name = "emmanuel", Age = 3 });
-    }
     private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
 
     [HttpGet("get-characters")]
-
     [Authorize]
     public async Task<ActionResult<CharacterPageDto[]>> GetCharactersAsync()
     {
@@ -40,14 +34,14 @@ public class CharactersPageController : ControllerBase
             {
                 ImageUrl = i.TypeId == PlayerTypeId
                     ? Player.GetImageUrl(i.UserData.Gender)
-                    : Character.GetDefaultCharacterFromTypeId(i.TypeId).ImageUrl,
+                    : Character.GetDefaultFromTypeId(i.TypeId).ImageUrl,
                 Level = i.Level,
                 Name = i.TypeId == PlayerTypeId
                     ? i.UserData.Name
-                    : Character.GetDefaultCharacterFromTypeId(i.TypeId).Name,
+                    : Character.GetDefaultFromTypeId(i.TypeId).Name,
                 Number = i.Number,
 
-                RarityNum = (int)Character.GetDefaultCharacterFromTypeId(i.TypeId).Rarity
+                RarityNum = (int)Character.GetDefaultFromTypeId(i.TypeId).Rarity
             })
             .ToArrayAsync();
 

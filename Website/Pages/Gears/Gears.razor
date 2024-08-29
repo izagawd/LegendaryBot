@@ -1,4 +1,4 @@
-@page "/characters"
+@page "/gears"
 
 
 
@@ -7,7 +7,6 @@
 @using Microsoft.AspNetCore.Authorization
 @using PublicInfo
 
-@using WebAssemblyApp.Pages.Characters
 @using Website.Components.Navigation
 @using WebsiteShared
 @inject WebsiteThemeService WebsiteThemeService
@@ -18,41 +17,38 @@
 @attribute [Authorize]
 @code{
 
-    private CharacterPageDto[]? CharacterCollection;
+    private GearPageDto[]? GearCollection;
 
     protected override async Task OnInitializedAsync()
     {
-        CharacterCollection = await Http.GetFromJsonAsync<CharacterPageDto[]>("/CharactersPage/get-characters");
+        GearCollection = await Http.GetFromJsonAsync<GearPageDto[]>("/GearsPage/get-gears");
 
     }
 
     private enum SortType
     {
-        Name,
-        Level,
-        Rarity
+        Name, Rarity
+    
     }
 
 
-    private IEnumerable<CharacterPageDto>? UsingCharacterCollection
+    private IEnumerable<GearPageDto>? UsingGearCollection
     {
         get
         {
-            if (CharacterCollection is null)
+            if (GearCollection is null)
                 return null;
-            var theEnumerable = CharacterCollection
+            var theEnumerable = GearCollection
                 .Where(i => i.Name.ToLower().Contains(_nameFilter));
             switch (SortTypeVal)
             {
                 case SortType.Name:
                     theEnumerable = theEnumerable.OrderByDescending(i => i.Name);
                     break;
-                case SortType.Level:
-                    theEnumerable = theEnumerable.OrderByDescending(i => i.Level);
-                    break;
                 case SortType.Rarity:
                     theEnumerable = theEnumerable.OrderByDescending(i => i.RarityNum);
                     break;
+                
             }
 
             if (reverseOrder)
@@ -80,13 +76,14 @@
     }
 
 
-    private SortType SortTypeVal { get; set; } = SortType.Level;
+    private SortType SortTypeVal { get; set; } = SortType.Name;
     public bool reverseOrder;
 }
 
 
 <Navigation>
 
+    
     <div class="filterer-outer @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")" 
          style="height: @(!displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
 
@@ -128,13 +125,13 @@
 
     @code{
 
-        private RenderFragment RenderCharacter(CharacterPageDto character)
+        private RenderFragment RenderGear(GearPageDto gear)
         {
-            return @<div class="character-to-display">
+            return @<div class="gear-to-display">
 
 
-                <a href="/character-info/@character.Number">
-                    <img src="@character.ImageUrl" style="background-color: @character.Color;
+                <a href="/gear-info/@gear.Number">
+                    <img src="@gear.ImageUrl" style="background-color: black;
                     border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
 box-shadow: 3px 3px @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" class="image-box"/>
                 </a>
@@ -142,26 +139,26 @@ box-shadow: 3px 3px @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "w
                     var pColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "dark";
                     
                 }
-                <p style="color: @pColor">@character.Name</p>
-                <p style="color: @pColor">Level: @character.Level </p>
-                <p style="color: @pColor">Number: @character.Number</p>
+                <p style="color: @pColor" >@gear.Name</p>
+                <p style="color: @pColor" >Number: @gear.Number</p>
+        <p style="color: @pColor" >Rarity: @gear.RarityName</p>
             </div>;
         }
 
     }
 
     @{
-        if (UsingCharacterCollection is not null)
+        if (UsingGearCollection is not null)
         {
-            <div class="characters-container">
+            <div class="gears-container">
 
-                @foreach (var i in UsingCharacterCollection)
+                @foreach (var i in UsingGearCollection)
                 {
-                    @RenderCharacter(i)
+                    @RenderGear(i)
                     ;
                 }
             </div>
-        }       
+        }
         else
         {
             <h1 style="font-size: 50px; margin: auto">Loading...</h1>

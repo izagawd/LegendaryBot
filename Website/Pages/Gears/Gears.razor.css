@@ -1,4 +1,4 @@
-.character-to-display {
+.gear-to-display {
 
     margin-right: 30px;
     margin-bottom: 30px;
@@ -15,12 +15,12 @@
 
     background-color: white;
 }
-.character-to-display p{
+.gear-to-display p{
     margin: 0;
     margin-top: 10px;
 }
-.character-to-display img{
-    
+.gear-to-display img{
+
     border: black 2px solid;
 }
 .image-box {
@@ -39,7 +39,7 @@
     border-radius: 10px; /* Match this to the box's border-radius */
 }
 
-.character-to-display p {
+.gear-to-display p{
     margin-left: 10px;
     font-weight: bold;
     margin-bottom: 0; /* Reduce space between paragraphs */
@@ -52,7 +52,7 @@
         height: 100px;
     }
 
-    .character-to-display p {
+    .gear-to-display p {
         font-size: 10px;
     }
 
@@ -164,7 +164,7 @@
 
 }
 
-.characters-container {
+.gears-container {
     display: flex;
     flex-wrap: wrap;
     max-width: fit-content;

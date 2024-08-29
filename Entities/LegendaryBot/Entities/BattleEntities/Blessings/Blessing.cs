@@ -25,6 +25,24 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
 
 public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 {
+    
+    private static readonly Dictionary<int, Blessing> _cachedDefaultBlessingsTypeIds = [];
+    private int _gearSetTypeId;
+    public static Blessing GetDefaultFromTypeId(int typeId)
+    {
+        if (!_cachedDefaultBlessingsTypeIds.TryGetValue(typeId, out var blessing))
+        {
+            blessing = TypesFunction.GetDefaultObjectsAndSubclasses<Blessing>()
+                .FirstOrDefault(i => i.TypeId == typeId);
+            if (blessing is null) throw new Exception($"Blessing with type id {typeId} not found");
+
+            _cachedDefaultBlessingsTypeIds[typeId] = blessing;
+        }
+
+        return blessing;
+    }
+
+
     [Timestamp] public uint Version { get; private set; }
 
     public virtual bool SpawnsNormally => true;

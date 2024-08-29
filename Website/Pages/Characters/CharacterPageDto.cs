@@ -6,7 +6,8 @@ public class CharacterPageDto
     public string Name { get; set; }
     public int Number { get; set; }
     public int RarityNum { get; set; }
-
+    
+   
     public string Color
     {
         get

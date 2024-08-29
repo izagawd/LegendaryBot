@@ -360,13 +360,13 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     public virtual bool CanBeTraded => true;
 
-    public static Character GetDefaultCharacterFromTypeId(int typeId)
+    public static Character GetDefaultFromTypeId(int typeId)
     {
         if (!_cachedDefaultCharacterTypeIds.TryGetValue(typeId, out var character))
         {
             character = TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
                 .FirstOrDefault(i => i.TypeId == typeId);
-            if (character is null) throw new Exception($"Character with type id {character.TypeId} not found");
+            if (character is null) throw new Exception($"Character with type id {typeId} not found");
 
             _cachedDefaultCharacterTypeIds[typeId] = character;
         }

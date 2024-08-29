@@ -1,12 +1,26 @@
 @page "/"
 
+@using System.Security.Claims
 @using Website.Components.Navigation
 
+@inject AuthenticationStateProvider StatProv
 
-@inject HttpClient Http
 
-@code {
-    
+@code
+{
+    private ClaimsPrincipal user;
+    protected override async Task OnInitializedAsync()
+    {
+        user = (await StatProv.GetAuthenticationStateAsync()).User;
+    }
 }
 <Navigation>
+    @if (user?.Identity?.IsAuthenticated ?? false)
+    {
+        <p>YAY</p>
+    }
+    else
+    {
+        <p>aww</p>
+    }
 </Navigation>

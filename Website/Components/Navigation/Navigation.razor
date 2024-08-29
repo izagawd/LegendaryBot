@@ -32,7 +32,9 @@
     [
         
         new DirectoryStorer("Home", "/", "home"),
-        new DirectoryStorer("Characters", "/characters", "settings_accessibility")
+        new DirectoryStorer("Characters", "/characters", "settings_accessibility"),
+        new DirectoryStorer("Gears", "/gears", "swords"),
+        new DirectoryStorer("Blessings", "/blessings", "star"),
     ];
 
 
@@ -40,7 +42,7 @@
 <HeadContent>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
 </HeadContent>
-<div class="navigator-outer" style="background-color: @Theme.GetThemeDefaults().DefaultBackgroundColor;">
+<div class="navigator-outer @(Theme == WebsiteTheme.Dark ? "navigator-outer-dark" : "navigator-outer-light")" style="background-color: @Theme.GetThemeDefaults().DefaultBackgroundColor;">
     <div class="navigator-container" style="border-color: @(Theme == WebsiteTheme.Dark ? "darkgray" : "black")">
         <div class="navigator-inner">
             <p style="color: @TextColor;">Legendary!!</p>

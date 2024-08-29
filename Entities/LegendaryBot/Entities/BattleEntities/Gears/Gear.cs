@@ -14,8 +14,22 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Gears;
 public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 {
     private static readonly Dictionary<int, Type> _gearSetCache = [];
-
+    private static readonly Dictionary<int, Gear> _cachedDefaultGearsTypeIds = [];
     private int _gearSetTypeId;
+    public static Gear GetDefaultFromTypeId(int typeId)
+    {
+        if (!_cachedDefaultGearsTypeIds.TryGetValue(typeId, out var gear))
+        {
+            gear = TypesFunction.GetDefaultObjectsAndSubclasses<Gear>()
+                .FirstOrDefault(i => i.TypeId == typeId);
+            if (gear is null) throw new Exception($"Gear with type id {typeId} not found");
+
+            _cachedDefaultGearsTypeIds[typeId] = gear;
+        }
+
+        return gear;
+    }
+
 
     static Gear()
     {

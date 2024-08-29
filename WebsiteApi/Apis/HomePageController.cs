@@ -1,5 +1,6 @@
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.Items;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFunctions;
@@ -9,8 +10,13 @@ namespace WebsiteApi.ClientSenders;
 [Route("[controller]")]
 public class HomePageController : ControllerBase
 {
+    [Authorize]
     public async Task<IActionResult> GetSomeUserData()
     {
+        if (!User.Identity?.IsAuthenticated ?? false)
+        {
+            return Unauthorized();
+        }
         await using var context = new PostgreSqlContext();
         var discordId = User.GetDiscordUserId();
         var selected = await context.UserData

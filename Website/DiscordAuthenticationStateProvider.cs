@@ -13,13 +13,20 @@ public class DiscordAuthenticationStateProvider : AuthenticationStateProvider
     public DiscordAuthenticationStateProvider(HttpClient client)
     {
         _httpClient = client;
-    
+        _authState = ProcessAuthStateAsync();
     }
 
 
 
- 
-    public override async  Task<AuthenticationState> GetAuthenticationStateAsync()
+
+    private Task<AuthenticationState> _authState;
+    public override Task<AuthenticationState> GetAuthenticationStateAsync()
+    {
+        return _authState;
+    }
+
+
+    public async  Task<AuthenticationState> ProcessAuthStateAsync()
     {
         var req = new HttpRequestMessage(HttpMethod.Get,
             PublicInfo.Information.ApiDomainName + "/Discord/get-data");
