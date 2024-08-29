@@ -35,6 +35,7 @@
       <AdditionalFiles Include="Pages\Characters\Characters.razor" />
       <AdditionalFiles Include="Pages\Counter.razor" />
       <AdditionalFiles Include="Pages\Home.razor" />
+      <AdditionalFiles Include="Pages\Items\Items.razor" />
     </ItemGroup>
 
     <ItemGroup>

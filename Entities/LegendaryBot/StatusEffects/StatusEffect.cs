@@ -1,7 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
 using BasicFunctionality;
-using BattleManagemen.LegendaryBot;
 using Entities.LegendaryBot.BattleSimulatorStuff;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using PublicInfo;

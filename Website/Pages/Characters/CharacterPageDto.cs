@@ -1,4 +1,4 @@
-namespace WebAssemblyApp.Pages.Characters;
+namespace Website.Pages.Characters;
 
 [Serializable]
 public class CharacterPageDto

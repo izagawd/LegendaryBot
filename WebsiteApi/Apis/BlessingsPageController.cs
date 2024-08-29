@@ -1,17 +1,12 @@
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
-using Entities.LegendaryBot.Entities.BattleEntities.Characters;
-using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebAssemblyApp.Pages.Characters;
 using WebFunctions;
 using Website.Pages.Blessings;
-using Website.Pages.Gears;
 
-namespace WebsiteApi.ClientSenders;
+namespace WebsiteApi.Apis;
 
 [Route("[controller]")]
 [ApiController] 

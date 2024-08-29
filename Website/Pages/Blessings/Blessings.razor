@@ -8,8 +8,6 @@
 @using PublicInfo
 
 @using Website.Components.Navigation
-@using Website.Pages.Gears
-@using WebsiteShared
 @inject WebsiteThemeService WebsiteThemeService
 
 
@@ -28,7 +26,7 @@
 
     private enum SortType
     {
-        Name, Rarity, Stacks
+        Name, Rarity
     
     }
 
@@ -49,9 +47,7 @@
                 case SortType.Rarity:
                     theEnumerable = theEnumerable.OrderByDescending(i => i.RarityNum);
                     break;
-                case SortType.Stacks:
-                    theEnumerable = theEnumerable.OrderByDescending(i => i.Stacks);
-                    break;
+                
             }
 
             if (reverseOrder)
@@ -86,6 +82,7 @@
 
 <Navigation>
 
+    
     <div class="filterer-outer @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")" 
          style="height: @(!displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
 
@@ -132,17 +129,18 @@
             return @<div class="blessing-to-display">
 
 
-                <a href="/blessing-info/r">
+                <a href="/blessing-info/">
                     <img src="@blessing.ImageUrl" style="background-color: black;
                     border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
 box-shadow: 3px 3px @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" class="image-box"/>
                 </a>
                 @{
                     var pColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "dark";
+                    
                 }
                 <p style="color: @pColor" >@blessing.Name</p>
-                <p style="color: @pColor" >Rarity: @blessing.RarityName</p>
-        <p style="color: @pColor" >Stacks: @blessing.Stacks</p>
+                <p style="color: @pColor" >Stacks: @blessing.Stacks</p>
+        <p style="color: @pColor" >Rarity: @blessing.RarityName</p>
             </div>;
         }
 
@@ -156,7 +154,7 @@ box-shadow: 3px 3px @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "w
                 @foreach (var i in UsingBlessingCollection)
                 {
                     @RenderBlessing(i)
-                    ;
+                    
                 }
             </div>
         }

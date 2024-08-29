@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BasicFunctionality;
-using BattleManagemen.LegendaryBot;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -27,6 +26,22 @@ public class ItemDatabaseConfiguration : IEntityTypeConfiguration<Item>
 
 public abstract class Item : IInventoryEntity
 {
+    private static readonly Dictionary<int, Item> _cachedDefaultItemsTypeIds = [];
+  
+    public static Item GetDefaultFromTypeId(int typeId)
+    {
+        if (!_cachedDefaultItemsTypeIds.TryGetValue(typeId, out var item))
+        {
+            item = TypesFunction.GetDefaultObjectsAndSubclasses<Item>()
+                .FirstOrDefault(i => i.TypeId == typeId);
+            if (item is null) throw new Exception($"Item with type id {typeId} not found");
+
+            _cachedDefaultItemsTypeIds[typeId] = item;
+        }
+
+        return item;
+    }
+
     [Timestamp] public uint Version { get; private set; }
 
     public int Stacks { get; set; } = 1;

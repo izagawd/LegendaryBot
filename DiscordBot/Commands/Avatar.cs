@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using BattleManagemen.LegendaryBot;
+using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Entities.Models;

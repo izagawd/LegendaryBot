@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using BasicFunctionality;
-using BattleManagemen.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears.GearSets;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;

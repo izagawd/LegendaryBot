@@ -1,4 +1,4 @@
-@page "/gears"
+@page "/items"
 
 
 
@@ -8,6 +8,7 @@
 @using PublicInfo
 
 @using Website.Components.Navigation
+@using Website.Pages.Gears
 @inject WebsiteThemeService WebsiteThemeService
 
 
@@ -16,28 +17,28 @@
 @attribute [Authorize]
 @code{
 
-    private GearPageDto[]? GearCollection;
+    private ItemPageDto[]? ItemCollection;
 
     protected override async Task OnInitializedAsync()
     {
-        GearCollection = await Http.GetFromJsonAsync<GearPageDto[]>("/GearsPage/get-gears");
+        ItemCollection = await Http.GetFromJsonAsync<ItemPageDto[]>("/ItemsPage/get-items");
 
     }
 
     private enum SortType
     {
-        Name, Rarity
+        Name, Rarity, Stacks
     
     }
 
 
-    private IEnumerable<GearPageDto>? UsingGearCollection
+    private IEnumerable<ItemPageDto>? UsingItemCollection
     {
         get
         {
-            if (GearCollection is null)
+            if (ItemCollection is null)
                 return null;
-            var theEnumerable = GearCollection
+            var theEnumerable = ItemCollection
                 .Where(i => i.Name.ToLower().Contains(_nameFilter));
             switch (SortTypeVal)
             {
@@ -47,7 +48,9 @@
                 case SortType.Rarity:
                     theEnumerable = theEnumerable.OrderByDescending(i => i.RarityNum);
                     break;
-                
+                case SortType.Stacks:
+                    theEnumerable = theEnumerable.OrderByDescending(i => i.Stacks);
+                    break;
             }
 
             if (reverseOrder)
@@ -82,7 +85,6 @@
 
 <Navigation>
 
-    
     <div class="filterer-outer @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")" 
          style="height: @(!displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
 
@@ -124,36 +126,35 @@
 
     @code{
 
-        private RenderFragment RenderGear(GearPageDto gear)
+        private RenderFragment RenderItem(ItemPageDto item)
         {
-            return @<div class="gear-to-display">
+            return @<div class="item-to-display">
 
 
-                <a href="/gear-info/@gear.Number">
-                    <img src="@gear.ImageUrl" style="background-color: black;
+                <a href="/item-info/r">
+                    <img src="@item.ImageUrl" style="background-color: black;
                     border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
 box-shadow: 3px 3px @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" class="image-box"/>
                 </a>
                 @{
                     var pColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "dark";
-                    
                 }
-                <p style="color: @pColor" >@gear.Name</p>
-                <p style="color: @pColor" >Number: @gear.Number</p>
-        <p style="color: @pColor" >Rarity: @gear.RarityName</p>
+                <p style="color: @pColor" >@item.Name</p>
+                <p style="color: @pColor" >Rarity: @item.RarityName</p>
+        <p style="color: @pColor" >Stacks: @item.Stacks</p>
             </div>;
         }
 
     }
 
     @{
-        if (UsingGearCollection is not null)
+        if (UsingItemCollection is not null)
         {
-            <div class="gears-container">
+            <div class="items-container">
 
-                @foreach (var i in UsingGearCollection)
+                @foreach (var i in UsingItemCollection)
                 {
-                    @RenderGear(i)
+                    @RenderItem(i)
                     ;
                 }
             </div>

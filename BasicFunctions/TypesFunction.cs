@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace BattleManagemen.LegendaryBot;
+namespace BasicFunctionality;
 
 [AttributeUsage(AttributeTargets.Method)]
 /**

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using BattleManagemen.LegendaryBot;
+using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Entities.LegendaryBot.Rewards;

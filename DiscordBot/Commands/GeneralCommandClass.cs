@@ -1,7 +1,6 @@
 ﻿using System.Data;
 using System.Linq.Expressions;
 using BasicFunctionality;
-using BattleManagemen.LegendaryBot;
 using DatabaseManagement;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;

@@ -1,6 +1,6 @@
-namespace Website.Pages.Blessings;
+namespace Website.Pages.Items;
 
-public class BlessingPageDto
+public class ItemPageDto
 {
     public int RarityNum { get; set; }
     public string Name { get; set; }

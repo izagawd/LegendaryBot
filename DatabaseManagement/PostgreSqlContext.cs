@@ -1,5 +1,4 @@
 ﻿using BasicFunctionality;
-using BattleManagemen.LegendaryBot;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;

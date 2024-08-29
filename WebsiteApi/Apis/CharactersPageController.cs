@@ -1,17 +1,14 @@
 using BasicFunctionality;
-using BattleManagemen.LegendaryBot;
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Microsoft.AspNetCore.Authorization;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PublicInfo;
-using WebAssemblyApp.Pages.Characters;
 using WebFunctions;
+using Website.Pages.Characters;
 
-namespace WebsiteApi.ClientSenders;
+namespace WebsiteApi.Apis;
 
 [Microsoft.AspNetCore.Mvc.Route("[controller]")]
 [ApiController]

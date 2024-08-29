@@ -1,16 +1,9 @@
-using System.Net.Http.Headers;
-using System.Security.Claims;
 using System.Text.Json.Nodes;
-using AspNet.Security.OAuth.Discord;
-using BasicFunctionality;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PublicInfo;
-using WebFunctions;
 
-namespace WebsiteApi.ClientSenders;
+namespace WebsiteApi.Apis;
 
 [Route("[controller]")]
 [ApiController]

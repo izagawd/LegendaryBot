@@ -1,4 +1,4 @@
-using BattleManagemen.LegendaryBot;
+using BasicFunctionality;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;

@@ -1,4 +1,4 @@
-using BattleManagemen.LegendaryBot;
+using BasicFunctionality;
 using DSharpPlus.Entities;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;

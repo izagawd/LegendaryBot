@@ -4,7 +4,6 @@ using System.Linq.Expressions;
 using System.Numerics;
 using System.Text;
 using BasicFunctionality;
-using BattleManagemen.LegendaryBot;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;

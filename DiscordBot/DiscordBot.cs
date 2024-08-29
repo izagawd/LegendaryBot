@@ -2,7 +2,6 @@
 using System.Collections.Immutable;
 using System.Configuration;
 using BasicFunctionality;
-using BattleManagemen.LegendaryBot;
 using DatabaseManagement;
 using DiscordBot.Commands;
 using DSharpPlus;

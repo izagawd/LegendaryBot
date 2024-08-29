@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFunctions;
 
-namespace WebsiteApi.ClientSenders;
+namespace WebsiteApi.Apis;
 [ApiController]
 [Route("[controller]")]
 public class HomePageController : ControllerBase

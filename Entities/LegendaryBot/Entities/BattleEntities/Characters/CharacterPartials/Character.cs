@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using BasicFunctionality;
-using BattleManagemen.LegendaryBot;
 using DSharpPlus.Entities;
 using Entities.LegendaryBot.BattleEvents.EventArgs;
 using Entities.LegendaryBot.BattleSimulatorStuff;

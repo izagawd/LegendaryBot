@@ -1,5 +1,4 @@
 using BasicFunctionality;
-using BattleManagemen.LegendaryBot;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using Entities;

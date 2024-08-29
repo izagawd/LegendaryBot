@@ -1,33 +1,36 @@
 using DatabaseManagement;
+using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
+using Entities.LegendaryBot.Entities.Items;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFunctions;
-using Website.Pages.Gears;
+using Website.Pages.Blessings;
+using Website.Pages.Items;
 
 namespace WebsiteApi.Apis;
 
 [Route("[controller]")]
 [ApiController] 
-public class GearsPageController : ControllerBase
+public class ItemsPageController : ControllerBase
 {
     
-    [HttpGet("get-gears")]
+    [HttpGet("get-items")]
     [Authorize]
-    public async Task<IActionResult> GetGearsAsync()
+    public async Task<IActionResult> GetCharactersAsync()
     {
         if (!User.Identity?.IsAuthenticated ?? false)
             return Unauthorized();
         await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
-        var gottenCollection = await post.Gears
+        var gottenCollection = await post.Items
             .Where(i => i.UserData.DiscordId == zaId)
-            .Select(i => new GearPageDto()
+            .Select(i => new ItemPageDto()
             {
-                ImageUrl = Gear.GetDefaultFromTypeId(i.TypeId).ImageUrl,
-                Name = Gear.GetDefaultFromTypeId(i.TypeId).Name,
-                Number = i.Number,
+                ImageUrl = Item.GetDefaultFromTypeId(i.TypeId).ImageUrl,
+                Name = Item.GetDefaultFromTypeId(i.TypeId).Name,
+                Stacks = i.Stacks,
                 RarityNum = (int) i.Rarity,
                 TypeId = i.TypeId
             })

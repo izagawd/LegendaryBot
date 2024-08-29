@@ -1,11 +1,8 @@
 ﻿using System.Diagnostics;
-using System.Text.Json;
-using BasicFunctionality;
-using WebsiteApi;
 using DatabaseManagement;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiscordBotNet;
+namespace WebsiteApi;
 
 public static class Bot
 {
