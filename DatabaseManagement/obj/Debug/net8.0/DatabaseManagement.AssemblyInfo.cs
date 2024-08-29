@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DatabaseManagement")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ba4f076891879804a2c764e6de3854c2f5049bb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef12f209f881383babee05626e8036fab1f2dc7d")]
 [assembly: System.Reflection.AssemblyProductAttribute("DatabaseManagement")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DatabaseManagement")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
