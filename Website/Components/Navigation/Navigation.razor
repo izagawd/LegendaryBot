@@ -12,7 +12,7 @@
     }
 
     
-    bool ShowMore = true;
+    private bool _showMore = false;
     private string TextColor => Theme == WebsiteTheme.Dark ? "white" : "black";
     private string IconHovBgColorClass => Theme == WebsiteTheme.Dark ? "icon-clickable-dark" : "icon-clickable-light";
     private class DirectoryStorer
@@ -48,7 +48,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
 </HeadContent>
 <div class="navigator-outer @(Theme == WebsiteTheme.Dark ? "navigator-outer-dark" : "navigator-outer-light")" style="background-color: @Theme.GetThemeDefaults().DefaultBackgroundColor;">
-    <div class="navigator-container @(ShowMore ? "show-more" : "")" style="border-color: @(Theme == WebsiteTheme.Dark ? "darkgray" : "black")">
+    <div class="navigator-container @(_showMore ? "show-more" : "")" style="border-color: @(Theme == WebsiteTheme.Dark ? "darkgray" : "black")">
         <div class="navigator-inner">
             <p style="color: @TextColor;">Legendary!!</p>
         </div>
@@ -57,7 +57,7 @@
         }
         @foreach (var i in Directories)
         {
-            <div style="order: @(or++)" class="link-container icon-clickable  @IconHovBgColorClass @(!ShowMore ? "link-cont-hide" : "")">
+            <div style="order: @(or++)" class="link-container icon-clickable  @IconHovBgColorClass @(!_showMore ? "link-cont-hide" : "")">
 
                 <a href="@i.Directory" class="link-a">
                     <span class="material-symbols-outlined nav-link-icon" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
@@ -75,7 +75,7 @@
             </div>
 
             <div class="more-options icon-clickable @IconHovBgColorClass" 
-                 @onclick="() => ShowMore = !ShowMore">
+                 @onclick="() => _showMore = !_showMore">
             <span class="material-symbols-outlined toggle-button" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
                 menu
             </span>
