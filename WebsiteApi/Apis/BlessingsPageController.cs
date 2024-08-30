@@ -17,8 +17,7 @@ public class BlessingsPageController : ControllerBase
     [Authorize]
     public async Task<IActionResult> GetCharactersAsync()
     {
-        if (!User.Identity?.IsAuthenticated ?? false)
-            return Unauthorized();
+ 
         await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
         var gottenCollectionTypeIds = await post.Blessings

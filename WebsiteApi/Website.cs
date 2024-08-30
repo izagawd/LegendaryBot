@@ -44,7 +44,8 @@ public static class Website
         services.AddControllers();
         services.AddAuthentication(options =>
             {
-                options.RequireAuthenticatedSignIn = false;
+
+                options.DefaultSignInScheme = null;
                 options.DefaultScheme = DiscordAuthScheme;
                 options.DefaultChallengeScheme = null;
                 options.DefaultAuthenticateScheme = DiscordAuthScheme;

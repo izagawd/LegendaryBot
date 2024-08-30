@@ -13,10 +13,7 @@ public class HomePageController : ControllerBase
     [Authorize]
     public async Task<IActionResult> GetSomeUserData()
     {
-        if (!User.Identity?.IsAuthenticated ?? false)
-        {
-            return Unauthorized();
-        }
+
         await using var context = new PostgreSqlContext();
         var discordId = User.GetDiscordUserId();
         var selected = await context.UserData

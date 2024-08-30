@@ -17,8 +17,7 @@ public class GearsPageController : ControllerBase
     [Authorize]
     public async Task<IActionResult> GetGearsAsync()
     {
-        if (!User.Identity?.IsAuthenticated ?? false)
-            return Unauthorized();
+
         await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Gears

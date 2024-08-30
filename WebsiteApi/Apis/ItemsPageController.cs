@@ -20,8 +20,6 @@ public class ItemsPageController : ControllerBase
     [Authorize]
     public async Task<IActionResult> GetCharactersAsync()
     {
-        if (!User.Identity?.IsAuthenticated ?? false)
-            return Unauthorized();
         await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Items
