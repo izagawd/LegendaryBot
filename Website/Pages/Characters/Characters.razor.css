@@ -173,5 +173,5 @@
     margin-right: auto;
     overflow: auto;
 
-    height: 100vh;
+    height: fit-content;
 }

@@ -172,6 +172,5 @@
     padding-top: 20px;
     margin-right: auto;
     overflow: auto;
-
-    height: 100vh;
+    height: fit-content;
 }
