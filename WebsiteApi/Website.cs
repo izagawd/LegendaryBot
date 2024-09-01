@@ -50,7 +50,7 @@ public static class Website
                 options.DefaultChallengeScheme = null;
                 options.DefaultAuthenticateScheme = DiscordAuthScheme;
             })
-            .AddScheme<AuthenticationSchemeOptions,CustomAuthenticationHandler>(DiscordAuthScheme,
+            .AddScheme<AuthenticationSchemeOptions,DiscordAuthenticationHandler>(DiscordAuthScheme,
                 i =>
                 {
                     

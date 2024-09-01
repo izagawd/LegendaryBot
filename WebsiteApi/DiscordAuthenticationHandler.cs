@@ -9,15 +9,14 @@ using Microsoft.Extensions.Options;
 namespace WebsiteApi;
 
 
-public class CustomAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+public class DiscordAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
-    protected HttpClient _httpClient = new HttpClient();
+    protected HttpClient _httpClient;
 
-    public CustomAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options,
+    public DiscordAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options,
         ILoggerFactory logger,
-        UrlEncoder encoder,
-        ISystemClock clock,HttpClient httpClient)
-        : base(options, logger, encoder, clock)
+        UrlEncoder encoder,HttpClient httpClient)
+        : base(options,logger,encoder)
     {
         _httpClient = httpClient;
     }
