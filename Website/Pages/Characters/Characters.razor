@@ -15,11 +15,11 @@
 @attribute [Authorize]
 @code{
 
-    private CharacterPageDto[]? CharacterCollection;
+    private CharacterDto[]? CharacterCollection;
 
     protected override async Task OnInitializedAsync()
     {
-        CharacterCollection = await Http.GetFromJsonAsync<CharacterPageDto[]>("/CharactersPage/get-characters");
+        CharacterCollection = await Http.GetFromJsonAsync<CharacterDto[]>("/CharactersPage/get-characters");
 
     }
 
@@ -31,7 +31,7 @@
     }
 
 
-    private IEnumerable<CharacterPageDto>? UsingCharacterCollection
+    private IEnumerable<CharacterDto>? UsingCharacterCollection
     {
         get
         {
@@ -125,7 +125,7 @@
 
     @code{
 
-        private RenderFragment RenderCharacter(CharacterPageDto character)
+        private RenderFragment RenderCharacter(CharacterDto character)
         {
             return @<div class="character-to-display">
 

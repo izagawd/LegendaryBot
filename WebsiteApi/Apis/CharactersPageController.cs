@@ -19,14 +19,14 @@ public class CharactersPageController : ControllerBase
 
     [HttpGet("get-characters")]
     [Authorize]
-    public async Task<ActionResult<CharacterPageDto[]>> GetCharactersAsync()
+    public async Task<ActionResult<Characters.CharacterDto[]>> GetCharactersAsync()
     {
 
         await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Characters
             .Where(i => i.UserData.DiscordId == zaId)
-            .Select(i => new CharacterPageDto
+            .Select(i => new Characters.CharacterDto
             {
                 ImageUrl = i.TypeId == PlayerTypeId
                     ? Player.GetImageUrl(i.UserData.Gender)

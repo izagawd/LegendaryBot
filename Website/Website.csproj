@@ -46,4 +46,10 @@
       <Folder Include="Pages\CharacterInfo\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Pages\Characters\Characters.cs">
+        <DependentUpon>Characters.razor</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
