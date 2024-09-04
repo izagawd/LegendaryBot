@@ -28,77 +28,83 @@
     }
 }
 <Navigation>
-    
+    <div class="shower-container">
 
-    <div class="filterer-outer @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")" 
-         style="height: @(!displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
+        <div class="filterer-outer @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")"
+             style="height: @(!displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
 
-        <div class="filter-basic">
-            <div class="input-div filterer-percentage">
+            <div class="filter-basic">
+                <div class="input-div filterer-percentage">
                 <span class="material-symbols-outlined name-filter-search-icon">
                     search
                 </span>
-                <input class="name-filter" placeholder="Search" type="text" @onchange="FilterWithName"/>
-            </div>
-            @{
+                    <input class="name-filter" placeholder="Search" type="text" @onchange="FilterWithName"/>
+                </div>
+                @{
                 var butTxtCol = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "black" : "white";
                 var advButColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "#525252";
-            }   
-            <button style="background-color: @advButColor; color: @butTxtCol " class="advanced-filter-button" @onclick="() => displayAdvancedFilter = !displayAdvancedFilter">
-                Adv Filt
-            </button>
+                }
+                <button style="background-color: @advButColor; color: @butTxtCol " class="advanced-filter-button" @onclick="() => displayAdvancedFilter = !displayAdvancedFilter">
+                    Adv Filt
+                </button>
+            </div>
+            @SorterStuff
+            <p>Reverse Order</p>
+            <input type="checkbox" @onchange="ReverseOrder" style="width: 25px; height: 25px"/>
         </div>
-        @SorterStuff
-        <p>Reverse Order</p>
-        <input type="checkbox" @onchange="ReverseOrder" style="width: 25px; height: 25px"/>
-    </div>
 
-@code{
+        @code{
 
-            private RenderFragment RenderObject(TObjectType objectToRender)
-            {
-                string col = "white";
-                
-                return @<div class="entity-to-display">
+        private RenderFragment RenderObject(TObjectType objectToRender)
+        {
+        string col = "white";
 
-                    
-                           <a href="@LinkUrlDel?.Invoke(objectToRender)">
-                               <img src="@ImageUrlDelegate(objectToRender)" style="background-color: @BackgroundCol(objectToRender);
+        return @<div class="entity-to-display">
+
+
+            <a href="@LinkUrlDel?.Invoke(objectToRender)">
+                <img src="@ImageUrlDelegate(objectToRender)" style="background-color: @BackgroundCol(objectToRender);
                     border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
-box-shadow: 3px 3px @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" class="image-box"/>
-                           </a>
-                           <p>@NameDelegate(objectToRender)</p>
-        
-                           @foreach (var i in Additionals?.Invoke(objectToRender) ??[])
-                           {
-                               <p>@i</p>
-                           }
-                      
+                    box-shadow: 3px 3px @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" class="image-box"/>
+            </a>
+            <p>@NameDelegate(objectToRender)</p>
 
-                </div>;
+            @foreach (var i in Additionals?.Invoke(objectToRender) ??[])
+            {
+            <p>@i</p>
             }
 
-}
 
-@{
-    var objsToRend = ObjectsToRender();
+        </div>;
+        }
+
+        }
+
+        @{
+        var objsToRend = ObjectsToRender();
         if (objsToRend is not null)
         {
+        <div style="overflow: auto; height: 100%">
             <div class="entities-container">
 
                 @foreach (var i in reverseOrder ? objsToRend.Reverse() : objsToRend)
                 {
-                    if (NameDelegate(i).ToLower().Contains(NameFilter))
-                    {
-                        @RenderObject(i)
-                    }
+                if (NameDelegate(i).ToLower().Contains(NameFilter))
+                {
+                @RenderObject(i)
+                }
                 }
             </div>
-        }       
+        </div>
+        }
         else
         {
-            <h1 style="font-size: 50px; margin: auto">Loading...</h1>
+        <h1 style="font-size: 50px; margin: auto">Loading...</h1>
         }
-    }
+        }
+
+
+    </div>
+
 
 </Navigation>

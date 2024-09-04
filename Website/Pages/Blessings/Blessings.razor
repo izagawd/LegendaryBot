@@ -9,6 +9,7 @@
 
 @using Website.Components.Navigation
 @using Website.Services
+@using Website.Components
 @inject WebsiteThemeService WebsiteThemeService
 
 
@@ -27,7 +28,7 @@
 
     private enum SortType
     {
-        Name, Rarity
+        Name, Rarity, Stacks
     
     }
 
@@ -38,8 +39,7 @@
         {
             if (BlessingCollection is null)
                 return null;
-            var theEnumerable = BlessingCollection
-                .Where(i => i.Name.ToLower().Contains(_nameFilter));
+            var theEnumerable = BlessingCollection.AsEnumerable();
             switch (SortTypeVal)
             {
                 case SortType.Name:
@@ -48,118 +48,47 @@
                 case SortType.Rarity:
                     theEnumerable = theEnumerable.OrderByDescending(i => i.RarityNum);
                     break;
-                
+                case SortType.Stacks:
+                    theEnumerable = theEnumerable.OrderByDescending(i => i.Stacks);
+                    break;
             }
 
-            if (reverseOrder)
-                theEnumerable = theEnumerable.Reverse();
             return theEnumerable;
         }
     }
 
-    private string _nameFilter = string.Empty;
 
-
-    private void FilterWithName(ChangeEventArgs eventArgs)
-    {
-        _nameFilter = ((string)eventArgs.Value!).ToLower();
-    }
 
     private void SelectChange(ChangeEventArgs eventArgs)
     {
         SortTypeVal = Enum.Parse<SortType>((string)eventArgs.Value!);
     }
 
-    public void ReverseOrder(ChangeEventArgs eventArgs)
+
+    public IEnumerable<string> AddStuff(BlessingDto blessingDto)
     {
-        reverseOrder = (bool)eventArgs.Value!;
+        yield return $"Stacks: {blessingDto.Stacks}";
+        yield return $"Rarity: {blessingDto.RarityName}";
     }
-
-
     private SortType SortTypeVal { get; set; } = SortType.Name;
-    public bool reverseOrder;
+
 }
-
-
-<Navigation>
-
-    
-    <div class="filterer-outer @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")" 
-         style="height: @(!displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
-
-        <div class="filter-basic">
-            <div class="input-div filterer-percentage">
-                <span class="material-symbols-outlined name-filter-search-icon">
-                    search
-                </span>
-                <input class="name-filter" placeholder="Search" type="text" @onchange="FilterWithName"/>
-            </div>
-            @{
-                var butTxtCol = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "black" : "white";
-                var advButColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "#525252";
-            }   
-            <button style="background-color: @advButColor; color: @butTxtCol " class="advanced-filter-button" @onclick="() => displayAdvancedFilter = !displayAdvancedFilter">
-                Adv Filt
-            </button>
-        </div>
-
-        @code
-
-        {
-            private bool displayAdvancedFilter;
-        }
-
+<InventoryEntitiesShower Additionals="AddStuff" BackgroundCol='dto => "white"'
+                         RarityDelegate="dto => dto.RarityNum" ObjectsToRender="() 
+=> UsingBlessingCollection"
+                         NameDelegate="dto => dto.Name"
+                         ImageUrlDelegate="dto => dto.ImageUrl"
+                         TObjectType="BlessingDto">
+    <SorterStuff>
         <p>Sort By</p>
         <select @onchange="SelectChange" class="filterer-percentage" style="height: 30px">
 
             @foreach (var i in Enum.GetValues<SortType>())
             {
-                <option selected="@(SortTypeVal == i)" value="@i">@i</option>
+            <option selected="@(SortTypeVal == i)" value="@i">@i</option>
             }
 
         </select>
-        <p>Reverse Order</p>
-        <input type="checkbox" @onchange="ReverseOrder" style="width: 25px; height: 25px"/>
-    </div>
-
-
-    @code{
-
-        private RenderFragment RenderBlessing(BlessingDto blessing)
-        {
-            return @<div class="blessing-to-display">
-                <a href="/blessing-info/">
-                    <img src="@blessing.ImageUrl" style="background-color: black;
-                    border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
-box-shadow: 3px 3px @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" class="image-box"/>
-                </a>
-                @{
-                    var pColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "dark";
-                    
-                }
-                <p style="color: @pColor" >@blessing.Name</p>
-                <p style="color: @pColor" >Stacks: @blessing.Stacks</p>
-                <p style="color: @pColor" >Rarity: @blessing.RarityName</p>
-            </div>;
-        }
-
-    }
-
-    @{
-        if (UsingBlessingCollection is not null)
-        {
-            <div class="blessings-container">
-                @foreach (var i in UsingBlessingCollection)
-                {
-                    @RenderBlessing(i)
-                }
-            </div>
-        }
-        else
-        {
-            <h1 style="font-size: 50px; margin: auto">Loading...</h1>
-        }
-    }
-
-
-</Navigation>
+    </SorterStuff>
+    
+</InventoryEntitiesShower>

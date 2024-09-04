@@ -10,6 +10,7 @@
 @using Website.Components.Navigation
 @using Website.Pages.Gears
 @using Website.Services
+@using Website.Components
 @inject WebsiteThemeService WebsiteThemeService
 
 
@@ -39,8 +40,7 @@
         {
             if (ItemCollection is null)
                 return null;
-            var theEnumerable = ItemCollection
-                .Where(i => i.Name.ToLower().Contains(_nameFilter));
+            var theEnumerable = ItemCollection.AsEnumerable();
             switch (SortTypeVal)
             {
                 case SortType.Name:
@@ -54,117 +54,44 @@
                     break;
             }
 
-            if (reverseOrder)
-                theEnumerable = theEnumerable.Reverse();
             return theEnumerable;
         }
     }
 
-    private string _nameFilter = string.Empty;
 
-
-    private void FilterWithName(ChangeEventArgs eventArgs)
-    {
-        _nameFilter = ((string)eventArgs.Value!).ToLower();
-    }
 
     private void SelectChange(ChangeEventArgs eventArgs)
     {
         SortTypeVal = Enum.Parse<SortType>((string)eventArgs.Value!);
     }
 
-    public void ReverseOrder(ChangeEventArgs eventArgs)
+
+
+    public IEnumerable<string> AddStuff(ItemDto blessingDto)
     {
-        reverseOrder = (bool)eventArgs.Value!;
+        yield return $"Stacks: {blessingDto.Stacks}";
     }
-
-
     private SortType SortTypeVal { get; set; } = SortType.Name;
     public bool reverseOrder;
 }
 
-
-<Navigation>
-
-    <div class="filterer-outer @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")" 
-         style="height: @(!displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
-
-        <div class="filter-basic">
-            <div class="input-div filterer-percentage">
-                <span class="material-symbols-outlined name-filter-search-icon">
-                    search
-                </span>
-                <input class="name-filter" placeholder="Search" type="text" @onchange="FilterWithName"/>
-            </div>
-            @{
-                var butTxtCol = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "black" : "white";
-                var advButColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "#525252";
-            }   
-            <button style="background-color: @advButColor; color: @butTxtCol " class="advanced-filter-button" @onclick="() => displayAdvancedFilter = !displayAdvancedFilter">
-                Adv Filt
-            </button>
-        </div>
-
-        @code
-
-        {
-            private bool displayAdvancedFilter;
-        }
-
+<InventoryEntitiesShower Additionals="AddStuff" BackgroundCol='dto => "white"'
+                         RarityDelegate="dto => dto.RarityNum" ObjectsToRender="() 
+=> UsingItemCollection"
+                         NameDelegate="dto => dto.Name"
+                         ImageUrlDelegate="dto => dto.ImageUrl"
+                         TObjectType="ItemDto">
+    <SorterStuff>
         <p>Sort By</p>
         <select @onchange="SelectChange" class="filterer-percentage" style="height: 30px">
 
             @foreach (var i in Enum.GetValues<SortType>())
             {
-                <option selected="@(SortTypeVal == i)" value="@i">@i</option>
+            <option selected="@(SortTypeVal == i)" value="@i">@i</option>
             }
 
         </select>
-        <p>Reverse Order</p>
-        <input type="checkbox" @onchange="ReverseOrder" style="width: 25px; height: 25px"/>
-    </div>
+    </SorterStuff>
 
+</InventoryEntitiesShower>
 
-    @code{
-
-        private RenderFragment RenderItem(ItemDto item)
-        {
-            return @<div class="item-to-display">
-
-
-                <a href="/item-info/r">
-                    <img src="@item.ImageUrl" style="background-color: black;
-                    border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
-box-shadow: 3px 3px @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" class="image-box"/>
-                </a>
-                @{
-                    var pColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "dark";
-                }
-                <p style="color: @pColor" >@item.Name</p>
-                <p style="color: @pColor" >Rarity: @item.RarityName</p>
-        <p style="color: @pColor" >Stacks: @item.Stacks</p>
-            </div>;
-        }
-
-    }
-
-    @{
-        if (UsingItemCollection is not null)
-        {
-            <div class="items-container">
-
-                @foreach (var i in UsingItemCollection)
-                {
-                    @RenderItem(i)
-                    ;
-                }
-            </div>
-        }
-        else
-        {
-            <h1 style="font-size: 50px; margin: auto">Loading...</h1>
-        }
-    }
-
-
-</Navigation>

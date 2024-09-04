@@ -110,12 +110,7 @@
     margin-left: 10px;
     height: 66%;
 }
-.filterer-outer-dark p{
-    color: white;
-}
-.filterer-outer-light p{
-    color: black;
-}
+
 .filterer-outer {
     transition: all 0.3s ease;
     display: flex;
