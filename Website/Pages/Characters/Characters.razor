@@ -77,7 +77,7 @@
                          TObjectType="CharacterDto">
     <SorterStuff>
         <p>Sort By</p>
-        <select @onchange="SelectChange" class="filterer-percentage" style="height: 30px">
+        <select @onchange="SelectChange" class="filterer-percentage" style="height: 30px; width: 80%">
             @foreach (var i in Enum.GetValues<SortType>())
             {
                 <option selected="@(SortTypeVal == i)" value="@i">@i</option>
