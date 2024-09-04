@@ -1,12 +1,13 @@
 @page "/authentication/callback"
 @using System.Text.Json.Nodes
 @using Blazored.LocalStorage
+@using Website.Services
 
 @inject  NavigationManager Navigation
 @inject  HttpClient HttpClient
 @inject ILocalStorageService StorageService
 @inject NavigationService NavService
-@inject AuthenticationStateProvider prov
+@inject DiscordTokenService DiscordTokServ
 <h1>Logging in...</h1>
 @code {
     protected override async Task OnInitializedAsync()
@@ -22,9 +23,7 @@
                                                               Uri.EscapeDataString(PublicInfo.Information.WebsiteDomainName+"/authentication/callback"));
         if (token is not null)
         {
-            await StorageService.SetItemAsync(WebsiteConstants.DiscordTokenKey,
-                token["access_token"]?.GetValue<string>());
-
+            DiscordTokServ.DiscordToken = token["access_token"]?.GetValue<string>();
             if (NavService.InitialLocation is not null)
             {
                 Navigation.NavigateTo(NavService.InitialLocation,true);

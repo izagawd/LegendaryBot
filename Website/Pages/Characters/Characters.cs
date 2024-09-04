@@ -14,6 +14,7 @@ public partial  class Characters
         {
             get
             {
+                
                 switch (RarityNum)
                 {
                     case 1:
