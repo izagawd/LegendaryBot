@@ -34,12 +34,12 @@
              style="height: @(!displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
 
             <div class="filter-basic">
-                <div class="input-div filterer-percentage">
-                <span class="material-symbols-outlined name-filter-search-icon">
+             
+                <span style="color: black; z-index: 1; margin-left: 20px; margin-right: -35px; margin-top: auto; margin-bottom: auto" class="material-symbols-outlined">
                     search
                 </span>
-                    <input class="name-filter" placeholder="Search" type="text" @onchange="FilterWithName"/>
-                </div>
+                <input class="name-filter" placeholder="Search" type="text" @onchange="FilterWithName"/>
+        
                 @{
                 var butTxtCol = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "black" : "white";
                 var advButColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "#525252";

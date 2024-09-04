@@ -1,6 +1,7 @@
 @using System.Collections.Immutable
 @using Website.Services
 @inject WebsiteThemeService WebsiteThemeService
+@inject NavigationManager NavMan
 @code {
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
@@ -54,11 +55,17 @@
         </div>
         @{
             var or = 2;
+            string backgroundCol = "white";
+            if (WebsiteThemeService.WebsiteTheme == WebsiteTheme.Light)
+                backgroundCol = "black";
+            
         }
         @foreach (var i in Directories)
         {
             <div style="order: @(or++)" class="link-container icon-clickable  @IconHovBgColorClass">
 
+                <div style="background-color: @(NavMan.Uri.Replace(PublicInfo.Information.WebsiteDomainName,"")
+                                                == i.Directory ? backgroundCol : "inherit"); height: 100%; width: 5px"></div>
                 <a href="@i.Directory" class="link-a">
                     <span class="material-symbols-outlined nav-link-icon" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
                         @i.Icon
