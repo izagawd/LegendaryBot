@@ -1,0 +1,103 @@
+
+
+@typeparam TObjectType
+@code {
+    [Parameter] [EditorRequired] public Func<TObjectType, string> BackgroundCol { get; set; }
+    [Parameter] [EditorRequired] public Func<IEnumerable<TObjectType>?> ObjectsToRender { get; set; }
+    [Parameter] [EditorRequired] public Func<TObjectType, string> NameDelegate { get; set; }
+    [Parameter] [EditorRequired] public Func<TObjectType, string> ImageUrlDelegate { get; set; }
+    [Parameter] [EditorRequired] public Func<TObjectType, int> RarityDelegate { get; set; }
+    [Parameter] public Func<TObjectType, IEnumerable<string>>? Additionals { get; set; }
+}
+@using Website.Services
+@using Website.Components.Navigation
+@inject WebsiteThemeService WebsiteThemeService
+@code{
+    private bool displayAdvancedFilter;
+    [Parameter]  public RenderFragment? SorterStuff { get; set; }
+    public string NameFilter { get; private set; } = "";
+    private void FilterWithName(ChangeEventArgs eventArgs)
+    {
+        NameFilter = ( eventArgs.Value as string ?? string.Empty).ToLower();
+    }
+    public bool reverseOrder;
+    public void ReverseOrder(ChangeEventArgs eventArgs)
+    {
+        reverseOrder = (bool)eventArgs.Value!;
+    }
+}
+<Navigation>
+    
+
+    <div class="filterer-outer @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")" 
+         style="height: @(!displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
+
+        <div class="filter-basic">
+            <div class="input-div filterer-percentage">
+                <span class="material-symbols-outlined name-filter-search-icon">
+                    search
+                </span>
+                <input class="name-filter" placeholder="Search" type="text" @onchange="FilterWithName"/>
+            </div>
+            @{
+                var butTxtCol = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "black" : "white";
+                var advButColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "#525252";
+            }   
+            <button style="background-color: @advButColor; color: @butTxtCol " class="advanced-filter-button" @onclick="() => displayAdvancedFilter = !displayAdvancedFilter">
+                Adv Filt
+            </button>
+        </div>
+        @SorterStuff
+        <p>Reverse Order</p>
+        <input type="checkbox" @onchange="ReverseOrder" style="width: 25px; height: 25px"/>
+    </div>
+
+@code{
+
+            private RenderFragment RenderObject(TObjectType objectToRender)
+            {
+                string col = "white";
+                
+                return @<div class="entity-to-display">
+
+                    
+                           <a href="/entity-info/">
+                               <img src="@ImageUrlDelegate(objectToRender)" style="background-color: @BackgroundCol(objectToRender);
+                    border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
+box-shadow: 3px 3px @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" class="image-box"/>
+                           </a>
+                           <p>@NameDelegate(objectToRender)</p>
+        
+                           @foreach (var i in Additionals?.Invoke(objectToRender))
+                           {
+                               <p>@i</p>
+                           }
+                      
+
+                </div>;
+            }
+
+}
+
+@{
+    var objsToRend = ObjectsToRender();
+        if (objsToRend is not null)
+        {
+            <div class="entities-container">
+
+                @foreach (var i in reverseOrder ? objsToRend.Reverse() : objsToRend)
+                {
+                    if (NameDelegate(i).ToLower().Contains(NameFilter))
+                    {
+                        @RenderObject(i)
+                    }
+                }
+            </div>
+        }       
+        else
+        {
+            <h1 style="font-size: 50px; margin: auto">Loading...</h1>
+        }
+    }
+
+</Navigation>
