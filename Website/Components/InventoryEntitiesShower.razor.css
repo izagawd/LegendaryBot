@@ -15,9 +15,9 @@
 
     background-color: white;
 }
+
 .entity-to-display p{
-    margin: 0;
-    margin-top: 10px;
+
 }
 .entity-to-display img{
 
@@ -48,12 +48,16 @@
     flex-shrink: 0;
 }
 .entity-to-display p {
+    margin: 0;
+    margin-top: 5px;
     margin-left: 10px;
-    font-weight: bold;
-    margin-bottom: 0; /* Reduce space between paragraphs */
+    font-weight: bolder;
     font-size: 20px; /* Reduce paragraph font size */
 }
-
+.entity-to-display > .additional-p{
+    font-weight: bold;
+     font-size: 15px
+}
 @media only screen and (max-width: 600px) {
     .image-box {
         width: 100px;
@@ -61,9 +65,11 @@
     }
 
     .entity-to-display p {
-        font-size: 10px;
+        font-size: 15px;
     }
-
+    .entity-to-display > .additional-p{
+        font-size: 11px;
+    }
 }
 
 .some-para {
