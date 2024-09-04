@@ -24,7 +24,7 @@ public class ItemsPageController : ControllerBase
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Items
             .Where(i => i.UserData.DiscordId == zaId)
-            .Select(i => new ItemPageDto()
+            .Select(i => new Items.ItemDto()
             {
                 ImageUrl = Item.GetDefaultFromTypeId(i.TypeId).ImageUrl,
                 Name = Item.GetDefaultFromTypeId(i.TypeId).Name,

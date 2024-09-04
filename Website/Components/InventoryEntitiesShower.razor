@@ -7,6 +7,7 @@
     [Parameter] [EditorRequired] public Func<TObjectType, string> NameDelegate { get; set; }
     [Parameter] [EditorRequired] public Func<TObjectType, string> ImageUrlDelegate { get; set; }
     [Parameter] [EditorRequired] public Func<TObjectType, int> RarityDelegate { get; set; }
+    [Parameter] public Func<TObjectType, string>? LinkUrlDel { get; set; }
     [Parameter] public Func<TObjectType, IEnumerable<string>>? Additionals { get; set; }
 }
 @using Website.Services
@@ -61,14 +62,14 @@
                 return @<div class="entity-to-display">
 
                     
-                           <a href="/entity-info/">
+                           <a href="@LinkUrlDel?.Invoke(objectToRender)">
                                <img src="@ImageUrlDelegate(objectToRender)" style="background-color: @BackgroundCol(objectToRender);
                     border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
 box-shadow: 3px 3px @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" class="image-box"/>
                            </a>
                            <p>@NameDelegate(objectToRender)</p>
         
-                           @foreach (var i in Additionals?.Invoke(objectToRender))
+                           @foreach (var i in Additionals?.Invoke(objectToRender) ??[])
                            {
                                <p>@i</p>
                            }

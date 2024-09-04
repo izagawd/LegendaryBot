@@ -28,7 +28,7 @@ public class BlessingsPageController : ControllerBase
 
         var gottenCollection = gottenCollectionTypeIds.GroupBy(i => i).Select(i =>
         {
-            return new BlessingPageDto()
+            return new Blessings.BlessingDto()
             {
                 ImageUrl = Blessing.GetDefaultFromTypeId(i.Key).ImageUrl,
                 Name = Blessing.GetDefaultFromTypeId(i.Key).Name,

@@ -17,11 +17,11 @@
 @attribute [Authorize]
 @code{
 
-    private BlessingPageDto[]? BlessingCollection;
+    private BlessingDto[]? BlessingCollection;
 
     protected override async Task OnInitializedAsync()
     {
-        BlessingCollection = await Http.GetFromJsonAsync<BlessingPageDto[]>("/BlessingsPage/get-blessings");
+        BlessingCollection = await Http.GetFromJsonAsync<BlessingDto[]>("/BlessingsPage/get-blessings");
 
     }
 
@@ -32,7 +32,7 @@
     }
 
 
-    private IEnumerable<BlessingPageDto>? UsingBlessingCollection
+    private IEnumerable<BlessingDto>? UsingBlessingCollection
     {
         get
         {
@@ -125,7 +125,7 @@
 
     @code{
 
-        private RenderFragment RenderBlessing(BlessingPageDto blessing)
+        private RenderFragment RenderBlessing(BlessingDto blessing)
         {
             return @<div class="blessing-to-display">
                 <a href="/blessing-info/">

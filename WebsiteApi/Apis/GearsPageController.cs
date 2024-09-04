@@ -22,7 +22,7 @@ public class GearsPageController : ControllerBase
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Gears
             .Where(i => i.UserData.DiscordId == zaId)
-            .Select(i => new GearPageDto()
+            .Select(i => new Gears.GearDto()
             {
                 ImageUrl = Gear.GetDefaultFromTypeId(i.TypeId).ImageUrl,
                 Name = Gear.GetDefaultFromTypeId(i.TypeId).Name,

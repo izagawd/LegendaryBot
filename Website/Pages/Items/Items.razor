@@ -18,11 +18,11 @@
 @attribute [Authorize]
 @code{
 
-    private ItemPageDto[]? ItemCollection;
+    private ItemDto[]? ItemCollection;
 
     protected override async Task OnInitializedAsync()
     {
-        ItemCollection = await Http.GetFromJsonAsync<ItemPageDto[]>("/ItemsPage/get-items");
+        ItemCollection = await Http.GetFromJsonAsync<ItemDto[]>("/ItemsPage/get-items");
 
     }
 
@@ -33,7 +33,7 @@
     }
 
 
-    private IEnumerable<ItemPageDto>? UsingItemCollection
+    private IEnumerable<ItemDto>? UsingItemCollection
     {
         get
         {
@@ -127,7 +127,7 @@
 
     @code{
 
-        private RenderFragment RenderItem(ItemPageDto item)
+        private RenderFragment RenderItem(ItemDto item)
         {
             return @<div class="item-to-display">
 
