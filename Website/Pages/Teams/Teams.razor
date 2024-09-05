@@ -80,24 +80,35 @@
                                 }
                             </div>
 
+                            <span class="material-symbols-outlined" style="margin: auto 15px auto auto;">
+                            delete
+                        </span>
+
                         </div>
                     }
                 </div>
 
             </div>
-            <div class="other-characters">
-                @foreach (var i in teamCharactersDto.Characters.Where(i =>
-                              !currentTeam.GetCharacters(teamCharactersDto).Contains(i)))
-                {
-                    <div>
-                        <a>
-                            <img src="@i.ImageUrl"/>
-                        </a>
-                        <p>@i.Name</p>
-                        <p>Num @i.Number</p>
-                    </div>
-                }
+            <div class="others">
+                <div>
+                    <input type="text"/>
+                </div>
+                <div class="other-characters">
+                    @foreach (var i in teamCharactersDto.Characters.Where(i =>
+                                  !currentTeam.GetCharacters(teamCharactersDto).Contains(i)))
+                    {
+                        <div class="character-div">
+                            <a>
+                                <img src="@i.ImageUrl"/>
+                            </a>
+                            <p>@i.Name</p>
+                            <p>Num @i.Number</p>
+                        </div>
+                        
+                    }
+                </div>
             </div>
+
         </div>
 
 
