@@ -1,6 +1,15 @@
 @page "/Teams"
-<h3>Teams</h3>
-
+@using Website.Components.Navigation
+@inject HttpClient Http
 @code {
-    
+    protected TeamCharactersDto? teamCharactersDto;
+    protected override async Task OnInitializedAsync()
+    {
+        teamCharactersDto = 
+            await Http.GetFromJsonAsync<TeamCharactersDto>("TeamPage/get-teams-and-characters");
+    }
+
 }
+<Navigation>
+    
+</Navigation>

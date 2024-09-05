@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Website.Pages.Characters;
 
 public partial  class Characters
@@ -10,6 +12,7 @@ public partial  class Characters
         public int RarityNum { get; set; }
     
    
+        [JsonIgnore]
         public string Color
         {
             get
