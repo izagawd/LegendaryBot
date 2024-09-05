@@ -71,7 +71,7 @@
                         var equippedTeamChars = currentTeam.GetCharacters(teamCharactersDto).ToArray();
                         if (index < equippedTeamChars.Length)
                             i = equippedTeamChars[index];
-                        <div class="team-character-div" style="border-color: @borderCol">
+                        <div class="team-character-div" style="border-color: @borderCol; background-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark? "gray" : "lightgrey")">
                             <a>
                                 <img style="border-color: @borderCol" src="@i?.ImageUrl"/>
                             </a>
@@ -79,7 +79,8 @@
                                 <p>@(i?.Name ?? "NONE")</p>
                                 @if (i is not null)
                                 {
-                                    <p style="font-size: 13px; font-weight: bold">Num @i.Number</p>
+
+                                    <p style="font-size: 13px; font-weight: bold;">Num @i.Number</p>
                                     <p style="font-size: 13px; font-weight: bold">Lvl @i.Level</p>
                                 }
                             </div>
