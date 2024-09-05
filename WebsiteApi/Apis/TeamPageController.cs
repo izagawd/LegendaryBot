@@ -20,6 +20,7 @@ public class TeamPageController : ControllerBase
 
     [Authorize]
     [HttpGet("get-teams-and-characters")]
+    
     public async Task<IActionResult> GetSomeUserData()
     {
 
@@ -54,18 +55,20 @@ public class TeamPageController : ControllerBase
 
     [Authorize]
     [HttpPost("equip-team")]
+
+    
     public async Task<IActionResult> EquipTeam([FromForm] long teamId)
     {
-        "t".Print();
         await using var context = new PostgreSqlContext();
         var discordId = User.GetDiscordUserId();
         var userData = await context.UserData
-            .Include(i => i.PlayerTeams.Where(j => j.Id == teamId))
+            .Include(i => i.PlayerTeams)
             .FirstOrDefaultAsync(i => i.DiscordId == discordId);
 
         if (userData is null)
             return BadRequest();
    
+        
         userData.EquippedPlayerTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (userData.EquippedPlayerTeam is null)
             return BadRequest();

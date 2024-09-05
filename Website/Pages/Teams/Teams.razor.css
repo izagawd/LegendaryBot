@@ -10,10 +10,15 @@
 
 }
 .equip-button{
+    
     flex-shrink: 0; background-color: limegreen; border: none;
     border-radius: 5px; color: inherit;
     border: solid;
     border-width: 2px;
+    
+}
+.equip-button:hover{
+    background-color: green;
 }
 .inputs{
     margin-top: 10px;

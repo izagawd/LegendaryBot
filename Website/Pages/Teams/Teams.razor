@@ -51,10 +51,14 @@
                     <select  @onchange="OnChangeTeamAsync">
                         @foreach (var i in teamCharactersDto.Teams)
                         {
-                            <option value="@i.Id">@i.Name @(i == teamCharactersDto.EquippedTeam ? "(E)": "")</option>
+                            <option selected="@(i == currentTeam)" value="@i.Id">@i.Name</option>
                         }
                     </select>
-                    <button @onclick="EquipTeamAsync" class="equip-button">Equip</button>
+                    @{
+                        var currentIsEquipped = currentTeam == teamCharactersDto.EquippedTeam;
+                    }
+                    <button style="@(currentIsEquipped ? "background-color: grey" : "")"
+                            @onclick="EquipTeamAsync" class="equip-button">@(currentIsEquipped ? "Equipped" : "Equip")</button>
                 </div>
             
                 @{
