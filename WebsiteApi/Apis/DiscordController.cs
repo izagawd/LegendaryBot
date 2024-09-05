@@ -31,8 +31,8 @@ public class DiscordController : ControllerBase
     public async Task<IActionResult> GetTokenAsync([FromQuery] string code, [FromQuery] string redirectUri)
     {
         var clientSecret = PrivateInfo.Information.ClientSecret;
-        var requestContent = new FormUrlEncodedContent(new[]
-        {
+        var requestContent = new FormUrlEncodedContent([
+        
             new KeyValuePair<string, string>
             ("redirect_uri",redirectUri)
                 ,
@@ -41,7 +41,7 @@ public class DiscordController : ControllerBase
             new KeyValuePair<string, string>("grant_type", "authorization_code"),
             new KeyValuePair<string, string>("code", code),
 
-        });
+        ]);
         
         var request = new HttpRequestMessage(HttpMethod.Post, "https://discord.com/api/v10/oauth2/token")
         {

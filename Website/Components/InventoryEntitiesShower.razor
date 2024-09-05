@@ -62,11 +62,15 @@
         return @<div class="entity-to-display">
 
 
-            <a href="@LinkUrlDel?.Invoke(objectToRender)">
-                <img src="@ImageUrlDelegate(objectToRender)" style="background-color: @BackgroundCol(objectToRender);
+                   <a href="@LinkUrlDel?.Invoke(objectToRender)">
+                       @{
+                           var shadCol = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
+                       }
+                       <img src="@ImageUrlDelegate(objectToRender)" style="background-color: @BackgroundCol(objectToRender);
                     border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
-                    box-shadow: 3px 3px @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" class="image-box"/>
-            </a>
+                    
+                    box-shadow: 0 0 5px 1px @shadCol" class="image-box"/>
+                   </a>
             <p>@NameDelegate(objectToRender)</p>
 
             @foreach (var i in Additionals?.Invoke(objectToRender) ??[])

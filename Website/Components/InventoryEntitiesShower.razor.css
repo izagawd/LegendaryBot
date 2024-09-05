@@ -30,8 +30,6 @@
     height: 200px;
     border-radius: 10px; /* Controls the curvature of the edges */
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
-    background-color: #f0f0f0; /* Optional: adds a background color */
 }
 
 .image-box img {
