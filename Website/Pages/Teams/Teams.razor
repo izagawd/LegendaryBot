@@ -3,6 +3,7 @@
 @using Website.Services
 @inject HttpClient Http
 @inject WebsiteThemeService WebTheme
+@inject IJSRuntime zaRuntime;
 @code {
     protected TeamCharactersDto? teamCharactersDto;
 
@@ -25,22 +26,18 @@
 
     async Task EquipTeamAsync()
     {
-
-        var requestContent = new FormUrlEncodedContent([
-        
-            new KeyValuePair<string, string>
-                ("teamId",currentTeam.Id.ToString())
-
-        ]);
-        
-        var req = new HttpRequestMessage(HttpMethod.Post, "TeamPage/equip-team")
-        {
-            Content = requestContent
-        };
-        var res = await Http.SendAsync(req);
+        var res = await Http.PostAsync("TeamPage/equip-team",
+            new FormUrlEncodedContent([
+                new KeyValuePair<string, string>
+                    ("teamId", currentTeam.Id.ToString())
+            ]));
         if (res.IsSuccessStatusCode)
         {
             teamCharactersDto.EquippedTeamId = currentTeam.Id;
+        }
+        else
+        {
+            await zaRuntime.InvokeVoidAsync("alert", "hmm, something went wrong");
         }
     }
 
