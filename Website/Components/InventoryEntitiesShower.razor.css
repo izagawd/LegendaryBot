@@ -2,9 +2,12 @@
 
     margin: 0;
  
-    width: fit-content;
+    width: 200px;
+    
 }
-
+.entity-to-display a{
+    width: 100%;
+}
 .advanced-filter-button {
     border-radius: 15px;
     height: 40px;
@@ -23,15 +26,11 @@
 
     border: black 2px solid;
 }
-.image-box {
-    width: 200px;
-    height: 200px;
-    border-radius: 10px; /* Controls the curvature of the edges */
-    overflow: hidden;
-}
 
-.image-box img {
+.image-box {
+    overflow: hidden;
     width: 100%;
+    aspect-ratio: 1/1;
     height: auto;
     display: block;
     border-radius: 10px; /* Match this to the box's border-radius */
@@ -57,9 +56,8 @@
      font-size: 15px
 }
 @media only screen and (max-width: 600px) {
-    .image-box {
+    .entity-to-display {
         width: 100px;
-        height: 100px;
     }
     .entity-to-display{
         margin-right: 10px;
@@ -170,11 +168,17 @@
     display: flex;
     flex-wrap: wrap;
     max-width: fit-content;
-    justify-content: center;
+   
     margin-top: 30px;
    
-    gap: 15px;
-    overflow: auto;
+    gap: 40px;
 
+    margin-left: 40px;
     height: fit-content;
+}
+@media only screen and (max-width: 600px) {
+    .entities-container{
+        gap: 20px;
+        margin-left: 20px;
+    }
 }
