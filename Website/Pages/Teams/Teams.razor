@@ -35,10 +35,6 @@
         {
             teamCharactersDto.EquippedTeamId = currentTeam.Id;
         }
-        else
-        {
-            await zaRuntime.InvokeVoidAsync("alert", "hmm, something went wrong");
-        }
     }
 
 }
@@ -79,7 +75,6 @@
                                 <p>@(i?.Name ?? "NONE")</p>
                                 @if (i is not null)
                                 {
-
                                     <p style="font-size: 13px; font-weight: bold;">Num @i.Number</p>
                                     <p style="font-size: 13px; font-weight: bold">Lvl @i.Level</p>
                                 }
@@ -89,6 +84,19 @@
                     }
                 </div>
 
+            </div>
+            <div class="other-characters">
+                @foreach (var i in teamCharactersDto.Characters.Where(i =>
+                              !currentTeam.GetCharacters(teamCharactersDto).Contains(i)))
+                {
+                    <div>
+                        <a>
+                            <img src="@i.ImageUrl"/>
+                        </a>
+                        <p>@i.Name</p>
+                        <p>Num @i.Number</p>
+                    </div>
+                }
             </div>
         </div>
 

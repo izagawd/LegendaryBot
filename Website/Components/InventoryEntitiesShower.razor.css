@@ -1,9 +1,7 @@
 .entity-to-display {
 
-    margin-left: 20px;
-    margin-right: 20px;
-    
-    margin-bottom: 30px;
+    margin: 0;
+ 
     width: fit-content;
 }
 
@@ -172,9 +170,10 @@
     display: flex;
     flex-wrap: wrap;
     max-width: fit-content;
-   
+    justify-content: center;
     margin-top: 30px;
    
+    gap: 15px;
     overflow: auto;
 
     height: fit-content;

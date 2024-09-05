@@ -7,6 +7,7 @@ public class NavigationService
 {
     public const string InitialUrlLocationKey = "InitialUrlLocation";
 
+    
     public string? InitialLocation
     {
         get => _sessionStorage.GetItem<string?>(InitialUrlLocationKey);

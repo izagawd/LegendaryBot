@@ -19,12 +19,14 @@
     private class DirectoryStorer
 
     {
+        
         public string Name { get; }
         public string Directory { get; }
         public string Icon { get; }
 
         public DirectoryStorer(string name, string directory, string icon)
         {
+            
             Name = name;
             Directory = directory;
             Icon = icon;
@@ -59,6 +61,7 @@
             string backgroundCol = "white";
             if (WebsiteThemeService.WebsiteTheme == WebsiteTheme.Light)
                 backgroundCol = "black";
+            
             
         }
         @foreach (var i in Directories)

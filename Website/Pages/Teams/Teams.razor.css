@@ -64,6 +64,19 @@
     font-size: 20px;
 
 }
+.other-characters{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-flow: wrap;
+    width: fit-content;
+    height: fit-content;
+}
+.other-characters img{
+    width: 150px;
+    height: 150px;
+    background-color: blue;
+}
 .paragraphs{
     margin-left: 10px;
     margin-bottom: 10px;
