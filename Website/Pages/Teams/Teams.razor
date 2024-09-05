@@ -62,7 +62,7 @@
                 </div>
             
                 @{
-                    string borderCol = WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "gray" : "black";
+                    string borderCol = WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
                 }
                 <div class="team-characters-container">
                     @for (var index = 0; index < 4; index++)
@@ -79,8 +79,8 @@
                                 <p>@(i?.Name ?? "NONE")</p>
                                 @if (i is not null)
                                 {
-                                    <p style="font-size: 15px; font-weight: bold">Num @i.Number</p>
-                                    <p style="font-size: 15px; font-weight: bold">Lvl @i.Level</p>
+                                    <p style="font-size: 13px; font-weight: bold">Num @i.Number</p>
+                                    <p style="font-size: 13px; font-weight: bold">Lvl @i.Level</p>
                                 }
                             </div>
 

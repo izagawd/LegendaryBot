@@ -41,6 +41,7 @@
     border-radius: inherit;
 }
 .team-character-div{
+    background-color: gray;
     border: black solid 2px;
     border-radius: 10px;
     display: flex;
@@ -61,7 +62,10 @@
     margin: 0;
     font-weight: bolder;
     font-size: 20px;
+    
 }
 .paragraphs{
+    margin-left: 10px;
+    margin-bottom: 10px;
     margin-top: auto;
 }
