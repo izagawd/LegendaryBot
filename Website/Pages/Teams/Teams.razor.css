@@ -1,0 +1,62 @@
+.team-character-div img{
+    height: 100%;
+
+    aspect-ratio: 1/1;
+    border: none;
+    border-radius: inherit;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: black solid 2px;
+
+}
+.equip-button{
+    flex-shrink: 0; background-color: limegreen; border: none;
+    border-radius: 5px; color: inherit;
+    border: solid;
+    border-width: 2px;
+}
+.inputs{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.inputs > *{
+    margin: auto;
+    width: 100px; height: 30px
+    
+}
+.team-settler{
+    margin-top: auto; margin-bottom: auto; height: fit-content;  margin-left: 20px;
+}
+.za-parent{
+    display: flex; height: 100%; width: 100%
+}
+.team-character-div a{
+    width: fit-content;
+    height: 100%;
+    border-radius: inherit;
+}
+.team-character-div{
+    border: black solid 2px;
+    border-radius: 10px;
+    display: flex;
+    margin-bottom: 30px;
+
+    height: 100px;
+    width: 300px;
+}
+
+.team-characters-container{
+   
+    height: fit-content;
+}
+.team-character-div:last-child{
+    margin-bottom: 0;
+}
+.team-character-div p{
+    margin: 0;
+    font-weight: bolder;
+    font-size: 20px;
+}
+.paragraphs{
+    margin-top: auto;
+}

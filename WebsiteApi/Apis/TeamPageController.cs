@@ -5,6 +5,7 @@ using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 using Entities.LegendaryBot.Entities.Items;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFunctions;
@@ -51,11 +52,31 @@ public class TeamPageController : ControllerBase
         return Ok(selected ?? new Teams.TeamCharactersDto());
     }
 
-    
+    [Authorize]
+    [HttpPost("equip-team")]
+    public async Task<IActionResult> EquipTeam([FromForm] long teamId)
+    {
+        "t".Print();
+        await using var context = new PostgreSqlContext();
+        var discordId = User.GetDiscordUserId();
+        var userData = await context.UserData
+            .Include(i => i.PlayerTeams.Where(j => j.Id == teamId))
+            .FirstOrDefaultAsync(i => i.DiscordId == discordId);
+
+        if (userData is null)
+            return BadRequest();
+   
+        userData.EquippedPlayerTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
+        if (userData.EquippedPlayerTeam is null)
+            return BadRequest();
+        await context.SaveChangesAsync();
+        
+        return Ok();
+    }
     [Authorize]
     [HttpPost]
-    public async Task<IActionResult> AddCharacterToTeam([FromBody] long teamId, 
-       [FromBody] long characterId)
+    public async Task<IActionResult> AddCharacterToTeam([FromForm] long teamId, 
+       [FromForm] long characterId)
     {
         
         await using var context = new PostgreSqlContext();

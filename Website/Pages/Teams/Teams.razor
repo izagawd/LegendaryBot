@@ -1,15 +1,99 @@
-@page "/Teams"
+@page "/teams"
 @using Website.Components.Navigation
+@using Website.Services
 @inject HttpClient Http
+@inject WebsiteThemeService WebTheme
 @code {
     protected TeamCharactersDto? teamCharactersDto;
+
+
+    protected TeamDto? currentTeam;
     protected override async Task OnInitializedAsync()
     {
         teamCharactersDto = 
             await Http.GetFromJsonAsync<TeamCharactersDto>("TeamPage/get-teams-and-characters");
+        currentTeam = teamCharactersDto.EquippedTeam;
+    }
+
+    Task OnChangeTeamAsync(ChangeEventArgs eventArgs)
+    {
+        var asString = (string)eventArgs.Value!;
+        var asLong = long.Parse(asString);
+        currentTeam = teamCharactersDto.Teams.FirstOrDefault(i => i.Id == asLong);
+        return Task.CompletedTask;
+    }
+
+    async Task EquipTeamAsync()
+    {
+
+        var requestContent = new FormUrlEncodedContent([
+        
+            new KeyValuePair<string, string>
+                ("teamId",currentTeam.Id.ToString())
+
+        ]);
+        
+        var req = new HttpRequestMessage(HttpMethod.Post, "TeamPage/equip-team")
+        {
+            Content = requestContent
+        };
+        var res = await Http.SendAsync(req);
+        if (res.IsSuccessStatusCode)
+        {
+            teamCharactersDto.EquippedTeamId = currentTeam.Id;
+        }
     }
 
 }
 <Navigation>
-    
+    @if (teamCharactersDto is not null && currentTeam is not null)
+    {
+        <div class="za-parent">
+            <div class="team-settler">
+                <div class="inputs" style="display: flex; width: 100%;">
+                    <select  @onchange="OnChangeTeamAsync">
+                        @foreach (var i in teamCharactersDto.Teams)
+                        {
+                            <option value="@i.Id">@i.Name @(i == teamCharactersDto.EquippedTeam ? "(E)": "")</option>
+                        }
+                    </select>
+                    <button @onclick="EquipTeamAsync" class="equip-button">Equip</button>
+                </div>
+            
+                @{
+                    string borderCol = WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "gray" : "black";
+                }
+                <div class="team-characters-container">
+                    @for (var index = 0; index < 4; index++)
+                    {
+                        CharacterDto? i = null;
+                        var equippedTeamChars = currentTeam.GetCharacters(teamCharactersDto).ToArray();
+                        if (index < equippedTeamChars.Length)
+                            i = equippedTeamChars[index];
+                        <div class="team-character-div" style="border-color: @borderCol">
+                            <a>
+                                <img style="border-color: @borderCol" src="@i?.ImageUrl"/>
+                            </a>
+                            <div class="paragraphs">
+                                <p>@(i?.Name ?? "NONE")</p>
+                                @if (i is not null)
+                                {
+                                    <p style="font-size: 15px; font-weight: bold">Num @i.Number</p>
+                                    <p style="font-size: 15px; font-weight: bold">Lvl @i.Level</p>
+                                }
+                            </div>
+
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+
+
+    }
+    else
+    {
+        <h1>Loading...</h1>
+    }
 </Navigation>

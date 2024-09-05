@@ -32,8 +32,6 @@ public class Program
                     BaseAddress =
                         new Uri(Information.ApiDomainName)
                 };
-                client.DefaultRequestHeaders.Add("Access-Control-Allow-Flight","*");
-                client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin","*");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
                      dep.DiscordToken);
                 return client;

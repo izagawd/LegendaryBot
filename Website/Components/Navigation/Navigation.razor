@@ -40,6 +40,7 @@
         new DirectoryStorer("Blessings", "/blessings", "star"),
         new DirectoryStorer("Items", "/items", "star"),
         new DirectoryStorer("Guild Settings", "/guild", "star"),
+        new DirectoryStorer("Teams","/teams","star")
     ];
 
 
@@ -64,8 +65,9 @@
         {
             <div style="order: @(or++)" class="link-container icon-clickable  @IconHovBgColorClass">
 
-                <div style="background-color: @(NavMan.Uri.Replace(PublicInfo.Information.WebsiteDomainName,"")
-                                                == i.Directory ? backgroundCol : "inherit"); height: 100%; width: 5px"></div>
+                <div style="background-color: @(NavMan.Uri.StartsWith(PublicInfo.Information.WebsiteDomainName + i.Directory, 
+    StringComparison.CurrentCultureIgnoreCase)
+                                                  ? backgroundCol : "inherit"); height: 100%; width: 5px"></div>
                 <a href="@i.Directory" class="link-a">
                     <span class="material-symbols-outlined nav-link-icon" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
                         @i.Icon

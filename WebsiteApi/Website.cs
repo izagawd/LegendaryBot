@@ -31,10 +31,10 @@ public static class Website
         services.AddDbContext<PostgreSqlContext>();
         services.AddCors(options =>
         {
-            options.AddPolicy("AllowAllOrigins",
+            options.AddDefaultPolicy(
                 policy =>
                 {
-                    policy.WithOrigins(Information.WebsiteDomainName+"/*",Information.WebsiteDomainName)
+                    policy.WithOrigins(Information.WebsiteDomainName)
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials();
@@ -112,7 +112,7 @@ public static class Website
         app.UseStaticFiles();
 
         app.UseRouting();
-        app.UseCors("AllowAllOrigins");
+        app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
        

@@ -24,9 +24,9 @@ public partial class Teams : ComponentBase
     }
     public class TeamDto
     {
-        public IEnumerable<CharacterDto> GetCharacters(IEnumerable<CharacterDto> totalCharacters)
+        public IEnumerable<CharacterDto> GetCharacters(TeamCharactersDto teamCharactersDto)
         {
-            return totalCharacters.Where(i => GottenCharacters.Contains(i.Id));
+            return teamCharactersDto.Characters.Where(i => GottenCharacters.Contains(i.Id));
         }
         public long Id{ get; set; }
         public List<long> GottenCharacters { get; set; } = [];
