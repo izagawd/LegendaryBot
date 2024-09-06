@@ -177,8 +177,10 @@
                 </div>
 
             </div>
-            
-            <div class="others-parent" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "gray" : "black")">
+            @{
+                var borCol = WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "gray" : "black";
+            }
+            <div class="others-parent" style="border-color: @borCol">
                 <div class="others">
 
 
@@ -206,7 +208,7 @@
                     }
 
                     }
-                    <div class="other-characters-parent">
+                    <div class="other-characters-parent" style="border-color: @borCol">
                         <div class="other-characters" ondragover="event.preventDefault()" @ondrop="RemoveDraggedCharacterFromTeamAsync">
                             @{
                                 var smallifiedFilter = _currentFilter.ToLower();
