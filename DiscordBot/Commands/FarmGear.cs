@@ -6,6 +6,7 @@ using DSharpPlus.Interactivity.Extensions;
 using Entities;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.Items;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBot.Commands;
@@ -17,7 +18,7 @@ public class FarmGear : GeneralCommandClass
     [Command("farm-gear")]
     public async ValueTask ExecuteAsync(CommandContext context)
     {
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .IncludeTeamWithAllEquipments()
             .Include(i => i.Items.Where(j => j is Stamina))
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);

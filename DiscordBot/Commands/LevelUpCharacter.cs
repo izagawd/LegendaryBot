@@ -167,7 +167,7 @@ public partial class CharacterCommand
             i.Characters.Where(j =>
                 j.Number == characterNumber);
 
-        var gottenUserData = await DatabaseContext.UserData
+        var gottenUserData = await DatabaseContext.Set<UserData>()
             .Include(includeLambda)
             .ThenInclude(i => i.Gears)
             .ThenInclude(i => i.Stats)

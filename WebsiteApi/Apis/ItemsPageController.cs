@@ -19,7 +19,7 @@ public class ItemsPageController : ControllerBase
     {
         await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
-        var gottenCollection = await post.Items
+        var gottenCollection = await post.Set<Item>()
             .Where(i => i.UserData!.DiscordId == zaId)
             .Select(i => new Items.ItemDto()
             {

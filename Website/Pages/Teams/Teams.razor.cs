@@ -22,14 +22,31 @@ public partial class Teams : ComponentBase
         public long EquippedTeamId { get; set; }
         public TeamDto[] Teams { get; set; } = [];
     }
+    
+    
+    public class CharacterSlot
+    {
+        public long CharacterId { get; set; }
+        
+        public int Slot { get; set; }
+
+        public CharacterDto GetCharacter(TeamCharactersDto charactersDto)
+        {
+            return charactersDto.Characters.First(i => i.Id == CharacterId);
+        }
+    }
     public class TeamDto
     {
         public IEnumerable<CharacterDto> GetCharacters(TeamCharactersDto teamCharactersDto)
         {
-            return teamCharactersDto.Characters.Where(i => GottenCharacters.Contains(i.Id));
+            return CharacterSlots.Select(i => i.GetCharacter(teamCharactersDto));
+        }
+        public CharacterDto? GetCharacter(int slot, TeamCharactersDto teamCharactersDto)
+        {
+            return CharacterSlots.FirstOrDefault(i => i.Slot == slot)?.GetCharacter(teamCharactersDto);
         }
         public long Id{ get; set; }
-        public List<long> GottenCharacters { get; set; } = [];
+        public List<CharacterSlot> CharacterSlots { get; set; } = [];
 
         public string? Name{ get; set; }
     }

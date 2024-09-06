@@ -67,7 +67,7 @@ public class DiscordBot
 
         DiscordEmbedBuilder? embedBuilder = null;
         await using var dbContext = new PostgreSqlContext();
-        var color = (await dbContext.UserData
+        var color = (await dbContext.Set<UserData>()
                 .Where(i => i.DiscordId == args.Context.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
@@ -128,7 +128,7 @@ public class DiscordBot
                 expGainInfo.MessageCount = 0;
                 ExpMatGive[args.Author.Id] = expGainInfo;
                 await using var dbContext = new PostgreSqlContext();
-                var userData = await dbContext.UserData
+                var userData = await dbContext.Set<UserData>()
                     .Include(i => i.Items.Where(j => j is CharacterExpMaterial))
                     .FirstOrDefaultAsync(i => i.DiscordId == args.Author.Id);
                 if (userData is null || userData.Tier <= Tier.Unranked)
@@ -216,12 +216,12 @@ public class DiscordBot
 
                     var localUser = result.Result.User;
                     await using var postgre = new PostgreSqlContext();
-                    var userData = await postgre.UserData.FirstOrDefaultAsync(i => i.DiscordId == localUser.Id);
+                    var userData = await postgre.Set<UserData>().FirstOrDefaultAsync(i => i.DiscordId == localUser.Id);
                     var isNew = userData is null || userData.Tier == Tier.Unranked;
                     if (userData is null)
                     {
                         userData = new UserData(localUser.Id);
-                        await postgre.UserData.AddAsync(userData);
+                        await postgre.Set<UserData>().AddAsync(userData);
                     }
 
                     userData.Characters.Add(created);

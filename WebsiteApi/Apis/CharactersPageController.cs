@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFunctions;
+using Website.Pages.Blessings;
 using Website.Pages.Characters;
 
 namespace WebsiteApi.Apis;
@@ -24,7 +25,7 @@ public class CharactersPageController : ControllerBase
 
         await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
-        var gottenCollection = await post.Characters
+        var gottenCollection = await post.Set<Character>()
             .Where(i => i.UserData!.DiscordId == zaId)
             .Select(i => new Characters.CharacterDto
             {

@@ -44,7 +44,7 @@ public class BattleText
     }
 
     /// <summary>
-    ///     This comes before the argument in the order
+    ///     This comes before the argument in the slot
     /// </summary>
     public virtual BattleText? Merge(BattleText battleTextInstance)
     {

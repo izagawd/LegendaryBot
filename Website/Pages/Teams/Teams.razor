@@ -10,10 +10,7 @@
 
     protected TeamDto? CurrentTeam;
 
-    public Teams(TeamCharactersDto? teamCharacterDto)
-    {
-        TeamCharacterDto = teamCharacterDto;
-    }
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -34,8 +31,80 @@
         return Task.CompletedTask;
     }
 
+    public CharacterDto? CurrentDraggedCharacter = null;
+    public async Task RemoveFromTeamAsync(int slot)
+    {
+        Console.WriteLine(slot);
+        var responseMessage = await Http.PostAsync("TeamPage/remove-from-team", new FormUrlEncodedContent([
+            new KeyValuePair<string, string>("slot", slot.ToString()),
+            new KeyValuePair<string, string>("teamId", CurrentTeam!.Id.ToString())
+        ]));
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            CurrentTeam.CharacterSlots.RemoveAll(i => i.Slot == slot);
+        }
+    }
+
+    async Task OnDropOnSlot(int slot)
+    {
+        if (CurrentDraggedCharacter is not null)
+        {
+            var currentCharIsInCurrTeam = CurrentTeam!.GetCharacters(TeamCharacterDto!).Contains(CurrentDraggedCharacter);
+            if (currentCharIsInCurrTeam
+             && CurrentTeam.CharacterSlots.Any(i => i.Slot == slot))
+            {
+                var currentCharSlot = CurrentTeam.CharacterSlots.First(i => i.CharacterId == CurrentDraggedCharacter.Id);
+
+                var result = await Http.PostAsync("TeamPage/switch-slots",
+                    new FormUrlEncodedContent([
+                        new KeyValuePair<string, string>("slot1", currentCharSlot.Slot.ToString()),
+                        new KeyValuePair<string, string>("teamId", CurrentTeam!.Id.ToString()),
+                        new KeyValuePair<string, string>("slot2", slot.ToString())
+                    ]));
+                if (result.IsSuccessStatusCode)
+                {
+                    var otherSlot = CurrentTeam.CharacterSlots.First(i => i.Slot == slot);
+                    (otherSlot.Slot, currentCharSlot.Slot) = (currentCharSlot.Slot, otherSlot.Slot);
+                }
+            }
+            else
+            {
+            
+                var result = await Http.PostAsync("TeamPage/set-slot",
+                    new FormUrlEncodedContent([
+                        new KeyValuePair<string, string>("slot", slot.ToString()),
+                        new KeyValuePair<string, string>("teamId", CurrentTeam!.Id.ToString()),
+                        new KeyValuePair<string, string>("characterId", CurrentDraggedCharacter.Id.ToString())
+                    ]));
+                if (result.IsSuccessStatusCode)
+                {
+                    if (currentCharIsInCurrTeam)
+                    {
+                        CurrentTeam.CharacterSlots.RemoveAll(i => i.CharacterId == CurrentDraggedCharacter.Id);
+                    }
+                    var gotten = CurrentTeam.CharacterSlots.FirstOrDefault(i => i.Slot == slot);
+                    if (gotten is null)
+                    {
+                        CurrentTeam.CharacterSlots.Add(new CharacterSlot()
+                        {
+                            CharacterId = CurrentDraggedCharacter.Id,
+                            Slot = slot
+                        });
+                    }
+                    else
+                    {
+                        gotten.CharacterId = CurrentDraggedCharacter.Id;
+                    }
+                }
+
+            }
+
+        }
+
+    }
     async Task EquipTeamAsync()
     {
+        
         var res = await Http.PostAsync("TeamPage/equip-team",
             new FormUrlEncodedContent([
                 new KeyValuePair<string, string>
@@ -45,6 +114,7 @@
         {
             TeamCharacterDto!.EquippedTeamId = CurrentTeam.Id;
         }
+      
     }
 
 }
@@ -53,7 +123,7 @@
     {
         <div class="za-parent">
             <div class="team-settler">
-                <div class="inputs" style="display: flex; width: 100%;">
+                <div class="inputs">
                     <select  @onchange="OnChangeTeamAsync">
                         @foreach (var i in TeamCharacterDto.Teams)
                         {
@@ -71,53 +141,87 @@
                     string borderCol = WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
                 }
                 <div class="team-characters-container">
-                    @for (var index = 0; index < 4; index++)
+                    @for (var i = 1; i <= 4; i++)
                     {
-                        CharacterDto? i = null;
-                        var equippedTeamChars = CurrentTeam.GetCharacters(TeamCharacterDto).ToArray();
-                        if (index < equippedTeamChars.Length)
-                            i = equippedTeamChars[index];
-                        <div class="team-character-div" style="border-color: @borderCol; background-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark? "gray" : "lightgrey")">
+                        var character = CurrentTeam.GetCharacter(i, TeamCharacterDto);
+                        
+                        var i1 = i;
+                        <div class="team-character-div" @ondragstart="() => CurrentDraggedCharacter = character" draggable="@(character is not null ? "true" : "false")" 
+                             ondragover="event.preventDefault()" @ondrop="() => OnDropOnSlot(i1)" style="border-color: @borderCol; background-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark? "gray" : "lightgrey")">
                             <a>
-                                <img style="border-color: @borderCol" src="@i?.ImageUrl" alt=""/>
+                                <img style="border-color: @borderCol" src="@character?.ImageUrl" alt=""/>
                             </a>
                             <div class="paragraphs">
-                                <p>@(i?.Name ?? "NONE")</p>
-                                @if (i is not null)
+                                <p>@(character?.Name ?? "EMPTY SLOT")</p>
+                                @if (character is not null)
                                 {
-                                    <p style="font-size: 13px; font-weight: bold;">Num @i.Number</p>
-                                    <p style="font-size: 13px; font-weight: bold">Lvl @i.Level</p>
+                                    <p class="minor-info">Num @character.Number</p>
+                                    <p class="minor-info">Lvl @character.Level</p>
                                 }
                             </div>
 
-                            <span class="material-symbols-outlined" style="margin: auto 15px auto auto;">
-                            delete
-                        </span>
+                            @if (character is not null && CurrentTeam.GetCharacters(TeamCharacterDto).Count() > 1)
+                            {
+                                <div class="delete-bin-div" @onclick="() => RemoveFromTeamAsync(i1)">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </div>
+                            }
+               
+                  
 
                         </div>
                     }
                 </div>
 
             </div>
-            <div class="others">
-                <div>
-                    <input type="text"/>
-                </div>
-                <div class="other-characters">
-                    @foreach (var i in TeamCharacterDto.Characters.Where(i =>
-                                  !CurrentTeam.GetCharacters(TeamCharacterDto).Contains(i)))
+            <div class="others-parent" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "gray" : "black")">
+                <div class="others">
+
+
+
+                    <div class="filter-class" >
+                            <span class="material-symbols-outlined">
+                                        search
+                                    </span>
+                        <input style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" type="text" placeholder="Search"/>
+
+                    </div>
+
+                    @code{
+
+                    Task RemoveDraggedCharacterFromTeamAsync()
                     {
-                        <div class="character-div">
+                    if(CurrentDraggedCharacter is null) return Task.CompletedTask;
+                    var currentSlot = CurrentTeam!.CharacterSlots.FirstOrDefault(i => i.CharacterId == CurrentDraggedCharacter.Id);
+                    if (currentSlot is not null)
+                    {
+                    return RemoveFromTeamAsync(currentSlot.Slot);
+                    }
+
+                    return Task.CompletedTask;
+                    }
+
+                    }
+                    <div class="other-characters" ondragover="event.preventDefault()" @ondrop="RemoveDraggedCharacterFromTeamAsync">
+                        @foreach (var i in TeamCharacterDto.Characters.Where(i =>
+                        !CurrentTeam.GetCharacters(TeamCharacterDto).Contains(i)))
+                        {
+                        <div class="character-div" draggable="true" @ondragstart='() => CurrentDraggedCharacter = i'>
                             <a>
-                                <img src="@i.ImageUrl" alt=""/>
+                                <img src="@i.ImageUrl" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" alt=""/>
                             </a>
                             <p>@i.Name</p>
                             <p>Num @i.Number</p>
+                            <p>Lvl @i.Level</p>
                         </div>
-                        
-                    }
+
+                        }
+                    </div>
                 </div>
             </div>
+       
 
         </div>
 

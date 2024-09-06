@@ -12,6 +12,7 @@ using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using Entities.LegendaryBot.Rewards;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBot.Commands.Region;
@@ -24,7 +25,7 @@ public class Explore : GeneralCommandClass
     public async ValueTask Execute(CommandContext ctx, string regionName)
     {
         var author = ctx.User;
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .IncludeTeamWithAllEquipments()
             .Include(i => i.Items.Where(j => j is Stamina))
             .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
@@ -154,7 +155,7 @@ public class Explore : GeneralCommandClass
             foreach (var _ in Enumerable.Range(0, expMatCount))
                 rewards.Add(new EntityReward([new HerosKnowledge { Stacks = 1 }]));
             rewards.Add(new EntityReward([new Coin { Stacks = 5000 }]));
-            await DatabaseContext.Items.Where(i => i is HerosKnowledge || i is Coin)
+            await DatabaseContext.Set<Item>().Where(i => i is HerosKnowledge || i is Coin)
                 .LoadAsync();
             rewardText += userData.ReceiveRewards(rewards);
             embedToBuild

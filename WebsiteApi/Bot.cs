@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using DatabaseManagement;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebsiteApi;
@@ -25,7 +26,7 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-
+     
     }
 
     private static async Task Main(string[] args)
@@ -43,7 +44,7 @@ public static class Bot
             var stopwatch = new Stopwatch();
             Console.WriteLine("Making all users unoccupied...");
             stopwatch.Start();
-            await ctx.UserData.ExecuteUpdateAsync(i => i.SetProperty(j => j.IsOccupied, _ => false));
+            await ctx.Set<UserData>().ExecuteUpdateAsync(i => i.SetProperty(j => j.IsOccupied, _ => false));
             Console.WriteLine("made all users unoccupied!");
         }
 

@@ -19,7 +19,7 @@ public class Avatar : GeneralCommandClass
         if (user is null) user = ctx.User;
 
 
-        var color = await DatabaseContext.UserData
+        var color = await DatabaseContext.Set<UserData>()
             .Where(i => i.DiscordId == user.Id)
             .Select(i => new DiscordColor?(i.Color))
             .FirstOrDefaultAsync();

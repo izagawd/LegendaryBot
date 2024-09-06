@@ -24,7 +24,7 @@ public class ViewDescription : GeneralCommandClass
             zaObject = TypesFunction.GetDefaultObjectsAndSubclasses<StatusEffect>()
                 .FirstOrDefault(i => i.Name.ToLower().Replace(" ", "") == simplifiedName);
 
-        var zaColor = await DatabaseContext.UserData
+        var zaColor = await DatabaseContext.Set<UserData>()
             .Where(i => i.DiscordId == context.User.Id)
             .Select(i => new DiscordColor?(i.Color))
             .FirstOrDefaultAsync();

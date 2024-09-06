@@ -27,7 +27,7 @@ public class Challenge : GeneralCommandClass
         var player1 = ctx.User;
         var player2 = opponent;
 
-        var player1User = await DatabaseContext.UserData
+        var player1User = await DatabaseContext.Set<UserData>()
             .IncludeTeamWithAllEquipments()
             .FirstOrDefaultAsync(i => i.DiscordId == player1.Id);
         if (player1User is null || player1User.Tier == Tier.Unranked)
@@ -55,7 +55,7 @@ public class Challenge : GeneralCommandClass
             return;
         }
 
-        var player2User = await DatabaseContext.UserData
+        var player2User = await DatabaseContext.Set<UserData>()
             .IncludeTeamWithAllEquipments()
             .FirstOrDefaultAsync(i => i.DiscordId == player2.Id);
 
@@ -70,7 +70,7 @@ public class Challenge : GeneralCommandClass
             return;
         }
 
-        await DatabaseContext.UserData
+        await DatabaseContext.Set<UserData>()
             .Where(i => i.DiscordId == player2.Id)
             .IncludeTeamWithAllEquipments()
             .LoadAsync();

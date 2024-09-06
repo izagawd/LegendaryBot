@@ -3,6 +3,7 @@ using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Entities.LegendaryBot;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBot.Commands;
@@ -17,7 +18,7 @@ public class TeamCommand : GeneralCommandClass
     public async ValueTask ExecuteEquip(CommandContext context,
         [Parameter("team-name")] string teamName)
     {
-        var anon = await DatabaseContext.UserData
+        var anon = await DatabaseContext.Set<UserData>()
             .Include(i => i.EquippedPlayerTeam)
             .Where(i => i.DiscordId == context.User.Id)
             .Select(i => new
@@ -69,7 +70,7 @@ public class TeamCommand : GeneralCommandClass
         string teamName, [Parameter("team-slot")] int teamSlot, [Parameter("character-num")] [Description("Number of the character. null if you are removng from slot")]
         int? characterNumber = null)
     {
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower()
                                                    == teamName.ToLower()))
             .ThenInclude(i => i.TeamMemberships)
@@ -160,7 +161,7 @@ public class TeamCommand : GeneralCommandClass
         [Parameter("team-name")] string teamName,
         [Parameter("new-name")] string newName)
     {
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .Include(i => i.PlayerTeams)
             .ThenInclude(i => i.TeamMemberships)
             .ThenInclude(i => i.Character)

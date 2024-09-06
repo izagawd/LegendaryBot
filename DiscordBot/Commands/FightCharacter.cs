@@ -6,6 +6,7 @@ using Entities.LegendaryBot;
 using Entities.LegendaryBot.BattleSimulatorStuff;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBot.Commands;
@@ -18,7 +19,7 @@ public class FightCharacter : GeneralCommandClass
         int count = 1)
     {
         if (context.User.Id != DiscordBot.Izasid) await context.RespondAsync("Only izagawd can use this command");
-        var userData = await DatabaseContext.UserData.IncludeTeamWithAllEquipments()
+        var userData = await DatabaseContext.Set<UserData>().IncludeTeamWithAllEquipments()
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {

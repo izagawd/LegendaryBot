@@ -14,7 +14,7 @@ public class Roll : GeneralCommandClass
     [BotCommandCategory]
     public async ValueTask Execute(CommandContext ctx)
     {
-        var color = await DatabaseContext.UserData
+        var color = await DatabaseContext.Set<UserData>()
                         .Where(i => i.DiscordId == ctx.User.Id)
                         .Select(i => new DiscordColor?(i.Color))
                         .FirstOrDefaultAsync()

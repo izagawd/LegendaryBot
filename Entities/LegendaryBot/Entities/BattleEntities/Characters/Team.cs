@@ -39,7 +39,7 @@ public abstract class Team<TTeamMembership> : Team where TTeamMembership : TeamM
 
     public override IEnumerator<Character> GetEnumerator()
     {
-        foreach (var i in TeamMemberships.OrderBy(i => i.Order))
+        foreach (var i in TeamMemberships.OrderBy(i => i.Slot))
         {
             yield return i.Character;
         }
@@ -62,12 +62,12 @@ public abstract class Team<TTeamMembership> : Team where TTeamMembership : TeamM
     {
         for(var i = 1; i <= MaxCharacters; i++)
         {
-            if (TeamMemberships.All(j => j.Order != i))
+            if (TeamMemberships.All(j => j.Slot != i))
             {
                 TeamMemberships.Add(new TTeamMembership()
                 {
                     Character = item,
-                    Order = i
+                    Slot = i
                 });
                 return;
             }
@@ -107,7 +107,7 @@ public abstract class Team<TTeamMembership> : Team where TTeamMembership : TeamM
     public override bool IsReadOnly => false;
     public override int IndexOf(Character item)
     {
-       return  TeamMemberships.FirstOrDefault(i => i.Character.Equals(item))?.Order ?? -1;
+       return  TeamMemberships.FirstOrDefault(i => i.Character.Equals(item))?.Slot ?? -1;
     }
 
     public override void Insert(int index, Character item)
@@ -115,9 +115,9 @@ public abstract class Team<TTeamMembership> : Team where TTeamMembership : TeamM
         this[index] = item;
     }
 
-    public override void RemoveAt(int order)
+    public override void RemoveAt(int slot)
     {
-        var gotten = TeamMemberships.FirstOrDefault(i => i.Order == order);
+        var gotten = TeamMemberships.FirstOrDefault(i => i.Slot == slot);
         if (gotten is not null)
         {
             TeamMemberships.Remove(gotten);
@@ -126,25 +126,31 @@ public abstract class Team<TTeamMembership> : Team where TTeamMembership : TeamM
     }
 
     
-    public override Character? this[int order]
+    public override Character? this[int slot]
     {
-        get => TeamMemberships.FirstOrDefault(i => i.Order == order)?.Character;
+        get => TeamMemberships.FirstOrDefault(i => i.Slot == slot)?.Character;
         set
         {
-            if (order < 1 || order > MaxCharacters)
-                throw new Exception("order/index exveeds max characters limit");
-            var gotten = TeamMemberships.FirstOrDefault(i => i.Order == order);
+            if (slot < 1 || slot > MaxCharacters)
+                throw new Exception("slot/index exceeds max characters limit");
+            var gotten = TeamMemberships.FirstOrDefault(i => i.Slot == slot);
+            
             if (gotten is not null)
             {
                 TeamMemberships.Remove(gotten);
             }
             if (value is not null)
             {
-                TeamMemberships.Add(new TTeamMembership()
+                var gottenSelf = TeamMemberships.FirstOrDefault(i => ReferenceEquals(i.Character, value));
+                if (gottenSelf is null)
                 {
-                    Character = value,
-                    Order = order
-                });
+                    gottenSelf = new TTeamMembership()
+                    {
+                        Character = value,
+                    };
+                    TeamMemberships.Add(gottenSelf);
+                }
+                gottenSelf.Slot = slot;
             }
         }
     }

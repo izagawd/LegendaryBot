@@ -20,7 +20,7 @@ public class QuoteCommand : GeneralCommandClass
     [BotCommandCategory]
     public async Task Read(CommandContext ctx)
     {
-        var anon = await DatabaseContext.Quote
+        var anon = await DatabaseContext.Set<Quote>()
             .Where(i => i.IsApproved)
             .Include(i => i.UserData)
             .Select(j =>
@@ -34,7 +34,7 @@ public class QuoteCommand : GeneralCommandClass
             .FirstOrDefaultAsync();
         if (anon is null)
         {
-            var userColor = (await DatabaseContext.UserData
+            var userColor = (await DatabaseContext.Set<UserData>()
                     .Where(i => i.DiscordId == ctx.User.Id)
                     .Select(i => new DiscordColor?(i.Color))
                     .FirstOrDefaultAsync())
@@ -94,7 +94,7 @@ public class QuoteCommand : GeneralCommandClass
                 await newDbContext.Set<QuoteReaction>().AddAsync(quoteReaction);
                 //assigning it to id instead of instance cuz instance might not be of the same dbcontext as newDbContext
                 quoteReaction.QuoteId = randomQuote.Id;
-                var gottenId = await DatabaseContext.UserData.Where(i => i.DiscordId == interactivityResult.User.Id)
+                var gottenId = await DatabaseContext.Set<UserData>().Where(i => i.DiscordId == interactivityResult.User.Id)
                     .Select(i => new long?(i.Id))
                     .FirstOrDefaultAsync();
                 if (gottenId is null)
@@ -108,8 +108,8 @@ public class QuoteCommand : GeneralCommandClass
                 isNew = true;
             }
 
-            if (!await newDbContext.UserData.AnyAsync(j => j.DiscordId == interactivityResult.User.Id))
-                await newDbContext.UserData.AddAsync(new UserData(interactivityResult.User.Id));
+            if (!await newDbContext.Set<UserData>().AnyAsync(j => j.DiscordId == interactivityResult.User.Id))
+                await newDbContext.Set<UserData>().AddAsync(new UserData(interactivityResult.User.Id));
             if (!isNew &&
                 ((choice == "like" && quoteReaction.IsLike) || (choice == "dislike" && !quoteReaction.IsLike)))
                 newDbContext.Set<QuoteReaction>().Remove(quoteReaction);
@@ -119,7 +119,7 @@ public class QuoteCommand : GeneralCommandClass
                 quoteReaction.IsLike = false;
 
             await newDbContext.SaveChangesAsync();
-            var localCounts = await newDbContext.Quote.Where(i => i.Id == randomQuote.Id)
+            var localCounts = await newDbContext.Set<Quote>().Where(i => i.Id == randomQuote.Id)
                 .Select(i => new
                 {
                     likes = i.QuoteReactions.Count(j => j.IsLike),
@@ -142,7 +142,7 @@ public class QuoteCommand : GeneralCommandClass
     [BotCommandCategory]
     public async Task Write(CommandContext ctx, [Parameter("text")] string text)
     {
-        var userData = await DatabaseContext.UserData.FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
+        var userData = await DatabaseContext.Set<UserData>().FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
         if (userData is null) userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);
         var embedBuilder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)

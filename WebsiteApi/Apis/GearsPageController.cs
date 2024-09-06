@@ -20,7 +20,7 @@ public class GearsPageController : ControllerBase
 
         await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
-        var gottenCollection = await post.Gears
+        var gottenCollection = await post.Set<Gear>()
             .Where(i => i.UserData!.DiscordId == zaId)
             .Select(i => new Gears.GearDto()
             {

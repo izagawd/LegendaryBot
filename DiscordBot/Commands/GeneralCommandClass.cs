@@ -44,7 +44,7 @@ public abstract class GeneralCommandClass
             .WithColor(TypesFunction.GetDefaultObject<UserData>().Color)
             .WithUser(context.User);
 
-        var color = (await DatabaseContext.UserData
+        var color = (await DatabaseContext.Set<UserData>()
                 .Where(i => i.DiscordId == context.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
@@ -62,7 +62,7 @@ public abstract class GeneralCommandClass
             .WithColor(TypesFunction.GetDefaultObject<UserData>().Color)
             .WithUser(context.User);
 
-        var color = (await DatabaseContext.UserData
+        var color = (await DatabaseContext.Set<UserData>()
                 .Where(i => i.DiscordId == context.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
@@ -80,7 +80,7 @@ public abstract class GeneralCommandClass
             if (_occupiedUserDatasIds.Count > 0)
             {
                 await using var tempCtx = new PostgreSqlContext();
-                await tempCtx.UserData
+                await tempCtx.Set<UserData>()
                     .Where(i => _occupiedUserDatasIds.Contains(i.Id))
                     .ExecuteUpdateAsync(i
                         => i.SetProperty(j => j.IsOccupied, false));
@@ -113,7 +113,7 @@ public abstract class GeneralCommandClass
         foreach (var i in userDatas) i.IsOccupied = true;
         var dic = userDatas.ToDictionary(i => i.Id, i => new { i, i.Version });
         await using var newDb = new PostgreSqlContext();
-        var userDatasToUpdate = await newDb.UserData.Where(i => ids.Contains(i.Id))
+        var userDatasToUpdate = await newDb.Set<UserData>().Where(i => ids.Contains(i.Id))
             .ToListAsync();
 
         foreach (var i in userDatasToUpdate)

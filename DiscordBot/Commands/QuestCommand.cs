@@ -6,6 +6,7 @@ using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Quests;
 using Entities.LegendaryBot.Rewards;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBot.Commands;
@@ -20,7 +21,7 @@ public class QuestCommand : GeneralCommandClass
 
         await DatabaseContext.CheckForNewDayAsync(author.Id);
         await DatabaseContext.SaveChangesAsync();
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .Include(i => i.Quests)
             .FirstOrDefaultAsync(i => i.DiscordId == author.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
@@ -90,14 +91,14 @@ public class QuestCommand : GeneralCommandClass
         await buttonResult.Result
             .Interaction
             .CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
-        var succeeded = await quest.StartQuest(DatabaseContext.UserData, ctx, message);
+        var succeeded = await quest.StartQuest(DatabaseContext.Set<UserData>(), ctx, message);
 
         if (succeeded)
         {
             quest.Completed = true;
             var expToAdd = 1000;
 
-            await DatabaseContext.Items.Where(i => i.UserDataId == userData.Id && i is DivineShard)
+            await DatabaseContext.Set<Item>().Where(i => i.UserDataId == userData.Id && i is DivineShard)
                 .LoadAsync();
             var rewardString = userData.ReceiveRewards([
                 ..quest.QuestRewards, new UserExperienceReward(expToAdd),

@@ -106,7 +106,7 @@ public class Help : GeneralCommandClass
         var author = ctx.User;
 
         var color = await DatabaseContext
-            .UserData
+            .Set<UserData>()
             .Where(i => i.DiscordId == ctx.User.Id)
             .Select(i => new DiscordColor?(i.Color))
             .FirstOrDefaultAsync();

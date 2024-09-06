@@ -7,6 +7,7 @@ using Entities.LegendaryBot.Entities;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Rewards;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBot.Commands;
@@ -38,7 +39,7 @@ public class GiveMe : GeneralCommandClass
         }
         else
         {
-            var userData = await DatabaseContext.UserData
+            var userData = await DatabaseContext.Set<UserData>()
                 .Include(i => i.Gears)
                 .Include(i => i.Blessings)
                 .Include(i => i.Characters)

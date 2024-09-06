@@ -3,6 +3,7 @@ using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Commands.Trees;
 using DSharpPlus.Entities;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBot.Commands;
@@ -18,7 +19,7 @@ public class Color : GeneralCommandClass
     {
         var author = ctx.User;
 
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .Where(i => i.DiscordId == ctx.User.Id)
             .Select(i => new { i.Color, i.IsOccupied })
             .FirstOrDefaultAsync();
@@ -63,7 +64,7 @@ public class Color : GeneralCommandClass
             .WithTimestamp(DateTime.Now);
         if (colorIsValid)
         {
-            await DatabaseContext.UserData.ExecuteUpdateAsync(i => i
+            await DatabaseContext.Set<UserData>().ExecuteUpdateAsync(i => i
                 .SetProperty(j => j.Color, color));
             embed.WithTitle("**Success!**");
             embed.WithDescription("`Look at your new color!`");

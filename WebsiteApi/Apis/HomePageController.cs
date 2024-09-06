@@ -1,5 +1,6 @@
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.Items;
+using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ public class HomePageController : ControllerBase
 
         await using var context = new PostgreSqlContext();
         var discordId = User.GetDiscordUserId();
-        var selected = await context.UserData
+        var selected = await context.Set<UserData>()
             .Where(i => i.DiscordId == discordId)
             .Select(i => new
             {

@@ -9,6 +9,6 @@ public class TeamMembership
 
 
     public Character Character { get; set; } = null!;
-    public int Order { get; set; }
+    public int Slot { get; set; }
 
 }

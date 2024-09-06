@@ -8,6 +8,7 @@ using DSharpPlus.Commands.Trees;
 using DSharpPlus.Entities;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBot.Commands;
@@ -28,7 +29,7 @@ public partial class CharacterCommand : GeneralCommandClass
         [Parameter("character-num")] int characterNumber,
         [Parameter("blessing-name")] string blessingName)
     {
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .Include(i => i.Blessings)
             .ThenInclude(i => i.Character)
             .Include(i => i.Characters.Where(j =>
@@ -92,7 +93,7 @@ public partial class CharacterCommand : GeneralCommandClass
     public async ValueTask ExecuteRemoveBlessing(CommandContext context,
         [Parameter("character-num")] int characterNum)
     {
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .Include(i => i.Characters.Where(j =>
                 j.Number == characterNum))
             .ThenInclude(i => i.Blessing)
@@ -148,7 +149,7 @@ public partial class CharacterCommand : GeneralCommandClass
         [Parameter("character-num")] int characterNumber,
         [Parameter("gear-num")] int gearNumber)
     {
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .Include(i => i.Gears)
             .Include(i =>
                 i.Characters.Where(j =>
@@ -210,7 +211,7 @@ public partial class CharacterCommand : GeneralCommandClass
         string gearType)
     {
         gearType = gearType.ToLower().Replace(" ", "");
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .Include(i => i.Characters.Where(j => j.Number == characterNumber))
             .ThenInclude(i => i.Gears)
             .ThenInclude(i => i.Stats)

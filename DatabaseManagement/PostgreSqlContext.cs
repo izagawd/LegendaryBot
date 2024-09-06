@@ -2,6 +2,7 @@
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;
@@ -18,14 +19,7 @@ namespace DatabaseManagement;
 public class PostgreSqlContext : DbContext
 {
     public const string DatabaseUrlPathToUse = Information.IsTesting ? "LocalConnectionString" : "ConnectionString";
-    public DbSet<UserData> UserData { get; set; }
-    public DbSet<GuildData> GuildDatas { get; set; }
-    public DbSet<Blessing> Blessings { get; set; }
 
-    public DbSet<Gear> Gears { get; set; }
-    public DbSet<Character> Characters { get; set; }
-    public DbSet<Item> Items { get; set; }
-    public DbSet<Quote> Quote { get; set; }
 
     /// <summary>
     ///     this should be called before any query if u want to ever use this method
@@ -33,7 +27,7 @@ public class PostgreSqlContext : DbContext
     /// <param name="userId"> the user id u want  to refresh to a new day</param>
     public async Task CheckForNewDayAsync(ulong userId)
     {
-        var user = await UserData
+        var user = await Set<UserData>()
             .Include(i => i.Quests)
             .FirstOrDefaultAsync(i => i.DiscordId == userId);
         if (user is null)
@@ -57,7 +51,7 @@ public class PostgreSqlContext : DbContext
     public async Task<UserData> CreateNonExistantUserdataAsync(ulong id)
     {
         var user = new UserData { DiscordId = id };
-        await UserData.AddAsync(user);
+        await Set<UserData>().AddAsync(user);
         return user;
     }
 
@@ -116,13 +110,13 @@ EXECUTE FUNCTION {functionName}();
 
     private Task SetupNumberIncrementorForCharacterAsync()
     {
-        return SetupNumberIncrementorForAsync(nameof(Characters),
+        return SetupNumberIncrementorForAsync(nameof(Character),
             nameof(Character.UserDataId), nameof(Character.Number));
     }
 
     private Task SetupNumberIncrementorForGearAsync()
     {
-        return SetupNumberIncrementorForAsync(nameof(Gears), nameof(Gear.UserDataId),
+        return SetupNumberIncrementorForAsync(nameof(Gear), nameof(Gear.UserDataId),
             nameof(Gear.Number));
     }
 

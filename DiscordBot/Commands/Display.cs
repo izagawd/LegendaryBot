@@ -71,7 +71,7 @@ public class Display : GeneralCommandClass
     public async ValueTask ExecuteDisplayCharacterGear(CommandContext context,
         [Parameter("character-num")] int characterNumber)
     {
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Characters
                 .Where(j => j.Number == characterNumber))
@@ -202,7 +202,7 @@ public class Display : GeneralCommandClass
         string nameFilter = "")
     {
         var simplified = nameFilter.Replace(" ", "").ToLower();
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Items)
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
@@ -224,7 +224,7 @@ public class Display : GeneralCommandClass
     [BotCommandCategory]
     public async ValueTask ExecuteDisplayAllEntities(CommandContext context)
     {
-        var color = (await DatabaseContext.UserData
+        var color = (await DatabaseContext.Set<UserData>()
                 .Where(i => i.DiscordId == context.User.Id)
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
@@ -238,7 +238,7 @@ public class Display : GeneralCommandClass
     [BotCommandCategory(BotCommandCategory.Inventory)]
     public async ValueTask ExecuteDisplayGears(CommandContext context)
     {
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Gears)
             .ThenInclude(i => i.Character)
@@ -264,7 +264,7 @@ public class Display : GeneralCommandClass
         string nameFilter = "")
     {
         var simplified = nameFilter.Replace(" ", "").ToLower();
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Characters)
             .ThenInclude(i => i.Blessing)
@@ -287,7 +287,7 @@ public class Display : GeneralCommandClass
     [BotCommandCategory(BotCommandCategory.Inventory)]
     public async ValueTask ExecuteDisplayBlessings(CommandContext context, string nameFilter = "")
     {
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Blessings)
             .ThenInclude(i => i.Character)
@@ -320,7 +320,7 @@ public class Display : GeneralCommandClass
     [BotCommandCategory(BotCommandCategory.Inventory)]
     public async ValueTask ExecuteDisplayGearByNum(CommandContext context, [Parameter("gear-num")] int gearNumber)
     {
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Gears.Where(j => j.Number == gearNumber))
             .ThenInclude(i => i.Character)
@@ -351,7 +351,7 @@ public class Display : GeneralCommandClass
     [Description("Displays all the teams you have and the characters in them")]
     public async ValueTask ExecuteDisplayTeams(CommandContext context)
     {
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
             .Include(i => i.PlayerTeams)
             .ThenInclude(i => i.TeamMemberships)

@@ -37,7 +37,7 @@ public class Begin : GeneralCommandClass
         DiscordEmbedBuilder embedToBuild = new();
         var author = ctx.User;
 
-        var userData = await DatabaseContext.UserData
+        var userData = await DatabaseContext.Set<UserData>()
             .Include(i => i.Items.Where(j => j is Stamina))
             .Include(j => j.Characters)
             .ThenInclude(j => j.Blessing)

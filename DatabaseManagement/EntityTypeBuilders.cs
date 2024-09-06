@@ -63,11 +63,11 @@ public class PlayerTeamDatabaseConfiguration : IEntityTypeConfiguration<PlayerTe
             .WithMany()
             .UsingEntity<PlayerTeamMembership>(i
                 => i.HasOne<Character>(j => j.Character).WithMany().HasForeignKey(j => j.CharacterId), i =>
-                i.HasOne<PlayerTeam>().WithMany(j => j.TeamMemberships).HasForeignKey(j => j.PlayerTeamId),
+                i.HasOne<PlayerTeam>(j => j.PlayerTeam).WithMany(j => j.TeamMemberships).HasForeignKey(j => j.PlayerTeamId),
                 i =>
                 {
                     i.HasKey(j => new { j.CharacterId, j.PlayerTeamId });
-                    i.HasIndex(j => new { j.PlayerTeamId, j.Order }).IsUnique();
+                    i.HasIndex(j => new { j.PlayerTeamId, Order = j.Slot }).IsUnique();
                 }
               );
     }

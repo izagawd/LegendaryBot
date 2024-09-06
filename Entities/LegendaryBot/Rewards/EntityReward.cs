@@ -35,7 +35,7 @@ public class EntityReward : Reward
         switch (entity)
         {
             case Character chara:
-                return $"{chara.Number} • {chara.Name} • Lvl {chara.Level}";
+                return $"{chara.Name} • Lvl {chara.Level}";
             case Item item:
                 return $"{item.Name} • Stacks: {item.Stacks}";
             case Blessing blessing:
@@ -52,7 +52,7 @@ public class EntityReward : Reward
         userData.Inventory.MergeItemStacks();
 
 
-        foreach (var i in EntitiesToReward) stringBuilder.Append($"{i.TypeGroup.Name}: {GetDisplayString(i)}\n");
+        foreach (var i in EntitiesToReward) stringBuilder.Append($"`{GetDisplayString(i)}`\n");
 
 
         return stringBuilder.ToString();
