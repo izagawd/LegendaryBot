@@ -85,7 +85,7 @@
     flex-flow: wrap;
     width: fit-content;
     height: 100%;
-    overflow-y: scroll;
+   
 }
 .character-div img{
     border: black solid 2px;
@@ -120,7 +120,9 @@
  .team-character-div .minor-info{
     font-size: 13px; font-weight: bold;
 }
+ 
  .filter-class{
+
      display: flex;
      height: fit-content;
      margin: 10px auto;
@@ -133,7 +135,17 @@
      border-left: black solid 1px;
     margin-left: 30px;
  }
-
+ .others{
+     width: 100%;
+     height: 100%;
+ }
+.other-characters-parent{
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+    border-top: black solid 1px;
+    padding-top: 10px;
+}
 .others span{
     margin-right: -30px;
     z-index: 3;
@@ -141,7 +153,11 @@
     margin-top: auto;
     margin-bottom: auto;
 }
+.others > *{
+    padding-left: 30px;
+}
 .others{
+    margin-left: 0;
     margin-right: auto;
     margin-bottom: auto;
     
@@ -165,6 +181,9 @@
         border: 0;
         border-top: black 1px solid;
     }
+    .others > *{
+        padding-left: 0;
+    }
     .others input{
         height: 25px;
         width: 150px;
@@ -174,6 +193,7 @@
         margin-right: -25px;
         font-size: 20px;
     }
+    
     .za-parent{
         flex-direction: column;
     }
@@ -207,9 +227,13 @@
         margin-left: 0;
         
     }
-    .other-characters{
+    .other-characters-parent{
         overflow-y: hidden;
         overflow-x: scroll;
+        height: fit-content;
+    }
+    .other-characters{
+       
         height: fit-content;
         width: 100%;
         flex-wrap: nowrap;
@@ -223,6 +247,7 @@
         }
         .filter-class{
             margin-top: 5px;
+            margin-bottom: 5px;
         }
         .others-parent{
             margin-top: 5px;

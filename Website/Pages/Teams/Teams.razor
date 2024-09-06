@@ -11,6 +11,7 @@
     protected TeamDto? CurrentTeam;
 
 
+    private string _currentFilter = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -176,6 +177,7 @@
                 </div>
 
             </div>
+            
             <div class="others-parent" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "gray" : "black")">
                 <div class="others">
 
@@ -185,7 +187,7 @@
                             <span class="material-symbols-outlined">
                                         search
                                     </span>
-                        <input style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" type="text" placeholder="Search"/>
+                        <input @onchange="args => _currentFilter =(string) args.Value!" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" type="text" placeholder="Search"/>
 
                     </div>
 
@@ -204,21 +206,28 @@
                     }
 
                     }
-                    <div class="other-characters" ondragover="event.preventDefault()" @ondrop="RemoveDraggedCharacterFromTeamAsync">
-                        @foreach (var i in TeamCharacterDto.Characters.Where(i =>
-                        !CurrentTeam.GetCharacters(TeamCharacterDto).Contains(i)))
-                        {
-                        <div class="character-div" draggable="true" @ondragstart='() => CurrentDraggedCharacter = i'>
-                            <a>
-                                <img src="@i.ImageUrl" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" alt=""/>
-                            </a>
-                            <p>@i.Name</p>
-                            <p>Num @i.Number</p>
-                            <p>Lvl @i.Level</p>
-                        </div>
+                    <div class="other-characters-parent">
+                        <div class="other-characters" ondragover="event.preventDefault()" @ondrop="RemoveDraggedCharacterFromTeamAsync">
+                            @{
+                                var smallifiedFilter = _currentFilter.ToLower();
+                                foreach (var i in TeamCharacterDto.Characters.Where(i =>
+                                              !CurrentTeam.GetCharacters(TeamCharacterDto).Contains(i) && i.Name!.ToLower().Contains(smallifiedFilter)))
+                                {
+                                    <div class="character-div" draggable="true" @ondragstart='() => CurrentDraggedCharacter = i'>
+                                        <a>
+                                            <img src="@i.ImageUrl" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" alt=""/>
+                                        </a>
+                                        <p>@i.Name</p>
+                                        <p>Num @i.Number</p>
+                                        <p>Lvl @i.Level</p>
+                                    </div>
 
-                        }
+                                }
+                            }
+
+                        </div>
                     </div>
+
                 </div>
             </div>
        
