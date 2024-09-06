@@ -52,7 +52,7 @@ public class YouCanDoIt : Skill
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return User.Team.Where(i => !i.IsDead && i != User);
+        return User.BattleTeam.Where(i => !i.IsDead && i != User);
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
@@ -88,7 +88,7 @@ public class YouCanMakeItEveryone : Ultimate
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return User.Team.Where(i => !i.IsDead);
+        return User.BattleTeam.Where(i => !i.IsDead);
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,

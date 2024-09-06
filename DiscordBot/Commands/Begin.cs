@@ -45,7 +45,8 @@ public class Begin : GeneralCommandClass
             .ThenInclude(i => i.Gears)
             .ThenInclude(i => i.Stats)
             .Include(i => i.EquippedPlayerTeam)
-            .ThenInclude(i => i.Characters)
+            .ThenInclude(i => i!.TeamMemberships)
+            .ThenInclude(i => i.Character)
             .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
         if (userData is null)
         {
@@ -109,7 +110,7 @@ public class Begin : GeneralCommandClass
                     [new DiscordActionRowComponent([_askForName]), new DiscordActionRowComponent([_askForGender])])
                 .WithCustomId(modalId));
         var done = await ctx.Client.ServiceProvider
-            .GetService<InteractivityExtension>()
+            .GetService<InteractivityExtension>()!
             .WaitForModalAsync(modalId,
                 ctx.User, new TimeSpan(0, 5, 0));
         if (done.TimedOut) return;
@@ -229,7 +230,7 @@ public class Begin : GeneralCommandClass
         coachChad.TotalAttack = 1;
         coachChad.TotalSpeed = 100;
         var battleResult = await new BattleSimulator(userTeam.LoadTeamStats(),
-            new CharacterTeam(characters: coachChad)).StartAsync(result.Message);
+            new NonPlayerTeam(characters: coachChad)).StartAsync(result.Message);
 
         if (battleResult.TimedOut is not null)
         {

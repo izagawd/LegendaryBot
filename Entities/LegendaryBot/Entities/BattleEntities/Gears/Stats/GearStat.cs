@@ -42,9 +42,6 @@ public abstract class GearStat
     [NotMapped] public static Type EffectivenessType { get; } = typeof(EffectivenessGearStat);
     [NotMapped] public static Type SpeedFlatType { get; } = typeof(SpeedFlatGearStat);
     [NotMapped] public static Type SpeedPercentageType { get; } = typeof(SpeedPercentageGearStat);
-
-
-    public Gear Gear { get; set; }
     public long Id { get; set; }
     public long GearId { get; set; }
 

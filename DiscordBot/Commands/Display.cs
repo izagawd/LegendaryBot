@@ -36,7 +36,7 @@ public class Display : GeneralCommandClass
         foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<IInventoryEntity>()
                      .Select(i =>
                      {
-                         Type type = null;
+                         Type type;
                          if (i is Character)
                              type = typeof(Character);
                          else if (i is Gear)
@@ -50,7 +50,7 @@ public class Display : GeneralCommandClass
                          else
                              type = typeof(IInventoryEntity);
                          return new { type, entity = i };
-                     }).OrderBy(i => i.type?.Name))
+                     }).OrderBy(i => i.type.Name))
             entitiesList.Add($"{i.entity.Name} ({i.type.Name})");
     }
 
@@ -278,7 +278,7 @@ public class Display : GeneralCommandClass
         await ExecuteDisplayAsync(context, userData.Characters
                 .Where(i => i.Name.ToLower().Replace(" ", "").Contains(simplified))
                 .OrderBy(i => i.Number), 10,
-            i => i.DisplayString,
+            i =>  $"{i.Number} • {i.Name} • Lvl {i.Level}",
             "\n", "Characters", userData.Color);
     }
 
@@ -354,7 +354,8 @@ public class Display : GeneralCommandClass
         var userData = await DatabaseContext.UserData
             .AsNoTrackingWithIdentityResolution()
             .Include(i => i.PlayerTeams)
-            .ThenInclude(i => i.Characters)
+            .ThenInclude(i => i.TeamMemberships)
+            .ThenInclude(i => i.Character)
             .ThenInclude(i => i.Blessing)
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
@@ -378,7 +379,24 @@ public class Display : GeneralCommandClass
             if (i.Any())
             {
                 value = "";
-                foreach (var j in i) value += $"{j.DisplayString}\n";
+                for (var j = 1; j <= i.MaxCharacters; j++)
+                {
+
+                    value += $"`Slot {j}: ";
+                    var chara = i[j];
+                    if (chara is null)
+                    {
+                        value += "EMPTY SLOT";
+                    }
+                    else
+                    {
+                        value += $"{chara.Number} • {chara.Name} • Lvl {chara.Level}";
+
+                    }
+
+                    value += "`\n";
+                }
+                    
             }
 
             embed.AddField(i.TeamName + equipped,

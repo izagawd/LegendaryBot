@@ -5,8 +5,8 @@ public partial class Gears
     public class GearDto
     {
         public int RarityNum { get; set; }
-        public string Name { get; set; }
-        public string ImageUrl { get; set; }
+        public string? Name { get; set; }
+        public string? ImageUrl { get; set; }
         public int Number { get; set; }
 
         public string RarityName

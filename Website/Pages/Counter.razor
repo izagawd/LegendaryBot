@@ -2,15 +2,15 @@
 @using System.Security.Claims
 @using Website.Components.Navigation
 
-@inject AuthenticationStateProvider prov
+@inject AuthenticationStateProvider Prov
 @code
 {
-    ClaimsPrincipal user;
+    ClaimsPrincipal _user = null!;
     protected override async Task OnInitializedAsync()
     {
-        user = (await prov.GetAuthenticationStateAsync()).User;
+        _user = (await Prov.GetAuthenticationStateAsync()).User;
     }
 }
 <Navigation>
- @user.Claims.Count()
+ @_user.Claims.Count()
 </Navigation>

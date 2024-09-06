@@ -23,6 +23,8 @@ public partial class Character
     /// <returns>true if the status effect was successfully added</returns>
     public StatusEffectInflictResult AddStatusEffect(StatusEffect statusEffect, float? effectiveness)
     {
+        if (CurrentBattle is null)
+            throw NoBattleExc;
         var inflictResult = StatusEffectInflictResult.Failed;
         if (statusEffect is null) return StatusEffectInflictResult.Failed;
         if (IsDead) return StatusEffectInflictResult.Failed;

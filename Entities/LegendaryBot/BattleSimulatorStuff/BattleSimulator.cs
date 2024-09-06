@@ -33,34 +33,34 @@ public enum BattleDecision : byte
 public partial class BattleSimulator
 {
     private static readonly DiscordButtonComponent
-        _forfeitButton = new(DiscordButtonStyle.Danger, "forfeit", "Forfeit");
+        ForfeitButton = new(DiscordButtonStyle.Danger, "forfeit", "Forfeit");
 
 
     protected static ConcurrentDictionary<string, Image<Rgba32>> CachedResizedForAvatars = new();
-    private static readonly ConcurrentDictionary<Type, List<EventMethodDetails>> _methodsCache = [];
+    private static readonly ConcurrentDictionary<Type, List<EventMethodDetails>> MethodsCache = [];
 
-    protected static DiscordButtonComponent yes = new(DiscordButtonStyle.Success, "yes", "YES");
+    protected static readonly DiscordButtonComponent Yes = new(DiscordButtonStyle.Success, "yes", "YES");
 
-    protected static DiscordButtonComponent no = new(DiscordButtonStyle.Success, "no", "NO");
+    protected static readonly DiscordButtonComponent No = new(DiscordButtonStyle.Success, "no", "NO");
 
 
     private readonly DiscordButtonComponent _basicAttackButton = new(DiscordButtonStyle.Secondary, nameof(BasicAttack),
-        null, emoji: new DiscordComponentEmoji("⚔️"));
+        "", emoji: new DiscordComponentEmoji("⚔️"));
 
 
     private readonly List<BattleText> _battleTextInstances = ["Have fun!"];
 
-    private readonly DiscordButtonComponent _skillButton = new(DiscordButtonStyle.Secondary, nameof(Skill), null,
+    private readonly DiscordButtonComponent _skillButton = new(DiscordButtonStyle.Secondary, nameof(Skill), "",
         emoji: new DiscordComponentEmoji("🪄"));
 
-    private readonly DiscordButtonComponent _ultimateButton = new(DiscordButtonStyle.Secondary, nameof(Ultimate), null,
+    private readonly DiscordButtonComponent _ultimateButton = new(DiscordButtonStyle.Secondary, nameof(Ultimate), "",
         emoji: new DiscordComponentEmoji("⚡"));
 
 
     /// <summary>
     ///     The team that has forfeited
     /// </summary>
-    private CharacterTeam? _forfeited;
+    private Team? _forfeited;
 
 
     /// <summary>
@@ -72,7 +72,7 @@ public partial class BattleSimulator
     ///     Canceled if you want to interrupt waiting for an action from a player/bot in battle.
     ///     mainly used for forfeit, so it's cancelled when someone forfeit to immediately process forfeiting
     /// </summary>
-    private CancellationTokenSource _interruptionCancellationTokenSource;
+    private CancellationTokenSource? _interruptionCancellationTokenSource;
 
 
     private string? _mainText = "battle begins";
@@ -80,14 +80,14 @@ public partial class BattleSimulator
 
     private bool _stopped;
 
-    private CharacterTeam? _winners;
+    private Team? _winners;
 
     static BattleSimulator()
     {
         SetupBattleEventDelegatorStuff();
     }
 
-    public BattleSimulator(CharacterTeam team1, CharacterTeam team2)
+    public BattleSimulator(Team team1, Team team2)
     {
         if (team1.Count == 0 || team2.Count == 0) throw new Exception("one of the teams has no fighters");
 
@@ -95,7 +95,7 @@ public partial class BattleSimulator
         Team2 = team2;
     }
 
-    public IEnumerable<CharacterTeam> CharacterTeams
+    public IEnumerable<Team> Teams
     {
         get
         {
@@ -107,7 +107,7 @@ public partial class BattleSimulator
     /// <summary>
     ///     The character who is currently taking their turn
     /// </summary>
-    public CharacterPartials_Character ActiveCharacter { get; protected set; }
+    public CharacterPartials_Character ActiveCharacter { get; protected set; } = null!;
 
 
     /// <summary>
@@ -118,9 +118,9 @@ public partial class BattleSimulator
     /// <summary>
     ///     Creates a new battle between two teams
     /// </summary>
-    public CharacterTeam Team1 { get; }
+    public Team Team1 { get; }
 
-    public CharacterTeam Team2 { get; }
+    public Team Team2 { get; }
 
     /// <summary>
     ///     whether or not to set health to max health for all characters at start of battle
@@ -150,7 +150,7 @@ public partial class BattleSimulator
 
     public async Task<Image<Rgba32>> GetCombatImageAsync()
     {
-        var heightToUse = CharacterTeams.Select(i => i.Count).Max() * 160;
+        var heightToUse = Teams.Select(i => i.Count).Max() * 160;
         var image = new Image<Rgba32>(500, heightToUse);
         var xOffSet = 70;
         var widest = 0;
@@ -159,7 +159,7 @@ public partial class BattleSimulator
         IImageProcessingContext imageCtx = null!;
         image.Mutate(ctx => imageCtx = ctx);
 
-        foreach (var i in CharacterTeams)
+        foreach (var i in Teams)
         {
             foreach (var j in i)
             {
@@ -186,7 +186,7 @@ public partial class BattleSimulator
         {
             using var characterImageToDraw = await GetAvatarAsync(i.ImageUrl);
             Color circleBgColor;
-            if (i.Team == Team2)
+            if (i.BattleTeam == Team2)
                 circleBgColor = Color.DarkRed;
             else
                 circleBgColor = Color.DarkBlue;
@@ -196,7 +196,7 @@ public partial class BattleSimulator
                     .ConvertToAvatar()
             );
             Color circleColor;
-            if (i.Team == Team2)
+            if (i.BattleTeam == Team2)
                 circleColor = Color.Red;
             else
                 circleColor = Color.Blue;
@@ -255,7 +255,7 @@ public partial class BattleSimulator
     private IEnumerable<BattleEventListenerMethodContainer> GetAllEventMethods()
     {
         foreach (var i in GetConnectedEntities())
-            if (_methodsCache.TryGetValue(i.GetType(), out var methodDetailsList))
+            if (MethodsCache.TryGetValue(i.GetType(), out var methodDetailsList))
                 foreach (var j in methodDetailsList)
                     yield return new BattleEventListenerMethodContainer(i, j);
     }
@@ -290,10 +290,10 @@ public partial class BattleSimulator
     {
         if (_winners is not null) return;
 
-        foreach (var i in CharacterTeams)
+        foreach (var i in Teams)
         {
             if (!i.All(j => j.IsDead)) continue;
-            _winners = CharacterTeams.First(k => k != i);
+            _winners = Teams.First(k => k != i);
             break;
         }
     }
@@ -419,7 +419,7 @@ public partial class BattleSimulator
     {
         try
         {
-            var team = CharacterTeams
+            var team = Teams
                 .OfType<PlayerTeam>().First(i => i.UserData.DiscordId == interaction.User.Id);
             var embed = new DiscordEmbedBuilder()
                 .WithTitle("For real?")
@@ -430,7 +430,7 @@ public partial class BattleSimulator
                 new DiscordInteractionResponseBuilder()
                     .AddEmbed(embed)
                     .AsEphemeral()
-                    .AddComponents(yes, no));
+                    .AddComponents(Yes, No));
 
             var message = await interaction.GetOriginalResponseAsync();
 
@@ -464,7 +464,7 @@ public partial class BattleSimulator
         _ = message.WaitForButtonAsync(args =>
         {
             if (args.Id == "forfeit" &&
-                CharacterTeams.OfType<PlayerTeam>().Any(i => i.UserData.DiscordId == args.User.Id))
+                Teams.OfType<PlayerTeam>().Any(i => i.UserData.DiscordId == args.User.Id))
             {
                 _ = HandleForfeitAsync(args.Interaction);
                 return false;
@@ -485,7 +485,6 @@ public partial class BattleSimulator
     /// <summary>
     ///     Initiates a new battle between two teams, by editing the provided message with responding to the interaction
     /// </summary>
-    /// <param name="isInteractionEdit">is true, edits the interaction message. if not, sends a follow up message</param>
     /// <param name="interaction"></param>
     /// <returns></returns>
     public Task<BattleResult> StartAsync(DiscordInteraction interaction)
@@ -496,7 +495,7 @@ public partial class BattleSimulator
 
     public void AddBattleText(BattleText battleTextInstance)
     {
-        if (battleTextInstance is null) throw new ArgumentNullException("Inputted argument is null");
+        if (battleTextInstance is null) throw new ArgumentNullException(nameof(battleTextInstance));
         _battleTextInstances.Add(battleTextInstance);
     }
 
@@ -528,6 +527,14 @@ public partial class BattleSimulator
         }
     }
 
+    public void PrepareTeamForBattle(Team team)
+    {
+        team.CurrentBattle = this;
+        foreach (var i in team)
+        {
+            i.BattleTeam = team;
+        }
+    }
     protected async Task<BattleResult> StartAsync(
         DiscordMessage? message = null, DiscordInteraction? interaction = null,
         DiscordChannel? channel = null)
@@ -545,14 +552,17 @@ public partial class BattleSimulator
         _gameCancellationTokenSource = new CancellationTokenSource();
         var firstLoop = true;
         _stopped = false;
-
-        Team1.CurrentBattle = this;
-        Team2.CurrentBattle = this;
+        
+        foreach (var i in Teams)
+        {
+          
+            PrepareTeamForBattle(i);
+        }
         foreach (var i in Characters)
             if (SetToMaxHealthAtStart)
                 i.Health = i.MaxHealth;
 
-        CharacterTeam? timedOut = null;
+        Team? timedOut = null;
 
 
         CharacterPartials_Character? target = null;
@@ -560,7 +570,7 @@ public partial class BattleSimulator
         // If you want the bot to update a message using an interactivity result instead of without, use this
         InvokeBattleEvent(new BattleBeginEventArgs());
         ImmutableArray<DiscordButtonComponent> components =
-            [_basicAttackButton, _skillButton, _ultimateButton, _forfeitButton];
+            [_basicAttackButton, _skillButton, _ultimateButton, ForfeitButton];
 
         while (true)
         {
@@ -640,9 +650,9 @@ public partial class BattleSimulator
             CheckForWinnerIfTeamIsDead();
 
             foreach (var i in components
-                         .Where(i => i != _forfeitButton))
+                         .Where(i => i != ForfeitButton))
                 i.Disable();
-            if (!(ActiveCharacter.Team is not PlayerTeam || ActiveCharacter.IsOverriden)
+            if (!(ActiveCharacter.BattleTeam is not PlayerTeam || ActiveCharacter.IsOverriden)
                 && shouldDoTurn
                 && _winners is null && !_stopped)
             {
@@ -698,7 +708,7 @@ public partial class BattleSimulator
 
 
             _mainText = null;
-            if (_forfeited is not null) _winners = CharacterTeams.First(i => i != _forfeited);
+            if (_forfeited is not null) _winners = Teams.First(i => i != _forfeited);
             if (_winners is not null)
             {
                 await Task.Delay(WaitDelay);
@@ -734,7 +744,7 @@ public partial class BattleSimulator
                 }
             }
 
-            else if (ActiveCharacter.Team is not PlayerTeam)
+            else if (ActiveCharacter.BattleTeam is not PlayerTeam)
             {
                 ActiveCharacter.NonPlayerCharacterAi(ref target!, ref battleDecision);
 
@@ -752,11 +762,11 @@ public partial class BattleSimulator
                 {
                     results = await message.WaitForButtonAsync(e =>
                     {
-                        if (!CharacterTeams.OfType<PlayerTeam>().Any(i => i.UserData.DiscordId == e.User.Id))
+                        if (!Teams.OfType<PlayerTeam>().Any(i => i.UserData.DiscordId == e.User.Id))
                             return false;
                         if (!Enum.TryParse(e.Id, out BattleDecision localDecision)) return false;
 
-                        if (ActiveCharacter.Team is PlayerTeam playerTeam
+                        if (ActiveCharacter.BattleTeam is PlayerTeam playerTeam
                             && e.User.Id == playerTeam.UserData.DiscordId
                             && ((IEnumerable<BattleDecision>)
                             [
@@ -774,14 +784,14 @@ public partial class BattleSimulator
 
                 if (_forfeited is not null)
                 {
-                    _winners = CharacterTeams.First(i => i != _forfeited);
+                    _winners = Teams.First(i => i != _forfeited);
                     break;
                 }
 
                 if (results.TimedOut)
                 {
-                    timedOut = ActiveCharacter.Team;
-                    _winners = CharacterTeams.First(i => i != ActiveCharacter.Team);
+                    timedOut = ActiveCharacter.BattleTeam;
+                    _winners = Teams.First(i => i != ActiveCharacter.BattleTeam);
                     break;
                 }
 
@@ -790,12 +800,12 @@ public partial class BattleSimulator
 
                 List<DiscordSelectComponentOption> enemiesToSelect = [];
                 List<CharacterPartials_Character> possibleTargets = [];
-                if (ActiveCharacter[battleDecision] is Move theMove)
+                if (ActiveCharacter[battleDecision] is { } theMove)
                 {
                     possibleTargets.AddRange(theMove.GetPossibleTargets());
                     foreach (var i in possibleTargets)
                     {
-                        var isEnemy = i.Team != ActiveCharacter.Team;
+                        var isEnemy = i.BattleTeam != ActiveCharacter.BattleTeam;
                         enemiesToSelect.Add(new DiscordSelectComponentOption(
                             i.GetNameWithAlphabetIdentifier(isEnemy), i.GetNameWithAlphabetIdentifier(isEnemy)));
                     }
@@ -808,7 +818,7 @@ public partial class BattleSimulator
                     var responseBuilder = new DiscordInteractionResponseBuilder()
                         .AddComponents(selectMoveTarget)
                         .AddComponents(infoSelect)
-                        .AddComponents(_forfeitButton)
+                        .AddComponents(ForfeitButton)
                         .AddEmbed(embedToEdit);
                     await results.Result.Interaction.CreateResponseAsync(
                         DiscordInteractionResponseType.UpdateMessage,
@@ -820,12 +830,12 @@ public partial class BattleSimulator
                     {
                         interactivityResult = await message.WaitForSelectAsync(e =>
                         {
-                            if (ActiveCharacter.Team is PlayerTeam playerTeam &&
+                            if (ActiveCharacter.BattleTeam is PlayerTeam playerTeam &&
                                 e.User.Id == playerTeam.UserData.DiscordId
                                 && e.Id == selectMoveTarget.CustomId)
                             {
                                 var localTarget = Characters
-                                    .First(i => i.GetNameWithAlphabetIdentifier(i.Team != ActiveCharacter.Team) ==
+                                    .First(i => i.GetNameWithAlphabetIdentifier(i.BattleTeam != ActiveCharacter.BattleTeam) ==
                                                 e.Values.First().ToString());
                                 if (possibleTargets.Contains(localTarget))
                                 {
@@ -840,14 +850,14 @@ public partial class BattleSimulator
 
                     if (_forfeited is not null)
                     {
-                        _winners = CharacterTeams.First(i => i != _forfeited);
+                        _winners = Teams.First(i => i != _forfeited);
                         break;
                     }
 
                     if (interactivityResult.TimedOut)
                     {
-                        timedOut = ActiveCharacter.Team;
-                        _winners = CharacterTeams.First(i => i != ActiveCharacter.Team);
+                        timedOut = ActiveCharacter.BattleTeam;
+                        _winners = Teams.First(i => i != ActiveCharacter.BattleTeam);
                         break;
                     }
 
@@ -857,7 +867,7 @@ public partial class BattleSimulator
 
             if (_forfeited is not null)
             {
-                _winners = CharacterTeams.First(i => i != _forfeited);
+                _winners = Teams.First(i => i != _forfeited);
                 break;
             }
 

@@ -1,16 +1,8 @@
-using System.Globalization;
-using System.Net.Http.Headers;
-using System.Security.Claims;
-using System.Text.Json;
 using AspNet.Security.OAuth.Discord;
 
 
 using DatabaseManagement;
-using Humanizer;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OAuth;
-using Microsoft.AspNetCore.Components.Authorization;
 using PublicInfo;
 
 
@@ -56,7 +48,7 @@ public static class Website
                     
                 })
             .AddCertificate(options => { options.Validate(); });
-        DiscordAuthenticationOptions options;
+     
     }
 
 

@@ -25,15 +25,15 @@ public class CharactersPageController : ControllerBase
         await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Characters
-            .Where(i => i.UserData.DiscordId == zaId)
+            .Where(i => i.UserData!.DiscordId == zaId)
             .Select(i => new Characters.CharacterDto
             {
                 ImageUrl = i.TypeId == PlayerTypeId
-                    ? Player.GetImageUrl(i.UserData.Gender)
+                    ? Player.GetImageUrl(i.UserData!.Gender)
                     : Character.GetDefaultFromTypeId(i.TypeId).ImageUrl,
                 Level = i.Level,
                 Name = i.TypeId == PlayerTypeId
-                    ? i.UserData.Name
+                    ? i.UserData!.Name
                     : Character.GetDefaultFromTypeId(i.TypeId).Name,
                 Number = i.Number,
 

@@ -10,9 +10,9 @@ public class BattleResult
     public required DiscordMessage Message { get; init; }
 
 
-    public required CharacterTeam Winners { get; init; }
+    public required Team Winners { get; init; }
 
     public required int Turns { get; init; }
-    public required CharacterTeam? TimedOut { get; init; }
-    public CharacterTeam? Forfeited { get; init; }
+    public required Team? TimedOut { get; init; }
+    public Team? Forfeited { get; init; }
 }

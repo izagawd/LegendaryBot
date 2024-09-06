@@ -21,7 +21,7 @@ public class BlessingsPageController : ControllerBase
         await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
         var gottenCollectionTypeIds = await post.Blessings
-            .Where(i => i.UserData.DiscordId == zaId)
+            .Where(i => i.UserData!.DiscordId == zaId)
             .Select(i => i.TypeId)
             .ToArrayAsync();
 

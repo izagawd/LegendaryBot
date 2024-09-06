@@ -24,7 +24,7 @@ public class Stun : StatusEffect
         MoveUsageType moveUsageType)
     {
         decision = BattleDecision.Other;
-        Affected.CurrentBattle.AddBattleText($"{Affected} cannot move because they are stunned!");
+        Affected.CurrentBattle!.AddBattleText($"{Affected} cannot move because they are stunned!");
         return "dizzy...";
     }
 }

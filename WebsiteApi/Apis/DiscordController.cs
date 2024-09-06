@@ -19,7 +19,7 @@ public class DiscordController : ControllerBase
 
     [HttpGet("get-data")]
     [Authorize]
-    public async Task<IActionResult> TryGetDataAsync()
+    public IActionResult TryGetData()
     {
         if (!HttpContext.User.Identity?.IsAuthenticated ?? false)
         {

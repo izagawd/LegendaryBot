@@ -27,7 +27,7 @@ public class KillSlimesQuest : Quest
     public override async Task<bool> StartQuest(IQueryable<UserData> userDataQueryable, CommandContext context,
         DiscordMessage message)
     {
-        var slimeTeam = new CharacterTeam([new Slime(), new Slime()]);
+        var slimeTeam = new NonPlayerTeam([new Slime(), new Slime()]);
 
         var userData = await userDataQueryable
             .IncludeTeamWithAllEquipments()
@@ -43,7 +43,9 @@ public class KillSlimesQuest : Quest
         else
             message = await message.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embed));
         await Task.Delay(2000);
-        var playerTeam = userData.EquippedPlayerTeam.LoadTeamStats();
+
+        var playerTeam = userData.EquippedPlayerTeam!;
+        playerTeam.LoadTeamStats();
 
         var battleSimulator = new BattleSimulator(playerTeam, slimeTeam);
         var result = await battleSimulator.StartAsync(message);

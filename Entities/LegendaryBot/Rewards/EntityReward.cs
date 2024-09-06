@@ -1,5 +1,8 @@
 ﻿using System.Text;
 using Entities.LegendaryBot.Entities;
+using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.LegendaryBot.Entities.Items;
 using Entities.Models;
 
 namespace Entities.LegendaryBot.Rewards;
@@ -18,7 +21,7 @@ public class EntityReward : Reward
 
     public override int Priority => 2;
 
-    public override bool IsValid => EntitiesToReward.Count() > 0;
+    public override bool IsValid => EntitiesToReward.Count > 0;
     public InventoryEntityContainer EntitiesToReward { get; }
 
     public override Reward MergeWith(Reward reward)
@@ -27,6 +30,20 @@ public class EntityReward : Reward
         return new EntityReward(EntitiesToReward.Union(entityReward.EntitiesToReward));
     }
 
+    public static string GetDisplayString(IInventoryEntity entity)
+    {
+        switch (entity)
+        {
+            case Character chara:
+                return $"{chara.Number} • {chara.Name} • Lvl {chara.Level}";
+            case Item item:
+                return $"{item.Name} • Stacks: {item.Stacks}";
+            case Blessing blessing:
+                return $"{blessing.Name}";
+            default:
+                return "NOOO";
+        }
+    }
     public override string GiveRewardTo(UserData userData)
     {
         var stringBuilder = new StringBuilder($"{userData.Name} got:\n ");
@@ -34,8 +51,8 @@ public class EntityReward : Reward
         userData.Inventory.AddRange(EntitiesToReward);
         userData.Inventory.MergeItemStacks();
 
-        Dictionary<string, int> nameSorter = [];
-        foreach (var i in EntitiesToReward) stringBuilder.Append($"{i.TypeGroup.Name}: {i.DisplayString}\n");
+
+        foreach (var i in EntitiesToReward) stringBuilder.Append($"{i.TypeGroup.Name}: {GetDisplayString(i)}\n");
 
 
         return stringBuilder.ToString();

@@ -53,7 +53,7 @@ public class CommanderJeanTaser : Skill
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return CurrentBattle.Characters.Where(i => !i.IsDead && i.Team != User.Team);
+        return CurrentBattle.Characters.Where(i => !i.IsDead && i.BattleTeam != User.BattleTeam);
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
@@ -92,7 +92,7 @@ public class CommanderJeanGrenade : Ultimate
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return CurrentBattle.Characters.Where(i => !i.IsDead && i.Team != User.Team);
+        return CurrentBattle.Characters.Where(i => !i.IsDead && i.BattleTeam != User.BattleTeam);
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
@@ -140,7 +140,7 @@ public class CommanderJeanFiringSquad : Move
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
+        return CurrentBattle.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead);
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,

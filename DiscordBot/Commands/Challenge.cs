@@ -14,8 +14,8 @@ namespace DiscordBot.Commands;
 
 public class Challenge : GeneralCommandClass
 {
-    private static readonly DiscordButtonComponent yes = new(DiscordButtonStyle.Primary, "yes", "YES");
-    private static readonly DiscordButtonComponent no = new(DiscordButtonStyle.Primary, "no", "NO");
+    private static readonly DiscordButtonComponent Yes = new(DiscordButtonStyle.Primary, "yes", "YES");
+    private static readonly DiscordButtonComponent No = new(DiscordButtonStyle.Primary, "no", "NO");
 
     [Command("challenge")]
     [Description("Use this Commands to fight other players")]
@@ -89,11 +89,11 @@ public class Challenge : GeneralCommandClass
         await MakeOccupiedAsync(player1User);
         var response = new DiscordInteractionResponseBuilder()
             .AddEmbed(embedToBuild.Build())
-            .AddComponents(yes, no);
+            .AddComponents(Yes, No);
         await ctx.RespondAsync(response);
-        var message = await ctx.GetResponseAsync();
-
-        string? decision = null;
+        var message = (await ctx.GetResponseAsync())!;
+        
+        string? decision;
         var interactivityResult = await message.WaitForButtonAsync(player2);
         if (!interactivityResult.TimedOut)
         {
@@ -133,7 +133,7 @@ public class Challenge : GeneralCommandClass
         var battleResult = await simulator.StartAsync(message);
         DiscordUser winnerDiscord;
         UserData winnerUserData;
-        if ((battleResult.Winners as PlayerTeam).UserData.DiscordId == player1.Id)
+        if (((PlayerTeam) battleResult.Winners).UserData.DiscordId == player1.Id)
         {
             winnerDiscord = player1;
             winnerUserData = player1User;

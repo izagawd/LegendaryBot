@@ -6,6 +6,7 @@ using DSharpPlus.Entities;
 using Entities;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.BattleSimulatorStuff;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.Items;
@@ -97,7 +98,7 @@ public class Explore : GeneralCommandClass
         await ctx.RespondAsync(embedToBuild);
         var message = await ctx.GetResponseAsync();
         await Task.Delay(2500);
-        var userTeam = userData.EquippedPlayerTeam!.LoadTeamStats();
+        var userTeam =(PlayerTeam) userData.EquippedPlayerTeam!.LoadTeamStats();
 
         var simulator = new BattleSimulator(userTeam, enemyTeam);
 

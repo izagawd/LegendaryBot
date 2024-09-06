@@ -8,14 +8,14 @@
 
 @code
 {
-    private ClaimsPrincipal user;
+    private ClaimsPrincipal _user = null!;
     protected override async Task OnInitializedAsync()
     {
-        user = (await StatProv.GetAuthenticationStateAsync()).User;
+        _user = (await StatProv.GetAuthenticationStateAsync()).User;
     }
 }
 <Navigation>
-    @if (user?.Identity?.IsAuthenticated ?? false)
+    @if (_user?.Identity?.IsAuthenticated ?? false)
     {
         <p>YAY</p>
     }

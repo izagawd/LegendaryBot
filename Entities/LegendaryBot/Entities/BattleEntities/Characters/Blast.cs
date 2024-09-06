@@ -62,13 +62,13 @@ public class BlowAway : Skill
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
+        return User.CurrentBattle.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead);
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType, out string? text)
     {
-        User.CurrentBattle.AddBattleText($"{User.NameWithAlphabet} threw multiple bombs at the opposing team!");
+        User.CurrentBattle!.AddBattleText($"{User.NameWithAlphabet} threw multiple bombs at the opposing team!");
         foreach (var i in GetPossibleTargets())
         foreach (var _ in Enumerable.Range(0, 1))
             if (BasicFunctions.RandomChance(BombInflictChance))
@@ -97,7 +97,7 @@ public class ExplosionBlast : Ultimate
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
+        return User.CurrentBattle?.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead) ?? throw Character.NoBattleExc;
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,

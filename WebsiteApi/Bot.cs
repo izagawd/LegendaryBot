@@ -26,7 +26,6 @@ public static class Bot
     private static async Task DoShitAsync()
     {
 
-       
     }
 
     private static async Task Main(string[] args)

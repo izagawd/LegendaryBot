@@ -75,9 +75,9 @@ public class QuestCommand : GeneralCommandClass
             .AddComponents([one, two, three, four])
             .AddEmbed(embed));
         IEnumerable<string> possibleCustomIds = ["1", "2", "3", "4"];
-        var message = await ctx.GetResponseAsync();
+        var message = (await ctx.GetResponseAsync())!;
 
-        Quest quest = null;
+        Quest quest = null!;
         var buttonResult = await message.WaitForButtonAsync(i =>
         {
             if (i.User.Id != ctx.User.Id) return false;

@@ -48,12 +48,12 @@ public class DiscordBot
 
     private const int MessagesTillExecution = 30;
     private const float MessageCoolDown = 1.5f;
-    private static readonly ConcurrentDictionary<ulong, ChannelSpawnInfo> _channelSpawnInfoDictionary = new();
+    private static readonly ConcurrentDictionary<ulong, ChannelSpawnInfo> ChannelSpawnInfoDictionary = new();
 
-    private static readonly ConcurrentDictionary<ulong, CharacterExpGainInfo> _expMatGive = new();
+    private static readonly ConcurrentDictionary<ulong, CharacterExpGainInfo> ExpMatGive = new();
 
 
-    public static DiscordClient Client { get; private set; }
+    public static DiscordClient Client { get; private set; } = null!;
 
 
     private static async Task OnCommandError(CommandsExtension extension, CommandErroredEventArgs args)
@@ -104,9 +104,10 @@ public class DiscordBot
     }
 
 
-    private static async Task OnReady(DiscordClient client, SocketEventArgs e)
+    private static Task OnReady(DiscordClient client, SocketEventArgs e)
     {
         Console.WriteLine("Ready!");
+        return Task.CompletedTask;
     }
 
     private static async Task OnMessageCreatedGiveUserExpMat(DiscordClient client, MessageCreatedEventArgs args)
@@ -115,17 +116,17 @@ public class DiscordBot
         var permissions = args.Guild.CurrentMember.PermissionsIn(args.Channel);
         if (!permissions.HasFlag(DiscordPermissions.EmbedLinks) ||
             !permissions.HasFlag(DiscordPermissions.SendMessages)) return;
-        var expGainInfo = _expMatGive.GetOrAdd(args.Author.Id, new CharacterExpGainInfo());
+        var expGainInfo = ExpMatGive.GetOrAdd(args.Author.Id, new CharacterExpGainInfo());
 
         if (DateTime.UtcNow.Subtract(expGainInfo.LastTimeIncremented).Seconds >= MessageCoolDown)
         {
             expGainInfo.MessageCount++;
             expGainInfo.LastTimeIncremented = DateTime.UtcNow;
-            _expMatGive[args.Author.Id] = expGainInfo;
+            ExpMatGive[args.Author.Id] = expGainInfo;
             if (expGainInfo.MessageCount >= MessagesTillExecution)
             {
                 expGainInfo.MessageCount = 0;
-                _expMatGive[args.Author.Id] = expGainInfo;
+                ExpMatGive[args.Author.Id] = expGainInfo;
                 await using var dbContext = new PostgreSqlContext();
                 var userData = await dbContext.UserData
                     .Include(i => i.Items.Where(j => j is CharacterExpMaterial))
@@ -133,7 +134,7 @@ public class DiscordBot
                 if (userData is null || userData.Tier <= Tier.Unranked)
                     return;
                 List<CharacterExpMaterial> characterExpMaterials = [];
-                foreach (var i in Enumerable.Range(0, (int)userData.Tier * 3))
+                foreach (var _ in Enumerable.Range(0, (int)userData.Tier * 3))
                     characterExpMaterials.Add(new AdventurersKnowledge { Stacks = 1 });
 
                 var rewardString = userData.ReceiveRewards(new EntityReward(characterExpMaterials));
@@ -157,18 +158,18 @@ public class DiscordBot
             !permissions.HasFlag(DiscordPermissions.SendMessages)) return;
         if (!args.Author.IsBot)
         {
-            var spawnInfo = _channelSpawnInfoDictionary.GetOrAdd(args.Channel.Id,
+            var spawnInfo = ChannelSpawnInfoDictionary.GetOrAdd(args.Channel.Id,
                 new ChannelSpawnInfo());
 
             if (DateTime.UtcNow.Subtract(spawnInfo.LastTimeIncremented).Seconds >= MessageCoolDown)
             {
                 spawnInfo.MessageCount++;
                 spawnInfo.LastTimeIncremented = DateTime.UtcNow;
-                _channelSpawnInfoDictionary[args.Channel.Id] = spawnInfo;
+                ChannelSpawnInfoDictionary[args.Channel.Id] = spawnInfo;
                 if (spawnInfo.MessageCount >= MessagesTillExecution)
                 {
                     spawnInfo.MessageCount = 0;
-                    _channelSpawnInfoDictionary[args.Channel.Id] = spawnInfo;
+                    ChannelSpawnInfoDictionary[args.Channel.Id] = spawnInfo;
                     var groups = TypesFunction
                         .GetDefaultObjectsAndSubclasses<Character>()
                         .Where(i => i.CanSpawnNormally)

@@ -51,9 +51,9 @@ public class QuoteCommand : GeneralCommandClass
         var counts = new { anon.likes, anon.dislikes };
         var randomQuote = anon.quote;
 
-        DiscordButtonComponent like = new(DiscordButtonStyle.Primary, "like", null, false,
+        DiscordButtonComponent like = new(DiscordButtonStyle.Primary, "like", "", false,
             new DiscordComponentEmoji("👍"));
-        DiscordButtonComponent dislike = new(DiscordButtonStyle.Primary, "dislike", null, false,
+        DiscordButtonComponent dislike = new(DiscordButtonStyle.Primary, "dislike", "", false,
             new DiscordComponentEmoji("👎"));
         var ownerOfQuote = await ctx.Client.GetUserAsync(randomQuote.UserData.DiscordId);
         var quoteDate = randomQuote.DateCreated;

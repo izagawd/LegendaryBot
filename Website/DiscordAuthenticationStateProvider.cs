@@ -39,7 +39,10 @@ public class DiscordAuthenticationStateProvider : AuthenticationStateProvider
         
         
         var content =await sent.Content.ReadFromJsonAsync<Dictionary<string, string>>();
- 
+        if (content is null)
+        {
+            return new AuthenticationState(new ClaimsPrincipal());
+        }
         return new AuthenticationState(new ClaimsPrincipal(
             new ClaimsIdentity(content.Select(i =>
                 new Claim(i.Key,i.Value)),"Discord")));

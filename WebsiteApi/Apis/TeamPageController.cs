@@ -2,10 +2,7 @@ using BasicFunctionality;
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-using Entities.LegendaryBot.Entities.Items;
-using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFunctions;
@@ -44,10 +41,10 @@ public class TeamPageController : ControllerBase
                 Teams = i.PlayerTeams.Select(j => new Teams.TeamDto()
                 {
                     Id = j.Id,
-                    GottenCharacters = j.Characters.Select(k => k.Id).ToList(),
+                    GottenCharacters = j.TeamMemberships.Select(k => k.Character.Id).ToList(),
                     Name = j.TeamName
                 }).ToArray(),
-                EquippedTeamId = i.EquippedPlayerTeam.Id
+                EquippedTeamId = i.EquippedPlayerTeam!.Id
             }).FirstOrDefaultAsync();
         
         return Ok(selected ?? new Teams.TeamCharactersDto());
@@ -86,11 +83,11 @@ public class TeamPageController : ControllerBase
         var discordId = User.GetDiscordUserId();
         var team = await context.UserData.Where(i => i.DiscordId == discordId)
             .SelectMany(i => i.PlayerTeams)
-            .Include(i => i.Characters.Where(j => j.Id == characterId))
+            .Include(i => i.TeamMemberships.Where(j => j.Character.Id == characterId))
             .FirstOrDefaultAsync(i => i.Id == teamId);
         if (team is null)
             return BadRequest($"No team with Id {teamId} could be found");
-        var zaFirst = team.Characters.FirstOrDefault(i => i.Id == characterId);
+        var zaFirst = team.FirstOrDefault(i => i.Id == characterId);
         if (zaFirst is null)
         {
             return BadRequest($"Team doesnt have character with Id {characterId}");

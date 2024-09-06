@@ -1,12 +1,9 @@
 using DatabaseManagement;
-using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
-using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.Items;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFunctions;
-using Website.Pages.Blessings;
 using Website.Pages.Items;
 
 namespace WebsiteApi.Apis;
@@ -23,7 +20,7 @@ public class ItemsPageController : ControllerBase
         await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Items
-            .Where(i => i.UserData.DiscordId == zaId)
+            .Where(i => i.UserData!.DiscordId == zaId)
             .Select(i => new Items.ItemDto()
             {
                 ImageUrl = Item.GetDefaultFromTypeId(i.TypeId).ImageUrl,

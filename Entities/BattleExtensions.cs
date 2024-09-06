@@ -11,8 +11,9 @@ public static class BattleExtensions
         (this IQueryable<UserData> queryable)
     {
         return queryable
-            .Include(i => i.EquippedPlayerTeam)
-            .ThenInclude(i => i!.Characters)
+            .Include(i => i.EquippedPlayerTeam!)
+            .ThenInclude(i => i.TeamMemberships)
+            .ThenInclude(i => i.Character)
             .ThenInclude(i => i.Blessing);
     }
 
@@ -24,7 +25,8 @@ public static class BattleExtensions
     {
         return queryable
             .Include(i => i.EquippedPlayerTeam)
-            .ThenInclude(i => i!.Characters)
+            .ThenInclude(i => i!.TeamMemberships)
+            .ThenInclude(i => i.Character)
             .ThenInclude(i => i.Gears)
             .ThenInclude(i => i.Stats);
     }

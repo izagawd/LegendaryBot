@@ -57,7 +57,7 @@ public class BlossomTouch : Skill
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return User.Team.Where(i => !i.IsDead);
+        return User.BattleTeam.Where(i => !i.IsDead);
     }
 
     public override string GetDescription(Character character)
@@ -88,7 +88,7 @@ public class LilyOfTheValley : Ultimate
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
+        return User.CurrentBattle.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead);
     }
 
 
@@ -163,7 +163,7 @@ public class Lily : Character
             return;
         }
 
-        var teamMateWithLowestHealth = Team.OrderBy(i => i.Health).First();
+        var teamMateWithLowestHealth = BattleTeam.OrderBy(i => i.Health).First();
         if (Skill.CanBeUsed() && teamMateWithLowestHealth.Health < teamMateWithLowestHealth.MaxHealth * 0.7)
         {
             decision = BattleDecision.Skill;

@@ -13,7 +13,7 @@ public interface IInventoryEntity : INameHaver
 {
     bool CanBeTraded { get; }
     int TypeId { get; }
-    string DisplayString { get; }
+
     Type TypeGroup { get; }
     DateTime DateAcquired { get; set; }
 

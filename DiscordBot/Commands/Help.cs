@@ -11,7 +11,7 @@ namespace DiscordBot.Commands;
 
 public class Help : GeneralCommandClass
 {
-    private static Dictionary<BotCommandCategory, List<Command>> _commandsThatDoesShit;
+    private static readonly Dictionary<BotCommandCategory, List<Command>> CommandsThatDoesShit = [];
 
     static Help()
     {
@@ -23,7 +23,7 @@ public class Help : GeneralCommandClass
         var commandsExtension = DiscordBot.Client.ServiceProvider.GetRequiredService<CommandsExtension>();
         if (commandsExtension.Commands.Count <= 0)
             throw new Exception("no command has been registered yet");
-        _commandsThatDoesShit = [];
+
         foreach (var i in commandsExtension.Commands.Values)
             if (i.Method is null)
             {
@@ -33,8 +33,8 @@ public class Help : GeneralCommandClass
                         ((j.Attributes.FirstOrDefault(k => k is BotCommandCategoryAttribute) as
                                 BotCommandCategoryAttribute)?
                             .BotCommandCategory).GetValueOrDefault(BotCommandCategory.Other);
-                    if (!_commandsThatDoesShit.TryGetValue(category, out var commands))
-                        commands = _commandsThatDoesShit[category] = [];
+                    if (!CommandsThatDoesShit.TryGetValue(category, out var commands))
+                        commands = CommandsThatDoesShit[category] = [];
                     commands.Add(j);
                 }
             }
@@ -44,8 +44,8 @@ public class Help : GeneralCommandClass
                     ((i.Attributes.FirstOrDefault(k => k is BotCommandCategoryAttribute) as BotCommandCategoryAttribute)
                         ?
                         .BotCommandCategory).GetValueOrDefault(BotCommandCategory.Other);
-                if (!_commandsThatDoesShit.TryGetValue(category, out var commands))
-                    commands = _commandsThatDoesShit[category] = [];
+                if (!CommandsThatDoesShit.TryGetValue(category, out var commands))
+                    commands = CommandsThatDoesShit[category] = [];
                 commands.Add(i);
             }
     }
@@ -54,7 +54,7 @@ public class Help : GeneralCommandClass
     public static DiscordEmbedBuilder? GenerateEmbedForCommandFailure(string cmd)
     {
         var splitted = cmd.Split(' ');
-        if (!DiscordBot.Client.ServiceProvider.GetRequiredService<CommandsExtension>()!.Commands.TryGetValue(
+        if (!DiscordBot.Client.ServiceProvider.GetRequiredService<CommandsExtension>().Commands.TryGetValue(
                 splitted[0], out var gottenCommand)) return null;
 
         if (splitted.Length > 1)
@@ -79,9 +79,6 @@ public class Help : GeneralCommandClass
         embedToBuild.WithDescription(gottenCommand.Description ?? "No Description");
 
 
-        var additionalCommandAttribute =
-            (BotCommandCategoryAttribute)gottenCommand.Attributes.FirstOrDefault(i =>
-                i is BotCommandCategoryAttribute)!;
 
 
         foreach (var i in gottenCommand.Subcommands)
@@ -125,11 +122,11 @@ public class Help : GeneralCommandClass
 
         Dictionary<BotCommandCategory, DiscordEmbed> embedsToUse = [];
 
-        foreach (var i in _commandsThatDoesShit.Keys)
+        foreach (var i in CommandsThatDoesShit.Keys)
         {
             embedToBuild.WithTitle(i.ToString());
             embedToBuild.ClearFields();
-            foreach (var j in _commandsThatDoesShit[i])
+            foreach (var j in CommandsThatDoesShit[i])
             {
                 var nameToUse = (j.Parent?.Name ?? "") + $" {j.Name}";
 
@@ -147,7 +144,7 @@ public class Help : GeneralCommandClass
             embedsToUse[i] = embedToBuild.Build();
         }
 
-        IEnumerable<DiscordSelectComponentOption> enumerable()
+        IEnumerable<DiscordSelectComponentOption> TheEnumerable()
         {
             foreach (var i in embedsToUse.Keys.OrderBy(i =>
                      {
@@ -164,12 +161,10 @@ public class Help : GeneralCommandClass
                 yield return new DiscordSelectComponentOption(i.GetName(),
                     ((int)i).ToString());
         }
-
-        List<DiscordSelectComponent> components = [];
         const string selectComponentId = "select_comp";
         var selectComponent = new DiscordSelectComponent(selectComponentId,
             embedsToUse[BotCommandCategory.Battle].Title!,
-            enumerable());
+            TheEnumerable());
 
 
         var discordMessageBuilder = new DiscordMessageBuilder()
@@ -191,7 +186,7 @@ public class Help : GeneralCommandClass
 
             var parsedInt = int.Parse(result.Result.Interaction.Data.Values[0]);
             var embedToUse = embedsToUse[(BotCommandCategory)parsedInt];
-            selectComponent = new DiscordSelectComponent(selectComponentId, embedToUse.Title,
+            selectComponent = new DiscordSelectComponent(selectComponentId, embedToUse.Title ?? "",
                 selectComponent.Options);
             await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
                 new DiscordInteractionResponseBuilder()

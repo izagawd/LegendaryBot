@@ -87,7 +87,7 @@ public class KarateNeckChop : Skill
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return CurrentBattle.Characters.Where(i => i.Team != User.Team);
+        return CurrentBattle.Characters.Where(i => i.BattleTeam != User.BattleTeam);
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
@@ -132,15 +132,15 @@ public class Takeshi : Character
     public void ToCounterAttack(CharacterPostUseMoveEventArgs args)
     {
         if (CannotDoAnything) return;
-        if (args.MoveUsageResult.User.Team == Team) return;
+        if (args.MoveUsageResult.User.BattleTeam == BattleTeam) return;
         var usageResult = args.MoveUsageResult;
         if (usageResult.MoveUsageType == MoveUsageType.CounterUsage) return;
         var damageDealer = usageResult.User;
-        if (damageDealer is null || damageDealer.IsDead || damageDealer.Team == Team)
+        if (damageDealer is null || damageDealer.IsDead || damageDealer.BattleTeam == BattleTeam)
             return;
 
         foreach (var _ in args.MoveUsageResult.DamageResults
-                     .Where(i => i.CanBeCountered && i.DamageReceiver.Team == Team))
+                     .Where(i => i.CanBeCountered && i.DamageReceiver.BattleTeam == BattleTeam))
             if (BasicFunctions.RandomChance(25))
             {
                 BasicAttack.Utilize(damageDealer, MoveUsageType.CounterUsage);

@@ -51,14 +51,14 @@ public class ThugInsult : Skill
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
+        return CurrentBattle?.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead) ?? [];
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType,
         out string? text)
     {
-        CurrentBattle.AddBattleText($"{User.NameWithAlphabet} insults {target.NameWithAlphabet} like a thug!");
+        CurrentBattle!.AddBattleText($"{User.NameWithAlphabet} insults {target.NameWithAlphabet} like a thug!");
         target.AddStatusEffect(new DefenseDebuff(User) { Duration = 2 }, User.Effectiveness);
         attackTargetType = AttackTargetType.SingleTarget;
         text = "What are you gonna do about it?";

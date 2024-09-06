@@ -100,7 +100,7 @@ public class DirectionHelping : Quest
         };
 
         dialogueResult = await dialogue.LoadAsync(context.User, dialogueResult.Message);
-        var blastTeam = new CharacterTeam(blast);
+        var blastTeam = new NonPlayerTeam([blast]);
 
         blast.SetBotStatsAndLevelBasedOnTier(Tier.Divine);
 

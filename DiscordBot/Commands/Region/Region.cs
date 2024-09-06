@@ -26,7 +26,7 @@ public abstract class Region
 
     public abstract string Name { get; }
 
-    public abstract CharacterTeam GenerateCharacterTeamFor(Type type, out Character originalCharacter);
+    public abstract Team GenerateCharacterTeamFor(Type type, out Character originalCharacter);
 
     public static Region? GetRegion(string regionName)
     {

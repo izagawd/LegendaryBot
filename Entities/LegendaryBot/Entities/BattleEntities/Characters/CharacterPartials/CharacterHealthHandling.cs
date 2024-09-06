@@ -11,10 +11,13 @@ public partial class Character
     /// </summary>
     /// <param name="toRecover">Amount to recover</param>
     /// <param name="recoveryText">text to say when health recovered. use $ to represent health recovered</param>
+    /// <param name="announceHealing"></param>
     /// <returns>Amount recovered</returns>
     public virtual int RecoverHealth(float toRecover,
         string? recoveryText = null, bool announceHealing = true)
     {
+        if (CurrentBattle is null)
+            throw NoBattleExc;
         if (IsDead) return 0;
         var healthToRecover = toRecover.Round();
 
@@ -66,17 +69,12 @@ public partial class Character
     /// <summary>
     ///     Used to damage this character
     /// </summary>
-    /// <param name="damage">The potential damage</param>
-    /// <param name="damageText">
-    ///     if there is a text for the damage, then use this. Use $ in the string and it will be replaced
-    ///     with the damage dealt
-    /// </param>
-    /// <param name="caster">The character causing the damage</param>
-    /// <param name="canCrit">Whether the damage can cause a critical hit or not</param>
-    /// <param name="damageElement">The element of the damage</param>
     /// <returns>The results of the damage</returns>
     public DamageResult Damage(DamageArgs damageArgs)
     {
+        if (CurrentBattle is null)
+            throw NoBattleExc;
+        
         if (IsDead)
             try
             {
@@ -91,7 +89,6 @@ public partial class Character
                     DamageReceiver = this
                 };
             }
-
         CurrentBattle.InvokeBattleEvent(new CharacterPreDamageEventArgs(damageArgs));
         var damageText = damageArgs.DamageText;
         if (damageText is null) damageText = $"{NameWithAlphabet} took $ damage!";

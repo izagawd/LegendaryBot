@@ -3,24 +3,34 @@
 @using Website.Services
 @inject HttpClient Http
 @inject WebsiteThemeService WebTheme
-@inject IJSRuntime zaRuntime;
+
 @code {
-    protected TeamCharactersDto? teamCharactersDto;
+    protected TeamCharactersDto? TeamCharacterDto { get; set; }
 
 
-    protected TeamDto? currentTeam;
+    protected TeamDto? CurrentTeam;
+
+    public Teams(TeamCharactersDto? teamCharacterDto)
+    {
+        TeamCharacterDto = teamCharacterDto;
+    }
+
     protected override async Task OnInitializedAsync()
     {
-        teamCharactersDto = 
+        TeamCharacterDto = 
             await Http.GetFromJsonAsync<TeamCharactersDto>("TeamPage/get-teams-and-characters");
-        currentTeam = teamCharactersDto.EquippedTeam;
+        if (TeamCharacterDto is null)
+        {
+            throw new Exception("Something went wrong");
+        }
+        CurrentTeam = TeamCharacterDto.EquippedTeam;
     }
 
     Task OnChangeTeamAsync(ChangeEventArgs eventArgs)
     {
         var asString = (string)eventArgs.Value!;
         var asLong = long.Parse(asString);
-        currentTeam = teamCharactersDto.Teams.FirstOrDefault(i => i.Id == asLong);
+        CurrentTeam = TeamCharacterDto!.Teams.FirstOrDefault(i => i.Id == asLong);
         return Task.CompletedTask;
     }
 
@@ -29,29 +39,29 @@
         var res = await Http.PostAsync("TeamPage/equip-team",
             new FormUrlEncodedContent([
                 new KeyValuePair<string, string>
-                    ("teamId", currentTeam.Id.ToString())
+                    ("teamId", CurrentTeam!.Id.ToString())
             ]));
         if (res.IsSuccessStatusCode)
         {
-            teamCharactersDto.EquippedTeamId = currentTeam.Id;
+            TeamCharacterDto!.EquippedTeamId = CurrentTeam.Id;
         }
     }
 
 }
 <Navigation>
-    @if (teamCharactersDto is not null && currentTeam is not null)
+    @if (TeamCharacterDto is not null && CurrentTeam is not null)
     {
         <div class="za-parent">
             <div class="team-settler">
                 <div class="inputs" style="display: flex; width: 100%;">
                     <select  @onchange="OnChangeTeamAsync">
-                        @foreach (var i in teamCharactersDto.Teams)
+                        @foreach (var i in TeamCharacterDto.Teams)
                         {
-                            <option selected="@(i == currentTeam)" value="@i.Id">@i.Name</option>
+                            <option selected="@(i == CurrentTeam)" value="@i.Id">@i.Name</option>
                         }
                     </select>
                     @{
-                        var currentIsEquipped = currentTeam == teamCharactersDto.EquippedTeam;
+                        var currentIsEquipped = CurrentTeam == TeamCharacterDto.EquippedTeam;
                     }
                     <button style="@(currentIsEquipped ? "background-color: grey" : "")"
                             @onclick="EquipTeamAsync" class="equip-button">@(currentIsEquipped ? "Equipped" : "Equip")</button>
@@ -64,12 +74,12 @@
                     @for (var index = 0; index < 4; index++)
                     {
                         CharacterDto? i = null;
-                        var equippedTeamChars = currentTeam.GetCharacters(teamCharactersDto).ToArray();
+                        var equippedTeamChars = CurrentTeam.GetCharacters(TeamCharacterDto).ToArray();
                         if (index < equippedTeamChars.Length)
                             i = equippedTeamChars[index];
                         <div class="team-character-div" style="border-color: @borderCol; background-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark? "gray" : "lightgrey")">
                             <a>
-                                <img style="border-color: @borderCol" src="@i?.ImageUrl"/>
+                                <img style="border-color: @borderCol" src="@i?.ImageUrl" alt=""/>
                             </a>
                             <div class="paragraphs">
                                 <p>@(i?.Name ?? "NONE")</p>
@@ -94,12 +104,12 @@
                     <input type="text"/>
                 </div>
                 <div class="other-characters">
-                    @foreach (var i in teamCharactersDto.Characters.Where(i =>
-                                  !currentTeam.GetCharacters(teamCharactersDto).Contains(i)))
+                    @foreach (var i in TeamCharacterDto.Characters.Where(i =>
+                                  !CurrentTeam.GetCharacters(TeamCharacterDto).Contains(i)))
                     {
                         <div class="character-div">
                             <a>
-                                <img src="@i.ImageUrl"/>
+                                <img src="@i.ImageUrl" alt=""/>
                             </a>
                             <p>@i.Name</p>
                             <p>Num @i.Number</p>

@@ -32,7 +32,7 @@ public abstract class StatusEffect : INameHaver
     /// <summary>
     ///     The character currently affected by the status effect
     /// </summary>
-    public CharacterPartials_Character Affected { get; set; }
+    public CharacterPartials_Character Affected { get; set; } = null!;
 
     public virtual string Description => "Does the bla bla bla of the bla bla bla";
 

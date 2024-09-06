@@ -4,7 +4,7 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Gears.GearSets;
 
 public abstract class GearSet : INameHaver
 {
-    public Character Owner { get; set; }
+    public Character Owner { get; set; } = null!;
     public bool CanUseFourPiece { get; set; }
     public abstract int TypeId { get; protected init; }
 

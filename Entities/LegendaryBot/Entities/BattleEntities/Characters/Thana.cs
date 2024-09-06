@@ -60,7 +60,7 @@ public class YourLifeEnergyIsMine : Skill
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
+        return User.CurrentBattle?.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead) ?? [];
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
@@ -99,13 +99,13 @@ public class Arise : Ultimate
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return User.Team;
+        return  User.BattleTeam?.AsEnumerable() ?? [];
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType, out string? text)
     {
-        User.CurrentBattle.AddBattleText(
+        User.CurrentBattle!.AddBattleText(
             $"With her necromancy powers, {User.NameWithAlphabet} attempts to bring back all her dead allies!");
 
 

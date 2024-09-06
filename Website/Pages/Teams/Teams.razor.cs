@@ -6,10 +6,10 @@ public partial class Teams : ComponentBase
 {
     public class CharacterDto
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public long Id{ get; set; }
         public int Number{ get; set; }
-        public string ImageUrl{ get; set; }
+        public string? ImageUrl{ get; set; }
         public int Level{ get; set; }
     }
 
@@ -18,7 +18,7 @@ public partial class Teams : ComponentBase
         public CharacterDto[] Characters { get; set; } = [];
 
 
-        public TeamDto EquippedTeam => Teams.FirstOrDefault(i => i.Id == EquippedTeamId);
+        public TeamDto? EquippedTeam => Teams.FirstOrDefault(i => i.Id == EquippedTeamId);
         public long EquippedTeamId { get; set; }
         public TeamDto[] Teams { get; set; } = [];
     }
@@ -31,6 +31,6 @@ public partial class Teams : ComponentBase
         public long Id{ get; set; }
         public List<long> GottenCharacters { get; set; } = [];
 
-        public string Name{ get; set; }
+        public string? Name{ get; set; }
     }
 }

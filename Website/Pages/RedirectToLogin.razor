@@ -1,6 +1,5 @@
 @page "/RedirectToLogin"
 @using Blazored.LocalStorage
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using PublicInfo
 @inject NavigationManager Nav
 @inject HttpClient HttpClient
@@ -9,7 +8,7 @@
 @inject NavigationService NavService
 @code {
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
 
         NavService.InitialLocation = Nav.Uri;

@@ -26,7 +26,7 @@ public class GearDatabaseConfiguration : IEntityTypeConfiguration<Gear>
             .WithOne()
             .HasForeignKey<GearStat>(i => i.IsMainStat);
         entity.HasMany(i => i.Stats)
-            .WithOne(i => i.Gear)
+            .WithOne()
             .HasForeignKey(i => i.GearId)
             .OnDelete(DeleteBehavior.Cascade);
         entity.Property(i => i.Rarity)
@@ -48,6 +48,7 @@ public class PlayerDatabaseConfiguration : IEntityTypeConfiguration<Player>
     }
 }
 
+
 public class PlayerTeamDatabaseConfiguration : IEntityTypeConfiguration<PlayerTeam>
 {
     public void Configure(EntityTypeBuilder<PlayerTeam> entity)
@@ -58,12 +59,17 @@ public class PlayerTeamDatabaseConfiguration : IEntityTypeConfiguration<PlayerTe
             .IsUnique();
 
         entity.HasKey(i => i.Id);
-        entity.HasMany(i => i.Characters)
+        entity.HasMany<Character>()
             .WithMany()
-            .UsingEntity<CharacterPlayerTeam>(i
-                => i.HasOne<Character>().WithMany().HasForeignKey(j => j.CharacterId), i =>
-                i.HasOne<PlayerTeam>().WithMany().HasForeignKey(j => j.PlayerTeamId), i =>
-                i.HasKey(j => new { j.CharacterId, j.PlayerTeamId }));
+            .UsingEntity<PlayerTeamMembership>(i
+                => i.HasOne<Character>(j => j.Character).WithMany().HasForeignKey(j => j.CharacterId), i =>
+                i.HasOne<PlayerTeam>().WithMany(j => j.TeamMemberships).HasForeignKey(j => j.PlayerTeamId),
+                i =>
+                {
+                    i.HasKey(j => new { j.CharacterId, j.PlayerTeamId });
+                    i.HasIndex(j => new { j.PlayerTeamId, j.Order }).IsUnique();
+                }
+              );
     }
 }
 

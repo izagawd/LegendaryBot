@@ -13,7 +13,7 @@ public abstract class BasicAttack : Move
 
     public sealed override IEnumerable<CharacterPartials_Character> GetPossibleTargets()
     {
-        return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
+        return User.CurrentBattle.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead);
     }
 
     public sealed override MoveUsageResult Utilize(CharacterPartials_Character target, MoveUsageType moveUsageType)

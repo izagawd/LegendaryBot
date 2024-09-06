@@ -8,7 +8,7 @@ public partial class Character
 {
     private class StatusEffectInflictBattleText : BattleText
     {
-        private List<Character> _affectedCharacters;
+        private List<Character> _affectedCharacters = null!;
         private StatusEffectInflictResult _effectInflictResult;
         private List<StatusEffect> _statusEffects = [];
 
@@ -22,6 +22,7 @@ public partial class Character
 
         protected StatusEffectInflictBattleText()
         {
+            
         }
 
         public override string Text
@@ -209,6 +210,7 @@ public partial class Character
 
         protected ReviveBattleText()
         {
+            _revivedCharacters = [];
         }
 
         public override string Text

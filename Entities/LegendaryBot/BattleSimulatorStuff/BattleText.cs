@@ -11,7 +11,7 @@ public class BattleText
     {
     }
 
-    public virtual string Text { get; }
+    public virtual string Text { get; } = null!;
 
     public static implicit operator BattleText(string text)
     {

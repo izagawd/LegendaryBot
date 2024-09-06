@@ -2,36 +2,37 @@
 
 @typeparam TObjectType
 @code {
-    [Parameter] [EditorRequired] public Func<TObjectType, string> BackgroundCol { get; set; }
-    [Parameter] [EditorRequired] public Func<IEnumerable<TObjectType>?> ObjectsToRender { get; set; }
-    [Parameter] [EditorRequired] public Func<TObjectType, string> NameDelegate { get; set; }
-    [Parameter] [EditorRequired] public Func<TObjectType, string> ImageUrlDelegate { get; set; }
-    [Parameter] [EditorRequired] public Func<TObjectType, int> RarityDelegate { get; set; }
+    [Parameter] [EditorRequired] public Func<TObjectType, string> BackgroundCol { get; set; } = null!;
+    [Parameter] [EditorRequired] public Func<IEnumerable<TObjectType>?> ObjectsToRender { get; set; } = null!;
+    [Parameter] [EditorRequired] public Func<TObjectType, string> NameDelegate { get; set; } = null!;
+    [Parameter] [EditorRequired] public Func<TObjectType, string> ImageUrlDelegate { get; set; } = null!;
+    [Parameter] [EditorRequired] public Func<TObjectType, int> RarityDelegate { get; set; } = null!;
     [Parameter] public Func<TObjectType, string>? LinkUrlDel { get; set; }
     [Parameter] public Func<TObjectType, IEnumerable<string>>? Additionals { get; set; }
 }
 @using Website.Services
 @using Website.Components.Navigation
+
 @inject WebsiteThemeService WebsiteThemeService
 @code{
-    private bool displayAdvancedFilter;
+    private bool _displayAdvancedFilter;
     [Parameter]  public RenderFragment? SorterStuff { get; set; }
     public string NameFilter { get; private set; } = "";
     private void FilterWithName(ChangeEventArgs eventArgs)
     {
         NameFilter = ( eventArgs.Value as string ?? string.Empty).ToLower();
     }
-    public bool reverseOrder;
-    public void ReverseOrder(ChangeEventArgs eventArgs)
+    private bool _reverseOrder;
+    public void ReverseOrderImp(ChangeEventArgs eventArgs)
     {
-        reverseOrder = (bool)eventArgs.Value!;
+        _reverseOrder = (bool)eventArgs.Value!;
     }
 }
 <Navigation>
     <div class="shower-container">
 
         <div class="filterer-outer @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")"
-             style="height: @(!displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
+             style="height: @(!_displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
 
             <div class="filter-basic">
              
@@ -44,20 +45,20 @@
                 var butTxtCol = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "black" : "white";
                 var advButColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "#525252";
                 }
-                <button style="background-color: @advButColor; color: @butTxtCol " class="advanced-filter-button" @onclick="() => displayAdvancedFilter = !displayAdvancedFilter">
+                <button style="background-color: @advButColor; color: @butTxtCol " class="advanced-filter-button" @onclick="() => _displayAdvancedFilter = !_displayAdvancedFilter">
                     Adv Filt
                 </button>
             </div>
             @SorterStuff
             <p>Reverse Order</p>
-            <input type="checkbox" @onchange="ReverseOrder" style="width: 25px; height: 25px"/>
+            <input type="checkbox" @onchange="ReverseOrderImp" style="width: 25px; height: 25px"/>
         </div>
 
         @code{
 
         private RenderFragment RenderObject(TObjectType objectToRender)
         {
-        string col = "white";
+        
 
         return @<div class="entity-to-display">
 
@@ -69,7 +70,7 @@
                        <img src="@ImageUrlDelegate(objectToRender)" style="background-color: @BackgroundCol(objectToRender);
                     border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
                     
-                    box-shadow: 0 0 5px 1px @shadCol" class="image-box"/>
+                    box-shadow: 0 0 5px 1px @shadCol" class="image-box" alt=""/>
                    </a>
             <p>@NameDelegate(objectToRender)</p>
 
@@ -91,7 +92,7 @@
         <div style="overflow: auto; height: 100%">
             <div class="entities-container">
 
-                @foreach (var i in reverseOrder ? objsToRend.Reverse() : objsToRend)
+                @foreach (var i in _reverseOrder ? objsToRend.Reverse() : objsToRend)
                 {
                 if (NameDelegate(i).ToLower().Contains(NameFilter))
                 {

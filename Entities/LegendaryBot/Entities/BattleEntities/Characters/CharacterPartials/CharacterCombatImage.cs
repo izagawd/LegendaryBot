@@ -15,23 +15,24 @@ public partial class Character
     /// <summary>
     ///     Caches the cropped combat images, since cropping takes time
     /// </summary>
-    private static readonly ConcurrentDictionary<string, Image<Rgba32>> _cachedCombatCroppedImages = new();
+    private static readonly ConcurrentDictionary<string, Image<Rgba32>> CachedCombatCroppedImages = new();
 
 
     public async Task<Image<Rgba32>> GetImageForCombatAsync()
     {
         var image = new Image<Rgba32>(190, 150);
         var url = ImageUrl;
-        if (!_cachedCombatCroppedImages.TryGetValue(url, out var characterImage))
+        if (!CachedCombatCroppedImages.TryGetValue(url, out var characterImage))
         {
             characterImage = await ImageFunctions.GetImageFromUrlAsync(url);
             characterImage.Mutate(ctx => { ctx.Resize(new Size(50, 50)); });
             //any image outside of the domain will n=be removed after a certain amount of time using this entry option
-            _cachedCombatCroppedImages[url] = characterImage;
+            CachedCombatCroppedImages[url] = characterImage;
         }
 
         IImageProcessingContext ctx = null!;
         image.Mutate(idk => ctx = idk);
+
 
         ctx
             .DrawImage(characterImage, new Point(0, 0), new GraphicsOptions())

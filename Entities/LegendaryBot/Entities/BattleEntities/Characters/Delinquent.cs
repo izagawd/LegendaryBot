@@ -50,7 +50,7 @@ public class DelinquentBeatdown : Skill
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return User.CurrentBattle.Characters.Where(i => i.Team != User.Team && !i.IsDead);
+        return User.CurrentBattle.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead);
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,

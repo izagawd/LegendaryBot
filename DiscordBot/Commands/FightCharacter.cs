@@ -45,15 +45,17 @@ public class FightCharacter : GeneralCommandClass
         List<Character> created = [];
         foreach (var _ in Enumerable.Range(0, count))
         {
-            var newOne = (Character)Activator.CreateInstance(type);
-            newOne.Level = userData.EquippedPlayerTeam.Select(i => i.Level).Average().Round();
+            var newOne = (Character)Activator.CreateInstance(type)!;
+            newOne.Level = userData.EquippedPlayerTeam!.Select(i => i.Level).Average().Round();
             created.Add(newOne);
         }
 
 
+        var playerTeam = userData.EquippedPlayerTeam!;
+        playerTeam.LoadTeamStats();
         await MakeOccupiedAsync(userData);
-        var battleSim = new BattleSimulator(userData.EquippedPlayerTeam.LoadTeamStats(),
-            new CharacterTeam(created).LoadTeamStats());
+        var battleSim = new BattleSimulator(playerTeam,
+            new NonPlayerTeam(created).LoadTeamStats());
         var interaction = (context as SlashCommandContext)?.Interaction;
         if (interaction is not null) await context.RespondAsync("hol up");
 

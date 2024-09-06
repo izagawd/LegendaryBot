@@ -5,9 +5,9 @@ public partial class Blessings
     public class BlessingDto
     {
         public int RarityNum { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int Stacks { get; set; }
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
 
         public string RarityName

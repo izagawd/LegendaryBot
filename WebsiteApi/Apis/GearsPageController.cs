@@ -21,7 +21,7 @@ public class GearsPageController : ControllerBase
         await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Gears
-            .Where(i => i.UserData.DiscordId == zaId)
+            .Where(i => i.UserData!.DiscordId == zaId)
             .Select(i => new Gears.GearDto()
             {
                 ImageUrl = Gear.GetDefaultFromTypeId(i.TypeId).ImageUrl,

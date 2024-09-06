@@ -61,20 +61,22 @@ public class TeamCommand : GeneralCommandClass
         await context.RespondAsync(embed);
     }
 
-    [Command("remove-character")]
+    [Command("set-slot")]
     [BotCommandCategory(BotCommandCategory.Team)]
-    public async ValueTask ExecuteRemoveFromTeam(CommandContext context,
-        [Parameter("character-num")] [Description("Number of the character")]
-        int characterNumber,
+    public async ValueTask ExecuteChangeTeamCharacter(CommandContext context,
+       
         [Parameter("team-name")] [Description("Name of team you want to remove character from")]
-        string teamName)
+        string teamName, [Parameter("team-slot")] int teamSlot, [Parameter("character-num")] [Description("Number of the character. null if you are removng from slot")]
+        int? characterNumber = null)
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower()
                                                    == teamName.ToLower()))
-            .ThenInclude(i => i.Characters)
+            .ThenInclude(i => i.TeamMemberships)
+            .ThenInclude(i => i.Character)
             .Include(i => i.EquippedPlayerTeam)
-            .ThenInclude(i => i.Characters)
+            .ThenInclude(i => i!.TeamMemberships)
+            .ThenInclude(i => i.Character)
             .Include(i => i.Characters.Where(j =>
                 j.Number == characterNumber))
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
@@ -83,6 +85,8 @@ public class TeamCommand : GeneralCommandClass
             await AskToDoBeginAsync(context);
             return;
         }
+
+   
 
         if (userData.IsOccupied)
         {
@@ -99,15 +103,21 @@ public class TeamCommand : GeneralCommandClass
             .WithColor(userData.Color)
             .WithTitle("Hmm")
             .WithDescription($"Team with name {teamName} does not exist");
+        if (teamSlot <= 0 || teamSlot > 4)
+        {
+            embed.WithDescription($"slot ranges from 1 to 4. {teamSlot} is an invalid number");
+            await context.RespondAsync(embed);
+                return;
+        }
         if (gottenTeam is null)
         {
             await context.RespondAsync(embed);
             return;
         }
 
-        if (gottenTeam.Count <= 1)
+        if (gottenTeam.Count <= 1 && gottenTeam[teamSlot] is not null)
         {
-            embed.WithDescription("There should be at least one character in a team");
+            embed.WithDescription($"There should be at least one character in a team, so you cant de equip from slot {teamSlot}");
             await context.RespondAsync(embed);
             return;
         }
@@ -115,28 +125,32 @@ public class TeamCommand : GeneralCommandClass
         var character = userData
             .Characters
             .FirstOrDefault(i => i.Number == characterNumber);
-        if (character is null)
+
+        if (character is null && characterNumber is not null)
         {
-            embed.WithDescription($"Character with number {characterNumber} could not be found");
+            embed.WithDescription($"character with number {characterNumber} not found");
             await context.RespondAsync(embed);
             return;
         }
 
-
-        if (!gottenTeam.Contains(character))
-        {
-            embed.WithDescription(
-                $"Character {character} with number {characterNumber} is not in team {gottenTeam.TeamName}");
-            return;
-        }
-
-        gottenTeam.Remove(character);
-
+        var prevChar = gottenTeam[teamSlot];
+        gottenTeam[teamSlot] = character;
         await DatabaseContext.SaveChangesAsync();
 
+        string text;
+        if (character is null && prevChar is not null)
+        {
+            text = $"{prevChar} with number {prevChar.Number} has been removed from team {gottenTeam.TeamName}!";
+        } else if (character is null)
+        {
+            text = $"No character in slot {teamSlot} of team {gottenTeam.TeamName}";
+        }
+        else
+        {
+            text = $"{character} has been put in slot {teamSlot} in team {gottenTeam.TeamName}";
+        }
         embed.WithTitle("Success!")
-            .WithDescription(
-                $"{character} with number {characterNumber} has been removed from team {gottenTeam.TeamName}!");
+            .WithDescription(text);
         await context.RespondAsync(embed);
     }
 
@@ -148,7 +162,8 @@ public class TeamCommand : GeneralCommandClass
     {
         var userData = await DatabaseContext.UserData
             .Include(i => i.PlayerTeams)
-            .ThenInclude(i => i.Characters)
+            .ThenInclude(i => i.TeamMemberships)
+            .ThenInclude(i => i.Character)
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -184,74 +199,9 @@ public class TeamCommand : GeneralCommandClass
         team.TeamName = newName;
         await DatabaseContext.SaveChangesAsync();
         embed.WithTitle("Success!")
-            .WithDescription($"Team {teamName} is now {newName!}");
+            .WithDescription($"Team {teamName} is now {newName}");
 
         await context.RespondAsync(embed);
     }
 
-    [Command("add-character")]
-    [Description("adds a character to a team!")]
-    [BotCommandCategory(BotCommandCategory.Team)]
-    public async ValueTask ExecuteAddToTeam(CommandContext context,
-        [Parameter("character-num")] [Description("Id of character you want to add")]
-        int characterNumber,
-        [Parameter("team-name")] string teamName)
-    {
-        var userData = await DatabaseContext.UserData
-            .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower() == teamName.ToLower()))
-            .ThenInclude(i => i.Characters)
-            .Include(i => i.EquippedPlayerTeam)
-            .ThenInclude(i => i.Characters)
-            .Include(i => i.Characters.Where(j =>
-                j.Number == characterNumber))
-            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
-        if (userData is null || userData.Tier == Tier.Unranked)
-        {
-            await AskToDoBeginAsync(context);
-            return;
-        }
-
-        if (userData.IsOccupied)
-        {
-            await NotifyAboutOccupiedAsync(context);
-            return;
-        }
-
-        var gottenTeam = userData.PlayerTeams.FirstOrDefault(i => i.TeamName.ToLower() == teamName.ToLower());
-
-
-        var embed = new DiscordEmbedBuilder()
-            .WithUser(context.User)
-            .WithColor(userData.Color)
-            .WithTitle("Hmm")
-            .WithDescription($"Team with name {teamName} does not exist");
-        if (gottenTeam is null)
-        {
-            await context.RespondAsync(embed);
-            return;
-        }
-
-        if (gottenTeam.IsFull)
-        {
-            embed.WithDescription("The provided team is full");
-            await context.RespondAsync(embed);
-            return;
-        }
-
-        var character = userData
-            .Characters
-            .FirstOrDefault(i => i.Number == characterNumber);
-        if (character is null)
-        {
-            embed.WithDescription($"Character with number {characterNumber} could not be found");
-            await context.RespondAsync(embed);
-            return;
-        }
-
-        gottenTeam.Add(character);
-        await DatabaseContext.SaveChangesAsync();
-
-        embed.WithTitle("Success!").WithDescription($"{character} has been added to team {gottenTeam.TeamName}!");
-        await context.RespondAsync(embed);
-    }
 }

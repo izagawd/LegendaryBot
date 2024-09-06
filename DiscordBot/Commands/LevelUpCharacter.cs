@@ -33,7 +33,7 @@ public partial class CharacterCommand
     {
         var description = $"Character number: {character.Number}\n";
         foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<CharacterExpMaterial>())
-            description += $"{i.Name}: {character.UserData.Items.GetItemStacks(i.GetType())}\n";
+            description += $"{i.Name}: {character.UserData!.Items.GetItemStacks(i.GetType())}\n";
 
         if (character.Blessing is not null) description += $"Blessing: {character.Blessing.Name}";
 
@@ -192,7 +192,7 @@ public partial class CharacterCommand
         if (gottenUserData.IsOccupied)
         {
             embedBuilder.WithDescription("You are occupied")
-                .WithImageUrl((string)null);
+                .WithImageUrl((string) null!);
             await ctx.RespondAsync(embedBuilder);
             return;
         }

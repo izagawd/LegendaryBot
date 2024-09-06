@@ -42,10 +42,10 @@ public partial class BattleSimulator
 
             var cache = new EventMethodDetails(CreateBattleEventMethodFrom(j.method), j.attribute!,
                 parameter.ParameterType);
-            if (_methodsCache.TryGetValue(i, out var list))
+            if (MethodsCache.TryGetValue(i, out var list))
                 list.Add(cache);
             else
-                _methodsCache[i] = [cache];
+                MethodsCache[i] = [cache];
         }
 
         var stringBuilder = new StringBuilder();

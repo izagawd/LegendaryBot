@@ -26,13 +26,13 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPart
 /// </summary>
 public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGuidPrimaryIdHaver
 {
-    private static readonly ConcurrentDictionary<int, Character> _cachedDefaultCharacterTypeIds = [];
+    private static readonly ConcurrentDictionary<int, Character> CachedDefaultCharacterTypeIds = [];
 
 
     private readonly HashSet<StatusEffect> _statusEffects = [];
 
 
-    [NotMapped] private BasicAttack? _basicAttack;
+
 
     [NotMapped] private float _combatReadiness;
 
@@ -90,7 +90,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     public bool IsDead => Health <= 0;
 
-    [NotMapped] public CharacterTeam Team { get; set; }
+    [NotMapped] public Team? BattleTeam { get; set; }
 
     [NotMapped]
     public float CombatReadiness
@@ -104,6 +104,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         }
     }
 
+    public static  readonly Exception NoBattleExc = new Exception("Character is not in battle");
 
     [NotMapped]
     public virtual float Health
@@ -111,6 +112,8 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         get => _health;
         set
         {
+            if (CurrentBattle is null)
+                throw NoBattleExc;
             if (_health <= 0) return;
             var tempMaxHealth = MaxHealth;
 
@@ -159,7 +162,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         }
     }
 
-    [NotMapped] public Alphabet AlphabetIdentifier => CurrentBattle.GetAlphabetIdentifier(this);
+    [NotMapped] public Alphabet AlphabetIdentifier => CurrentBattle?.GetAlphabetIdentifier(this) ?? throw NoBattleExc;
 
     public float HealthPercentage => (float)(Health * 1.0 / MaxHealth * 100.0);
 
@@ -240,12 +243,12 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     [NotMapped] public IEnumerable<GearSet> GearSets => _gearSets ?? [];
 
-    [NotMapped] public BattleSimulator CurrentBattle => Team?.CurrentBattle!;
+    [NotMapped] public BattleSimulator? CurrentBattle => BattleTeam?.CurrentBattle;
 
     public string NameWithAlphabet => $"{Name} [{AlphabetIdentifier}]";
 
 
-    [NotMapped] public BasicAttack BasicAttack { get; protected set; }
+    [NotMapped] public BasicAttack BasicAttack { get; protected set; } = null!;
 
 
     [NotMapped] public Ultimate? Ultimate { get; protected set; }
@@ -256,8 +259,14 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     /// <summary>
     ///     The position of the player based on combat readiness
     /// </summary>
-    public int Position =>
-        Array.IndexOf(CurrentBattle.Characters.OrderByDescending(i => i.CombatReadiness).ToArray(), this) + 1;
+    public int Position {
+        get
+        {
+            if (CurrentBattle is null)
+                throw NoBattleExc;
+            return    Array.IndexOf(CurrentBattle.Characters.OrderByDescending(i => i.CombatReadiness).ToArray(), this) + 1;
+        }}
+     
 
     /// <summary>
     ///     Checks if something overrides the player turn eg stun status effect preventing the player from doing anything
@@ -330,17 +339,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     public abstract int TypeId { get; protected init; }
 
-    public string DisplayString
-    {
-        get
-        {
-            var stringg = $"{Name} • Lvl: {Level}";
-            if (Number != 0) stringg = $"{Number} • {stringg}";
-            if (Blessing is not null) stringg += $" • Blessing: {Blessing.Name}";
-
-            return $"`{stringg}`";
-        }
-    }
 
 
     public UserData? UserData { get; set; }
@@ -361,13 +359,13 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     public static Character GetDefaultFromTypeId(int typeId)
     {
-        if (!_cachedDefaultCharacterTypeIds.TryGetValue(typeId, out var character))
+        if (!CachedDefaultCharacterTypeIds.TryGetValue(typeId, out var character))
         {
             character = TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
                 .FirstOrDefault(i => i.TypeId == typeId);
             if (character is null) throw new Exception($"Character with type id {typeId} not found");
 
-            _cachedDefaultCharacterTypeIds[typeId] = character;
+            CachedDefaultCharacterTypeIds[typeId] = character;
         }
 
         return character;
@@ -382,6 +380,8 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     /// <returns>The amount of combat readiness increased</returns>
     public float IncreaseCombatReadiness(float increaseAmount, bool announceIncrease = true)
     {
+        if (CurrentBattle is null)
+            throw NoBattleExc;
         if (increaseAmount < 0) throw new ArgumentException("Increase amount should be at least 0");
         CombatReadiness += increaseAmount;
         if (announceIncrease && increaseAmount > 0)
@@ -396,6 +396,8 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     /// <returns>the amount decreased</returns>
     public int DecreaseCombatReadiness(int decreaseAmount, int? effectiveness = 0, bool announceDecrease = true)
     {
+        if (CurrentBattle is null)
+            throw NoBattleExc;
         if (decreaseAmount < 0) throw new ArgumentException("Decrease amount should be at least 0");
         if (effectiveness is not null)
         {
@@ -420,6 +422,8 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     /// </summary>
     public void Revive()
     {
+        if (CurrentBattle is null)
+            throw NoBattleExc;
         if (!IsDead) return;
         _health = 1;
         CurrentBattle.AddBattleText(new ReviveBattleText(this));
@@ -432,6 +436,8 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     /// </summary>
     public void GrantExtraTurn()
     {
+        if (CurrentBattle is null)
+            throw NoBattleExc;
         if (IsDead) return;
         _shouldTakeExtraTurn = true;
         CurrentBattle.AddBattleText(new ExtraTurnBattleText(this));

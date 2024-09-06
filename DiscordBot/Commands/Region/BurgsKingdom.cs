@@ -15,10 +15,10 @@ public class BurgsKingdom : Region
         typeof(Blast), typeof(Thana), typeof(Cheerleader)
     ];
 
-    public override CharacterTeam GenerateCharacterTeamFor(Type type, out Character main)
+    public override Team GenerateCharacterTeamFor(Type type, out Character main)
     {
         main = (Character)Activator.CreateInstance(type)!;
-        CharacterTeam newTeam = [main];
+        NonPlayerTeam newTeam = [main];
         switch (main)
         {
             case Blast:

@@ -61,7 +61,7 @@ public class IWillBeYourShield : Skill
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return User.Team.Where(i => !i.IsDead);
+        return User.BattleTeam.Where(i => !i.IsDead);
     }
 
 
@@ -98,7 +98,7 @@ public class IWillProtectUs : Ultimate
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return User.Team.Where(i => !i.IsDead);
+        return User.BattleTeam?.Where(i => !i.IsDead) ?? [];
     }
 
 

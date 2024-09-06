@@ -7,7 +7,7 @@ public partial  class Characters
     [Serializable]
     public class CharacterDto
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
         public int Number { get; set; }
         public int RarityNum { get; set; }
     
@@ -31,7 +31,7 @@ public partial  class Characters
             }
         }
 
-        public string ImageUrl { get; set; }
+        public string ImageUrl { get; set; } = null!;
         public int Level { get; set; }
     }
 }

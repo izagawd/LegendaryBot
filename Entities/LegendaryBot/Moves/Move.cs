@@ -2,14 +2,14 @@
 using BasicFunctionality;
 using Entities.LegendaryBot.BattleEvents.EventArgs;
 using Entities.LegendaryBot.BattleSimulatorStuff;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Results;
 using PublicInfo;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+
 
 namespace Entities.LegendaryBot.Moves;
 
@@ -30,7 +30,7 @@ public class MoveUsageContext
 
 public abstract class Move : INameHaver
 {
-    public Move(CharacterPartials_Character user)
+    public Move(Character user)
     {
         User = user;
     }
@@ -43,15 +43,15 @@ public abstract class Move : INameHaver
     public virtual string IconUrl => $"{Information.ApiDomainName}/battle_images/moves/{GetType().Name}.png";
 
 
-    protected static ConcurrentDictionary<string, Image<Rgba32>> _croppedCombatImages { get; } = new();
+    protected static ConcurrentDictionary<string, Image<Rgba32>> CroppedCombatImages { get; } = new();
 
 
     /// <summary>
     ///     The character who owns this move
     /// </summary>
-    public CharacterPartials_Character User { get; }
+    public Character User { get; }
 
-    public BattleSimulator CurrentBattle => User.CurrentBattle;
+    public BattleSimulator? CurrentBattle => User.CurrentBattle;
 
     public abstract string Name { get; }
 
@@ -59,13 +59,13 @@ public abstract class Move : INameHaver
     public async Task<Image<Rgba32>> GetImageForCombatAsync()
     {
         var url = IconUrl;
-        if (!_croppedCombatImages.TryGetValue(url, out var image))
+        if (!CroppedCombatImages.TryGetValue(url, out var image))
         {
             image = await ImageFunctions.GetImageFromUrlAsync(IconUrl);
             image.Mutate(i => i
                 .Resize(25, 25)
                 .Draw(Color.Black, 3, new RectangleF(0, 0, 24, 24)));
-            _croppedCombatImages[url] = image;
+            CroppedCombatImages[url] = image;
         }
 
 
@@ -78,13 +78,14 @@ public abstract class Move : INameHaver
     /// <summary>
     ///     Gets description based on character. The description is mostly affected by the character's level
     /// </summary>
-    /// <param name="level"></param>
-    public abstract string GetDescription(CharacterPartials_Character character);
+
+    /// <param name="character"></param>
+    public abstract string GetDescription(Character character);
 
     /// <summary>
     ///     Gets all the possible targets this move can be used on based on the owner of the move
     /// </summary>
-    public abstract IEnumerable<CharacterPartials_Character> GetPossibleTargets();
+    public abstract IEnumerable<Character> GetPossibleTargets();
 
     /// <summary>
     ///     This is where the custom functionality of a move is created
@@ -93,7 +94,7 @@ public abstract class Move : INameHaver
     /// <param name="moveUsageContext"></param>
     /// <param name="attackTargetType"></param>
     /// <param name="text"></param>
-    protected abstract void UtilizeImplementation(CharacterPartials_Character target, MoveUsageContext moveUsageContext,
+    protected abstract void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType, out string? text);
 
     /// <summary>
@@ -102,8 +103,10 @@ public abstract class Move : INameHaver
     /// </summary>
     /// <param name="target">The target</param>
     /// <param name="moveUsageType"></param>
-    public virtual MoveUsageResult Utilize(CharacterPartials_Character target, MoveUsageType moveUsageType)
+    public virtual MoveUsageResult Utilize(Character target, MoveUsageType moveUsageType)
     {
+        if (CurrentBattle is null)
+            throw Character.NoBattleExc;
         var usageContext = new MoveUsageContext(this, moveUsageType);
         UtilizeImplementation(target, usageContext, out var attackTargetType, out var text);
         var moveUsageResult = new MoveUsageResult(usageContext, attackTargetType, text);
