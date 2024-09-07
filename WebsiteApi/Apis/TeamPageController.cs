@@ -39,7 +39,8 @@ public class TeamPageController : ControllerBase
                     Level = k.Level,
                     Name = k.TypeId == PlayerTypeId ? i.Name :
                         Character.GetDefaultFromTypeId(k.TypeId).Name,
-                    Number = k.Number
+                    Number = k.Number,
+                    RarityNum = (int) Character.GetDefaultFromTypeId(k.TypeId).Rarity
                 }).ToArray(),
                 Teams = i.PlayerTeams.Select(j => new Teams.TeamDto()
                 {

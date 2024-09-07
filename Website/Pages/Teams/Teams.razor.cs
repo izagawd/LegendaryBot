@@ -11,6 +11,7 @@ public partial class Teams : ComponentBase
         public int Number{ get; set; }
         public string? ImageUrl{ get; set; }
         public int Level{ get; set; }
+        public int RarityNum { get; set; }
     }
 
     public class TeamCharactersDto

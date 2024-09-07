@@ -36,7 +36,7 @@
             switch (SortTypeVal)
             {
                 case SortType.Name:
-                    theEnumerable = theEnumerable.OrderByDescending(i => i.Name);
+                    theEnumerable = theEnumerable.OrderBy(i => i.Name);
                     break;
                 case SortType.Rarity:
                     theEnumerable = theEnumerable.OrderByDescending(i => i.RarityNum);
@@ -51,11 +51,6 @@
     }
 
 
-
-    private void SelectChange(ChangeEventArgs eventArgs)
-    {
-        SortTypeVal = Enum.Parse<SortType>((string)eventArgs.Value!);
-    }
 
 
 
@@ -75,11 +70,11 @@
                          TObjectType="ItemDto">
     <SorterStuff>
         <p>Sort By</p>
-        <select @onchange="SelectChange" class="filterer-percentage" style="height: 30px; width: 80%">
+        <select @bind="SortTypeVal" class="filterer-percentage" style="height: 30px; width: 80%">
 
             @foreach (var i in Enum.GetValues<SortType>())
             {
-            <option selected="@(SortTypeVal == i)" value="@i">@i</option>
+            <option  value="@i">@i</option>
             }
 
         </select>

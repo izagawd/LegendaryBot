@@ -5,6 +5,17 @@
 @inject WebsiteThemeService WebTheme
 
 @code {
+
+    enum SortType
+    {
+        Level,
+        Rarity,
+        Name
+    }
+
+    private SortType CurrentSortType = SortType.Level;
+
+    bool reverseOrder = false;
     protected TeamCharactersDto? TeamCharacterDto { get; set; }
 
 
@@ -184,14 +195,24 @@
                 <div class="others">
 
 
-
-                    <div class="filter-class" >
+                    
+                    <div class="filters">
+                        <div class="filter-class" >
                             <span class="material-symbols-outlined">
                                         search
                                     </span>
-                        <input @onchange="args => _currentFilter =(string) args.Value!" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" type="text" placeholder="Search"/>
+                            <input @onchange="args => _currentFilter =(string) args.Value!" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" type="text" placeholder="Search"/>
 
+                        </div> 
+                        <select @bind="CurrentSortType" style="width: 75px; height: 30px">
+                            @foreach (var i in Enum.GetValues<SortType>())
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                        <input  @bind="reverseOrder" type="checkbox"/>
                     </div>
+       
 
                     @code{
 
@@ -210,10 +231,40 @@
                     }
                     <div class="other-characters-parent" style="border-color: @borCol">
                         <div class="other-characters" ondragover="event.preventDefault()" @ondrop="RemoveDraggedCharacterFromTeamAsync">
+                            @code{
+
+                                public IEnumerable<CharacterDto> NonTeamedCharacters
+                                {
+                                    get
+                                    {
+                                        var smallifiedFilter = _currentFilter.ToLower();
+                                        var gotten = TeamCharacterDto.Characters.Where(i =>
+                                            !CurrentTeam.GetCharacters(TeamCharacterDto).Contains(i) && i.Name!.ToLower().Contains(smallifiedFilter));
+                                        switch (CurrentSortType)
+                                        {
+                                            case SortType.Level:
+                                                gotten = gotten.OrderByDescending(i => i.Level);
+                                                break;
+                                            case SortType.Rarity:
+                                                gotten = gotten.OrderByDescending(i => i.RarityNum);
+                                                break;
+                                            case SortType.Name:
+                                                gotten = gotten.OrderBy(i => i.Name);
+                                                break;
+                                         
+                                        }
+
+                                        if (reverseOrder)
+                                            gotten = gotten.Reverse();
+                                        return gotten;
+                                    }
+                                }
+
+                            }
                             @{
-                                var smallifiedFilter = _currentFilter.ToLower();
-                                foreach (var i in TeamCharacterDto.Characters.Where(i =>
-                                              !CurrentTeam.GetCharacters(TeamCharacterDto).Contains(i) && i.Name!.ToLower().Contains(smallifiedFilter)))
+                          
+                                foreach (var i in NonTeamedCharacters)
+                                    
                                 {
                                     <div class="character-div" draggable="true" @ondragstart='() => CurrentDraggedCharacter = i'>
                                         <a href="/character-info/@i.Number">

@@ -23,10 +23,7 @@
         NameFilter = ( eventArgs.Value as string ?? string.Empty).ToLower();
     }
     private bool _reverseOrder;
-    public void ReverseOrderImp(ChangeEventArgs eventArgs)
-    {
-        _reverseOrder = (bool)eventArgs.Value!;
-    }
+
 }
 <Navigation>
     <div class="shower-container">
@@ -51,7 +48,7 @@
             </div>
             @SorterStuff
             <p>Reverse Order</p>
-            <input type="checkbox" @onchange="ReverseOrderImp" style="width: 25px; height: 25px"/>
+            <input  type="checkbox" @bind="_reverseOrder" style="width: 25px; height: 25px"/>
         </div>
 
         @code{
