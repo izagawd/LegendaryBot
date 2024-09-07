@@ -1,0 +1,54 @@
+@using Website.Services
+
+@inject WebsiteThemeService WebTheme
+@inject  NavigationManager NavMan
+@code {
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    private class InventoryPage
+    {
+        public InventoryPage(string name,  string icon)
+        {
+            Name = name;
+            Directory = name.ToLower();
+            Icon = icon;
+        }
+
+        public string Name { get; }
+        public string Directory { get; }
+        public string Icon { get; }
+    }
+
+    private static List<InventoryPage> InventoryPages =
+    [
+        new InventoryPage("Characters", "settings_accessibility"),
+        new InventoryPage("Items", "construction"),
+        new InventoryPage("Blessings", "star"),
+        new InventoryPage("Gears", "swords"),
+    ];
+
+}
+
+<Navigation>
+    <div class="za-parent">
+        <div class="inventory-nav-root-div" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")">
+            @foreach (var i in InventoryPages)
+            {
+                <a  href="@(PublicInfo.Information.WebsiteDomainName + $"/inventory/{i.Directory}")"  
+                    class="@(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "div-nav-dark" : "div-nav-light") inventory-page">
+                       <span style="color: @(NavMan.Uri.Contains(i.Directory,StringComparison.CurrentCultureIgnoreCase) ? "green":"inherit")" class="material-symbols-outlined">
+                                        @i.Icon
+                                    </span>
+                </a>
+            }
+        </div>
+        @if (ChildContent is not null)
+        {
+            <div style="flex-grow: 1; height: 0">
+                @ChildContent
+            </div>
+        }
+
+    </div>
+
+</Navigation>
