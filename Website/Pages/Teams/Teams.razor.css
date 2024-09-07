@@ -146,9 +146,12 @@
      flex-shrink: 0;
      flex-grow: 0;
      height: 68px;
+     justify-content: center;
+     gap: 30px;
  }
  .filters > *{
-     margin: auto;
+     margin-top: auto;
+     margin-bottom: auto;
  }
 .other-characters-parent{
     overflow-y: scroll;
