@@ -46,7 +46,6 @@
     public CharacterDto? CurrentDraggedCharacter = null;
     public async Task RemoveFromTeamAsync(int slot)
     {
-        Console.WriteLine(slot);
         var responseMessage = await Http.PostAsync("TeamPage/remove-from-team", new FormUrlEncodedContent([
             new KeyValuePair<string, string>("slot", slot.ToString()),
             new KeyValuePair<string, string>("teamId", CurrentTeam!.Id.ToString())
