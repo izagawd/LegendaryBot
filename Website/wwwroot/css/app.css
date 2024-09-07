@@ -2,8 +2,14 @@ html, body, #app {
     height: 100%;
     width: 100%;
 
-    position: fixed;
+    
     margin: 0;
+}
+html{
+    position: fixed;
+}
+body, #app{
+    position: relative;
 }
 :root{
     --theme-transition-time: 0.3s;
