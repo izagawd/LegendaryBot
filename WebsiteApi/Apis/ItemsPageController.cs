@@ -10,14 +10,13 @@ namespace WebsiteApi.Apis;
 
 [Route("[controller]")]
 [ApiController] 
-public class ItemsPageController : ControllerBase
+public class ItemsPageController(PostgreSqlContext post) : ControllerBase
 {
     
     [HttpGet("get-items")]
     [Authorize]
     public async Task<IActionResult> GetCharactersAsync()
     {
-        await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Item>()
             .Where(i => i.UserData!.DiscordId == zaId)

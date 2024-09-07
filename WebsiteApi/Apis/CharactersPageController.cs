@@ -13,7 +13,7 @@ namespace WebsiteApi.Apis;
 
 [Microsoft.AspNetCore.Mvc.Route("[controller]")]
 [ApiController]
-public class CharactersPageController : ControllerBase
+public class CharactersPageController(PostgreSqlContext post) : ControllerBase
 {
 
     private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
@@ -23,7 +23,7 @@ public class CharactersPageController : ControllerBase
     public async Task<ActionResult<Characters.CharacterDto[]>> GetCharactersAsync()
     {
 
-        await using var post = new PostgreSqlContext();
+     
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Character>()
             .Where(i => i.UserData!.DiscordId == zaId)

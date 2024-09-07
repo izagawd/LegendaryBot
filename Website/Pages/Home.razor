@@ -8,7 +8,7 @@
 
 @code
 {
-    private ClaimsPrincipal _user = null!;
+    private ClaimsPrincipal? _user;
     protected override async Task OnInitializedAsync()
     {
         _user = (await StatProv.GetAuthenticationStateAsync()).User;

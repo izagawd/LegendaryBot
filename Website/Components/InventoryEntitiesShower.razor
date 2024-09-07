@@ -2,6 +2,7 @@
 
 @typeparam TObjectType
 @code {
+    [Parameter] public Func<TObjectType,RenderFragment>? HoverShit { get; set; }
     [Parameter] [EditorRequired] public Func<TObjectType, string> BackgroundCol { get; set; } = null!;
     [Parameter] [EditorRequired] public Func<IEnumerable<TObjectType>?> ObjectsToRender { get; set; } = null!;
     [Parameter] [EditorRequired] public Func<TObjectType, string> NameDelegate { get; set; } = null!;
@@ -57,10 +58,10 @@
         {
         
 
-        return @<div class="entity-to-display">
+        return @<div style="position: relative;" class="entity-to-display">
 
 
-                   <a href="@LinkUrlDel?.Invoke(objectToRender)">
+                   <a class="some-class" href="@LinkUrlDel?.Invoke(objectToRender)">
                        @{
                            var shadCol = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
                        }
@@ -76,7 +77,13 @@
             <p class="additional-p">@i</p>
             }
 
+            @if (HoverShit is not null)
+            {
+            <div style="position: absolute; z-index: 1">
+                @HoverShit(objectToRender)
+            </div>
 
+            }
         </div>;
         }
 
@@ -91,10 +98,10 @@
 
                 @foreach (var i in _reverseOrder ? objsToRend.Reverse() : objsToRend)
                 {
-                if (NameDelegate(i).ToLower().Contains(NameFilter))
-                {
-                @RenderObject(i)
-                }
+                    if (NameDelegate(i).ToLower().Contains(NameFilter))
+                    {
+                        @RenderObject(i)
+                    }
                 }
             </div>
         </div>

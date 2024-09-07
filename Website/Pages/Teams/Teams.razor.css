@@ -26,8 +26,19 @@
 }
 .inputs > *{
     margin: auto;
-    width: 100px; height: 30px
+    width: 85px; height: 30px
     
+}
+.inputs input{
+    width: 80px;
+    height: 20px;
+    border-radius: 5px;
+}
+.inputs select{
+    width: 100px;
+}
+.inputs button{
+    width: 75px;
 }
 .team-settler{
     margin-top: auto; margin-bottom: auto; height: fit-content;  margin-left: 20px;

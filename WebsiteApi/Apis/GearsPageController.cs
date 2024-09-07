@@ -10,15 +10,13 @@ namespace WebsiteApi.Apis;
 
 [Route("[controller]")]
 [ApiController] 
-public class GearsPageController : ControllerBase
+public class GearsPageController(PostgreSqlContext post) : ControllerBase
 {
     
     [HttpGet("get-gears")]
     [Authorize]
     public async Task<IActionResult> GetGearsAsync()
     {
-
-        await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Gear>()
             .Where(i => i.UserData!.DiscordId == zaId)

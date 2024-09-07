@@ -5,12 +5,7 @@ html, body, #app {
     
     margin: 0;
 }
-html{
-    position: fixed;
-}
-body, #app{
-    position: relative;
-}
+
 :root{
     --theme-transition-time: 0.3s;
 }

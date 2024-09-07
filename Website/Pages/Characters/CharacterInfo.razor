@@ -1,0 +1,22 @@
+@page "/inventory/characters/{CharacterNumber:int}"
+@using Microsoft.AspNetCore.Authorization
+@using Website.Components.Navigation
+
+@attribute [Authorize]
+
+
+@code {
+    [Parameter] public int CharacterNumber { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+       
+    }
+
+}
+
+
+<InventoryNavigation>
+    <div style="display: flex">
+        
+    </div>
+</InventoryNavigation>

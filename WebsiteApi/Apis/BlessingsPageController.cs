@@ -10,15 +10,14 @@ namespace WebsiteApi.Apis;
 
 [Route("[controller]")]
 [ApiController] 
-public class BlessingsPageController : ControllerBase
+public class BlessingsPageController(PostgreSqlContext post) : ControllerBase
 {
+
     
     [HttpGet("get-blessings")]
     [Authorize]
     public async Task<IActionResult> GetCharactersAsync()
     {
- 
-        await using var post = new PostgreSqlContext();
         var zaId = User.GetDiscordUserId();
         var gottenCollectionTypeIds = await post.Set<Blessing>()
             .Where(i => i.UserData!.DiscordId == zaId)
@@ -26,16 +25,13 @@ public class BlessingsPageController : ControllerBase
             .ToArrayAsync();
 
 
-        var gottenCollection = gottenCollectionTypeIds.GroupBy(i => i).Select(i =>
+        var gottenCollection = gottenCollectionTypeIds.GroupBy(i => i).Select(i => new Blessings.BlessingDto()
         {
-            return new Blessings.BlessingDto()
-            {
-                ImageUrl = Blessing.GetDefaultFromTypeId(i.Key).ImageUrl,
-                Name = Blessing.GetDefaultFromTypeId(i.Key).Name,
-                RarityNum = (int)Blessing.GetDefaultFromTypeId(i.Key).Rarity,
-                Stacks = i.Count(),
-                TypeId = i.Key
-            };
+            ImageUrl = Blessing.GetDefaultFromTypeId(i.Key).ImageUrl,
+            Name = Blessing.GetDefaultFromTypeId(i.Key).Name,
+            RarityNum = (int)Blessing.GetDefaultFromTypeId(i.Key).Rarity,
+            Stacks = i.Count(),
+            TypeId = i.Key
         }).ToArray();
         return Ok(gottenCollection);
     }

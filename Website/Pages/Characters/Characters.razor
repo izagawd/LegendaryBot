@@ -63,10 +63,15 @@
 
     private SortType SortTypeVal { get; set; } = SortType.Level;
 
+
+
+
 }
 
 
-<InventoryEntitiesShower LinkUrlDel='dto => $"/character-info/{dto.Number}"' Additionals="AdditionalStuff" BackgroundCol="dto => dto.Color" RarityDelegate="dto => dto.RarityNum" ObjectsToRender="() 
+<InventoryEntitiesShower 
+    
+    LinkUrlDel='dto => $"/inventory/characters/{dto.Number}"' Additionals="AdditionalStuff" BackgroundCol="dto => dto.Color" RarityDelegate="dto => dto.RarityNum" ObjectsToRender="() 
 => UsingCharacterCollection"
                          NameDelegate="dto => dto.Name"
                          ImageUrlDelegate="dto => dto.ImageUrl"

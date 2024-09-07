@@ -15,9 +15,33 @@ namespace WebsiteApi.Apis;
 [ApiController] 
 public class TeamPageController : ControllerBase
 {
-    private PostgreSqlContext postgres;
+    private PostgreSqlContext context;
+
+    public TeamPageController(PostgreSqlContext databaseContext)
+    {
+        context = databaseContext;
+    }
+    
     private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
 
+    [Authorize]
+    [HttpPost("rename-team")]
+    public async Task<IActionResult> RenameTeamAsync([FromForm] long teamId, [FromForm] string newName)
+    {
+
+        if (newName.Length <= 0)
+            return BadRequest();
+        var userId = User.GetDiscordUserId();
+        var didDo  =await  context.Set<PlayerTeam>()
+            .Where(i => i.UserData.DiscordId == userId && i.Id == teamId
+                                                       && i.UserData.PlayerTeams.All(j => j.TeamName.ToLower() != newName.ToLower()))
+            .ExecuteUpdateAsync(i => i.SetProperty(j => j.TeamName, newName));
+        if (didDo <= 0)
+            return BadRequest();
+        return Ok();
+
+
+    }
     [Authorize]
     [HttpGet("get-teams-and-characters")]
     
@@ -69,9 +93,9 @@ public class TeamPageController : ControllerBase
             if (slot < 1 || slot > TypesFunction.GetDefaultObject<PlayerTeam>().MaxCharacters)
                 return BadRequest();
         }
-        await using var postgre = new PostgreSqlContext();
+       
         var theId = User.GetDiscordUserId();
-        var userData = await postgre.Set<UserData>()
+        var userData = await context.Set<UserData>()
             .Include(i => i.PlayerTeams)
             .ThenInclude(i => i.TeamMemberships)
             .ThenInclude(i => i.Character)
@@ -82,15 +106,15 @@ public class TeamPageController : ControllerBase
         var theTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (theTeam is null)
             return BadRequest();
-        await using (var transaction = await postgre.Database.BeginTransactionAsync())
+        await using (var transaction = await context.Database.BeginTransactionAsync())
         {
             try
             {
                 var slotOneCharacter = theTeam[slot1];
                 theTeam[slot1] = theTeam[slot2];
-                await postgre.SaveChangesAsync();
+                await context.SaveChangesAsync();
                 theTeam[slot2] = slotOneCharacter;
-                await postgre.SaveChangesAsync();
+                await context.SaveChangesAsync();
                 await transaction.CommitAsync();
             }
             catch
@@ -112,9 +136,9 @@ public class TeamPageController : ControllerBase
         {
             return BadRequest();
         }
-        await using var postgre = new PostgreSqlContext();
+ 
         var theId = User.GetDiscordUserId();
-        var userData = await postgre.Set<UserData>()
+        var userData = await context.Set<UserData>()
             .Include(i => i.PlayerTeams)
             .ThenInclude(i => i.TeamMemberships)
             .ThenInclude(i => i.Character)
@@ -131,7 +155,7 @@ public class TeamPageController : ControllerBase
             return BadRequest();
         theTeam[slot] = theCharacter;
 
-        await postgre.SaveChangesAsync();
+        await context.SaveChangesAsync();
         return Ok();
 
 
@@ -145,9 +169,9 @@ public class TeamPageController : ControllerBase
         {
             return BadRequest();
         }
-        await using var postgre = new PostgreSqlContext();
+
         var theId = User.GetDiscordUserId();
-        var deleted =await  postgre.Set<PlayerTeamMembership>()
+        var deleted =await  context.Set<PlayerTeamMembership>()
             .Where(i => i.Character.UserData!.DiscordId == theId && i.PlayerTeamId == teamId && i.Slot == slot
                         && i.PlayerTeam.TeamMemberships.Count > 1)
             .ExecuteDeleteAsync();
@@ -163,7 +187,7 @@ public class TeamPageController : ControllerBase
  
     public async Task<IActionResult> EquipTeam([FromForm] long teamId)
     {
-        await using var context = new PostgreSqlContext();
+
         var discordId = User.GetDiscordUserId();
         var userData = await context.Set<UserData>()
             .Include(i => i.PlayerTeams)
@@ -186,7 +210,7 @@ public class TeamPageController : ControllerBase
        [FromForm] long characterId)
     {
         
-        await using var context = new PostgreSqlContext();
+
         var discordId = User.GetDiscordUserId();
         var team = await context.Set<UserData>().Where(i => i.DiscordId == discordId)
             .SelectMany(i => i.PlayerTeams)

@@ -9,13 +9,11 @@ using WebFunctions;
 namespace WebsiteApi.Apis;
 [ApiController]
 [Route("[controller]")]
-public class HomePageController : ControllerBase
+public class HomePageController(PostgreSqlContext context) : ControllerBase
 {
     [Authorize]
     public async Task<IActionResult> GetSomeUserData()
     {
-
-        await using var context = new PostgreSqlContext();
         var discordId = User.GetDiscordUserId();
         var selected = await context.Set<UserData>()
             .Where(i => i.DiscordId == discordId)
