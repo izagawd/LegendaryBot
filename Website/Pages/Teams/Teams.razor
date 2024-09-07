@@ -149,7 +149,7 @@
                         var i1 = i;
                         <div class="team-character-div" @ondragstart="() => CurrentDraggedCharacter = character" draggable="@(character is not null ? "true" : "false")" 
                              ondragover="event.preventDefault()" @ondrop="() => OnDropOnSlot(i1)" style="border-color: @borderCol; background-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark? "gray" : "lightgrey")">
-                            <a>
+                            <a href="/character-info/@(character?.Number ?? 0)">
                                 <img style="border-color: @borderCol" src="@character?.ImageUrl" alt=""/>
                             </a>
                             <div class="paragraphs">
@@ -216,7 +216,7 @@
                                               !CurrentTeam.GetCharacters(TeamCharacterDto).Contains(i) && i.Name!.ToLower().Contains(smallifiedFilter)))
                                 {
                                     <div class="character-div" draggable="true" @ondragstart='() => CurrentDraggedCharacter = i'>
-                                        <a>
+                                        <a href="/character-info/@i.Number">
                                             <img src="@i.ImageUrl" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" alt=""/>
                                         </a>
                                         <p>@i.Name</p>

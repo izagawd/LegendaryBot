@@ -19,7 +19,7 @@
     margin: auto; user-select: none;
 }
 .child-content-stuff{
-    
+    min-height: 0;
     flex-grow: 1;
 
 }
