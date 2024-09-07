@@ -89,7 +89,7 @@
         var objsToRend = ObjectsToRender();
         if (objsToRend is not null)
         {
-        <div style="overflow: auto; height: 100%">
+        <div style="overflow: auto; flex-grow: 1">
             <div class="entities-container">
 
                 @foreach (var i in _reverseOrder ? objsToRend.Reverse() : objsToRend)
