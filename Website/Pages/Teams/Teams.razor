@@ -1,9 +1,10 @@
 @page "/teams"
+@using Microsoft.AspNetCore.Authorization
 @using Website.Components.Navigation
 @using Website.Services
 @inject HttpClient Http
 @inject WebsiteThemeService WebTheme
-
+@attribute [Authorize]
 @code {
 
     enum SortType

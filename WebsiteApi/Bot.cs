@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using DatabaseManagement;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,9 +25,11 @@ public static class Bot
     }
 
 
+
     private static async Task DoShitAsync()
     {
-     
+
+
     }
 
     private static async Task Main(string[] args)
