@@ -40,6 +40,7 @@
 
     <ItemGroup>
       <Folder Include="Pages\CharacterInfo\" />
+      <Folder Include="wwwroot\js\" />
     </ItemGroup>
 
     <ItemGroup>
