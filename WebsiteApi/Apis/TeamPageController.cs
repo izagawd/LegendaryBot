@@ -79,8 +79,11 @@ public class TeamPageController : ControllerBase
                 }).ToArray(),
                 EquippedTeamId = i.EquippedPlayerTeam!.Id
             }).FirstOrDefaultAsync();
-        
-        return Ok(selected ?? new Teams.TeamCharactersDto());
+
+        if (selected is null)
+            return BadRequest(
+                "No team was found. You may not have began your journey with /begin with the discord bot");
+        return Ok(selected);
     }
 
     [HttpPost("switch-slots")]

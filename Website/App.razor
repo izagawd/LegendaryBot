@@ -1,15 +1,25 @@
 ﻿@using Website.Pages
-<CascadingAuthenticationState>
-    <Router AppAssembly="@typeof(App).Assembly">
-        <Found Context="routeData">
-            <AuthorizeRouteView RouteData="@routeData">
-                <NotAuthorized>
-                    <RedirectToLogin></RedirectToLogin>
-                </NotAuthorized>
-            </AuthorizeRouteView>
-        </Found>
-        <NotFound>
-            <PageTitle>Not found</PageTitle>
-        </NotFound>
-    </Router>
-</CascadingAuthenticationState>
+
+
+<ErrorBoundary >
+    <ErrorContent>
+        <AppError></AppError>
+        <PageTitle>Error</PageTitle>
+    </ErrorContent>
+    <ChildContent>
+        <CascadingAuthenticationState>
+            <Router AppAssembly="@typeof(App).Assembly">
+                <Found Context="routeData">
+                    <AuthorizeRouteView RouteData="@routeData">
+                        <NotAuthorized>
+                            <RedirectToLogin></RedirectToLogin>
+                        </NotAuthorized>
+                    </AuthorizeRouteView>
+                </Found>
+                <NotFound>
+                    <PageTitle>Not found</PageTitle>
+                </NotFound>
+            </Router>
+        </CascadingAuthenticationState>
+    </ChildContent>
+</ErrorBoundary>

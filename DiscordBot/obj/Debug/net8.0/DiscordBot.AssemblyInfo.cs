@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DiscordBot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7301116387610b6788d9b799a750c99a63c47bf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e545cf1941d2b72f640a6942a29b053cb1da2c43")]
 [assembly: System.Reflection.AssemblyProductAttribute("DiscordBot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DiscordBot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -23,17 +23,23 @@
     protected TeamDto? CurrentTeam;
 
 
+    private string? ErrorText;
     private string _currentFilter = "";
 
     protected override async Task OnInitializedAsync()
     {
-        TeamCharacterDto = 
-            await Http.GetFromJsonAsync<TeamCharactersDto>("TeamPage/get-teams-and-characters");
-        if (TeamCharacterDto is null)
+        var gotten = await Http.GetAsync("TeamPage/get-teams-and-characters");
+        if (gotten.IsSuccessStatusCode)
         {
-            throw new Exception("Something went wrong");
+            TeamCharacterDto = await gotten.Content.ReadFromJsonAsync<TeamCharactersDto>();
+            CurrentTeam = TeamCharacterDto!.EquippedTeam;
         }
-        CurrentTeam = TeamCharacterDto.EquippedTeam;
+        else
+        {
+            ErrorText = await gotten.Content.ReadAsStringAsync();
+        }
+
+ 
     }
 
     Task OnChangeTeamAsync(ChangeEventArgs eventArgs)
@@ -307,6 +313,18 @@
     }
     else
     {
-        <h1>Loading...</h1>
+        <div class="loading-or-failure-div">
+            <div>
+                @if(ErrorText is null)
+                {
+                <h1>Loading...</h1>
+                }
+                else
+                {
+                <h1>@ErrorText</h1>
+                }
+            </div>
+        </div>
+
     }
 </Navigation>

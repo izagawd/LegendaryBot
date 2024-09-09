@@ -5,7 +5,12 @@ html, body, #app {
     
     margin: 0;
 }
-
+#blazor-error-ui{
+    position: absolute;
+    z-index: 1;
+    background-color: red;
+    color: white;
+}
 :root{
     --theme-transition-time: 0.3s;
 }

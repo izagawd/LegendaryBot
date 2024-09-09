@@ -55,4 +55,10 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="AppError.razor">
+        <DependentUpon>App.razor</DependentUpon>
+      </Content>
+    </ItemGroup>
+
 </Project>
