@@ -19,10 +19,7 @@
     private bool _displayAdvancedFilter;
     [Parameter]  public RenderFragment? SorterStuff { get; set; }
     public string NameFilter { get; private set; } = "";
-    private void FilterWithName(ChangeEventArgs eventArgs)
-    {
-        NameFilter = ( eventArgs.Value as string ?? string.Empty).ToLower();
-    }
+
     private bool _reverseOrder;
 
 }
@@ -37,7 +34,7 @@
                 <span style="color: black; z-index: 1; margin-left: 20px; margin-right: -35px; margin-top: auto; margin-bottom: auto" class="material-symbols-outlined">
                     search
                 </span>
-                <input class="name-filter" placeholder="Search" type="text" @onchange="FilterWithName"/>
+                <input class="name-filter" placeholder="Search" type="text" @bind="NameFilter"/>
         
                 @{
                 var butTxtCol = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "black" : "white";
@@ -79,10 +76,9 @@
 
             @if (HoverShit is not null)
             {
-            <div style="position: absolute; z-index: 1">
-                @HoverShit(objectToRender)
-            </div>
-
+                <div style="position: absolute; z-index: 1">
+                    @HoverShit(objectToRender)
+                </div>
             }
         </div>;
         }
@@ -98,7 +94,7 @@
 
                 @foreach (var i in _reverseOrder ? objsToRend.Reverse() : objsToRend)
                 {
-                    if (NameDelegate(i).ToLower().Contains(NameFilter))
+                    if (NameDelegate(i).Contains(NameFilter,StringComparison.CurrentCultureIgnoreCase))
                     {
                         @RenderObject(i)
                     }

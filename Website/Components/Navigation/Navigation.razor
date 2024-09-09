@@ -42,7 +42,9 @@
         new DirectoryStorer("Inventory", "/inventory/characters", "backpack",
             str => str.StartsWith(PublicInfo.Information.WebsiteDomainName+"/inventory",StringComparison.CurrentCultureIgnoreCase)),
         new DirectoryStorer("Guild Settings", "/guild", "star"),
-        new DirectoryStorer("Teams","/teams","groups")
+        new DirectoryStorer("Teams","/teams","groups"),
+        
+        new DirectoryStorer("Game","/game","groups")
     ];
 
 
