@@ -4,7 +4,7 @@
 @using Website.Services
 @using Website.Components
 @inject HttpClient Http
-
+@inject SnackBarService SnackBarService
 @attribute [Authorize]
 @code {
 
@@ -68,10 +68,10 @@
         }
         else
         {
-            await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+            await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                 await responseMessage.Content.ReadAsStringAsync(),
                 BadRequestTimeSpan
-            ){SnackBarLayout = SnackBar.SnackBarLayout.Error});
+            ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Error});
         }
     }
 
@@ -98,10 +98,10 @@
                 }
                 else
                 {
-                    await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+                    await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                         await result.Content.ReadAsStringAsync(),
                         BadRequestTimeSpan
-                    ){SnackBarLayout = SnackBar.SnackBarLayout.Error});
+                    ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Error});
                 }
             }
             else
@@ -135,10 +135,10 @@
                 }
                 else
                 {
-                    await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+                    await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                         await result.Content.ReadAsStringAsync(),
                         BadRequestTimeSpan
-                    ){SnackBarLayout = SnackBar.SnackBarLayout.Error});
+                    ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Error});
                 }
                 
 
@@ -161,18 +161,18 @@
         {
             CurrentTeam.Name = newName;
             StateHasChanged();
-            await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+            await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                 $"Team name changed to {newName}!",
                 BadRequestTimeSpan
-            ){SnackBarLayout = SnackBar.SnackBarLayout.Success});
+            ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Success});
         }
         else
         {
             
-            await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+            await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                 await didChange.Content.ReadAsStringAsync(),
                 BadRequestTimeSpan
-            ){SnackBarLayout = SnackBar.SnackBarLayout.Error});
+            ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Error});
             
         }
     }
@@ -188,24 +188,23 @@
         {
             TeamCharacterDto!.EquippedTeamId = CurrentTeam.Id;
             StateHasChanged();
-            await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+            await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                 $"Team {CurrentTeam.Name} is now equipped!",
                 BadRequestTimeSpan
-            ){SnackBarLayout = SnackBar.SnackBarLayout.Success});
+            ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Success});
         }       else
         {
-            await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+            await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                 await res.Content.ReadAsStringAsync(),
                 BadRequestTimeSpan
-            ){SnackBarLayout = SnackBar.SnackBarLayout.Error});
+            ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Error});
         }
       
     }
 
 
 
-    SnackBar? SnackBar;
-
+   
 
 }
 <Navigation>
@@ -357,19 +356,13 @@
                                         <p>Num @i.Number</p>
                                         <p>Lvl @i.Level</p>
                                     </div>
-
                                 }
                             }
-
                         </div>
                     </div>
-
                 </div>
             </div>
-
-
         </div>
-        <SnackBar @ref="SnackBar"></SnackBar>
     }
     else
     {

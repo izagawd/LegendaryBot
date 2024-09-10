@@ -2,35 +2,48 @@
 @using Website.Components
 @using Website.Services
 @inject WebsiteThemeService WebsiteThemeService
+@inject SnackBarService SnackBarService
 @code{
-
+    private SnackBar? _snackBar;
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            SnackBarService.SetSnackBar(_snackBar!);
+            return SnackBarService.DisplayPendingSnackBarIfExistsAsync();
+        }
+        return Task.CompletedTask;
+    }
     protected override void OnInitialized()
     {
         WebsiteThemeService.OnWebsiteThemeChanged += StateHasChanged;
+
     }
 }
 <CascadingValue Value="WebsiteThemeService.WebsiteTheme">
+    <SnackBar @ref="_snackBar"/>
     <ErrorBoundary >
         <ErrorContent>
             <AppError></AppError>
             <PageTitle>Error</PageTitle>
         </ErrorContent>
         <ChildContent>
-                <Router AppAssembly="@typeof(App).Assembly">
-                    <Found Context="routeData">
-                        <AuthorizeRouteView RouteData="@routeData">
-                            <NotAuthorized>
-                                <Login></Login>
-                            </NotAuthorized>
-                            <Authorizing>
-                                <HugeText TheText="Authorizing..."></HugeText>
-                            </Authorizing>
-                        </AuthorizeRouteView>
-                    </Found>
-                    <NotFound>
-                        <PageTitle>Not found</PageTitle>
-                    </NotFound>
-                </Router>
-            </ChildContent>
+            <Router AppAssembly="@typeof(App).Assembly">
+                <Found Context="routeData">
+                    <AuthorizeRouteView RouteData="@routeData">
+                        <NotAuthorized>
+                            <Login></Login>
+                        </NotAuthorized>
+                        <Authorizing>
+                            <HugeText TheText="Authorizing..."></HugeText>
+                        </Authorizing>
+                    </AuthorizeRouteView>
+                </Found>
+                <NotFound>
+                    <PageTitle>Not found</PageTitle>
+                </NotFound>
+            </Router>
+        </ChildContent>
     </ErrorBoundary>
+
 </CascadingValue>

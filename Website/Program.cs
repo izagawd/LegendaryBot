@@ -38,7 +38,7 @@ public class Program
             });
         builder.Services.AddScoped<AuthenticationStateProvider, DiscordAuthenticationStateProvider>();
         builder.Services.AddAuthorizationCore();
-
+        builder.Services.AddScoped<SnackBarService>();
         builder.Services.AddScoped<NavigationService>();
         await builder.Build().RunAsync();
     }
