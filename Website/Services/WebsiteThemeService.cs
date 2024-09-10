@@ -1,8 +1,10 @@
 using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components;
 
 namespace Website.Services;
 public class WebsiteThemeService
 {
+    public event Action OnWebsiteThemeChanged;
     private const string WebsiteThemeKey = "website_theme";
     private ISyncLocalStorageService _syncLocalStorage;
 
@@ -15,6 +17,7 @@ public class WebsiteThemeService
         {
             _cachedWebsiteTheme = value;
             _syncLocalStorage.SetItem(WebsiteThemeKey,value);
+            OnWebsiteThemeChanged.Invoke();
         }
     }
 

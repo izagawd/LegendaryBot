@@ -12,11 +12,14 @@
         customStyle = "background-color: green;";
     }
 
-    var borCol = WebsiteThemeServce.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
+    var borCol = WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
     customStyle += $"border-color: {borCol};";
 }
-@inject WebsiteThemeService WebsiteThemeServce
+@code{
 
+    [CascadingParameter] public WebsiteTheme WebsiteTheme { get; set; }
+
+}
 
 <div class="snack-bar-parent" style="opacity: @(_shouldDisplaySnackBar ? "100" : "0")%">
     <div style="@(customStyle); @(_params.divStyle ?? "")">

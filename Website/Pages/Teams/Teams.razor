@@ -4,7 +4,7 @@
 @using Website.Services
 @using Website.Components
 @inject HttpClient Http
-@inject WebsiteThemeService WebTheme
+
 @attribute [Authorize]
 @code {
 
@@ -17,6 +17,8 @@
         Name
     }
 
+    [CascadingParameter]
+    public WebsiteTheme WebsiteTheme { get; set; }
     private SortType CurrentSortType = SortType.Level;
 
     bool reverseOrder = false;
@@ -228,7 +230,7 @@
                 </div>
 
                 @{
-                    string borderCol = WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
+                    string borderCol = WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
                 }
                 <div class="team-characters-container">
                     @for (var i = 1; i <= 4; i++)
@@ -237,7 +239,7 @@
 
                         var i1 = i;
                         <div class="team-character-div" @ondragstart="() => CurrentDraggedCharacter = character" draggable="@(character is not null ? "true" : "false")"
-                             ondragover="event.preventDefault()" @ondrop="() => OnDropOnSlot(i1)" style="border-color: @borderCol; background-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgrey")">
+                             ondragover="event.preventDefault()" @ondrop="() => OnDropOnSlot(i1)" style="border-color: @borderCol; background-color: @(WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgrey")">
                             <a href="/inventory/characters/@(character?.Number ?? 0)">
                                 <img style="border-color: @borderCol" src="@character?.ImageUrl" alt=""/>
                             </a>
@@ -267,7 +269,7 @@
 
             </div>
             @{
-                var borCol = WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "gray" : "black";
+                var borCol = WebsiteTheme == WebsiteTheme.Dark ? "gray" : "black";
             }
             <div class="others-parent" style="border-color: @borCol">
                 <div class="others">
@@ -279,7 +281,7 @@
                             <span class="material-symbols-outlined">
                                 search
                             </span>
-                            <input @onchange="args => _currentFilter = (string)args.Value!" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" type="text" placeholder="Search"/>
+                            <input @onchange="args => _currentFilter = (string)args.Value!" style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" type="text" placeholder="Search"/>
 
                         </div>
                         <select @bind="CurrentSortType" style="width: 75px; height: 30px">
@@ -349,7 +351,7 @@
                                 {
                                     <div class="character-div" draggable="true" @ondragstart='() => CurrentDraggedCharacter = i'>
                                         <a href="/inventory/characters/@i.Number">
-                                            <img src="@i.ImageUrl" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" alt=""/>
+                                            <img src="@i.ImageUrl" style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" alt=""/>
                                         </a>
                                         <p>@i.Name</p>
                                         <p>Num @i.Number</p>

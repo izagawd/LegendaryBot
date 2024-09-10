@@ -1,15 +1,16 @@
 @using Website.Services
 
-@inject WebsiteThemeService WebThemeServ
+
 @code {
+    [CascadingParameter] public WebsiteTheme WebsiteTheme { get; set; }
     [Parameter] public string TheText { get; set; } = "";
 
     [Parameter] public string Style { get; set; } = "";
 
 }
 <div class="main-div" 
-     style="color: @(WebThemeServ.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
-         background-color: @WebThemeServ.WebsiteTheme.GetThemeDefaults().DefaultBackgroundColor;
+     style="color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
+         background-color: @WebsiteTheme.GetThemeDefaults().DefaultBackgroundColor;
 @Style">
    <h1>@TheText</h1>
 </div>

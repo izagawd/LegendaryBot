@@ -14,8 +14,10 @@
 @using Website.Services
 @using Website.Components.Navigation
 
-@inject WebsiteThemeService WebsiteThemeService
+
 @code{
+    [CascadingParameter]
+    public WebsiteTheme WebsiteTheme { get; set; }
     private bool _displayAdvancedFilter;
     [Parameter]  public RenderFragment? SorterStuff { get; set; }
     public string NameFilter { get; private set; } = "";
@@ -26,8 +28,8 @@
 <InventoryNavigation>
     <div class="shower-container">
 
-        <div class="filterer-outer @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")"
-             style="height: @(!_displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
+        <div class="filterer-outer @(WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")"
+             style="height: @(!_displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
 
             <div class="filter-basic">
              
@@ -37,8 +39,8 @@
                 <input class="name-filter" placeholder="Search" type="text" @bind="NameFilter"/>
         
                 @{
-                var butTxtCol = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "black" : "white";
-                var advButColor = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "#525252";
+                var butTxtCol = WebsiteTheme == WebsiteTheme.Dark ? "black" : "white";
+                var advButColor = WebsiteTheme == WebsiteTheme.Dark ? "white" : "#525252";
                 }
                 <button style="background-color: @advButColor; color: @butTxtCol " class="advanced-filter-button" @onclick="() => _displayAdvancedFilter = !_displayAdvancedFilter">
                     Adv Filt
@@ -60,10 +62,10 @@
 
                    <a class="some-class" href="@LinkUrlDel?.Invoke(objectToRender)">
                        @{
-                           var shadCol = WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
+                           var shadCol = WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
                        }
                        <img src="@ImageUrlDelegate(objectToRender)" style="background-color: @BackgroundCol(objectToRender);
-                    border-color: @(WebsiteThemeService.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
+                    border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
                     
                     box-shadow: 0 0 5px 1px @shadCol" class="image-box" alt=""/>
                    </a>

@@ -1,30 +1,37 @@
-﻿@using Website.Pages
-@using Website.Pages.Authentication
+﻿@using Website.Pages.Authentication
 @using Website.Components
+@using Website.Services
+@inject WebsiteThemeService WebsiteThemeService
+@code{
 
-
-<ErrorBoundary >
-    <ErrorContent>
-        <AppError></AppError>
-        <PageTitle>Error</PageTitle>
-    </ErrorContent>
-    <ChildContent>
-        <CascadingAuthenticationState>
-            <Router AppAssembly="@typeof(App).Assembly">
-                <Found Context="routeData">
-                    <AuthorizeRouteView RouteData="@routeData">
-                        <NotAuthorized>
-                            <Login></Login>
-                        </NotAuthorized>
-                        <Authorizing>
-                            <HugeText TheText="Authorizing..."></HugeText>
-                        </Authorizing>
-                    </AuthorizeRouteView>
-                </Found>
-                <NotFound>
-                    <PageTitle>Not found</PageTitle>
-                </NotFound>
-            </Router>
-        </CascadingAuthenticationState>
-    </ChildContent>
-</ErrorBoundary>
+    protected override void OnInitialized()
+    {
+        WebsiteThemeService.OnWebsiteThemeChanged += StateHasChanged;
+    }
+}
+<CascadingValue Value="WebsiteThemeService.WebsiteTheme">
+    <ErrorBoundary >
+        <ErrorContent>
+            <AppError></AppError>
+            <PageTitle>Error</PageTitle>
+        </ErrorContent>
+        <ChildContent>
+                <Router AppAssembly="@typeof(App).Assembly">
+                    <Found Context="routeData">
+                        <AuthorizeRouteView RouteData="@routeData">
+                            <NotAuthorized>
+                                <Login></Login>
+                            </NotAuthorized>
+                            <Authorizing>
+                                <HugeText TheText="Authorizing..."></HugeText>
+                            </Authorizing>
+                        </AuthorizeRouteView>
+                    </Found>
+                    <NotFound>
+                        <PageTitle>Not found</PageTitle>
+                    </NotFound>
+                </Router>
+            </ChildContent>
+       
+    </ErrorBoundary>
+</CascadingValue>

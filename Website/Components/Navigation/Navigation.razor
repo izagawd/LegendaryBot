@@ -1,23 +1,15 @@
-@using System.Collections.Immutable
-@using Microsoft.VisualBasic
+
 @using Website.Services
 @inject WebsiteThemeService WebsiteThemeService
 @inject NavigationManager NavMan
 @inject AuthenticationStateProvider AuthStateProvider
 @code {
 
+    [CascadingParameter] public WebsiteTheme WebsiteTheme { get; set; }
     [Parameter] public RenderFragment? ChildContent { get; set; }
-
-    public WebsiteTheme Theme
-    {
-        get => WebsiteThemeService.WebsiteTheme;
-        set => WebsiteThemeService.WebsiteTheme = value;
-    }
-
-    
     private bool _showMore = false;
-    private string TextColor => Theme == WebsiteTheme.Dark ? "white" : "black";
-    private string IconHovBgColorClass => Theme == WebsiteTheme.Dark ? "icon-clickable-dark" : "icon-clickable-light";
+    private string TextColor => WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
+    private string IconHovBgColorClass => WebsiteTheme == WebsiteTheme.Dark ? "icon-clickable-dark" : "icon-clickable-light";
     private class DirectoryStorer
 
     {
@@ -65,8 +57,8 @@
 <HeadContent>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
 </HeadContent>
-<div class="navigator-outer @(Theme == WebsiteTheme.Dark ? "navigator-outer-dark" : "navigator-outer-light")" style="background-color: @Theme.GetThemeDefaults().DefaultBackgroundColor;">
-    <div class="navigator-container  @(_showMore ? "show-more" : "")" style="border-color: @(Theme == WebsiteTheme.Dark ? "darkgray" : "black")">
+<div class="navigator-outer @(WebsiteTheme == WebsiteTheme.Dark ? "navigator-outer-dark" : "navigator-outer-light")" style="background-color: @WebsiteTheme.GetThemeDefaults().DefaultBackgroundColor;">
+    <div class="navigator-container  @(_showMore ? "show-more" : "")" style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "darkgray" : "black")">
         <div class="navigator-inner">
             <p style="color: @TextColor;">Legendary!!</p>
         </div>
@@ -94,7 +86,7 @@
 
                 <div style="background-color: @(isDom ? backgroundCol : "inherit"); height: 100%; width: 5px"></div>
                 <a href="@i.Directory" class="link-a">
-                    <span class="material-symbols-outlined nav-link-icon" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
+                    <span class="material-symbols-outlined nav-link-icon" style="color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")">
                         @i.Icon
                     </span>
                     <p style="color: @TextColor">@i.Name</p>
@@ -102,15 +94,15 @@
             </div>
         }
         <div class="additional-cont">
-            <div class="icon-clickable dark-mode-changer-div @IconHovBgColorClass" @onclick="() => { if (Theme == WebsiteTheme.Dark) Theme = WebsiteTheme.Light;else Theme = WebsiteTheme.Dark;  }">
-            <span class="material-symbols-outlined toggle-button" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
+            <div class="icon-clickable dark-mode-changer-div @IconHovBgColorClass" @onclick="() => { if (WebsiteTheme == WebsiteTheme.Dark) WebsiteThemeService.WebsiteTheme = WebsiteTheme.Light;else WebsiteThemeService.WebsiteTheme = WebsiteTheme.Dark;  }">
+            <span class="material-symbols-outlined toggle-button" style="color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")">
                 dark_mode
             </span>
             </div>
 
             <div class="menu-div icon-clickable @IconHovBgColorClass" 
                  @onclick="() => _showMore = !_showMore">
-            <span class="material-symbols-outlined toggle-button" style="color: @(Theme == WebsiteTheme.Dark ? "white" : "black")">
+            <span class="material-symbols-outlined toggle-button" style="color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")">
                 menu
             </span>
             </div>

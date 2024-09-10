@@ -5,6 +5,9 @@ html, body, #app {
     
     margin: 0;
 }
+* {
+    transition: background-color var(--theme-transition-time), color var(--theme-transition-time);
+}
 #blazor-error-ui{
     position: absolute;
     z-index: 1;
