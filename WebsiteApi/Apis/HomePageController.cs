@@ -1,10 +1,12 @@
 using DatabaseManagement;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.Items;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFunctions;
+using Website.Pages;
 
 namespace WebsiteApi.Apis;
 [ApiController]
@@ -12,23 +14,29 @@ namespace WebsiteApi.Apis;
 public class HomePageController(PostgreSqlContext context) : ControllerBase
 {
     [Authorize]
+    [HttpGet("get")]
     public async Task<IActionResult> GetSomeUserData()
     {
         var discordId = User.GetDiscordUserId();
         var selected = await context.Set<UserData>()
             .Where(i => i.DiscordId == discordId)
-            .Select(i => new
+            .Select(i => new Home.HomePageData()
             {
-                coinsCount = i.Items.Where(j => j is Coin)
-                    .Select(j => j.Stacks).FirstOrDefault(0),
-                divineShardsCount = i.Items.Where(j => j is DivineShard)
-                    .Select(j => j.Stacks).FirstOrDefault(0),
-                staminaValue = i.Items.Where(j => j is Stamina)
-                    .Select(j => j.Stacks).FirstOrDefault(0)
+                FavoriteAvatarUrl = Player.GetImageUrl(i.Gender),
+                Coins = i.Items.Where(j => j is Coin)
+                    .Select(j => new int?(j.Stacks)).FirstOrDefault() ?? 0,
+                DivineShards = i.Items.Where(j => j is DivineShard)
+                    .Select(j => new int?(j.Stacks)).FirstOrDefault() ?? 0,
+                Stamina = i.Items.Where(j => j is Stamina)
+                    .Select(j => new int?(j.Stacks)).FirstOrDefault() ?? 0,
+                AdventurerLevel = i.AdventurerLevel
             }).FirstOrDefaultAsync();
         if (selected is null)
         {
-            selected = new { coinsCount = 0, divineShardsCount = 0, staminaValue =0 };
+            selected = new Home.HomePageData
+            {
+                FavoriteAvatarUrl = Player.GetImageUrl(Gender.Male)
+            };
         }
 
         return Ok(selected);

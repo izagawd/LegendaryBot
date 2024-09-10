@@ -2,25 +2,56 @@
 
 @using System.Security.Claims
 @using Website.Components.Navigation
+@using Website.Services
+@using Website.Components
 
 @inject AuthenticationStateProvider StatProv
-
-
+@inject HttpClient Http
+@inject  WebsiteThemeService Serv
 @code
 {
-    private ClaimsPrincipal? _user;
+    public class HomePageData
+    {
+        public string FavoriteAvatarUrl { get; set; }
+        public int Coins { get; set; }
+        public int DivineShards { get; set; }
+        public int Stamina { get; set; }
+        public int AdventurerLevel { get; set; }
+    }
+
+    protected ClaimsPrincipal? _user;
+    private HomePageData? _homePageData;
     protected override async Task OnInitializedAsync()
     {
         _user = (await StatProv.GetAuthenticationStateAsync()).User;
+        if (_user.Identity?.IsAuthenticated ?? false)
+        {
+           _homePageData = await Http.GetFromJsonAsync<HomePageData>("HomePage/get");
+        }
     }
 }
 <Navigation>
-    @if (_user?.Identity?.IsAuthenticated ?? false)
+    @if (_homePageData is not null)
     {
-        <p>YAY</p>
+        <div class="home-class">
+            <div>
+                <img style="border-color: @(Serv.WebsiteTheme == WebsiteTheme.Dark? "white": "black")" src="@_homePageData.FavoriteAvatarUrl" alt=""/>
+                <div>
+                    <p>Level: @_homePageData.AdventurerLevel</p>
+                    <p>Coins: @_homePageData.Coins</p>
+                    <p>Divine Shards: @_homePageData.DivineShards</p>
+                    <p>Stamina: @_homePageData.Stamina</p>
+                </div>
+
+
+            </div>
+        </div>
+
     }
-    else
+    else if(_user is not null && !(_user.Identity?.IsAuthenticated ?? false))
     {
-        <p>aww</p>
+        var col = Serv.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
+        var zaStyle = $"background-color: inherit; color: {col}";
+        <HugeText Style="@zaStyle" TheText="Not Logged In"></HugeText>
     }
 </Navigation>
