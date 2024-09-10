@@ -309,7 +309,7 @@
 
                     }
 
-                    <div class="other-characters-parent"  ondragover="event.preventDefault()" @ondrop="RemoveDraggedCharacterFromTeamAsync" style="border-color: @borCol">
+                    <div class="other-characters-parent"   ondragover="@(CurrentTeam.CharacterSlots.Count > 1? "event.preventDefault()" : "")" @ondrop="RemoveDraggedCharacterFromTeamAsync" style="border-color: @borCol">
                         <div class="other-characters">
 
                             @code{

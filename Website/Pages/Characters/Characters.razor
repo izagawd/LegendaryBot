@@ -9,11 +9,11 @@
 @attribute [Authorize]
 @code{
 
-    private CharacterDto[]? CharacterCollection;
+    private CharacterDto[]? _characterCollection;
 
     protected override async Task OnInitializedAsync()
     {
-        CharacterCollection = await Http.GetFromJsonAsync<CharacterDto[]>("/CharactersPage/get-characters");
+        _characterCollection = await Http.GetFromJsonAsync<CharacterDto[]>("/CharactersPage/get-characters");
 
     }
 
@@ -29,9 +29,9 @@
     {
         get
         {
-            if (CharacterCollection is null)
+            if (_characterCollection is null)
                 return null;
-            var theEnumerable = CharacterCollection.AsEnumerable();
+            var theEnumerable = _characterCollection.AsEnumerable();
             switch (SortTypeVal)
             {
                 case SortType.Name:
