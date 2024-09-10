@@ -2,11 +2,14 @@
 @using Microsoft.AspNetCore.Authorization
 @using Website.Components.Navigation
 @using Website.Services
+@using Website.Components
 @inject HttpClient Http
 @inject WebsiteThemeService WebTheme
 @attribute [Authorize]
 @code {
 
+
+    private static readonly TimeSpan BadRequestTimeSpan = TimeSpan.FromSeconds(2);
     enum SortType
     {
         Level,
@@ -61,6 +64,13 @@
         {
             CurrentTeam.CharacterSlots.RemoveAll(i => i.Slot == slot);
         }
+        else
+        {
+            await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+                await responseMessage.Content.ReadAsStringAsync(),
+                BadRequestTimeSpan
+            ){SnackBarLayout = SnackBar.SnackBarLayout.Error});
+        }
     }
 
     async Task OnDropOnSlot(int slot)
@@ -83,6 +93,14 @@
                 {
                     var otherSlot = CurrentTeam.CharacterSlots.First(i => i.Slot == slot);
                     (otherSlot.Slot, currentCharSlot.Slot) = (currentCharSlot.Slot, otherSlot.Slot);
+                }
+                else
+                {
+                    Console.WriteLine("bruh");
+                    await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+                        await result.Content.ReadAsStringAsync(),
+                        BadRequestTimeSpan
+                    ){SnackBarLayout = SnackBar.SnackBarLayout.Error});
                 }
             }
             else
@@ -114,6 +132,14 @@
                         gotten.CharacterId = CurrentDraggedCharacter.Id;
                     }
                 }
+                else
+                {
+                    await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+                        await result.Content.ReadAsStringAsync(),
+                        BadRequestTimeSpan
+                    ){SnackBarLayout = SnackBar.SnackBarLayout.Error});
+                }
+                
 
             }
 
@@ -134,6 +160,15 @@
         {
             CurrentTeam.Name = newName;
         }
+        else
+        {
+          
+            await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+                await didChange.Content.ReadAsStringAsync(),
+                BadRequestTimeSpan
+            ){SnackBarLayout = SnackBar.SnackBarLayout.Error});
+            
+        }
     }
     async Task EquipTeamAsync()
     {
@@ -146,18 +181,30 @@
         if (res.IsSuccessStatusCode)
         {
             TeamCharacterDto!.EquippedTeamId = CurrentTeam.Id;
+        }       else
+        {
+            await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+                await res.Content.ReadAsStringAsync(),
+                BadRequestTimeSpan
+            ){SnackBarLayout = SnackBar.SnackBarLayout.Error});
         }
       
     }
+
+
+
+    SnackBar? SnackBar;
+
 
 }
 <Navigation>
     @if (TeamCharacterDto is not null && CurrentTeam is not null)
     {
+
         <div class="za-parent">
             <div class="team-settler">
                 <div class="inputs">
-                    <select  @onchange="OnChangeTeamAsync">
+                    <select @onchange="OnChangeTeamAsync">
                         @foreach (var i in TeamCharacterDto.Teams)
                         {
                             <option selected="@(i == CurrentTeam)" value="@i.Id">@i.Name</option>
@@ -170,7 +217,7 @@
                     <button style="@(currentIsEquipped ? "background-color: grey" : "")"
                             @onclick="EquipTeamAsync" class="equip-button">@(currentIsEquipped ? "Equipped" : "Equip")</button>
                 </div>
-            
+
                 @{
                     string borderCol = WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
                 }
@@ -178,10 +225,10 @@
                     @for (var i = 1; i <= 4; i++)
                     {
                         var character = CurrentTeam.GetCharacter(i, TeamCharacterDto);
-                        
+
                         var i1 = i;
-                        <div class="team-character-div" @ondragstart="() => CurrentDraggedCharacter = character" draggable="@(character is not null ? "true" : "false")" 
-                             ondragover="event.preventDefault()" @ondrop="() => OnDropOnSlot(i1)" style="border-color: @borderCol; background-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark? "gray" : "lightgrey")">
+                        <div class="team-character-div" @ondragstart="() => CurrentDraggedCharacter = character" draggable="@(character is not null ? "true" : "false")"
+                             ondragover="event.preventDefault()" @ondrop="() => OnDropOnSlot(i1)" style="border-color: @borderCol; background-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgrey")">
                             <a href="/inventory/characters/@(character?.Number ?? 0)">
                                 <img style="border-color: @borderCol" src="@character?.ImageUrl" alt=""/>
                             </a>
@@ -202,8 +249,8 @@
                                     </span>
                                 </div>
                             }
-               
-                  
+
+
 
                         </div>
                     }
@@ -217,42 +264,44 @@
                 <div class="others">
 
 
-                    
-                    <div class="filters">
-                        <div class="filter-class" >
-                            <span class="material-symbols-outlined">
-                                        search
-                                    </span>
-                            <input @onchange="args => _currentFilter =(string) args.Value!" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" type="text" placeholder="Search"/>
 
-                        </div> 
+                    <div class="filters">
+                        <div class="filter-class">
+                            <span class="material-symbols-outlined">
+                                search
+                            </span>
+                            <input @onchange="args => _currentFilter = (string)args.Value!" style="border-color: @(WebTheme.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" type="text" placeholder="Search"/>
+
+                        </div>
                         <select @bind="CurrentSortType" style="width: 75px; height: 30px">
                             @foreach (var i in Enum.GetValues<SortType>())
                             {
                                 <option value="@i">@i</option>
                             }
                         </select>
-                        <input  @bind="reverseOrder" type="checkbox"/>
+                        <input @bind="reverseOrder" type="checkbox"/>
                     </div>
-       
+
 
                     @code{
 
-                    Task RemoveDraggedCharacterFromTeamAsync()
-                    {
-                    if(CurrentDraggedCharacter is null) return Task.CompletedTask;
-                    var currentSlot = CurrentTeam!.CharacterSlots.FirstOrDefault(i => i.CharacterId == CurrentDraggedCharacter.Id);
-                    if (currentSlot is not null)
-                    {
-                    return RemoveFromTeamAsync(currentSlot.Slot);
+                        Task RemoveDraggedCharacterFromTeamAsync()
+                        {
+                            if (CurrentDraggedCharacter is null) return Task.CompletedTask;
+                            var currentSlot = CurrentTeam!.CharacterSlots.FirstOrDefault(i => i.CharacterId == CurrentDraggedCharacter.Id);
+                            if (currentSlot is not null)
+                            {
+                                return RemoveFromTeamAsync(currentSlot.Slot);
+                            }
+
+                            return Task.CompletedTask;
+                        }
+
                     }
 
-                    return Task.CompletedTask;
-                    }
-
-                    }
                     <div class="other-characters-parent" style="border-color: @borCol">
                         <div class="other-characters" ondragover="event.preventDefault()" @ondrop="RemoveDraggedCharacterFromTeamAsync">
+
                             @code{
 
                                 public IEnumerable<CharacterDto> NonTeamedCharacters
@@ -273,7 +322,7 @@
                                             case SortType.Name:
                                                 gotten = gotten.OrderBy(i => i.Name);
                                                 break;
-                                         
+
                                         }
 
                                         if (reverseOrder)
@@ -283,10 +332,11 @@
                                 }
 
                             }
+
                             @{
-                          
+
                                 foreach (var i in NonTeamedCharacters)
-                                    
+
                                 {
                                     <div class="character-div" draggable="true" @ondragstart='() => CurrentDraggedCharacter = i'>
                                         <a href="/inventory/characters/@i.Number">
@@ -305,23 +355,22 @@
 
                 </div>
             </div>
-       
+
 
         </div>
-
-
+        <SnackBar @ref="SnackBar"></SnackBar>
     }
     else
     {
         <div class="loading-or-failure-div">
             <div>
-                @if(ErrorText is null)
+                @if (ErrorText is null)
                 {
-                <h1>Loading...</h1>
+                    <h1>Loading...</h1>
                 }
                 else
                 {
-                <h1>@ErrorText</h1>
+                    <h1>@ErrorText</h1>
                 }
             </div>
         </div>

@@ -30,14 +30,14 @@ public class TeamPageController : ControllerBase
     {
 
         if (newName.Length <= 0)
-            return BadRequest();
+            return BadRequest("Name length must be at least 1 character");
         var userId = User.GetDiscordUserId();
         var didDo  =await  context.Set<PlayerTeam>()
             .Where(i => i.UserData.DiscordId == userId && i.Id == teamId
                                                        && i.UserData.PlayerTeams.All(j => j.TeamName.ToLower() != newName.ToLower()))
             .ExecuteUpdateAsync(i => i.SetProperty(j => j.TeamName, newName));
         if (didDo <= 0)
-            return BadRequest();
+            return BadRequest("Team not found in database or provided name already exists");
         return Ok();
 
 
@@ -75,14 +75,14 @@ public class TeamPageController : ControllerBase
                             CharacterId = k.CharacterId,
                             Slot = k.Slot
                         }).ToList(),
-                    Name = j.TeamName
+                    Name = j.TeamName 
                 }).ToArray(),
                 EquippedTeamId = i.EquippedPlayerTeam!.Id
             }).FirstOrDefaultAsync();
 
         if (selected is null)
             return BadRequest(
-                "No team was found. You may not have began your journey with /begin with the discord bot");
+                "No team was found in database. You may not have began your journey with /begin with the discord bot");
         return Ok(selected);
     }
 
@@ -94,7 +94,7 @@ public class TeamPageController : ControllerBase
         foreach (var slot in slots)
         {
             if (slot < 1 || slot > TypesFunction.GetDefaultObject<PlayerTeam>().MaxCharacters)
-                return BadRequest();
+                return BadRequest("Slot input out of range. Range is 1-4");
         }
        
         var theId = User.GetDiscordUserId();
@@ -105,10 +105,10 @@ public class TeamPageController : ControllerBase
             .FirstOrDefaultAsync(i => i.DiscordId == theId);
 
         if (userData is null)
-            return BadRequest();
+            return BadRequest("Your data cannot be found in database");
         var theTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (theTeam is null)
-            return BadRequest();
+            return BadRequest("Team not found in database");
         await using (var transaction = await context.Database.BeginTransactionAsync())
         {
             try
@@ -137,7 +137,7 @@ public class TeamPageController : ControllerBase
     {
         if (slot < 1 || slot > TypesFunction.GetDefaultObject<PlayerTeam>().MaxCharacters)
         {
-            return BadRequest();
+            return BadRequest("Slot input out of range. Range is 1-4");
         }
  
         var theId = User.GetDiscordUserId();
@@ -149,13 +149,13 @@ public class TeamPageController : ControllerBase
             .FirstOrDefaultAsync(i => i.DiscordId == theId);
 
         if (userData is null)
-            return BadRequest();
+            return BadRequest("Your data cannot be found from database");
         var theCharacter = userData.Characters.FirstOrDefault(i => i.Id == characterId);
         if (theCharacter is null)
-            return BadRequest();
+            return BadRequest("Character not found in database");
         var theTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (theTeam is null)
-            return BadRequest();
+            return BadRequest("Team not found in database");
         theTeam[slot] = theCharacter;
 
         await context.SaveChangesAsync();
@@ -170,7 +170,7 @@ public class TeamPageController : ControllerBase
    
         if (slot < 1 || slot > TypesFunction.GetDefaultObject<PlayerTeam>().MaxCharacters)
         {
-            return BadRequest();
+            return BadRequest("Inputted slot out of range. range is 1-4");
         }
 
         var theId = User.GetDiscordUserId();
@@ -180,7 +180,7 @@ public class TeamPageController : ControllerBase
             .ExecuteDeleteAsync();
 
         if (deleted < 1)
-            return BadRequest();
+            return BadRequest("Character is not in that team in the database, or your team is not found in the database");
         return Ok();
     }
     [Authorize]
@@ -197,39 +197,16 @@ public class TeamPageController : ControllerBase
             .FirstOrDefaultAsync(i => i.DiscordId == discordId);
 
         if (userData is null)
-            return BadRequest();
+            return BadRequest("Your data cannot be found in the database");
    
         
         userData.EquippedPlayerTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (userData.EquippedPlayerTeam is null)
-            return BadRequest();
+            return BadRequest("The team you desired to equip cannot be found in database");
         await context.SaveChangesAsync();
         
         return Ok();
     }
-    [Authorize]
-    [HttpPost]
-    public async Task<IActionResult> AddCharacterToTeam([FromForm] long teamId, 
-       [FromForm] long characterId)
-    {
-        
 
-        var discordId = User.GetDiscordUserId();
-        var team = await context.Set<UserData>().Where(i => i.DiscordId == discordId)
-            .SelectMany(i => i.PlayerTeams)
-            .Include(i => i.TeamMemberships.Where(j => j.Character.Id == characterId))
-            .FirstOrDefaultAsync(i => i.Id == teamId);
-        if (team is null)
-            return BadRequest($"No team with Id {teamId} could be found");
-        var zaFirst = team.FirstOrDefault(i => i.Id == characterId);
-        if (zaFirst is null)
-        {
-            return BadRequest($"Team doesnt have character with Id {characterId}");
-        }
-
-        team.Remove(zaFirst);
-        await context.SaveChangesAsync();
-        return Ok();
-    }
     
 }

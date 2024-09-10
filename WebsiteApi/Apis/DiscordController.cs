@@ -58,7 +58,7 @@ public class DiscordController : ControllerBase
     
             return Ok(tokenResponse);
         }
-        return BadRequest();
+        return BadRequest("Something went wrong");
         
     }
 

@@ -1,0 +1,93 @@
+@using Website.Services
+@{
+    
+
+
+    var customStyle = "";
+    if (_params.SnackBarLayout == SnackBarLayout.Error)
+    {
+        customStyle = "background-color: red;";
+    } else if (_params.SnackBarLayout == SnackBarLayout.Success)
+    {
+        customStyle = "background-color: green;";
+    }
+
+    var borCol = WebsiteThemeServce.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
+    customStyle += $"border-color: {borCol};";
+}
+@inject WebsiteThemeService WebsiteThemeServce
+
+
+<div class="snack-bar-parent" style="opacity: @(_shouldDisplaySnackBar ? "100" : "0")%">
+    <div style="@(customStyle); @(_params.divStyle ?? "")">
+        <p style="@(_params.textStyle ?? "")">@(_params.text)</p>
+    </div>
+</div>
+
+@code {
+    private bool _shouldDisplaySnackBar;
+    public enum  SnackBarLayout
+    {
+        Error, Success
+    }
+
+    ~SnackBar()
+    {
+        _cancellationTokenSource?.Dispose();
+    }
+
+
+    // Task to track the currently displaying snackbar
+    private CancellationTokenSource? _cancellationTokenSource;
+
+    public struct SnackBarParams(string text, TimeSpan delay)
+    {
+        public string text = text;
+        public TimeSpan delay = delay;
+        public SnackBarLayout SnackBarLayout = SnackBarLayout.Success;
+        public string? divStyle;
+        public string? textStyle;
+    }
+    public async Task DisplaySnackBarAsync(SnackBarParams @params)
+    {
+        // Cancel the current snackbar if one is being displayed
+        _cancellationTokenSource?.Cancel();
+        _cancellationTokenSource?.Dispose();
+        // Create a new cancellation token source for the new snackbar
+        _cancellationTokenSource = new CancellationTokenSource();
+
+        try
+        {
+            // Display the new snackbar
+            await DisplaySnackBarTaskStuff(@params, _cancellationTokenSource.Token);
+        }
+        catch (OperationCanceledException)
+        {
+            // Handle the cancellation (if needed)
+        }
+    }
+
+    SnackBarParams _params;
+    private async Task DisplaySnackBarTaskStuff(SnackBarParams @params, CancellationToken token)
+    {
+        _params = @params;
+        _shouldDisplaySnackBar = true;
+        StateHasChanged();
+        try
+        {
+            // Display the snackbar for the specified delay or until cancellation
+            await Task.Delay(@params.delay, token);
+        }
+        catch (TaskCanceledException)
+        {
+            // Handle cancellation during the delay
+        }
+
+        // Hide the snackbar (only if it wasn't cancelled)
+        if (!token.IsCancellationRequested)
+        {
+            _shouldDisplaySnackBar = false;
+            StateHasChanged();
+        }
+    }
+}

@@ -29,6 +29,7 @@
     width: 85px; height: 30px
     
 }
+
 .loading-or-failure-div{
     display: flex;
     text-align: center;
@@ -58,6 +59,7 @@
     margin-top: auto; margin-bottom: auto; height: fit-content;  margin-left: 20px;
 }
 .za-parent{
+    overflow: hidden;
     display: flex; height: 100%; width: 100%
 }
 .team-character-div a{
