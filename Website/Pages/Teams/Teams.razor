@@ -159,10 +159,15 @@
         if (didChange.IsSuccessStatusCode)
         {
             CurrentTeam.Name = newName;
+            StateHasChanged();
+            await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+                $"Team name changed to {newName}!",
+                BadRequestTimeSpan
+            ){SnackBarLayout = SnackBar.SnackBarLayout.Success});
         }
         else
         {
-          
+            
             await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                 await didChange.Content.ReadAsStringAsync(),
                 BadRequestTimeSpan
@@ -181,6 +186,11 @@
         if (res.IsSuccessStatusCode)
         {
             TeamCharacterDto!.EquippedTeamId = CurrentTeam.Id;
+            StateHasChanged();
+            await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
+                $"Team {CurrentTeam.Name} is now equipped!",
+                BadRequestTimeSpan
+            ){SnackBarLayout = SnackBar.SnackBarLayout.Success});
         }       else
         {
             await SnackBar!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
