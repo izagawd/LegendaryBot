@@ -15,6 +15,7 @@ div{
 .snack-bar-parent p{
     height: fit-content;
     
+    width: 95%;
     margin-left: 20px;
     margin-top: auto;
     margin-bottom: auto;

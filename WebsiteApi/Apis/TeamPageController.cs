@@ -37,7 +37,7 @@ public class TeamPageController : ControllerBase
                                                        && i.UserData.PlayerTeams.All(j => j.TeamName.ToLower() != newName.ToLower()))
             .ExecuteUpdateAsync(i => i.SetProperty(j => j.TeamName, newName));
         if (didDo <= 0)
-            return BadRequest("Team not found in database or provided name already exists");
+            return BadRequest("One of your teams already has that name");
         return Ok();
 
 
@@ -105,10 +105,10 @@ public class TeamPageController : ControllerBase
             .FirstOrDefaultAsync(i => i.DiscordId == theId);
 
         if (userData is null)
-            return BadRequest("Your data cannot be found in database");
+            return BadRequest("Something went wrong");
         var theTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (theTeam is null)
-            return BadRequest("Team not found in database");
+            return BadRequest("Something went wrong");
         await using (var transaction = await context.Database.BeginTransactionAsync())
         {
             try
@@ -149,13 +149,13 @@ public class TeamPageController : ControllerBase
             .FirstOrDefaultAsync(i => i.DiscordId == theId);
 
         if (userData is null)
-            return BadRequest("Your data cannot be found from database");
+            return BadRequest("Something went wrong");
         var theCharacter = userData.Characters.FirstOrDefault(i => i.Id == characterId);
         if (theCharacter is null)
-            return BadRequest("Character not found in database");
+            return BadRequest("Something went wrong");
         var theTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (theTeam is null)
-            return BadRequest("Team not found in database");
+            return BadRequest("Something went wrong");
         theTeam[slot] = theCharacter;
 
         await context.SaveChangesAsync();
@@ -180,7 +180,7 @@ public class TeamPageController : ControllerBase
             .ExecuteDeleteAsync();
 
         if (deleted < 1)
-            return BadRequest("Character is not in that team in the database, or your team is not found in the database");
+            return BadRequest("Something went wrong");
         return Ok();
     }
     [Authorize]
@@ -197,12 +197,12 @@ public class TeamPageController : ControllerBase
             .FirstOrDefaultAsync(i => i.DiscordId == discordId);
 
         if (userData is null)
-            return BadRequest("Your data cannot be found in the database");
+            return BadRequest("Something went wrong");
    
         
         userData.EquippedPlayerTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (userData.EquippedPlayerTeam is null)
-            return BadRequest("The team you desired to equip cannot be found in database");
+            return BadRequest("Something went wrong");
         await context.SaveChangesAsync();
         
         return Ok();
