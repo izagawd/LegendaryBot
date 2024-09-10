@@ -5,7 +5,7 @@
 @using Website.Services
 @using Website.Components
 
-@inject AuthenticationStateProvider StatProv
+
 @inject HttpClient Http
 @inject  WebsiteThemeService Serv
 @code
@@ -19,11 +19,12 @@
         public int AdventurerLevel { get; set; }
     }
 
+    [CascadingParameter] public Task<AuthenticationState> AuthState  { get; set; } = null!;
     protected ClaimsPrincipal? _user;
     private HomePageData? _homePageData;
     protected override async Task OnInitializedAsync()
     {
-        _user = (await StatProv.GetAuthenticationStateAsync()).User;
+        _user = (await AuthState).User;
         if (_user.Identity?.IsAuthenticated ?? false)
         {
            _homePageData = await Http.GetFromJsonAsync<HomePageData>("HomePage/get");

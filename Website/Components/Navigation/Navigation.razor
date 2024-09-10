@@ -2,9 +2,10 @@
 @using Website.Services
 @inject WebsiteThemeService WebsiteThemeService
 @inject NavigationManager NavMan
-@inject AuthenticationStateProvider AuthStateProvider
+
 @code {
 
+    [CascadingParameter] public Task<AuthenticationState> AuthState { get; set; } = null!;
     [CascadingParameter] public WebsiteTheme WebsiteTheme { get; set; }
     [Parameter] public RenderFragment? ChildContent { get; set; }
     private bool _showMore = false;
@@ -42,7 +43,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if ((await AuthStateProvider.GetAuthenticationStateAsync()).User.Identity?.IsAuthenticated ?? false)
+        if ((await AuthState).User.Identity?.IsAuthenticated ?? false)
         {
             Directories.Add(new DirectoryStorer("Logout","/authentication/logout","logout"));
         }

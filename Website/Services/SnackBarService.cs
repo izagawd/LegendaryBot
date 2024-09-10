@@ -7,7 +7,12 @@ public class SnackBarService
     public Task DisplayPendingSnackBarIfExistsAsync()
     {
         if (_pendingSnackBarParam is not null)
-            return DisplaySnackBarAsync(_pendingSnackBarParam.Value);
+        {
+            var toDo = DisplaySnackBarAsync(_pendingSnackBarParam.Value);
+            _pendingSnackBarParam = null;
+            return toDo;
+        }
+      
         return Task.CompletedTask;
 
     }

@@ -20,30 +20,32 @@
 
     }
 }
-<CascadingValue Value="WebsiteThemeService.WebsiteTheme">
-    <SnackBar @ref="_snackBar"/>
-    <ErrorBoundary >
-        <ErrorContent>
-            <AppError></AppError>
-            <PageTitle>Error</PageTitle>
-        </ErrorContent>
-        <ChildContent>
-            <Router AppAssembly="@typeof(App).Assembly">
-                <Found Context="routeData">
-                    <AuthorizeRouteView RouteData="@routeData">
-                        <NotAuthorized>
-                            <Login></Login>
-                        </NotAuthorized>
-                        <Authorizing>
-                            <HugeText TheText="Authorizing..."></HugeText>
-                        </Authorizing>
-                    </AuthorizeRouteView>
-                </Found>
-                <NotFound>
-                    <PageTitle>Not found</PageTitle>
-                </NotFound>
-            </Router>
-        </ChildContent>
-    </ErrorBoundary>
+<CascadingAuthenticationState>
+    <CascadingValue Value="WebsiteThemeService.WebsiteTheme">
+        <SnackBar @ref="_snackBar"/>
+        <ErrorBoundary >
+            <ErrorContent>
+                <AppError></AppError>
+                <PageTitle>Error</PageTitle>
+            </ErrorContent>
+            <ChildContent>
+                <Router AppAssembly="@typeof(App).Assembly">
+                    <Found Context="routeData">
+                        <AuthorizeRouteView RouteData="@routeData">
+                            <NotAuthorized>
+                                <Login></Login>
+                            </NotAuthorized>
+                            <Authorizing>
+                                <HugeText TheText="Authorizing..."></HugeText>
+                            </Authorizing>
+                        </AuthorizeRouteView>
+                    </Found>
+                    <NotFound>
+                        <PageTitle>Not found</PageTitle>
+                    </NotFound>
+                </Router>
+            </ChildContent>
+        </ErrorBoundary>
 
-</CascadingValue>
+    </CascadingValue>
+</CascadingAuthenticationState>
