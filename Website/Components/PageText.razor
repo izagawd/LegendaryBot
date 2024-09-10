@@ -1,0 +1,10 @@
+@using Website.Services
+
+@inject WebsiteThemeService WebThemeServ
+@code {
+    [Parameter] public string TheText { get; set; } = "";
+}
+<div class="main-div" 
+     style="background-color: @WebThemeServ.WebsiteTheme.GetThemeDefaults().DefaultBackgroundColor">
+   <h1 style="color: @(WebThemeServ.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")">@TheText</h1>
+</div>

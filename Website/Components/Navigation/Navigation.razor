@@ -3,6 +3,7 @@
 @using Website.Services
 @inject WebsiteThemeService WebsiteThemeService
 @inject NavigationManager NavMan
+@inject AuthenticationStateProvider AuthStateProvider
 @code {
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
@@ -36,7 +37,7 @@
         }
     }
 
-    private static readonly ImmutableArray<DirectoryStorer> Directories =
+    private readonly List<DirectoryStorer> Directories =
     [
         
         new DirectoryStorer("Home", "/", "home", str => str == PublicInfo.Information.WebsiteDomainName || str == PublicInfo.Information.WebsiteDomainName + "/"),
@@ -47,6 +48,17 @@
 
     ];
 
+    protected override async Task OnInitializedAsync()
+    {
+        if ((await AuthStateProvider.GetAuthenticationStateAsync()).User.Identity?.IsAuthenticated ?? false)
+        {
+            Directories.Add(new DirectoryStorer("Logout","/authentication/logout","logout"));
+        }
+        else
+        {
+            Directories.Add(new DirectoryStorer("Login","/authentication/login","login"));
+        }
+    }
 
 }
 

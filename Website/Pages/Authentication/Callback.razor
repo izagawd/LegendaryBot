@@ -2,13 +2,13 @@
 @using System.Text.Json.Nodes
 @using Blazored.LocalStorage
 @using Website.Services
+@using Website.Components
 
 @inject  NavigationManager Navigation
 @inject  HttpClient HttpClient
-@inject ILocalStorageService StorageService
 @inject NavigationService NavService
 @inject DiscordTokenService DiscordTokServ
-<h1>Logging in...</h1>
+<PageText TheText="Logging In..."></PageText>
 @code {
     protected override async Task OnInitializedAsync()
     {
@@ -24,10 +24,10 @@
         if (token is not null)
         {
             DiscordTokServ.DiscordToken = token["access_token"]?.GetValue<string>();
-            if (NavService.InitialLocation is not null)
+            if (NavService.DesiredRedirectLocation is not null)
             {
-                Navigation.NavigateTo(NavService.InitialLocation,true);
-                NavService.InitialLocation = null;
+                Navigation.NavigateTo(NavService.DesiredRedirectLocation,true);
+                NavService.DesiredRedirectLocation = null;
             }
 
         }

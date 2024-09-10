@@ -7,7 +7,7 @@ public class NavigationService
     public const string InitialUrlLocationKey = "InitialUrlLocation";
 
     
-    public string? InitialLocation
+    public string? DesiredRedirectLocation
     {
         get => _sessionStorage.GetItem<string?>(InitialUrlLocationKey);
         set => _sessionStorage.SetItem(InitialUrlLocationKey, value);

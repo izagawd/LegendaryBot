@@ -1,10 +1,5 @@
 @using Website.Services
+@using Website.Components
 @inject WebsiteThemeService WebThemeServ
 
-<div class="error-div" 
-     style="background-color: @WebThemeServ.WebsiteTheme.GetThemeDefaults().DefaultBackgroundColor">
-    <h1 style="color: @(WebThemeServ.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")">An Error Has Occured</h1>
-</div>
-@code {
-    
-}
+<PageText TheText="An Error Has Occured"></PageText>

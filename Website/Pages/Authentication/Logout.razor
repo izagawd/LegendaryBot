@@ -1,0 +1,15 @@
+@page "/authentication/logout"
+@using Website.Services
+@using Website.Components
+<PageText TheText="Redirecting..."></PageText>
+@inject DiscordTokenService TokenService
+@inject NavigationManager NavManager
+@code {
+  protected override void OnInitialized()
+  {
+    TokenService.DiscordToken = null;
+    NavManager.NavigateTo("/",true);
+    
+  }
+
+}

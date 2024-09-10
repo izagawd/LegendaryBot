@@ -1,4 +1,6 @@
 ﻿@using Website.Pages
+@using Website.Pages.Authentication
+@using Website.Components
 
 
 <ErrorBoundary >
@@ -12,8 +14,11 @@
                 <Found Context="routeData">
                     <AuthorizeRouteView RouteData="@routeData">
                         <NotAuthorized>
-                            <RedirectToLogin></RedirectToLogin>
+                            <Login></Login>
                         </NotAuthorized>
+                        <Authorizing>
+                            <PageText TheText="Authorizing..."></PageText>
+                        </Authorizing>
                     </AuthorizeRouteView>
                 </Found>
                 <NotFound>
