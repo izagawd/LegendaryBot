@@ -9,8 +9,9 @@
 
 }
 <div class="main-div" 
-     style="color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
+     style="
          background-color: @WebsiteTheme.GetThemeDefaults().DefaultBackgroundColor;
+         color: @WebsiteTheme.GetThemeDefaults().DefaultColor;
 @Style">
    <h1>@TheText</h1>
 </div>

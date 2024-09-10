@@ -28,6 +28,7 @@ public abstract class WebsiteThemeDefaults
     {
         return isDarkMode ? Dark : Light;
     }
+        public abstract string DefaultColor { get; }
     protected WebsiteThemeDefaults(){}
 }
 
@@ -35,11 +36,13 @@ public abstract class WebsiteThemeDefaults
 
 public class DarkThemeDefaults : WebsiteThemeDefaults
 {
+    public override string DefaultColor => "white";
     public override string DefaultBackgroundColor => "#1A1A1A";
    
 }
 public class LightThemeDefaults : WebsiteThemeDefaults
 {
+    public override string DefaultColor => "black";
     public override string DefaultBackgroundColor => "white";
 
 

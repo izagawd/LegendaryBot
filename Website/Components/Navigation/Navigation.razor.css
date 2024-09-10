@@ -67,9 +67,6 @@
     text-decoration: none;
 }
 
-* {
-    transition: background-color var(--theme-transition-time), color var(--theme-transition-time);
-}
 
 
 .icon-clickable:active {

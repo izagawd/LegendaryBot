@@ -42,16 +42,12 @@
                     <p>Divine Shards: @_homePageData.DivineShards</p>
                     <p>Stamina: @_homePageData.Stamina</p>
                 </div>
-
-
             </div>
         </div>
 
     }
     else if(_user is not null && !(_user.Identity?.IsAuthenticated ?? false))
     {
-        var col = Serv.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
-        var zaStyle = $"background-color: inherit; color: {col}";
         <HugeText  TheText="Not Logged In"></HugeText>
     }
 </Navigation>
