@@ -35,3 +35,11 @@ div{
     margin-top: auto;
     color: white;
 }
+@media only screen and (max-width: 600px) {
+    .snack-bar-parent p{
+        font-size: 17px;
+    }
+    .snack-bar-parent > div{
+        height: 70px;
+    }
+}
