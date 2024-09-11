@@ -36,8 +36,25 @@ public class Begin : GeneralCommandClass
     {
         DiscordEmbedBuilder embedToBuild = new();
         var author = ctx.User;
-
         var userData = await DatabaseContext.Set<UserData>()
+            .Where(i => i.DiscordId == ctx.User.Id)
+            .FirstOrDefaultAsync();
+        if (userData is null)
+        {
+            userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);
+            await DatabaseContext.SaveChangesAsync();
+        }
+
+        if (userData.Tier > Tier.Unranked)
+        {
+            embedToBuild
+                .WithTitle("Hmm")
+                .WithDescription("`You have already begun`");
+            await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedToBuild.Build()));
+            return;
+        }
+
+        await DatabaseContext.Set<UserData>()
             .Include(i => i.Items.Where(j => j is Stamina))
             .Include(j => j.Characters)
             .ThenInclude(j => j.Blessing)
@@ -47,14 +64,8 @@ public class Begin : GeneralCommandClass
             .Include(i => i.EquippedPlayerTeam)
             .ThenInclude(i => i!.TeamMemberships)
             .ThenInclude(i => i.Character)
-            .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
-        if (userData is null)
-        {
-            userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);
-            await DatabaseContext.SaveChangesAsync();
-        }
-
-
+            .Where(i => i.DiscordId == ctx.User.Id)
+            .LoadAsync();
         var userColor = userData.Color;
         embedToBuild
             .WithUser(ctx.User)
@@ -64,18 +75,7 @@ public class Begin : GeneralCommandClass
             await NotifyAboutOccupiedAsync(ctx);
             return;
         }
-
-        if (userData.Tier != Tier.Unranked)
-        {
-            embedToBuild
-                .WithTitle("Hmm")
-                .WithDescription("`You have already begun`");
-
-
-            await ctx.RespondAsync(new DiscordInteractionResponseBuilder().AddEmbed(embedToBuild.Build()));
-            return;
-        }
-
+        
 
         await MakeOccupiedAsync(userData);
         embedToBuild.WithTitle($"{ctx.User.Username}, ")

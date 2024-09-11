@@ -56,7 +56,6 @@ public class Challenge : GeneralCommandClass
         }
 
         var player2User = await DatabaseContext.Set<UserData>()
-            .IncludeTeamWithAllEquipments()
             .FirstOrDefaultAsync(i => i.DiscordId == player2.Id);
 
         if (player2User is null || player2User.IsOccupied || player2User.Tier == Tier.Unranked)
@@ -70,10 +69,7 @@ public class Challenge : GeneralCommandClass
             return;
         }
 
-        await DatabaseContext.Set<UserData>()
-            .Where(i => i.DiscordId == player2.Id)
-            .IncludeTeamWithAllEquipments()
-            .LoadAsync();
+
         if (player2User.Tier == Tier.Unranked || player1User.Tier == Tier.Unranked)
         {
             embedToBuild = embedToBuild
@@ -86,6 +82,10 @@ public class Challenge : GeneralCommandClass
         embedToBuild = embedToBuild
             .WithTitle($"{player2.Username}, ")
             .WithDescription($"`do you accept {player1.Username}'s challenge?`");
+        await DatabaseContext.Set<UserData>()
+            .Where(i => i.DiscordId == player2.Id)
+            .IncludeTeamWithAllEquipments()
+            .LoadAsync();
         await MakeOccupiedAsync(player1User);
         var response = new DiscordInteractionResponseBuilder()
             .AddEmbed(embedToBuild.Build())
