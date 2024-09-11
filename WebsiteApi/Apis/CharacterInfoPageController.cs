@@ -29,7 +29,7 @@ public class CharacterInfoPageController : ControllerBase
 
     [Authorize]
     [HttpGet("get")]
-    public async Task<IActionResult> GetTeamDataAsync([FromForm] int characterNumber)
+    public async Task<IActionResult> GetTeamDataAsync([FromQuery] int characterNumber)
     {
         var userDataId = User.GetDiscordUserId();
         var gotten = await Context.Set<UserData>().Where(i => i.DiscordId == userDataId)
