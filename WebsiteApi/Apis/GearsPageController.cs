@@ -9,10 +9,9 @@ using Website.Pages.Gears;
 namespace WebsiteApi.Apis;
 
 [Route("[controller]")]
-[ApiController] 
+[ApiController]
 public class GearsPageController(PostgreSqlContext post) : ControllerBase
 {
-    
     [HttpGet("get-gears")]
     [Authorize]
     public async Task<IActionResult> GetGearsAsync()
@@ -20,12 +19,12 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Gear>()
             .Where(i => i.UserData!.DiscordId == zaId)
-            .Select(i => new Gears.GearDto()
+            .Select(i => new Gears.GearDto
             {
                 ImageUrl = Gear.GetDefaultFromTypeId(i.TypeId).ImageUrl,
                 Name = Gear.GetDefaultFromTypeId(i.TypeId).Name,
                 Number = i.Number,
-                RarityNum = (int) i.Rarity,
+                RarityNum = (int)i.Rarity,
                 TypeId = i.TypeId
             })
             .ToArrayAsync();

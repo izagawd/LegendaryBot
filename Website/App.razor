@@ -1,10 +1,12 @@
-﻿@using Website.Pages.Authentication
-@using Website.Components
+﻿@using Website.Components
+@using Website.Pages.Authentication
 @using Website.Services
 @inject WebsiteThemeService WebsiteThemeService
 @inject SnackBarService SnackBarService
+
 @code{
     private SnackBar? _snackBar;
+
     protected override Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -12,14 +14,17 @@
             SnackBarService.SetSnackBar(_snackBar!);
             return SnackBarService.DisplayPendingSnackBarIfExistsAsync();
         }
+
         return Task.CompletedTask;
     }
+
     protected override void OnInitialized()
     {
         WebsiteThemeService.OnWebsiteThemeChanged += StateHasChanged;
-
     }
+
 }
+
 <CascadingAuthenticationState>
     <CascadingValue Value="WebsiteThemeService.WebsiteTheme">
         <SnackBar @ref="_snackBar"/>

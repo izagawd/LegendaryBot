@@ -1,26 +1,30 @@
-.home-class{
+.home-class {
     width: 100%;
     height: 100%;
     display: flex;
 
 }
-.home-class > div{
+
+.home-class > div {
     width: fit-content;
     display: flex;
     height: fit-content;
     margin: auto;
     flex-direction: column;
 }
-.home-class > div >div{
+
+.home-class > div > div {
     margin-left: 10px;
 }
-.home-class img{
+
+.home-class img {
     border-radius: 10px;
     border: solid black 3px;
     width: 200px;
     height: 200px;
 }
-.home-class p{
+
+.home-class p {
     margin-top: 5px;
     margin-bottom: 5px;
     font-weight: bold;

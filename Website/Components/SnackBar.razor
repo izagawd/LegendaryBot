@@ -1,10 +1,10 @@
-@using Website.Services
 @{
     var customStyle = "";
     if (_params.SnackBarLayout == SnackBarLayout.Error)
     {
         customStyle = "background-color: red;";
-    } else if (_params.SnackBarLayout == SnackBarLayout.Success)
+    }
+    else if (_params.SnackBarLayout == SnackBarLayout.Success)
     {
         customStyle = "background-color: green;";
     }
@@ -12,6 +12,7 @@
     var borCol = WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
     customStyle += $"border-color: {borCol};";
 }
+
 @code{
 
 
@@ -27,9 +28,11 @@
 
 @code {
     private bool _shouldDisplaySnackBar;
-    public enum  SnackBarLayout
+
+    public enum SnackBarLayout
     {
-        Error, Success
+        Error,
+        Success
     }
 
     ~SnackBar()
@@ -49,6 +52,7 @@
         public string? DivStyle;
         public string? TextStyle;
     }
+
     public async Task DisplaySnackBarAsync(SnackBarParams @params)
     {
         // Cancel the current snackbar if one is being displayed
@@ -69,6 +73,7 @@
     }
 
     SnackBarParams _params;
+
     private async Task DisplaySnackBarTaskStuff(SnackBarParams @params, CancellationToken token)
     {
         _params = @params;
@@ -91,4 +96,5 @@
             StateHasChanged();
         }
     }
+
 }

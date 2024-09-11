@@ -9,10 +9,9 @@ using Website.Pages.Items;
 namespace WebsiteApi.Apis;
 
 [Route("[controller]")]
-[ApiController] 
+[ApiController]
 public class ItemsPageController(PostgreSqlContext post) : ControllerBase
 {
-    
     [HttpGet("get-items")]
     [Authorize]
     public async Task<IActionResult> GetCharactersAsync()
@@ -20,12 +19,12 @@ public class ItemsPageController(PostgreSqlContext post) : ControllerBase
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Item>()
             .Where(i => i.UserData!.DiscordId == zaId)
-            .Select(i => new Items.ItemDto()
+            .Select(i => new Items.ItemDto
             {
                 ImageUrl = Item.GetDefaultFromTypeId(i.TypeId).ImageUrl,
                 Name = Item.GetDefaultFromTypeId(i.TypeId).Name,
                 Stacks = i.Stacks,
-                RarityNum = (int) i.Rarity,
+                RarityNum = (int)i.Rarity,
                 TypeId = i.TypeId
             })
             .ToArrayAsync();

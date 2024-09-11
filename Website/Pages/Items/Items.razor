@@ -1,7 +1,5 @@
 @page "/inventory/items"
-
 @using Microsoft.AspNetCore.Authorization
-@using Website.Services
 @using Website.Components
 
 
@@ -9,6 +7,7 @@
 
 @inject HttpClient Http
 @attribute [Authorize]
+
 @code{
 
     private ItemDto[]? ItemCollection;
@@ -16,13 +15,13 @@
     protected override async Task OnInitializedAsync()
     {
         ItemCollection = await Http.GetFromJsonAsync<ItemDto[]>("/ItemsPage/get-items");
-
     }
 
     private enum SortType
     {
-        Name, Rarity, Stacks
-    
+        Name,
+        Rarity,
+        Stacks
     }
 
 
@@ -51,20 +50,17 @@
     }
 
 
-
-
-
     public IEnumerable<string> AddStuff(ItemDto blessingDto)
     {
         yield return $"Stacks: {blessingDto.Stacks}";
     }
+
     private SortType SortTypeVal { get; set; } = SortType.Name;
     public bool reverseOrder;
 }
 
 <InventoryEntitiesShower Additionals="AddStuff" BackgroundCol='dto => "white"'
-                         RarityDelegate="dto => dto.RarityNum" ObjectsToRender="() 
-=> UsingItemCollection"
+                         RarityDelegate="dto => dto.RarityNum" ObjectsToRender="() => UsingItemCollection"
                          NameDelegate="dto => dto.Name"
                          ImageUrlDelegate="dto => dto.ImageUrl"
                          TObjectType="ItemDto">
@@ -74,11 +70,10 @@
 
             @foreach (var i in Enum.GetValues<SortType>())
             {
-            <option  value="@i">@i</option>
+                <option value="@i">@i</option>
             }
 
         </select>
     </SorterStuff>
 
 </InventoryEntitiesShower>
-

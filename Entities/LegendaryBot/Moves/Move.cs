@@ -10,7 +10,6 @@ using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 
-
 namespace Entities.LegendaryBot.Moves;
 
 public class MoveUsageContext
@@ -78,7 +77,6 @@ public abstract class Move : INameHaver
     /// <summary>
     ///     Gets description based on character. The description is mostly affected by the character's level
     /// </summary>
-
     /// <param name="character"></param>
     public abstract string GetDescription(Character character);
 

@@ -1,20 +1,15 @@
-using AspNet.Security.OAuth.Discord;
-
-
 using DatabaseManagement;
 using Microsoft.AspNetCore.Authentication;
 using PublicInfo;
-
 
 namespace WebsiteApi;
 
 public static class Website
 {
     public const string DiscordAuthScheme = "Discord";
+
     public static void ConfigureServices(IServiceCollection services)
     {
-
-
         services.AddHttpClient("WebApi", i => i.BaseAddress =
             new Uri(Information.ApiDomainName));
         services.AddScoped(i => i.GetRequiredService<IHttpClientFactory>()
@@ -32,23 +27,18 @@ public static class Website
                         .AllowCredentials();
                 });
         });
-     
+
         services.AddControllers();
         services.AddAuthentication(options =>
             {
-
                 options.DefaultSignInScheme = null;
                 options.DefaultScheme = DiscordAuthScheme;
                 options.DefaultChallengeScheme = null;
                 options.DefaultAuthenticateScheme = DiscordAuthScheme;
             })
-            .AddScheme<AuthenticationSchemeOptions,DiscordAuthenticationHandler>(DiscordAuthScheme,
-                i =>
-                {
-                    
-                })
+            .AddScheme<AuthenticationSchemeOptions, DiscordAuthenticationHandler>(DiscordAuthScheme,
+                i => { })
             .AddCertificate(options => { options.Validate(); });
-     
     }
 
 
@@ -100,16 +90,16 @@ public static class Website
         }
 
         app.UseHttpsRedirection();
-    
+
         app.UseStaticFiles();
 
         app.UseRouting();
         app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
-       
+
         app.MapControllers();
-        
+
 
         await app.RunAsync(Information.ApiDomainName);
     }

@@ -27,7 +27,27 @@ public class ItemDatabaseConfiguration : IEntityTypeConfiguration<Item>
 public abstract class Item : IInventoryEntity
 {
     private static readonly Dictionary<int, Item> _cachedDefaultItemsTypeIds = [];
-  
+
+    [Timestamp] public uint Version { get; private set; }
+
+    public int Stacks { get; set; } = 1;
+    public string DisplayString => $"`{Name} • Stacks: {Stacks}`";
+    public bool CanBeTraded => false;
+
+
+    public abstract int TypeId { get; protected init; }
+    public Type TypeGroup => typeof(Item);
+    public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
+    public virtual string Description => string.Empty;
+    public virtual Rarity Rarity => Rarity.OneStar;
+
+    public abstract string Name { get; }
+    public UserData? UserData { get; set; }
+    public string ImageUrl => $"{Information.ApiDomainName}/battle_images/items/{GetType().Name}.png";
+
+
+    public long UserDataId { get; set; }
+
     public static Item GetDefaultFromTypeId(int typeId)
     {
         if (!_cachedDefaultItemsTypeIds.TryGetValue(typeId, out var item))
@@ -41,26 +61,6 @@ public abstract class Item : IInventoryEntity
 
         return item;
     }
-
-    [Timestamp] public uint Version { get; private set; }
-
-    public int Stacks { get; set; } = 1;
-    public bool CanBeTraded => false;
-
-
-    public abstract int TypeId { get; protected init; }
-    public string DisplayString => $"`{Name} • Stacks: {Stacks}`";
-    public Type TypeGroup => typeof(Item);
-    public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
-    public virtual string Description => string.Empty;
-    public virtual Rarity Rarity => Rarity.OneStar;
-
-    public abstract string Name { get; }
-    public UserData? UserData { get; set; }
-    public string ImageUrl => $"{Information.ApiDomainName}/battle_images/items/{GetType().Name}.png";
-
-
-    public long UserDataId { get; set; }
 
 
     public IInventoryEntity Clone()

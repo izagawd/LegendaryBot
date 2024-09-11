@@ -1,4 +1,4 @@
-.snack-bar-parent{
+.snack-bar-parent {
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -7,12 +7,14 @@
 
     top: 0;
     right: 0;
-    
+
 }
-div{
+
+div {
     pointer-events: none;
 }
-.snack-bar-parent p{
+
+.snack-bar-parent p {
     height: fit-content;
     font-weight: bolder;
     width: 95%;
@@ -21,13 +23,15 @@ div{
     margin-bottom: auto;
     font-size: 20px;
 }
-.snack-bar-parent{
+
+.snack-bar-parent {
     transition: opacity 1.5s;
 }
-.snack-bar-parent > div{
-   
+
+.snack-bar-parent > div {
+
     width: 100%;
-    
+
     height: 50px;
     min-height: fit-content;
     display: flex;
@@ -35,8 +39,9 @@ div{
     margin-top: auto;
     color: white;
 }
+
 @media only screen and (max-width: 600px) {
-    .snack-bar-parent p{
+    .snack-bar-parent p {
         font-size: 17px;
     }
 

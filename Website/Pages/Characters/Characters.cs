@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Website.Pages.Characters;
 
-public partial  class Characters
+public partial class Characters
 {
     [Serializable]
     public class CharacterDto
@@ -10,14 +10,13 @@ public partial  class Characters
         public string Name { get; set; } = null!;
         public int Number { get; set; }
         public int RarityNum { get; set; }
-    
-   
+
+
         [JsonIgnore]
         public string Color
         {
             get
             {
-                
                 switch (RarityNum)
                 {
                     case 1:

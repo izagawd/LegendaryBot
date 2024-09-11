@@ -2,21 +2,25 @@ html, body, #app {
     height: 100%;
     width: 100%;
 
-    
+
     margin: 0;
 }
+
 * {
     transition: background-color var(--theme-transition-time), color var(--theme-transition-time);
 }
-#blazor-error-ui{
+
+#blazor-error-ui {
     position: absolute;
     z-index: 1;
     background-color: red;
     color: white;
 }
-:root{
+
+:root {
     --theme-transition-time: 0.3s;
 }
+
 * {
     font-family: Arial, Helvetica, sans-serif;
 }

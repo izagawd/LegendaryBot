@@ -44,6 +44,7 @@ public class EntityReward : Reward
                 return "NOOO";
         }
     }
+
     public override string GiveRewardTo(UserData userData)
     {
         var stringBuilder = new StringBuilder($"{userData.Name} got:\n ");

@@ -13,7 +13,6 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
-        
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.RootComponents.Add<App>("#app");
         builder.RootComponents.Add<HeadOutlet>("head::after");
@@ -25,16 +24,15 @@ public class Program
             .AddScoped(sp =>
             {
                 var dep = sp.GetRequiredService<DiscordTokenService>();
-              
+
                 var client = new HttpClient
                 {
                     BaseAddress =
                         new Uri(Information.ApiDomainName)
                 };
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-                     dep.DiscordToken);
+                    dep.DiscordToken);
                 return client;
-
             });
         builder.Services.AddScoped<AuthenticationStateProvider, DiscordAuthenticationStateProvider>();
         builder.Services.AddAuthorizationCore();

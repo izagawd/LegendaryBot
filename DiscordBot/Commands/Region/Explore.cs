@@ -99,7 +99,7 @@ public class Explore : GeneralCommandClass
         await ctx.RespondAsync(embedToBuild);
         var message = await ctx.GetResponseAsync();
         await Task.Delay(2500);
-        var userTeam =(PlayerTeam) userData.EquippedPlayerTeam!.LoadTeamStats();
+        var userTeam = (PlayerTeam)userData.EquippedPlayerTeam!.LoadTeamStats();
 
         var simulator = new BattleSimulator(userTeam, enemyTeam);
 

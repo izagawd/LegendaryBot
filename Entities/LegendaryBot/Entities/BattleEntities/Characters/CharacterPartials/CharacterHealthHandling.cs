@@ -74,7 +74,7 @@ public partial class Character
     {
         if (CurrentBattle is null)
             throw NoBattleExc;
-        
+
         if (IsDead)
             try
             {
@@ -89,6 +89,7 @@ public partial class Character
                     DamageReceiver = this
                 };
             }
+
         CurrentBattle.InvokeBattleEvent(new CharacterPreDamageEventArgs(damageArgs));
         var damageText = damageArgs.DamageText;
         if (damageText is null) damageText = $"{NameWithAlphabet} took $ damage!";

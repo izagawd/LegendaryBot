@@ -4,10 +4,15 @@ namespace Website.Services;
 
 public class DiscordTokenService
 {
-    
     public const string DiscordTokenKey = "discord_access_token";
-    
-    private ISyncLocalStorageService _syncLocalStorage;
+
+    private readonly ISyncLocalStorageService _syncLocalStorage;
+
+
+    public DiscordTokenService(ISyncLocalStorageService syncLocalStorage)
+    {
+        _syncLocalStorage = syncLocalStorage;
+    }
 
 
     public string? DiscordToken
@@ -15,12 +20,4 @@ public class DiscordTokenService
         get => _syncLocalStorage.GetItem<string>(DiscordTokenKey);
         set => _syncLocalStorage.SetItem(DiscordTokenKey, value);
     }
-
-
-    public DiscordTokenService(ISyncLocalStorageService syncLocalStorage)
-    {
-        _syncLocalStorage = syncLocalStorage;
-    }
-    
-
 }

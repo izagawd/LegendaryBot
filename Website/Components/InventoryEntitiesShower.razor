@@ -1,8 +1,8 @@
-
-
+@using Website.Components.Navigation
 @typeparam TObjectType
+
 @code {
-    [Parameter] public Func<TObjectType,RenderFragment>? HoverShit { get; set; }
+    [Parameter] public Func<TObjectType, RenderFragment>? HoverShit { get; set; }
     [Parameter] [EditorRequired] public Func<TObjectType, string> BackgroundCol { get; set; } = null!;
     [Parameter] [EditorRequired] public Func<IEnumerable<TObjectType>?> ObjectsToRender { get; set; } = null!;
     [Parameter] [EditorRequired] public Func<TObjectType, string> NameDelegate { get; set; } = null!;
@@ -11,36 +11,34 @@
     [Parameter] public Func<TObjectType, string>? LinkUrlDel { get; set; }
     [Parameter] public Func<TObjectType, IEnumerable<string>>? Additionals { get; set; }
 }
-@using Website.Services
-@using Website.Components.Navigation
 
 
 @code{
-    [CascadingParameter]
-    public WebsiteTheme WebsiteTheme { get; set; }
+    [CascadingParameter] public WebsiteTheme WebsiteTheme { get; set; }
     private bool _displayAdvancedFilter;
-    [Parameter]  public RenderFragment? SorterStuff { get; set; }
+    [Parameter] public RenderFragment? SorterStuff { get; set; }
     public string NameFilter { get; private set; } = "";
 
     private bool _reverseOrder;
 
 }
+
 <InventoryNavigation>
     <div class="shower-container">
 
         <div class="filterer-outer @(WebsiteTheme == WebsiteTheme.Dark ? "filterer-outer-dark" : "filterer-outer-light")"
-             style="height: @(!_displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white":"black")">
+             style="height: @(!_displayAdvancedFilter ? "80px" : "280px"); border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")">
 
             <div class="filter-basic">
-             
+
                 <span style="color: black; z-index: 1; margin-left: 20px; margin-right: -35px; margin-top: auto; margin-bottom: auto" class="material-symbols-outlined">
                     search
                 </span>
                 <input class="name-filter" placeholder="Search" type="text" @bind="NameFilter"/>
-        
+
                 @{
-                var butTxtCol = WebsiteTheme == WebsiteTheme.Dark ? "black" : "white";
-                var advButColor = WebsiteTheme == WebsiteTheme.Dark ? "white" : "#525252";
+                    var butTxtCol = WebsiteTheme == WebsiteTheme.Dark ? "black" : "white";
+                    var advButColor = WebsiteTheme == WebsiteTheme.Dark ? "white" : "#525252";
                 }
                 <button style="background-color: @advButColor; color: @butTxtCol " class="advanced-filter-button" @onclick="() => _displayAdvancedFilter = !_displayAdvancedFilter">
                     Adv Filt
@@ -48,66 +46,64 @@
             </div>
             @SorterStuff
             <p>Reverse Order</p>
-            <input  type="checkbox" @bind="_reverseOrder" style="width: 25px; height: 25px"/>
+            <input type="checkbox" @bind="_reverseOrder" style="width: 25px; height: 25px"/>
         </div>
 
         @code{
 
-        private RenderFragment RenderObject(TObjectType objectToRender)
-        {
-        
-
-        return @<div style="position: relative;" class="entity-to-display">
+            private RenderFragment RenderObject(TObjectType objectToRender)
+            {
+                return @<div style="position: relative;" class="entity-to-display">
 
 
-                   <a class="some-class" href="@LinkUrlDel?.Invoke(objectToRender)">
-                       @{
-                           var shadCol = WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
-                       }
-                       <img src="@ImageUrlDelegate(objectToRender)" style="background-color: @BackgroundCol(objectToRender);
+                    <a class="some-class" href="@LinkUrlDel?.Invoke(objectToRender)">
+                        @{
+                            var shadCol = WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
+                        }
+                        <img src="@ImageUrlDelegate(objectToRender)" style="background-color: @BackgroundCol(objectToRender);
                     border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
                     
                     box-shadow: 0 0 5px 1px @shadCol" class="image-box" alt=""/>
-                   </a>
-            <p>@NameDelegate(objectToRender)</p>
+                    </a>
+                    <p>@NameDelegate(objectToRender)</p>
 
-            @foreach (var i in Additionals?.Invoke(objectToRender) ??[])
-            {
-            <p class="additional-p">@i</p>
-            }
+                    @foreach (var i in Additionals?.Invoke(objectToRender) ?? [])
+                    {
+                        <p class="additional-p">@i</p>
+                    }
 
-            @if (HoverShit is not null)
-            {
-                <div style="position: absolute; z-index: 1">
-                    @HoverShit(objectToRender)
-                </div>
+                    @if (HoverShit is not null)
+                    {
+                        <div style="position: absolute; z-index: 1">
+                            @HoverShit(objectToRender)
+                        </div>
+                    }
+                </div>;
             }
-        </div>;
-        }
 
         }
 
         @{
-        var objsToRend = ObjectsToRender();
-        if (objsToRend is not null)
-        {
-        <div style="overflow: auto; flex-grow: 1">
-            <div class="entities-container">
+            var objsToRend = ObjectsToRender();
+            if (objsToRend is not null)
+            {
+                <div style="overflow: auto; flex-grow: 1">
+                    <div class="entities-container">
 
-                @foreach (var i in _reverseOrder ? objsToRend.Reverse() : objsToRend)
-                {
-                    if (NameDelegate(i).Contains(NameFilter,StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        @RenderObject(i)
-                    }
-                }
-            </div>
-        </div>
-        }
-        else
-        {
-        <h1 style="font-size: 50px; margin: auto">Loading...</h1>
-        }
+                        @foreach (var i in _reverseOrder ? objsToRend.Reverse() : objsToRend)
+                        {
+                            if (NameDelegate(i).Contains(NameFilter, StringComparison.CurrentCultureIgnoreCase))
+                            {
+                                @RenderObject(i)
+                            }
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <h1 style="font-size: 50px; margin: auto">Loading...</h1>
+            }
         }
 
 

@@ -1,7 +1,7 @@
 using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PublicInfo;
+using PrivateInfo;
 
 namespace WebsiteApi.Apis;
 
@@ -9,8 +9,7 @@ namespace WebsiteApi.Apis;
 [ApiController]
 public class DiscordController : ControllerBase
 {
-
-    private HttpClient _httpClient;
+    private readonly HttpClient _httpClient;
 
     public DiscordController(HttpClient httpClient)
     {
@@ -21,28 +20,23 @@ public class DiscordController : ControllerBase
     [Authorize]
     public IActionResult TryGetData()
     {
-        if (!HttpContext.User.Identity?.IsAuthenticated ?? false)
-        {
-            return Unauthorized();
-        }
+        if (!HttpContext.User.Identity?.IsAuthenticated ?? false) return Unauthorized();
         return Ok(HttpContext.User.Claims.DistinctBy(i => i.Type).ToDictionary(i => i.Type, i => i.Value));
     }
+
     [HttpGet("get-token")]
     public async Task<IActionResult> GetTokenAsync([FromQuery] string code, [FromQuery] string redirectUri)
     {
-        var clientSecret = PrivateInfo.Information.ClientSecret;
+        var clientSecret = Information.ClientSecret;
         var requestContent = new FormUrlEncodedContent([
-        
             new KeyValuePair<string, string>
-            ("redirect_uri",redirectUri)
-                ,
-            new KeyValuePair<string, string>("client_id",Information.DiscordClientId),
+                ("redirect_uri", redirectUri),
+            new KeyValuePair<string, string>("client_id", PublicInfo.Information.DiscordClientId),
             new KeyValuePair<string, string>("client_secret", clientSecret),
             new KeyValuePair<string, string>("grant_type", "authorization_code"),
-            new KeyValuePair<string, string>("code", code),
-
+            new KeyValuePair<string, string>("code", code)
         ]);
-        
+
         var request = new HttpRequestMessage(HttpMethod.Post, "https://discord.com/api/v10/oauth2/token")
         {
             Content = requestContent
@@ -53,13 +47,11 @@ public class DiscordController : ControllerBase
 
         if (response.IsSuccessStatusCode)
         {
-
             var tokenResponse = await response.Content.ReadFromJsonAsync<JsonObject>();
-    
+
             return Ok(tokenResponse);
         }
-        return BadRequest("Something went wrong");
-        
-    }
 
+        return BadRequest("Something went wrong");
+    }
 }

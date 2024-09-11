@@ -6,24 +6,20 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFunctions;
-using Website.Pages.Blessings;
 using Website.Pages.Characters;
 
 namespace WebsiteApi.Apis;
 
-[Microsoft.AspNetCore.Mvc.Route("[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class CharactersPageController(PostgreSqlContext post) : ControllerBase
 {
-
     private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
 
     [HttpGet("get-characters")]
     [Authorize]
     public async Task<ActionResult<Characters.CharacterDto[]>> GetCharactersAsync()
     {
-
-     
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Character>()
             .Where(i => i.UserData!.DiscordId == zaId)

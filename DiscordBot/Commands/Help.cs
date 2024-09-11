@@ -79,8 +79,6 @@ public class Help : GeneralCommandClass
         embedToBuild.WithDescription(gottenCommand.Description ?? "No Description");
 
 
-
-
         foreach (var i in gottenCommand.Subcommands)
         {
             var stringToUse = i.Description ?? "No description";
@@ -161,6 +159,7 @@ public class Help : GeneralCommandClass
                 yield return new DiscordSelectComponentOption(i.GetName(),
                     ((int)i).ToString());
         }
+
         const string selectComponentId = "select_comp";
         var selectComponent = new DiscordSelectComponent(selectComponentId,
             embedsToUse[BotCommandCategory.Battle].Title!,

@@ -19,10 +19,10 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6"/>
         <ProjectReference Include="..\DatabaseManagement\DatabaseManagement.csproj"/>
-        <ProjectReference Include="..\PrivateInfo\PrivateInfo.csproj" />
+        <ProjectReference Include="..\PrivateInfo\PrivateInfo.csproj"/>
         <ProjectReference Include="..\PublicInfo\PublicInfo.csproj"/>
-        <ProjectReference Include="..\WebFunctions\WebFunctions.csproj" />
-        <ProjectReference Include="..\Website\Website.csproj" />
+        <ProjectReference Include="..\WebFunctions\WebFunctions.csproj"/>
+        <ProjectReference Include="..\Website\Website.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -136,12 +136,12 @@
         <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.js"/>
         <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map"/>
         <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt"/>
-        <_ContentIncludedByDefault Remove="WebsiteStuff\Pages\Home\Home.razor" />
-        <_ContentIncludedByDefault Remove="WebsiteStuff\App.razor" />
-        <_ContentIncludedByDefault Remove="WebsiteStuff\Pages\Error.razor" />
-        <_ContentIncludedByDefault Remove="WebsiteStuff\Pages\Gears\Gears.razor" />
-        <_ContentIncludedByDefault Remove="WebsiteStuff\Routes.razor" />
-        <_ContentIncludedByDefault Remove="WebsiteStuff\_Imports.razor" />
+        <_ContentIncludedByDefault Remove="WebsiteStuff\Pages\Home\Home.razor"/>
+        <_ContentIncludedByDefault Remove="WebsiteStuff\App.razor"/>
+        <_ContentIncludedByDefault Remove="WebsiteStuff\Pages\Error.razor"/>
+        <_ContentIncludedByDefault Remove="WebsiteStuff\Pages\Gears\Gears.razor"/>
+        <_ContentIncludedByDefault Remove="WebsiteStuff\Routes.razor"/>
+        <_ContentIncludedByDefault Remove="WebsiteStuff\_Imports.razor"/>
     </ItemGroup>
 
 

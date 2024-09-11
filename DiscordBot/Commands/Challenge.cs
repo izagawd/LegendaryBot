@@ -92,7 +92,7 @@ public class Challenge : GeneralCommandClass
             .AddComponents(Yes, No);
         await ctx.RespondAsync(response);
         var message = (await ctx.GetResponseAsync())!;
-        
+
         string? decision;
         var interactivityResult = await message.WaitForButtonAsync(player2);
         if (!interactivityResult.TimedOut)
@@ -133,7 +133,7 @@ public class Challenge : GeneralCommandClass
         var battleResult = await simulator.StartAsync(message);
         DiscordUser winnerDiscord;
         UserData winnerUserData;
-        if (((PlayerTeam) battleResult.Winners).UserData.DiscordId == player1.Id)
+        if (((PlayerTeam)battleResult.Winners).UserData.DiscordId == player1.Id)
         {
             winnerDiscord = player1;
             winnerUserData = player1User;

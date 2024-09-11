@@ -278,7 +278,7 @@ public class Display : GeneralCommandClass
         await ExecuteDisplayAsync(context, userData.Characters
                 .Where(i => i.Name.ToLower().Replace(" ", "").Contains(simplified))
                 .OrderBy(i => i.Number), 10,
-            i =>  $"{i.Number} • {i.Name} • Lvl {i.Level}",
+            i => $"{i.Number} • {i.Name} • Lvl {i.Level}",
             "\n", "Characters", userData.Color);
     }
 
@@ -381,22 +381,15 @@ public class Display : GeneralCommandClass
                 value = "";
                 for (var j = 1; j <= i.MaxCharacters; j++)
                 {
-
                     value += $"`Slot {j}: ";
                     var chara = i[j];
                     if (chara is null)
-                    {
                         value += "EMPTY SLOT";
-                    }
                     else
-                    {
                         value += $"{chara.Number} • {chara.Name} • Lvl {chara.Level}";
-
-                    }
 
                     value += "`\n";
                 }
-                    
             }
 
             embed.AddField(i.TeamName + equipped,

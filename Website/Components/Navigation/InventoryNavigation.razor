@@ -1,14 +1,14 @@
-@using Website.Services
-
-
+@using PublicInfo
 @inject  NavigationManager NavMan
+
 @code {
 
-    [CascadingParameter] public  WebsiteTheme WebsiteTheme { get; set; }
+    [CascadingParameter] public WebsiteTheme WebsiteTheme { get; set; }
     [Parameter] public RenderFragment? ChildContent { get; set; }
+
     private class InventoryPage
     {
-        public InventoryPage(string name,  string icon)
+        public InventoryPage(string name, string icon)
         {
             Name = name;
             Directory = name.ToLower();
@@ -25,7 +25,7 @@
         new InventoryPage("Characters", "settings_accessibility"),
         new InventoryPage("Items", "construction"),
         new InventoryPage("Blessings", "star"),
-        new InventoryPage("Gears", "swords"),
+        new InventoryPage("Gears", "swords")
     ];
 
 }
@@ -35,11 +35,11 @@
         <div class="inventory-nav-root-div" style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")">
             @foreach (var i in InventoryPages)
             {
-                <a  href="@(PublicInfo.Information.WebsiteDomainName + $"/inventory/{i.Directory}")"  
-                    class="@(WebsiteTheme == WebsiteTheme.Dark ? "div-nav-dark" : "div-nav-light") inventory-page">
-                       <span style="color: @(NavMan.Uri.Contains(i.Directory,StringComparison.CurrentCultureIgnoreCase) ? "green":"inherit")" class="material-symbols-outlined">
-                                        @i.Icon
-                                    </span>
+                <a href="@(Information.WebsiteDomainName + $"/inventory/{i.Directory}")"
+                   class="@(WebsiteTheme == WebsiteTheme.Dark ? "div-nav-dark" : "div-nav-light") inventory-page">
+                    <span style="color: @(NavMan.Uri.Contains(i.Directory, StringComparison.CurrentCultureIgnoreCase) ? "green" : "inherit")" class="material-symbols-outlined">
+                        @i.Icon
+                    </span>
                 </a>
             }
         </div>

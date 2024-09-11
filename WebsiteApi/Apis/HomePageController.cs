@@ -9,6 +9,7 @@ using WebFunctions;
 using Website.Pages;
 
 namespace WebsiteApi.Apis;
+
 [ApiController]
 [Route("[controller]")]
 public class HomePageController(PostgreSqlContext context) : ControllerBase
@@ -20,7 +21,7 @@ public class HomePageController(PostgreSqlContext context) : ControllerBase
         var discordId = User.GetDiscordUserId();
         var selected = await context.Set<UserData>()
             .Where(i => i.DiscordId == discordId)
-            .Select(i => new Home.HomePageData()
+            .Select(i => new Home.HomePageData
             {
                 FavoriteAvatarUrl = Player.GetImageUrl(i.Gender),
                 Coins = i.Items.Where(j => j is Coin)
@@ -32,12 +33,10 @@ public class HomePageController(PostgreSqlContext context) : ControllerBase
                 AdventurerLevel = i.AdventurerLevel
             }).FirstOrDefaultAsync();
         if (selected is null)
-        {
             selected = new Home.HomePageData
             {
                 FavoriteAvatarUrl = Player.GetImageUrl(Gender.Male)
             };
-        }
 
         return Ok(selected);
     }

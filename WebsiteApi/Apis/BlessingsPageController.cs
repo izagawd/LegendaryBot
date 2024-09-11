@@ -9,11 +9,9 @@ using Website.Pages.Blessings;
 namespace WebsiteApi.Apis;
 
 [Route("[controller]")]
-[ApiController] 
+[ApiController]
 public class BlessingsPageController(PostgreSqlContext post) : ControllerBase
 {
-
-    
     [HttpGet("get-blessings")]
     [Authorize]
     public async Task<IActionResult> GetCharactersAsync()
@@ -25,7 +23,7 @@ public class BlessingsPageController(PostgreSqlContext post) : ControllerBase
             .ToArrayAsync();
 
 
-        var gottenCollection = gottenCollectionTypeIds.GroupBy(i => i).Select(i => new Blessings.BlessingDto()
+        var gottenCollection = gottenCollectionTypeIds.GroupBy(i => i).Select(i => new Blessings.BlessingDto
         {
             ImageUrl = Blessing.GetDefaultFromTypeId(i.Key).ImageUrl,
             Name = Blessing.GetDefaultFromTypeId(i.Key).Name,

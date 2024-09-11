@@ -9,11 +9,11 @@
 @inject NavigationService NavService
 
 <HugeText TheText="Redirecting..."></HugeText>
+
 @code {
 
     protected override void OnInitialized()
     {
-
         if (Nav.Uri.Contains("authentication/login", StringComparison.CurrentCultureIgnoreCase))
         {
             NavService.DesiredRedirectLocation = "/";
@@ -22,9 +22,9 @@
         {
             NavService.DesiredRedirectLocation = Nav.Uri;
         }
+
         Nav.NavigateTo($"https://discord.com/oauth2/authorize?client_id={Information.DiscordClientId}&scope=identify&response_type=code&redirect_uri=" +
                        $"{Uri.EscapeDataString($"{Information.WebsiteDomainName}/authentication/callback")}");
-
     }
 
 }

@@ -4,61 +4,59 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
-        <PackageReference Include="Blazored.SessionStorage" Version="2.4.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.8" />
+        <PackageReference Include="Blazored.LocalStorage" Version="4.5.0"/>
+        <PackageReference Include="Blazored.SessionStorage" Version="2.4.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.8"/>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.6"/>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.6" PrivateAssets="all"/>
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Pages\Authentication.razor" />
-      <_ContentIncludedByDefault Remove="Pages\Counter.razor" />
-      <_ContentIncludedByDefault Remove="Pages\Home.razor" />
-      <_ContentIncludedByDefault Remove="Pages\Weather.razor" />
-      <_ContentIncludedByDefault Remove="Layout\LoginDisplay.razor" />
-      <_ContentIncludedByDefault Remove="Layout\MainLayout.razor" />
-      <_ContentIncludedByDefault Remove="Layout\NavMenu.razor" />
-      <_ContentIncludedByDefault Remove="Layout\RedirectToLogin.razor" />
+        <_ContentIncludedByDefault Remove="Pages\Authentication.razor"/>
+        <_ContentIncludedByDefault Remove="Pages\Counter.razor"/>
+        <_ContentIncludedByDefault Remove="Pages\Home.razor"/>
+        <_ContentIncludedByDefault Remove="Pages\Weather.razor"/>
+        <_ContentIncludedByDefault Remove="Layout\LoginDisplay.razor"/>
+        <_ContentIncludedByDefault Remove="Layout\MainLayout.razor"/>
+        <_ContentIncludedByDefault Remove="Layout\NavMenu.razor"/>
+        <_ContentIncludedByDefault Remove="Layout\RedirectToLogin.razor"/>
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Components\Navigation\Navigation.razor" />
-      <AdditionalFiles Include="Pages\Characters\Characters.razor" />
-      <AdditionalFiles Include="Pages\Counter.razor" />
-      <AdditionalFiles Include="Pages\Home.razor" />
-      <AdditionalFiles Include="Pages\Items\Items.razor" />
+        <AdditionalFiles Include="Components\Navigation\Navigation.razor"/>
+        <AdditionalFiles Include="Pages\Characters\Characters.razor"/>
+        <AdditionalFiles Include="Pages\Home.razor"/>
+        <AdditionalFiles Include="Pages\Items\Items.razor"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PublicInfo\PublicInfo.csproj" />
+        <ProjectReference Include="..\PublicInfo\PublicInfo.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Pages\CharacterInfo\" />
-      <Folder Include="wwwroot\js\" />
+        <Folder Include="Pages\CharacterInfo\"/>
+        <Folder Include="wwwroot\js\"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Pages\Characters\Characters.cs">
-        <DependentUpon>Characters.razor</DependentUpon>
-      </Compile>
-      <Compile Update="Pages\Gears\Gears.cs">
-        <DependentUpon>Gears.razor</DependentUpon>
-      </Compile>
-      <Compile Update="Pages\Items\Items.cs">
-        <DependentUpon>Items.razor</DependentUpon>
-      </Compile>
+        <Compile Update="Pages\Characters\Characters.cs">
+            <DependentUpon>Characters.razor</DependentUpon>
+        </Compile>
+        <Compile Update="Pages\Gears\Gears.cs">
+            <DependentUpon>Gears.razor</DependentUpon>
+        </Compile>
+        <Compile Update="Pages\Items\Items.cs">
+            <DependentUpon>Items.razor</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="AppError.razor">
-        <DependentUpon>App.razor</DependentUpon>
-      </Content>
+        <Content Update="AppError.razor">
+            <DependentUpon>App.razor</DependentUpon>
+        </Content>
     </ItemGroup>
 
 </Project>

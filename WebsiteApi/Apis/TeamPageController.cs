@@ -4,78 +4,73 @@ using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFunctions;
 using Website.Pages.Teams;
 
 namespace WebsiteApi.Apis;
+
 [Route("[controller]")]
-[ApiController] 
+[ApiController]
 public class TeamPageController : ControllerBase
 {
-    private PostgreSqlContext context;
+    private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
+    private readonly PostgreSqlContext context;
 
     public TeamPageController(PostgreSqlContext databaseContext)
     {
         context = databaseContext;
     }
-    
-    private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
 
     [Authorize]
     [HttpPost("rename-team")]
     public async Task<IActionResult> RenameTeamAsync([FromForm] long teamId, [FromForm] string newName)
     {
-
         if (newName.Length <= 0)
             return BadRequest("Name length must be at least 1 character");
         var userId = User.GetDiscordUserId();
-        var didDo  =await  context.Set<PlayerTeam>()
+        var didDo = await context.Set<PlayerTeam>()
             .Where(i => i.UserData.DiscordId == userId && i.Id == teamId
-                                                       && i.UserData.PlayerTeams.All(j => j.TeamName.ToLower() != newName.ToLower()))
+                                                       && i.UserData.PlayerTeams.All(j =>
+                                                           j.TeamName.ToLower() != newName.ToLower()))
             .ExecuteUpdateAsync(i => i.SetProperty(j => j.TeamName, newName));
         if (didDo <= 0)
             return BadRequest("One of your teams already has that name");
         return Ok();
-
-
     }
+
     [Authorize]
     [HttpGet("get-teams-and-characters")]
-    
     public async Task<IActionResult> GetSomeUserData()
     {
-
         await using var context = new PostgreSqlContext();
         var discordId = User.GetDiscordUserId();
         var selected = await context.Set<UserData>()
             .Where(i => i.DiscordId == discordId)
-            .Select(i => new Teams.TeamCharactersDto()
+            .Select(i => new Teams.TeamCharactersDto
             {
-                Characters = i.Characters.Select(k => new Teams.CharacterDto()
+                Characters = i.Characters.Select(k => new Teams.CharacterDto
                 {
                     Id = k.Id,
-                    ImageUrl = k.TypeId == PlayerTypeId ?
-                        Player.GetImageUrl(i.Gender) : 
-                        Character.GetDefaultFromTypeId(k.TypeId).ImageUrl,
+                    ImageUrl = k.TypeId == PlayerTypeId
+                        ? Player.GetImageUrl(i.Gender)
+                        : Character.GetDefaultFromTypeId(k.TypeId).ImageUrl,
                     Level = k.Level,
-                    Name = k.TypeId == PlayerTypeId ? i.Name :
-                        Character.GetDefaultFromTypeId(k.TypeId).Name,
+                    Name = k.TypeId == PlayerTypeId ? i.Name : Character.GetDefaultFromTypeId(k.TypeId).Name,
                     Number = k.Number,
-                    RarityNum = (int) Character.GetDefaultFromTypeId(k.TypeId).Rarity
+                    RarityNum = (int)Character.GetDefaultFromTypeId(k.TypeId).Rarity
                 }).ToArray(),
-                Teams = i.PlayerTeams.Select(j => new Teams.TeamDto()
+                Teams = i.PlayerTeams.Select(j => new Teams.TeamDto
                 {
-                    Id = j.Id, 
-                    CharacterSlots= j.TeamMemberships.Select(k =>
-                        new Teams.CharacterSlot()
+                    Id = j.Id,
+                    CharacterSlots = j.TeamMemberships.Select(k =>
+                        new Teams.CharacterSlot
                         {
                             CharacterId = k.CharacterId,
                             Slot = k.Slot
                         }).ToList(),
-                    Name = j.TeamName 
+                    Name = j.TeamName
                 }).ToArray(),
                 EquippedTeamId = i.EquippedPlayerTeam!.Id
             }).FirstOrDefaultAsync();
@@ -92,11 +87,9 @@ public class TeamPageController : ControllerBase
     {
         int[] slots = [slot1, slot2];
         foreach (var slot in slots)
-        {
             if (slot < 1 || slot > TypesFunction.GetDefaultObject<PlayerTeam>().MaxCharacters)
                 return BadRequest("Slot input out of range. Range is 1-4");
-        }
-       
+
         var theId = User.GetDiscordUserId();
         var userData = await context.Set<UserData>()
             .Include(i => i.PlayerTeams)
@@ -125,21 +118,19 @@ public class TeamPageController : ControllerBase
                 await transaction.RollbackAsync();
                 throw;
             }
-        
         }
+
         return Ok();
-
-
     }
+
     [HttpPost("set-slot")]
     [Authorize]
-    public async Task<IActionResult> SetSlotAsync([FromForm] int slot, [FromForm] long teamId, [FromForm] long characterId)
+    public async Task<IActionResult> SetSlotAsync([FromForm] int slot, [FromForm] long teamId,
+        [FromForm] long characterId)
     {
         if (slot < 1 || slot > TypesFunction.GetDefaultObject<PlayerTeam>().MaxCharacters)
-        {
             return BadRequest("Slot input out of range. Range is 1-4");
-        }
- 
+
         var theId = User.GetDiscordUserId();
         var userData = await context.Set<UserData>()
             .Include(i => i.PlayerTeams)
@@ -160,21 +151,17 @@ public class TeamPageController : ControllerBase
 
         await context.SaveChangesAsync();
         return Ok();
-
-
     }
+
     [HttpPost("remove-from-team")]
     [Authorize]
     public async Task<IActionResult> RemoveFromTeamAsync([FromForm] int slot, [FromForm] long teamId)
     {
-   
         if (slot < 1 || slot > TypesFunction.GetDefaultObject<PlayerTeam>().MaxCharacters)
-        {
             return BadRequest("Inputted slot out of range. range is 1-4");
-        }
 
         var theId = User.GetDiscordUserId();
-        var deleted =await  context.Set<PlayerTeamMembership>()
+        var deleted = await context.Set<PlayerTeamMembership>()
             .Where(i => i.Character.UserData!.DiscordId == theId && i.PlayerTeamId == teamId && i.Slot == slot
                         && i.PlayerTeam.TeamMemberships.Count > 1)
             .ExecuteDeleteAsync();
@@ -183,14 +170,11 @@ public class TeamPageController : ControllerBase
             return BadRequest("Something went wrong");
         return Ok();
     }
+
     [Authorize]
     [HttpPost("equip-team")]
-
-
- 
     public async Task<IActionResult> EquipTeam([FromForm] long teamId)
     {
-
         var discordId = User.GetDiscordUserId();
         var userData = await context.Set<UserData>()
             .Include(i => i.PlayerTeams)
@@ -198,15 +182,13 @@ public class TeamPageController : ControllerBase
 
         if (userData is null)
             return BadRequest("Something went wrong");
-   
-        
+
+
         userData.EquippedPlayerTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (userData.EquippedPlayerTeam is null)
             return BadRequest("Something went wrong");
         await context.SaveChangesAsync();
-        
+
         return Ok();
     }
-
-    
 }

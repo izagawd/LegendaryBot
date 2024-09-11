@@ -1,12 +1,12 @@
 @page "/inventory/characters"
 @using Microsoft.AspNetCore.Authorization
-
 @using Website.Components
 
 
 
 @inject HttpClient Http
 @attribute [Authorize]
+
 @code{
 
     private CharacterDto[]? _characterCollection;
@@ -14,7 +14,6 @@
     protected override async Task OnInitializedAsync()
     {
         _characterCollection = await Http.GetFromJsonAsync<CharacterDto[]>("/CharactersPage/get-characters");
-
     }
 
     private enum SortType
@@ -44,15 +43,10 @@
                     theEnumerable = theEnumerable.OrderByDescending(i => i.RarityNum);
                     break;
             }
+
             return theEnumerable;
         }
     }
-
-
-
-
-
-
 
 
     public IEnumerable<string> AdditionalStuff(CharacterDto characterDto)
@@ -64,18 +58,15 @@
     private SortType SortTypeVal { get; set; } = SortType.Level;
 
 
-
-
 }
 
 
-<InventoryEntitiesShower 
-    
-    LinkUrlDel='dto => $"/inventory/characters/{dto.Number}"' Additionals="AdditionalStuff" BackgroundCol="dto => dto.Color" RarityDelegate="dto => dto.RarityNum" ObjectsToRender="() 
-=> UsingCharacterCollection"
-                         NameDelegate="dto => dto.Name"
-                         ImageUrlDelegate="dto => dto.ImageUrl"
-                         TObjectType="CharacterDto">
+<InventoryEntitiesShower
+
+    LinkUrlDel='dto => $"/inventory/characters/{dto.Number}"' Additionals="AdditionalStuff" BackgroundCol="dto => dto.Color" RarityDelegate="dto => dto.RarityNum" ObjectsToRender="() => UsingCharacterCollection"
+    NameDelegate="dto => dto.Name"
+    ImageUrlDelegate="dto => dto.ImageUrl"
+    TObjectType="CharacterDto">
     <SorterStuff>
         <p>Sort By</p>
         <select @bind="SortTypeVal" class="filterer-percentage" style="height: 30px; width: 80%">
@@ -85,5 +76,5 @@
             }
         </select>
     </SorterStuff>
-    
+
 </InventoryEntitiesShower>

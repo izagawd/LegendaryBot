@@ -530,11 +530,9 @@ public partial class BattleSimulator
     public void PrepareTeamForBattle(Team team)
     {
         team.CurrentBattle = this;
-        foreach (var i in team)
-        {
-            i.BattleTeam = team;
-        }
+        foreach (var i in team) i.BattleTeam = team;
     }
+
     protected async Task<BattleResult> StartAsync(
         DiscordMessage? message = null, DiscordInteraction? interaction = null,
         DiscordChannel? channel = null)
@@ -552,12 +550,8 @@ public partial class BattleSimulator
         _gameCancellationTokenSource = new CancellationTokenSource();
         var firstLoop = true;
         _stopped = false;
-        
-        foreach (var i in Teams)
-        {
-          
-            PrepareTeamForBattle(i);
-        }
+
+        foreach (var i in Teams) PrepareTeamForBattle(i);
         foreach (var i in Characters)
             if (SetToMaxHealthAtStart)
                 i.Health = i.MaxHealth;
@@ -835,7 +829,8 @@ public partial class BattleSimulator
                                 && e.Id == selectMoveTarget.CustomId)
                             {
                                 var localTarget = Characters
-                                    .First(i => i.GetNameWithAlphabetIdentifier(i.BattleTeam != ActiveCharacter.BattleTeam) ==
+                                    .First(i => i.GetNameWithAlphabetIdentifier(i.BattleTeam !=
+                                                    ActiveCharacter.BattleTeam) ==
                                                 e.Values.First().ToString());
                                 if (possibleTargets.Contains(localTarget))
                                 {

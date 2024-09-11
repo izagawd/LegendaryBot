@@ -15,19 +15,6 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     private static readonly Dictionary<int, Type> _gearSetCache = [];
     private static readonly Dictionary<int, Gear> _cachedDefaultGearsTypeIds = [];
     private int _gearSetTypeId;
-    public static Gear GetDefaultFromTypeId(int typeId)
-    {
-        if (!_cachedDefaultGearsTypeIds.TryGetValue(typeId, out var gear))
-        {
-            gear = TypesFunction.GetDefaultObjectsAndSubclasses<Gear>()
-                .FirstOrDefault(i => i.TypeId == typeId);
-            if (gear is null) throw new Exception($"Gear with type id {typeId} not found");
-
-            _cachedDefaultGearsTypeIds[typeId] = gear;
-        }
-
-        return gear;
-    }
 
 
     static Gear()
@@ -88,10 +75,6 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 
     public long? CharacterId { get; set; }
     public int Number { get; set; }
-    public long Id { get; set; }
-    public abstract int TypeId { get; protected init; }
-
-    public bool CanBeTraded => true;
 
     public string DisplayString
     {
@@ -136,6 +119,11 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
         }
     }
 
+    public long Id { get; set; }
+    public abstract int TypeId { get; protected init; }
+
+    public bool CanBeTraded => true;
+
     public Type TypeGroup => typeof(Gear);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
 
@@ -148,6 +136,20 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public UserData? UserData { get; set; }
     public string ImageUrl => $"{Information.ApiDomainName}/battle_images/gears/{GetType().Name}.png";
     public long UserDataId { get; set; }
+
+    public static Gear GetDefaultFromTypeId(int typeId)
+    {
+        if (!_cachedDefaultGearsTypeIds.TryGetValue(typeId, out var gear))
+        {
+            gear = TypesFunction.GetDefaultObjectsAndSubclasses<Gear>()
+                .FirstOrDefault(i => i.TypeId == typeId);
+            if (gear is null) throw new Exception($"Gear with type id {typeId} not found");
+
+            _cachedDefaultGearsTypeIds[typeId] = gear;
+        }
+
+        return gear;
+    }
 
 
     private void AddSubstat()

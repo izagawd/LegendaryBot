@@ -97,7 +97,8 @@ public class ExplosionBlast : Ultimate
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return User.CurrentBattle?.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead) ?? throw Character.NoBattleExc;
+        return User.CurrentBattle?.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead) ??
+               throw Character.NoBattleExc;
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,

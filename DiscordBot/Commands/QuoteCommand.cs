@@ -94,7 +94,8 @@ public class QuoteCommand : GeneralCommandClass
                 await newDbContext.Set<QuoteReaction>().AddAsync(quoteReaction);
                 //assigning it to id instead of instance cuz instance might not be of the same dbcontext as newDbContext
                 quoteReaction.QuoteId = randomQuote.Id;
-                var gottenId = await DatabaseContext.Set<UserData>().Where(i => i.DiscordId == interactivityResult.User.Id)
+                var gottenId = await DatabaseContext.Set<UserData>()
+                    .Where(i => i.DiscordId == interactivityResult.User.Id)
                     .Select(i => new long?(i.Id))
                     .FirstOrDefaultAsync();
                 if (gottenId is null)

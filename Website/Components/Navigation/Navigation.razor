@@ -1,4 +1,4 @@
-
+@using PublicInfo
 @using Website.Services
 @inject WebsiteThemeService WebsiteThemeService
 @inject NavigationManager NavMan
@@ -11,18 +11,17 @@
     private bool _showMore = false;
     private string TextColor => WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
     private string IconHovBgColorClass => WebsiteTheme == WebsiteTheme.Dark ? "icon-clickable-dark" : "icon-clickable-light";
+
     private class DirectoryStorer
 
     {
-        
         public string Name { get; }
         public string Directory { get; }
         public string Icon { get; }
-        public Func<string,bool>? IsDirUse { get; }
+        public Func<string, bool>? IsDirUse { get; }
 
-        public DirectoryStorer(string name, string directory, string icon, Func<string,bool>? isDirectoryUse = null)
+        public DirectoryStorer(string name, string directory, string icon, Func<string, bool>? isDirectoryUse = null)
         {
-            
             IsDirUse = isDirectoryUse;
             Name = name;
             Directory = directory;
@@ -32,24 +31,22 @@
 
     private readonly List<DirectoryStorer> Directories =
     [
-        
-        new DirectoryStorer("Home", "/", "home", str => str == PublicInfo.Information.WebsiteDomainName || str == PublicInfo.Information.WebsiteDomainName + "/"),
+        new DirectoryStorer("Home", "/", "home", str => str == Information.WebsiteDomainName || str == Information.WebsiteDomainName + "/"),
         new DirectoryStorer("Inventory", "/inventory/characters", "backpack",
-            str => str.StartsWith(PublicInfo.Information.WebsiteDomainName+"/inventory",StringComparison.CurrentCultureIgnoreCase)),
+            str => str.StartsWith(Information.WebsiteDomainName + "/inventory", StringComparison.CurrentCultureIgnoreCase)),
         new DirectoryStorer("Guild Settings", "/guild", "star"),
-        new DirectoryStorer("Teams","/teams","groups"),
-
+        new DirectoryStorer("Teams", "/teams", "groups")
     ];
 
     protected override async Task OnInitializedAsync()
     {
         if ((await AuthState).User.Identity?.IsAuthenticated ?? false)
         {
-            Directories.Add(new DirectoryStorer("Logout","/authentication/logout","logout"));
+            Directories.Add(new DirectoryStorer("Logout", "/authentication/logout", "logout"));
         }
         else
         {
-            Directories.Add(new DirectoryStorer("Login","/authentication/login","login"));
+            Directories.Add(new DirectoryStorer("Login", "/authentication/login", "login"));
         }
     }
 
@@ -65,11 +62,9 @@
         </div>
         @{
             var or = 2;
-            string backgroundCol = "white";
+            var backgroundCol = "white";
             if (WebsiteThemeService.WebsiteTheme == WebsiteTheme.Light)
                 backgroundCol = "black";
-            
-            
         }
         @foreach (var i in Directories)
         {
@@ -80,9 +75,10 @@
             }
             else
             {
-                isDom = NavMan.Uri.StartsWith(PublicInfo.Information.WebsiteDomainName + i.Directory,
+                isDom = NavMan.Uri.StartsWith(Information.WebsiteDomainName + i.Directory,
                     StringComparison.CurrentCultureIgnoreCase);
             }
+
             <div style="order: @(or++)" class="link-container icon-clickable  @IconHovBgColorClass">
 
                 <div style="background-color: @(isDom ? backgroundCol : "inherit"); height: 100%; width: 5px"></div>
@@ -95,19 +91,19 @@
             </div>
         }
         <div class="additional-cont">
-            <div class="icon-clickable dark-mode-changer-div @IconHovBgColorClass" @onclick="() => { if (WebsiteTheme == WebsiteTheme.Dark) WebsiteThemeService.WebsiteTheme = WebsiteTheme.Light;else WebsiteThemeService.WebsiteTheme = WebsiteTheme.Dark;  }">
-            <span class="material-symbols-outlined toggle-button" style="color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")">
-                dark_mode
-            </span>
+            <div class="icon-clickable dark-mode-changer-div @IconHovBgColorClass" @onclick="() => { if (WebsiteTheme == WebsiteTheme.Dark) WebsiteThemeService.WebsiteTheme = WebsiteTheme.Light;else WebsiteThemeService.WebsiteTheme = WebsiteTheme.Dark; }">
+                <span class="material-symbols-outlined toggle-button" style="color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")">
+                    dark_mode
+                </span>
             </div>
 
-            <div class="menu-div icon-clickable @IconHovBgColorClass" 
+            <div class="menu-div icon-clickable @IconHovBgColorClass"
                  @onclick="() => _showMore = !_showMore">
-            <span class="material-symbols-outlined toggle-button" style="color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")">
-                menu
-            </span>
+                <span class="material-symbols-outlined toggle-button" style="color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")">
+                    menu
+                </span>
             </div>
-        </div> 
+        </div>
 
     </div>
 

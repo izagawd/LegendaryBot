@@ -22,7 +22,6 @@ public partial class Character
 
         protected StatusEffectInflictBattleText()
         {
-            
         }
 
         public override string Text

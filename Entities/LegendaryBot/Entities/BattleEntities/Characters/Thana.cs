@@ -99,7 +99,7 @@ public class Arise : Ultimate
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return  User.BattleTeam?.AsEnumerable() ?? [];
+        return User.BattleTeam?.AsEnumerable() ?? [];
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,

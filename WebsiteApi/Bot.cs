@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using DatabaseManagement;
-using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +24,6 @@ public static class Bot
     }
 
 
-
     private static async Task DoShitAsync()
     {
     }
@@ -35,7 +33,7 @@ public static class Bot
         await DoShitAsync();
         if (args.Length > 0 && args[0] == "test-website")
         {
-            await WebsiteApi.Website.StartAsync(args);
+            await Website.StartAsync(args);
             return;
         }
 
@@ -53,6 +51,6 @@ public static class Bot
 
         await DiscordBot.DiscordBot.StartDiscordBotAsync();
 
-        await WebsiteApi.Website.StartAsync(args);
+        await Website.StartAsync(args);
     }
 }

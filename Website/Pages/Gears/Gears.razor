@@ -1,12 +1,12 @@
 @page "/inventory/gears"
 @using Microsoft.AspNetCore.Authorization
-
 @using Website.Components
 
 
 
 @inject HttpClient Http
 @attribute [Authorize]
+
 @code{
 
     private GearDto[]? GearCollection;
@@ -14,13 +14,12 @@
     protected override async Task OnInitializedAsync()
     {
         GearCollection = await Http.GetFromJsonAsync<GearDto[]>("/GearsPage/get-gears");
-
     }
 
     private enum SortType
     {
         Name,
-  
+
         Rarity
     }
 
@@ -42,14 +41,10 @@
                     theEnumerable = theEnumerable.OrderByDescending(i => i.RarityNum);
                     break;
             }
+
             return theEnumerable;
         }
     }
-
-
-
-
-
 
 
     public IEnumerable<string> AdditionalStuff(GearDto gearDto)
@@ -62,9 +57,8 @@
 }
 
 
-<InventoryEntitiesShower Additionals="AdditionalStuff" BackgroundCol='dto => "white"' 
-                         RarityDelegate="dto => dto.RarityNum" ObjectsToRender="() 
-=> UsingGearCollection"
+<InventoryEntitiesShower Additionals="AdditionalStuff" BackgroundCol='dto => "white"'
+                         RarityDelegate="dto => dto.RarityNum" ObjectsToRender="() => UsingGearCollection"
                          NameDelegate="dto => dto.Name"
                          ImageUrlDelegate="dto => dto.ImageUrl"
                          TObjectType="GearDto">
@@ -77,5 +71,5 @@
             }
         </select>
     </SorterStuff>
-    
+
 </InventoryEntitiesShower>

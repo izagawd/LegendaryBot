@@ -28,10 +28,10 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 {
     private static readonly ConcurrentDictionary<int, Character> CachedDefaultCharacterTypeIds = [];
 
+    public static readonly Exception NoBattleExc = new("Character is not in battle");
+
 
     private readonly HashSet<StatusEffect> _statusEffects = [];
-
-
 
 
     [NotMapped] private float _combatReadiness;
@@ -103,8 +103,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             if (_combatReadiness < 0) _combatReadiness = 0;
         }
     }
-
-    public static  readonly Exception NoBattleExc = new Exception("Character is not in battle");
 
     [NotMapped]
     public virtual float Health
@@ -259,14 +257,17 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     /// <summary>
     ///     The position of the player based on combat readiness
     /// </summary>
-    public int Position {
+    public int Position
+    {
         get
         {
             if (CurrentBattle is null)
                 throw NoBattleExc;
-            return    Array.IndexOf(CurrentBattle.Characters.OrderByDescending(i => i.CombatReadiness).ToArray(), this) + 1;
-        }}
-     
+            return Array.IndexOf(CurrentBattle.Characters.OrderByDescending(i => i.CombatReadiness).ToArray(), this) +
+                   1;
+        }
+    }
+
 
     /// <summary>
     ///     Checks if something overrides the player turn eg stun status effect preventing the player from doing anything
@@ -338,7 +339,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
 
     public abstract int TypeId { get; protected init; }
-
 
 
     public UserData? UserData { get; set; }

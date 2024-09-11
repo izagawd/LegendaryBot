@@ -6,5 +6,4 @@ namespace WebsiteApi.Apis;
 [ApiController]
 public class CharacterInfoPageController : ControllerBase
 {
-    
 }

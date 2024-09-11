@@ -1,7 +1,5 @@
 @page "/inventory/blessings"
-
 @using Microsoft.AspNetCore.Authorization
-@using Website.Services
 @using Website.Components
 
 
@@ -9,6 +7,7 @@
 
 @inject HttpClient Http
 @attribute [Authorize]
+
 @code{
 
     private BlessingDto[]? BlessingCollection;
@@ -16,13 +15,13 @@
     protected override async Task OnInitializedAsync()
     {
         BlessingCollection = await Http.GetFromJsonAsync<BlessingDto[]>("/BlessingsPage/get-blessings");
-
     }
 
     private enum SortType
     {
-        Name, Rarity, Stacks
-    
+        Name,
+        Rarity,
+        Stacks
     }
 
 
@@ -51,19 +50,18 @@
     }
 
 
-
-
     public IEnumerable<string> AddStuff(BlessingDto blessingDto)
     {
         yield return $"Stacks: {blessingDto.Stacks}";
         yield return $"Rarity: {blessingDto.RarityName}";
     }
+
     private SortType SortTypeVal { get; set; } = SortType.Name;
 
 }
+
 <InventoryEntitiesShower Additionals="AddStuff" BackgroundCol='dto => "white"'
-                         RarityDelegate="dto => dto.RarityNum" ObjectsToRender="() 
-=> UsingBlessingCollection"
+                         RarityDelegate="dto => dto.RarityNum" ObjectsToRender="() => UsingBlessingCollection"
                          NameDelegate="dto => dto.Name"
                          ImageUrlDelegate="dto => dto.ImageUrl"
                          TObjectType="BlessingDto">
@@ -73,10 +71,10 @@
 
             @foreach (var i in Enum.GetValues<SortType>())
             {
-            <option value="@i">@i</option>
+                <option value="@i">@i</option>
             }
 
         </select>
     </SorterStuff>
-    
+
 </InventoryEntitiesShower>

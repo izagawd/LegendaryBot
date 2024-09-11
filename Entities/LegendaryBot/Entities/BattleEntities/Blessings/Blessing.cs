@@ -24,22 +24,8 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
 
 public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 {
-    
     private static readonly Dictionary<int, Blessing> _cachedDefaultBlessingsTypeIds = [];
     private int _gearSetTypeId;
-    public static Blessing GetDefaultFromTypeId(int typeId)
-    {
-        if (!_cachedDefaultBlessingsTypeIds.TryGetValue(typeId, out var blessing))
-        {
-            blessing = TypesFunction.GetDefaultObjectsAndSubclasses<Blessing>()
-                .FirstOrDefault(i => i.TypeId == typeId);
-            if (blessing is null) throw new Exception($"Blessing with type id {typeId} not found");
-
-            _cachedDefaultBlessingsTypeIds[typeId] = blessing;
-        }
-
-        return blessing;
-    }
 
 
     [Timestamp] public uint Version { get; private set; }
@@ -53,6 +39,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     public int LevelMilestone => (Character?.LevelMilestone).GetValueOrDefault(0);
     public bool IsInStandardBanner => true;
     public CharacterPartials_Character? Character { get; set; }
+    public string DisplayString => $"`{Name}`";
 
 
     public long Id { get; set; }
@@ -66,12 +53,25 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 
 
     public abstract int TypeId { get; protected init; }
-    public string DisplayString => $"`{Name}`";
     public Type TypeGroup => typeof(Blessing);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
     public long UserDataId { get; set; }
     public virtual string ImageUrl => $"{Information.ApiDomainName}/battle_images/blessings/{GetType().Name}.png";
     public abstract string Name { get; }
+
+    public static Blessing GetDefaultFromTypeId(int typeId)
+    {
+        if (!_cachedDefaultBlessingsTypeIds.TryGetValue(typeId, out var blessing))
+        {
+            blessing = TypesFunction.GetDefaultObjectsAndSubclasses<Blessing>()
+                .FirstOrDefault(i => i.TypeId == typeId);
+            if (blessing is null) throw new Exception($"Blessing with type id {typeId} not found");
+
+            _cachedDefaultBlessingsTypeIds[typeId] = blessing;
+        }
+
+        return blessing;
+    }
 
     public static Blessing GetRandomBlessing(Dictionary<Rarity, double> rates)
     {

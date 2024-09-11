@@ -65,9 +65,9 @@ public class TeamCommand : GeneralCommandClass
     [Command("set-slot")]
     [BotCommandCategory(BotCommandCategory.Team)]
     public async ValueTask ExecuteChangeTeamCharacter(CommandContext context,
-       
         [Parameter("team-name")] [Description("Name of team you want to remove character from")]
-        string teamName, [Parameter("team-slot")] int teamSlot, [Parameter("character-num")] [Description("Number of the character. null if you are removng from slot")]
+        string teamName, [Parameter("team-slot")] int teamSlot,
+        [Parameter("character-num")] [Description("Number of the character. null if you are removng from slot")]
         int? characterNumber = null)
     {
         var userData = await DatabaseContext.Set<UserData>()
@@ -87,7 +87,6 @@ public class TeamCommand : GeneralCommandClass
             return;
         }
 
-   
 
         if (userData.IsOccupied)
         {
@@ -108,8 +107,9 @@ public class TeamCommand : GeneralCommandClass
         {
             embed.WithDescription($"slot ranges from 1 to 4. {teamSlot} is an invalid number");
             await context.RespondAsync(embed);
-                return;
+            return;
         }
+
         if (gottenTeam is null)
         {
             await context.RespondAsync(embed);
@@ -118,7 +118,8 @@ public class TeamCommand : GeneralCommandClass
 
         if (gottenTeam.Count <= 1 && gottenTeam[teamSlot] is not null)
         {
-            embed.WithDescription($"There should be at least one character in a team, so you cant de equip from slot {teamSlot}");
+            embed.WithDescription(
+                $"There should be at least one character in a team, so you cant de equip from slot {teamSlot}");
             await context.RespondAsync(embed);
             return;
         }
@@ -140,16 +141,11 @@ public class TeamCommand : GeneralCommandClass
 
         string text;
         if (character is null && prevChar is not null)
-        {
             text = $"{prevChar} with number {prevChar.Number} has been removed from team {gottenTeam.TeamName}!";
-        } else if (character is null)
-        {
+        else if (character is null)
             text = $"No character in slot {teamSlot} of team {gottenTeam.TeamName}";
-        }
         else
-        {
             text = $"{character} has been put in slot {teamSlot} in team {gottenTeam.TeamName}";
-        }
         embed.WithTitle("Success!")
             .WithDescription(text);
         await context.RespondAsync(embed);
@@ -204,5 +200,4 @@ public class TeamCommand : GeneralCommandClass
 
         await context.RespondAsync(embed);
     }
-
 }

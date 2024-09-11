@@ -1,13 +1,13 @@
 @page "/"
-
 @using System.Security.Claims
+@using Website.Components
 @using Website.Components.Navigation
 @using Website.Services
-@using Website.Components
 
 
 @inject HttpClient Http
 @inject  WebsiteThemeService Serv
+
 @code
 {
     public class HomePageData
@@ -19,24 +19,26 @@
         public int AdventurerLevel { get; set; }
     }
 
-    [CascadingParameter] public Task<AuthenticationState> AuthState  { get; set; } = null!;
+    [CascadingParameter] public Task<AuthenticationState> AuthState { get; set; } = null!;
     protected ClaimsPrincipal? _user;
     private HomePageData? _homePageData;
+
     protected override async Task OnInitializedAsync()
     {
         _user = (await AuthState).User;
         if (_user.Identity?.IsAuthenticated ?? false)
         {
-           _homePageData = await Http.GetFromJsonAsync<HomePageData>("HomePage/get");
+            _homePageData = await Http.GetFromJsonAsync<HomePageData>("HomePage/get");
         }
     }
 }
+
 <Navigation>
     @if (_homePageData is not null)
     {
         <div class="home-class">
             <div>
-                <img style="border-color: @(Serv.WebsiteTheme == WebsiteTheme.Dark? "white": "black")" src="@_homePageData.FavoriteAvatarUrl" alt=""/>
+                <img style="border-color: @(Serv.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" src="@_homePageData.FavoriteAvatarUrl" alt=""/>
                 <div>
                     <p>Level: @_homePageData.AdventurerLevel</p>
                     <p>Coins: @_homePageData.Coins</p>
@@ -45,10 +47,9 @@
                 </div>
             </div>
         </div>
-
     }
-    else if(_user is not null && !(_user.Identity?.IsAuthenticated ?? false))
+    else if (_user is not null && !(_user.Identity?.IsAuthenticated ?? false))
     {
-        <HugeText  TheText="Not Logged In"></HugeText>
+        <HugeText TheText="Not Logged In"></HugeText>
     }
 </Navigation>

@@ -192,7 +192,7 @@ public partial class CharacterCommand
         if (gottenUserData.IsOccupied)
         {
             embedBuilder.WithDescription("You are occupied")
-                .WithImageUrl((string) null!);
+                .WithImageUrl((string)null!);
             await ctx.RespondAsync(embedBuilder);
             return;
         }

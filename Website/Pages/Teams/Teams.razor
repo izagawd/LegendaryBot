@@ -1,15 +1,17 @@
 @page "/teams"
 @using Microsoft.AspNetCore.Authorization
+@using Website.Components
 @using Website.Components.Navigation
 @using Website.Services
-@using Website.Components
 @inject HttpClient Http
 @inject SnackBarService SnackBarService
 @attribute [Authorize]
+
 @code {
 
 
     private static readonly TimeSpan BadRequestTimeSpan = TimeSpan.FromSeconds(2);
+
     enum SortType
     {
         Level,
@@ -17,11 +19,10 @@
         Name
     }
 
-    [CascadingParameter]
-    public WebsiteTheme WebsiteTheme { get; set; }
+    [CascadingParameter] public WebsiteTheme WebsiteTheme { get; set; }
     private SortType CurrentSortType = SortType.Level;
 
-    bool reverseOrder = false;
+    bool reverseOrder;
     protected TeamCharactersDto? TeamCharacterDto { get; set; }
 
 
@@ -43,8 +44,6 @@
         {
             ErrorText = await gotten.Content.ReadAsStringAsync();
         }
-
- 
     }
 
     Task OnChangeTeamAsync(ChangeEventArgs eventArgs)
@@ -55,7 +54,8 @@
         return Task.CompletedTask;
     }
 
-    public CharacterDto? CurrentDraggedCharacter = null;
+    public CharacterDto? CurrentDraggedCharacter;
+
     public async Task RemoveFromTeamAsync(int slot)
     {
         var responseMessage = await Http.PostAsync("TeamPage/remove-from-team", new FormUrlEncodedContent([
@@ -71,7 +71,7 @@
             await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                 await responseMessage.Content.ReadAsStringAsync(),
                 BadRequestTimeSpan
-            ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Error});
+            ) { SnackBarLayout = SnackBar.SnackBarLayout.Error });
         }
     }
 
@@ -81,7 +81,7 @@
         {
             var currentCharIsInCurrTeam = CurrentTeam!.GetCharacters(TeamCharacterDto!).Contains(CurrentDraggedCharacter);
             if (currentCharIsInCurrTeam
-             && CurrentTeam.CharacterSlots.Any(i => i.Slot == slot))
+                && CurrentTeam.CharacterSlots.Any(i => i.Slot == slot))
             {
                 var currentCharSlot = CurrentTeam.CharacterSlots.First(i => i.CharacterId == CurrentDraggedCharacter.Id);
 
@@ -101,12 +101,11 @@
                     await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                         await result.Content.ReadAsStringAsync(),
                         BadRequestTimeSpan
-                    ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Error});
+                    ) { SnackBarLayout = SnackBar.SnackBarLayout.Error });
                 }
             }
             else
             {
-            
                 var result = await Http.PostAsync("TeamPage/set-slot",
                     new FormUrlEncodedContent([
                         new KeyValuePair<string, string>("slot", slot.ToString()),
@@ -119,10 +118,11 @@
                     {
                         CurrentTeam.CharacterSlots.RemoveAll(i => i.CharacterId == CurrentDraggedCharacter.Id);
                     }
+
                     var gotten = CurrentTeam.CharacterSlots.FirstOrDefault(i => i.Slot == slot);
                     if (gotten is null)
                     {
-                        CurrentTeam.CharacterSlots.Add(new CharacterSlot()
+                        CurrentTeam.CharacterSlots.Add(new CharacterSlot
                         {
                             CharacterId = CurrentDraggedCharacter.Id,
                             Slot = slot
@@ -138,21 +138,17 @@
                     await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                         await result.Content.ReadAsStringAsync(),
                         BadRequestTimeSpan
-                    ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Error});
+                    ) { SnackBarLayout = SnackBar.SnackBarLayout.Error });
                 }
-                
-
             }
-
         }
-
     }
 
     async Task RenameTeamAsync(ChangeEventArgs args)
     {
         var newName = (string)args.Value!;
 
-        var didChange  = await Http.PostAsync("TeamPage/rename-team",
+        var didChange = await Http.PostAsync("TeamPage/rename-team",
             new FormUrlEncodedContent([
                 new KeyValuePair<string, string>("teamId", CurrentTeam!.Id.ToString()),
                 new KeyValuePair<string, string>("newName", newName)
@@ -164,21 +160,19 @@
             await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                 $"Team name changed to {newName}!",
                 BadRequestTimeSpan
-            ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Success});
+            ) { SnackBarLayout = SnackBar.SnackBarLayout.Success });
         }
         else
         {
-            
             await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                 await didChange.Content.ReadAsStringAsync(),
                 BadRequestTimeSpan
-            ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Error});
-            
+            ) { SnackBarLayout = SnackBar.SnackBarLayout.Error });
         }
     }
+
     async Task EquipTeamAsync()
     {
-        
         var res = await Http.PostAsync("TeamPage/equip-team",
             new FormUrlEncodedContent([
                 new KeyValuePair<string, string>
@@ -191,26 +185,23 @@
             await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                 $"Team {CurrentTeam.Name} is now equipped!",
                 BadRequestTimeSpan
-            ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Success});
-        }       else
+            ) { SnackBarLayout = SnackBar.SnackBarLayout.Success });
+        }
+        else
         {
             await SnackBarService!.DisplaySnackBarAsync(new SnackBar.SnackBarParams(
                 await res.Content.ReadAsStringAsync(),
                 BadRequestTimeSpan
-            ){SnackBarLayout = Components.SnackBar.SnackBarLayout.Error});
+            ) { SnackBarLayout = SnackBar.SnackBarLayout.Error });
         }
-      
     }
 
 
-
-   
-
 }
+
 <Navigation>
     @if (TeamCharacterDto is not null && CurrentTeam is not null)
     {
-
         <div class="za-parent">
             <div class="team-settler">
                 <div class="inputs">
@@ -225,11 +216,13 @@
                         var currentIsEquipped = CurrentTeam == TeamCharacterDto.EquippedTeam;
                     }
                     <button style="@(currentIsEquipped ? "background-color: grey" : "")"
-                            @onclick="EquipTeamAsync" class="equip-button">@(currentIsEquipped ? "Equipped" : "Equip")</button>
+                            @onclick="EquipTeamAsync" class="equip-button">
+                        @(currentIsEquipped ? "Equipped" : "Equip")
+                    </button>
                 </div>
 
                 @{
-                    string borderCol = WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
+                    var borderCol = WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
                 }
                 <div class="team-characters-container">
                     @for (var i = 1; i <= 4; i++)
@@ -261,7 +254,6 @@
                             }
 
 
-
                         </div>
                     }
                 </div>
@@ -272,7 +264,6 @@
             }
             <div class="others-parent" style="border-color: @borCol">
                 <div class="others">
-
 
 
                     <div class="filters">
@@ -309,7 +300,7 @@
 
                     }
 
-                    <div class="other-characters-parent"   ondragover="@(CurrentTeam.CharacterSlots.Count > 1? "event.preventDefault()" : "")" @ondrop="RemoveDraggedCharacterFromTeamAsync" style="border-color: @borCol">
+                    <div class="other-characters-parent" ondragover="@(CurrentTeam.CharacterSlots.Count > 1 ? "event.preventDefault()" : "")" @ondrop="RemoveDraggedCharacterFromTeamAsync" style="border-color: @borCol">
                         <div class="other-characters">
 
                             @code{
@@ -332,7 +323,6 @@
                                             case SortType.Name:
                                                 gotten = gotten.OrderBy(i => i.Name);
                                                 break;
-
                                         }
 
                                         if (reverseOrder)
@@ -344,7 +334,6 @@
                             }
 
                             @{
-
                                 foreach (var i in NonTeamedCharacters)
 
                                 {
@@ -378,6 +367,5 @@
                 }
             </div>
         </div>
-
     }
 </Navigation>

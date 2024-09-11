@@ -1,6 +1,3 @@
-@using Website.Services
-
-
 @code {
     [CascadingParameter] public WebsiteTheme WebsiteTheme { get; set; }
     [Parameter] public string TheText { get; set; } = "";
@@ -8,10 +5,11 @@
     [Parameter] public string Style { get; set; } = "";
 
 }
-<div class="main-div" 
+
+<div class="main-div"
      style="
          background-color: @WebsiteTheme.GetThemeDefaults().DefaultBackgroundColor;
          color: @WebsiteTheme.GetThemeDefaults().DefaultColor;
 @Style">
-   <h1>@TheText</h1>
+    <h1>@TheText</h1>
 </div>
