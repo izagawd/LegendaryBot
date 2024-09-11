@@ -224,7 +224,7 @@ string joiner, string title,
         await ExecuteDisplayAsync(context, userData.Items.Where(i => i.Name
                 .Replace(" ","")
                 .Contains(simplified,StringComparison.CurrentCultureIgnoreCase))
-                .Select(i => $"Name {i.Name}"), 20,
+                .Select(i => $"Name • {i.Name} • Stacks • {i.Stacks}"), 20,
             "\n", "Items", userData.Color);
     }
 
