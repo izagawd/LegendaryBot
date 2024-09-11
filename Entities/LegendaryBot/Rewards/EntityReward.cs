@@ -2,6 +2,7 @@
 using Entities.LegendaryBot.Entities;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.Items;
 using Entities.Models;
 
@@ -40,8 +41,10 @@ public class EntityReward : Reward
                 return $"{item.Name} • Stacks: {item.Stacks}";
             case Blessing blessing:
                 return $"{blessing.Name}";
+            case Gear gear:
+                return gear.DisplayString;
             default:
-                return "NOOO";
+                return "NOOOO";
         }
     }
 

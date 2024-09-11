@@ -26,6 +26,10 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPart
 /// </summary>
 public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGuidPrimaryIdHaver
 {
+    public Character()
+    {
+        "WOO".Print();
+    }
     private static readonly ConcurrentDictionary<int, Character> CachedDefaultCharacterTypeIds = [];
 
     public static readonly Exception NoBattleExc = new("Character is not in battle");

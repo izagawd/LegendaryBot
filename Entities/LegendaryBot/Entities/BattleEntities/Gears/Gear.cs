@@ -76,47 +76,55 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public long? CharacterId { get; set; }
     public int Number { get; set; }
 
-    public string DisplayString
+    public static string GetDisplayString(string name, IEnumerable<GearStat> gearStats, Rarity rarity,
+        string gearSetTypeName
+    ,int? number, string? characterName, int? characterNumber)
     {
-        get
+        var enumerable = gearStats as GearStat[] ?? gearStats.ToArray();
+        var mainStat = enumerable.First(i => i.IsMainStat is not null);
+        mainStat.SetMainStatValue(rarity);
+        var substats = enumerable.Where(i => i != mainStat).ToArray();
+        string numberToUse = null!;
+        if (number is null)
+            numberToUse = "";
+        else
+            numberToUse = $"{number} • ";
+
+        var setName = gearSetTypeName;
+        var shouldSpace = false;
+        var stringToUse = new StringBuilder($"```{numberToUse}{name}".PadRight(12) +
+                                            $" • {mainStat.AsNameAndValue()} • " +
+                                            $"Rarity: {(int)rarity}\u2b50\nSet: {setName}\nSubstats:");
+        foreach (var j in substats)
         {
-            MainStat.SetMainStatValue(Rarity);
-
-            string numberToUse = null!;
-            if (Number == 0)
-                numberToUse = "";
-            else
-                numberToUse = $"{Number} • ";
-
-            var setName = ((GearSet)TypesFunction.GetDefaultObject(GearSetType)).Name;
-            var shouldSpace = false;
-            var stringToUse = new StringBuilder($"```{numberToUse}{Name}".PadRight(12) +
-                                                $" • {MainStat.AsNameAndValue()} • " +
-                                                $"Rarity: {(int)Rarity}\u2b50\nSet: {setName}\nSubstats:");
-            foreach (var j in Substats)
+            if (shouldSpace)
             {
-                if (shouldSpace)
-                {
-                    shouldSpace = false;
-                }
-                else
-                {
-                    shouldSpace = true;
-                    stringToUse.Append("\n");
-                }
-
-                var zaString = j.AsNameAndValue();
-
-                if (shouldSpace)
-                    zaString = zaString.PadRight(25);
-                stringToUse.Append(zaString);
+                shouldSpace = false;
+            }
+            else
+            {
+                shouldSpace = true;
+                stringToUse.Append("\n");
             }
 
-            if (Character is not null)
-                stringToUse.Append($"\nEquipped By: {Character.Name} [{Character.Number}]");
-            stringToUse.Append("```");
-            return stringToUse.ToString();
+            var zaString = j.AsNameAndValue();
+
+            if (shouldSpace)
+                zaString = zaString.PadRight(25);
+            stringToUse.Append(zaString);
         }
+
+        if (characterName is not null && characterNumber is not null) 
+            stringToUse.Append($"\nEquipped By: {characterName} [{characterNumber}]");
+        stringToUse.Append("```");
+        return stringToUse.ToString();
+    }
+    public string DisplayString
+    {
+        get => GetDisplayString(Name, Stats, Rarity,
+            ((GearSet)TypesFunction.GetDefaultObject(GearSetType)).Name,
+            Number == 0 ? null : Number, Character?.Name,
+            Character?.Number);
     }
 
     public long Id { get; set; }

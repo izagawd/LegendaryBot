@@ -118,6 +118,7 @@ public class Ignite : Ultimate
 
 public class Player : Character
 {
+    public static int OriginalTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
     public Player()
     {
         Element = Element.Fire;
