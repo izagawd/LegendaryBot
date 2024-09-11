@@ -4,7 +4,7 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Characters;
 
 public class PlayerTeam : Team<PlayerTeamMembership>
 {
-    public long Id { get; }
+    public long Id { get; set; }
     public string TeamName { get; set; } = "Team1";
     public long? IsEquipped { get; set; }
     public long UserDataId { get; set; }
