@@ -1,4 +1,6 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+
 
 namespace Website.Pages.Characters;
 
@@ -8,6 +10,8 @@ public partial class CharacterInfo
     {
         public long Id { get; set; }
 
+        
+        public Dictionary<WorkingWith, long?> TheEquippedOnes { get; set; }
         public int Number { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
@@ -24,9 +28,9 @@ public partial class CharacterInfo
 
     public class GearDto
     {
-        public long Id { get; set; }
         public string GearName { get; set; }
-
+        public long Id { get; set; }
+        public int  RarityNum { get; set; }
         public int TypeId { get; set; }
         public string ImageUrl { get; set; }
         public string? OriginalOwnerImageUrl { get; set; }
@@ -38,6 +42,8 @@ public partial class CharacterInfo
 
     public class BlessingDto
     {
+        public int TypeId { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public int RemainingStacks { get; set; }
@@ -45,16 +51,17 @@ public partial class CharacterInfo
     public class CharacterInfoDto
     {
         
+        
+
         public CharacterDto CharacterDto { get; set; }
         public GearDto[] AllGears { get; set; }
 
+        public BlessingDto[] AllBlessings { get; set; }
 
-        [JsonIgnore]
-        public IEnumerable<GearDto> CharacterEquippedGears
-        {
-            get { return AllGears.Where(j => CharacterEquippedGearsId.Contains(j.Id)); }
-        }
+        public BlessingDto? EquippedBlessing =>
+            AllBlessings.FirstOrDefault(i => i.Id == CharacterDto.TheEquippedOnes. GetValueOrDefault(WorkingWith.Blessing));
 
-        public List<long> CharacterEquippedGearsId { get; set; }
+
+
     }
 }

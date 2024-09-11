@@ -2,14 +2,21 @@
 @using Microsoft.AspNetCore.Authorization
 @using Website.Components.Navigation
 @using Website.Components
+@using Website.Pages.Blessings
 
 @attribute [Authorize]
 
 @inject HttpClient Http
 
 @code {
+    
+    public enum  WorkingWith
+    {
+        Blessing, Armor, Helmet, Weapon, Ring, Necklace, Boots
+    }
     [Parameter] public int CharacterNumber { get; set; }
 
+    private WorkingWith CurrentlyWorkingWith { get; set; } = WorkingWith.Blessing;
     protected CharacterInfoDto? Dto { get; set; }
     private string? ErrorMessage;
     protected override async Task OnInitializedAsync()
@@ -36,7 +43,43 @@
                 <p>Level: @Dto.CharacterDto.Level</p>
                 <p>Num @Dto.CharacterDto.Number</p>
             </div>  
-    
+            <div>
+              
+                @{
+                    
+                    string? imageUrl;
+                    object? workingWithObject;
+                    if (CurrentlyWorkingWith == WorkingWith.Blessing)
+                    {
+                        
+                        workingWithObject = Dto.EquippedBlessing;
+                        imageUrl = (workingWithObject as BlessingDto)?.ImageUrl;
+                    }
+                    else
+                    {
+                        workingWithObject = Dto.AllGears
+                            .FirstOrDefault(i => i.Id ==
+                                                 Dto.CharacterDto. TheEquippedOnes.GetValueOrDefault(CurrentlyWorkingWith));
+                        imageUrl = (workingWithObject as GearDto)?.ImageUrl;
+                    }
+                 
+     
+                }
+                <img src="@imageUrl"/>
+                <div>
+                    @if (workingWithObject is BlessingDto blessingDto)
+                    {
+                        <p>@blessingDto.Name</p>
+                        
+                    } else if (workingWithObject is GearDto gearDto)
+                    {
+                        <p>@gearDto.GearName</p>
+                        <p>Rarity: @gearDto.RarityNum</p>
+                    }
+                </div>
+            </div>
+     
+            
         </div>
 
     }

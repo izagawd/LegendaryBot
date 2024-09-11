@@ -1,3 +1,4 @@
+
 @using Website.Components.Navigation
 @typeparam TObjectType
 
@@ -7,7 +8,7 @@
     [Parameter] [EditorRequired] public Func<IEnumerable<TObjectType>?> ObjectsToRender { get; set; } = null!;
     [Parameter] [EditorRequired] public Func<TObjectType, string> NameDelegate { get; set; } = null!;
     [Parameter] [EditorRequired] public Func<TObjectType, string> ImageUrlDelegate { get; set; } = null!;
-    [Parameter] [EditorRequired] public Func<TObjectType, int> RarityDelegate { get; set; } = null!;
+
     [Parameter] public Func<TObjectType, string>? LinkUrlDel { get; set; }
     [Parameter] public Func<TObjectType, IEnumerable<string>>? Additionals { get; set; }
 }
