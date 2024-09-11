@@ -52,7 +52,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 
 
     [NotMapped] public virtual IEnumerable<Type> PossibleMainStats => [];
-    public Character Character { get; set; }
+    public Character? Character { get; set; }
 
 
     public static IEnumerable<Type> AllGearTypes

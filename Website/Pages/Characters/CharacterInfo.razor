@@ -1,22 +1,42 @@
 @page "/inventory/characters/{CharacterNumber:int}"
 @using Microsoft.AspNetCore.Authorization
 @using Website.Components.Navigation
+@using Website.Components
 
 @attribute [Authorize]
 
+@inject HttpClient Http
 
 @code {
     [Parameter] public int CharacterNumber { get; set; }
 
+    protected CharacterInfoDto? Dto { get; set; }
+    private string? ErrorMessage;
     protected override async Task OnInitializedAsync()
     {
+        var result = await Http.GetAsync("CharacterInfoPage/get");
+        if (!result.IsSuccessStatusCode)
+            ErrorMessage = await result.Content.ReadAsStringAsync();
+        else
+        {
+            Dto = await result.Content.ReadFromJsonAsync<CharacterInfoDto>();
+        }
     }
 
 }
 
 
 <InventoryNavigation>
-    <div style="display: flex">
-
-    </div>
+    @if (Dto is not null)
+    {
+        <h1>@Dto.CharacterDto.Name</h1>
+    }
+    else if(ErrorMessage is not null)
+    {
+        <HugeText TheText=@ErrorMessage></HugeText>
+    }
+    else
+    {
+        <HugeText TheText="Loading..."></HugeText>
+    }
 </InventoryNavigation>

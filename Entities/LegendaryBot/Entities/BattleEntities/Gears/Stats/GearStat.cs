@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Concurrent;
+using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations.Schema;
 using BasicFunctionality;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,21 @@ public class GearStatDatabaseConfiguration : IEntityTypeConfiguration<GearStat>
 
 public abstract class GearStat
 {
+    public static ConcurrentDictionary<int, GearStat> _cachedDefaultItemsTypeIds = [];
+    public static GearStat GetDefaultFromTypeId(int typeId)
+    {
+        if (!_cachedDefaultItemsTypeIds.TryGetValue(typeId, out var gearStat))
+        {
+            gearStat = TypesFunction.GetDefaultObjectsAndSubclasses<GearStat>()
+                .FirstOrDefault(i => i.TypeId == typeId);
+            if (gearStat is null) throw new Exception($"Gear stat with type id {typeId} not found");
+
+            _cachedDefaultItemsTypeIds[typeId] = gearStat;
+        }
+
+        return gearStat;
+    }
+
     static GearStat()
     {
         AllGearStatTypes = TypesFunction.AllTypes.Where(i => !i.IsAbstract && i.IsSubclassOf(typeof(GearStat)))

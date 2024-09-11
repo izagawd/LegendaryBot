@@ -6,6 +6,7 @@ public partial class CharacterInfo
 {
     public class CharacterDto
     {
+        public long Id { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
         public string ImageUrl { get; set; }
@@ -15,7 +16,7 @@ public partial class CharacterInfo
     {
         public string StatName { get; set; }
         public bool IsPercentage { get; set; }
-        public int Value { get; set; }
+        public float Value { get; set; }
         public bool IsMainStat { get; set; }
     }
 
@@ -24,6 +25,7 @@ public partial class CharacterInfo
         public long Id { get; set; }
         public string GearName { get; set; }
 
+        public int TypeId { get; set; }
         public string ImageUrl { get; set; }
         public string? OriginalOwnerImageUrl { get; set; }
         public GearStatDto[] GearStats { get; set; }
