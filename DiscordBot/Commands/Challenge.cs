@@ -28,7 +28,6 @@ public class Challenge : GeneralCommandClass
         var player2 = opponent;
 
         var player1User = await DatabaseContext.Set<UserData>()
-            .IncludeTeamWithAllEquipments()
             .FirstOrDefaultAsync(i => i.DiscordId == player1.Id);
         if (player1User is null || player1User.Tier == Tier.Unranked)
         {
@@ -83,7 +82,7 @@ public class Challenge : GeneralCommandClass
             .WithTitle($"{player2.Username}, ")
             .WithDescription($"`do you accept {player1.Username}'s challenge?`");
         await DatabaseContext.Set<UserData>()
-            .Where(i => i.DiscordId == player2.Id)
+            .Where(i => i.DiscordId == player2.Id || i.DiscordId == player1.Id)
             .IncludeTeamWithAllEquipments()
             .LoadAsync();
         await MakeOccupiedAsync(player1User);

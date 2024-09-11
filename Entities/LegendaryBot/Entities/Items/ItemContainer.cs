@@ -2,6 +2,15 @@ namespace Entities.LegendaryBot.Entities.Items;
 
 public class ItemContainer : InventoryEntityContainer<Item>
 {
+    public ItemContainer()
+    {
+        
+    }
+
+    public ItemContainer(IEnumerable<Item> items) : base(items)
+    {
+        
+    }
     public TItem GetOrCreateItem<TItem>() where TItem : Item
     {
         return (TItem)GetOrCreateItem(typeof(TItem));

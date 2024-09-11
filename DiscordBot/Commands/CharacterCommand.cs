@@ -30,7 +30,7 @@ public partial class CharacterCommand : GeneralCommandClass
         [Parameter("blessing-name")] string blessingName)
     {
         var userData = await DatabaseContext.Set<UserData>()
-            .Include(i => i.Blessings)
+            .Include(i => i.Blessings.Where(j => j.Character!.Number == characterNumber))
             .ThenInclude(i => i.Character)
             .Include(i => i.Characters.Where(j =>
                 j.Number == characterNumber))
