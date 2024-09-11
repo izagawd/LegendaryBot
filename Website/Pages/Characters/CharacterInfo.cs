@@ -30,6 +30,7 @@ public partial class CharacterInfo
         public string? OriginalOwnerImageUrl { get; set; }
         public GearStatDto[] GearStats { get; set; }
 
+        [JsonIgnore] public IEnumerable<GearStatDto> SubStats => GearStats.Where(i => !i.IsMainStat);
         [JsonIgnore] public GearStatDto MainStat => GearStats.First(i => i.IsMainStat);
     }
 

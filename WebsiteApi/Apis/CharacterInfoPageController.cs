@@ -38,7 +38,7 @@ public class CharacterInfoPageController : ControllerBase
                 AllGears = i.Gears.Select(j => new CharacterInfo.GearDto()
                 {
                     GearName = Gear.GetDefaultFromTypeId(j.TypeId).Name,
-                    GearStats = j.Substats.Select(k => new CharacterInfo.GearStatDto()
+                    GearStats = j.Stats.Select(k => new CharacterInfo.GearStatDto
                     {
                         Value = k.Value,
                         IsMainStat = k.IsMainStat != null,

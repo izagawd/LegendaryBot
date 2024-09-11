@@ -14,7 +14,7 @@
     private string? ErrorMessage;
     protected override async Task OnInitializedAsync()
     {
-        var result = await Http.GetAsync("CharacterInfoPage/get");
+        var result = await Http.GetAsync($"CharacterInfoPage/get?characterNumber={CharacterNumber}");
         if (!result.IsSuccessStatusCode)
             ErrorMessage = await result.Content.ReadAsStringAsync();
         else
