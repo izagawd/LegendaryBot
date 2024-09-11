@@ -203,19 +203,23 @@ public class Display : GeneralCommandClass
     {
         var simplified = nameFilter.Replace(" ", "").ToLower();
         var userData = await DatabaseContext.Set<UserData>()
-            .AsNoTrackingWithIdentityResolution()
-            .Include(i => i.Items)
-            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
+            .Where(i => i.DiscordId == context.User.Id)
+            .Select(i => new
+            {
+                Tier = i.Tier,
+                Color = i.Color,
+                ItemString = i.Items
+                    .Select(j => $"`{Item.GetDefaultFromTypeId(j.TypeId)} • Stacks: {j.Stacks}`")
+            }).FirstOrDefaultAsync();
+               
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
         }
 
-        await ExecuteDisplayAsync(context, userData.Items.Where(i => i.Name.ToLower()
-                .Replace(" ", "")
-                .Contains(simplified)), 20,
-            i => i.DisplayString,
+        await ExecuteDisplayAsync(context, userData.ItemString, 20,
+            i => i,
             "\n", "Items", userData.Color);
     }
 

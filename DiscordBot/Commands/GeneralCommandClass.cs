@@ -114,7 +114,7 @@ public abstract class GeneralCommandClass
         var dic = userDatas.ToDictionary(i => i.Id, i => new { i, i.Version });
         await using var newDb = new PostgreSqlContext();
         var userDatasToUpdate = await newDb.Set<UserData>().Where(i => ids.Contains(i.Id))
-            .ToListAsync();
+            .ToArrayAsync();
 
         foreach (var i in userDatasToUpdate)
         {

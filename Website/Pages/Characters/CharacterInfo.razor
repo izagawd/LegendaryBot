@@ -29,7 +29,16 @@
 <InventoryNavigation>
     @if (Dto is not null)
     {
-        <h1>@Dto.CharacterDto.Name</h1>
+        <div style="display: flex">
+            <div class="character-div">
+                <img style="width: 200px; height: 200px" src="@Dto.CharacterDto.ImageUrl">
+                <p>@Dto.CharacterDto.Name</p>
+                <p>Level: @Dto.CharacterDto.Level</p>
+                <p>Num @Dto.CharacterDto.Number</p>
+            </div>  
+    
+        </div>
+
     }
     else if(ErrorMessage is not null)
     {

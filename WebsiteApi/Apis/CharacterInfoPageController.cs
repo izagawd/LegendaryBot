@@ -62,7 +62,8 @@ public class CharacterInfoPageController : ControllerBase
                         Name = j.TypeId != PlayerTypeId
                             ? Character.GetDefaultFromTypeId(j.TypeId).Name
                             : i.Name,
-                        Level = j.Level
+                        Level = j.Level,
+                        Number = j.Number
                     }).FirstOrDefault()!,
                 CharacterEquippedGearsId = i.Characters.Where(j => j.Number == characterNumber)
                     .SelectMany(j => j.Gears).Select(j => j.Id).ToList()

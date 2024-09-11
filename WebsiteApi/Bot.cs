@@ -1,5 +1,8 @@
 ﻿using System.Diagnostics;
+using BasicFunctionality;
 using DatabaseManagement;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +29,8 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
+        BasicFunctions.GetAllFields(typeof(CommanderJean))
+            .ForEach(i => $"{i.Name}: {BasicFunctions.SizeOf(i.FieldType)}".Print());
     }
 
     private static async Task Main(string[] args)

@@ -7,6 +7,8 @@ public partial class CharacterInfo
     public class CharacterDto
     {
         public long Id { get; set; }
+
+        public int Number { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
         public string ImageUrl { get; set; }
@@ -34,10 +36,18 @@ public partial class CharacterInfo
         [JsonIgnore] public GearStatDto MainStat => GearStats.First(i => i.IsMainStat);
     }
 
+    public class BlessingDto
+    {
+        public string Name { get; set; }
+        public string ImageUrl { get; set; }
+        public int RemainingStacks { get; set; }
+    }
     public class CharacterInfoDto
     {
+        
         public CharacterDto CharacterDto { get; set; }
         public GearDto[] AllGears { get; set; }
+
 
         [JsonIgnore]
         public IEnumerable<GearDto> CharacterEquippedGears

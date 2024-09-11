@@ -31,7 +31,7 @@ public abstract class Item : IInventoryEntity
     [Timestamp] public uint Version { get; private set; }
 
     public int Stacks { get; set; } = 1;
-    public string DisplayString => $"`{Name} • Stacks: {Stacks}`";
+
     public bool CanBeTraded => false;
 
 
