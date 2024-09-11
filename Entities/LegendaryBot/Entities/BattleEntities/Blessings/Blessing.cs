@@ -25,7 +25,7 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
 public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 {
     private static readonly Dictionary<int, Blessing> _cachedDefaultBlessingsTypeIds = [];
-    private int _gearSetTypeId;
+ 
 
 
     [Timestamp] public uint Version { get; private set; }
@@ -36,10 +36,10 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 
     [NotMapped] public virtual int Attack => 20 + LevelMilestone * 40;
     [NotMapped] public virtual int Health => 70 + LevelMilestone * 80;
-    public int LevelMilestone => (Character?.LevelMilestone).GetValueOrDefault(0);
+    public int LevelMilestone => Character?.LevelMilestone ?? 0;
     public bool IsInStandardBanner => true;
     public CharacterPartials_Character? Character { get; set; }
-    public string DisplayString => $"`{Name}`";
+
 
 
     public long Id { get; set; }

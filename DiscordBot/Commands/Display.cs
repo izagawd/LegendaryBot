@@ -301,7 +301,13 @@ string joiner, string title,
         await ExecuteDisplayAsync(context, userData.Characters
                 .Where(i => i.Name.ToLower().Replace(" ", "").Contains(simplified))
                 .OrderBy(i => i.Number)
-                .Select(i =>  $"{i.Number} • {i.Name} • Lvl {i.Level}"), 10,
+                .Select(i =>
+                {
+                    var toReturn =$"{i.Number} • {i.Name} • Lvl {i.Level}";
+                    if (i.BlessingName is not null)
+                        toReturn += $" • {i.BlessingName}";
+                    return toReturn;
+                }), 10,
             "\n", "Characters", userData.Color);
     }
 
@@ -338,7 +344,7 @@ string joiner, string title,
                 {
                     var asArray = i.ToArray();
                     var count = asArray.Length;
-                    var countThatsFree = asArray.Count(j => j.IsEquipped);
+                    var countThatsFree = asArray.Count(j => !j.IsEquipped);
                     var sample = asArray[0];
                     return  $"`{sample.Name} • Count: {count} • Available: {countThatsFree}`";
                 }), 10,

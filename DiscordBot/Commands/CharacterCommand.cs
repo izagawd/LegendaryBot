@@ -7,6 +7,7 @@ using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Commands.Trees;
 using DSharpPlus.Entities;
 using Entities.LegendaryBot;
+using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
@@ -29,32 +30,52 @@ public partial class CharacterCommand : GeneralCommandClass
         [Parameter("character-num")] int characterNumber,
         [Parameter("blessing-name")] string blessingName)
     {
-        var userData = await DatabaseContext.Set<UserData>()
-            .Include(i => i.Blessings.Where(j => j.Character!.Number == characterNumber))
-            .ThenInclude(i => i.Character)
+        var gotten = await DatabaseContext.Set<UserData>()
+            .Where(i => i.DiscordId == context.User.Id)
             .Include(i => i.Characters.Where(j =>
                 j.Number == characterNumber))
-            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
-        if (userData is null || userData.Tier == Tier.Unranked)
+            .ThenInclude(i => i.Blessing)
+            .Select(i =>
+                new
+                {
+             
+                    Blessings = i.Blessings.Select(j => new
+                    {
+                        j.TypeId,
+                        Blessing.GetDefaultFromTypeId(j.TypeId).Name,
+                        j.CharacterId,
+                        j.Id,
+                        j.Version
+                    }),
+                    i.Color,
+                    i.Tier,
+                    i.IsOccupied,
+                    Character = i.Characters.FirstOrDefault(j =>
+                        j.Number == characterNumber)
+                  
+                })
+            .FirstOrDefaultAsync();
+        if (gotten is null || gotten.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
         }
 
-        if (userData.IsOccupied)
+
+        if (gotten.IsOccupied)
         {
             await NotifyAboutOccupiedAsync(context);
             return;
         }
 
         var simplifiedName = blessingName.Replace(" ", "").ToLower();
-        var possibleBlessings = userData.Blessings
+        var possibleBlessings = gotten.Blessings
             .Where(i => i.Name.ToLower().Replace(" ", "") == simplifiedName)
             .ToArray();
         var embed = new DiscordEmbedBuilder()
             .WithTitle("Equipping blessing")
             .WithUser(context.User)
-            .WithColor(userData.Color);
+            .WithColor(gotten.Color);
         if (!possibleBlessings.Any())
         {
             embed.WithDescription($"Blessing with name {blessingName} not found in your inventory");
@@ -62,7 +83,7 @@ public partial class CharacterCommand : GeneralCommandClass
             return;
         }
 
-        var blessing = possibleBlessings.FirstOrDefault(i => i.Character == null);
+        var blessing = possibleBlessings.FirstOrDefault(i => i.CharacterId == null);
         if (blessing is null)
         {
             embed.WithDescription(
@@ -72,7 +93,7 @@ public partial class CharacterCommand : GeneralCommandClass
         }
 
 
-        var character = userData.Characters.FirstOrDefault();
+        var character = gotten.Character;
         if (character is null)
         {
             embed.WithDescription($"Character with number {characterNumber} not found");
@@ -80,10 +101,15 @@ public partial class CharacterCommand : GeneralCommandClass
             return;
         }
 
-        character.Blessing = blessing;
-        await DatabaseContext.SaveChangesAsync();
-        embed.WithDescription(
-            $"{character.Name} [{character.Number}] has successfully equipped {blessing.Name}!");
+        var updated = await DatabaseContext.Set<Blessing>()
+            .Where(i => i.Version == blessing.Version && i.UserData!.DiscordId == context.User.Id
+                                                      && i.Id == blessing.Id)
+            .ExecuteUpdateAsync(i => i.SetProperty(j => j.CharacterId,
+                character.Id));
+        var toSend = "Something went wrong";
+        if (updated > 0)
+            toSend = $"{character.Name} [{character.Number}] has successfully equipped {blessing.Name}!";
+        embed.WithDescription(toSend);
         await context.RespondAsync(embed);
     }
 
