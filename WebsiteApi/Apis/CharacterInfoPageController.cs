@@ -131,7 +131,7 @@ public class CharacterInfoPageController : ControllerBase
             Enum.GetValues<StatType>().Select(i => $"{i.GetShortName()}: {character.GetStatFromType(i)}").ToArray();
         dto.WorkingWithToTypeIdHelper = Helper;
     
-        return Ok(gotten);
+        return Ok(dto);
     }
 
     private static readonly Dictionary<CharacterInfo.WorkingWith, int> Helper = TypesFunction

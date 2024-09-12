@@ -30,24 +30,10 @@ public static class Bot
     }
 
 
-    public class Idk
-    {
 
-
-        [Benchmark]
-        public void DefaultShit()
-        {
-            for (int i = 0; i < 1500; i++)
-            {
-                Character.GetDefaultFromTypeId(5);
-                
-            }
-        }
-        
-    }
     private static async Task DoShitAsync()
     {
-        BenchmarkRunner.Run<Idk>();
+
 
     }
 
