@@ -8,9 +8,10 @@ public partial class CharacterInfo
 {
     public class CharacterDto
     {
+        public string[] CharacterStatsString { get; set; }
         public long Id { get; set; }
 
-        
+       
         public Dictionary<WorkingWith, long?> TheEquippedOnes { get; set; }
         public int Number { get; set; }
         public string Name { get; set; }
@@ -31,6 +32,7 @@ public partial class CharacterInfo
         public string GearName { get; set; }
         public long Id { get; set; }
         public int  RarityNum { get; set; }
+        public string RarityName { get; set; }
         public int TypeId { get; set; }
         public string ImageUrl { get; set; }
         public string? OriginalOwnerImageUrl { get; set; }
@@ -51,7 +53,8 @@ public partial class CharacterInfo
     public class CharacterInfoDto
     {
         
-        
+         
+        public Dictionary<WorkingWith, int> WorkingWithToTypeIdHelper { get; set; }
 
         public CharacterDto CharacterDto { get; set; }
         public GearDto[] AllGears { get; set; }

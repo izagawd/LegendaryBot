@@ -16,7 +16,7 @@
     }
     [Parameter] public int CharacterNumber { get; set; }
 
-    private WorkingWith CurrentlyWorkingWith { get; set; } = WorkingWith.Blessing;
+    private WorkingWith CurrentlyWorkingWith { get; set; } = WorkingWith.Armor;
     protected CharacterInfoDto? Dto { get; set; }
     private string? ErrorMessage;
     protected override async Task OnInitializedAsync()
@@ -30,57 +30,103 @@
         }
     }
 
+    
 }
 
 
 <InventoryNavigation>
     @if (Dto is not null)
     {
-        <div style="display: flex">
-            <div class="character-div">
-                <img style="width: 200px; height: 200px" src="@Dto.CharacterDto.ImageUrl">
-                <p>@Dto.CharacterDto.Name</p>
-                <p>Level: @Dto.CharacterDto.Level</p>
-                <p>Num @Dto.CharacterDto.Number</p>
-            </div>  
-            <div>
-              
-                @{
-                    
-                    string? imageUrl;
-                    object? workingWithObject;
-                    if (CurrentlyWorkingWith == WorkingWith.Blessing)
-                    {
-                        
-                        workingWithObject = Dto.EquippedBlessing;
-                        imageUrl = (workingWithObject as BlessingDto)?.ImageUrl;
-                    }
-                    else
-                    {
-                        workingWithObject = Dto.AllGears
-                            .FirstOrDefault(i => i.Id ==
-                                                 Dto.CharacterDto. TheEquippedOnes.GetValueOrDefault(CurrentlyWorkingWith));
-                        imageUrl = (workingWithObject as GearDto)?.ImageUrl;
-                    }
-                 
-     
+
+        <div class="parent">
+            <div class="equipment-navigator">
+                @foreach (var i in Enum.GetValues<WorkingWith>())
+                {
+                    <div style="flex-grow: 1">
+                        <p>@i</p>
+                    </div>
                 }
-                <img src="@imageUrl"/>
-                <div>
-                    @if (workingWithObject is BlessingDto blessingDto)
-                    {
-                        <p>@blessingDto.Name</p>
-                        
-                    } else if (workingWithObject is GearDto gearDto)
-                    {
-                        <p>@gearDto.GearName</p>
-                        <p>Rarity: @gearDto.RarityNum</p>
-                    }
+            </div>
+            <div style="flex-grow: 1; display: flex; height: 0">
+                <div class="equipment-n-stats">
+                    <div class="idk-for-now">
+                        <div class="character-div">
+                            <img src="@Dto.CharacterDto.ImageUrl">
+                            <p>@Dto.CharacterDto.Name</p>
+                            <p>Level: @Dto.CharacterDto.Level</p>
+                            <p>Num @Dto.CharacterDto.Number</p>
+                        </div>
+                        <div>
+
+                            @{
+
+                                string? imageUrl;
+                                object? workingWithObject;
+                                if (CurrentlyWorkingWith == WorkingWith.Blessing)
+                                {
+
+                                    workingWithObject = Dto.EquippedBlessing;
+                                    imageUrl = (workingWithObject as BlessingDto)?.ImageUrl;
+                                }
+                                else
+                                {
+                                    workingWithObject = Dto.AllGears
+                                        .FirstOrDefault(i => i.Id ==
+                                                             Dto.CharacterDto.TheEquippedOnes.GetValueOrDefault(CurrentlyWorkingWith));
+                                    imageUrl = (workingWithObject as GearDto)?.ImageUrl;
+                                }
+
+
+                            }
+                            <img  src="@imageUrl"/>
+                            <div>
+                                @if (workingWithObject is BlessingDto blessingDto)
+                                {
+                                    <p>@blessingDto.Name</p>
+
+                                }
+                                else if (workingWithObject is GearDto gearDto)
+                                {
+                                    <p>@gearDto.GearName</p>
+                                    <p>Rarity: @gearDto.RarityNum</p>
+                                }
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="character-stats-shower">
+                        @foreach (var i in Dto.CharacterDto.CharacterStatsString)
+                        {
+                            <p>@i</p>
+                        }
+                    </div>
+                </div>
+                <div class="search-stuff">
+                    <div style="display: flex; border-bottom: solid 1px; max-height: 30px">
+                        <input type="text"/>
+                    </div>
+                    <div class="the-stuff-to-search">
+
+                        @if (CurrentlyWorkingWith != WorkingWith.Blessing)
+                        {
+                        var typeIdToLookFor = Dto.WorkingWithToTypeIdHelper[CurrentlyWorkingWith];
+                            foreach (var i in Dto.AllGears.Where(j => j.TypeId == typeIdToLookFor && j != workingWithObject))
+                            {
+                                <div>
+                                    <img src="@i.ImageUrl"/>
+                                    <p>@i.GearName</p>
+                                    <p>Rarity: @i.RarityNum</p>
+                                </div>
+                            }
+                        }
+                   
+                    </div>
                 </div>
             </div>
-     
-            
+       
         </div>
+
 
     }
     else if(ErrorMessage is not null)

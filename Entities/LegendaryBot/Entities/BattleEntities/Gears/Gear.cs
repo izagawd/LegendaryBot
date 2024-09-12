@@ -78,11 +78,11 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 
     public static string GetDisplayString(string name, IEnumerable<GearStat> gearStats, Rarity rarity,
         string gearSetTypeName
-    ,int? number, string? characterName, int? characterNumber)
+    ,int? number, string? characterName, int? characterNumber, GearStat? mainStat = null)
     {
         var enumerable = gearStats as GearStat[] ?? gearStats.ToArray();
-        var mainStat = enumerable.First(i => i.IsMainStat is not null);
-        mainStat.SetMainStatValue(rarity);
+        mainStat =mainStat ??  enumerable.First(i => i.IsMainStat is not null);
+        
         var substats = enumerable.Where(i => i != mainStat).ToArray();
         string numberToUse = null!;
         if (number is null)
@@ -124,7 +124,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
         get => GetDisplayString(Name, Stats, Rarity,
             ((GearSet)TypesFunction.GetDefaultObject(GearSetType)).Name,
             Number == 0 ? null : Number, Character?.Name,
-            Character?.Number);
+            Character?.Number,MainStat);
     }
 
     public long Id { get; set; }
