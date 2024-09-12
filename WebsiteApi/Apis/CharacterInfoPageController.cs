@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFunctions;
 using Website.Pages.Characters;
+using Website.Pages.Teams;
 
 namespace WebsiteApi.Apis;
 
@@ -60,87 +61,77 @@ public class CharacterInfoPageController : ControllerBase
         Expression<Func<UserData, IEnumerable<Character>>> zaExpr = i =>
             i.Characters.Where(j => j.Number == characterNumber);
         var userDataId = User.GetDiscordUserId();
-        var gotten = await Context.Set<UserData>().Where(i => i.DiscordId == userDataId)
-            .Include(zaExpr)
-            .ThenInclude(i => i.Gears)
+        var gotten = await Context.Set<UserData>()
+            .AsNoTrackingWithIdentityResolution()
+            .Where(i => i.DiscordId == userDataId)
+            .Include(i => i.Characters.Where(j => j.Number == characterNumber))
+            .Include(i => i.Gears)
             .ThenInclude(i => i.Stats)
-            .Include(zaExpr)
-            .ThenInclude(i => i.Blessing)
-            .Select(i =>new{Character =
-                    i.Characters.FirstOrDefault(j => j.Number == characterNumber)
-                , TheData = new CharacterInfo.CharacterInfoDto()
-            {
-                AllGears = i.Gears.Select(j => new CharacterInfo.GearDto()
-                {
-                    GearName = Gear.GetDefaultFromTypeId(j.TypeId).Name,
-                    GearStats = j.Stats.Select(k => new CharacterInfo.GearStatDto
-                    {
-                        Value = k.Value,
-                        IsMainStat = k.IsMainStat != null,
-                        IsPercentage = GearStat.GetDefaultFromTypeId(k.TypeId).IsPercentage
-                    }).ToArray(),
-                    TypeId = j.TypeId,
-                    Id = j.Id,
-                    ImageUrl = Gear.GetDefaultFromTypeId(j.TypeId).ImageUrl,
-                    OriginalOwnerImageUrl = j.Character != null ? 
-                        (j.Character.TypeId != PlayerTypeId ?  Character.GetDefaultFromTypeId(j.Character.TypeId).ImageUrl
-                            : Player.GetImageUrl(i.Gender)) : null,
-                    RarityNum =(int) j.Rarity,
-                    RarityName = j.Rarity.ToString()
-                    
-                    
-
-                }).ToArray(),
-                CharacterDto = i.Characters.Where(j => j.Number == characterNumber)
-                    .Select(j => new CharacterInfo.CharacterDto()
-                    {
-                        Id = j.Id,
-                        ImageUrl = j.TypeId != PlayerTypeId
-                            ? Character.GetDefaultFromTypeId(j.TypeId).ImageUrl
-                            : Player.GetImageUrl(i.Gender),
-                        Name = j.TypeId != PlayerTypeId
-                            ? Character.GetDefaultFromTypeId(j.TypeId).Name
-                            : i.Name,
-                        Level = j.Level,
-                        Number = j.Number,
-                    }).FirstOrDefault()!,
-                AllBlessings = i.Blessings.Select(j => new CharacterInfo.BlessingDto()
-                {
-                    Id = j.Id,
-                    ImageUrl = Blessing.GetDefaultFromTypeId(j.TypeId).ImageUrl,
-                    Name = Blessing.GetDefaultFromTypeId(j.TypeId).Name,
-                    TypeId = j.TypeId
-                    
-                }).ToArray()
-                }
-            
-            }).FirstOrDefaultAsync();
+            .Include(i => i.Blessings)
+            .FirstOrDefaultAsync();
+        
+        
         if (gotten is null)
         {
             return BadRequest("Your data was not found in database");
         }
 
-        if (gotten.TheData.CharacterDto is null)
+        var character = gotten.Characters.FirstOrDefault(i => i.Number == characterNumber);
+        
+        if (character is null)
         {
             return BadRequest($"Character with number {characterNumber} not found");
         }
 
-        var theDic = gotten.TheData.CharacterDto.TheEquippedOnes = new();
+        var dto = new CharacterInfo.CharacterInfoDto();
+        dto.CharacterDto = new CharacterInfo.CharacterDto
+        {
+            Id = character.Id,
+            ImageUrl = character.ImageUrl,
+            Level = character.Level,
+            Name = character.Name,
+            Number = character.Number,
 
-        foreach (var i in gotten.Character!.Gears)
+        };
+        var theDic = dto.CharacterDto.TheEquippedOnes = new();
+        foreach (var i in character.Gears)
         {
             theDic[GetWorkingWithValue(i.TypeId)] = i.Id;
         }
 
-        theDic[CharacterInfo.WorkingWith.Blessing] = gotten.Character.Blessing?.Id;
-        gotten.Character.LoadStats();
+        dto.AllGears = gotten.Gears.Select(j => new CharacterInfo.GearDto()
+        {
+            Id = j.Id,
+            GearName = j.Name,
+            ImageUrl = j.ImageUrl,
+            RarityName = j.Rarity.ToString(),
+            RarityNum = (int) j.Rarity,
+            GearStats = j.Stats.Select(k => new CharacterInfo.GearStatDto()
+            {
+                IsMainStat = k.IsMainStat is not null,
+                IsPercentage = k.IsPercentage,
+                StatName = k.StatType.GetShortName(),
+                Value = k.Value,
+                
+            }).ToArray(),
+            TypeId = j.TypeId,
+            
+        }).ToArray();
+        dto.AllBlessings = gotten.Blessings.Select(i => new CharacterInfo.BlessingDto()
+        {
+            Id = i.Id,
+            ImageUrl = i.ImageUrl,
+            Name = i.Name,
+            TypeId = i.TypeId
+        }).ToArray();
+        theDic[CharacterInfo.WorkingWith.Blessing] = character.Blessing?.Id;
+        character.LoadStats();
 
-
-        gotten.TheData.CharacterDto.CharacterStatsString =
-            Enum.GetValues<StatType>().Select(i => $"{i.GetShortName()}: {gotten.Character.GetStatFromType(i)}").ToArray();
-        gotten.TheData.WorkingWithToTypeIdHelper = Helper;
-        gotten.TheData.AllGears.Length.Print();
-        return Ok(gotten.TheData);
+        dto.CharacterDto.CharacterStatsString =
+            Enum.GetValues<StatType>().Select(i => $"{i.GetShortName()}: {character.GetStatFromType(i)}").ToArray();
+        dto.WorkingWithToTypeIdHelper = Helper;
+    
+        return Ok(gotten);
     }
 
     private static readonly Dictionary<CharacterInfo.WorkingWith, int> Helper = TypesFunction

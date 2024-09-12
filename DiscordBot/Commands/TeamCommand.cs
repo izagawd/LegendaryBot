@@ -19,11 +19,11 @@ public class TeamCommand : GeneralCommandClass
         [Parameter("team-name")] string teamName)
     {
         var anon = await DatabaseContext.Set<UserData>()
-            .Include(i => i.EquippedPlayerTeam)
             .Where(i => i.DiscordId == context.User.Id)
             .Select(i => new
 
             {
+                i.EquippedPlayerTeam,
                 i.IsOccupied, tier = i.Tier, team = i.PlayerTeams.FirstOrDefault(j => j.TeamName.ToLower()
                     .Replace(" ", "") == teamName.ToLower()),
                 userData = i

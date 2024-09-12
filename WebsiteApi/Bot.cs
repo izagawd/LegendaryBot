@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using BasicFunctionality;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
@@ -28,9 +30,25 @@ public static class Bot
     }
 
 
+    public class Idk
+    {
+
+
+        [Benchmark]
+        public void DefaultShit()
+        {
+            for (int i = 0; i < 1500; i++)
+            {
+                Character.GetDefaultFromTypeId(5);
+                
+            }
+        }
+        
+    }
     private static async Task DoShitAsync()
     {
-        BasicFunctions.SizeOf(typeof(Blessing)).Print();
+        BenchmarkRunner.Run<Idk>();
+
     }
 
     private static async Task Main(string[] args)

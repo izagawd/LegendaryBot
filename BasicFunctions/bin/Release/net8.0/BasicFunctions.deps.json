@@ -185,10 +185,7 @@
       },
       "PublicInfo/1.0.0": {
         "runtime": {
-          "PublicInfo.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "PublicInfo.dll": {}
         }
       }
     }

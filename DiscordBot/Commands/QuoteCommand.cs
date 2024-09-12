@@ -22,10 +22,10 @@ public class QuoteCommand : GeneralCommandClass
     {
         var anon = await DatabaseContext.Set<Quote>()
             .Where(i => i.IsApproved)
-            .Include(i => i.UserData)
             .Select(j =>
                 new
                 {
+                    j.UserData,
                     quote = j,
                     likes = j.QuoteReactions.Count(k => k.IsLike),
                     dislikes = j.QuoteReactions.Count(k => !k.IsLike)
