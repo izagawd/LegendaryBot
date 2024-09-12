@@ -10,6 +10,10 @@
 
 @code {
     
+    
+    public object? HoveredObject { get; set; }
+    [CascadingParameter]
+    public WebsiteTheme Theme { get; set; }
     public enum  WorkingWith
     {
         Blessing, Armor, Helmet, Weapon, Ring, Necklace, Boots
@@ -42,7 +46,7 @@
             <div class="equipment-navigator">
                 @foreach (var i in Enum.GetValues<WorkingWith>())
                 {
-                    <div style="flex-grow: 1">
+                    <div @onclick="() => CurrentlyWorkingWith = i"  style="flex-grow: 1; border-right: solid 1px;">
                         <p>@i</p>
                     </div>
                 }
@@ -113,10 +117,21 @@
                         var typeIdToLookFor = Dto.WorkingWithToTypeIdHelper[CurrentlyWorkingWith];
                             foreach (var i in Dto.AllGears.Where(j => j.TypeId == typeIdToLookFor && j != workingWithObject))
                             {
-                                <div>
+                                
+                                <div @onmouseover="() => HoveredObject = i" @onmouseout="() => { if (HoveredObject == i) { HoveredObject = null; } }">
                                     <img src="@i.ImageUrl"/>
                                     <p>@i.GearName</p>
                                     <p>Rarity: @i.RarityName</p>
+                                    <div  class="the-hover-shit" style="border-color: @(Theme == WebsiteTheme.Dark ? "gray" : "lightgrey");
+                                        background-color: @(Theme == WebsiteTheme.Dark ? "white" : "black");
+color: @(Theme == WebsiteTheme.Dark ? "black" : "white");
+display: @(HoveredObject == i ? "block" : "none")">
+                                        <p>@i.MainStat.StatName: @i.MainStat.Value</p>
+                                        @foreach (var j in i.SubStats)
+                                        {
+                                            <p>@j.StatName: @j.Value</p>
+                                        }
+                                    </div>
                                 </div>
                             }
                         }
