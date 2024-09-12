@@ -206,14 +206,8 @@ string joiner, string title,
         var simplified = nameFilter.Replace(" ", "").ToLower();
         var userData = await DatabaseContext.Set<UserData>()
             .Where(i => i.DiscordId == context.User.Id)
-            .Select(i => new
-            {
-                 i.Tier,
-                i.Color,
-                Items = i.Items
-                    .Select(j => new{Item.GetDefaultFromTypeId(j.TypeId).Name, j.Stacks})
-                
-            }).FirstOrDefaultAsync();
+            .Include(i => i.Items)
+            .FirstOrDefaultAsync();
                
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -276,20 +270,8 @@ string joiner, string title,
         var userData = await DatabaseContext.Set<UserData>()
 
             .Where(i => i.DiscordId == context.User.Id)
-            .Select(i => new
-            {
-                i.Tier,
-                i.Color,
-                Characters = i.Characters.Select(j =>
-                    new
-                    {
-                        j.Number, j.Level,
-                        Name = j.TypeId == Player.OriginalTypeId
-                            ? i.Name
-                            : Character.GetDefaultFromTypeId(j.TypeId).Name,
-                        BlessingName = j.Blessing != null ? Blessing.GetDefaultFromTypeId(j.Blessing.TypeId).Name : null
-                    })
-            })
+            .Include(i => i.Characters)
+            .ThenInclude(i => i.Blessing)
             .FirstOrDefaultAsync();
             
         if (userData is null || userData.Tier == Tier.Unranked)
@@ -304,8 +286,8 @@ string joiner, string title,
                 .Select(i =>
                 {
                     var toReturn =$"{i.Number} • {i.Name} • Lvl {i.Level}";
-                    if (i.BlessingName is not null)
-                        toReturn += $" • {i.BlessingName}";
+                    if (i.Blessing is not null)
+                        toReturn += $" • {i.Blessing.Name}";
                     return toReturn;
                 }), 10,
             "\n", "Characters", userData.Color);
@@ -318,17 +300,7 @@ string joiner, string title,
     {
         var userData = await DatabaseContext.Set<UserData>()
             .Where(i => i.DiscordId == context.User.Id)
-            .Select(i => new
-            {
-                i.Tier, i.Color,
-
-                Blessings = i.Blessings.Select(k => new
-                {
-                     Blessing.GetDefaultFromTypeId(k.TypeId).Name,
-                    IsEquipped = k.Character != null,
-                    k.TypeId
-                })
-            })
+            .Include(i => i.Blessings)
             .FirstOrDefaultAsync();
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -344,7 +316,7 @@ string joiner, string title,
                 {
                     var asArray = i.ToArray();
                     var count = asArray.Length;
-                    var countThatsFree = asArray.Count(j => !j.IsEquipped);
+                    var countThatsFree = asArray.Count(j => j.CharacterId is null);
                     var sample = asArray[0];
                     return  $"`{sample.Name} • Count: {count} • Available: {countThatsFree}`";
                 }), 10,
@@ -358,19 +330,10 @@ string joiner, string title,
     {
         var userData = await DatabaseContext.Set<UserData>()
             .Where(i => i.DiscordId == context.User.Id)
-            .Select(i => new{
-                Gears =
-                i.Gears.Where(j => j.Number == gearNumber)
-                .Select(j => new
-                {
-                    j.Stats, Name = Gear.GetDefaultFromTypeId(j.TypeId).Name, j.Rarity,
-                    j.GearSetTypeId, j.Number,
-                    CharacterNumber = j.Character != null ? j.Character.Number : (int?)null,
-                    CharacterName = j.Character != null ? Character.GetDefaultFromTypeId(j.Character.TypeId).Name : null
-                }),
-                i.Tier,
-                
-                i.Color})
+            .Include(i => i.Gears.Where(j => j.Number == gearNumber))
+            .ThenInclude(i => i.Stats)
+            .Include(i => i.Gears)
+            .ThenInclude(i => i.Character)
             .FirstOrDefaultAsync();
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -380,7 +343,7 @@ string joiner, string title,
         
       
 
-        var gear = userData.Gears.FirstOrDefault();
+        var gear = userData.Gears.FirstOrDefault(i => i.Number == gearNumber);
         var embed = new DiscordEmbedBuilder()
             .WithColor(userData.Color)
             .WithTitle("Displaying gear")
@@ -388,10 +351,7 @@ string joiner, string title,
         if (gear is null)
             embed.WithDescription($"Gear with number {gearNumber} not found");
         else
-            embed.WithDescription(Gear.GetDisplayString(gear.Name,gear.Stats,
-                gear.Rarity,GearSet.GetDefaultByTypeId(gear.GearSetTypeId).Name,
-                gear.Number,gear.CharacterName,gear.CharacterNumber
-                ));
+            embed.WithDescription(gear.DisplayString);
 
         await context.RespondAsync(embed);
     }
@@ -403,26 +363,10 @@ string joiner, string title,
     {
         var userData = await DatabaseContext.Set<UserData>()
             .Where(i => i.DiscordId == context.User.Id)
-            .Select(i => new
-            {
-                i.Tier,
-                i.Color,
-                PlayerTeams = i.PlayerTeams.Select(j =>
-                    new
-                    {
-                        MemberShips =  j.TeamMemberships.Select(k =>
-                            new
-                            {
-                                CharacterNumber = k.Character.Number,
-                                CharacterName=  Character.GetDefaultFromTypeId(k.Character.TypeId).Name,
-                                CharacterLevel = k.Character.Level,
-                                k.Slot,
-                            }).ToArray(),
-                        IsEquipped = j.IsEquipped != null,
-                         j.TeamName
-                        
-                    })
-            }).FirstOrDefaultAsync();
+            .Include(i => i.PlayerTeams)
+            .ThenInclude(i => i.TeamMemberships)
+            .ThenInclude(i => i.Character)
+            .FirstOrDefaultAsync();
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -439,7 +383,7 @@ string joiner, string title,
         {
             var equipped = "";
             var value = "NO TEAM MEMBER";
-            if (i.IsEquipped)
+            if (userData.EquippedPlayerTeam == i)
                 equipped = " (equipped)";
 
                 value = "";
@@ -447,11 +391,11 @@ string joiner, string title,
                 for (var j = 1; j <=  maxChar; j++)
                 {
                     value += $"`Slot {j}: ";
-                    var membership = i.MemberShips.FirstOrDefault(k => k.Slot == j);
+                    var membership = i.TeamMemberships.FirstOrDefault(k => k.Slot == j);
                     if (membership is null)
                         value += "EMPTY SLOT";
                     else
-                        value += $"{membership.CharacterNumber} • {membership.CharacterName} • Lvl {membership.CharacterLevel}";
+                        value += $"{membership.Character.Number} • {membership.Character.Name} • Lvl {membership.Character.Level}";
 
                     value += "`\n";
                 }

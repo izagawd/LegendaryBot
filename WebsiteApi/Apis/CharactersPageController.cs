@@ -2,6 +2,7 @@ using BasicFunctionality;
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,23 +22,22 @@ public class CharactersPageController(PostgreSqlContext post) : ControllerBase
     public async Task<ActionResult<Characters.CharacterDto[]>> GetCharactersAsync()
     {
         var zaId = User.GetDiscordUserId();
-        var gottenCollection = await post.Set<Character>()
-            .Where(i => i.UserData!.DiscordId == zaId)
+        var userData = await post.Set<UserData>()
+            .Include(i => i.Characters)
+            .FirstOrDefaultAsync(i => i.DiscordId == zaId);
+            
+            
+            var toDto = userData.Characters
             .Select(i => new Characters.CharacterDto
             {
-                ImageUrl = i.TypeId == PlayerTypeId
-                    ? Player.GetImageUrl(i.UserData!.Gender)
-                    : Character.GetDefaultFromTypeId(i.TypeId).ImageUrl,
+                ImageUrl = i.ImageUrl,
                 Level = i.Level,
-                Name = i.TypeId == PlayerTypeId
-                    ? i.UserData!.Name
-                    : Character.GetDefaultFromTypeId(i.TypeId).Name,
+                Name = i.Name,
                 Number = i.Number,
-
                 RarityNum = (int)Character.GetDefaultFromTypeId(i.TypeId).Rarity
             })
-            .ToArrayAsync();
+            .ToArray();
 
-        return Ok(gottenCollection);
+        return Ok(toDto);
     }
 }

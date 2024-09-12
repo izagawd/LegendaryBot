@@ -18,47 +18,41 @@ public class TeamCommand : GeneralCommandClass
     public async ValueTask ExecuteEquip(CommandContext context,
         [Parameter("team-name")] string teamName)
     {
-        var anon = await DatabaseContext.Set<UserData>()
+        var userData = await DatabaseContext.Set<UserData>()
             .Where(i => i.DiscordId == context.User.Id)
-            .Select(i => new
-
-            {
-                i.EquippedPlayerTeam,
-                i.IsOccupied, tier = i.Tier, team = i.PlayerTeams.FirstOrDefault(j => j.TeamName.ToLower()
-                    .Replace(" ", "") == teamName.ToLower()),
-                userData = i
-            })
+            .Include(i => i.PlayerTeams)
             .FirstOrDefaultAsync();
 
-        if (anon is null || anon.tier == Tier.Unranked)
+        if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
             return;
         }
 
-        if (anon.IsOccupied)
+        if (userData.IsOccupied)
         {
             await NotifyAboutOccupiedAsync(context);
             return;
         }
 
-        var userData = anon.userData;
+        var team = userData.PlayerTeams.FirstOrDefault(i => i.TeamName.Replace(" ", "")
+            .Equals(teamName.Replace(" ", ""), StringComparison.OrdinalIgnoreCase));
         var embed = new DiscordEmbedBuilder()
             .WithUser(context.User)
             .WithColor(userData.Color)
             .WithTitle("Hmm")
             .WithDescription("Team does not seem to exist");
-        if (anon.team is null)
+        if (team is null)
         {
             await context.RespondAsync(embed);
             return;
         }
 
 
-        userData.EquippedPlayerTeam = anon.team;
+        userData.EquippedPlayerTeam = team;
         await DatabaseContext.SaveChangesAsync();
         embed.WithTitle("Success!")
-            .WithDescription($"Team {anon.team.TeamName} is now equipped!");
+            .WithDescription($"Team {team.TeamName} is now equipped!");
         await context.RespondAsync(embed);
     }
 

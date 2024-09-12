@@ -19,15 +19,14 @@ public class BlessingsPageController(PostgreSqlContext post) : ControllerBase
         var zaId = User.GetDiscordUserId();
         var gottenCollectionTypeIds = await post.Set<Blessing>()
             .Where(i => i.UserData!.DiscordId == zaId)
-            .Select(i => i.TypeId)
             .ToArrayAsync();
 
 
-        var gottenCollection = gottenCollectionTypeIds.GroupBy(i => i).Select(i => new Blessings.BlessingDto
+        var gottenCollection = gottenCollectionTypeIds.GroupBy(i => i.TypeId).Select(i => new Blessings.BlessingDto
         {
-            ImageUrl = Blessing.GetDefaultFromTypeId(i.Key).ImageUrl,
-            Name = Blessing.GetDefaultFromTypeId(i.Key).Name,
-            RarityNum = (int)Blessing.GetDefaultFromTypeId(i.Key).Rarity,
+            ImageUrl = i.First().ImageUrl,
+            Name = i.First().Name,
+            RarityNum = (int)i.First().Rarity,
             Stacks = i.Count(),
             TypeId = i.Key
         }).ToArray();

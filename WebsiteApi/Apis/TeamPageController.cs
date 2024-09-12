@@ -43,25 +43,35 @@ public class TeamPageController : ControllerBase
     [Authorize]
     [HttpGet("get-teams-and-characters")]
     public async Task<IActionResult> GetSomeUserData()
-    {
-        await using var context = new PostgreSqlContext();
-        var discordId = User.GetDiscordUserId();
-        var selected = await context.Set<UserData>()
-            .Where(i => i.DiscordId == discordId)
-            .Select(i => new Teams.TeamCharactersDto
+        {
+
+            var discordId = User.GetDiscordUserId();
+            var userData = await context.Set<UserData>()
+                .Include(i => i.PlayerTeams)
+                .ThenInclude(i => i.TeamMemberships)
+                .ThenInclude(i => i.Character)
+                .FirstOrDefaultAsync(i => i.DiscordId == discordId);
+
+
+
+            if (userData is null)
+                return BadRequest(
+                    "No team was found in database. You may not have began your journey with /begin with the discord bot");
+  
+
+
+            var dto = new Teams.TeamCharactersDto
             {
-                Characters = i.Characters.Select(k => new Teams.CharacterDto
+                Characters = userData.Characters.Select(k => new Teams.CharacterDto
                 {
                     Id = k.Id,
-                    ImageUrl = k.TypeId == PlayerTypeId
-                        ? Player.GetImageUrl(i.Gender)
-                        : Character.GetDefaultFromTypeId(k.TypeId).ImageUrl,
+                    ImageUrl = k.ImageUrl,
                     Level = k.Level,
-                    Name = k.TypeId == PlayerTypeId ? i.Name : Character.GetDefaultFromTypeId(k.TypeId).Name,
+                    Name = k.Name,
                     Number = k.Number,
-                    RarityNum = (int)Character.GetDefaultFromTypeId(k.TypeId).Rarity
+                    RarityNum = (int)k.Rarity
                 }).ToArray(),
-                Teams = i.PlayerTeams.Select(j => new Teams.TeamDto
+                Teams = userData.PlayerTeams.Select(j => new Teams.TeamDto
                 {
                     Id = j.Id,
                     CharacterSlots = j.TeamMemberships.Select(k =>
@@ -72,14 +82,11 @@ public class TeamPageController : ControllerBase
                         }).ToList(),
                     Name = j.TeamName
                 }).ToArray(),
-                EquippedTeamId = i.EquippedPlayerTeam!.Id
-            }).FirstOrDefaultAsync();
+                EquippedTeamId = userData.EquippedPlayerTeam!.Id
+            };
 
-        if (selected is null)
-            return BadRequest(
-                "No team was found in database. You may not have began your journey with /begin with the discord bot");
-        return Ok(selected);
-    }
+            return Ok(dto);
+        }
 
     [HttpPost("switch-slots")]
     [Authorize]

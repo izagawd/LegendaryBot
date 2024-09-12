@@ -35,25 +35,7 @@ public partial class CharacterCommand : GeneralCommandClass
             .Include(i => i.Characters.Where(j =>
                 j.Number == characterNumber))
             .ThenInclude(i => i.Blessing)
-            .Select(i =>
-                new
-                {
-             
-                    Blessings = i.Blessings.Select(j => new
-                    {
-                        j.TypeId,
-                        Blessing.GetDefaultFromTypeId(j.TypeId).Name,
-                        j.CharacterId,
-                        j.Id,
-                        j.Version
-                    }),
-                    i.Color,
-                    i.Tier,
-                    i.IsOccupied,
-                    Character = i.Characters.FirstOrDefault(j =>
-                        j.Number == characterNumber)
-                  
-                })
+            .Include(i => i.Blessings)
             .FirstOrDefaultAsync();
         if (gotten is null || gotten.Tier == Tier.Unranked)
         {
@@ -93,7 +75,7 @@ public partial class CharacterCommand : GeneralCommandClass
         }
 
 
-        var character = gotten.Character;
+        var character = gotten.Characters.FirstOrDefault(i => i.Number == characterNumber);
         if (character is null)
         {
             embed.WithDescription($"Character with number {characterNumber} not found");
@@ -101,14 +83,9 @@ public partial class CharacterCommand : GeneralCommandClass
             return;
         }
 
-        var updated = await DatabaseContext.Set<Blessing>()
-            .Where(i => i.Version == blessing.Version && i.UserData!.DiscordId == context.User.Id
-                                                      && i.Id == blessing.Id)
-            .ExecuteUpdateAsync(i => i.SetProperty(j => j.CharacterId,
-                character.Id));
-        var toSend = "Something went wrong";
-        if (updated > 0)
-            toSend = $"{character.Name} [{character.Number}] has successfully equipped {blessing.Name}!";
+        character.Blessing = blessing;
+        await DatabaseContext.SaveChangesAsync();
+        var toSend = $"{character.Name} [{character.Number}] has successfully equipped {blessing.Name}!";
         embed.WithDescription(toSend);
         await context.RespondAsync(embed);
     }

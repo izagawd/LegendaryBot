@@ -16,28 +16,29 @@ namespace DiscordBot.Commands;
 
 public class Info : GeneralCommandClass
 {
-    public static async Task<Image<Rgba32>> GetInfoAsync(long experience, 
-        DiscordColor color,int adventurerLevel, DiscordUser user)
+    public static async Task<Image<Rgba32>> GetInfoAsync(UserData userData, DiscordUser user)
     {
 
-        var requiredExp = TypesFunction.GetDefaultObject<UserData>().GetRequiredExperienceToNextLevel(adventurerLevel);
+        var adventurerLevel = userData.AdventurerLevel;
+
+        var requiredExp = userData.GetRequiredExperienceToNextLevel();
         using var userImage = await ImageFunctions.GetImageFromUrlAsync(user.AvatarUrl);
         var image = new Image<Rgba32>(500, 150);
         userImage.Mutate(ctx => ctx.Resize(new Size(100, 100)));
         image.Mutate(ctx =>
         {
-            ctx.BackgroundColor(SixLabors.ImageSharp.Color.ParseHex(color.ToString()));
+            ctx.BackgroundColor(SixLabors.ImageSharp.Color.ParseHex(userData.Color.ToString()));
             var userImagePoint = new Point(20, 20);
             ctx.DrawImage(userImage, userImagePoint, new GraphicsOptions());
             ctx.Draw(SixLabors.ImageSharp.Color.Black, 3, new RectangleF(userImagePoint, userImage.Size));
             var levelBarMaxLevelWidth = 300ul;
-            var gottenExp = levelBarMaxLevelWidth * (experience / (requiredExp * 1.0f));
+            var gottenExp = levelBarMaxLevelWidth * (userData.Experience / (requiredExp * 1.0f));
             var levelBarY = userImage.Height - 30 + userImagePoint.Y;
             ctx.Fill(SixLabors.ImageSharp.Color.Gray, new RectangleF(130, levelBarY, levelBarMaxLevelWidth, 30));
             ctx.Fill(SixLabors.ImageSharp.Color.Green, new RectangleF(130, levelBarY, gottenExp, 30));
             ctx.Draw(SixLabors.ImageSharp.Color.Black, 3, new RectangleF(130, levelBarY, levelBarMaxLevelWidth, 30));
             var font = SystemFonts.CreateFont("Arial", 25);
-            ctx.DrawText($"{experience}/{requiredExp}", font,
+            ctx.DrawText($"{userData.Experience}/{requiredExp}", font,
                 SixLabors.ImageSharp.Color.Black,
                 new PointF(140, levelBarY + 2));
             ctx.DrawText($"Adventurer Level {adventurerLevel}", font, SixLabors.ImageSharp.Color.Black,
@@ -56,12 +57,9 @@ public class Info : GeneralCommandClass
 
         var userData = await DatabaseContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
-            .Select(i => new
-            {
-                i.Tier, i.Color, i.StartTime, i.Experience,i.AdventurerLevel,
-                Items = new ItemContainer(i.Items.Where(j => j is Coin || j is DivineShard || j is Stamina))
-            })
-            .FirstOrDefaultAsync();
+            .Include(i => i.Items.Where(j => j is Coin || j is DivineShard || j is Stamina))
+
+            .FirstOrDefaultAsync(i=> i.DiscordId == author.Id);
 
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -98,8 +96,7 @@ public class Info : GeneralCommandClass
             .AddField("Divine Shards", $"`{userData.Items.GetItemStacks(typeof(DivineShard))}`")
             .WithImageUrl("attachment://info.png")
             .WithTimestamp(DateTime.Now);
-        using var image = await GetInfoAsync(userData.Experience, userData.Color,
-            userData.AdventurerLevel, author);
+        using var image = await GetInfoAsync(userData, author);
         await using var stream = new MemoryStream();
 
         await image.SaveAsPngAsync(stream);

@@ -19,16 +19,17 @@ public class ItemsPageController(PostgreSqlContext post) : ControllerBase
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Item>()
             .Where(i => i.UserData!.DiscordId == zaId)
-            .Select(i => new Items.ItemDto
-            {
-                ImageUrl = Item.GetDefaultFromTypeId(i.TypeId).ImageUrl,
-                Name = Item.GetDefaultFromTypeId(i.TypeId).Name,
-                Stacks = i.Stacks,
-                RarityNum = (int)i.Rarity,
-                TypeId = i.TypeId
-            })
+            
             .ToArrayAsync();
 
-        return Ok(gottenCollection);
+        var dto = gottenCollection.Select(i => new Items.ItemDto
+        {
+            ImageUrl = Item.GetDefaultFromTypeId(i.TypeId).ImageUrl,
+            Name = Item.GetDefaultFromTypeId(i.TypeId).Name,
+            Stacks = i.Stacks,
+            RarityNum = (int)i.Rarity,
+            TypeId = i.TypeId
+        }).ToArray();
+        return Ok(dto);
     }
 }

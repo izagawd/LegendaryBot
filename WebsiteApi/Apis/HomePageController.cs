@@ -33,11 +33,9 @@ public class HomePageController(PostgreSqlContext context) : ControllerBase
                 AdventurerLevel = i.AdventurerLevel
             }).FirstOrDefaultAsync();
         if (selected is null)
-            selected = new Home.HomePageData
-            {
-                FavoriteAvatarUrl = Player.GetImageUrl(Gender.Male)
-            };
-
+        {
+            return BadRequest("User data not found. You have not started battle");
+        }
         return Ok(selected);
     }
 }

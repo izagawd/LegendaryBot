@@ -19,16 +19,16 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Gear>()
             .Where(i => i.UserData!.DiscordId == zaId)
-            .Select(i => new Gears.GearDto
-            {
-                ImageUrl = Gear.GetDefaultFromTypeId(i.TypeId).ImageUrl,
-                Name = Gear.GetDefaultFromTypeId(i.TypeId).Name,
-                Number = i.Number,
-                RarityNum = (int)i.Rarity,
-                TypeId = i.TypeId
-            })
+         
             .ToArrayAsync();
-
-        return Ok(gottenCollection);
+        var dto = gottenCollection.Select(i => new Gears.GearDto
+        {
+            ImageUrl = i.ImageUrl,
+            Name = i.Name,
+            Number = i.Number,
+            RarityNum = (int)i.Rarity,
+            TypeId = i.TypeId
+        }).ToArray();
+        return Ok(dto);
     }
 }
