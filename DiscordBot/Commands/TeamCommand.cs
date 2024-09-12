@@ -19,9 +19,8 @@ public class TeamCommand : GeneralCommandClass
         [Parameter("team-name")] string teamName)
     {
         var userData = await DatabaseContext.Set<UserData>()
-            .Where(i => i.DiscordId == context.User.Id)
             .Include(i => i.PlayerTeams)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
 
         if (userData is null || userData.Tier == Tier.Unranked)
         {

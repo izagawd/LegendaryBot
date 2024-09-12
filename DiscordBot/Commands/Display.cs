@@ -205,9 +205,8 @@ string joiner, string title,
     {
         var simplified = nameFilter.Replace(" ", "").ToLower();
         var userData = await DatabaseContext.Set<UserData>()
-            .Where(i => i.DiscordId == context.User.Id)
             .Include(i => i.Items)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
                
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -268,11 +267,10 @@ string joiner, string title,
     {
         var simplified = nameFilter.Replace(" ", "").ToLower();
         var userData = await DatabaseContext.Set<UserData>()
-
-            .Where(i => i.DiscordId == context.User.Id)
+            
             .Include(i => i.Characters)
             .ThenInclude(i => i.Blessing)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
             
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -299,9 +297,9 @@ string joiner, string title,
     public async ValueTask ExecuteDisplayBlessings(CommandContext context, string nameFilter = "")
     {
         var userData = await DatabaseContext.Set<UserData>()
-            .Where(i => i.DiscordId == context.User.Id)
+       
             .Include(i => i.Blessings)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -329,12 +327,11 @@ string joiner, string title,
     public async ValueTask ExecuteDisplayGearByNum(CommandContext context, [Parameter("gear-num")] int gearNumber)
     {
         var userData = await DatabaseContext.Set<UserData>()
-            .Where(i => i.DiscordId == context.User.Id)
             .Include(i => i.Gears.Where(j => j.Number == gearNumber))
             .ThenInclude(i => i.Stats)
             .Include(i => i.Gears)
             .ThenInclude(i => i.Character)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -362,11 +359,10 @@ string joiner, string title,
     public async ValueTask ExecuteDisplayTeams(CommandContext context)
     {
         var userData = await DatabaseContext.Set<UserData>()
-            .Where(i => i.DiscordId == context.User.Id)
             .Include(i => i.PlayerTeams)
             .ThenInclude(i => i.TeamMemberships)
             .ThenInclude(i => i.Character)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);

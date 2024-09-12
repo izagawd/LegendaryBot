@@ -22,7 +22,9 @@ public class BlessingsPageController(PostgreSqlContext post) : ControllerBase
             .ToArrayAsync();
 
 
-        var gottenCollection = gottenCollectionTypeIds.GroupBy(i => i.TypeId).Select(i => new Blessings.BlessingDto
+        var gottenCollection = gottenCollectionTypeIds
+            .GroupBy(i => i.TypeId)
+            .Select(i => new Blessings.BlessingDto
         {
             ImageUrl = i.First().ImageUrl,
             Name = i.First().Name,

@@ -31,12 +31,11 @@ public partial class CharacterCommand : GeneralCommandClass
         [Parameter("blessing-name")] string blessingName)
     {
         var gotten = await DatabaseContext.Set<UserData>()
-            .Where(i => i.DiscordId == context.User.Id)
             .Include(i => i.Characters.Where(j =>
                 j.Number == characterNumber))
             .ThenInclude(i => i.Blessing)
             .Include(i => i.Blessings)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (gotten is null || gotten.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);

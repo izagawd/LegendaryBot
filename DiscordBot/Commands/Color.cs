@@ -20,14 +20,11 @@ public class Color : GeneralCommandClass
         var author = ctx.User;
 
         var userData = await DatabaseContext.Set<UserData>()
-            .Where(i => i.DiscordId == ctx.User.Id)
-            .Select(i => new { i.Color, i.IsOccupied })
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
 
         if (userData is null)
         {
-            var created = await DatabaseContext.CreateNonExistantUserdataAsync(author.Id);
-            userData = new { created.Color, created.IsOccupied };
+            userData = await DatabaseContext.CreateNonExistantUserdataAsync(author.Id);
             await DatabaseContext.SaveChangesAsync();
         }
 
@@ -64,8 +61,7 @@ public class Color : GeneralCommandClass
             .WithTimestamp(DateTime.Now);
         if (colorIsValid)
         {
-            await DatabaseContext.Set<UserData>().ExecuteUpdateAsync(i => i
-                .SetProperty(j => j.Color, color));
+            await DatabaseContext.SaveChangesAsync();
             embed.WithTitle("**Success!**");
             embed.WithDescription("`Look at your new color!`");
         }
