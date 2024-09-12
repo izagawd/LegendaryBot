@@ -7,17 +7,7 @@
     display: flex;
     column-gap: 10px;
 }
-.the-stuff-to-search{
-    display: flex;
-    flex-wrap: wrap;
-}
-.the-stuff-to-search img{
-    width: 100px;
-    height: 100px;
-   
-    border: solid 1px;
-    border-right: 10px;
-}
+
 .search-stuff{
     display: flex;
     flex-grow: 1;
@@ -40,7 +30,8 @@
 .parent img{
     width: 180px;
     height: 180px;
-
+    border: solid 2px;
+    border-radius: 10px;
 }
 .equipment-n-stats{
     max-width: fit-content;
@@ -68,4 +59,32 @@
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+.the-stuff-to-search{
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    
+    column-gap: 5px;
+
+    height: fit-content;
+}
+.the-stuff-to-search > div{
+  
+    height: fit-content;
+    
+}
+
+.the-stuff-to-search img{
+    width: 100px;
+    height: 100px;
+
+    border: solid 2px;
+    border-radius: 10px;
+    border-right: 10px;
+}
+.the-stuff-to-search p{
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
