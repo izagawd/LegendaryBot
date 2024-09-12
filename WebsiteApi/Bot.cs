@@ -34,7 +34,15 @@ public static class Bot
     private static async Task DoShitAsync()
     {
 
-
+        var cont = new PostgreSqlContext();
+        var arr =await cont.Set<UserData>().Include(i => i.Characters.Where(j =>
+                j.TypeId == TypesFunction.GetDefaultObject<Player>().TypeId))
+            .SelectMany(j => j.Characters)
+            .ToArrayAsync();
+        foreach (var i in arr)
+        {
+            i.Name.Print();
+        }
     }
 
     private static async Task Main(string[] args)
