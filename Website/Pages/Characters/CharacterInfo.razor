@@ -106,7 +106,7 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
 
         if (DraggedObject is GearDto gearDto)
         {
-            if (Dto!.CharacterDto.TheEquippedOnes[GearTypeIdToWorkingWith(gearDto.TypeId)]!.Value == gearDto.Id)
+            if ((Dto!.CharacterDto.TheEquippedOnes.GetValueOrDefault(GearTypeIdToWorkingWith(gearDto.TypeId)) ?? 0) == gearDto.Id)
             {
              
                 return;
