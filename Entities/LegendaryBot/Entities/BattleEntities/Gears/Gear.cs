@@ -142,7 +142,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 
     public abstract string Name { get; }
     public UserData? UserData { get; set; }
-    public string ImageUrl => $"{Information.ApiDomainName}/battle_images/gears/{GetType().Name}.png";
+    public string ImageUrl => $"{Information.GearsImagesDirectory}/{TypeId}.png";
     public long UserDataId { get; set; }
 
     public static Gear GetDefaultFromTypeId(int typeId)

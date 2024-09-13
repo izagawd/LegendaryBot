@@ -49,6 +49,7 @@
 
     public IEnumerable<string> AdditionalStuff(GearDto gearDto)
     {
+        yield return string.Concat(Enumerable.Repeat("\u2b50", gearDto.RarityNum));
         yield return $"Num {gearDto.Number}";
     }
 

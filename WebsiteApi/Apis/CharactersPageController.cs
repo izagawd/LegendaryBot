@@ -30,9 +30,9 @@ public class CharactersPageController(PostgreSqlContext post) : ControllerBase
             var toDto = userData.Characters
             .Select(i => new Characters.CharacterDto
             {
-                ImageUrl = i.ImageUrl,
-                Level = i.Level,
                 Name = i.Name,
+                Level = i.Level,
+                TypeId = i.TypeId,
                 Number = i.Number,
                 RarityNum = (int)Character.GetDefaultFromTypeId(i.TypeId).Rarity
             })

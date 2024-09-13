@@ -138,7 +138,7 @@ public abstract class StatusEffect : INameHaver
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null,
                     [typeof(CharacterPartials_Character)], null)
                 .Invoke(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-                    null, [new Player()],
+                    null, [new PlayerMale()],
                     null);
             yield return created;
         }

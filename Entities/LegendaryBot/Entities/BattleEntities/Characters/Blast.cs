@@ -140,7 +140,7 @@ public class Blast : Character
 
     public override int TypeId
     {
-        get => 2;
+        get => 18;
         protected init { }
     }
 }

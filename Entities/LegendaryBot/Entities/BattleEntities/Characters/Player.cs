@@ -116,12 +116,12 @@ public class Ignite : Ultimate
     }
 }
 
-public class Player : Character
+public abstract class Player : Character
 {
     public static int OriginalTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
     public Player()
     {
-        Element = Element.Fire;
+
         Skill = new FireBall(this);
         Ultimate = new Ignite(this);
         BasicAttack = new FourthWallBreaker(this);
@@ -145,27 +145,29 @@ public class Player : Character
     protected override float BaseSpeedMultiplier => 1.1f;
 
 
+
+
+
+
+    public override string Name => UserData?.Name ?? "Player";
+
+
+    
+}
+
+public class PlayerMale : Player
+{
     public override int TypeId
     {
         get => 1;
         protected init { }
     }
-
-    public override string ImageUrl => GetImageUrl(UserData?.Gender ?? Gender.Male);
-
-
-    public override string Name => UserData?.Name ?? "Player";
-
-    public static string GetImageUrl(Gender gender)
+}
+public class PlayerFemale : Player
+{
+    public override int TypeId
     {
-        return gender == Gender.Male
-            ? $"{Information.ApiDomainName}/battle_images/characters/PlayerMale.png"
-            : $"{Information.ApiDomainName}/battle_images/characters/PlayerFemale.png";
-    }
-
-
-    public void SetElement(Element element)
-    {
-        Element = element;
+        get => 2;
+        protected init { }
     }
 }

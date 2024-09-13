@@ -240,7 +240,9 @@
                                 @if (character is not null)
                                 {
                                     <p class="minor-info">Num @character.Number</p>
+                                    <p class="minor-info">@(string.Concat(Enumerable.Repeat("\u2b50", character.RarityNum)))</p>
                                     <p class="minor-info">Lvl @character.Level</p>
+                                    
                                 }
                             </div>
 
@@ -344,6 +346,7 @@
                                             <img src="@i.ImageUrl" style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" alt=""/>
                                         </a>
                                         <p>@i.Name</p>
+                                        <p>@(string.Concat(Enumerable.Repeat("\u2b50", i.RarityNum)))</p>
                                         <p>Num @i.Number</p>
                                         <p>Lvl @i.Level</p>
                                     </div>

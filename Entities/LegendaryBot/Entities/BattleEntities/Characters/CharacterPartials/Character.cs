@@ -175,7 +175,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         StatType.Attack, StatType.Effectiveness, StatType.Resistance, StatType.Speed
     ];
 
-    [NotMapped] public virtual Element Element { get; protected set; } = Element.Fire;
+    [NotMapped] public virtual Element Element => Element.Fire;
 
     /// <summary>
     ///     Derives dialogue profile from character properties
@@ -348,7 +348,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     public abstract string Name { get; }
 
-    public virtual string ImageUrl => $"{Information.ApiDomainName}/battle_images/characters/{GetType().Name}.png";
+    public virtual string ImageUrl => $"{Information.CharactersImagesDirectory}/{TypeId}.png";
 
 
     public Type TypeGroup => typeof(Character);

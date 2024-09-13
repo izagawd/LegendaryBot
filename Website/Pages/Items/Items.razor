@@ -50,9 +50,10 @@
     }
 
 
-    public IEnumerable<string> AddStuff(ItemDto blessingDto)
+    public IEnumerable<string> AddStuff(ItemDto itemDto)
     {
-        yield return $"Stacks: {blessingDto.Stacks}";
+        yield return string.Concat(Enumerable.Repeat("\u2b50", itemDto.RarityNum));
+        yield return $"Stacks: {itemDto.Stacks}";
     }
 
     private SortType SortTypeVal { get; set; } = SortType.Name;

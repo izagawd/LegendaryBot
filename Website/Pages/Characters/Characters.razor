@@ -51,6 +51,7 @@
 
     public IEnumerable<string> AdditionalStuff(CharacterDto characterDto)
     {
+        yield return string.Concat(Enumerable.Repeat("\u2b50", characterDto.RarityNum));
         yield return $"Lvl {characterDto.Level}";
         yield return $"Num {characterDto.Number}";
     }

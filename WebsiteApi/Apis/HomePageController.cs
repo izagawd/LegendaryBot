@@ -1,5 +1,6 @@
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.Items;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -23,7 +24,8 @@ public class HomePageController(PostgreSqlContext context) : ControllerBase
             .Where(i => i.DiscordId == discordId)
             .Select(i => new Home.HomePageData
             {
-                FavoriteAvatarUrl = Player.GetImageUrl(i.Gender),
+                FavoriteAvatarUrl = i.Characters.Where(j => j is Player).Select(j 
+                    => Character.GetDefaultFromTypeId(j.TypeId).ImageUrl).FirstOrDefault()!,
                 Coins = i.Items.Where(j => j is Coin)
                     .Select(j => new int?(j.Stacks)).FirstOrDefault() ?? 0,
                 DivineShards = i.Items.Where(j => j is DivineShard)

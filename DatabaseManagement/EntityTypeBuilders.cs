@@ -43,8 +43,7 @@ public class PlayerDatabaseConfiguration : IEntityTypeConfiguration<Player>
 {
     public void Configure(EntityTypeBuilder<Player> builder)
     {
-        builder.Property(i => i.Element)
-            .HasColumnName(nameof(Player.Element));
+     
     }
 }
 

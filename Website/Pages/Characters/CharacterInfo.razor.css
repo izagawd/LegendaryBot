@@ -38,6 +38,7 @@
     border-radius: 10px;
 }
 .equipment-n-stats{
+    flex-shrink: 0;
     max-width: fit-content;
     overflow: auto;
     padding-right: 50px;
@@ -66,6 +67,7 @@
     margin-bottom: 10px;
 }
 .the-stuff-to-search{
+
     margin-top: 5px;
     display: flex;
     flex-wrap: wrap;

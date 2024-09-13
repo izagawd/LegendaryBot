@@ -131,9 +131,16 @@ public class Begin : GeneralCommandClass
         lily.Level = 5;
         if (!userData.Inventory.Any(i => i is Player))
         {
-            var player = new Player();
+            Player player;
+            if (gottenGender == Gender.Male)
+            {
+                player = new PlayerMale();
+            }
+            else
+            {
+                player = new PlayerFemale();
+            }
             player.Level = 5;
-            player.SetElement(Element.Fire);
             userData.Inventory.Add(player);
             player.UserData = userData;
             player.UserDataId = userData.Id;

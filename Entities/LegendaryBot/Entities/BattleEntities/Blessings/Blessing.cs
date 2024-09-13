@@ -56,7 +56,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     public Type TypeGroup => typeof(Blessing);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
     public long UserDataId { get; set; }
-    public virtual string ImageUrl => $"{Information.ApiDomainName}/battle_images/blessings/{GetType().Name}.png";
+    public string ImageUrl => $"{Information.BlessingImagesDirectory}/{TypeId}.png";
     public abstract string Name { get; }
 
     public static Blessing GetDefaultFromTypeId(int typeId)

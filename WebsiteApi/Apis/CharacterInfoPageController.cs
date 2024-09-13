@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Linq.Expressions;
 using BasicFunctionality;
 using DatabaseManagement;
@@ -232,8 +233,9 @@ public class CharacterInfoPageController : ControllerBase
         var dto = new CharacterInfo.CharacterInfoDto();
         dto.CharacterDto = new CharacterInfo.CharacterDto
         {
+            RarityNum =(int) character.Rarity,
             Id = character.Id,
-            ImageUrl = character.ImageUrl,
+            TypeId = character.TypeId,
             Level = character.Level,
             Name = character.Name,
             Number = character.Number,
@@ -248,16 +250,14 @@ public class CharacterInfoPageController : ControllerBase
         dto.AllGears = gotten.Gears.Select(j => new CharacterInfo.GearDto()
         {
             Id = j.Id,
-            GearName = j.Name,
-            ImageUrl = j.ImageUrl,
-            RarityName = j.Rarity.ToString(),
+
             RarityNum = (int) j.Rarity,
             Number = j.Number,
             GearStats = j.Stats.Select(k => new CharacterInfo.GearStatDto()
             {
                 IsMainStat = k.IsMainStat is not null,
                 IsPercentage = k.IsPercentage,
-                StatName = k.StatType.GetShortName(),
+                TypeId = k.TypeId,
                 Value = k.Value,
                 
             }).ToArray(),
@@ -267,20 +267,25 @@ public class CharacterInfoPageController : ControllerBase
         dto.AllBlessings = gotten.Blessings.GroupBy(i => i.TypeId)
             .Select(i => new CharacterInfo.BlessingDto()
         {
-   
-            ImageUrl = i.First().ImageUrl,
-            Name = i.First().Name,
+            
             TypeId = i.Key,
             RemainingStacks = i.Count(j => j.CharacterId is null),
             Stacks = i.Count(),
-            RarityName = i.First().Rarity.ToString(),
-            Description = i.First().Description
+RarityNum =(int) i.First().Rarity,
+            Description = i.First().Description,
+            Name = i.First().Name
         }).ToArray();
         theDic[CharacterInfo.WorkingWith.Blessing] = character.Blessing?.TypeId;
 
 
         dto.CharacterDto.CharacterStatsString =
             GenerateStatsStrings(character);
+
+
+        dto.GearStatNameByTypeId = TypesFunction.GetDefaultObjectsAndSubclasses<GearStat>()
+            .DistinctBy(i => i.TypeId).ToImmutableDictionary(i => i.TypeId, i => i.StatType.GetShortName());
+        dto.GearNameByTypeId =
+            TypesFunction.GetDefaultObjectsAndSubclasses<Gear>().DistinctBy(i => i.TypeId).ToImmutableDictionary(i =>  i.TypeId, i => i.Name);
         dto.WorkingWithToTypeIdHelper = Helper;
     
         return Ok(dto);
@@ -295,6 +300,7 @@ public class CharacterInfoPageController : ControllerBase
             return $"{i.GetShortName()}: {character.GetStatFromType(i)}{perc}";
         }).ToArray();
     }
+    
     private static readonly Dictionary<CharacterInfo.WorkingWith, int> Helper = TypesFunction
         .GetDefaultObjectsAndSubclasses<Gear>()
         .ToDictionary(i => GetWorkingWithValue(i.TypeId), i => i.TypeId);

@@ -48,7 +48,9 @@
             ErrorMessage = await result.Content.ReadAsStringAsync();
         else
         {
+            Console.WriteLine(await  result.Content.ReadAsStringAsync());
             Dto = await result.Content.ReadFromJsonAsync<CharacterInfoDto>();
+            Dto!.Setup();
         }
     }
 
@@ -213,6 +215,7 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
                         <div class="character-div">
                             <img src="@Dto.CharacterDto.ImageUrl">
                             <p>@Dto.CharacterDto.Name</p>
+                            <P>@(string.Concat(Enumerable.Repeat("\u2b50", Dto.CharacterDto.RarityNum)))</p>
                             <p>Level: @Dto.CharacterDto.Level</p>
                             <p>Num @Dto.CharacterDto.Number</p>
                         </div>
@@ -240,14 +243,20 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
                                 @if (workingWithObject is BlessingDto blessingDto)
                                 {
                                     <p>@blessingDto.Name</p>
-                                    <p>Rarity: @blessingDto.RarityName</p>
+                                    <p>@foreach (var i in Enumerable.Range(0,blessingDto.RarityNum))
+                                       {
+                                           @("⭐")
+                                       }</p>
           
 
                                 }
                                 else if (workingWithObject is GearDto gearDto)
                                 {
                                     <p>@gearDto.GearName</p>
-                                    <p>Rarity: @gearDto.RarityName</p>
+                                    <p>@foreach (var i in Enumerable.Range(0,gearDto.RarityNum))
+                                        {
+                                        @("⭐")
+                                        }</p>
                                     <p>Num @gearDto.Number</p>
                                 }
                                 else
@@ -294,7 +303,10 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
                                 <div draggable="true"  @onclick="() =>SetAsObject(i)" @ondragstart="() => DraggedObject = i">
                                     <img src="@i.ImageUrl"/>
                                     <p>@i.GearName</p>
-                                    <p>Rarity: @i.RarityName</p>
+                                    <p>@foreach (var _ in Enumerable.Range(0,i.RarityNum))
+                                        {
+                                        @("⭐")
+                                        }</p>
                                     <p>Num @i.Number</p>
                                     @RenderAdditionalInfo(i)
                                 </div>
@@ -307,7 +319,10 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
                                 <div draggable="true" @onclick="() =>SetAsObject(i)" @ondragstart="() => DraggedObject = i">
                                     <img src="@i.ImageUrl"/>
                                     <p>@i.Name</p>
-                                    <p>Rarity: @i.RarityName</p>
+                                    <p>@foreach (var _ in Enumerable.Range(0,i.RarityNum))
+                                        {
+                                        @("⭐")
+                                        }</p>
                                     <p>Remaining Stacks: @i.RemainingStacks</p>
                                     <p>Stacks: @i.Stacks</p>
                                     @RenderAdditionalInfo(i)
