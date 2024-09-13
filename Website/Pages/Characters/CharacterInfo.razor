@@ -102,6 +102,24 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
             if (result.IsSuccessStatusCode)
             {
                 Dto.CharacterDto.TheEquippedOnes[GearTypeIdToWorkingWith(gearDto.TypeId)] = null;
+                Dto.CharacterDto.CharacterStatsString = (await result.Content.ReadFromJsonAsync<string[]>())!;
+            }
+            else
+            {
+                await SnackBarService.DisplaySnackBarAsync(new SnackBar.SnackBarParams(await result.Content.ReadAsStringAsync(), zaTime)
+                {
+                    SnackBarLayout = SnackBar.SnackBarLayout.Error
+                });
+            }
+        } else if (DraggedObject is BlessingDto blessingDto)
+        {
+            var result = await Http.PostAsync("CharacterInfoPage/remove-blessing", new FormUrlEncodedContent([
+                new KeyValuePair<string, string>("characterId",Dto!.CharacterDto.Id.ToString()),
+            ]));
+            if (result.IsSuccessStatusCode)
+            {
+                Dto.CharacterDto.CharacterStatsString =(await result.Content.ReadFromJsonAsync<string[]>())!;
+                Dto.CharacterDto.TheEquippedOnes[WorkingWith.Blessing] = null;
             }
             else
             {
@@ -160,6 +178,7 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
             {
                 
                 Dto.CharacterDto.CharacterStatsString = (await result.Content.ReadFromJsonAsync<string[]>())!;
+                Dto.CharacterDto.TheEquippedOnes[WorkingWith.Blessing] = blessingDto.TypeId;
             }
             else
             {

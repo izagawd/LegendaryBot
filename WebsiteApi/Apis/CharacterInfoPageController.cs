@@ -47,7 +47,38 @@ public class CharacterInfoPageController : ControllerBase
         }
     }
 
+    [Authorize]
+    [HttpPost("remove-blessing")]
+    public async Task<IActionResult> RemoveBlessingAsync([FromForm] long characterId)
+    {
+        var discordId = User.GetDiscordUserId();
+        var userData = await postgreSqlContext.Set<UserData>()
+            .Include(i => i.Characters.Where(j => j.Id == characterId))
+            .ThenInclude(i => i.Blessing)
+            .Include(i => i.Characters)
+            .ThenInclude(i => i.Gears)
+            .ThenInclude(i => i.Stats)
+     
+            .FirstOrDefaultAsync(i => i.DiscordId == discordId);
+        if (userData is null)
+        {
+            return  BadRequest("Userdata not found");
+        }
+        if (userData.IsOccupied)
+        {
+            return BadRequest("You are occupied");
+        }
 
+        var character = userData.Characters.FirstOrDefault(i => i.Id == characterId);
+        if (character is null)
+        {
+            return BadRequest("Character not found");
+        }
+
+        character.Blessing = null;
+        await postgreSqlContext.SaveChangesAsync();
+        return Ok(GenerateStatsStrings(character));
+    }
 
     [Authorize]
     [HttpPost("equip-blessing")]

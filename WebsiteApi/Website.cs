@@ -1,7 +1,7 @@
 using DatabaseManagement;
 using Microsoft.AspNetCore.Authentication;
 using PublicInfo;
-using WebsiteApi.Apis.Hubs;
+
 
 namespace WebsiteApi;
 
@@ -99,8 +99,6 @@ public static class Website
         app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
-        app.MapHub<TestHub>("/hub/test-hub");
-        app.MapHub<EquipmentHub>("/hub/character-info");
         app.MapControllers();
 
 

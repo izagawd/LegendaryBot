@@ -63,6 +63,7 @@
         <Content Update="AppError.razor">
             <DependentUpon>App.razor</DependentUpon>
         </Content>
+        <Content Remove="Pages\TestHub.razor" />
     </ItemGroup>
 
 </Project>
