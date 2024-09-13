@@ -23,7 +23,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
             _gearSetCache[i.TypeId] = i.GetType();
     }
 
-    [Timestamp] public uint Version { get; }
+    [Timestamp] public uint Version { get; set; }
 
     public int GearSetTypeId
     {

@@ -99,7 +99,8 @@ public static class Website
         app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
-        app.MapHub<EquipmentHub>("/hub/team-hub");
+        app.MapHub<TestHub>("/hub/test-hub");
+        app.MapHub<EquipmentHub>("/hub/character-info");
         app.MapControllers();
 
 
