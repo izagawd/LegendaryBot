@@ -99,6 +99,17 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
                 new KeyValuePair<string, string>("characterId",Dto!.CharacterDto.Id.ToString()),
                 new KeyValuePair<string, string>("gearTypeId",gearDto.TypeId.ToString()),
             ]));
+            if (result.IsSuccessStatusCode)
+            {
+                Dto.CharacterDto.TheEquippedOnes[GearTypeIdToWorkingWith(gearDto.TypeId)] = null;
+            }
+            else
+            {
+                await SnackBarService.DisplaySnackBarAsync(new SnackBar.SnackBarParams(await result.Content.ReadAsStringAsync(), zaTime)
+                {
+                    SnackBarLayout = SnackBar.SnackBarLayout.Error
+                });
+            }
         }
     }
     public async Task OnEquipItem()
