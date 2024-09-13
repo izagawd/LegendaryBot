@@ -69,6 +69,7 @@ public class TeamPageController : ControllerBase
 
             var discordId = User.GetDiscordUserId();
             var userData = await context.Set<UserData>()
+                .Include(i => i.Characters)
                 .Include(i => i.PlayerTeams)
                 .ThenInclude(i => i.TeamMemberships)
                 .ThenInclude(i => i.Character)

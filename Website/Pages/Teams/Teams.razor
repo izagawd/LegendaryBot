@@ -309,9 +309,11 @@
                                 {
                                     get
                                     {
-                                        var smallifiedFilter = _currentFilter.ToLower();
-                                        var gotten = TeamCharacterDto.Characters.Where(i =>
-                                            !CurrentTeam.GetCharacters(TeamCharacterDto).Contains(i) && i.Name!.ToLower().Contains(smallifiedFilter));
+                             
+                                        var gotten = TeamCharacterDto?.Characters
+                                            .Except(CurrentTeam?.GetCharacters(TeamCharacterDto) ??[])
+                                            .Where(i =>
+                                             i.Name!.Contains(_currentFilter,StringComparison.CurrentCultureIgnoreCase)) ?? [];
                                         switch (CurrentSortType)
                                         {
                                             case SortType.Level:
