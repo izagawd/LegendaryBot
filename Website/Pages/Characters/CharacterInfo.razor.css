@@ -101,6 +101,17 @@
     border-radius: 10px;
 
 }
+.filterer-stuff{
+    max-height: 60px;
+    display: flex; border-bottom: solid 1px;
+}
+.filterer-stuff > input{
+    height: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 5px;
+    border: solid 1px;
+}
 .the-stuff-to-search p{
     font-weight: bold;
     font-size: 14px;
@@ -120,9 +131,19 @@
 .the-hover-shit > *{
     margin-left: 20px;
 }
+.idk-for-now{
+    font-weight: bold;    
+}
 @media only screen and (max-width: 600px) {
     .en-totale{
         flex-direction: column;
+    }
+    .character-stats-shower{
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
     .the-stuff-to-search{
         overflow-y: hidden;
@@ -136,6 +157,7 @@
         border: none;
         max-width: 100%;
         height: max-content;
+        margin-left: 0;
     }
     .search-stuff{
         border-top: solid 1px;
@@ -143,6 +165,9 @@
     }
     .the-hover-shit{
         order: 1;
+    }
+    .idk-for-now p{
+        font-size: 15px;
     }
     .the-stuff-to-search > div{
         display: flex;
@@ -155,7 +180,13 @@
         column-gap: 0;
         justify-content: space-around;
     }
-    
+    .filterer-stuff > input{
+        height: 20px;
+        margin-top: auto;
+        margin-bottom: auto;
+        border-radius: 5px;
+        border: solid 1px;
+    }
     .parent img{
         width: 120px;
         height: 120px;
@@ -163,5 +194,11 @@
     }
     .character-stats-shower p{
         font-size: 15px;
+    }
+    
+    .the-stuff-to-search p{
+        font-size: 12px;
+        margin-top: 3px;
+        margin-bottom: 3px;
     }
 }

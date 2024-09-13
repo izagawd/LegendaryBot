@@ -261,14 +261,24 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
 
                     </div>
                     <div class="character-stats-shower">
-                        @foreach (var i in Dto.CharacterDto.CharacterStatsString)
-                        {
+
+                        <div>
+                            @{ const int toSkip = 4;}
+                            @foreach (var i in Dto.CharacterDto.CharacterStatsString.Take(toSkip))
+                            {
+                                <p>@i</p>
+                            }
+                        </div>
+                        <div>
+                            @foreach (var i in Dto.CharacterDto.CharacterStatsString.Skip(toSkip))
+                            {
                             <p>@i</p>
-                        }
+                            }
+                        </div>
                     </div>
                 </div>
                 <div class="search-stuff">
-                    <div style="display: flex; border-bottom: solid 1px; max-height: 30px">
+                    <div class="filterer-stuff">
                         <input type="text"/>
                     </div>
                     
