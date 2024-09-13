@@ -43,7 +43,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 
 
     public long Id { get; set; }
-    public virtual string Description => GetDescription(LevelMilestone);
+    public abstract string Description { get; }
     public abstract Rarity Rarity { get; }
 
 
@@ -88,8 +88,5 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
         return (Blessing)Activator.CreateInstance(randomBlessing)!;
     }
 
-    public virtual string GetDescription(int levelMilestone)
-    {
-        return "Idk man";
-    }
+ 
 }

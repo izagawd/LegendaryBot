@@ -32,6 +32,7 @@ public partial class CharacterInfo
         public string GearName { get; set; }
         public long Id { get; set; }
         public int  RarityNum { get; set; }
+        public int Number { get; set; }
         public string RarityName { get; set; }
         public int TypeId { get; set; }
         public string ImageUrl { get; set; }
@@ -45,9 +46,11 @@ public partial class CharacterInfo
     public class BlessingDto
     {
         public int TypeId { get; set; }
-        public long Id { get; set; }
+        public string Description { get; set; }
+        public string RarityName { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
+        public int Stacks { get; set; }
         public int RemainingStacks { get; set; }
     }
     public class CharacterInfoDto
@@ -62,7 +65,7 @@ public partial class CharacterInfo
         public BlessingDto[] AllBlessings { get; set; }
 
         public BlessingDto? EquippedBlessing =>
-            AllBlessings.FirstOrDefault(i => i.Id == CharacterDto.TheEquippedOnes. GetValueOrDefault(WorkingWith.Blessing));
+            AllBlessings.FirstOrDefault(i => i.TypeId == CharacterDto.TheEquippedOnes.GetValueOrDefault(WorkingWith.Blessing));
 
 
 

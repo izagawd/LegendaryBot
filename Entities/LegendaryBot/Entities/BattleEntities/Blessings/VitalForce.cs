@@ -18,22 +18,12 @@ public class VitalForce : Blessing, IStatsModifier
 
     public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
     {
-        yield return new DefensePercentageModifierArgs(Character!, GetDefenseBoost(LevelMilestone));
+        yield return new DefensePercentageModifierArgs(Character!, DefenseIncrease);
     }
 
-    public override string GetDescription(int levelMilestone)
-    {
-        return $"Defense is increased by {GetDefenseBoost(levelMilestone)}%";
-    }
+    public override string Description => $"Defense is increased by {DefenseIncrease}%";
+    
 
-    public float GetDefenseBoost(int levelMilestone)
-    {
-        if (levelMilestone >= 6) return 10;
-        if (levelMilestone >= 5) return 9;
-        if (levelMilestone >= 4) return 8;
-        if (levelMilestone >= 3) return 7;
-        if (levelMilestone >= 2) return 6;
-        if (levelMilestone >= 1) return 5;
-        return 4;
-    }
+    private const int DefenseIncrease = 10;
+
 }

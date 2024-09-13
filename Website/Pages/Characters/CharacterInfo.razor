@@ -1,16 +1,31 @@
 @page "/inventory/characters/{CharacterNumber:int}"
 @using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.SignalR.Client
 @using Website.Components.Navigation
 @using Website.Components
-@using Website.Pages.Blessings
-
+@using Website.Services
+@inject SnackBarService SnackBarService
 @attribute [Authorize]
+
 
 @inject HttpClient Http
 
 @code {
+
+    public void SetAsObject(object? theObject)
+    {
+        if (HoveredObject == theObject)
+        {
+            HoveredObject = null;
+        }
+        else
+        {
+            HoveredObject = theObject;
+        }
+
+    }
     
-    
+    public object? DraggedObject { get; set; }
     public object? HoveredObject { get; set; }
     [CascadingParameter]
     public WebsiteTheme Theme { get; set; }
@@ -23,8 +38,11 @@
     private WorkingWith CurrentlyWorkingWith { get; set; } = WorkingWith.Armor;
     protected CharacterInfoDto? Dto { get; set; }
     private string? ErrorMessage;
+
+
     protected override async Task OnInitializedAsync()
     {
+
         var result = await Http.GetAsync($"CharacterInfoPage/get?characterNumber={CharacterNumber}");
         if (!result.IsSuccessStatusCode)
             ErrorMessage = await result.Content.ReadAsStringAsync();
@@ -36,7 +54,115 @@
 
     
 }
+@code{
 
+    public RenderFragment RenderAdditionalInfo(object? theObject)
+    {
+        
+        return @<div class="the-hover-shit" style="border-color: @(Theme == WebsiteTheme.Dark ? "gray" : "lightgrey");
+                                        background-color: @(Theme == WebsiteTheme.Dark ? "gray" : "lightgray");
+opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
+            @if (theObject is GearDto gearDto)
+            {
+                <p style="font-size: 18px">@gearDto.MainStat.StatName: @gearDto.MainStat.Value@(gearDto.MainStat.IsPercentage ? "%" : "")</p>
+                @foreach (var j in gearDto.SubStats)
+                {
+                    <p>@j.StatName: @j.Value@(j.IsPercentage ? "%" : "")</p>
+                }
+            }
+            else if(theObject is BlessingDto blessingDto)
+            {
+                <p>@blessingDto.Description</p>
+            }
+        </div>;
+        
+
+        return @<div></div>;
+    }
+
+    public WorkingWith GearTypeIdToWorkingWith(int typeId)
+    {
+
+       return  Dto?.WorkingWithToTypeIdHelper
+            .Where(i => i.Value == typeId)
+            .Select(i =>new WorkingWith?(i.Key)).FirstOrDefault() ?? throw new Exception("not found");
+
+    }
+    private static TimeSpan zaTime = TimeSpan.FromSeconds(2);
+
+
+    async Task RemoveItemAsync()
+    {
+        if (DraggedObject is GearDto gearDto)
+        {
+            var result = await Http.PostAsync("CharacterInfoPage/remove-gear", new FormUrlEncodedContent([
+                new KeyValuePair<string, string>("characterId",Dto!.CharacterDto.Id.ToString()),
+                new KeyValuePair<string, string>("gearTypeId",gearDto.TypeId.ToString()),
+            ]));
+        }
+    }
+    public async Task OnEquipItem()
+    {
+
+        if (DraggedObject is GearDto gearDto)
+        {
+            if (Dto!.CharacterDto.TheEquippedOnes[GearTypeIdToWorkingWith(gearDto.TypeId)]!.Value == gearDto.Id)
+            {
+             
+                return;
+            }
+             
+            var result = await Http.PostAsync("CharacterInfoPage/equip-gear", new FormUrlEncodedContent([
+                new KeyValuePair<string, string>("characterId",Dto!.CharacterDto.Id.ToString()),
+                new KeyValuePair<string, string>("gearId",gearDto.Id.ToString()),
+            ]));
+            if (result.IsSuccessStatusCode)
+            {
+                Dto.CharacterDto.CharacterStatsString = (await result.Content.ReadFromJsonAsync<string[]>())!;
+                Dto.CharacterDto.TheEquippedOnes[
+                    Dto.WorkingWithToTypeIdHelper
+                        .Where(i => i.Value == gearDto.TypeId)
+                        .Select(i => i.Key).First()] = gearDto.Id;
+
+
+            }
+            else
+            {
+                await SnackBarService.DisplaySnackBarAsync(
+                    new SnackBar.SnackBarParams((await result.Content.ReadFromJsonAsync<string>())!,
+                        zaTime)
+                    {
+                        SnackBarLayout = SnackBar.SnackBarLayout.Error
+                    });
+            }
+        } else if (DraggedObject is BlessingDto blessingDto)
+        {
+            if(DraggedObject == Dto!.EquippedBlessing)
+            {
+                return;
+            }
+            var result = await Http.PostAsync("CharacterInfoPage/equip-blessing", new FormUrlEncodedContent([
+                new KeyValuePair<string, string>("characterId",Dto!.CharacterDto.Id.ToString()),
+                new KeyValuePair<string, string>("blessingTypeId",blessingDto.TypeId.ToString()),
+            ]));
+            if (result.IsSuccessStatusCode)
+            {
+                
+                Dto.CharacterDto.CharacterStatsString = (await result.Content.ReadFromJsonAsync<string[]>())!;
+            }
+            else
+            {
+                await SnackBarService.DisplaySnackBarAsync(
+                    new SnackBar.SnackBarParams((await result.Content.ReadAsStringAsync())!,
+                        zaTime)
+                    {
+                        SnackBarLayout = SnackBar.SnackBarLayout.Error
+                    });
+            }
+        }
+    }
+
+}
 
 <InventoryNavigation>
     @if (Dto is not null)
@@ -51,8 +177,8 @@
                     </div>
                 }
             </div>
-            <div style="flex-grow: 1; display: flex; height: 0">
-                <div class="equipment-n-stats">
+            <div class="en-totale">
+                <div class="equipment-n-stats"  ondragover="event.preventDefault()" @ondrop="OnEquipItem">
                     <div class="idk-for-now">
                         <div class="character-div">
                             <img src="@Dto.CharacterDto.ImageUrl">
@@ -60,41 +186,46 @@
                             <p>Level: @Dto.CharacterDto.Level</p>
                             <p>Num @Dto.CharacterDto.Number</p>
                         </div>
-                        <div>
+                        @{
+                            string? imageUrl;
+                            object? workingWithObject;
+                            if (CurrentlyWorkingWith == WorkingWith.Blessing)
+                            {
 
-                            @{
-
-                                string? imageUrl;
-                                object? workingWithObject;
-                                if (CurrentlyWorkingWith == WorkingWith.Blessing)
-                                {
-
-                                    workingWithObject = Dto.EquippedBlessing;
-                                    imageUrl = (workingWithObject as BlessingDto)?.ImageUrl;
-                                }
-                                else
-                                {
-                                    workingWithObject = Dto.AllGears
-                                        .FirstOrDefault(i => i.Id ==
-                                                             Dto.CharacterDto.TheEquippedOnes.GetValueOrDefault(CurrentlyWorkingWith));
-                                    imageUrl = (workingWithObject as GearDto)?.ImageUrl;
-                                }
-
-
+                                workingWithObject = Dto.EquippedBlessing;
+                                imageUrl = (workingWithObject as BlessingDto)?.ImageUrl;
                             }
-                            <img  src="@imageUrl"/>
-                            <div>
+                            else
+                            {
+                                workingWithObject = Dto.AllGears
+                                    .FirstOrDefault(i => i.Id ==
+                                                         Dto.CharacterDto.TheEquippedOnes.GetValueOrDefault(CurrentlyWorkingWith));
+                                imageUrl = (workingWithObject as GearDto)?.ImageUrl;
+                            }
+
+                        }
+                        <div @ondragstart="() => DraggedObject = workingWithObject" draggable="@(workingWithObject is not null ? "true" : "false")">
+                            <img  @onclick="() =>SetAsObject(workingWithObject)" src="@imageUrl"/>
+                        
                                 @if (workingWithObject is BlessingDto blessingDto)
                                 {
                                     <p>@blessingDto.Name</p>
+                                    <p>Rarity: @blessingDto.RarityName</p>
+          
 
                                 }
                                 else if (workingWithObject is GearDto gearDto)
                                 {
                                     <p>@gearDto.GearName</p>
                                     <p>Rarity: @gearDto.RarityName</p>
+                                    <p>Num @gearDto.Number</p>
                                 }
-                            </div>
+                                else
+                                {
+                                    <p>NONE</p>
+                                }
+                                @RenderAdditionalInfo(workingWithObject)
+                          
                         </div>
 
 
@@ -110,7 +241,9 @@
                     <div style="display: flex; border-bottom: solid 1px; max-height: 30px">
                         <input type="text"/>
                     </div>
-                    <div class="the-stuff-to-search">
+                    
+                    <div class="the-stuff-to-search" ondragover="event.preventDefault()"
+                         @ondrop="RemoveItemAsync">
 
                         @if (CurrentlyWorkingWith != WorkingWith.Blessing)
                         {
@@ -118,20 +251,26 @@
                             foreach (var i in Dto.AllGears.Where(j => j.TypeId == typeIdToLookFor && j != workingWithObject))
                             {
                                 
-                                <div @onmouseover="() => HoveredObject = i" @onmouseout="() => { if (HoveredObject == i) { HoveredObject = null; } }">
+                                <div draggable="true"  @onclick="() =>SetAsObject(i)" @ondragstart="() => DraggedObject = i">
                                     <img src="@i.ImageUrl"/>
                                     <p>@i.GearName</p>
                                     <p>Rarity: @i.RarityName</p>
-                                    <div  class="the-hover-shit" style="border-color: @(Theme == WebsiteTheme.Dark ? "gray" : "lightgrey");
-                                        background-color: @(Theme == WebsiteTheme.Dark ? "white" : "black");
-color: @(Theme == WebsiteTheme.Dark ? "black" : "white");
-display: @(HoveredObject == i ? "block" : "none")">
-                                        <p>@i.MainStat.StatName: @i.MainStat.Value</p>
-                                        @foreach (var j in i.SubStats)
-                                        {
-                                            <p>@j.StatName: @j.Value</p>
-                                        }
-                                    </div>
+                                    <p>Num @i.Number</p>
+                                    @RenderAdditionalInfo(i)
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            @foreach (var i in Dto.AllBlessings.Where(j => Dto.EquippedBlessing != j))
+                            {
+                                <div draggable="true" @onclick="() =>SetAsObject(i)" @ondragstart="() => DraggedObject = i">
+                                    <img src="@i.ImageUrl"/>
+                                    <p>@i.Name</p>
+                                    <p>Rarity: @i.RarityName</p>
+                                    <p>Remaining Stacks: @i.RemainingStacks</p>
+                                    <p>Stacks: @i.Stacks</p>
+                                    @RenderAdditionalInfo(i)
                                 </div>
                             }
                         }

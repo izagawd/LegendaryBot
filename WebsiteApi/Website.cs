@@ -1,6 +1,7 @@
 using DatabaseManagement;
 using Microsoft.AspNetCore.Authentication;
 using PublicInfo;
+using WebsiteApi.Apis.Hubs;
 
 namespace WebsiteApi;
 
@@ -28,6 +29,7 @@ public static class Website
                 });
         });
 
+        services.AddSignalR();
         services.AddControllers();
         services.AddAuthentication(options =>
             {
@@ -40,7 +42,7 @@ public static class Website
                 i => { })
             .AddCertificate(options => { options.Validate(); });
     }
-
+    
 
     public static async Task<bool> IsLoadedAsync()
     {
@@ -97,7 +99,7 @@ public static class Website
         app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
-
+        app.MapHub<EquipmentHub>("/hub/team-hub");
         app.MapControllers();
 
 

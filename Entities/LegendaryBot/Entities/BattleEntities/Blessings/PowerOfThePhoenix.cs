@@ -17,29 +17,20 @@ public class PowerOfThePhoenix : Blessing
 
     public override Rarity Rarity => Rarity.FiveStar;
 
-    public int GetHealthPercentRecovering(int levelMilestone)
-    {
-        if (levelMilestone >= 6) return 10;
-        if (levelMilestone >= 5) return 9;
-        if (levelMilestone >= 4) return 8;
-        if (levelMilestone >= 3) return 7;
-        if (levelMilestone >= 2) return 6;
-        if (levelMilestone >= 1) return 5;
-        return 4;
-    }
+    private const int HealthPercentageRecovering = 5;
+
 
     [BattleEventListenerMethod]
     public void HealOnTurnBegin(TurnStartEventArgs eventArgs)
     {
         if (eventArgs.Character != Character) return;
 
-        Character!.RecoverHealth((GetHealthPercentRecovering(LevelMilestone) * 0.01 * Character.MaxHealth).Round(),
+        Character!.RecoverHealth((5 * 0.01 * Character.MaxHealth).Round(),
             $"{Character.NameWithAlphabet} recovered $ health via the blessing of the phoenix");
     }
 
-    public override string GetDescription(int levelMilestone)
-    {
-        return
-            $"At the start of the character's turn, they recover {GetHealthPercentRecovering(levelMilestone)}% of their health";
-    }
+    public override string Description =>
+
+            $"At the start of the character's turn, they recover {HealthPercentageRecovering}% of their health";
+    
 }

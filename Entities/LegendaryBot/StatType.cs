@@ -14,6 +14,19 @@ public enum StatType : byte
 
 public static class Idk
 {
+    public static bool IsAPercentageType(this StatType statType)
+    {
+        switch (statType)
+        {
+            case StatType.CriticalChance:
+                case StatType.CriticalDamage:
+                case StatType.Resistance:
+                case StatType.Effectiveness:
+                    return true;
+            default:
+                return false;
+        }
+    }
     public static string GetShortName(this StatType statType)
     {
         switch (statType)

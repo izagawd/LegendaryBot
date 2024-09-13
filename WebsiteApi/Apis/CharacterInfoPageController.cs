@@ -22,15 +22,7 @@ namespace WebsiteApi.Apis;
 [ApiController]
 public class CharacterInfoPageController : ControllerBase
 {
-    private PostgreSqlContext Context;
 
-
-    public CharacterInfoPageController(PostgreSqlContext context)
-    {
-        Context = context;
-    }
-
-    private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
 
 
     public static CharacterInfo.WorkingWith GetWorkingWithValue(int typeId)
@@ -54,14 +46,134 @@ public class CharacterInfoPageController : ControllerBase
                 throw new ArgumentException("Invalid typeId", nameof(typeId));
         }
     }
+
+
+
+    [Authorize]
+    [HttpPost("equip-blessing")]
+    public async Task<IActionResult> EquipBlessingAsync([FromForm] long characterId, [FromForm] int blessingTypeId)
+    {
+        var discordId = User.GetDiscordUserId();
+        var userData = await postgreSqlContext.Set<UserData>()
+            .Include(i => i.Characters.Where(j => j.Id == characterId))
+            .ThenInclude(i => i.Blessing)
+            .Include(i => i.Characters)
+            .ThenInclude(i => i.Gears)
+            .ThenInclude(i => i.Stats)
+            .Include(i => i.Blessings.Where(j => j.TypeId == blessingTypeId && j.CharacterId == null))
+            .FirstOrDefaultAsync(i => i.DiscordId == discordId);
+
+        if (userData is null)
+        {
+            return BadRequest("Userdata not found");
+        }
+        if (userData.IsOccupied)
+        {
+            return BadRequest("You are occupied");
+        }
+        var blessing = userData.Blessings.FirstOrDefault(j => j.TypeId == blessingTypeId && j.CharacterId == null);
+        if (blessing is null)
+        {
+            return BadRequest(
+                $"you have no free blessing with name {Blessing.GetDefaultFromTypeId(blessingTypeId).Name}");
+        }
+
+        var character = userData.Characters.FirstOrDefault(i => i.Id == characterId);
+        if (character is null)
+        {
+            return BadRequest($"Something went wrong");
+        }
+
+        character.Blessing = blessing;
+        await postgreSqlContext.SaveChangesAsync();
+        return Ok(GenerateStatsStrings(character));
+    }
+    [Authorize]
+    [HttpPost("equip-gear")]
+    public async Task<IActionResult> EquipGearAsync([FromForm] long characterId, [FromForm] long gearId)
+    {
+        var discordId = User.GetDiscordUserId();
+        var userData = await postgreSqlContext.Set<UserData>()
+            .Include(i => i.Characters.Where(j => j.Id == characterId))
+            .ThenInclude(i => i.Gears)
+            .ThenInclude(i => i.Stats)
+            .Include(i => i.Characters)
+            .ThenInclude(i => i.Blessing)
+            .Include(i => i.Gears.Where(j => j.Id == gearId))
+            .ThenInclude(i => i.Character)
+            .Include(i => i.Gears)
+            .ThenInclude(i => i.Stats)
+            .FirstOrDefaultAsync(i => i.DiscordId == discordId);
+        if (userData is null)
+            return BadRequest("User data not found");
+        if (userData.IsOccupied)
+        {
+            return BadRequest("You are occupied");
+        }
+        var gottenGear = userData.Gears.FirstOrDefault(i => i.Id == gearId);
+        if (gottenGear is null)
+        {
+            return BadRequest("Something went wrong");
+        }
+
+        var character = userData.Characters.FirstOrDefault(i => i.Id == characterId);
+        if (character is null)
+        {
+            return BadRequest("Something went wrong");
+        }
+        character.Gears.RemoveAll(i => i.GetType() == gottenGear.GetType());
+        character.Gears.Add(gottenGear);
+        await postgreSqlContext.SaveChangesAsync();
+        
+        return Ok( GenerateStatsStrings(character));
+    }
+
+    private PostgreSqlContext postgreSqlContext;
+
+    public CharacterInfoPageController(PostgreSqlContext postgreSqlContext)
+    {
+        this.postgreSqlContext = postgreSqlContext;
+    }
+
+    [Authorize]
+    [HttpPost("remove-gear")]
+    public async Task<IActionResult> RemoveGearAsync([FromForm] long characterId, [FromForm] int gearTypeId)
+    {
+        var discordId = User.GetDiscordUserId();
+        var userData = await postgreSqlContext.Set<UserData>()
+            .Include(i => i.Characters.Where(j => j.Id == characterId))
+            .ThenInclude(i => i.Blessing)
+            .Include(i => i.Characters)
+            .ThenInclude(i => i.Gears)
+            .ThenInclude(i => i.Stats)
+            .FirstOrDefaultAsync(i => i.DiscordId == discordId);
+
+        if (userData is null)
+        {
+            return BadRequest("user data not found");
+        }
+
+        if (userData.IsOccupied)
+        {
+            return BadRequest("You are occupied");
+        }
+
+        var character = userData.Characters.FirstOrDefault(i => i.Id == characterId);
+        if (character is null)
+        {
+            return BadRequest("Something went wrong");
+        }
+        character.Gears.RemoveAll(i => i.TypeId == gearTypeId);
+        await postgreSqlContext.SaveChangesAsync();
+        return Ok(GenerateStatsStrings(character));
+    }
+
     [Authorize]
     [HttpGet("get")]
     public async Task<IActionResult> GetTeamDataAsync([FromQuery] int characterNumber)
     {
-        Expression<Func<UserData, IEnumerable<Character>>> zaExpr = i =>
-            i.Characters.Where(j => j.Number == characterNumber);
         var userDataId = User.GetDiscordUserId();
-        var gotten = await Context.Set<UserData>()
+        var gotten = await postgreSqlContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
             .Where(i => i.DiscordId == userDataId)
             .Include(i => i.Characters.Where(j => j.Number == characterNumber))
@@ -75,7 +187,10 @@ public class CharacterInfoPageController : ControllerBase
         {
             return BadRequest("Your data was not found in database");
         }
-
+        if (gotten.IsOccupied)
+        {
+            return BadRequest("You are occupied");
+        }
         var character = gotten.Characters.FirstOrDefault(i => i.Number == characterNumber);
         
         if (character is null)
@@ -106,6 +221,7 @@ public class CharacterInfoPageController : ControllerBase
             ImageUrl = j.ImageUrl,
             RarityName = j.Rarity.ToString(),
             RarityNum = (int) j.Rarity,
+            Number = j.Number,
             GearStats = j.Stats.Select(k => new CharacterInfo.GearStatDto()
             {
                 IsMainStat = k.IsMainStat is not null,
@@ -117,23 +233,37 @@ public class CharacterInfoPageController : ControllerBase
             TypeId = j.TypeId,
             
         }).ToArray();
-        dto.AllBlessings = gotten.Blessings.Select(i => new CharacterInfo.BlessingDto()
+        dto.AllBlessings = gotten.Blessings.GroupBy(i => i.TypeId)
+            .Select(i => new CharacterInfo.BlessingDto()
         {
-            Id = i.Id,
-            ImageUrl = i.ImageUrl,
-            Name = i.Name,
-            TypeId = i.TypeId
+   
+            ImageUrl = i.First().ImageUrl,
+            Name = i.First().Name,
+            TypeId = i.Key,
+            RemainingStacks = i.Count(j => j.CharacterId is null),
+            Stacks = i.Count(),
+            RarityName = i.First().Rarity.ToString(),
+            Description = i.First().Description
         }).ToArray();
-        theDic[CharacterInfo.WorkingWith.Blessing] = character.Blessing?.Id;
-        character.LoadStats();
+        theDic[CharacterInfo.WorkingWith.Blessing] = character.Blessing?.TypeId;
+
 
         dto.CharacterDto.CharacterStatsString =
-            Enum.GetValues<StatType>().Select(i => $"{i.GetShortName()}: {character.GetStatFromType(i)}").ToArray();
+            GenerateStatsStrings(character);
         dto.WorkingWithToTypeIdHelper = Helper;
     
         return Ok(dto);
     }
 
+    public static string[] GenerateStatsStrings(Character character)
+    {
+        character.LoadStats();
+        return Enum.GetValues<StatType>().Select(i =>
+        {
+            var perc = i.IsAPercentageType() ? "%" : "";
+            return $"{i.GetShortName()}: {character.GetStatFromType(i)}{perc}";
+        }).ToArray();
+    }
     private static readonly Dictionary<CharacterInfo.WorkingWith, int> Helper = TypesFunction
         .GetDefaultObjectsAndSubclasses<Gear>()
         .ToDictionary(i => GetWorkingWithValue(i.TypeId), i => i.TypeId);

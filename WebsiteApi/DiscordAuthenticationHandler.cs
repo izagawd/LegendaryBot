@@ -33,8 +33,7 @@ public class DiscordAuthenticationHandler : AuthenticationHandler<Authentication
         if (!sent.IsSuccessStatusCode) return AuthenticateResult.Fail("Invalid token");
 
         var discordData = await sent.Content.ReadFromJsonAsync<JsonObject>();
-        if (discordData is null) return AuthenticateResult.Fail("");
-        Console.WriteLine(token);
+        if (discordData is null) return AuthenticateResult.Fail("Discord data not found");
         return AuthenticateResult.Success(
             new AuthenticationTicket(
                 new ClaimsPrincipal(

@@ -6,8 +6,12 @@
 .idk-for-now{
     display: flex;
     column-gap: 10px;
-}
 
+}
+.idk-for-now p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 .search-stuff{
     display: flex;
     flex-grow: 1;
@@ -35,14 +39,15 @@
 }
 .equipment-n-stats{
     max-width: fit-content;
-    
+    overflow: auto;
     padding-right: 50px;
     display: flex; flex-grow: 1; flex-direction: column; margin-left: 20px;
     padding-top: 20px;
     border-right: solid 1px;
 }
 .parent{
-    display: flex; width: 100%; height: 100%; flex-direction: column
+    display: flex; width: 100%; height: 100%; flex-direction: column;
+
 }
 .equipment-navigator > div > p{
     width: fit-content;
@@ -65,8 +70,10 @@
     display: flex;
     flex-wrap: wrap;
     
-    column-gap: 5px;
-
+    align-content: flex-start;
+    gap: 5px;
+  
+    overflow-y: auto;
     height: fit-content;
 }
 .the-stuff-to-search > div{
@@ -76,18 +83,15 @@
     
 }
 .the-hover-shit{
+    transition: opacity 0.2s;
+    z-index: 1;
     border: solid 2px;
     border-radius: 10px;
     width: max-content;
     position: absolute;
     padding-right: 30px;
 }
-.the-hover-shit p{
-    width: fit-content;
-}
-.the-hover-shit > *{
-    margin-left: 20px;
-}
+
 
 .the-stuff-to-search img{
     width: 100px;
@@ -95,11 +99,69 @@
 
     border: solid 2px;
     border-radius: 10px;
-    border-right: 10px;
+
 }
 .the-stuff-to-search p{
     font-weight: bold;
     font-size: 14px;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+.en-totale{
+    flex-grow: 1; display: flex; height: 0
+}
+.the-hover-shit p{
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: fit-content;
+}
+.the-hover-shit > *{
+    margin-left: 20px;
+}
+@media only screen and (max-width: 600px) {
+    .en-totale{
+        flex-direction: column;
+    }
+    .the-stuff-to-search{
+        overflow-y: hidden;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        flex-grow: 1;
+        height: 200px;
+    }
+    .equipment-n-stats{
+        padding-right: 0;
+        border: none;
+        max-width: 100%;
+        height: max-content;
+    }
+    .search-stuff{
+        border-top: solid 1px;
+        padding-top: 5px;
+    }
+    .the-hover-shit{
+        order: 1;
+    }
+    .the-stuff-to-search > div{
+        display: flex;
+        flex-direction: column;
+    }
+    .character-stats-shower{
+        margin-top: 10px;
+    }
+    .idk-for-now{
+        column-gap: 0;
+        justify-content: space-around;
+    }
+    
+    .parent img{
+        width: 120px;
+        height: 120px;
+        
+    }
+    .character-stats-shower p{
+        font-size: 15px;
+    }
 }

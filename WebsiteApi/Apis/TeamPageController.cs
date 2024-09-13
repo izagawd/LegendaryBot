@@ -30,13 +30,35 @@ public class TeamPageController : ControllerBase
         if (newName.Length <= 0)
             return BadRequest("Name length must be at least 1 character");
         var userId = User.GetDiscordUserId();
-        var didDo = await context.Set<PlayerTeam>()
-            .Where(i => i.UserData.DiscordId == userId && i.Id == teamId
-                                                       && i.UserData.PlayerTeams.All(j =>
-                                                           j.TeamName.ToLower() != newName.ToLower()))
-            .ExecuteUpdateAsync(i => i.SetProperty(j => j.TeamName, newName));
-        if (didDo <= 0)
+        var userData = await context.Set<UserData>()
+            .Where(i => i.DiscordId == userId)
+            .Include(i => i.PlayerTeams)
+            .FirstOrDefaultAsync(i => i.DiscordId == userId);
+
+        if (userData is null)
+        {
+            return BadRequest("Your data not found");
+        }
+
+        if (userData.IsOccupied)
+        {
+            return BadRequest("You are occupied");
+        }
+        if (userData.PlayerTeams.Any(i =>
+                i.TeamName.Replace(" ", "")
+                    .Equals(newName.Replace(" ", ""), StringComparison.CurrentCultureIgnoreCase)))
+        {
             return BadRequest("One of your teams already has that name");
+        }
+
+        var team = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
+        if (team is null)
+        {
+            return BadRequest("team not found");
+        }
+
+        team.TeamName = newName;
+        await context.SaveChangesAsync();
         return Ok();
     }
 
@@ -56,9 +78,16 @@ public class TeamPageController : ControllerBase
 
             if (userData is null)
                 return BadRequest(
-                    "No team was found in database. You may not have began your journey with /begin with the discord bot");
-  
+                    "You may not have began your journey with /begin with the discord bot");
+            if (userData.IsOccupied)
+            {
+                return BadRequest("You are occupied");
+            }
 
+            if (userData.EquippedPlayerTeam is null)
+            {
+                return BadRequest("Team not found in database");
+            }
 
             var dto = new Teams.TeamCharactersDto
             {
@@ -106,6 +135,10 @@ public class TeamPageController : ControllerBase
 
         if (userData is null)
             return BadRequest("Something went wrong");
+        if (userData.IsOccupied)
+        {
+            return BadRequest("You are occupied");
+        }
         var theTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (theTeam is null)
             return BadRequest("Something went wrong");
@@ -148,6 +181,10 @@ public class TeamPageController : ControllerBase
 
         if (userData is null)
             return BadRequest("Something went wrong");
+        if (userData.IsOccupied)
+        {
+            return BadRequest("You are occupied");
+        }
         var theCharacter = userData.Characters.FirstOrDefault(i => i.Id == characterId);
         if (theCharacter is null)
             return BadRequest("Something went wrong");
@@ -190,7 +227,10 @@ public class TeamPageController : ControllerBase
         if (userData is null)
             return BadRequest("Something went wrong");
 
-
+        if (userData.IsOccupied)
+        {
+            return BadRequest("You are occupied");
+        }
         userData.EquippedPlayerTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (userData.EquippedPlayerTeam is null)
             return BadRequest("Something went wrong");
