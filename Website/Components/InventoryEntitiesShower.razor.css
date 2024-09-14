@@ -28,7 +28,9 @@
 
     border: black 2px solid;
 }
-
+.entities-container{
+    word-wrap: break-word;
+}
 .image-box {
     overflow: hidden;
     width: 100%;

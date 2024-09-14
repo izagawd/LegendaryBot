@@ -178,7 +178,7 @@
 
 .paragraphs {
     margin-left: 10px;
-    margin-bottom: 10px;
+    margin-bottom: auto;
     margin-top: auto;
 }
 
@@ -366,16 +366,26 @@
 
     }
     .team-character-div {
-        height: 90px;
+        height: 80px;
     }
     .character-div .stars{
         font-size: 10px;
     }
+    .character-div p {
+
+        margin-bottom: 1px;
+    }
+    .filters{
+        height: 50px;
+    }
+    .team-character-div p{
+        font-size: 16px;
+    }
     @media only screen and (max-height: 750px) {
 
-        .character-div img {
+        .character-div {
             width: 80px;
-            height: 80px;
+  
         }
         
         .others-parent {
@@ -383,12 +393,9 @@
 
         }
         .team-character-div {
-            height: 80px;
+            height: 70px;
         }
-        .character-div p {
-
-            margin-bottom: 1px;
-        }
+   
 
       
 

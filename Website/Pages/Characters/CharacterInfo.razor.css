@@ -141,6 +141,9 @@
 .idk-for-now{
     font-weight: bold;    
 }
+p{
+    word-wrap: break-word;
+}
 @media only screen and (max-width: 600px) {
     .en-totale{
         flex-direction: column;
@@ -158,6 +161,7 @@
         flex-wrap: nowrap;
         flex-grow: 1;
         height: 200px;
+        min-height: max-content;
     }
     .equipment-n-stats{
         padding-right: 0;
