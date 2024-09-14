@@ -269,20 +269,14 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
                                 @if (workingWithObject is BlessingDto blessingDto)
                                 {
                                     <p>@blessingDto.Name</p>
-                                    <p>@foreach (var i in Enumerable.Range(0,blessingDto.RarityNum))
-                                       {
-                                           @("⭐")
-                                       }</p>
+                                    <p>@(string.Concat(Enumerable.Repeat("⭐",blessingDto.RarityNum)))</p>
           
 
                                 }
                                 else if (workingWithObject is GearDto gearDto)
                                 {
                                     <p>@gearDto.GearName</p>
-                                    <p>@foreach (var i in Enumerable.Range(0,gearDto.RarityNum))
-                                        {
-                                        @("⭐")
-                                        }</p>
+                                    <p>@(string.Concat(Enumerable.Repeat("⭐",gearDto.RarityNum)))</p>
                                     <p>Num @gearDto.Number</p>
                                 }
                                 else
