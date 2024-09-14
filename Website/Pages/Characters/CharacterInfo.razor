@@ -300,8 +300,8 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
                             foreach (var i in Dto.AllGears.Where(j => j.TypeId == typeIdToLookFor && j != workingWithObject))
                             {
                                 
-                                <div draggable="true"  @onclick="() =>SetAsObject(i)" @ondragstart="() => DraggedObject = i">
-                                    <img src="@i.ImageUrl"/>
+                                <div>
+                                    <img  draggable="true"  @onclick="() =>SetAsObject(i)" @ondragstart="() => DraggedObject = i" src="@i.ImageUrl"/>
                                     <p>@i.GearName</p>
                                     <p>@foreach (var _ in Enumerable.Range(0,i.RarityNum))
                                         {

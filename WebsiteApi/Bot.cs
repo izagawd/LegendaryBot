@@ -33,7 +33,7 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-        TypesFunction.GetDefaultObjectsAndSubclasses<Character>().Where(i => i.TypeId ==2).ForEach(i => i.Name.Print());
+
     }
 
     private static async Task Main(string[] args)

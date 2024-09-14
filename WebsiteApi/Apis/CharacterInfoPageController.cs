@@ -211,6 +211,8 @@ public class CharacterInfoPageController : ControllerBase
             .Include(i => i.Characters.Where(j => j.Number == characterNumber))
             .Include(i => i.Gears)
             .ThenInclude(i => i.Stats)
+            .Include(i => i.Gears)
+            .ThenInclude(i => i.Character)
             .Include(i => i.Blessings)
             .FirstOrDefaultAsync();
         
@@ -261,6 +263,7 @@ public class CharacterInfoPageController : ControllerBase
                 Value = k.Value,
                 
             }).ToArray(),
+            EquippedCharacterTypeId = j.Character?.TypeId,
             TypeId = j.TypeId,
             
         }).ToArray();

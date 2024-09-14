@@ -73,7 +73,7 @@
     flex-wrap: wrap;
     
     align-content: flex-start;
-    gap: 5px;
+    gap: 15px;
   
     overflow-y: auto;
     height: fit-content;
@@ -90,6 +90,7 @@
     border: solid 2px;
     border-radius: 10px;
     width: max-content;
+    max-width: 400px;
     position: absolute;
     padding-right: 30px;
 }

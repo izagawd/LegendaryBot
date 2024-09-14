@@ -50,7 +50,10 @@ public partial class CharacterInfo
         public int Number { get; set; }
         [JsonPropertyName("5")]
         public int TypeId { get; set; }
+        
+        [JsonPropertyName("6")]
 
+        public int? EquippedCharacterTypeId { get; set; }
         [JsonIgnore] public string ImageUrl => $"{Information.GearsImagesDirectory}/{TypeId}.png";
         [JsonPropertyName("8")]
         public string? OriginalOwnerImageUrl { get; set; }
