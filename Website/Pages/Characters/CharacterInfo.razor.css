@@ -144,6 +144,9 @@
 p{
     word-wrap: break-word;
 }
+.equipment-navigator > div{
+    flex-grow: 1; border-right: solid 1px;
+}
 @media only screen and (max-width: 600px) {
     .en-totale{
         flex-direction: column;
@@ -215,5 +218,8 @@ p{
     .filterer-stuff{
         min-height: 32px;
         max-height: 32px;
+    }
+    .equipment-navigator > div{
+        border-right: none;
     }
 }

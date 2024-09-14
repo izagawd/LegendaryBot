@@ -1,6 +1,7 @@
 @page "/inventory/characters/{CharacterNumber:int}"
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.SignalR.Client
+@using PublicInfo
 @using Website.Components.Navigation
 @using Website.Components
 @using Website.Services
@@ -207,7 +208,20 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
     }
 
 }
+@code{
 
+    public string GetNavImage(WorkingWith workingWith)
+    {
+        if (workingWith == WorkingWith.Blessing)
+        {
+            return $"{Information.BlessingImagesDirectory}/1.png";
+        }
+     
+            return $"{Information.GearsImagesDirectory}/{Dto!.WorkingWithToTypeIdHelper[workingWith]}.png";
+        
+    }
+
+}
 <InventoryNavigation>
     @if (Dto is not null)
     {
@@ -216,8 +230,8 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
             <div class="equipment-navigator">
                 @foreach (var i in Enum.GetValues<WorkingWith>())
                 {
-                    <div @onclick="() => CurrentlyWorkingWith = i"  style="flex-grow: 1; border-right: solid 1px;">
-                        <p>@i</p>
+                    <div @onclick="() => CurrentlyWorkingWith = i" >
+                        <img style="border: none; width: 35px; height: 35px;" src="@GetNavImage(i)"/>
                     </div>
                 }
             </div>
