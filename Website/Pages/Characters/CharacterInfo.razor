@@ -103,6 +103,7 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
             ]));
             if (result.IsSuccessStatusCode)
             {
+                
                 Dto.CharacterDto.TheEquippedOnes[GearTypeIdToWorkingWith(gearDto.TypeId)] = null;
                 Dto.CharacterDto.CharacterStatsString = (await result.Content.ReadFromJsonAsync<string[]>())!;
             }
@@ -120,6 +121,7 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
             ]));
             if (result.IsSuccessStatusCode)
             {
+                blessingDto.RemainingStacks++;
                 Dto.CharacterDto.CharacterStatsString =(await result.Content.ReadFromJsonAsync<string[]>())!;
                 Dto.CharacterDto.TheEquippedOnes[WorkingWith.Blessing] = null;
             }
@@ -178,7 +180,7 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
             ]));
             if (result.IsSuccessStatusCode)
             {
-                
+                blessingDto.RemainingStacks--;
                 Dto.CharacterDto.CharacterStatsString = (await result.Content.ReadFromJsonAsync<string[]>())!;
                 Dto.CharacterDto.TheEquippedOnes[WorkingWith.Blessing] = blessingDto.TypeId;
             }
