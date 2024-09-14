@@ -248,7 +248,7 @@ public class DiscordBot
     }
 
 
-    #region BotSetup
+
 
     public static async Task StartDiscordBotAsync()
     {
@@ -291,7 +291,6 @@ public class DiscordBot
         await Client.ConnectAsync();
     }
 
-    #endregion
 
 
     private static Task OnCommandsExtensionOnCommandExecuted(CommandsExtension sender, CommandExecutedEventArgs args)
