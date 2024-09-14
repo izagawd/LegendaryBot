@@ -29,6 +29,7 @@ public class BlessingsPageController(PostgreSqlContext post) : ControllerBase
             Name = i.First().Name,
             RarityNum = (int)i.First().Rarity,
             Stacks = i.Count(),
+            Description = i.First().Description,
             TypeId = i.Key
         }).ToArray();
         return Ok(gottenCollection);

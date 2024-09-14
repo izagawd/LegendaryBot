@@ -1,5 +1,9 @@
+using System.Collections.Immutable;
+using BasicFunctionality;
 using DatabaseManagement;
+using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
+using Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +22,7 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
     {
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Gear>()
+            .Include(i => i.Stats)
             .Where(i => i.UserData!.DiscordId == zaId)
          
             .ToArrayAsync();
@@ -26,8 +31,21 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
             Name = i.Name,
             Number = i.Number,
             RarityNum = (int)i.Rarity,
-            TypeId = i.TypeId
+            TypeId = i.TypeId,
+            GearStatDtos = i.Stats.Select(j => new Gears.GearStatDto()
+            {
+                IsMainStat = j.IsMainStat is not null,
+                Value = j.Value,
+                TypeId = j.TypeId,
+                IsPercentage = j.IsPercentage
+            }).ToArray()
         }).ToArray();
-        return Ok(dto);
+        return Ok(new Gears.GearPageDto()
+        {
+            Gears = dto,
+            GearStatNameMapper = TypesFunction.GetDefaultObjectsAndSubclasses<GearStat>()
+                .ToImmutableDictionary(i => i.TypeId, i => i.StatType.GetShortName())
+        });
     }
+
 }

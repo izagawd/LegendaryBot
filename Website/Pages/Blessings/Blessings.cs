@@ -18,5 +18,8 @@ public partial class Blessings
         [JsonPropertyName("5")]
 
         public int TypeId { get; set; }
+        
+        [JsonPropertyName("6")]
+        public  string Description { get; set; }
     }
 }

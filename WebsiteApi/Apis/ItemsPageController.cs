@@ -32,7 +32,8 @@ public class ItemsPageController(PostgreSqlContext post) : ControllerBase
             Name = Item.GetDefaultFromTypeId(i.TypeId).Name,
             Stacks = i.Stacks,
             RarityNum = (int)i.Rarity,
-            TypeId = i.TypeId
+            TypeId = i.TypeId,
+            Description = i.Description
         }).ToArray();
         return Ok(dto);
     }

@@ -14,7 +14,9 @@
     protected override async Task OnInitializedAsync()
     {
         Console.WriteLine(await Http.GetStringAsync("/GearsPage/get-gears"));
-        GearCollection = await Http.GetFromJsonAsync<GearDto[]>("/GearsPage/get-gears");
+        var gearPageDto = await Http.GetFromJsonAsync<GearPageDto>("/GearsPage/get-gears");
+        gearPageDto!.Setup();
+        GearCollection = gearPageDto.Gears;
     }
 
     private enum SortType
@@ -60,10 +62,17 @@
 
 
 <InventoryEntitiesShower Additionals="AdditionalStuff" BackgroundCol='dto => "white"'
-                 ObjectsToRender="() => UsingGearCollection"
+                         ObjectsToRender="() => UsingGearCollection"
                          NameDelegate="dto => dto.Name"
                          ImageUrlDelegate="dto => dto.ImageUrl"
                          TObjectType="GearDto">
+    <HoverShit>
+        <p style="font-size: 23px">@context.MainStat.Name: @context.MainStat.Value@(context.MainStat.IsPercentage ? "%":"")</p>
+        @foreach (var i in context.Substats)
+        {
+            <p>@i.Name: @i.Value@(i.IsPercentage ? "%":"")</p>
+        }
+    </HoverShit>
     <SorterStuff>
         <p>Sort By</p>
         <select @bind="SortTypeVal" class="filterer-percentage" style="height: 30px; width: 80%">

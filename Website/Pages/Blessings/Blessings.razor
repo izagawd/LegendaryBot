@@ -62,10 +62,13 @@
 }
 
 <InventoryEntitiesShower Additionals="AddStuff" BackgroundCol='dto => "white"'
-                        ObjectsToRender="() => UsingBlessingCollection"
+                         ObjectsToRender="() => UsingBlessingCollection"
                          NameDelegate="dto => dto.Name"
                          ImageUrlDelegate="dto => dto.ImageUrl"
                          TObjectType="BlessingDto">
+    <HoverShit>
+        <p>@context.Description</p>
+    </HoverShit>
     <SorterStuff>
         <p>Sort By</p>
         <select @bind="SortTypeVal" class="filterer-percentage" style="height: 30px">

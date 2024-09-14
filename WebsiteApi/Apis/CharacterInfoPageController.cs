@@ -289,7 +289,9 @@ RarityNum =(int) i.First().Rarity,
             .DistinctBy(i => i.TypeId).ToImmutableDictionary(i => i.TypeId, i => i.StatType.GetShortName());
         dto.GearNameByTypeId =
             TypesFunction.GetDefaultObjectsAndSubclasses<Gear>().DistinctBy(i => i.TypeId).ToImmutableDictionary(i =>  i.TypeId, i => i.Name);
-        dto.WorkingWithToTypeIdHelper = Helper;
+        dto.WorkingWithToTypeIdHelper = TypesFunction
+            .GetDefaultObjectsAndSubclasses<Gear>()
+            .ToDictionary(i => GetWorkingWithValue(i.TypeId), i => i.TypeId);;
     
         return Ok(dto);
     }
@@ -304,7 +306,4 @@ RarityNum =(int) i.First().Rarity,
         }).ToArray();
     }
     
-    private static readonly Dictionary<CharacterInfo.WorkingWith, int> Helper = TypesFunction
-        .GetDefaultObjectsAndSubclasses<Gear>()
-        .ToDictionary(i => GetWorkingWithValue(i.TypeId), i => i.TypeId);
 }

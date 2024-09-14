@@ -1,9 +1,9 @@
 
 @using Website.Components.Navigation
-@typeparam TObjectType
+@typeparam TObjectType where TObjectType : class
 
 @code {
-    [Parameter] public Func<TObjectType, RenderFragment>? HoverShit { get; set; }
+    [Parameter] public RenderFragment<TObjectType>? HoverShit { get; set; }
     [Parameter] [EditorRequired] public Func<TObjectType, string> BackgroundCol { get; set; } = null!;
     [Parameter] [EditorRequired] public Func<IEnumerable<TObjectType>?> ObjectsToRender { get; set; } = null!;
     [Parameter] [EditorRequired] public Func<TObjectType, string> NameDelegate { get; set; } = null!;
@@ -11,6 +11,7 @@
 
     [Parameter] public Func<TObjectType, string>? LinkUrlDel { get; set; }
     [Parameter] public Func<TObjectType, IEnumerable<string>>? Additionals { get; set; }
+    
 }
 
 
@@ -22,6 +23,7 @@
 
     private bool _reverseOrder;
 
+    public TObjectType HoveredObject { get; set; }
 }
 
 <InventoryNavigation>
@@ -60,8 +62,19 @@
                     <a class="some-class" href="@LinkUrlDel?.Invoke(objectToRender)">
                         @{
                             var shadCol = WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
+                            void DoClickShit()
+                            {
+                                if (!ReferenceEquals(HoveredObject,objectToRender))
+                                {
+                                    HoveredObject = objectToRender;
+                                }
+                                else
+                                {
+                                    HoveredObject = null;
+                                }
+                            }
                         }
-                        <img src="@ImageUrlDelegate(objectToRender)" style="background-color: @BackgroundCol(objectToRender);
+                        <img @onclick="DoClickShit" src="@ImageUrlDelegate(objectToRender)" style="background-color: @BackgroundCol(objectToRender);
                     border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black");
                     
                     box-shadow: 0 0 5px 1px @shadCol" class="image-box" alt=""/>
@@ -75,7 +88,8 @@
 
                     @if (HoverShit is not null)
                     {
-                        <div style="position: absolute; z-index: 1">
+                        <div class="the-hover-shit" style="
+                            opacity: @(ReferenceEquals(HoveredObject,objectToRender) ? "100%" : "0%"); background-color: @(WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgray")">
                             @HoverShit(objectToRender)
                         </div>
                     }

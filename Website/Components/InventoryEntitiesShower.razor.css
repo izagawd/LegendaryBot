@@ -37,7 +37,23 @@
     display: block;
     border-radius: 10px; /* Match this to the box's border-radius */
 }
-
+.the-hover-shit{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    position: absolute; z-index: 1;
+    border-radius: 5px;
+    width: 200px;
+}
+.the-hover-shit ::deep > *{
+    margin-left: 10px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    font-weight: bold;
+    font-size: 18px;
+    
+}
 .shower-container {
     width: 100%;
     height: 100%;
