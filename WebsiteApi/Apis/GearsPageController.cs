@@ -3,6 +3,7 @@ using System.Diagnostics;
 using BasicFunctionality;
 using DatabaseManagement;
 using Entities.LegendaryBot;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,7 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Gear>()
             .Include(i => i.Stats)
+            .Include(i => i.Character)
             .Where(i => i.UserData!.DiscordId == zaId)
          
             .ToArrayAsync();
@@ -34,6 +36,7 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
             Number = i.Number,
             RarityNum = (int)i.Rarity,
             TypeId = i.TypeId,
+            OwnerTypeId = i.Character?.TypeId,
             GearStatDtos = i.Stats.Select(j => new Gears.GearStatDto()
             {
                 IsMainStat = j.IsMainStat is not null,
@@ -45,6 +48,7 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
 
         return Ok(new Gears.GearPageDto()
         {
+         
             Gears = dto,
             GearStatNameMapper = TypesFunction.GetDefaultObjectsAndSubclasses<GearStat>()
                 .ToImmutableDictionary(i => i.TypeId, i => i.StatType.GetShortName())

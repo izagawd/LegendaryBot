@@ -65,11 +65,16 @@
 opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
             @if (theObject is GearDto gearDto)
             {
+                if (gearDto.EquippedCharacterImageUrl is not null)
+                {
+                    <img src="@gearDto.EquippedCharacterImageUrl" style="margin-top: 5px; border-radius: 100%; width: 30px; height: 30px"/>
+                }
                 <p style="font-size: 18px">@gearDto.MainStat.StatName: @gearDto.MainStat.Value@(gearDto.MainStat.IsPercentage ? "%" : "")</p>
                 @foreach (var j in gearDto.SubStats)
                 {
                     <p>@j.StatName: @j.Value@(j.IsPercentage ? "%" : "")</p>
                 }
+           
             }
             else if(theObject is BlessingDto blessingDto)
             {
@@ -108,6 +113,7 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
                 
                 Dto.CharacterDto.TheEquippedOnes[GearTypeIdToWorkingWith(gearDto.TypeId)] = null;
                 Dto.CharacterDto.CharacterStatsString = (await result.Content.ReadFromJsonAsync<string[]>())!;
+                gearDto.EquippedCharacterTypeId = null;
             }
             else
             {
@@ -160,7 +166,7 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
                     Dto.WorkingWithToTypeIdHelper
                         .Where(i => i.Value == gearDto.TypeId)
                         .Select(i => i.Key).First()] = gearDto.Id;
-
+                gearDto.EquippedCharacterTypeId = Dto.CharacterDto.TypeId;
 
             }
             else

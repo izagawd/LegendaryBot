@@ -50,7 +50,11 @@ public partial class CharacterInfo
         public int Number { get; set; }
         [JsonPropertyName("5")]
         public int TypeId { get; set; }
-        
+
+
+        [JsonIgnore]
+        public string? EquippedCharacterImageUrl =>
+            EquippedCharacterTypeId is not null ? $"{Information.CharactersImagesDirectory}/{EquippedCharacterTypeId}.png" : null;
         [JsonPropertyName("6")]
 
         public int? EquippedCharacterTypeId { get; set; }

@@ -8,7 +8,7 @@ using Entities.LegendaryBot.BattleSimulatorStuff;
 using Entities.LegendaryBot.DialogueNamespace;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
-using Entities.LegendaryBot.Entities.BattleEntities.Gears.GearSets;
+
 using Entities.LegendaryBot.Moves;
 using Entities.LegendaryBot.Results;
 using Entities.LegendaryBot.Rewards;
@@ -38,7 +38,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     [NotMapped] private float _combatReadiness;
 
 
-    [NotMapped] private GearSet[]? _gearSets;
 
 
     [NotMapped] private float _health = 1;
@@ -240,7 +239,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     [NotMapped] public virtual DiscordColor Color => DiscordColor.Green;
 
-    [NotMapped] public IEnumerable<GearSet> GearSets => _gearSets ?? [];
+
 
     [NotMapped] public BattleSimulator? CurrentBattle => BattleTeam?.CurrentBattle;
 
@@ -598,19 +597,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     }
 
 
-    public IEnumerable<GearSet> GenerateGearSets()
-    {
-        foreach (var i in Gears.GroupBy(i => i.GearSetType))
-        {
-            var count = i.Count();
-            if (count < 2) continue;
-            var created = (GearSet)Activator.CreateInstance(i.Key)!;
-            created.Owner = this;
-            if (count >= 4)
-                created.CanUseFourPiece = true;
-            yield return created;
-        }
-    }
+
 
     public bool RemoveStatusEffect(StatusEffect statusEffect)
     {
@@ -672,7 +659,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             i.MainStat.AddStats(this);
         }
 
-        _gearSets = GenerateGearSets().ToArray();
     }
 
     #endregion

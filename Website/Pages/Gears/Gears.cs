@@ -18,6 +18,7 @@ public partial class Gears
         }
         public ImmutableDictionary<int, string> GearStatNameMapper { get; set; } 
         public GearDto[] Gears { get; set; }
+
     }
     public class GearStatDto
     {
@@ -34,6 +35,7 @@ public partial class Gears
         
         [JsonPropertyName("4")]
         public bool IsPercentage { get; set; }
+        
     }
     public class GearDto
     {
@@ -55,5 +57,9 @@ public partial class Gears
         [JsonPropertyName("6")]
         
         public GearStatDto[] GearStatDtos { get; set; }
+        
+        [JsonPropertyName("7")]
+        
+        public int? OwnerTypeId { get; set; }
     }
 }

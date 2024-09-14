@@ -230,7 +230,6 @@ public partial class BattleSimulator
         yield return this;
         foreach (var i in Characters)
         {
-            foreach (var j in i.GearSets) yield return j;
             yield return i;
             foreach (var j in i.StatusEffects) yield return j;
             if (i.Blessing is not null) yield return i.Blessing;

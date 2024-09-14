@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using BasicFunctionality;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-using Entities.LegendaryBot.Entities.BattleEntities.Gears.GearSets;
+
 using Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using Entities.Models;
 using PublicInfo;
@@ -14,39 +14,13 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 {
     private static readonly Dictionary<int, Type> _gearSetCache = [];
     private static readonly Dictionary<int, Gear> _cachedDefaultGearsTypeIds = [];
-    private int _gearSetTypeId;
 
 
-    static Gear()
-    {
-        foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<GearSet>())
-            _gearSetCache[i.TypeId] = i.GetType();
-    }
 
     [Timestamp] public uint Version { get; set; }
 
-    public int GearSetTypeId
-    {
-        get => _gearSetTypeId;
-        set
-        {
-            if (!_gearSetCache.Keys.Contains(value))
-                throw new Exception($"No gear set type with typeid {value}");
-            _gearSetTypeId = value;
-        }
-    }
 
-    [NotMapped]
-    public Type GearSetType
-    {
-        get => _gearSetCache[_gearSetTypeId];
-        set
-        {
-            if (!value.IsAssignableTo(typeof(GearSet)))
-                throw new Exception("Inputted type must be of type gearstat");
-            _gearSetTypeId = ((GearSet)TypesFunction.GetDefaultObject(value)).TypeId;
-        }
-    }
+
 
     [NotMapped] public IEnumerable<GearStat> Substats => Stats.Except([MainStat]);
 
@@ -76,8 +50,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public long? CharacterId { get; set; }
     public int Number { get; set; }
 
-    public static string GetDisplayString(string name, IEnumerable<GearStat> gearStats, Rarity rarity,
-        string gearSetTypeName
+    public static string GetDisplayString(string name, IEnumerable<GearStat> gearStats, Rarity rarity
     ,int? number, string? characterName, int? characterNumber, GearStat? mainStat = null)
     {
         var enumerable = gearStats as GearStat[] ?? gearStats.ToArray();
@@ -90,11 +63,10 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
         else
             numberToUse = $"{number} • ";
 
-        var setName = gearSetTypeName;
         var shouldSpace = false;
         var stringToUse = new StringBuilder($"```{numberToUse}{name}".PadRight(12) +
                                             $" • {mainStat.AsNameAndValue()} • " +
-                                            $"Rarity: {(int)rarity}\u2b50\nSet: {setName}\nSubstats:");
+                                            $"Rarity: {(int)rarity}\u2b50\nSubstats:");
         foreach (var j in substats)
         {
             if (shouldSpace)
@@ -122,7 +94,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public string DisplayString
     {
         get => GetDisplayString(Name, Stats, Rarity,
-            ((GearSet)TypesFunction.GetDefaultObject(GearSetType)).Name,
+           
             Number == 0 ? null : Number, Character?.Name,
             Character?.Number,MainStat);
     }
@@ -191,16 +163,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
         Rarity = rarity;
 
 
-        if (desiredGearSet is null)
-            GearSetType =
-                BasicFunctions.RandomChoice(
-                        TypesFunction.GetDefaultObjectsAndSubclasses<GearSet>())
-                    .GetType();
-        else if (!desiredGearSet.IsAssignableTo(typeof(GearSet)))
-            throw new ArgumentException(
-                $"{nameof(desiredGearSet)} inputted is not subclass of type {typeof(GearSet).FullName}");
-        else
-            GearSetType = desiredGearSet;
+        
         if (desiredMainStat is null)
             desiredMainStat = BasicFunctions.RandomChoice(PossibleMainStats);
         else if (!PossibleMainStats.Contains(desiredMainStat))
