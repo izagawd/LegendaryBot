@@ -162,10 +162,17 @@
     margin-bottom: 5px;
     margin-left: 5px;
 }
-
-.other-characters img {
+.character-div{
     width: 150px;
-    height: 150px;
+
+}
+.other-characters p{
+    word-wrap: break-word;
+}
+.other-characters img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
     background-color: blue;
 }
 
@@ -273,7 +280,9 @@
     width: 25px;
     height: 25px;
 }
-
+.character-div{
+    flex-shrink: 0;
+}
 @media only screen and (max-width: 1200px) {
     .others input[type=text] {
         width: 200px;
@@ -307,9 +316,10 @@
         flex-direction: column;
     }
 
-    .character-div img {
+    .character-div {
+        
         width: 100px;
-        height: 100px;
+     
     }
 
     .team-settler {
@@ -344,8 +354,8 @@
 
     .other-characters-parent {
         overflow-y: hidden;
-        overflow-x: scroll;
-        height: fit-content;
+        overflow-x: auto;
+        flex-grow: 1;
     }
 
     .other-characters {
@@ -355,27 +365,32 @@
         flex-wrap: nowrap;
 
     }
-
+    .team-character-div {
+        height: 90px;
+    }
+    .character-div .stars{
+        font-size: 10px;
+    }
     @media only screen and (max-height: 750px) {
 
         .character-div img {
             width: 80px;
             height: 80px;
         }
-
+        
         .others-parent {
             margin-top: 5px;
 
         }
-
+        .team-character-div {
+            height: 80px;
+        }
         .character-div p {
 
             margin-bottom: 1px;
         }
 
-        .team-character-div {
-            height: 80px;
-        }
+      
 
     }
 

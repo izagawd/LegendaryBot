@@ -82,7 +82,7 @@
   
     height: fit-content;
     position: relative;
-    
+    width: 100px;
 }
 .the-hover-shit{
     pointer-events: none;
@@ -98,8 +98,9 @@
 
 
 .the-stuff-to-search img{
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
 
     border: solid 2px;
     border-radius: 10px;
@@ -107,7 +108,8 @@
 }
 .filterer-stuff{
     flex-shrink: 0;
-    height: 45px;
+    max-height: 45px;
+    min-height: 45px;
     display: flex; border-bottom: solid 1px;
 }
 .filterer-stuff > input{
@@ -192,7 +194,7 @@
         border-radius: 5px;
         border: solid 1px;
     }
-    .parent img{
+    .idk-for-now img{
         width: 120px;
         height: 120px;
         
@@ -205,5 +207,9 @@
         font-size: 12px;
         margin-top: 3px;
         margin-bottom: 3px;
+    }
+    .filterer-stuff{
+        min-height: 32px;
+        max-height: 32px;
     }
 }
