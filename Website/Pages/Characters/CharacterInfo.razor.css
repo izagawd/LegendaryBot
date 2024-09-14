@@ -147,6 +147,12 @@ p{
 .equipment-navigator > div{
     flex-grow: 1; border-right: solid 1px;
 }
+.equipment-navigator-dark > div:hover{
+    background-color: grey;
+}
+.equipment-navigator-light > div:hover{
+    background-color: lightgrey;
+}
 @media only screen and (max-width: 600px) {
     .en-totale{
         flex-direction: column;

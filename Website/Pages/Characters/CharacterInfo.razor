@@ -227,7 +227,7 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
     {
 
         <div class="parent">
-            <div class="equipment-navigator">
+            <div class="equipment-navigator equipment-navigator-@(Theme.ToString().ToLower())">
                 @foreach (var i in Enum.GetValues<WorkingWith>())
                 {
                     <div @onclick="() => CurrentlyWorkingWith = i" >
