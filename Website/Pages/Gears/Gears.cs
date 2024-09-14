@@ -10,8 +10,8 @@ public partial class Gears
         public int RarityNum { get; set; }
         [JsonPropertyName("2")]
         public string? Name { get; set; }
-        [JsonPropertyName("3")]
-        public string? ImageUrl { get; set; }
+
+        [JsonIgnore] public string? ImageUrl => PublicInfo.Information.GearsImagesDirectory + $"/{TypeId}.png";
         [JsonPropertyName("4")]
         public int Number { get; set; }
 

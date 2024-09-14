@@ -28,7 +28,7 @@ public class ItemsPageController(PostgreSqlContext post) : ControllerBase
         }
         var dto = gottenCollection.Select(i => new Items.ItemDto
         {
-            ImageUrl = Item.GetDefaultFromTypeId(i.TypeId).ImageUrl,
+   
             Name = Item.GetDefaultFromTypeId(i.TypeId).Name,
             Stacks = i.Stacks,
             RarityNum = (int)i.Rarity,

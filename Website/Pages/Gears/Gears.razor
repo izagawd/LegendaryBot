@@ -13,6 +13,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        Console.WriteLine(await Http.GetStringAsync("/GearsPage/get-gears"));
         GearCollection = await Http.GetFromJsonAsync<GearDto[]>("/GearsPage/get-gears");
     }
 

@@ -23,7 +23,6 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
             .ToArrayAsync();
         var dto = gottenCollection.Select(i => new Gears.GearDto
         {
-            ImageUrl = i.ImageUrl,
             Name = i.Name,
             Number = i.Number,
             RarityNum = (int)i.Rarity,

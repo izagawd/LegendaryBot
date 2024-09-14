@@ -26,7 +26,6 @@ public class BlessingsPageController(PostgreSqlContext post) : ControllerBase
             .GroupBy(i => i.TypeId)
             .Select(i => new Blessings.BlessingDto
         {
-            ImageUrl = i.First().ImageUrl,
             Name = i.First().Name,
             RarityNum = (int)i.First().Rarity,
             Stacks = i.Count(),

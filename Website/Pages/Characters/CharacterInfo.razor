@@ -48,7 +48,6 @@
             ErrorMessage = await result.Content.ReadAsStringAsync();
         else
         {
-            Console.WriteLine(await  result.Content.ReadAsStringAsync());
             Dto = await result.Content.ReadFromJsonAsync<CharacterInfoDto>();
             Dto!.Setup();
         }
