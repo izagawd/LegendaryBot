@@ -197,7 +197,7 @@ public class DiscordBot
                     var embed = new DiscordEmbedBuilder()
                         .WithColor(created.Color)
                         .WithTitle("Character has appeared!\nThey will join one with the fastest reaction time")
-                        .WithDescription($"Name: {created.Name}\nRarity: {(int)created.Rarity} :star:")
+                        .WithDescription($"Name: {created.Name}\n{string.Concat(Enumerable.Repeat("\u2b50",(int) created.Rarity))}")
                         .WithImageUrl("attachment://character.png");
                     var message = await args.Channel.SendMessageAsync(new DiscordMessageBuilder()
                         .AddEmbed(embed)

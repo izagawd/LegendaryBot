@@ -66,7 +66,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
         var shouldSpace = false;
         var stringToUse = new StringBuilder($"```{numberToUse}{name}".PadRight(12) +
                                             $" • {mainStat.AsNameAndValue()} • " +
-                                            $"Rarity: {(int)rarity}\u2b50\nSubstats:");
+                                            $"{string.Concat(Enumerable.Repeat("\u2b50",(int) rarity))}\nSubstats:");
         foreach (var j in substats)
         {
             if (shouldSpace)
