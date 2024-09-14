@@ -341,6 +341,14 @@ public class Begin : GeneralCommandClass
         if (!userData.Characters.Any(i => i.GetType() == typeof(Lily)))
             rewardText = userData.ReceiveRewards(new EntityReward([lily]));
         message = result.Message;
+        var stam = userData.Items.OfType<Stamina>().FirstOrDefault();
+        if (stam is null)
+        {
+            stam = new Stamina();
+            stam.RefreshEnergyValue();
+            stam.Stacks = stam.MaxEnergyValue;
+            userData.Items.Add(stam);
+        }
         await DatabaseContext.SaveChangesAsync();
         await message.ModifyAsync(new DiscordMessageBuilder()
             .AddEmbed(embedToBuild.WithTitle("Nice!").WithUser(ctx.User).WithDescription(rewardText)

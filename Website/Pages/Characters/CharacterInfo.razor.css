@@ -106,11 +106,12 @@
 
 }
 .filterer-stuff{
-    max-height: 60px;
+    flex-shrink: 0;
+    height: 45px;
     display: flex; border-bottom: solid 1px;
 }
 .filterer-stuff > input{
-    height: 30px;
+    height: 25px;
     margin-top: auto;
     margin-bottom: auto;
     border-radius: 5px;

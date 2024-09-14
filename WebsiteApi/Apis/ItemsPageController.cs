@@ -22,6 +22,10 @@ public class ItemsPageController(PostgreSqlContext post) : ControllerBase
             
             .ToArrayAsync();
 
+        foreach (var i in gottenCollection.OfType<Energy>())
+        {
+            i.RefreshEnergyValue();
+        }
         var dto = gottenCollection.Select(i => new Items.ItemDto
         {
             ImageUrl = Item.GetDefaultFromTypeId(i.TypeId).ImageUrl,

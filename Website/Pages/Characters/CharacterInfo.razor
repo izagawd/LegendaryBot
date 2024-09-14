@@ -95,8 +95,11 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
 
     async Task RemoveItemAsync()
     {
+        
         if (DraggedObject is GearDto gearDto)
         {
+            if(Dto.CharacterDto.TheEquippedOnes[GearTypeIdToWorkingWith(gearDto.TypeId)].Value != gearDto.Id)
+                return;
             var result = await Http.PostAsync("CharacterInfoPage/remove-gear", new FormUrlEncodedContent([
                 new KeyValuePair<string, string>("characterId",Dto!.CharacterDto.Id.ToString()),
                 new KeyValuePair<string, string>("gearTypeId",gearDto.TypeId.ToString()),
@@ -116,6 +119,8 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
             }
         } else if (DraggedObject is BlessingDto blessingDto)
         {
+            if(DraggedObject != Dto.EquippedBlessing)
+                return;
             var result = await Http.PostAsync("CharacterInfoPage/remove-blessing", new FormUrlEncodedContent([
                 new KeyValuePair<string, string>("characterId",Dto!.CharacterDto.Id.ToString()),
             ]));

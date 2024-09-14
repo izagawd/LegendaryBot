@@ -1,3 +1,4 @@
+using CommandLine;
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
@@ -20,24 +21,30 @@ public class HomePageController(PostgreSqlContext context) : ControllerBase
     public async Task<IActionResult> GetSomeUserData()
     {
         var discordId = User.GetDiscordUserId();
-        var selected = await context.Set<UserData>()
-            .Where(i => i.DiscordId == discordId)
-            .Select(i => new Home.HomePageData
-            {
-                FavoriteAvatarUrl = i.Characters.Where(j => j is Player).Select(j 
-                    => Character.GetDefaultFromTypeId(j.TypeId).ImageUrl).FirstOrDefault()!,
-                Coins = i.Items.Where(j => j is Coin)
-                    .Select(j => new int?(j.Stacks)).FirstOrDefault() ?? 0,
-                DivineShards = i.Items.Where(j => j is DivineShard)
-                    .Select(j => new int?(j.Stacks)).FirstOrDefault() ?? 0,
-                Stamina = i.Items.Where(j => j is Stamina)
-                    .Select(j => new int?(j.Stacks)).FirstOrDefault() ?? 0,
-                AdventurerLevel = i.AdventurerLevel
-            }).FirstOrDefaultAsync();
-        if (selected is null)
+        var userData = await context.Set<UserData>()
+            .Include(i => i.Characters.Where(j => j is Player))
+            .Include(i => i.Items.Where(j => j is Coin || j is DivineShard || j is Stamina))
+            .FirstOrDefaultAsync(i =>i.DiscordId == discordId);
+
+        if (userData is null)
         {
-            return BadRequest("User data not found. You have not started battle");
+            return BadRequest("Userdata not found");
         }
+
+        var stamina = userData.Items.FirstOrDefault(i => i is Stamina)
+            ?.Cast<Stamina>().Stacks ?? 0;
+        var selected = new Home.HomePageData()
+        {
+            AdventurerLevel = userData.AdventurerLevel,
+            Stamina = stamina,
+            Coins = userData.Items.OfType<Coin>().Select(i => i.Stacks)
+                .FirstOrDefault(0),
+            DivineShards = userData.Items.OfType<DivineShard>().Select(i => i.Stacks)
+                .FirstOrDefault(0),
+            FavoriteAvatarUrl = userData.Characters.OfType<Player>().Select(i => i.ImageUrl)
+                .FirstOrDefault()!
+        };
+
         return Ok(selected);
     }
 }
