@@ -85,6 +85,7 @@
     
 }
 .the-hover-shit{
+    pointer-events: none;
     transition: opacity 0.2s;
     z-index: 1;
     border: solid 2px;
