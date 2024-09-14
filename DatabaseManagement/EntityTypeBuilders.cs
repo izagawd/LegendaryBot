@@ -107,7 +107,7 @@ public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
     public void Configure(EntityTypeBuilder<UserData> builder)
     {
         builder.Property(i => i.Color)
-            .HasConversion(i => i.ToString(), j => new DiscordColor(j)
+            .HasConversion(i => i.Value, j => new DiscordColor(j)
             );
         builder.HasMany(i => i.PlayerTeams)
             .WithOne(i => i.UserData)

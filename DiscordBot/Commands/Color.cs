@@ -61,6 +61,7 @@ public class Color : GeneralCommandClass
             .WithTimestamp(DateTime.Now);
         if (colorIsValid)
         {
+            userData.Color = color;
             await DatabaseContext.SaveChangesAsync();
             embed.WithTitle("**Success!**");
             embed.WithDescription("`Look at your new color!`");
