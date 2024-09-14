@@ -15,7 +15,7 @@ namespace WebsiteApi.Apis;
 [ApiController]
 public class CharactersPageController(PostgreSqlContext post) : ControllerBase
 {
-    private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
+
 
     [HttpGet("get-characters")]
     [Authorize]

@@ -77,8 +77,21 @@ public class Explore : GeneralCommandClass
             return;
         }
 
+        const int requiredStamina = 60;
+        var stamina = userData.Items.OfType<Stamina>().FirstOrDefault();
+        stamina?.RefreshEnergyValue();
+        var staminaCount = (stamina?.Stacks ?? 0);
+        if (staminaCount < requiredStamina)
+        {
+            embedToBuild.WithDescription(
+                $"You need at least {requiredStamina} stamina to explore. You have {staminaCount} stamina");
+            await ctx.RespondAsync(embedToBuild);
+            return;
+        }
+        
         await MakeOccupiedAsync(userData);
 
+        
         var groups = region.ObtainableCharacters
             .Select(i => (Character)TypesFunction.GetDefaultObject(i))
             .GroupBy(i => i.Rarity)
@@ -92,10 +105,12 @@ public class Explore : GeneralCommandClass
         var characterType
             = BasicFunctions.RandomChoice(characterGrouping.Select(i => i)).GetType();
 
-        var enemyTeam = region.GenerateCharacterTeamFor(characterType, out var character);
+        var combatTier = userData.Tier;
+        var enemyTeam = region.GenerateCharacterTeamFor(characterType, out var character, combatTier);
         embedToBuild
             .WithTitle("Keep your guard up!")
-            .WithDescription($"{enemyTeam.First().Name}(s) have appeared!");
+            .WithDescription($"{character.Name} has appeared!")
+            .WithFooter($"Note: exploring costs {requiredStamina} stamina");
         await ctx.RespondAsync(embedToBuild);
         var message = await ctx.GetResponseAsync();
         await Task.Delay(2500);
@@ -106,15 +121,16 @@ public class Explore : GeneralCommandClass
 
         var battleResult = await simulator.StartAsync(message!);
 
-
-        var expToGain = Character.GetExpBasedOnDefeatedCharacters(enemyTeam);
-        var coinsToGain = Character.GetCoinsBasedOnCharacters(enemyTeam);
-        if (battleResult.Winners != userTeam) expToGain = expToGain / 5;
-
-
-        var expGainText = userTeam.IncreaseExp(expToGain);
         if (battleResult.Winners == userTeam)
         {
+            
+
+            var expToGain = Character.GetExpBasedOnDefeatedCharacters(enemyTeam);
+            var coinsToGain = Character.GetCoinsBasedOnCharacters(enemyTeam);
+            if (battleResult.Winners != userTeam) expToGain = expToGain / 5;
+
+
+            var expGainText = userTeam.IncreaseExp(expToGain);
             character.Level = 1;
             List<Reward> rewards =
             [
@@ -147,7 +163,31 @@ public class Explore : GeneralCommandClass
             {
                 var gear
                     = (Gear)Activator.CreateInstance(BasicFunctions.RandomChoice(Gear.AllGearTypes))!;
-                var gearRarityToGive = BasicFunctions.RandomChoice([Rarity.OneStar, Rarity.TwoStar]);
+                Rarity gearRarityToGive;
+                switch (combatTier)
+                {
+                    case Tier.Unranked:
+                    case Tier.Bronze:
+                        gearRarityToGive = Rarity.OneStar;
+                        break;
+                    case Tier.Silver:
+                        gearRarityToGive = BasicFunctions.RandomChoice([Rarity.OneStar, Rarity.TwoStar]);
+                        break;
+                    case Tier.Gold:
+                        gearRarityToGive = BasicFunctions.RandomChoice([Rarity.TwoStar, Rarity.ThreeStar]);
+                        break;
+                    case Tier.Platinum:
+                        gearRarityToGive = BasicFunctions.RandomChoice([Rarity.ThreeStar, Rarity.FourStar]);
+                        break;
+                    case Tier.Diamond:
+                        gearRarityToGive = BasicFunctions.RandomChoice([Rarity.FourStar, Rarity.FiveStar]);
+                        break;
+                    case Tier.Divine:
+                        gearRarityToGive = Rarity.FiveStar;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
                 gear.Initialize(gearRarityToGive);
                 rewards.Add(new EntityReward([gear]));
             }
@@ -155,14 +195,18 @@ public class Explore : GeneralCommandClass
             foreach (var _ in Enumerable.Range(0, expMatCount))
                 rewards.Add(new EntityReward([new HerosKnowledge { Stacks = 1 }]));
             rewards.Add(new EntityReward([new Coin { Stacks = 5000 }]));
-            await DatabaseContext.Set<Item>().Where(i => i is HerosKnowledge || i is Coin)
+            
+            
+            await DatabaseContext.Set<Item>().Where(i => (i is HerosKnowledge || i is Coin) && i.UserDataId == userData.Id)
                 .LoadAsync();
             rewardText += userData.ReceiveRewards(rewards);
             embedToBuild
                 .WithTitle("Nice going bud!")
                 .WithDescription($"You won!\n{expGainText}\n{rewardText}")
                 .WithImageUrl("");
-
+            stamina!.Stacks -= requiredStamina;
+            
+            await DatabaseContext.SaveChangesAsync();
             await message!.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embedToBuild));
         }
         else
@@ -175,10 +219,9 @@ public class Explore : GeneralCommandClass
 
             embedToBuild
                 .WithTitle("Ah, too bad\n" + additionalString)
-                .WithDescription($"You lost boi\n{expGainText}");
+                .WithDescription($"You lost boi");
             await message!.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embedToBuild));
         }
 
-        await DatabaseContext.SaveChangesAsync();
     }
 }

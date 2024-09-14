@@ -118,7 +118,7 @@ public class Ignite : Ultimate
 
 public abstract class Player : Character
 {
-    public static int OriginalTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
+
     public Player()
     {
 

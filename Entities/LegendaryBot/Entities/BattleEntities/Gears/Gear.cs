@@ -157,7 +157,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     }
 
 
-    public void Initialize(Rarity rarity, Type? desiredGearSet = null, Type? desiredMainStat = null)
+    public void Initialize(Rarity rarity,Type? desiredMainStat = null)
     {
         if (Stats.Count != 0) return;
         Rarity = rarity;

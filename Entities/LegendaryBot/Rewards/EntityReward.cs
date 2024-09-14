@@ -56,7 +56,7 @@ public class EntityReward : Reward
         userData.Inventory.MergeItemStacks();
 
 
-        foreach (var i in EntitiesToReward) stringBuilder.Append($"`{GetDisplayString(i)}`\n");
+        foreach (var i in EntitiesToReward) stringBuilder.Append($"{GetDisplayString(i)}\n");
 
 
         return stringBuilder.ToString();

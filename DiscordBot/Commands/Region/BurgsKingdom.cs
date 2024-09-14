@@ -1,4 +1,5 @@
 using BasicFunctionality;
+using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
@@ -15,7 +16,7 @@ public class BurgsKingdom : Region
         typeof(Blast), typeof(Thana), typeof(Cheerleader)
     ];
 
-    public override Team GenerateCharacterTeamFor(Type type, out Character main)
+    public override Team GenerateCharacterTeamFor(Type type, out Character main, Tier combatTier)
     {
         main = (Character)Activator.CreateInstance(type)!;
         NonPlayerTeam newTeam = [main];
@@ -59,7 +60,7 @@ public class BurgsKingdom : Region
                 break;
         }
 
-        foreach (var i in newTeam) i.SetBotStatsAndLevelBasedOnTier(TierRequirement);
+        foreach (var i in newTeam) i.SetBotStatsAndLevelBasedOnTier(combatTier);
 
         return newTeam;
     }

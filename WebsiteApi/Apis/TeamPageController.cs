@@ -15,7 +15,6 @@ namespace WebsiteApi.Apis;
 [ApiController]
 public class TeamPageController : ControllerBase
 {
-    private static readonly int PlayerTypeId = TypesFunction.GetDefaultObject<Player>().TypeId;
     private readonly PostgreSqlContext context;
 
     public TeamPageController(PostgreSqlContext databaseContext)

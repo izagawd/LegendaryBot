@@ -19,8 +19,8 @@ namespace DiscordBot.Commands;
 public class Begin : GeneralCommandClass
 {
     private static readonly DiscordTextInputComponent _askForName = new("What is your name?",
-        "name", TypesFunction.GetDefaultObject<Player>().Name,
-        TypesFunction.GetDefaultObject<Player>().Name, min_length: 3, max_length: 15);
+        "name", TypesFunction.GetDefaultObject<PlayerMale>().Name,
+        TypesFunction.GetDefaultObject<PlayerMale>().Name, min_length: 3, max_length: 15);
 
     private static readonly DiscordButtonComponent _yes = new(DiscordButtonStyle.Primary, "yes", "Yes");
     private static readonly DiscordButtonComponent _no = new(DiscordButtonStyle.Primary, "no", "No");
