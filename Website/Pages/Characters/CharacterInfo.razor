@@ -323,10 +323,7 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
                                 <div>
                                     <img  draggable="true"  @onclick="() =>SetAsObject(i)" @ondragstart="() => DraggedObject = i" src="@i.ImageUrl"/>
                                     <p>@i.GearName</p>
-                                    <p>@foreach (var _ in Enumerable.Range(0,i.RarityNum))
-                                        {
-                                        @("⭐")
-                                        }</p>
+                                    <p>@(string.Concat(Enumerable.Repeat("\u2b50", i.RarityNum)))</p>
                                     <p>Num @i.Number</p>
                                     @RenderAdditionalInfo(i)
                                 </div>
@@ -339,10 +336,7 @@ opacity: @(HoveredObject == theObject && theObject is not null? "100%" : "0")">
                                 <div draggable="true" @onclick="() =>SetAsObject(i)" @ondragstart="() => DraggedObject = i">
                                     <img src="@i.ImageUrl"/>
                                     <p>@i.Name</p>
-                                    <p>@foreach (var _ in Enumerable.Range(0,i.RarityNum))
-                                        {
-                                        @("⭐")
-                                        }</p>
+                                    <p>@(string.Concat(Enumerable.Repeat("\u2b50", i.RarityNum)))</p>
                                     <p>Remaining: @i.RemainingStacks</p>
                                     <p>Stacks: @i.Stacks</p>
                                     @RenderAdditionalInfo(i)
