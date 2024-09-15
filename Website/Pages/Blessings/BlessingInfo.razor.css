@@ -7,8 +7,48 @@
     flex-shrink: 0;
 }
 .parent{
-    display: flex; width: 100%; height: 100%"
+    display: flex; width: 100%; height: 100%;
 }
 .characters-holder{
     flex-grow: 1;
+}
+.blessing-details{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width: 150px
+}
+.blessing-details p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.filterer{
+    height: 50px;  border-bottom: solid 2px
+}
+.character-containers{
+    
+}
+.blessing-details img{
+    width: 100%; height: auto; aspect-ratio: 1/1; border: solid 2px; border-radius: 10px;
+
+}
+.blessing-description{
+    width: 80%; margin-left: auto; margin-right: auto; font-weight: bold
+}
+@media only screen and (max-width: 600px) {
+    .parent{
+        flex-direction: column;
+    }
+    .blessing-details{
+        width: 100px;
+    }
+    .blessing-holder{
+        flex-grow: 0;
+     
+    }
+    .filterer{
+        border-top: solid 2px;
+    }
 }

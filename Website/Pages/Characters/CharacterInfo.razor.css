@@ -145,7 +145,7 @@ p{
     word-wrap: break-word;
 }
 .equipment-navigator > div{
-    flex-grow: 1; border-right: solid 1px;
+    flex-grow: 1;
 }
 .equipment-navigator-dark > div:hover{
     background-color: grey;

@@ -39,6 +39,8 @@
         {
             TeamCharacterDto = await gotten.Content.ReadFromJsonAsync<TeamCharactersDto>();
             CurrentTeam = TeamCharacterDto!.EquippedTeam;
+            StateHasChanged();
+            await SnackBarService.DisplaySnackBarAsync(new SnackBar.SnackBarParams("Drag and drop to modify teams"));
         }
         else
         {
@@ -250,7 +252,7 @@
                             {
                                 <div class="delete-bin-div" @onclick="() => RemoveFromTeamAsync(i1)">
                                     <span class="material-symbols-outlined">
-                                        delete
+                                        close
                                     </span>
                                 </div>
                             }

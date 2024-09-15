@@ -20,7 +20,7 @@ public class BlessingInfoPageController : ControllerBase
     }
     [Authorize]
     [HttpGet("get")]
-    public async Task<IActionResult> GetBlessingInfo(int blessingTypeId)
+    public async Task<IActionResult> GetBlessingInfo([FromQuery] int blessingTypeId)
     {
         var discordId = User.GetDiscordUserId();
         var userData = await _postgre.Set<UserData>()
@@ -37,7 +37,7 @@ public class BlessingInfoPageController : ControllerBase
         if (!gottenBlessings.Any())
         {
            
-            return BadRequest("You do not have any of blessing");
+            return BadRequest("You do not have any of that blessing");
         }
 
         var blessingDto = gottenBlessings.GroupBy(i => i.TypeId).Select(i => new BlessingInfo.BlessingDto()
@@ -45,6 +45,7 @@ public class BlessingInfoPageController : ControllerBase
             Name = i.First().Name,
             RarityNum = (int)i.First().Rarity,
             TypeId = i.Key,
+            Description = i.First().Description
         }).First();
         var charactersDto = userData.Characters.Where(i => i.Blessing?.TypeId == blessingTypeId)
             .Select(i => new BlessingInfo.CharacterDto()
@@ -52,6 +53,7 @@ public class BlessingInfoPageController : ControllerBase
                 Id = i.Id,
                 Number = i.Number,
                 RarityNum = (int)i.Rarity,
+                
                 Name = i.Name
             }).ToArray();
         var blessingsInfo = new BlessingInfo.BlessingInfoDto()

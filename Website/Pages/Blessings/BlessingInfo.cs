@@ -7,6 +7,7 @@ public partial class BlessingInfo
 {
     public class BlessingDto
     {
+        public string Description { get; set; }
         public int TypeId { get; set; }
         public string Name { get; set; }
         public int RarityNum { get; set; }

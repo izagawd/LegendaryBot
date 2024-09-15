@@ -14,7 +14,7 @@
    private string? ErrorString;
    protected override async Task OnInitializedAsync()
    {
-      var result = await Http.GetAsync("BlessingInfoPage/get");
+      var result = await Http.GetAsync($"BlessingInfoPage/get?blessingTypeId={BlessingTypeId}");
       if (result.IsSuccessStatusCode)
       {
          BlessingData = await result.Content.ReadFromJsonAsync<BlessingInfoDto>();
@@ -39,13 +39,26 @@
    {
       <div class="parent">
          <div class="blessing-holder">
-            <div style="width: 100px">
-               <img style="width: 100%; height: auto; aspect-ratio: 1/1" src="@BlessingData.Blessing.ImageUrl"/>
+            <div class="blessing-details">
+               <img src="@BlessingData.Blessing.ImageUrl"/>
                <p>@BlessingData.Blessing.Name</p>
                <p>@(string.Concat(Enumerable.Repeat("\u2b50",BlessingData.Blessing.RarityNum)))</p>
             </div>
+            <p class="blessing-description">@BlessingData.Blessing.Description</p>
          </div>
-         <div class="characters-holder"></div>
+         <div class="characters-holder">
+            <div class="filterer">
+               
+            </div>
+            <div class="character-containers">
+               @foreach (var i in BlessingData.Characters)
+               {
+                  <div>
+                     
+                  </div>
+               }
+            </div>
+         </div>
       </div>
    }
 
