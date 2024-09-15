@@ -1,3 +1,5 @@
+using System.Net;
+using BasicFunctionality;
 using DatabaseManagement;
 using Microsoft.AspNetCore.Authentication;
 using PublicInfo;
@@ -17,6 +19,7 @@ public static class Website
             .CreateClient());
 
         services.AddDbContext<PostgreSqlContext>();
+        
         services.AddCors(options =>
         {
             options.AddDefaultPolicy(
@@ -76,6 +79,22 @@ public static class Website
             Args = args
         });
         builder.WebHost.UseStaticWebAssets();
+        if (!Information.IsTesting)
+        {
+            builder.WebHost.UseKestrel(serverOptions =>
+            {
+                serverOptions.ListenAnyIP(5000);
+
+                serverOptions.ListenAnyIP( 5001,
+                    listenOptions =>
+                    {
+                        listenOptions.UseHttps(System.Configuration.ConfigurationManager.AppSettings["CertificatePath"]!.Print(),
+                            System.Configuration.ConfigurationManager.AppSettings["CertificatePassword"]!);
+                    });
+
+            });
+        }
+
         ConfigureServices(builder.Services);
 
         var app = builder.Build();
@@ -90,7 +109,7 @@ public static class Website
             app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
-
+        
         app.UseHttpsRedirection();
 
         app.UseStaticFiles();

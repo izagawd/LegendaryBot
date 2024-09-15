@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rBjTDFSQwJGGkR2NbdMGILQWSfy5BkjPsfpOnFfkoVaw7NlGkJTk5Ul3li/mghh79Fp2H/S8rLoRSSE7OE6zVA==",
+  "dgSpecHash": "aj4SyIMusIX+1WVrG6slEmBkf8M7x8KfDEysTAko6FMeELlRIvCAaZhoIs8DjprA4+zWtdf26PIVA+VEZ3gCfA==",
   "success": true,
   "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.7\\microsoft.netcore.app.ref.8.0.7.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.7\\microsoft.windowsdesktop.app.ref.8.0.7.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.7\\microsoft.aspnetcore.app.ref.8.0.7.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

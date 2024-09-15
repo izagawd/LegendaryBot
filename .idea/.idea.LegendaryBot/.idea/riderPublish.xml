@@ -4,6 +4,7 @@
     <option name="locations">
       <list>
         <option value="$USER_HOME$/Downloads/CompiledDiscordBot" />
+        <option value="$USER_HOME$/Downloads/WebsitePublished" />
       </list>
     </option>
   </component>

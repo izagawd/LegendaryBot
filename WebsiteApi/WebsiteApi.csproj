@@ -16,6 +16,9 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8"/>
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.6"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6"/>
+        <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Core" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6"/>
