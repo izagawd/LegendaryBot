@@ -19,24 +19,27 @@ public class CharactersPageController(PostgreSqlContext post) : ControllerBase
 
     [HttpGet("get-characters")]
     [Authorize]
-    public async Task<ActionResult<Characters.CharacterDto[]>> GetCharactersAsync()
+    public async Task<IActionResult> GetCharactersAsync()
     {
         var zaId = User.GetDiscordUserId();
         var userData = await post.Set<UserData>()
             .Include(i => i.Characters)
             .FirstOrDefaultAsync(i => i.DiscordId == zaId);
-            
-            
-            var toDto = userData.Characters
-            .Select(i => new Characters.CharacterDto
-            {
-                Name = i.Name,
-                Level = i.Level,
-                TypeId = i.TypeId,
-                Number = i.Number,
-                RarityNum = (int)Character.GetDefaultFromTypeId(i.TypeId).Rarity
-            })
-            .ToArray();
+
+        if (userData is null)
+        {
+            return Ok(new Characters.CharacterDto[]{});
+        }
+        var toDto = userData.Characters
+        .Select(i => new Characters.CharacterDto
+        {
+            Name = i.Name,
+            Level = i.Level,
+            TypeId = i.TypeId,
+            Number = i.Number,
+            RarityNum = (int)Character.GetDefaultFromTypeId(i.TypeId).Rarity
+        })
+        .ToArray();
 
         return Ok(toDto);
     }

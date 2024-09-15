@@ -1,0 +1,14 @@
+.blessing-holder{
+    
+    border-right: solid 1px;
+    
+    max-width: 400px;
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+.parent{
+    display: flex; width: 100%; height: 100%"
+}
+.characters-holder{
+    flex-grow: 1;
+}

@@ -22,13 +22,22 @@
     [CascadingParameter] public Task<AuthenticationState> AuthState { get; set; } = null!;
     protected ClaimsPrincipal? _user;
     private HomePageData? _homePageData;
-
+    private string? ErrorString;
     protected override async Task OnInitializedAsync()
     {
         _user = (await AuthState).User;
         if (_user.Identity?.IsAuthenticated ?? false)
         {
-            _homePageData = await Http.GetFromJsonAsync<HomePageData>("HomePage/get");
+            var httpResponse = await Http.GetAsync("HomePage/get");
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                ErrorString = await httpResponse.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                _homePageData = await httpResponse.Content.ReadFromJsonAsync<HomePageData>();
+            }
+
         }
     }
 }
@@ -47,6 +56,9 @@
                 </div>
             </div>
         </div>
+    } else if (ErrorString is not null)
+    {
+        <HugeText TheText=@ErrorString />
     }
     else if (_user is not null && !(_user.Identity?.IsAuthenticated ?? false))
     {

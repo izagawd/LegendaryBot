@@ -44,10 +44,10 @@
     // Task to track the currently displaying snackbar
     private CancellationTokenSource? _cancellationTokenSource;
 
-    public struct SnackBarParams(string text, TimeSpan delay)
+    public struct SnackBarParams(string text, TimeSpan? delay = null)
     {
         public string Text = text;
-        public TimeSpan Delay = delay;
+        public TimeSpan Delay = delay ?? TimeSpan.FromSeconds(2);
         public SnackBarLayout SnackBarLayout = SnackBarLayout.Success;
         public string? DivStyle;
         public string? TextStyle;

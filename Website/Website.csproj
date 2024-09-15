@@ -60,6 +60,9 @@
         <Compile Update="Pages\Blessings\Blessings.cs">
           <DependentUpon>Blessings.razor</DependentUpon>
         </Compile>
+        <Compile Update="Pages\Blessings\BlessingInfo.cs">
+          <DependentUpon>BlessingInfo.razor</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>

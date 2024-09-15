@@ -1,0 +1,14 @@
+@page "/inventory/blessings/{BlessingTypeId:int}"
+@using Website.Components.Navigation
+@code {
+   [Parameter]  public int BlessingTypeId { get; set; }
+}
+
+<InventoryNavigation>
+   <div class="parent">
+      <div class="blessing-holder">
+         
+      </div>
+      <div class="characters-holder"></div>
+   </div>
+</InventoryNavigation>
