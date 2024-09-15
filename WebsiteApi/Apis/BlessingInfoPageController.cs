@@ -24,6 +24,7 @@ public class BlessingInfoPageController : ControllerBase
     {
         var discordId = User.GetDiscordUserId();
         var userData = await _postgre.Set<UserData>()
+            .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Blessings.Where(j => j.TypeId == blessingTypeId))
             .ThenInclude(i => i.Character)
             .FirstOrDefaultAsync(i => i.DiscordId == discordId);
@@ -36,7 +37,7 @@ public class BlessingInfoPageController : ControllerBase
         if (!gottenBlessings.Any())
         {
            
-            return BadRequest($"You do not have that blessing");
+            return BadRequest("You do not have any of blessing");
         }
 
         var blessingDto = gottenBlessings.GroupBy(i => i.TypeId).Select(i => new BlessingInfo.BlessingDto()

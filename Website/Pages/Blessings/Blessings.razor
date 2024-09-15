@@ -1,5 +1,6 @@
 @page "/inventory/blessings"
 @using Microsoft.AspNetCore.Authorization
+@using PublicInfo
 @using Website.Components
 
 
@@ -65,10 +66,9 @@
                          ObjectsToRender="() => UsingBlessingCollection"
                          NameDelegate="dto => dto.Name"
                          ImageUrlDelegate="dto => dto.ImageUrl"
+                         LinkUrlDel='dto => $"/inventory/blessings/{dto.TypeId}"'
                          TObjectType="BlessingDto">
-    <HoverShit>
-        <p>@context.Description</p>
-    </HoverShit>
+
     <SorterStuff>
         <p>Sort By</p>
         <select @bind="SortTypeVal" class="filterer-percentage" style="height: 30px">

@@ -1,14 +1,52 @@
 @page "/inventory/blessings/{BlessingTypeId:int}"
+@using System.Reflection.Metadata
+@using Microsoft.AspNetCore.Authorization
 @using Website.Components.Navigation
+@using Website.Components
+
+@attribute [Authorize]
+
+@inject HttpClient Http;
 @code {
    [Parameter]  public int BlessingTypeId { get; set; }
+   
+   public BlessingInfoDto? BlessingData { get; set; }
+   private string? ErrorString;
+   protected override async Task OnInitializedAsync()
+   {
+      var result = await Http.GetAsync("BlessingInfoPage/get");
+      if (result.IsSuccessStatusCode)
+      {
+         BlessingData = await result.Content.ReadFromJsonAsync<BlessingInfoDto>();
+      }
+      else
+      {
+         ErrorString = await result.Content.ReadAsStringAsync();
+      }
+   }
+
 }
 
 <InventoryNavigation>
-   <div class="parent">
-      <div class="blessing-holder">
-         
+   @if (ErrorString is not null)
+   {
+      <HugeText TheText=@ErrorString ></HugeText>
+   } else if (BlessingData is null)
+   {
+      <HugeText TheText="Loading..." ></HugeText>
+   }
+   else
+   {
+      <div class="parent">
+         <div class="blessing-holder">
+            <div style="width: 100px">
+               <img style="width: 100%; height: auto; aspect-ratio: 1/1" src="@BlessingData.Blessing.ImageUrl"/>
+               <p>@BlessingData.Blessing.Name</p>
+               <p>@(string.Concat(Enumerable.Repeat("\u2b50",BlessingData.Blessing.RarityNum)))</p>
+            </div>
+         </div>
+         <div class="characters-holder"></div>
       </div>
-      <div class="characters-holder"></div>
-   </div>
+   }
+
 </InventoryNavigation>
