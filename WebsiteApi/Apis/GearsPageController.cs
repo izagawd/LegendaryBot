@@ -1,9 +1,7 @@
 using System.Collections.Immutable;
-using System.Diagnostics;
 using BasicFunctionality;
 using DatabaseManagement;
 using Entities.LegendaryBot;
-using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using Microsoft.AspNetCore.Authorization;
@@ -27,7 +25,6 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
             .Include(i => i.Stats)
             .Include(i => i.Character)
             .Where(i => i.UserData!.DiscordId == zaId)
-         
             .ToArrayAsync();
 
         var dto = gottenCollection.Select(i => new Gears.GearDto
@@ -37,7 +34,7 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
             RarityNum = (int)i.Rarity,
             TypeId = i.TypeId,
             OwnerTypeId = i.Character?.TypeId,
-            GearStatDtos = i.Stats.Select(j => new Gears.GearStatDto()
+            GearStatDtos = i.Stats.Select(j => new Gears.GearStatDto
             {
                 IsMainStat = j.IsMainStat is not null,
                 Value = j.Value,
@@ -46,13 +43,11 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
             }).ToArray()
         }).ToArray();
 
-        return Ok(new Gears.GearPageDto()
+        return Ok(new Gears.GearPageDto
         {
-         
             Gears = dto,
             GearStatNameMapper = TypesFunction.GetDefaultObjectsAndSubclasses<GearStat>()
                 .ToImmutableDictionary(i => i.TypeId, i => i.StatType.GetShortName())
         });
     }
-
 }

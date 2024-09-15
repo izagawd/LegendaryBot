@@ -1,21 +1,17 @@
 using System.Collections.Immutable;
-using System.Linq.Expressions;
 using BasicFunctionality;
 using DatabaseManagement;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
-using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;
-using Entities.LegendaryBot.Entities.Items;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFunctions;
 using Website.Pages.Characters;
-using Website.Pages.Teams;
 
 namespace WebsiteApi.Apis;
 
@@ -23,7 +19,12 @@ namespace WebsiteApi.Apis;
 [ApiController]
 public class CharacterInfoPageController : ControllerBase
 {
+    private readonly PostgreSqlContext postgreSqlContext;
 
+    public CharacterInfoPageController(PostgreSqlContext postgreSqlContext)
+    {
+        this.postgreSqlContext = postgreSqlContext;
+    }
 
 
     public static CharacterInfo.WorkingWith GetWorkingWithValue(int typeId)
@@ -59,22 +60,12 @@ public class CharacterInfoPageController : ControllerBase
             .Include(i => i.Characters)
             .ThenInclude(i => i.Gears)
             .ThenInclude(i => i.Stats)
-     
             .FirstOrDefaultAsync(i => i.DiscordId == discordId);
-        if (userData is null)
-        {
-            return  BadRequest("Userdata not found");
-        }
-        if (userData.IsOccupied)
-        {
-            return BadRequest("You are occupied");
-        }
+        if (userData is null) return BadRequest("Userdata not found");
+        if (userData.IsOccupied) return BadRequest("You are occupied");
 
         var character = userData.Characters.FirstOrDefault(i => i.Id == characterId);
-        if (character is null)
-        {
-            return BadRequest("Character not found");
-        }
+        if (character is null) return BadRequest("Character not found");
 
         character.Blessing = null;
         await postgreSqlContext.SaveChangesAsync();
@@ -95,31 +86,21 @@ public class CharacterInfoPageController : ControllerBase
             .Include(i => i.Blessings.Where(j => j.TypeId == blessingTypeId && j.CharacterId == null))
             .FirstOrDefaultAsync(i => i.DiscordId == discordId);
 
-        if (userData is null)
-        {
-            return BadRequest("Userdata not found");
-        }
-        if (userData.IsOccupied)
-        {
-            return BadRequest("You are occupied");
-        }
+        if (userData is null) return BadRequest("Userdata not found");
+        if (userData.IsOccupied) return BadRequest("You are occupied");
         var blessing = userData.Blessings.FirstOrDefault(j => j.TypeId == blessingTypeId && j.CharacterId == null);
         if (blessing is null)
-        {
             return BadRequest(
                 $"you have no free blessing with name {Blessing.GetDefaultFromTypeId(blessingTypeId).Name}");
-        }
 
         var character = userData.Characters.FirstOrDefault(i => i.Id == characterId);
-        if (character is null)
-        {
-            return BadRequest($"Something went wrong");
-        }
+        if (character is null) return BadRequest("Something went wrong");
 
         character.Blessing = blessing;
         await postgreSqlContext.SaveChangesAsync();
         return Ok(GenerateStatsStrings(character));
     }
+
     [Authorize]
     [HttpPost("equip-gear")]
     public async Task<IActionResult> EquipGearAsync([FromForm] long characterId, [FromForm] long gearId)
@@ -138,33 +119,17 @@ public class CharacterInfoPageController : ControllerBase
             .FirstOrDefaultAsync(i => i.DiscordId == discordId);
         if (userData is null)
             return BadRequest("User data not found");
-        if (userData.IsOccupied)
-        {
-            return BadRequest("You are occupied");
-        }
+        if (userData.IsOccupied) return BadRequest("You are occupied");
         var gottenGear = userData.Gears.FirstOrDefault(i => i.Id == gearId);
-        if (gottenGear is null)
-        {
-            return BadRequest("Something went wrong");
-        }
+        if (gottenGear is null) return BadRequest("Something went wrong");
 
         var character = userData.Characters.FirstOrDefault(i => i.Id == characterId);
-        if (character is null)
-        {
-            return BadRequest("Something went wrong");
-        }
+        if (character is null) return BadRequest("Something went wrong");
         character.Gears.RemoveAll(i => i.GetType() == gottenGear.GetType());
         character.Gears.Add(gottenGear);
         await postgreSqlContext.SaveChangesAsync();
-        
-        return Ok( GenerateStatsStrings(character));
-    }
 
-    private PostgreSqlContext postgreSqlContext;
-
-    public CharacterInfoPageController(PostgreSqlContext postgreSqlContext)
-    {
-        this.postgreSqlContext = postgreSqlContext;
+        return Ok(GenerateStatsStrings(character));
     }
 
     [Authorize]
@@ -180,21 +145,12 @@ public class CharacterInfoPageController : ControllerBase
             .ThenInclude(i => i.Stats)
             .FirstOrDefaultAsync(i => i.DiscordId == discordId);
 
-        if (userData is null)
-        {
-            return BadRequest("user data not found");
-        }
+        if (userData is null) return BadRequest("user data not found");
 
-        if (userData.IsOccupied)
-        {
-            return BadRequest("You are occupied");
-        }
+        if (userData.IsOccupied) return BadRequest("You are occupied");
 
         var character = userData.Characters.FirstOrDefault(i => i.Id == characterId);
-        if (character is null)
-        {
-            return BadRequest("Something went wrong");
-        }
+        if (character is null) return BadRequest("Something went wrong");
         character.Gears.RemoveAll(i => i.TypeId == gearTypeId);
         await postgreSqlContext.SaveChangesAsync();
         return Ok(GenerateStatsStrings(character));
@@ -214,69 +170,53 @@ public class CharacterInfoPageController : ControllerBase
             .ThenInclude(i => i.Character)
             .Include(i => i.Blessings)
             .FirstOrDefaultAsync(i => i.DiscordId == userDataId);
-        
-        
-        if (gotten is null)
-        {
-            return BadRequest("Your data was not found in database");
-        }
-        if (gotten.IsOccupied)
-        {
-            return BadRequest("You are occupied");
-        }
+
+
+        if (gotten is null) return BadRequest("Your data was not found in database");
+        if (gotten.IsOccupied) return BadRequest("You are occupied");
         var character = gotten.Characters.FirstOrDefault(i => i.Number == characterNumber);
-        
-        if (character is null)
-        {
-            return BadRequest($"Character with number {characterNumber} not found");
-        }
+
+        if (character is null) return BadRequest($"Character with number {characterNumber} not found");
 
         var dto = new CharacterInfo.CharacterInfoDto();
         dto.CharacterDto = new CharacterInfo.CharacterDto
         {
-            RarityNum =(int) character.Rarity,
+            RarityNum = (int)character.Rarity,
             Id = character.Id,
             TypeId = character.TypeId,
             Level = character.Level,
             Name = character.Name,
-            Number = character.Number,
-
+            Number = character.Number
         };
-        var theDic = dto.CharacterDto.TheEquippedOnes = new();
-        foreach (var i in character.Gears)
-        {
-            theDic[GetWorkingWithValue(i.TypeId)] = i.Id;
-        }
+        var theDic = dto.CharacterDto.TheEquippedOnes = new Dictionary<CharacterInfo.WorkingWith, long?>();
+        foreach (var i in character.Gears) theDic[GetWorkingWithValue(i.TypeId)] = i.Id;
 
-        dto.AllGears = gotten.Gears.Select(j => new CharacterInfo.GearDto()
+        dto.AllGears = gotten.Gears.Select(j => new CharacterInfo.GearDto
         {
             Id = j.Id,
 
-            RarityNum = (int) j.Rarity,
+            RarityNum = (int)j.Rarity,
             Number = j.Number,
-            GearStats = j.Stats.Select(k => new CharacterInfo.GearStatDto()
+            GearStats = j.Stats.Select(k => new CharacterInfo.GearStatDto
             {
                 IsMainStat = k.IsMainStat is not null,
                 IsPercentage = k.IsPercentage,
                 TypeId = k.TypeId,
-                Value = k.Value,
-                
+                Value = k.Value
             }).ToArray(),
             EquippedCharacterTypeId = j.Character?.TypeId,
-            TypeId = j.TypeId,
-            
+            TypeId = j.TypeId
         }).ToArray();
         dto.AllBlessings = gotten.Blessings.GroupBy(i => i.TypeId)
-            .Select(i => new CharacterInfo.BlessingDto()
-        {
-            
-            TypeId = i.Key,
-            RemainingStacks = i.Count(j => j.CharacterId is null),
-            Stacks = i.Count(),
-RarityNum =(int) i.First().Rarity,
-            Description = i.First().Description,
-            Name = i.First().Name
-        }).ToArray();
+            .Select(i => new CharacterInfo.BlessingDto
+            {
+                TypeId = i.Key,
+                RemainingStacks = i.Count(j => j.CharacterId is null),
+                Stacks = i.Count(),
+                RarityNum = (int)i.First().Rarity,
+                Description = i.First().Description,
+                Name = i.First().Name
+            }).ToArray();
         theDic[CharacterInfo.WorkingWith.Blessing] = character.Blessing?.TypeId;
 
 
@@ -287,11 +227,13 @@ RarityNum =(int) i.First().Rarity,
         dto.GearStatNameByTypeId = TypesFunction.GetDefaultObjectsAndSubclasses<GearStat>()
             .DistinctBy(i => i.TypeId).ToImmutableDictionary(i => i.TypeId, i => i.StatType.GetShortName());
         dto.GearNameByTypeId =
-            TypesFunction.GetDefaultObjectsAndSubclasses<Gear>().DistinctBy(i => i.TypeId).ToImmutableDictionary(i =>  i.TypeId, i => i.Name);
+            TypesFunction.GetDefaultObjectsAndSubclasses<Gear>().DistinctBy(i => i.TypeId)
+                .ToImmutableDictionary(i => i.TypeId, i => i.Name);
         dto.WorkingWithToTypeIdHelper = TypesFunction
             .GetDefaultObjectsAndSubclasses<Gear>()
-            .ToDictionary(i => GetWorkingWithValue(i.TypeId), i => i.TypeId);;
-    
+            .ToDictionary(i => GetWorkingWithValue(i.TypeId), i => i.TypeId);
+        ;
+
         return Ok(dto);
     }
 
@@ -304,5 +246,4 @@ RarityNum =(int) i.First().Rarity,
             return $"{i.GetShortName()}: {character.GetStatFromType(i)}{perc}";
         }).ToArray();
     }
-    
 }

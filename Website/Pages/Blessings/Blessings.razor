@@ -1,6 +1,5 @@
 @page "/inventory/blessings"
 @using Microsoft.AspNetCore.Authorization
-@using PublicInfo
 @using Website.Components
 
 
@@ -55,7 +54,6 @@
     {
         yield return string.Concat(Enumerable.Repeat("\u2b50", blessingDto.RarityNum));
         yield return $"Stacks: {blessingDto.Stacks}";
-
     }
 
     private SortType SortTypeVal { get; set; } = SortType.Name;

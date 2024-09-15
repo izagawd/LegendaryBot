@@ -8,12 +8,12 @@ public partial class Characters
     [Serializable]
     public class CharacterDto
     {
-        [JsonPropertyName("1")]
-        public string Name { get;  set; } = null!;
-        [JsonPropertyName("2")]
-        public int Number { get; set; }
-        [JsonPropertyName("3")]
-        public int RarityNum { get; set; }
+        [JsonPropertyName("1")] public string Name { get; set; } = null!;
+
+        [JsonPropertyName("2")] public int Number { get; set; }
+
+        [JsonPropertyName("3")] public int RarityNum { get; set; }
+
         [JsonIgnore]
         public string Color
         {
@@ -31,11 +31,11 @@ public partial class Characters
                 }
             }
         }
-        [JsonPropertyName("4")]
-        public int TypeId { get; set; }
+
+        [JsonPropertyName("4")] public int TypeId { get; set; }
 
         [JsonPropertyName("5")] public string ImageUrl => $"{Information.CharactersImagesDirectory}/{TypeId}.png";
-        [JsonPropertyName("6")]
-        public int Level { get; set; }
+
+        [JsonPropertyName("6")] public int Level { get; set; }
     }
 }

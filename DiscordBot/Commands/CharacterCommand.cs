@@ -7,7 +7,6 @@ using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Commands.Trees;
 using DSharpPlus.Entities;
 using Entities.LegendaryBot;
-using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;

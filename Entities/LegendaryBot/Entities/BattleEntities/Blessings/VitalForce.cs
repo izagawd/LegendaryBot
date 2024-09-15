@@ -4,6 +4,7 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class VitalForce : Blessing, IStatsModifier
 {
+    private const int DefenseIncrease = 10;
     public override string Name => "Vital Force";
 
 
@@ -16,14 +17,10 @@ public class VitalForce : Blessing, IStatsModifier
         protected init { }
     }
 
+    public override string Description => $"Defense is increased by {DefenseIncrease}%";
+
     public IEnumerable<StatsModifierArgs> GetAllStatsModifierArgs()
     {
         yield return new DefensePercentageModifierArgs(Character!, DefenseIncrease);
     }
-
-    public override string Description => $"Defense is increased by {DefenseIncrease}%";
-    
-
-    private const int DefenseIncrease = 10;
-
 }

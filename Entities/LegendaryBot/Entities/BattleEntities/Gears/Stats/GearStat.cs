@@ -23,19 +23,6 @@ public class GearStatDatabaseConfiguration : IEntityTypeConfiguration<GearStat>
 public abstract class GearStat
 {
     public static ConcurrentDictionary<int, GearStat> _cachedDefaultItemsTypeIds = [];
-    public static GearStat GetDefaultFromTypeId(int typeId)
-    {
-        if (!_cachedDefaultItemsTypeIds.TryGetValue(typeId, out var gearStat))
-        {
-            gearStat = TypesFunction.GetDefaultObjectsAndSubclasses<GearStat>()
-                .FirstOrDefault(i => i.TypeId == typeId);
-            if (gearStat is null) throw new Exception($"Gear stat with type id {typeId} not found");
-
-            _cachedDefaultItemsTypeIds[typeId] = gearStat;
-        }
-
-        return gearStat;
-    }
 
     static GearStat()
     {
@@ -78,6 +65,20 @@ public abstract class GearStat
 
 
     [NotMapped] public abstract bool IsPercentage { get; }
+
+    public static GearStat GetDefaultFromTypeId(int typeId)
+    {
+        if (!_cachedDefaultItemsTypeIds.TryGetValue(typeId, out var gearStat))
+        {
+            gearStat = TypesFunction.GetDefaultObjectsAndSubclasses<GearStat>()
+                .FirstOrDefault(i => i.TypeId == typeId);
+            if (gearStat is null) throw new Exception($"Gear stat with type id {typeId} not found");
+
+            _cachedDefaultItemsTypeIds[typeId] = gearStat;
+        }
+
+        return gearStat;
+    }
 
     /// <summary>
     ///     This is called when the gear that owns this stat is loaded. It sets the main stat's value according to

@@ -24,6 +24,7 @@ public partial class BlessingInfo
         public string Name { get; set; }
         [JsonIgnore] public string ImageUrl => $"{Information.CharactersImagesDirectory}/{TypeId}.png";
     }
+
     public class BlessingInfoDto
     {
         public BlessingDto Blessing { get; set; }

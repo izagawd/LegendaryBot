@@ -6,6 +6,7 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class PowerOfThePhoenix : Blessing
 {
+    private const int HealthPercentageRecovering = 5;
     public override string Name => "Power Of The Phoenix";
 
     public override int TypeId
@@ -17,7 +18,8 @@ public class PowerOfThePhoenix : Blessing
 
     public override Rarity Rarity => Rarity.FiveStar;
 
-    private const int HealthPercentageRecovering = 5;
+    public override string Description =>
+        $"At the start of the character's turn, they recover {HealthPercentageRecovering}% of their health";
 
 
     [BattleEventListenerMethod]
@@ -28,9 +30,4 @@ public class PowerOfThePhoenix : Blessing
         Character!.RecoverHealth((5 * 0.01 * Character.MaxHealth).Round(),
             $"{Character.NameWithAlphabet} recovered $ health via the blessing of the phoenix");
     }
-
-    public override string Description =>
-
-            $"At the start of the character's turn, they recover {HealthPercentageRecovering}% of their health";
-    
 }

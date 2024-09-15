@@ -43,7 +43,6 @@ public class PlayerDatabaseConfiguration : IEntityTypeConfiguration<Player>
 {
     public void Configure(EntityTypeBuilder<Player> builder)
     {
-     
     }
 }
 

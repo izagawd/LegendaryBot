@@ -35,7 +35,8 @@ public class ViewDescription : GeneralCommandClass
                 .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color));
         if (zaObject is IInventoryEntity zaEntity)
         {
-            var zaDescription = $"{zaEntity.TypeGroup.Name}: {zaEntity.Name}.\n{string.Concat(Enumerable.Repeat("\u2b50",(int) zaEntity.Rarity))}";
+            var zaDescription =
+                $"{zaEntity.TypeGroup.Name}: {zaEntity.Name}.\n{string.Concat(Enumerable.Repeat("\u2b50", (int)zaEntity.Rarity))}";
             if (zaEntity is Character z) zaDescription += $" • Element: {z.Element}";
 
             zaDescription += $"\n{zaEntity.Description}";

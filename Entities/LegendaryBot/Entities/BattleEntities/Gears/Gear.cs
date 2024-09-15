@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using BasicFunctionality;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-
 using Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 using Entities.Models;
 using PublicInfo;
@@ -16,10 +15,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     private static readonly Dictionary<int, Gear> _cachedDefaultGearsTypeIds = [];
 
 
-
     [Timestamp] public uint Version { get; set; }
-
-
 
 
     [NotMapped] public IEnumerable<GearStat> Substats => Stats.Except([MainStat]);
@@ -50,12 +46,35 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public long? CharacterId { get; set; }
     public int Number { get; set; }
 
+    public string DisplayString =>
+        GetDisplayString(Name, Stats, Rarity,
+            Number == 0 ? null : Number, Character?.Name,
+            Character?.Number, MainStat);
+
+    public long Id { get; set; }
+    public abstract int TypeId { get; protected init; }
+
+    public bool CanBeTraded => true;
+
+    public Type TypeGroup => typeof(Gear);
+    public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
+
+
+    public string Description { get; }
+    public Rarity Rarity { get; private set; }
+
+
+    public abstract string Name { get; }
+    public UserData? UserData { get; set; }
+    public string ImageUrl => $"{Information.GearsImagesDirectory}/{TypeId}.png";
+    public long UserDataId { get; set; }
+
     public static string GetDisplayString(string name, IEnumerable<GearStat> gearStats, Rarity rarity
-    ,int? number, string? characterName, int? characterNumber, GearStat? mainStat = null)
+        , int? number, string? characterName, int? characterNumber, GearStat? mainStat = null)
     {
         var enumerable = gearStats as GearStat[] ?? gearStats.ToArray();
-        mainStat =mainStat ??  enumerable.First(i => i.IsMainStat is not null);
-        
+        mainStat = mainStat ?? enumerable.First(i => i.IsMainStat is not null);
+
         var substats = enumerable.Where(i => i != mainStat).ToArray();
         string numberToUse = null!;
         if (number is null)
@@ -66,7 +85,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
         var shouldSpace = false;
         var stringToUse = new StringBuilder($"```{numberToUse}{name}".PadRight(12) +
                                             $" • {mainStat.AsNameAndValue()} • " +
-                                            $"{string.Concat(Enumerable.Repeat("\u2b50",(int) rarity))}\nSubstats:");
+                                            $"{string.Concat(Enumerable.Repeat("\u2b50", (int)rarity))}\nSubstats:");
         foreach (var j in substats)
         {
             if (shouldSpace)
@@ -86,36 +105,11 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
             stringToUse.Append(zaString);
         }
 
-        if (characterName is not null && characterNumber is not null) 
+        if (characterName is not null && characterNumber is not null)
             stringToUse.Append($"\nEquipped By: {characterName} [{characterNumber}]");
         stringToUse.Append("```");
         return stringToUse.ToString();
     }
-    public string DisplayString
-    {
-        get => GetDisplayString(Name, Stats, Rarity,
-           
-            Number == 0 ? null : Number, Character?.Name,
-            Character?.Number,MainStat);
-    }
-
-    public long Id { get; set; }
-    public abstract int TypeId { get; protected init; }
-
-    public bool CanBeTraded => true;
-
-    public Type TypeGroup => typeof(Gear);
-    public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
-
-
-    public string Description { get; }
-    public Rarity Rarity { get; private set; }
-
-
-    public abstract string Name { get; }
-    public UserData? UserData { get; set; }
-    public string ImageUrl => $"{Information.GearsImagesDirectory}/{TypeId}.png";
-    public long UserDataId { get; set; }
 
     public static Gear GetDefaultFromTypeId(int typeId)
     {
@@ -157,13 +151,12 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     }
 
 
-    public void Initialize(Rarity rarity,Type? desiredMainStat = null)
+    public void Initialize(Rarity rarity, Type? desiredMainStat = null)
     {
         if (Stats.Count != 0) return;
         Rarity = rarity;
 
 
-        
         if (desiredMainStat is null)
             desiredMainStat = BasicFunctions.RandomChoice(PossibleMainStats);
         else if (!PossibleMainStats.Contains(desiredMainStat))

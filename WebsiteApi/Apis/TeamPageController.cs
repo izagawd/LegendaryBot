@@ -1,7 +1,6 @@
 using BasicFunctionality;
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
-using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,27 +33,16 @@ public class TeamPageController : ControllerBase
             .Include(i => i.PlayerTeams)
             .FirstOrDefaultAsync(i => i.DiscordId == userId);
 
-        if (userData is null)
-        {
-            return BadRequest("Your data not found");
-        }
+        if (userData is null) return BadRequest("Your data not found");
 
-        if (userData.IsOccupied)
-        {
-            return BadRequest("You are occupied");
-        }
+        if (userData.IsOccupied) return BadRequest("You are occupied");
         if (userData.PlayerTeams.Any(i =>
                 i.TeamName.Replace(" ", "")
                     .Equals(newName.Replace(" ", ""), StringComparison.CurrentCultureIgnoreCase)))
-        {
             return BadRequest("One of your teams already has that name");
-        }
 
         var team = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
-        if (team is null)
-        {
-            return BadRequest("team not found");
-        }
+        if (team is null) return BadRequest("team not found");
 
         team.TeamName = newName;
         await context.SaveChangesAsync();
@@ -64,58 +52,50 @@ public class TeamPageController : ControllerBase
     [Authorize]
     [HttpGet("get-teams-and-characters")]
     public async Task<IActionResult> GetSomeUserData()
+    {
+        var discordId = User.GetDiscordUserId();
+        var userData = await context.Set<UserData>()
+            .Include(i => i.Characters)
+            .Include(i => i.PlayerTeams)
+            .ThenInclude(i => i.TeamMemberships)
+            .ThenInclude(i => i.Character)
+            .FirstOrDefaultAsync(i => i.DiscordId == discordId);
+
+
+        if (userData is null)
+            return BadRequest(
+                "You may not have began your journey with /begin with the discord bot");
+        if (userData.IsOccupied) return BadRequest("You are occupied");
+
+        if (userData.EquippedPlayerTeam is null) return BadRequest("Team not found in database");
+
+        var dto = new Teams.TeamCharactersDto
         {
-
-            var discordId = User.GetDiscordUserId();
-            var userData = await context.Set<UserData>()
-                .Include(i => i.Characters)
-                .Include(i => i.PlayerTeams)
-                .ThenInclude(i => i.TeamMemberships)
-                .ThenInclude(i => i.Character)
-                .FirstOrDefaultAsync(i => i.DiscordId == discordId);
-
-
-
-            if (userData is null)
-                return BadRequest(
-                    "You may not have began your journey with /begin with the discord bot");
-            if (userData.IsOccupied)
+            Characters = userData.Characters.Select(k => new Teams.CharacterDto
             {
-                return BadRequest("You are occupied");
-            }
-
-            if (userData.EquippedPlayerTeam is null)
+                Id = k.Id,
+                ImageUrl = k.ImageUrl,
+                Level = k.Level,
+                Name = k.Name,
+                Number = k.Number,
+                RarityNum = (int)k.Rarity
+            }).ToArray(),
+            Teams = userData.PlayerTeams.Select(j => new Teams.TeamDto
             {
-                return BadRequest("Team not found in database");
-            }
+                Id = j.Id,
+                CharacterSlots = j.TeamMemberships.Select(k =>
+                    new Teams.CharacterSlot
+                    {
+                        CharacterId = k.CharacterId,
+                        Slot = k.Slot
+                    }).ToList(),
+                Name = j.TeamName
+            }).ToArray(),
+            EquippedTeamId = userData.EquippedPlayerTeam!.Id
+        };
 
-            var dto = new Teams.TeamCharactersDto
-            {
-                Characters = userData.Characters.Select(k => new Teams.CharacterDto
-                {
-                    Id = k.Id,
-                    ImageUrl = k.ImageUrl,
-                    Level = k.Level,
-                    Name = k.Name,
-                    Number = k.Number,
-                    RarityNum = (int)k.Rarity
-                }).ToArray(),
-                Teams = userData.PlayerTeams.Select(j => new Teams.TeamDto
-                {
-                    Id = j.Id,
-                    CharacterSlots = j.TeamMemberships.Select(k =>
-                        new Teams.CharacterSlot
-                        {
-                            CharacterId = k.CharacterId,
-                            Slot = k.Slot
-                        }).ToList(),
-                    Name = j.TeamName
-                }).ToArray(),
-                EquippedTeamId = userData.EquippedPlayerTeam!.Id
-            };
-
-            return Ok(dto);
-        }
+        return Ok(dto);
+    }
 
     [HttpPost("switch-slots")]
     [Authorize]
@@ -135,10 +115,7 @@ public class TeamPageController : ControllerBase
 
         if (userData is null)
             return BadRequest("Something went wrong");
-        if (userData.IsOccupied)
-        {
-            return BadRequest("You are occupied");
-        }
+        if (userData.IsOccupied) return BadRequest("You are occupied");
         var theTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (theTeam is null)
             return BadRequest("Something went wrong");
@@ -181,10 +158,7 @@ public class TeamPageController : ControllerBase
 
         if (userData is null)
             return BadRequest("Something went wrong");
-        if (userData.IsOccupied)
-        {
-            return BadRequest("You are occupied");
-        }
+        if (userData.IsOccupied) return BadRequest("You are occupied");
         var theCharacter = userData.Characters.FirstOrDefault(i => i.Id == characterId);
         if (theCharacter is null)
             return BadRequest("Something went wrong");
@@ -227,10 +201,7 @@ public class TeamPageController : ControllerBase
         if (userData is null)
             return BadRequest("Something went wrong");
 
-        if (userData.IsOccupied)
-        {
-            return BadRequest("You are occupied");
-        }
+        if (userData.IsOccupied) return BadRequest("You are occupied");
         userData.EquippedPlayerTeam = userData.PlayerTeams.FirstOrDefault(i => i.Id == teamId);
         if (userData.EquippedPlayerTeam is null)
             return BadRequest("Something went wrong");

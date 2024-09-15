@@ -5,9 +5,9 @@ namespace Website.Services;
 public class WebsiteThemeService
 {
     private const string WebsiteThemeKey = "website_theme";
+    private readonly ISyncLocalStorageService _syncLocalStorage;
 
     private WebsiteTheme _cachedWebsiteTheme;
-    private readonly ISyncLocalStorageService _syncLocalStorage;
 
     public WebsiteThemeService(ISyncLocalStorageService syncLocalStorageService)
     {

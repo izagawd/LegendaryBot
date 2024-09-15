@@ -25,7 +25,6 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
 public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 {
     private static readonly Dictionary<int, Blessing> _cachedDefaultBlessingsTypeIds = [];
- 
 
 
     [Timestamp] public uint Version { get; private set; }
@@ -39,7 +38,6 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     public int LevelMilestone => Character?.LevelMilestone ?? 0;
     public bool IsInStandardBanner => true;
     public CharacterPartials_Character? Character { get; set; }
-
 
 
     public long Id { get; set; }
@@ -87,6 +85,4 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
                 groups.First(i => i.Key == rarityToUse).Select(i => i)).GetType();
         return (Blessing)Activator.CreateInstance(randomBlessing)!;
     }
-
- 
 }

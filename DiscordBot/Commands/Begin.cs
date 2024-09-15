@@ -35,7 +35,7 @@ public class Begin : GeneralCommandClass
     public async ValueTask Execute(CommandContext ctx)
     {
         DiscordEmbedBuilder embedToBuild = new();
-     
+
         var userData = await DatabaseContext.Set<UserData>()
             .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
         if (userData is null)
@@ -74,7 +74,7 @@ public class Begin : GeneralCommandClass
             await NotifyAboutOccupiedAsync(ctx);
             return;
         }
-        
+
 
         await MakeOccupiedAsync(userData);
         embedToBuild.WithTitle($"{ctx.User.Username}, ")
@@ -132,13 +132,9 @@ public class Begin : GeneralCommandClass
         {
             Player player;
             if (gottenGender == Gender.Male)
-            {
                 player = new PlayerMale();
-            }
             else
-            {
                 player = new PlayerFemale();
-            }
             player.Level = 5;
             userData.Inventory.Add(player);
             player.UserData = userData;
@@ -348,6 +344,7 @@ public class Begin : GeneralCommandClass
             stam.Stacks = stam.MaxEnergyValue;
             userData.Items.Add(stam);
         }
+
         await DatabaseContext.SaveChangesAsync();
         await message.ModifyAsync(new DiscordMessageBuilder()
             .AddEmbed(embedToBuild.WithTitle("Nice!").WithUser(ctx.User).WithDescription(rewardText)

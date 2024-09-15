@@ -5,6 +5,7 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class HeadStart : Blessing
 {
+    private const int CombatReadinessIncreaseAmount = 5;
     public override string Name => "Head Start";
 
     public override int TypeId
@@ -16,13 +17,10 @@ public class HeadStart : Blessing
 
     public override Rarity Rarity => Rarity.FiveStar;
 
-    private const int CombatReadinessIncreaseAmount = 5;
-
     public override string Description =>
+        $"Increases combat readiness of the owner at the beginning" +
+        $" of the battle by {CombatReadinessIncreaseAmount}%!";
 
-            $"Increases combat readiness of the owner at the beginning" +
-            $" of the battle by {CombatReadinessIncreaseAmount}%!";
-    
 
     [BattleEventListenerMethod]
     public void OnStart(BattleBeginEventArgs eventArgs)

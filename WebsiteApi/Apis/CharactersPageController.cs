@@ -1,6 +1,4 @@
-using BasicFunctionality;
 using DatabaseManagement;
-using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -15,8 +13,6 @@ namespace WebsiteApi.Apis;
 [ApiController]
 public class CharactersPageController(PostgreSqlContext post) : ControllerBase
 {
-
-
     [HttpGet("get-characters")]
     [Authorize]
     public async Task<IActionResult> GetCharactersAsync()
@@ -26,20 +22,17 @@ public class CharactersPageController(PostgreSqlContext post) : ControllerBase
             .Include(i => i.Characters)
             .FirstOrDefaultAsync(i => i.DiscordId == zaId);
 
-        if (userData is null)
-        {
-            return Ok(new Characters.CharacterDto[]{});
-        }
+        if (userData is null) return Ok(new Characters.CharacterDto[] { });
         var toDto = userData.Characters
-        .Select(i => new Characters.CharacterDto
-        {
-            Name = i.Name,
-            Level = i.Level,
-            TypeId = i.TypeId,
-            Number = i.Number,
-            RarityNum = (int)Character.GetDefaultFromTypeId(i.TypeId).Rarity
-        })
-        .ToArray();
+            .Select(i => new Characters.CharacterDto
+            {
+                Name = i.Name,
+                Level = i.Level,
+                TypeId = i.TypeId,
+                Number = i.Number,
+                RarityNum = (int)Character.GetDefaultFromTypeId(i.TypeId).Rarity
+            })
+            .ToArray();
 
         return Ok(toDto);
     }

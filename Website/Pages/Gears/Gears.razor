@@ -1,5 +1,6 @@
 @page "/inventory/gears"
 @using Microsoft.AspNetCore.Authorization
+@using PublicInfo
 @using Website.Components
 
 
@@ -68,12 +69,11 @@
     <HoverShit>
         @if (context.OwnerTypeId is not null)
         {
-            <img style="margin-top: 5px; border: solid 2px; width: 30px; height: 30px; border-radius: 100%" src='@($"{PublicInfo.Information.CharactersImagesDirectory}/{context.OwnerTypeId}.png")'/>
+            <img style="margin-top: 5px; border: solid 2px; width: 30px; height: 30px; border-radius: 100%" src='@($"{Information.CharactersImagesDirectory}/{context.OwnerTypeId}.png")'/>
         }
         <p style="font-size: 23px">@context.MainStat.Name: @context.MainStat.Value@(context.MainStat.IsPercentage ? "%" : "")</p>
         @foreach (var i in context.Substats)
         {
-
             <p>@i.Name: @i.Value@(i.IsPercentage ? "%" : "")</p>
         }
     </HoverShit>

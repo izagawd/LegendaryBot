@@ -9,7 +9,9 @@
     border-right: black solid 2px;
 
 }
-
+.img{
+    pointer-events: none;
+}
 .equip-button {
 
     flex-shrink: 0;
@@ -162,13 +164,16 @@
     margin-bottom: 5px;
     margin-left: 5px;
 }
-.character-div{
+
+.character-div {
     width: 150px;
 
 }
-.other-characters p{
+
+.other-characters p {
     word-wrap: break-word;
 }
+
 .other-characters img {
     width: 100%;
     height: auto;
@@ -280,9 +285,11 @@
     width: 25px;
     height: 25px;
 }
-.character-div{
+
+.character-div {
     flex-shrink: 0;
 }
+
 @media only screen and (max-width: 1200px) {
     .others input[type=text] {
         width: 200px;
@@ -317,9 +324,9 @@
     }
 
     .character-div {
-        
+
         width: 100px;
-     
+
     }
 
     .team-settler {
@@ -365,39 +372,44 @@
         flex-wrap: nowrap;
 
     }
+
     .team-character-div {
         height: 80px;
     }
-    .character-div .stars{
+
+    .character-div .stars {
         font-size: 10px;
     }
+
     .character-div p {
 
         margin-bottom: 1px;
     }
-    .filters{
+
+    .filters {
         height: 50px;
     }
-    .team-character-div p{
+
+    .team-character-div p {
         font-size: 16px;
     }
+
     @media only screen and (max-height: 750px) {
 
         .character-div {
             width: 80px;
-  
+
         }
-        
+
         .others-parent {
             margin-top: 5px;
 
         }
+
         .team-character-div {
             height: 70px;
         }
-   
 
-      
 
     }
 

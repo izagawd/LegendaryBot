@@ -3,8 +3,6 @@ using DSharpPlus.Entities;
 using Entities.LegendaryBot.Moves;
 using Entities.LegendaryBot.Results;
 using Entities.LegendaryBot.StatusEffects;
-using Entities.Models;
-using PublicInfo;
 using Character = Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace Entities.LegendaryBot.Entities.BattleEntities.Characters;
@@ -118,10 +116,8 @@ public class Ignite : Ultimate
 
 public abstract class Player : Character
 {
-
     public Player()
     {
-
         Skill = new FireBall(this);
         Ultimate = new Ignite(this);
         BasicAttack = new FourthWallBreaker(this);
@@ -145,14 +141,7 @@ public abstract class Player : Character
     protected override float BaseSpeedMultiplier => 1.1f;
 
 
-
-
-
-
     public override string Name => UserData?.Name ?? "Player";
-
-
-    
 }
 
 public class PlayerMale : Player
@@ -163,6 +152,7 @@ public class PlayerMale : Player
         protected init { }
     }
 }
+
 public class PlayerFemale : Player
 {
     public override int TypeId

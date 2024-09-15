@@ -19,16 +19,11 @@ public class ItemsPageController(PostgreSqlContext post) : ControllerBase
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Item>()
             .Where(i => i.UserData!.DiscordId == zaId)
-            
             .ToArrayAsync();
 
-        foreach (var i in gottenCollection.OfType<Energy>())
-        {
-            i.RefreshEnergyValue();
-        }
+        foreach (var i in gottenCollection.OfType<Energy>()) i.RefreshEnergyValue();
         var dto = gottenCollection.Select(i => new Items.ItemDto
         {
-   
             Name = Item.GetDefaultFromTypeId(i.TypeId).Name,
             Stacks = i.Stacks,
             RarityNum = (int)i.Rarity,

@@ -18,7 +18,6 @@ public class Info : GeneralCommandClass
 {
     public static async Task<Image<Rgba32>> GetInfoAsync(UserData userData, DiscordUser user)
     {
-
         var adventurerLevel = userData.AdventurerLevel;
 
         var requiredExp = userData.GetRequiredExperienceToNextLevel();
@@ -58,8 +57,7 @@ public class Info : GeneralCommandClass
         var userData = await DatabaseContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Items.Where(j => j is Coin || j is DivineShard || j is Stamina))
-
-            .FirstOrDefaultAsync(i=> i.DiscordId == author.Id);
+            .FirstOrDefaultAsync(i => i.DiscordId == author.Id);
 
         if (userData is null || userData.Tier == Tier.Unranked)
         {

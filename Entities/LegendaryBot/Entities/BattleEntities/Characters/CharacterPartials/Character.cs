@@ -8,7 +8,6 @@ using Entities.LegendaryBot.BattleSimulatorStuff;
 using Entities.LegendaryBot.DialogueNamespace;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
-
 using Entities.LegendaryBot.Moves;
 using Entities.LegendaryBot.Results;
 using Entities.LegendaryBot.Rewards;
@@ -26,7 +25,6 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPart
 /// </summary>
 public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGuidPrimaryIdHaver
 {
-
     private static readonly ConcurrentDictionary<int, Character> CachedDefaultCharacterTypeIds = [];
 
     public static readonly Exception NoBattleExc = new("Character is not in battle");
@@ -36,8 +34,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
 
     [NotMapped] private float _combatReadiness;
-
-
 
 
     [NotMapped] private float _health = 1;
@@ -238,7 +234,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     [NotMapped] public IEnumerable<StatusEffect> StatusEffects => _statusEffects;
 
     [NotMapped] public virtual DiscordColor Color => DiscordColor.Green;
-
 
 
     [NotMapped] public BattleSimulator? CurrentBattle => BattleTeam?.CurrentBattle;
@@ -597,8 +592,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     }
 
 
-
-
     public bool RemoveStatusEffect(StatusEffect statusEffect)
     {
         return _statusEffects.Remove(statusEffect);
@@ -658,7 +651,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             i.MainStat.SetMainStatValue(i.Rarity);
             i.MainStat.AddStats(this);
         }
-
     }
 
     #endregion

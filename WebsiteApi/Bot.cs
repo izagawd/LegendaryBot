@@ -1,11 +1,5 @@
 ﻿using System.Diagnostics;
-using BasicFunctionality;
-using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
 using DatabaseManagement;
-using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
-using Entities.LegendaryBot.Entities.BattleEntities.Characters;
-using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,10 +24,8 @@ public static class Bot
     }
 
 
-
     private static async Task DoShitAsync()
     {
-
     }
 
     private static async Task Main(string[] args)

@@ -9,7 +9,6 @@ using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
-
 using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using Entities.Models;
@@ -121,7 +120,7 @@ public class Display : GeneralCommandClass
 
     private static async ValueTask ExecuteDisplayAsync(CommandContext context, IEnumerable<string> objects,
         int displaySectionLimit,
-string joiner, string title,
+        string joiner, string title,
         DiscordColor discordColor)
     {
         List<List<string>> displayList = [];
@@ -138,7 +137,7 @@ string joiner, string title,
                 displayList.Add(currentList);
                 count = 0;
             }
-            
+
             currentList.Add(i);
             count++;
         }
@@ -206,7 +205,7 @@ string joiner, string title,
         var userData = await DatabaseContext.Set<UserData>()
             .Include(i => i.Items)
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
-               
+
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -214,8 +213,8 @@ string joiner, string title,
         }
 
         await ExecuteDisplayAsync(context, userData.Items.Where(i => i.Name
-                .Replace(" ","")
-                .Contains(simplified,StringComparison.CurrentCultureIgnoreCase))
+                    .Replace(" ", "")
+                    .Contains(simplified, StringComparison.CurrentCultureIgnoreCase))
                 .Select(i => $"Name • {i.Name} • Stacks • {i.Stacks}"), 20,
             "\n", "Items", userData.Color);
     }
@@ -230,7 +229,7 @@ string joiner, string title,
                 .Select(i => new DiscordColor?(i.Color))
                 .FirstOrDefaultAsync())
             .GetValueOrDefault(TypesFunction.GetDefaultObject<UserData>().Color);
-        await ExecuteDisplayAsync(context, entitiesList, 15, 
+        await ExecuteDisplayAsync(context, entitiesList, 15,
             "\n", "All entities", color);
     }
 
@@ -253,7 +252,6 @@ string joiner, string title,
         }
 
         await ExecuteDisplayAsync(context, userData.Gears.OrderBy(i => i.Number).Select(i => i.DisplayString), 3,
-            
             "\n\n", "Gears", userData.Color);
     }
 
@@ -266,11 +264,10 @@ string joiner, string title,
     {
         var simplified = nameFilter.Replace(" ", "").ToLower();
         var userData = await DatabaseContext.Set<UserData>()
-            
             .Include(i => i.Characters)
             .ThenInclude(i => i.Blessing)
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
-            
+
         if (userData is null || userData.Tier == Tier.Unranked)
         {
             await AskToDoBeginAsync(context);
@@ -282,7 +279,7 @@ string joiner, string title,
                 .OrderBy(i => i.Number)
                 .Select(i =>
                 {
-                    var toReturn =$"{i.Number} • {i.Name} • Lvl {i.Level}";
+                    var toReturn = $"{i.Number} • {i.Name} • Lvl {i.Level}";
                     if (i.Blessing is not null)
                         toReturn += $" • {i.Blessing.Name}";
                     return toReturn;
@@ -296,7 +293,6 @@ string joiner, string title,
     public async ValueTask ExecuteDisplayBlessings(CommandContext context, string nameFilter = "")
     {
         var userData = await DatabaseContext.Set<UserData>()
-       
             .Include(i => i.Blessings)
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
@@ -315,7 +311,7 @@ string joiner, string title,
                     var count = asArray.Length;
                     var countThatsFree = asArray.Count(j => j.CharacterId is null);
                     var sample = asArray[0];
-                    return  $"`{sample.Name} • Count: {count} • Available: {countThatsFree}`";
+                    return $"`{sample.Name} • Count: {count} • Available: {countThatsFree}`";
                 }), 10,
             "\n\n", "Blessings", userData.Color);
     }
@@ -336,8 +332,7 @@ string joiner, string title,
             await AskToDoBeginAsync(context);
             return;
         }
-        
-      
+
 
         var gear = userData.Gears.FirstOrDefault(i => i.Number == gearNumber);
         var embed = new DiscordEmbedBuilder()
@@ -381,20 +376,21 @@ string joiner, string title,
             if (userData.EquippedPlayerTeam == i)
                 equipped = " (equipped)";
 
-                value = "";
-                var maxChar = TypesFunction.GetDefaultObject<PlayerTeam>().MaxCharacters;
-                for (var j = 1; j <=  maxChar; j++)
-                {
-                    value += $"`Slot {j}: ";
-                    var membership = i.TeamMemberships.FirstOrDefault(k => k.Slot == j);
-                    if (membership is null)
-                        value += "EMPTY SLOT";
-                    else
-                        value += $"{membership.Character.Number} • {membership.Character.Name} • Lvl {membership.Character.Level}";
+            value = "";
+            var maxChar = TypesFunction.GetDefaultObject<PlayerTeam>().MaxCharacters;
+            for (var j = 1; j <= maxChar; j++)
+            {
+                value += $"`Slot {j}: ";
+                var membership = i.TeamMemberships.FirstOrDefault(k => k.Slot == j);
+                if (membership is null)
+                    value += "EMPTY SLOT";
+                else
+                    value +=
+                        $"{membership.Character.Number} • {membership.Character.Name} • Lvl {membership.Character.Level}";
 
-                    value += "`\n";
-                }
-            
+                value += "`\n";
+            }
+
 
             embed.AddField(i.TeamName + equipped,
                 value);

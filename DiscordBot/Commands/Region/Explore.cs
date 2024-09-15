@@ -80,7 +80,7 @@ public class Explore : GeneralCommandClass
         const int requiredStamina = 60;
         var stamina = userData.Items.OfType<Stamina>().FirstOrDefault();
         stamina?.RefreshEnergyValue();
-        var staminaCount = (stamina?.Stacks ?? 0);
+        var staminaCount = stamina?.Stacks ?? 0;
         if (staminaCount < requiredStamina)
         {
             embedToBuild.WithDescription(
@@ -88,10 +88,10 @@ public class Explore : GeneralCommandClass
             await ctx.RespondAsync(embedToBuild);
             return;
         }
-        
+
         await MakeOccupiedAsync(userData);
 
-        
+
         var groups = region.ObtainableCharacters
             .Select(i => (Character)TypesFunction.GetDefaultObject(i))
             .GroupBy(i => i.Rarity)
@@ -123,8 +123,6 @@ public class Explore : GeneralCommandClass
 
         if (battleResult.Winners == userTeam)
         {
-            
-
             var expToGain = Character.GetExpBasedOnDefeatedCharacters(enemyTeam);
             var coinsToGain = Character.GetCoinsBasedOnCharacters(enemyTeam);
             if (battleResult.Winners != userTeam) expToGain = expToGain / 5;
@@ -188,6 +186,7 @@ public class Explore : GeneralCommandClass
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
+
                 gear.Initialize(gearRarityToGive);
                 rewards.Add(new EntityReward([gear]));
             }
@@ -195,9 +194,10 @@ public class Explore : GeneralCommandClass
             foreach (var _ in Enumerable.Range(0, expMatCount))
                 rewards.Add(new EntityReward([new HerosKnowledge { Stacks = 1 }]));
             rewards.Add(new EntityReward([new Coin { Stacks = 5000 }]));
-            
-            
-            await DatabaseContext.Set<Item>().Where(i => (i is HerosKnowledge || i is Coin) && i.UserDataId == userData.Id)
+
+
+            await DatabaseContext.Set<Item>()
+                .Where(i => (i is HerosKnowledge || i is Coin) && i.UserDataId == userData.Id)
                 .LoadAsync();
             rewardText += userData.ReceiveRewards(rewards);
             embedToBuild
@@ -205,7 +205,7 @@ public class Explore : GeneralCommandClass
                 .WithDescription($"You won!\n{expGainText}\n{rewardText}")
                 .WithImageUrl("");
             stamina!.Stacks -= requiredStamina;
-            
+
             await DatabaseContext.SaveChangesAsync();
             await message!.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embedToBuild));
         }
@@ -219,9 +219,8 @@ public class Explore : GeneralCommandClass
 
             embedToBuild
                 .WithTitle("Ah, too bad\n" + additionalString)
-                .WithDescription($"You lost boi");
+                .WithDescription("You lost boi");
             await message!.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embedToBuild));
         }
-
     }
 }

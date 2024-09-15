@@ -1,4 +1,3 @@
-
 @using Website.Components.Navigation
 @typeparam TObjectType where TObjectType : class
 
@@ -11,7 +10,7 @@
 
     [Parameter] public Func<TObjectType, string>? LinkUrlDel { get; set; }
     [Parameter] public Func<TObjectType, IEnumerable<string>>? Additionals { get; set; }
-    
+
 }
 
 
@@ -62,9 +61,10 @@
                     <a class="some-class" href="@LinkUrlDel?.Invoke(objectToRender)">
                         @{
                             var shadCol = WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
+
                             void DoClickShit()
                             {
-                                if (!ReferenceEquals(HoveredObject,objectToRender))
+                                if (!ReferenceEquals(HoveredObject, objectToRender))
                                 {
                                     HoveredObject = objectToRender;
                                 }
@@ -89,7 +89,7 @@
                     @if (HoverShit is not null)
                     {
                         <div class="the-hover-shit" style="
-                            opacity: @(ReferenceEquals(HoveredObject,objectToRender) ? "100%" : "0%"); background-color: @(WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgray")">
+                            opacity: @(ReferenceEquals(HoveredObject, objectToRender) ? "100%" : "0%"); background-color: @(WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgray")">
                             @HoverShit(objectToRender)
                         </div>
                     }

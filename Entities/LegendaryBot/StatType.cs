@@ -19,14 +19,15 @@ public static class Idk
         switch (statType)
         {
             case StatType.CriticalChance:
-                case StatType.CriticalDamage:
-                case StatType.Resistance:
-                case StatType.Effectiveness:
-                    return true;
+            case StatType.CriticalDamage:
+            case StatType.Resistance:
+            case StatType.Effectiveness:
+                return true;
             default:
                 return false;
         }
     }
+
     public static string GetShortName(this StatType statType)
     {
         switch (statType)
