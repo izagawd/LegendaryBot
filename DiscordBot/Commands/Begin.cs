@@ -35,10 +35,9 @@ public class Begin : GeneralCommandClass
     public async ValueTask Execute(CommandContext ctx)
     {
         DiscordEmbedBuilder embedToBuild = new();
-        var author = ctx.User;
+     
         var userData = await DatabaseContext.Set<UserData>()
-            .Where(i => i.DiscordId == ctx.User.Id)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
         if (userData is null)
         {
             userData = await DatabaseContext.CreateNonExistantUserdataAsync(ctx.User.Id);

@@ -207,14 +207,13 @@ public class CharacterInfoPageController : ControllerBase
         var userDataId = User.GetDiscordUserId();
         var gotten = await postgreSqlContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
-            .Where(i => i.DiscordId == userDataId)
             .Include(i => i.Characters.Where(j => j.Number == characterNumber))
             .Include(i => i.Gears)
             .ThenInclude(i => i.Stats)
             .Include(i => i.Gears)
             .ThenInclude(i => i.Character)
             .Include(i => i.Blessings)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.DiscordId == userDataId);
         
         
         if (gotten is null)

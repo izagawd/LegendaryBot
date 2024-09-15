@@ -27,6 +27,6 @@ public partial class BlessingInfo
     public class BlessingInfoDto
     {
         public BlessingDto Blessing { get; set; }
-        public CharacterDto[] Characters { get; set; }
+        public List<CharacterDto> Characters { get; set; }
     }
 }

@@ -18,6 +18,33 @@ public class BlessingInfoPageController : ControllerBase
     {
         _postgre = postgreSqlContext;
     }
+
+    [Authorize]
+    [HttpPost("unequip-blessing")]
+    public async Task<IActionResult> UnequipBlessing([FromForm] int blessingTypeId, [FromForm] long characterId)
+    {
+        var discordId = User.GetDiscordUserId();
+        var userData = await _postgre.Set<UserData>()
+            .Include(i =>
+                i.Blessings.Where(j => j.TypeId == blessingTypeId && j.CharacterId == characterId))
+            .ThenInclude(i => i.Character)
+            .FirstOrDefaultAsync(i => i.DiscordId == discordId);
+        if (userData is null)
+        {
+            return BadRequest("User data not found");
+        }
+
+        var blessing =
+            userData.Blessings.FirstOrDefault(i => i.TypeId == blessingTypeId && i.Character?.Id == characterId);
+        if (blessing is null)
+        {
+            return BadRequest("blessing or character not found");
+        }
+
+        blessing.Character = null;
+        await _postgre.SaveChangesAsync();
+        return Ok();
+    }
     [Authorize]
     [HttpGet("get")]
     public async Task<IActionResult> GetBlessingInfo([FromQuery] int blessingTypeId)
@@ -53,9 +80,9 @@ public class BlessingInfoPageController : ControllerBase
                 Id = i.Id,
                 Number = i.Number,
                 RarityNum = (int)i.Rarity,
-                
+                TypeId = i.TypeId,
                 Name = i.Name
-            }).ToArray();
+            }).ToList();
         var blessingsInfo = new BlessingInfo.BlessingInfoDto()
         {
             Blessing = blessingDto,
