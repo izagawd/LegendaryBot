@@ -8,7 +8,7 @@ public class Stamina : Energy
         protected init { }
     }
 
-    public override string Description => "Used to explore the wonderful world";
+    public override string Description => "Energy used to explore the wonderful world";
 
     public override string Name => "Stamina";
     public override TimeSpan EnergyIncreaseInterval => TimeSpan.FromMinutes(5);
