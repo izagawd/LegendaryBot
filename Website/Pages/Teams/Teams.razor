@@ -268,9 +268,14 @@
                                         PendingCharacter = null;
                                     }
                                 }
-
+    
                             }
-                            @if ((character is not null && CurrentTeam.CharacterSlots.Count > 1) || PendingCharacter is not null)
+                            @{
+                            var teamCount = CurrentTeam.CharacterSlots.Count;
+                        }
+                            @if ((PendingCharacter is null && character is not null)
+                             || (PendingCharacter is not null && PendingCharacter != character)
+                        || (PendingCharacter is not null && teamCount > 1))
                             {
                                 <div class="delete-bin-div" @onclick="() => SlotButtonStuffAsync(character, i1)">
                                     <span class="material-symbols-outlined">
