@@ -8,6 +8,6 @@ public class DivineShard : Item
         protected init { }
     }
 
-
+    public override string Description => "The premium currency";
     public override string Name => "Divine Shard";
 }
