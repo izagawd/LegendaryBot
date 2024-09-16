@@ -8,6 +8,6 @@ public class Coin : Item
         protected init { }
     }
 
-
+    public override string Description => "The currency every nation acknowledges";
     public override string Name => "Coin";
 }
