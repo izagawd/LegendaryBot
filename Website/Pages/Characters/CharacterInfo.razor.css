@@ -3,6 +3,28 @@
     margin-top: 5px;
 }
 
+button{
+    margin-left: 5%;
+    width: 80%;
+    font-size: 18px;
+    background-color: green;
+    min-height: max-content;
+    border-radius: 5px;
+    color: inherit;
+    border-color: inherit;
+    border: solid 1px;
+
+}
+.button-bad{
+    background-color: red;
+}
+button:hover{
+    background-color: darkgreen;
+}
+
+.button-bad:hover{
+    background-color: darkred;
+}
 .idk-for-now {
     display: flex;
     column-gap: 10px;
@@ -205,8 +227,7 @@ p {
     }
 
     .the-stuff-to-search {
-        overflow-y: hidden;
-        overflow-x: auto;
+        overflow: auto;
         flex-wrap: nowrap;
         flex-grow: 1;
         height: 200px;

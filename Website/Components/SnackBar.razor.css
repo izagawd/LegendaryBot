@@ -32,6 +32,7 @@ div {
 
     width: 100%;
 
+    z-index: 99999;
     height: 50px;
     min-height: fit-content;
     display: flex;

@@ -26,7 +26,6 @@
         }
     }
 
-    public object? DraggedObject { get; set; }
     public object? HoveredObject { get; set; }
     [CascadingParameter] public WebsiteTheme Theme { get; set; }
 
@@ -65,8 +64,7 @@
         {
             Dto = await result.Content.ReadFromJsonAsync<CharacterInfoDto>();
             Dto!.Setup();
-            StateHasChanged();
-            await SnackBarService.DisplaySnackBarAsync(new SnackBar.SnackBarParams("Drag and drop the equipment"));
+
         }
     }
 
@@ -113,9 +111,9 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
     private static readonly TimeSpan zaTime = TimeSpan.FromSeconds(2);
 
 
-    async Task RemoveItemAsync()
+    async Task RemoveItemAsync(object? interactedOne)
     {
-        if (DraggedObject is GearDto gearDto)
+        if (interactedOne is GearDto gearDto)
         {
             if (Dto.CharacterDto.TheEquippedOnes[GearTypeIdToWorkingWith(gearDto.TypeId)].Value != gearDto.Id)
                 return;
@@ -137,9 +135,9 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
                 });
             }
         }
-        else if (DraggedObject is BlessingDto blessingDto)
+        else if (interactedOne is BlessingDto blessingDto)
         {
-            if (DraggedObject != Dto.EquippedBlessing)
+            if (interactedOne != Dto.EquippedBlessing)
                 return;
             var result = await Http.PostAsync("CharacterInfoPage/remove-blessing", new FormUrlEncodedContent([
                 new KeyValuePair<string, string>("characterId", Dto!.CharacterDto.Id.ToString())
@@ -160,9 +158,9 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
         }
     }
 
-    public async Task OnEquipItem()
+    public async Task OnEquipItem(object? interactedOne)
     {
-        if (DraggedObject is GearDto gearDto)
+        if (interactedOne is GearDto gearDto)
         {
             if ((Dto!.CharacterDto.TheEquippedOnes.GetValueOrDefault(GearTypeIdToWorkingWith(gearDto.TypeId)) ?? 0) == gearDto.Id)
             {
@@ -192,9 +190,9 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
                     });
             }
         }
-        else if (DraggedObject is BlessingDto blessingDto)
+        else if (interactedOne is BlessingDto blessingDto)
         {
-            if (DraggedObject == Dto!.EquippedBlessing)
+            if (interactedOne == Dto!.EquippedBlessing)
             {
                 return;
             }
@@ -207,6 +205,12 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
             {
                 blessingDto.RemainingStacks--;
                 Dto.CharacterDto.CharacterStatsString = (await result.Content.ReadFromJsonAsync<string[]>())!;
+                var previous = Dto.AllBlessings
+                    .FirstOrDefault(i => i.TypeId == Dto.CharacterDto.TheEquippedOnes[WorkingWith.Blessing]);
+                if (previous is not null)
+                {
+                    previous.RemainingStacks++;
+                }
                 Dto.CharacterDto.TheEquippedOnes[WorkingWith.Blessing] = blessingDto.TypeId;
             }
             else
@@ -275,7 +279,7 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
                                 imageUrl = (workingWithObject as GearDto)?.ImageUrl;
                             }
                         }
-                        <div @ondragstart="() => DraggedObject = workingWithObject" draggable="@(workingWithObject is not null ? "true" : "false")">
+                        <div>
                             <img @onclick="() => SetAsObject(workingWithObject)" src="@imageUrl"/>
 
                             @if (workingWithObject is BlessingDto blessingDto)
@@ -293,6 +297,11 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
                             {
                                 <p>NONE</p>
                             }
+                            @if (workingWithObject is not null)
+                            {
+                                <button class="button-bad" @onclick="() => RemoveItemAsync(workingWithObject)">Unequip</button>
+                            }
+               
                             @RenderAdditionalInfo(workingWithObject)
 
                         </div>
@@ -330,10 +339,11 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
                             foreach (var i in Dto.AllGears.Where(j => j.TypeId == typeIdToLookFor && j != workingWithObject))
                             {
                                 <div>
-                                    <img draggable="true" @onclick="() => SetAsObject(i)" @ondragstart="() => DraggedObject = i" src="@i.ImageUrl"/>
+                                    <img @onclick="() => SetAsObject(i)" src="@i.ImageUrl"/>
                                     <p>@i.GearName</p>
                                     <p>@(string.Concat(Enumerable.Repeat("\u2b50", i.RarityNum)))</p>
                                     <p>Num @i.Number</p>
+                                    <button @onclick="() => OnEquipItem(i)">Equip</button>
                                     @RenderAdditionalInfo(i)
                                 </div>
                             }
@@ -342,12 +352,17 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
                         {
                             @foreach (var i in Dto.AllBlessings.Where(j => Dto.EquippedBlessing != j))
                             {
-                                <div draggable="true" @onclick="() => SetAsObject(i)" @ondragstart="() => DraggedObject = i">
-                                    <img src="@i.ImageUrl"/>
+                                <div draggable="true" >
+                                    <img src="@i.ImageUrl" @onclick="() => SetAsObject(i)"/>
                                     <p>@i.Name</p>
                                     <p>@(string.Concat(Enumerable.Repeat("\u2b50", i.RarityNum)))</p>
                                     <p>Remaining: @i.RemainingStacks</p>
                                     <p>Stacks: @i.Stacks</p>
+                                    @if (i.RemainingStacks > 0)
+                                    {
+                                        <button @onclick="() => OnEquipItem(i)">Equip</button>
+                                    }
+             
                                     @RenderAdditionalInfo(i)
                                 </div>
                             }

@@ -39,8 +39,7 @@
         {
             TeamCharacterDto = await gotten.Content.ReadFromJsonAsync<TeamCharactersDto>();
             CurrentTeam = TeamCharacterDto!.EquippedTeam;
-            StateHasChanged();
-            await SnackBarService.DisplaySnackBarAsync(new SnackBar.SnackBarParams("Drag and drop to modify teams"));
+
         }
         else
         {
@@ -53,10 +52,11 @@
         var asString = (string)eventArgs.Value!;
         var asLong = long.Parse(asString);
         CurrentTeam = TeamCharacterDto!.Teams.FirstOrDefault(i => i.Id == asLong);
+        PendingCharacter = null;
         return Task.CompletedTask;
     }
 
-    public CharacterDto? CurrentDraggedCharacter;
+
 
     public async Task RemoveFromTeamAsync(int slot)
     {
@@ -77,15 +77,15 @@
         }
     }
 
-    async Task OnDropOnSlot(int slot)
+    async Task PutCharacterInSlot(int slot, CharacterDto characterToPutInSlot)
     {
-        if (CurrentDraggedCharacter is not null)
+        if (characterToPutInSlot is not null)
         {
-            var currentCharIsInCurrTeam = CurrentTeam!.GetCharacters(TeamCharacterDto!).Contains(CurrentDraggedCharacter);
+            var currentCharIsInCurrTeam = CurrentTeam!.GetCharacters(TeamCharacterDto!).Contains(characterToPutInSlot);
             if (currentCharIsInCurrTeam
                 && CurrentTeam.CharacterSlots.Any(i => i.Slot == slot))
             {
-                var currentCharSlot = CurrentTeam.CharacterSlots.First(i => i.CharacterId == CurrentDraggedCharacter.Id);
+                var currentCharSlot = CurrentTeam.CharacterSlots.First(i => i.CharacterId == characterToPutInSlot.Id);
 
                 var result = await Http.PostAsync("TeamPage/switch-slots",
                     new FormUrlEncodedContent([
@@ -112,13 +112,13 @@
                     new FormUrlEncodedContent([
                         new KeyValuePair<string, string>("slot", slot.ToString()),
                         new KeyValuePair<string, string>("teamId", CurrentTeam!.Id.ToString()),
-                        new KeyValuePair<string, string>("characterId", CurrentDraggedCharacter.Id.ToString())
+                        new KeyValuePair<string, string>("characterId", characterToPutInSlot.Id.ToString())
                     ]));
                 if (result.IsSuccessStatusCode)
                 {
                     if (currentCharIsInCurrTeam)
                     {
-                        CurrentTeam.CharacterSlots.RemoveAll(i => i.CharacterId == CurrentDraggedCharacter.Id);
+                        CurrentTeam.CharacterSlots.RemoveAll(i => i.CharacterId == characterToPutInSlot.Id);
                     }
 
                     var gotten = CurrentTeam.CharacterSlots.FirstOrDefault(i => i.Slot == slot);
@@ -126,13 +126,13 @@
                     {
                         CurrentTeam.CharacterSlots.Add(new CharacterSlot
                         {
-                            CharacterId = CurrentDraggedCharacter.Id,
+                            CharacterId = characterToPutInSlot.Id,
                             Slot = slot
                         });
                     }
                     else
                     {
-                        gotten.CharacterId = CurrentDraggedCharacter.Id;
+                        gotten.CharacterId = characterToPutInSlot.Id;
                     }
                 }
                 else
@@ -226,14 +226,18 @@
                 @{
                     var borderCol = WebsiteTheme == WebsiteTheme.Dark ? "white" : "black";
                 }
+                @code{
+
+                    public CharacterDto? PendingCharacter { get; set; }
+
+                }
                 <div class="team-characters-container">
                     @for (var i = 1; i <= 4; i++)
                     {
                         var character = CurrentTeam.GetCharacter(i, TeamCharacterDto);
 
                         var i1 = i;
-                        <div class="team-character-div" @ondragstart="() => CurrentDraggedCharacter = character" draggable="@(character is not null ? "true" : "false")"
-                             ondragover="event.preventDefault()" @ondrop="() => OnDropOnSlot(i1)" style="border-color: @borderCol; background-color: @(WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgrey")">
+                        <div class="team-character-div" style="border-color: @borderCol; background-color: @(WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgrey")">
                             <a href="/inventory/characters/@(character?.Number ?? 0)">
                                 <img style="border-color: @borderCol" src="@character?.ImageUrl" alt=""/>
                             </a>
@@ -246,15 +250,54 @@
                                     <p class="minor-info">Lvl @character.Level</p>
                                 }
                             </div>
+                            @code{
 
-                            @if (character is not null && CurrentTeam.GetCharacters(TeamCharacterDto).Count() > 1)
+                                async Task SlotButtonStuffAsync(CharacterDto? characterDto, int slot)
+                                {
+                                    if (PendingCharacter is null && characterDto is not null)
+                                    {
+                                        PendingCharacter = characterDto;
+                                    }
+                                    else if (PendingCharacter == characterDto && characterDto is not null)
+                                    {
+                                        await RemoveFromTeamAsync(slot);
+                                        PendingCharacter = null;
+                                    } else if (PendingCharacter is not null)
+                                    {
+                                        await PutCharacterInSlot(slot, PendingCharacter);
+                                        PendingCharacter = null;
+                                    }
+                                }
+
+                            }
+                            @if ((character is not null && CurrentTeam.CharacterSlots.Count > 1) || PendingCharacter is not null)
                             {
-                                <div class="delete-bin-div" @onclick="() => RemoveFromTeamAsync(i1)">
+                                <div class="delete-bin-div" @onclick="() => SlotButtonStuffAsync(character, i1)">
                                     <span class="material-symbols-outlined">
-                                        close
+                                        @if (PendingCharacter is null && character is not null)
+                                        {
+                                            @("arrow_selector_tool")
+                                        }
+                                        else if (PendingCharacter == character && character is not null)
+                                        {
+                                            @("close")
+                                        } else if (TeamCharacterDto.EquippedTeam.GetCharacters(TeamCharacterDto).Contains(PendingCharacter)
+                                                   && character is not null)
+                                        {
+                                            @("swap_horiz")
+                                        }
+                                        else if (PendingCharacter is not null && character is not null)
+                                        {
+                                            @("swap_horiz")
+                                        } else if (PendingCharacter is not null)
+                                        {
+                                            @("add")
+                                        }
                                     </span>
                                 </div>
                             }
+       
+                        
 
 
                         </div>
@@ -289,10 +332,10 @@
 
                     @code{
 
-                        Task RemoveDraggedCharacterFromTeamAsync()
+                        Task RemoveFromTeam(CharacterDto characterToRemove)
                         {
-                            if (CurrentDraggedCharacter is null) return Task.CompletedTask;
-                            var currentSlot = CurrentTeam!.CharacterSlots.FirstOrDefault(i => i.CharacterId == CurrentDraggedCharacter.Id);
+                            if (characterToRemove is null) return Task.CompletedTask;
+                            var currentSlot = CurrentTeam!.CharacterSlots.FirstOrDefault(i => i.CharacterId == characterToRemove.Id);
                             if (currentSlot is not null)
                             {
                                 return RemoveFromTeamAsync(currentSlot.Slot);
@@ -303,7 +346,7 @@
 
                     }
 
-                    <div class="other-characters-parent" ondragover="@(CurrentTeam.CharacterSlots.Count > 1 ? "event.preventDefault()" : "")" @ondrop="RemoveDraggedCharacterFromTeamAsync" style="border-color: @borCol">
+                    <div class="other-characters-parent" style="border-color: @borCol">
                         <div class="other-characters">
 
                             @code{
@@ -341,7 +384,7 @@
                                 foreach (var i in NonTeamedCharacters)
 
                                 {
-                                    <div class="character-div" draggable="true" @ondragstart='() => CurrentDraggedCharacter = i'>
+                                    <div class="character-div">
                                         <a href="/inventory/characters/@i.Number">
                                             <img src="@i.ImageUrl" style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" alt=""/>
                                         </a>
@@ -349,6 +392,7 @@
                                         <p class="stars">@(string.Concat(Enumerable.Repeat("\u2b50", i.RarityNum)))</p>
                                         <p>Num @i.Number</p>
                                         <p>Lvl @i.Level</p>
+                                        <button style="@(PendingCharacter == i ? "background-color: gray" : "")" class="char-button" @onclick="() => PendingCharacter = i">Add</button>
                                     </div>
                                 }
                             }
