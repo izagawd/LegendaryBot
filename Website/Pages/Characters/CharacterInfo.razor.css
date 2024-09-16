@@ -61,8 +61,11 @@ button:hover{
     align-items: center;
     display: flex;
 }
-
+.parent{
+    overflow-y: auto;
+}
 .parent img {
+
     width: 180px;
     height: 180px;
     border: solid 2px;
@@ -118,7 +121,7 @@ button:hover{
     align-content: flex-start;
     gap: 15px;
 
-    overflow-y: auto;
+
     height: fit-content;
 }
 
@@ -208,11 +211,15 @@ p {
 .equipment-navigator-dark > div:hover {
     background-color: grey;
 }
-
+button{
+    text-align: center;
+}
 .equipment-navigator-light > div:hover {
     background-color: lightgrey;
 }
-
+.the-stuff-to-search{
+    overflow-y: auto;
+}
 @media only screen and (max-width: 600px) {
     .en-totale {
         flex-direction: column;
@@ -227,10 +234,11 @@ p {
     }
 
     .the-stuff-to-search {
-        overflow: auto;
+        overflow-y: visible;
+        overflow-x: auto;
         flex-wrap: nowrap;
         flex-grow: 1;
-        height: 200px;
+        height: max-content;
         min-height: max-content;
     }
 

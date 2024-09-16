@@ -87,7 +87,9 @@
     height: fit-content;
     margin-left: 20px;
 }
-
+button{
+    text-align: center;
+}
 .za-parent {
     overflow: hidden;
     overflow-y: auto;

@@ -254,7 +254,7 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
                 }
             </div>
             <div class="en-totale">
-                <div class="equipment-n-stats" ondragover="event.preventDefault()" @ondrop="OnEquipItem">
+                <div class="equipment-n-stats">
                     <div class="idk-for-now">
                         <div class="character-div">
                             <img src="@Dto.CharacterDto.ImageUrl">
@@ -330,8 +330,7 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
 
                     </div>
 
-                    <div class="the-stuff-to-search" ondragover="event.preventDefault()"
-                         @ondrop="RemoveItemAsync">
+                    <div class="the-stuff-to-search">
 
                         @if (CurrentlyWorkingWith != WorkingWith.Blessing)
                         {
