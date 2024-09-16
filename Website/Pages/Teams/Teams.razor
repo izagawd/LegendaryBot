@@ -10,6 +10,7 @@
 @code {
 
 
+    public string TheBorderToUse => WebsiteTheme == WebsiteTheme.Dark ? "lime" : "darkorange";
     private static readonly TimeSpan BadRequestTimeSpan = TimeSpan.FromSeconds(2);
 
     enum SortType
@@ -237,7 +238,7 @@
                         var character = CurrentTeam.GetCharacter(i, TeamCharacterDto);
 
                         var characterBor = PendingCharacter is not null && 
-                                           PendingCharacter == character ? "lime" : borderCol;
+                                           PendingCharacter == character ? TheBorderToUse : borderCol;
                         var i1 = i;
                         <div class="team-character-div" style="border-color: @characterBor; background-color: @(WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgrey")">
                             <a style="border-color:  inherit" href="/inventory/characters/@(character?.Number ?? 0)">
@@ -393,7 +394,7 @@
                                 {
                                     <div class="character-div">
                                         <a  style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" href="/inventory/characters/@i.Number">
-                                            <img src="@i.ImageUrl" style="border-color: @(PendingCharacter== i ? "lime" : "inherit");
+                                            <img src="@i.ImageUrl" style="border-color: @(PendingCharacter== i ? TheBorderToUse : "inherit");
                                                 border-width: @(PendingCharacter == i ? "3px": "2px")" alt=""/>
                                         </a>
                                         <p>@i.Name</p>
