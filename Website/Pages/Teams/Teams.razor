@@ -236,10 +236,12 @@
                     {
                         var character = CurrentTeam.GetCharacter(i, TeamCharacterDto);
 
+                        var characterBor = PendingCharacter is not null && 
+                                           PendingCharacter == character ? "lime" : borderCol;
                         var i1 = i;
-                        <div class="team-character-div" style="border-color: @borderCol; background-color: @(WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgrey")">
-                            <a href="/inventory/characters/@(character?.Number ?? 0)">
-                                <img style="border-color: @borderCol" src="@character?.ImageUrl" alt=""/>
+                        <div class="team-character-div" style="border-color: @characterBor; background-color: @(WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgrey")">
+                            <a style="border-color:  inherit" href="/inventory/characters/@(character?.Number ?? 0)">
+                                <img style="border-color: inherit" src="@character?.ImageUrl" alt=""/>
                             </a>
                             <div class="paragraphs">
                                 <p>@(character?.Name ?? "EMPTY SLOT")</p>
@@ -281,7 +283,7 @@
                                     <span class="material-symbols-outlined">
                                         @if (PendingCharacter is null && character is not null)
                                         {
-                                            @("arrow_selector_tool")
+                                            @("touch_app")
                                         }
                                         else if (PendingCharacter == character && character is not null)
                                         {
@@ -390,8 +392,9 @@
 
                                 {
                                     <div class="character-div">
-                                        <a href="/inventory/characters/@i.Number">
-                                            <img src="@i.ImageUrl" style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" alt=""/>
+                                        <a  style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" href="/inventory/characters/@i.Number">
+                                            <img src="@i.ImageUrl" style="border-color: @(PendingCharacter== i ? "lime" : "inherit");
+                                                border-width: @(PendingCharacter == i ? "3px": "1px")" alt=""/>
                                         </a>
                                         <p>@i.Name</p>
                                         <p class="stars">@(string.Concat(Enumerable.Repeat("\u2b50", i.RarityNum)))</p>
