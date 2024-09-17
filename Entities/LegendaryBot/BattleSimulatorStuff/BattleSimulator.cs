@@ -436,6 +436,7 @@ public partial class BattleSimulator
             var result = await message.WaitForButtonAsync(i => i.User.Id == interaction.User.Id,
                 new TimeSpan(0, 0, 30));
             if (result.TimedOut) return;
+            string text = "Forfeitation Cancelled. Dismiss message";
             if (result.Result.Id == "yes")
             {
                 if (_forfeited is null)
@@ -443,9 +444,17 @@ public partial class BattleSimulator
                 if (_interruptionCancellationTokenSource is not null &&
                     !_interruptionCancellationTokenSource.IsCancellationRequested)
                     await _interruptionCancellationTokenSource.CancelIfNotDisposedAsync();
+                text = "Forfeitation succeeded. Dismiss message";
+
             }
 
-            await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage);
+            await result.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+                new DiscordInteractionResponseBuilder()
+                    .AddEmbed(new DiscordEmbedBuilder()
+                        .WithColor(DiscordColor.Blue)
+                      
+                        .WithTitle("Forfeit")
+                        .WithDescription(text)));
         }
         catch (Exception e)
         {
