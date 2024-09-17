@@ -34,7 +34,8 @@ public class Begin : GeneralCommandClass
     [Description("Use this Commands to begin your journey")]
     public async ValueTask Execute(CommandContext ctx)
     {
-        DiscordEmbedBuilder embedToBuild = new();
+        var embedToBuild = new DiscordEmbedBuilder()
+            .WithUser(ctx.User);
 
         var userData = await DatabaseContext.Set<UserData>()
             .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
@@ -44,6 +45,7 @@ public class Begin : GeneralCommandClass
             await DatabaseContext.SaveChangesAsync();
         }
 
+        embedToBuild.WithColor(userData.Color);
         if (userData.Tier > Tier.Unranked)
         {
             embedToBuild
