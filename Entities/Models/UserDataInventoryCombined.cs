@@ -7,7 +7,7 @@ using Entities.LegendaryBot.Entities.Items;
 
 namespace Entities.Models;
 
-public struct UserDataInventoryCombined : IInventoryEntityContainer<IInventoryEntity>
+public class UserDataInventoryCombined : IInventoryEntityContainer<IInventoryEntity>
 {
     private readonly UserData _userData;
 
