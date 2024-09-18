@@ -2,6 +2,7 @@
 using BasicFunctionality;
 using DatabaseManagement;
 using Entities.LegendaryBot;
+using Entities.LegendaryBot.Entities;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
@@ -32,7 +33,7 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-
+        
     }
 
     private static async Task Main(string[] args)
