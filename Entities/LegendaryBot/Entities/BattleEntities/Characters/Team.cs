@@ -8,7 +8,7 @@ using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 
 namespace Entities.LegendaryBot.Entities.BattleEntities.Characters;
 
-public abstract class Team : IList<Character>
+public abstract class Team : ICollection<Character>
 {
     [NotMapped] public BattleSimulator? CurrentBattle { get; set; }
 
@@ -87,6 +87,7 @@ public abstract class Team<TTeamMembership> : Team where TTeamMembership : TeamM
 
     public override void Add(Character item)
     {
+   
         for (var i = 1; i <= MaxCharacters; i++)
             if (TeamMemberships.All(j => j.Slot != i))
             {
@@ -113,8 +114,11 @@ public abstract class Team<TTeamMembership> : Team where TTeamMembership : TeamM
 
     public override void CopyTo(Character[] array, int arrayIndex)
     {
-        var characters = this.ToArray();
-        characters.CopyTo(array, arrayIndex);
+        var count = arrayIndex;
+        foreach (var i in this )
+        {
+            array[count++] = i;
+        }
     }
 
     public override bool Remove(Character item)

@@ -34,10 +34,20 @@ public partial class BattleSimulator
                 .Resize(25 , 25 )
                 .Draw(Color.Black, 3 , new RectangleF(0, 0, 24 ,
                     24)));
+            
             CachdMoveCroppedCombatImages[url] = image;
         }
 
-
+        if (move is Special special && special.IsOnCooldown)
+        {
+            image = image.Clone();
+            
+            image.Mutate(i => i.Opacity(0.5f).DrawText(special.Cooldown.ToString(),
+                SystemFonts.CreateFont(Information.GlobalFontName,20),
+                SixLabors.ImageSharp.Color.White, new PointF(6, 3)));
+        }
+        
+        
         return image;
         
 
@@ -122,15 +132,7 @@ public partial class BattleSimulator
             //do it in the method that gets the image
             var moveImage = await GenerateMovesCombatImageAsync(i);
             ctx.DrawImage(moveImage, new Point(xOffSet, yOffSet), new GraphicsOptions());
-            xOffSet += moveLength;
-            var cooldown = 0;
-            if (i is Special special) cooldown = special.Cooldown;
-
-            var cooldownString = "";
-            if (cooldown > 0) cooldownString = cooldown.ToString();
-            ctx.DrawText(cooldownString, SystemFonts.CreateFont(Information.GlobalFontName, moveLength),
-                Color.Black, new PointF(xOffSet + 5, yOffSet));
-            xOffSet += moveLength;
+            xOffSet += moveLength * 2;
         }
 
 
