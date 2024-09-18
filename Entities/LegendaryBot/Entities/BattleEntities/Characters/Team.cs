@@ -8,7 +8,7 @@ using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 
 namespace Entities.LegendaryBot.Entities.BattleEntities.Characters;
 
-public abstract class Team : ICollection<Character>
+public abstract class Team : IList<Character>
 {
     [NotMapped] public BattleSimulator? CurrentBattle { get; set; }
 
