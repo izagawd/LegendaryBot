@@ -20,14 +20,17 @@ public partial class BattleSimulator
     private static readonly ConcurrentDictionary<string, Image<Rgba32>> CachedCombatCroppedImages = new();
 
 
+
     public async Task<Image<Rgba32>> GenerateCharacterDetailsImageForCombatAsync(Character character)
     {
+        const int characterImageSize = 50;
         var image = new Image<Rgba32>(190, 150);
         var url = character.ImageUrl;
         if (!CachedCombatCroppedImages.TryGetValue(url, out var characterImage))
         {
             characterImage = await ImageFunctions.GetImageFromUrlAsync(url);
-            characterImage.Mutate(ctx => { ctx.Resize(new Size(50, 50)); });
+            characterImage
+                .Mutate(ctx => { ctx.Resize(new Size(characterImageSize, characterImageSize)); });
             //any image outside of the domain will n=be removed after a certain amount of time using this entry option
             CachedCombatCroppedImages[url] = characterImage;
         }
@@ -35,9 +38,22 @@ public partial class BattleSimulator
         IImageProcessingContext ctx = null!;
         image.Mutate(idk => ctx = idk);
 
+        
 
         ctx
-            .DrawImage(characterImage, new Point(0, 0), new GraphicsOptions())
+            .DrawImage(characterImage, new Point(0, 0), new GraphicsOptions());
+            
+        
+        if(character.IsDead)
+        {
+            
+            using var gottenImage =
+                await ImageFunctions.GetImageFromUrlAsync(PublicInfo.Information.BattleImagesDirectory + "/dead_x.png");
+            gottenImage.Mutate(i => i.Resize(new Size(characterImageSize,characterImageSize)));
+            ctx
+                .DrawImage(gottenImage, new Point(0, 0), new GraphicsOptions());
+        }   
+         ctx
             .Draw(Color.Black, 1, new Rectangle(new Point(0, 0), new Size(50, 50)))
             .DrawText($"Lvl {character.Level}", SystemFonts.CreateFont(Information.GlobalFontName, 10),
                 Color.Black, new PointF(55, 21.5f))
@@ -117,12 +133,13 @@ public partial class BattleSimulator
             xOffSet += statusLength + 2;
         }
 
-
-        if (character.IsDead)
+        if (character != ActiveCharacter)
         {
-            ctx.Opacity(0.5f);
+            ctx.Opacity(0.6f);
         }
-   
+
+
+        
         ctx.EntropyCrop(0.05f);
 
 
