@@ -163,9 +163,11 @@ public partial class BattleSimulator
         {
             foreach (var j in i)
             {
-                using var characterCombatImage = await j.GetImageForCombatAsync();
+                using var characterCombatImage = await GenerateCharacterDetailsImageForCombatAsync(j);
                 if (characterCombatImage.Width > widest) widest = characterCombatImage.Width;
                 imageCtx.DrawImage(characterCombatImage, new Point(xOffSet, yOffset), new GraphicsOptions());
+
+
                 yOffset += characterCombatImage.Height + 15;
                 if (yOffset > length) length = yOffset;
             }

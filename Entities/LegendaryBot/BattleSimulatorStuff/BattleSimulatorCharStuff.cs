@@ -1,5 +1,7 @@
+
 using System.Collections.Concurrent;
 using BasicFunctionality;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Moves;
 using PublicInfo;
 using SixLabors.Fonts;
@@ -8,20 +10,20 @@ using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 
-namespace Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+namespace Entities.LegendaryBot.BattleSimulatorStuff;
 
-public partial class Character
+public partial class BattleSimulator
 {
-    /// <summary>
+        /// <summary>
     ///     Caches the cropped combat images, since cropping takes time
     /// </summary>
     private static readonly ConcurrentDictionary<string, Image<Rgba32>> CachedCombatCroppedImages = new();
 
 
-    public async Task<Image<Rgba32>> GetImageForCombatAsync()
+    public async Task<Image<Rgba32>> GenerateCharacterDetailsImageForCombatAsync(Character character)
     {
         var image = new Image<Rgba32>(190, 150);
-        var url = ImageUrl;
+        var url = character.ImageUrl;
         if (!CachedCombatCroppedImages.TryGetValue(url, out var characterImage))
         {
             characterImage = await ImageFunctions.GetImageFromUrlAsync(url);
@@ -36,48 +38,48 @@ public partial class Character
 
         ctx
             .DrawImage(characterImage, new Point(0, 0), new GraphicsOptions())
-            .Draw(SixLabors.ImageSharp.Color.Black, 1, new Rectangle(new Point(0, 0), new Size(50, 50)))
-            .DrawText($"Lvl {Level}", SystemFonts.CreateFont(Information.GlobalFontName, 10),
-                SixLabors.ImageSharp.Color.Black, new PointF(55, 21.5f))
-            .Draw(SixLabors.ImageSharp.Color.Black, 1,
+            .Draw(Color.Black, 1, new Rectangle(new Point(0, 0), new Size(50, 50)))
+            .DrawText($"Lvl {character.Level}", SystemFonts.CreateFont(Information.GlobalFontName, 10),
+                Color.Black, new PointF(55, 21.5f))
+            .Draw(Color.Black, 1,
                 new RectangleF(52.5f, 20, 70, 11.5f))
-            .DrawText(Name + $" [{AlphabetIdentifier}] [{Position}]",
+            .DrawText(character.Name + $" [{character.AlphabetIdentifier}] [{character.Position}]",
                 SystemFonts.CreateFont(Information.GlobalFontName, 11),
-                SixLabors.ImageSharp.Color.Black, new PointF(55, 36.2f))
-            .Draw(SixLabors.ImageSharp.Color.Black, 1,
+                Color.Black, new PointF(55, 36.2f))
+            .Draw(Color.Black, 1,
                 new RectangleF(52.5f, 35, 115, 12.5f));
-        if (UsesSuperPoints)
+        if (character.UsesSuperPoints)
             ctx
-                .DrawText($"SP: {SuperPoints}", SystemFonts.CreateFont(Information.GlobalFontName, 10),
-                    SixLabors.ImageSharp.Color.Black, new PointF(55, 6.5f))
-                .Draw(SixLabors.ImageSharp.Color.Black, 1,
+                .DrawText($"SP: {character.SuperPoints}", SystemFonts.CreateFont(Information.GlobalFontName, 10),
+                    Color.Black, new PointF(55, 6.5f))
+                .Draw(Color.Black, 1,
                     new RectangleF(52.5f, 5f, 40, 11.5f));
-        var healthPercentage = HealthPercentage;
+        var healthPercentage = character.HealthPercentage;
         const int width = 175;
-        var shieldPercentage = ShieldPercentage;
+        var shieldPercentage = character.ShieldPercentage;
         var filledWidth = (width * healthPercentage / 100.0).Round();
         var filledShieldWidth = (width * shieldPercentage / 100).Round();
         const int barHeight = 16;
         if (healthPercentage < 100)
-            ctx.Fill(SixLabors.ImageSharp.Color.Red, new Rectangle(0, 50, width, barHeight));
-        ctx.Fill(SixLabors.ImageSharp.Color.Green, new Rectangle(0, 50, filledWidth, barHeight));
+            ctx.Fill(Color.Red, new Rectangle(0, 50, width, barHeight));
+        ctx.Fill(Color.Green, new Rectangle(0, 50, filledWidth, barHeight));
         var shieldXPosition = filledWidth;
         if (shieldXPosition + filledShieldWidth > width) shieldXPosition = width - filledShieldWidth;
         if (shieldPercentage > 0)
-            ctx.Fill(SixLabors.ImageSharp.Color.White,
+            ctx.Fill(Color.White,
                 new RectangleF(shieldXPosition, 50, filledShieldWidth, barHeight));
 
         // Creates a border for the health bar
-        ctx.Draw(SixLabors.ImageSharp.Color.Black, 0.5f, new Rectangle(0, 50, width, barHeight));
-        ctx.DrawText($"{Health.Round()}/{MaxHealth.Round()}", SystemFonts.CreateFont(Information.GlobalFontName, 14),
-            SixLabors.ImageSharp.Color.Black, new PointF(2.5f, 51.5f));
+        ctx.Draw(Color.Black, 0.5f, new Rectangle(0, 50, width, barHeight));
+        ctx.DrawText($"{character.Health.Round()}/{character.MaxHealth.Round()}", SystemFonts.CreateFont(Information.GlobalFontName, 14),
+            Color.Black, new PointF(2.5f, 51.5f));
 
         var xOffSet = 0;
         var yOffSet = 50 + barHeight + 5;
 
         const int moveLength = 25;
 
-        foreach (var i in MoveList.Take(3))
+        foreach (var i in character.MoveList.Take(3))
         {
             //do not change size of the move image here.
             //do it in the method that gets the image
@@ -90,7 +92,7 @@ public partial class Character
             var cooldownString = "";
             if (cooldown > 0) cooldownString = cooldown.ToString();
             ctx.DrawText(cooldownString, SystemFonts.CreateFont(Information.GlobalFontName, moveLength),
-                SixLabors.ImageSharp.Color.Black, new PointF(xOffSet + 5, yOffSet));
+                Color.Black, new PointF(xOffSet + 5, yOffSet));
             xOffSet += moveLength;
         }
 
@@ -99,7 +101,7 @@ public partial class Character
         yOffSet += moveLength + 5;
 
 
-        foreach (var i in _statusEffects.Take(16))
+        foreach (var i in character.StatusEffects.Take(16))
         {
             //do not change size of the status effect image here.
             //do it in the method that gets the image
@@ -115,11 +117,16 @@ public partial class Character
             xOffSet += statusLength + 2;
         }
 
-        if (IsDead) ctx.Opacity(0.5f);
 
+        if (character.IsDead)
+        {
+            ctx.Opacity(0.5f);
+        }
+   
         ctx.EntropyCrop(0.05f);
 
 
         return image;
     }
+    
 }
