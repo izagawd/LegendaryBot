@@ -17,22 +17,43 @@ public partial class BattleSimulator
         /// <summary>
     ///     Caches the cropped combat images, since cropping takes time
     /// </summary>
-    private static readonly ConcurrentDictionary<string, Image<Rgba32>> CachedCombatCroppedImages = new();
+    private static readonly ConcurrentDictionary<string, Image<Rgba32>> CachedCharacterCombatCroppedImages = new();
 
 
+    protected static ConcurrentDictionary<string, Image<Rgba32>> CachdMoveCroppedCombatImages { get; } = new();
 
+
+    public async Task<Image<Rgba32>> GenerateMovesCombatImageAsync(Move move)
+    {
+    
+        var url = move.IconUrl;
+        if (!CachdMoveCroppedCombatImages.TryGetValue(url, out var image))
+        {
+            image = await ImageFunctions.GetImageFromUrlAsync(url);
+            image.Mutate(i => i
+                .Resize(25 , 25 )
+                .Draw(Color.Black, 3 , new RectangleF(0, 0, 24 ,
+                    24)));
+            CachdMoveCroppedCombatImages[url] = image;
+        }
+
+
+        return image;
+        
+
+    }
     public async Task<Image<Rgba32>> GenerateCharacterDetailsImageForCombatAsync(Character character)
     {
         const int characterImageSize = 50;
         var image = new Image<Rgba32>(190, 150);
         var url = character.ImageUrl;
-        if (!CachedCombatCroppedImages.TryGetValue(url, out var characterImage))
+        if (!CachedCharacterCombatCroppedImages.TryGetValue(url, out var characterImage))
         {
             characterImage = await ImageFunctions.GetImageFromUrlAsync(url);
             characterImage
                 .Mutate(ctx => { ctx.Resize(new Size(characterImageSize, characterImageSize)); });
             //any image outside of the domain will n=be removed after a certain amount of time using this entry option
-            CachedCombatCroppedImages[url] = characterImage;
+            CachedCharacterCombatCroppedImages[url] = characterImage;
         }
 
         IImageProcessingContext ctx = null!;
@@ -99,7 +120,7 @@ public partial class BattleSimulator
         {
             //do not change size of the move image here.
             //do it in the method that gets the image
-            var moveImage = await i.GetImageForCombatAsync();
+            var moveImage = await GenerateMovesCombatImageAsync(i);
             ctx.DrawImage(moveImage, new Point(xOffSet, yOffSet), new GraphicsOptions());
             xOffSet += moveLength;
             var cooldown = 0;

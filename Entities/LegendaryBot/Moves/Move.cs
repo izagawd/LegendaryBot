@@ -42,8 +42,6 @@ public abstract class Move : INameHaver
     public virtual string IconUrl => $"{Information.ApiDomainName}/battle_images/moves/{GetType().Name}.png";
 
 
-    protected static ConcurrentDictionary<string, Image<Rgba32>> CroppedCombatImages { get; } = new();
-
 
     /// <summary>
     ///     The character who owns this move
@@ -55,21 +53,7 @@ public abstract class Move : INameHaver
     public abstract string Name { get; }
 
 
-    public async Task<Image<Rgba32>> GetImageForCombatAsync()
-    {
-        var url = IconUrl;
-        if (!CroppedCombatImages.TryGetValue(url, out var image))
-        {
-            image = await ImageFunctions.GetImageFromUrlAsync(IconUrl);
-            image.Mutate(i => i
-                .Resize(25, 25)
-                .Draw(Color.Black, 3, new RectangleF(0, 0, 24, 24)));
-            CroppedCombatImages[url] = image;
-        }
 
-
-        return image;
-    }
 
     /// <summary>
     ///     Gets the description of the Move, based on the MoveType
