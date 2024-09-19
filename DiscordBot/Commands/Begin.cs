@@ -229,10 +229,11 @@ public class Begin : GeneralCommandClass
 
         var userTeam = userData.EquippedPlayerTeam;
 
-        coachChad.TotalMaxHealth = 900;
-        coachChad.TotalDefense = 20;
+       
+        coachChad.TotalDefense = 5;
         coachChad.TotalAttack = 1;
         coachChad.TotalSpeed = 100;
+        coachChad.TotalMaxHealth = 9000;
         embedToBuild = new DiscordEmbedBuilder()
             .WithTitle("Tutorial!!!")
             .WithColor(userColor)

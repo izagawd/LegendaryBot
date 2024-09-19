@@ -129,6 +129,7 @@ public class CoachChad : Character
     {
         if (deathEventArgs.Killed != this) return;
         Revive();
+        RecoverHealth(MaxHealth);
     }
 
     [BattleEventListenerMethod]
