@@ -364,5 +364,12 @@ public class Begin : GeneralCommandClass
         await message.ModifyAsync(new DiscordMessageBuilder()
             .AddEmbed(embedToBuild.WithTitle("Nice!").WithUser(ctx.User).WithDescription(rewardText)
             ));
+        await ctx.Channel.SendMessageAsync(new DiscordMessageBuilder()
+            .AddEmbed(embedToBuild.WithTitle("Congrats!")
+                .WithColor(userColor)
+                .WithUser(ctx.User)
+                .WithDescription(
+                    "You can now use commands /explore (to farm items), /quest (for daily quest), /challenge (to fight other characters), and much more!"))
+            );
     }
 }
