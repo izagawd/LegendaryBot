@@ -32,9 +32,11 @@
     private readonly List<DirectoryStorer> Directories =
     [
         new DirectoryStorer("Home", "/", "home", str => str == Information.WebsiteDomainName || str == Information.WebsiteDomainName + "/"),
+        new DirectoryStorer("Overview","/bot-overview","robot"),
         new DirectoryStorer("Inventory", "/inventory/characters", "backpack",
             str => str.StartsWith(Information.WebsiteDomainName + "/inventory", StringComparison.CurrentCultureIgnoreCase)),
-        new DirectoryStorer("Teams", "/teams", "groups")
+        new DirectoryStorer("Teams", "/teams", "groups"),
+
     ];
 
     protected override async Task OnInitializedAsync()

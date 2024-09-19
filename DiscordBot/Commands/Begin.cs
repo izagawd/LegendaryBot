@@ -31,7 +31,7 @@ public class Begin : GeneralCommandClass
 
     [Command("begin")]
     [BotCommandCategory(BotCommandCategory.Battle)]
-    [Description("Use this Commands to begin your journey")]
+    [Description("Use this Command to begin your journey")]
     public async ValueTask Execute(CommandContext ctx)
     {
         var embedToBuild = new DiscordEmbedBuilder()
@@ -233,6 +233,19 @@ public class Begin : GeneralCommandClass
         coachChad.TotalDefense = 20;
         coachChad.TotalAttack = 1;
         coachChad.TotalSpeed = 100;
+        var builder = new DiscordEmbedBuilder()
+            .WithTitle("Tutorial!!!")
+            .WithColor(userColor)
+            .AddField("Using your  moves!!",
+                "Tap/Click :crossed_swords: for basic attack, :magic_wand: for skill, and :zap: for ultimate! Then, an option to select your target will appear. Different characters have different movesets\nNote: most skills and ultimates become on cooldown after use!")
+            .AddField("Who's turn is it?","All characters except the one thats not taking their turn will be opaque. The only character thats not opaque is the character who is taking their turn")
+            .AddField("Teams",
+                "Your team is on the left. The enemy team is on the right. it may be in reverse, especially if playing against another player")
+            .AddField("Character move set",
+                "You can see what a character can do with the \"View info of character\" interactable component!");
+
+
+        _ = ctx.Channel.SendMessageAsync(builder);
         var battleResult = await new BattleSimulator(userTeam.LoadTeamStats(),
             new NonPlayerTeam(characters: coachChad)).StartAsync(result.Message);
 
@@ -266,8 +279,7 @@ public class Begin : GeneralCommandClass
                     DialogueProfile = coachChadProfile,
                     DialogueTexts =
                     [
-                        "Seems like you have gotten more used to battle.",
-                        "You have completed the registration and you are now a **Bronze** tier adventurer! the lowest tier! you gotta work your way up the ranks!",
+                        "Congrats! You have completed the registration and you are now a **Bronze** tier adventurer! the lowest tier! you gotta work your way up the ranks!",
                         "I will see you later then! My coach job is done for today! let's go and report it, lily!"
                     ]
                 },
@@ -276,8 +288,7 @@ public class Begin : GeneralCommandClass
                     DialogueProfile = lilyDialogueProfile,
                     DialogueTexts =
                     [
-                        $"Actually, I want to journey with {userData.Name}. They seem interesting!",
-                        "I hope you don't mind me quitting the job to journey with them"
+                        $"Actually, I want to quit this job to journey with {userData.Name}. They seem interesting!",
                     ]
                 },
                 new DialogueNormalArgument
@@ -285,8 +296,8 @@ public class Begin : GeneralCommandClass
                     DialogueProfile = coachChadProfile,
                     DialogueTexts =
                     [
-                        "Very well, absolutely no problem there. I'll go report for you then",
-                        $"Go have fun with {userData.Name}, lily! and see you later! ***i take my leave***"
+                        "Very well, I'll go report for you then",
+                        $"Go have fun with {userData.Name}, lily!"
                     ]
                 },
                 new DialogueNormalArgument

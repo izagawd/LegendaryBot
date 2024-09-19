@@ -1,5 +1,6 @@
 using CommandLine;
 using DatabaseManagement;
+using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.Items;
 using Entities.Models;
@@ -26,7 +27,7 @@ public class HomePageController(PostgreSqlContext context) : ControllerBase
             .FirstOrDefaultAsync(i => i.DiscordId == discordId);
 
         if (userData is null) return BadRequest("Userdata not found");
-
+        if (userData.Tier == Tier.Unranked) return BadRequest("You have not yet started your journey with /begin");
         var stamina = userData.Items.FirstOrDefault(i => i is Stamina)
             ?.Cast<Stamina>().Stacks ?? 0;
         var selected = new Home.HomePageData

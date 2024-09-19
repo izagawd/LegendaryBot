@@ -55,7 +55,7 @@ public class TeamCommand : GeneralCommandClass
         await context.RespondAsync(embed);
     }
 
-    [Command("set-slot")]
+    [Command("set-slot")] [Description("Puts a character into a team slot")]
     [BotCommandCategory(BotCommandCategory.Team)]
     public async ValueTask ExecuteChangeTeamCharacter(CommandContext context,
         [Parameter("team-name")] [Description("Name of team you want to remove character from")]
@@ -144,7 +144,7 @@ public class TeamCommand : GeneralCommandClass
         await context.RespondAsync(embed);
     }
 
-    [Command("rename-team")]
+    [Command("rename-team")] [Description("Renames a team")]
     [BotCommandCategory(BotCommandCategory.Team)]
     public async ValueTask ExecuteRenameTeam(CommandContext context,
         [Parameter("team-name")] string teamName,

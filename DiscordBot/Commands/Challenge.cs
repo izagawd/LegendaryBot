@@ -18,7 +18,7 @@ public class Challenge : GeneralCommandClass
     private static readonly DiscordButtonComponent No = new(DiscordButtonStyle.Primary, "no", "NO");
 
     [Command("challenge")]
-    [Description("Use this Commands to fight other players")]
+    [Description("Use this Command to fight other players")]
     [BotCommandCategory(BotCommandCategory.Battle)]
     public async ValueTask Execute(CommandContext ctx,
         [Description("The player you want to fight")]

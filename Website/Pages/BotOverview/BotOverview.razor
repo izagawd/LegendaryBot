@@ -1,0 +1,60 @@
+@page "/bot-overview"
+
+@using Website.Components.Navigation
+
+@code
+{}
+<PageTitle>Bot description</PageTitle>
+<Navigation>
+    <div style="display: flex; flex-direction: column; height: 100%; width: 100%">
+        
+        <div class="header">
+            <a style="width: fit-content; margin: auto; font-size: 30px; color: inherit" href="https://discord.com/oauth2/authorize?client_id=340054610989416460&permissions=563226978929728&integration_type=0&scope=bot">Discord bot invite link</a>
+        </div>
+        <div style="flex-grow: 1; height: 0">
+            <div class="parent">
+                <p class="big-text">Discord bot game</p>
+                <p>
+                    The discord bot is a turn by turn game, that generates and sends an image every turn to display the state of the battle.
+                </p>
+                <img src="@(PublicInfo.Information.ApiDomainName + "/info_stuff/solely_image.png")"/>
+                <p class="big-text">
+                    Objective of the game
+                </p>
+                <p>
+                    In this game, theres not much of a story.
+                    The goal  to be as strong as possible by
+                    getting stronger gears, and more characters.
+                    Each team players have can have up to 4 characters, and each character has moves.
+                    Some of which have cooldowns. Characters can also be leveled up
+                    There are also buffs and debuffs in this game as well
+                </p>
+                <img src="@(PublicInfo.Information.ApiDomainName + "/info_stuff/solely_image.png")"/>
+                <p>Discord allows us developers to put buttons and respond to it's interactions. Of course,
+                    this was used well by the discord bot.<br/> There's three buttons then a forfeit button. The 3 buttons lets the user use 
+                    their character's moves, while the forfeit button lets the user quit the battle.
+                    Then the interactable component that says "view info of character" is used to see the details of a character if the player were to get confused</p>
+                <img src="@(PublicInfo.Information.ApiDomainName + "/info_stuff/button_shower.png")"/>
+                <p class="big-text">Why does it have a website?</p>
+                <p>This website exists because setting up your team and character equipment can be a hassle with commands. This website allows users to change their data, without them feeling like they are using a command prompt.
+                </p>
+                <p>Here's the command to put a character in a team slot in discord</p>
+                <img src="@(PublicInfo.Information.ApiDomainName + "/info_stuff/pain_in_the_ass.png")"/>
+                <p>This can be cumbersome. Typing a command like this everytime you want to edit your teams can be a bit frustrating, especially when you accidentally put the wrong inputs</p>
+                <p>Thats why this way exist</p>
+                <img class="less-hassle" src="@(PublicInfo.Information.ApiDomainName + "/info_stuff/much_better.png")"/>
+                <p>This makes it much more easier for users to modify their teams. all you have to do is click/tap buttons</p>
+                <p class="big-text">
+                    How to play the game
+                </p>
+                <p>First, you must, of course, have discord. Then you need a server to add it to. The bot invite link is in the header of this page. After adding the bot, use /begin to start the bot tutorial.
+                    Once you are done with the tutorial, you can start using commands like /explore or /quests to get stronger. Also, you can use /challenge to play against other users!</p>
+                <p>You can, of course, come back to this website if you want to modify your data with ease. Simply login with discord 0Auth, and you are good to go!</p>
+                </div>
+            
+        </div>
+      
+
+    </div>
+
+</Navigation>

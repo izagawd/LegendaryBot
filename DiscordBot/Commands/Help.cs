@@ -1,4 +1,5 @@
-﻿using BasicFunctionality;
+﻿using System.ComponentModel;
+using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Trees;
 using DSharpPlus.Entities;
@@ -98,7 +99,7 @@ public class Help : GeneralCommandClass
     }
 
     [Command("help")]
-    [BotCommandCategory]
+    [BotCommandCategory] [Description("Used to show all commands I have")]
     public async ValueTask Execute(CommandContext ctx)
     {
         var author = ctx.User;

@@ -1,4 +1,5 @@
-﻿using BasicFunctionality;
+﻿using System.ComponentModel;
+using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
@@ -13,7 +14,7 @@ namespace DiscordBot.Commands;
 
 public class QuestCommand : GeneralCommandClass
 {
-    [Command("quest")]
+    [Command("quest")] [Description("Use this command to do daily quests!")]
     [BotCommandCategory(BotCommandCategory.Battle)]
     public async ValueTask Execute(CommandContext ctx)
     {
