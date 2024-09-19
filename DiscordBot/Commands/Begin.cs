@@ -233,7 +233,7 @@ public class Begin : GeneralCommandClass
         coachChad.TotalDefense = 20;
         coachChad.TotalAttack = 1;
         coachChad.TotalSpeed = 100;
-        var builder = new DiscordEmbedBuilder()
+        embedToBuild = new DiscordEmbedBuilder()
             .WithTitle("Tutorial!!!")
             .WithColor(userColor)
             .AddField("Using your  moves!!",
@@ -242,12 +242,13 @@ public class Begin : GeneralCommandClass
             .AddField("Teams",
                 "Your team is on the left. The enemy team is on the right. it may be in reverse, especially if playing against another player")
             .AddField("Character move set",
-                "You can see what a character can do with the \"View info of character\" interactable component!");
+                "You can see what a character's moves can do with the \"View info of character\" interactable component!");
 
 
-        _ = ctx.Channel.SendMessageAsync(builder);
+        _ = result.Message.ModifyAsync(new DiscordMessageBuilder()
+            .AddEmbed(embedToBuild));
         var battleResult = await new BattleSimulator(userTeam.LoadTeamStats(),
-            new NonPlayerTeam(characters: coachChad)).StartAsync(result.Message);
+            new NonPlayerTeam(characters: coachChad)).StartAsync(ctx.Channel);
 
         if (battleResult.TimedOut is not null)
         {
@@ -266,7 +267,7 @@ public class Begin : GeneralCommandClass
             };
 
 
-            await theDialogue.LoadAsync(ctx.User, result.Message);
+            await theDialogue.LoadAsync(ctx.User, battleResult.Message);
             return;
         }
 
@@ -321,7 +322,7 @@ public class Begin : GeneralCommandClass
         ;
 
 
-        result = await theDialogue.LoadAsync(ctx.User, result.Message);
+        result = await theDialogue.LoadAsync(ctx.User, battleResult.Message);
         if (result.TimedOut)
         {
             theDialogue = new Dialogue
@@ -358,6 +359,7 @@ public class Begin : GeneralCommandClass
             userData.Items.Add(stam);
         }
 
+        embedToBuild.ClearFields();
         await DatabaseContext.SaveChangesAsync();
         await message.ModifyAsync(new DiscordMessageBuilder()
             .AddEmbed(embedToBuild.WithTitle("Nice!").WithUser(ctx.User).WithDescription(rewardText)

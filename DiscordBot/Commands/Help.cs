@@ -116,7 +116,7 @@ public class Help : GeneralCommandClass
             .WithTitle("Help")
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
             .WithColor(color.Value)
-            .WithFooter("note: text with < > means its a parameter, and ? means the command parameter is optional");
+            .WithFooter("note: text with < > means its a parameter, and ? means the command parameter is optional.");
 
 
         Dictionary<BotCommandCategory, DiscordEmbed> embedsToUse = [];
