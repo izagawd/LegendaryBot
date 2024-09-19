@@ -24,7 +24,7 @@ public class BurgsKingdom : Region
         {
             case Blast:
                 main.Blessing = new GoingAllOut();
-                foreach (var i in Enumerable.Range(0, BasicFunctions.GetRandomNumberInBetween(2, 3)))
+                foreach (var i in Enumerable.Range(0, GetSmallFryEnemyCount(combatTier)))
                 {
                     var createdChar = new Slime();
                     newTeam.Add(createdChar);
@@ -33,7 +33,7 @@ public class BurgsKingdom : Region
                 break;
             case RoyalKnight:
                 main.Blessing = new VitalForce();
-                foreach (var i in Enumerable.Range(0, BasicFunctions.GetRandomNumberInBetween(2, 3)))
+                foreach (var i in Enumerable.Range(0, GetSmallFryEnemyCount(combatTier)))
                 {
                     var createdChar = new Police();
                     newTeam.Add(createdChar);
@@ -42,7 +42,7 @@ public class BurgsKingdom : Region
                 break;
             case Cheerleader:
                 main.Blessing = new HeadStart();
-                foreach (var i in Enumerable.Range(0, BasicFunctions.GetRandomNumberInBetween(2, 3)))
+                foreach (var i in Enumerable.Range(0,GetSmallFryEnemyCount(combatTier)))
                 {
                     var createdChar = new Jock();
                     newTeam.Add(createdChar);
@@ -51,7 +51,7 @@ public class BurgsKingdom : Region
                 break;
             case Thana:
                 main.Blessing = new HeadStart();
-                foreach (var i in Enumerable.Range(0, BasicFunctions.GetRandomNumberInBetween(2, 3)))
+                foreach (var i in Enumerable.Range(0,GetSmallFryEnemyCount(combatTier)))
                 {
                     var createdChar = new Skeleton();
                     newTeam.Add(createdChar);

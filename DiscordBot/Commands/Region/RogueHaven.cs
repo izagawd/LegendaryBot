@@ -24,7 +24,7 @@ public class RogueHaven : Region
         {
             case Roxy:
                 main.Blessing = new VitalForce();
-                foreach (var i in Enumerable.Range(0, BasicFunctions.GetRandomNumberInBetween(2, 3)))
+                foreach (var i in Enumerable.Range(0,GetSmallFryEnemyCount(combatTier)))
                 {
                     var createdChar = new Delinquent();
                     newTeam.Add(createdChar);
@@ -37,7 +37,7 @@ public class RogueHaven : Region
 
             case CommanderJean:
                 main.Blessing = new HeadStart();
-                foreach (var i in Enumerable.Range(0, BasicFunctions.GetRandomNumberInBetween(2, 3)))
+                foreach (var i in Enumerable.Range(0, GetSmallFryEnemyCount(combatTier)))
                 {
                     var createdChar = new Police();
                     newTeam.Add(createdChar);

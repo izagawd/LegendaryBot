@@ -540,7 +540,14 @@ public partial class BattleSimulator
     public void PrepareTeamForBattle(Team team)
     {
         team.CurrentBattle = this;
-        foreach (var i in team) i.BattleTeam = team;
+        foreach (var i in team)
+        {
+            i.BattleTeam = team;
+            if (i.Blessing is not null)
+            {
+                i.Blessing.Character = i;
+            }
+        }
     }
 
     protected async Task<BattleResult> StartAsync(

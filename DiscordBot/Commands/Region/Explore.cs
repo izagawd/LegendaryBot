@@ -109,7 +109,7 @@ public class Explore : GeneralCommandClass
         var enemyTeam = region.GenerateCharacterTeamFor(characterType, out var character, combatTier);
         embedToBuild
             .WithTitle("Keep your guard up!")
-            .WithDescription($"{character.Name} has appeared!")
+            .WithDescription($"{character.Name} {string.Concat(Enumerable.Repeat("\u2b50", (int) character.Rarity))} has appeared!")
             .WithFooter($"Note: exploring costs {requiredStamina} stamina");
         await ctx.RespondAsync(embedToBuild);
         var message = await ctx.GetResponseAsync();
