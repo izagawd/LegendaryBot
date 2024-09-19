@@ -288,6 +288,7 @@ public class DiscordBot
 
 
         await Client.ConnectAsync();
+        
     }
 
 
