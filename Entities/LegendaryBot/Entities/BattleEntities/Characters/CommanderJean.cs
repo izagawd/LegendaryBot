@@ -36,43 +36,6 @@ public class CommanderJeanTonfaWhack : BasicAttack
     }
 }
 
-public class CommanderJeanTaser : Skill
-{
-    public CommanderJeanTaser(Character user) : base(user)
-    {
-    }
-
-    public override string Name => "Commander Jean Taser";
-
-    public override int MaxCooldown => 3;
-
-    public override string GetDescription(Character character)
-    {
-        return "Tazes the enemy, stunning them for one turn, and increasing super points by 2";
-    }
-
-    public override IEnumerable<Character> GetPossibleTargets()
-    {
-        return CurrentBattle.Characters.Where(i => !i.IsDead && i.BattleTeam != User.BattleTeam);
-    }
-
-    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
-        out AttackTargetType attackTargetType,
-        out string? text)
-    {
-        target.Damage(new DamageArgs(User.Attack * 2f, new MoveDamageSource(moveUsageContext))
-        {
-            CriticalChance = User.CriticalChance,
-            CriticalDamage = User.CriticalDamage,
-            DamageText = $"{User.NameWithAlphabet} tases {target.NameWithAlphabet}, dealing $ damage!"
-        });
-        target.AddStatusEffect(new Stun(User), User.Effectiveness);
-
-        attackTargetType = AttackTargetType.SingleTarget;
-        User.SuperPoints += 2;
-        text = "I warned you!";
-    }
-}
 
 public class CommanderJeanGrenade : Ultimate
 {
@@ -125,8 +88,10 @@ public class CommanderJeanGrenade : Ultimate
     }
 }
 
-public class CommanderJeanFiringSquad : Move
+public class CommanderJeanFiringSquad : Skill
 {
+    public override bool IsPassive => true;
+
     public CommanderJeanFiringSquad(Character user) : base(user)
     {
     }
@@ -135,12 +100,12 @@ public class CommanderJeanFiringSquad : Move
 
     public override string GetDescription(Character character)
     {
-        return "d";
+        return "When 5 superpoints are reached, makes a firing squad attack all enemies! this resets superpoints to 0";
     }
 
     public override IEnumerable<Character> GetPossibleTargets()
     {
-        return CurrentBattle.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead);
+        return CurrentBattle!.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead);
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
@@ -159,16 +124,18 @@ public class CommanderJeanFiringSquad : Move
         text = null;
         attackTargetType = AttackTargetType.AOE;
     }
+
+    public override int MaxCooldown => 0;
 }
 
 public class CommanderJean : Character
 {
     public CommanderJean()
     {
-        Skill = new CommanderJeanTaser(this);
+        Skill = new CommanderJeanFiringSquad(this);
         Ultimate = new CommanderJeanGrenade(this);
         BasicAttack = new CommanderJeanTonfaWhack(this);
-        FiringSquad = new CommanderJeanFiringSquad(this);
+
     }
 
     protected override float BaseAttackMultiplier => 1.15f;
@@ -178,22 +145,11 @@ public class CommanderJean : Character
 
     protected override float BaseSpeedMultiplier => 1.1f;
 
-    public override string? PassiveDescription =>
-        "Once super points reach 5, a firing squad appears, attacking all enemies";
 
-    public override IEnumerable<Move> MoveList
-    {
-        get
-        {
-            foreach (var i in base.MoveList) yield return i;
-
-            yield return FiringSquad;
-        }
-    }
 
     public override Rarity Rarity => Rarity.FiveStar;
 
-    public CommanderJeanFiringSquad FiringSquad { get; }
+
 
     public override int TypeId
     {
@@ -207,9 +163,9 @@ public class CommanderJean : Character
         if (CannotDoAnything) return;
         if (SuperPoints >= 5)
         {
-            var possibleTarget = FiringSquad.GetPossibleTargets().FirstOrDefault();
+            var possibleTarget = Skill!.GetPossibleTargets().FirstOrDefault();
             if (possibleTarget is not null)
-                FiringSquad.Utilize(possibleTarget, MoveUsageType.MiscellaneousFollowUpUsage);
+                Skill!.Utilize(possibleTarget, MoveUsageType.MiscellaneousFollowUpUsage);
         }
     }
 }

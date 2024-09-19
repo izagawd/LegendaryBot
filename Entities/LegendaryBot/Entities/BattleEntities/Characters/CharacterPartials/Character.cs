@@ -50,7 +50,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     public virtual bool CanSpawnNormally => true;
     public bool CannotDoAnything => IsDead || HighestOverrideTurnType >= OverrideTurnType.CannotMove;
-    public virtual string? PassiveDescription => null;
+
 
     public OverrideTurnType HighestOverrideTurnType
     {
@@ -573,14 +573,14 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     /// <param name="decision"></param>
     public virtual void NonPlayerCharacterAi(ref Character target, ref BattleDecision decision)
     {
-        if ((Ultimate?.CanBeUsed()).GetValueOrDefault(false))
+        if ((Ultimate?.CanBeUsedNormally()).GetValueOrDefault(false))
         {
             decision = BattleDecision.Ultimate;
             target = BasicFunctions.RandomChoice(Ultimate!.GetPossibleTargets());
             return;
         }
 
-        if ((Skill?.CanBeUsed()).GetValueOrDefault(false))
+        if ((Skill?.CanBeUsedNormally()).GetValueOrDefault(false))
         {
             decision = BattleDecision.Skill;
             target = BasicFunctions.RandomChoice(Skill!.GetPossibleTargets());

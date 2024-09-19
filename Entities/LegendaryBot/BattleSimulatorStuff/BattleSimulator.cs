@@ -329,13 +329,18 @@ public partial class BattleSimulator
 
 
             descriptionStringBuilder.Append(
-                $"Element: {characterToDisplayBattleInfo.Element} • Combat Readiness: {characterToDisplayBattleInfo.CombatReadiness.Round()}%\n\n");
+                $" {string.Concat(Enumerable.Repeat("\u2b50",(int) characterToDisplayBattleInfo.Rarity))} • Element: {characterToDisplayBattleInfo.Element} • Combat Readiness: {characterToDisplayBattleInfo.CombatReadiness.Round()}%\n\n");
             foreach (var i in characterToDisplayBattleInfo.MoveList)
             {
                 var moveTypeName = "Basic Attack :crossed_swords:";
 
-                if (i is Skill)
+                if (i is Skill skill)
+                {
                     moveTypeName = "Skill :magic_wand:";
+                    if (skill.IsPassive)
+                        moveTypeName += " (passive)";
+                }
+                    
                 else if (i is Ultimate) moveTypeName = "Ultimate :zap:";
 
                 descriptionStringBuilder.Append(
@@ -347,11 +352,6 @@ public partial class BattleSimulator
                 descriptionStringBuilder.Append("\n\n");
             }
 
-            if (characterToDisplayBattleInfo.PassiveDescription is not null)
-            {
-                descriptionStringBuilder.Append($"Passive Ability: {characterToDisplayBattleInfo.PassiveDescription}");
-                descriptionStringBuilder.Append("\n\n");
-            }
 
             var statusEffectsCopy = characterToDisplayBattleInfo.StatusEffects.ToArray();
             if (statusEffectsCopy.Any())
@@ -669,8 +669,8 @@ public partial class BattleSimulator
             {
                 _basicAttackButton.Enable();
 
-                if (ActiveCharacter.Skill is not null && ActiveCharacter.Skill.CanBeUsed()) _skillButton.Enable();
-                if (ActiveCharacter.Ultimate is not null && ActiveCharacter.Ultimate.CanBeUsed())
+                if (ActiveCharacter.Skill is not null && ActiveCharacter.Skill.CanBeUsedNormally()) _skillButton.Enable();
+                if (ActiveCharacter.Ultimate is not null && ActiveCharacter.Ultimate.CanBeUsedNormally())
                     _ultimateButton.Enable();
             }
 
@@ -783,7 +783,7 @@ public partial class BattleSimulator
                             [
                                 BattleDecision.BasicAttack, BattleDecision.Skill, BattleDecision.Ultimate
                             ]).Contains(localDecision) &&
-                            (ActiveCharacter[localDecision]?.CanBeUsed()).GetValueOrDefault(false))
+                            (ActiveCharacter[localDecision]?.CanBeUsedNormally()).GetValueOrDefault(false))
                         {
                             battleDecision = localDecision;
                             return true;

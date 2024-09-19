@@ -18,7 +18,7 @@ public class TakeshiStraightPunch : BasicAttack
 
     public override string GetDescription(Character character)
     {
-        return "Does a simple but powerful straight punch at the enemy!";
+        return "Does a simple but powerful straight punch at the enemy! Also, has a 25% chance to counter attack with it when any ally is attacked";
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
@@ -114,9 +114,6 @@ public class Takeshi : Character
 
     public override string Name => "Takeshi";
     public override Rarity Rarity => Rarity.ThreeStar;
-
-    public override string? PassiveDescription =>
-        "Has a 25% chance to counter attack with basic attack when any ally is attacked";
 
     protected override float BaseSpeedMultiplier => 1.05f;
 

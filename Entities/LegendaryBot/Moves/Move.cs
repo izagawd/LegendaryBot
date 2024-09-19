@@ -97,9 +97,9 @@ public abstract class Move : INameHaver
     }
 
     /// <summary>
-    ///     Checks if this move can be used based on the owner
+    ///  Checks if this move can be used normally, which is, when the player is clicking to use it
     /// </summary>
-    public virtual bool CanBeUsed()
+    public virtual bool CanBeUsedNormally()
     {
         return GetPossibleTargets().Any() && !User.IsOverriden;
     }

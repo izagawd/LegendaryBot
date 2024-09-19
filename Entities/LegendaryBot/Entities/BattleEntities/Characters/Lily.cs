@@ -156,7 +156,7 @@ public class Lily : Character
 
     public override void NonPlayerCharacterAi(ref Character target, ref BattleDecision decision)
     {
-        if (Ultimate.CanBeUsed())
+        if (Ultimate.CanBeUsedNormally())
         {
             decision = BattleDecision.Ultimate;
             target = BasicFunctions.RandomChoice(Ultimate.GetPossibleTargets());
@@ -164,7 +164,7 @@ public class Lily : Character
         }
 
         var teamMateWithLowestHealth = BattleTeam.OrderBy(i => i.Health).First();
-        if (Skill.CanBeUsed() && teamMateWithLowestHealth.Health < teamMateWithLowestHealth.MaxHealth * 0.7)
+        if (Skill.CanBeUsedNormally() && teamMateWithLowestHealth.Health < teamMateWithLowestHealth.MaxHealth * 0.7)
         {
             decision = BattleDecision.Skill;
             target = teamMateWithLowestHealth;

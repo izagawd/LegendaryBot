@@ -25,9 +25,9 @@ public abstract class Special : Move
     public bool IsOnCooldown => Cooldown > 0;
 
 
-    public sealed override bool CanBeUsed()
+    public  override bool CanBeUsedNormally()
     {
-        return base.CanBeUsed() && !IsOnCooldown;
+        return base.CanBeUsedNormally() && !IsOnCooldown;
     }
 
     public override string ToString()

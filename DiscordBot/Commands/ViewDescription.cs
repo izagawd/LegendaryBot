@@ -45,10 +45,18 @@ public class ViewDescription : GeneralCommandClass
             {
                 builder.AddField("Basic Attack :crossed_swords:", character.BasicAttack.GetDescription(character));
                 if (character.Skill is not null)
-                    builder.AddField("Skill :magic_wand:", character.Skill.GetDescription(character));
+                {
+                    var passiveString = "";
+                    if (character.Skill.IsPassive)
+                    {
+                        passiveString = " (passive)";
+                    }
+                    builder.AddField($"Skill :magic_wand:{passiveString}", character.Skill.GetDescription(character));
+                }
+                
                 if (character.Ultimate is not null)
                     builder.AddField("Ultimate :zap:", character.Ultimate.GetDescription(character));
-                if (character.PassiveDescription is not null) builder.AddField("Passive", character.PassiveDescription);
+            
                 var statsToIncreasePerMilestone = character.GetStatsToIncreaseBasedOnLevelMilestone(6).ToArray();
                 var stringToUse = "";
                 for (var i = 0; i < statsToIncreasePerMilestone.Length; i++)
