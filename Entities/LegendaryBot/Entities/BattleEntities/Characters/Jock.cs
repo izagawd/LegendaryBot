@@ -25,9 +25,19 @@ public class Jock : Character
     [BattleEventListenerMethod]
     public void RedoBallThrow(CharacterPostUseMoveEventArgs postUseMoveEventArgs)
     {
-        if (postUseMoveEventArgs.Move == BasicAttack && !CannotDoAnything)
-            BasicAttack.Utilize(postUseMoveEventArgs.MoveUsageResult.DamageResults.First().DamageReceiver,
-                MoveUsageType.MiscellaneousFollowUpUsage);
+
+        if (postUseMoveEventArgs.Move == BasicAttack && !CannotDoAnything &&
+            postUseMoveEventArgs.MoveUsageResult.MoveUsageType == MoveUsageType.NormalUsage)
+        {
+            var damageResult = postUseMoveEventArgs.MoveUsageResult.DamageResults.FirstOrDefault();
+            if (!(damageResult?.DamageReceiver.IsDead ?? true))
+            {
+                BasicAttack.Utilize(postUseMoveEventArgs.MoveUsageResult.DamageResults.First().DamageReceiver,
+                    MoveUsageType.MiscellaneousFollowUpUsage);
+            }
+   
+        }
+           
     }
 
     private class BallThrow : BasicAttack
@@ -58,6 +68,7 @@ public class Jock : Character
                 DamageText =
                     $"{User.NameWithAlphabet} throws a foot ball at {target.NameWithAlphabet}, dealing $ damage"
             });
+            
             text = "heh...";
         }
     }
