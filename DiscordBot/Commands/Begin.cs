@@ -238,7 +238,7 @@ public class Begin : GeneralCommandClass
             .WithColor(userColor)
             .AddField("Using your  moves!!",
                 "Tap/Click :crossed_swords: for basic attack, :magic_wand: for skill, and :zap: for ultimate! Then, an option to select your target will appear. Different characters have different movesets\nNote: most skills and ultimates become on cooldown after use!")
-            .AddField("Who's turn is it?","All characters except the one thats not taking their turn will be translucent. The only character that's not translucent is the character who is taking their turn")
+            .AddField("Who's turn is it?","All characters except the one that's not taking their turn will be translucent. The only character that's not translucent is the character who is taking their turn")
             .AddField("Teams",
                 "Your team is on the left. The enemy team is on the right. it may be in reverse, especially if playing against another player")
             .AddField("Character move set",
