@@ -52,6 +52,8 @@ public partial class BattleSimulator
         
 
     }
+
+    private ConcurrentDictionary<string, Image<Rgba32>> XHolder = [];
     public async Task<Image<Rgba32>> GenerateCharacterDetailsImageForCombatAsync(Character character)
     {
         const int characterImageSize = 50;
@@ -77,14 +79,17 @@ public partial class BattleSimulator
         
         if(character.IsDead)
         {
-            
-            using var gottenImage =
-                await ImageFunctions.GetImageFromUrlAsync(PublicInfo.Information.BattleImagesDirectory + "/dead_x.png");
-            gottenImage.Mutate(i => i.Resize(new Size(characterImageSize,characterImageSize)));
-            ctx
-                .DrawImage(gottenImage, new Point(0, 0), new GraphicsOptions());
+            const string zaKey = "KEY";
+            if(!XHolder.TryGetValue(zaKey,out var gottenImage))
+            {
+                gottenImage = await ImageFunctions.GetImageFromUrlAsync(Information.BattleImagesDirectory + "/dead_x.png");
+                 
+                gottenImage.Mutate(i => i.Resize(new Size(characterImageSize,characterImageSize)));
+                XHolder[zaKey] = gottenImage;
+            }
+            ctx.DrawImage(gottenImage, new Point(0, 0), new GraphicsOptions());
         }   
-         ctx
+        ctx
             .Draw(Color.Black, 1, new Rectangle(new Point(0, 0), new Size(50, 50)))
             .DrawText($"Lvl {character.Level}", SystemFonts.CreateFont(Information.GlobalFontName, 10),
                 Color.Black, new PointF(55, 21.5f))
