@@ -2,7 +2,7 @@
 
 public class Information
 {
-    public const string BattleImagesDirectory = ApiDomainName + "/battle_images/";
+    public const string BattleImagesDirectory = ApiDomainName + "/battle_images";
     public const string BlessingImagesDirectory = BattleImagesDirectory + "/blessings";
     public const string GearsImagesDirectory = BattleImagesDirectory + "/gears";
     public const string ItemsImagesDirectory = BattleImagesDirectory + "/items";
