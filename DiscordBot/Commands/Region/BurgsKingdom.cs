@@ -3,6 +3,7 @@ using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Rewards;
 
 namespace DiscordBot.Commands.Region;
@@ -17,9 +18,35 @@ public class BurgsKingdom : Region
         typeof(Blast), typeof(Thana), typeof(Cheerleader)
     ];
 
+    public override string WhatYouGain => "Coins";
+
     public override IEnumerable<Reward> GetRewardsAfterBattle(Character main, Tier combatTier)
     {
-        throw new NotImplementedException();
+        switch (combatTier)
+        {
+            case Tier.Unranked:
+                break;
+            case Tier.Bronze:
+                yield return new EntityReward([new Coin(){Stacks = 10000}]);
+                break;
+            case Tier.Silver:
+                yield return new EntityReward([new Coin(){Stacks = 25000}]);
+                break;
+            case Tier.Gold:
+                yield return new EntityReward([new Coin(){Stacks = 40000}]);
+                break;
+            case Tier.Platinum:
+                yield return new EntityReward([new Coin(){Stacks = 55000}]);
+                break;
+            case Tier.Diamond:
+                yield return new EntityReward([new Coin(){Stacks = 70000}]);
+                break;
+            case Tier.Divine:
+                yield return new EntityReward([new Coin(){Stacks = 85000}]);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(combatTier), combatTier, null);
+        }
     }
 
     public override Team GenerateCharacterTeamFor(Type type, out Character main, Tier combatTier)

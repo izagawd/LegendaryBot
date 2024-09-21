@@ -3,6 +3,7 @@ using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Rewards;
 
 namespace DiscordBot.Commands.Region;
@@ -17,10 +18,42 @@ public class RogueHaven : Region
         typeof(Takeshi), typeof(CommanderJean)
     ];
 
+    private Gear GenerateGear(Rarity rarity)
+    {
+        var gear
+            = (Gear)Activator.CreateInstance(BasicFunctions.RandomChoice(Gear.AllGearTypes))!;
+        gear.Initialize(rarity);
+        return gear;
+    }
     public override IEnumerable<Reward> GetRewardsAfterBattle(Character main, Tier combatTier)
     {
-        throw new NotImplementedException();
+        switch (combatTier)
+        {
+            case Tier.Unranked:
+            case Tier.Bronze:
+                yield return new EntityReward([GenerateGear(Rarity.OneStar), GenerateGear(Rarity.OneStar)]);
+                break;
+            case Tier.Silver:
+                yield return new EntityReward([GenerateGear(Rarity.OneStar), GenerateGear(Rarity.TwoStar)]);
+                break;
+            case Tier.Gold:
+                yield return new EntityReward([GenerateGear(Rarity.TwoStar), GenerateGear(Rarity.ThreeStar)]);
+                break;
+            case Tier.Platinum:
+                yield return new EntityReward([GenerateGear(Rarity.ThreeStar), GenerateGear(Rarity.FourStar)]);
+                break;
+            case Tier.Diamond:
+                yield return new EntityReward([GenerateGear(Rarity.FourStar), GenerateGear(Rarity.FiveStar)]);
+                break;
+            case Tier.Divine:
+                yield return new EntityReward([GenerateGear(Rarity.FiveStar), GenerateGear(Rarity.FiveStar)]);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
+
+    public override string WhatYouGain => "Gear";
 
     public override Team GenerateCharacterTeamFor(Type type, out Character main, Tier combatTier)
     {

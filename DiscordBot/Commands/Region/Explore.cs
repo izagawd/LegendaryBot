@@ -20,7 +20,7 @@ namespace DiscordBot.Commands.Region;
 public class Explore : GeneralCommandClass
 {
     [Command("explore")]
-    [Description("Use this command to encounter a character while exploring a region, and get them when you beat them")]
+    [Description("Use this command to encounter enemies while exploring a region, and get rewards for defeating them!")]
     [BotCommandCategory(BotCommandCategory.Battle)]
     public async ValueTask Execute(CommandContext ctx, string regionName)
     {
@@ -63,7 +63,7 @@ public class Explore : GeneralCommandClass
             var regionString = $"Region with name `{regionName}` not found\nThese are the following existing regions:";
             foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<Region>())
                 embedToBuild.AddField(i.Name,
-                    $"Required Tier: **{i.TierRequirement}**");
+                    $"Required Tier: **{i.TierRequirement}**\nRewards: **{i.WhatYouGain}**");
             embedToBuild.WithDescription(regionString);
             await ctx.RespondAsync(embedToBuild);
             return;
@@ -106,10 +106,10 @@ public class Explore : GeneralCommandClass
             = BasicFunctions.RandomChoice(characterGrouping.Select(i => i)).GetType();
 
         var combatTier = userData.Tier;
-        var enemyTeam = region.GenerateCharacterTeamFor(characterType, out var character, combatTier);
+        var enemyTeam = region.GenerateCharacterTeamFor(characterType, out var mainEnemyCharacter, combatTier);
         embedToBuild
             .WithTitle("Keep your guard up!")
-            .WithDescription($"{character.Name} {string.Concat(Enumerable.Repeat("\u2b50", (int) character.Rarity))} has appeared!")
+            .WithDescription($"{mainEnemyCharacter.Name} {string.Concat(Enumerable.Repeat("\u2b50", (int) mainEnemyCharacter.Rarity))} has appeared!")
             .WithFooter($"Note: exploring costs {requiredStamina} stamina");
         await ctx.RespondAsync(embedToBuild);
         var message = await ctx.GetResponseAsync();
@@ -123,36 +123,25 @@ public class Explore : GeneralCommandClass
 
         if (battleResult.Winners == userTeam)
         {
-            var expToGain = Character.GetExpBasedOnDefeatedCharacters(enemyTeam);
-            var coinsToGain = Character.GetCoinsBasedOnCharacters(enemyTeam);
-            if (battleResult.Winners != userTeam) expToGain = expToGain / 5;
-
-
-            var expGainText = userTeam.IncreaseExp(expToGain);
-
-
-
-
-
-
-            IEnumerable<Reward> rewards = [new EntityReward([new Coin { Stacks = 1000 * (int)userData.Tier }])];
-            var rewardText = userData.ReceiveRewards(rewards);
-            rewardText += $"\nYou explored a bit more after recruiting {character.Name}!\n";
-
-
-            
-
-
+            var rewards = region.GetRewardsAfterBattle(mainEnemyCharacter, combatTier)
+                .Append(new EntityReward([new Coin() { Stacks = 1000 * (int)combatTier }]))
+                .ToArray();
+            var itemsToLoadTypeIdFormat  = rewards.OfType<EntityReward>()
+                .SelectMany(i => i.EntitiesToReward.OfType<Item>().Select(j => j.TypeId))
+                .Distinct()
+                .ToArray();
             await DatabaseContext.Set<Item>()
-                .Where(i => (i is HerosKnowledge || i is Coin) && i.UserDataId == userData.Id)
+                .Where(i => itemsToLoadTypeIdFormat.Contains(i.TypeId) && i.UserDataId == userData.Id)
                 .LoadAsync();
+
+         
+            var rewardText = $"You defeated {mainEnemyCharacter.Name}, and found some loot!\n";
             rewardText += userData.ReceiveRewards(rewards);
             embedToBuild
                 .WithTitle("Nice going bud!")
-                .WithDescription($"You won!\n{expGainText}\n{rewardText}")
+                .WithDescription($"You won!\n{rewardText}")
                 .WithImageUrl("");
             stamina!.Stacks -= requiredStamina;
-
             await DatabaseContext.SaveChangesAsync();
             await message!.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embedToBuild));
         }

@@ -45,6 +45,7 @@ public abstract class Region
         }
     }
 
+    public abstract string WhatYouGain { get; }
     public abstract IEnumerable<Reward> GetRewardsAfterBattle(Character main, Tier combatTier);
     public virtual Tier TierRequirement => Tier.Bronze;
     public abstract IEnumerable<Type> ObtainableCharacters { get; }
