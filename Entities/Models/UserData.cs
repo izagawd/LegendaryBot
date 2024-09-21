@@ -88,17 +88,21 @@ public class UserData : ICanBeLeveledUp
 
     public void SortDupeCharacters()
     {
-        foreach (var i in Characters.GroupBy(i => i.GetType()))
+        foreach (var i in Characters.ToArray()
+                     .GroupBy(i => i.GetType()))
         {
             var totalCharacters = i.ToArray();
             if (totalCharacters.Length > 1)
             {
                 var mainCharacter = totalCharacters
                     .MinBy(j => j.DateAcquired)!;
+                var dupes =
+                    totalCharacters.Where(j => j != mainCharacter).ToArray();
                 mainCharacter.DupeCount +=
-                    totalCharacters.Where(j => j != mainCharacter)
+                        dupes
                         .Select(j => j.DupeCount + 1)
                         .Sum();
+                Characters.RemoveAll(j => dupes.Contains(j));
             }
         }
       
