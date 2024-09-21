@@ -147,5 +147,9 @@
         <_ContentIncludedByDefault Remove="WebsiteStuff\_Imports.razor"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\battle_images\moves\" />
+    </ItemGroup>
+
 
 </Project>
