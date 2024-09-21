@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Concurrent;
+using System.ComponentModel.DataAnnotations;
 using BasicFunctionality;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,7 @@ public class ItemDatabaseConfiguration : IEntityTypeConfiguration<Item>
 
 public abstract class Item : IInventoryEntity
 {
-    private static readonly Dictionary<int, Item> _cachedDefaultItemsTypeIds = [];
+    private static readonly ConcurrentDictionary<int, Item> _cachedDefaultItemsTypeIds = [];
 
     [Timestamp] public uint Version { get; private set; }
 
@@ -50,16 +51,13 @@ public abstract class Item : IInventoryEntity
 
     public static Item GetDefaultFromTypeId(int typeId)
     {
-        if (!_cachedDefaultItemsTypeIds.TryGetValue(typeId, out var item))
-        {
-            item = TypesFunction.GetDefaultObjectsAndSubclasses<Item>()
-                .FirstOrDefault(i => i.TypeId == typeId);
-            if (item is null) throw new Exception($"Item with type id {typeId} not found");
-
-            _cachedDefaultItemsTypeIds[typeId] = item;
-        }
-
-        return item;
+        return _cachedDefaultItemsTypeIds.GetOrAdd(typeId,
+            i =>
+            {
+                return TypesFunction.GetDefaultObjectsAndSubclasses<Item>()
+                           .FirstOrDefault(j => j.TypeId == i)
+                       ?? throw new Exception($"Item with type id {i} not found");
+            });
     }
 
 

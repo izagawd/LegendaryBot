@@ -68,16 +68,14 @@ public abstract class GearStat
 
     public static GearStat GetDefaultFromTypeId(int typeId)
     {
-        if (!_cachedDefaultItemsTypeIds.TryGetValue(typeId, out var gearStat))
-        {
-            gearStat = TypesFunction.GetDefaultObjectsAndSubclasses<GearStat>()
-                .FirstOrDefault(i => i.TypeId == typeId);
-            if (gearStat is null) throw new Exception($"Gear stat with type id {typeId} not found");
+        return _cachedDefaultItemsTypeIds.GetOrAdd(typeId,
+            i =>
+            {
+                return TypesFunction.GetDefaultObjectsAndSubclasses<GearStat>()
+                    .FirstOrDefault(j => j.TypeId == i) ?? throw new Exception($"Gear stat with type id {i} not found");
 
-            _cachedDefaultItemsTypeIds[typeId] = gearStat;
-        }
+            });
 
-        return gearStat;
     }
 
     /// <summary>

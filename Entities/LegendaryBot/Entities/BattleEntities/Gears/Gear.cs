@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -11,8 +12,8 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Gears;
 
 public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 {
-    private static readonly Dictionary<int, Type> _gearSetCache = [];
-    private static readonly Dictionary<int, Gear> _cachedDefaultGearsTypeIds = [];
+
+    private static readonly ConcurrentDictionary<int, Gear> _cachedDefaultGearsTypeIds = [];
 
 
     [Timestamp] public uint Version { get; set; }
@@ -113,16 +114,12 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
 
     public static Gear GetDefaultFromTypeId(int typeId)
     {
-        if (!_cachedDefaultGearsTypeIds.TryGetValue(typeId, out var gear))
+        return _cachedDefaultGearsTypeIds.GetOrAdd(typeId, i =>
         {
-            gear = TypesFunction.GetDefaultObjectsAndSubclasses<Gear>()
-                .FirstOrDefault(i => i.TypeId == typeId);
-            if (gear is null) throw new Exception($"Gear with type id {typeId} not found");
-
-            _cachedDefaultGearsTypeIds[typeId] = gear;
-        }
-
-        return gear;
+            return TypesFunction.GetDefaultObjectsAndSubclasses<Gear>()
+                .FirstOrDefault(j => j.TypeId == i) ?? throw new Exception($"Gear with type id {i} not found");
+        });
+        
     }
 
 

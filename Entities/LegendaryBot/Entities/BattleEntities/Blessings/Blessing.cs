@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Concurrent;
+using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using BasicFunctionality;
@@ -24,7 +25,7 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
 
 public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 {
-    private static readonly Dictionary<int, Blessing> _cachedDefaultBlessingsTypeIds = [];
+    private static readonly ConcurrentDictionary<int, Blessing> _cachedDefaultBlessingsTypeIds = [];
 
 
     [Timestamp] public uint Version { get; private set; }
@@ -59,16 +60,11 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 
     public static Blessing GetDefaultFromTypeId(int typeId)
     {
-        if (!_cachedDefaultBlessingsTypeIds.TryGetValue(typeId, out var blessing))
-        {
-            blessing = TypesFunction.GetDefaultObjectsAndSubclasses<Blessing>()
-                .FirstOrDefault(i => i.TypeId == typeId);
-            if (blessing is null) throw new Exception($"Blessing with type id {typeId} not found");
+        return _cachedDefaultBlessingsTypeIds.GetOrAdd(typeId,
+            i => TypesFunction.GetDefaultObjectsAndSubclasses<Blessing>()
+                     .FirstOrDefault(j => j.TypeId == i) ??
+                 throw new Exception($"Blessing with type id {i} not found"));
 
-            _cachedDefaultBlessingsTypeIds[typeId] = blessing;
-        }
-
-        return blessing;
     }
 
     public static Blessing GetRandomBlessing(Dictionary<Rarity, double> rates)

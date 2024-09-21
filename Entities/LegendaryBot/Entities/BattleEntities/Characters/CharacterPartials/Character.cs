@@ -73,7 +73,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public StatusEffects_Barrier? Shield => _statusEffects.OfType<StatusEffects_Barrier>().FirstOrDefault();
 
     [NotMapped]
-    public virtual IEnumerable<Move> MoveList
+    public IEnumerable<Move> MoveList
     {
         get
         {
@@ -354,16 +354,13 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     public static Character GetDefaultFromTypeId(int typeId)
     {
-        if (!CachedDefaultCharacterTypeIds.TryGetValue(typeId, out var character))
-        {
-            character = TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
-                .FirstOrDefault(i => i.TypeId == typeId);
-            if (character is null) throw new Exception($"Character with type id {typeId} not found");
+        return CachedDefaultCharacterTypeIds.GetOrAdd(typeId,
+            i =>
+            {
+                return TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
+                    .FirstOrDefault(j => j.TypeId == i) ?? throw new Exception($"Character with type id {i} not found");
+            });
 
-            CachedDefaultCharacterTypeIds[typeId] = character;
-        }
-
-        return character;
     }
 
 
