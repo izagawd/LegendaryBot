@@ -33,7 +33,36 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-        
+        // Set the directory path where your images are stored
+        string directoryPath = @"C:\Users\theiz\Downloads\Transparent"; 
+
+        // Get all the files in the directory
+        var files = Directory.GetFiles(directoryPath, "*-fococlipping-HD*");
+
+        foreach (var file in files)
+        {
+            // Get the file name without the directory path
+            string fileName = Path.GetFileName(file);
+
+            // Remove the unwanted part from the file name
+            string newFileName = fileName.Replace("-fococlipping-HD", "");
+
+            // Combine the directory path and the new file name
+            string newFilePath = Path.Combine(directoryPath, newFileName);
+
+            try
+            {
+                // Rename the file
+                File.Move(file, newFilePath);
+                Console.WriteLine($"Renamed: {fileName} -> {newFileName}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to rename {fileName}: {ex.Message}");
+            }
+        }
+
+        Console.WriteLine("Renaming process completed.");
     }
 
     private static async Task Main(string[] args)
