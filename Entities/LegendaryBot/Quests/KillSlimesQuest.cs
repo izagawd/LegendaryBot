@@ -46,17 +46,8 @@ public class KillSlimesQuest : Quest
 
         var playerTeam = userData.EquippedPlayerTeam!;
         playerTeam.LoadTeamStats();
-
         var battleSimulator = new BattleSimulator(playerTeam, slimeTeam);
         var result = await battleSimulator.StartAsync(message);
-
-
-        if (result.Winners == playerTeam)
-        {
-            var str = playerTeam.IncreaseExp(Character.GetExpBasedOnDefeatedCharacters(slimeTeam));
-            QuestRewards = [new TextReward(str)];
-        }
-
         return result.Winners == playerTeam;
     }
 }

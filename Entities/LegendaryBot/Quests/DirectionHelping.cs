@@ -136,7 +136,7 @@ public class DirectionHelping : Quest
                 .LoadAsync();
             QuestRewards =
             [
-                new TextReward(userTeam.IncreaseExp(Character.GetExpBasedOnDefeatedCharacters(blastTeam))),
+
                 new EntityReward([new Coin { Stacks = Character.GetCoinsBasedOnCharacters(blastTeam) }])
             ];
 
