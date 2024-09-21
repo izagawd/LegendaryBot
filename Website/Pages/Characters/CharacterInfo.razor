@@ -1,4 +1,4 @@
-@page "/inventory/characters/{CharacterNumber:int}"
+@page "/inventory/characters/{CharacterName}"
 @using System.Web
 @using Microsoft.AspNetCore.Authorization
 @using PublicInfo
@@ -40,7 +40,7 @@
         Boots
     }
 
-    [Parameter] public int CharacterNumber { get; set; }
+    [Parameter] public string CharacterName { get; set; }
 
     private WorkingWith CurrentlyWorkingWith { get; set; } = WorkingWith.Armor;
     protected CharacterInfoDto? Dto { get; set; }
@@ -57,7 +57,7 @@
             CurrentlyWorkingWith = asParsed;
         }
 
-        var result = await Http.GetAsync($"CharacterInfoPage/get?characterNumber={CharacterNumber}");
+        var result = await Http.GetAsync($"CharacterInfoPage/get?characterName={CharacterName}");
         if (!result.IsSuccessStatusCode)
             ErrorMessage = await result.Content.ReadAsStringAsync();
         else
@@ -261,7 +261,6 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
                             <p>@Dto.CharacterDto.Name</p>
                             <P>@(string.Concat(Enumerable.Repeat("\u2b50", Dto.CharacterDto.RarityNum)))</p>
                             <p>Level: @Dto.CharacterDto.Level</p>
-                            <p>Num @Dto.CharacterDto.Number</p>
                         </div>
                         @{
                             string? imageUrl;

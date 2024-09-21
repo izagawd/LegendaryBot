@@ -102,14 +102,9 @@ EXECUTE FUNCTION {functionName}();
     private async Task SetupDatabaseTriggersAsync()
     {
         await SetupNumberIncrementorForGearAsync();
-        await SetupNumberIncrementorForCharacterAsync();
+
     }
 
-    private Task SetupNumberIncrementorForCharacterAsync()
-    {
-        return SetupNumberIncrementorForAsync(nameof(Character),
-            nameof(Character.UserDataId), nameof(Character.Number));
-    }
 
     private Task SetupNumberIncrementorForGearAsync()
     {

@@ -31,7 +31,7 @@ public class EntityReward : Reward
         return new EntityReward(EntitiesToReward.Union(entityReward.EntitiesToReward));
     }
 
-    public static string GetDisplayString(IInventoryEntity entity)
+    public static string GetDisplayString(IInventoryEntity entity, UserData userData)
     {
         switch (entity)
         {
@@ -55,10 +55,11 @@ public class EntityReward : Reward
         userData.Inventory.AddRange(EntitiesToReward);
         userData.Inventory.MergeItemStacks();
 
+        
+        foreach (var i in EntitiesToReward)
+            stringBuilder.Append($"{GetDisplayString(i, userData)}\n");
 
-        foreach (var i in EntitiesToReward) stringBuilder.Append($"{GetDisplayString(i)}\n");
-
-
+        userData.SortDupeCharacters();
         return stringBuilder.ToString();
     }
 }

@@ -17,7 +17,7 @@ public partial class BlessingInfo
     public class CharacterDto
     {
         public long Id { get; set; }
-        public int Number { get; set; }
+
         public int TypeId { get; set; }
         public int RarityNum { get; set; }
 

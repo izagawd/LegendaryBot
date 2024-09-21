@@ -4,6 +4,7 @@ using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Rewards;
@@ -65,6 +66,13 @@ public class GiveMe : GeneralCommandClass
                     item.Stacks = 1;
                 if (createdType is Gear gear)
                     gear.Initialize(Rarity.FiveStar);
+                if (createdType is Character character)
+                {
+                    await DatabaseContext.Set<UserData>()
+                        .Where(j => j.Id == userData.Id)
+                        .Include(j => j.Characters.Where(k => k.TypeId == character.TypeId))
+                        .LoadAsync();
+                }
                 rewards.Add(new EntityReward([createdType]));
             }
 

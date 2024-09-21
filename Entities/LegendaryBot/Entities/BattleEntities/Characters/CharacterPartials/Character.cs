@@ -38,6 +38,16 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     [NotMapped] private float _health = 1;
 
+    public static int LookFor(string? characterName)
+    {
+        if (characterName is null)
+            return 0;
+        var simplified = characterName.Replace(" ", "");
+        return TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
+            .Where(i => i.Name.Replace(" ", "").Equals(simplified, StringComparison.OrdinalIgnoreCase))
+            .Select(i => i.TypeId)
+            .FirstOrDefault();
+    }
     private bool _shouldTakeExtraTurn;
 
     /// <summary>
@@ -62,7 +72,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         }
     }
 
-    public int Number { get; set; }
+    
 
     /// <summary>
     ///     Blessing currently equipped by character. Character of blessing must be set to this if useed in battle
@@ -309,8 +319,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             nextLevelExp = GetRequiredExperienceToNextLevel(Level);
         }
 
-        var num = Number != 0 ? $" [{Number}]" : string.Empty;
-        expGainText += $"{Name}{num} gained {experienceToGain} exp";
+        expGainText += $"{Name} gained {experienceToGain} exp";
         if (levelBefore != Level) expGainText += $", and moved from level {levelBefore} to level {Level}";
         var excessExp = 0;
         if (Experience > nextLevelExp)
@@ -479,6 +488,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     }
 
 
+    public int DupeCount { get; set; }
     public static int GetCoinsBasedOnCharacters(IEnumerable<Character> characters)
     {
         return characters.Select(i => i.CoinsToGainWhenKilled).Sum();

@@ -241,14 +241,13 @@
                                            PendingCharacter == character ? TheBorderToUse : borderCol;
                         var i1 = i;
                         <div class="team-character-div" style="border-color: @characterBor; background-color: @(WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgrey")">
-                            <a style="border-color:  inherit" href="/inventory/characters/@(character?.Number ?? 0)">
+                            <a style="border-color:  inherit" href="/inventory/characters/@(character?.Name ?? "nil")">
                                 <img style="border-color: inherit" src="@character?.ImageUrl" alt=""/>
                             </a>
                             <div class="paragraphs">
                                 <p>@(character?.Name ?? "EMPTY SLOT")</p>
                                 @if (character is not null)
                                 {
-                                    <p class="minor-info">Num @character.Number</p>
                                     <p class="minor-info">@(string.Concat(Enumerable.Repeat("\u2b50", character.RarityNum)))</p>
                                     <p class="minor-info">Lvl @character.Level</p>
                                 }
@@ -393,13 +392,12 @@
 
                                 {
                                     <div class="character-div">
-                                        <a  style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" href="/inventory/characters/@i.Number">
+                                        <a  style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" href="/inventory/characters/@i.Name">
                                             <img src="@i.ImageUrl" style="border-color: @(PendingCharacter== i ? TheBorderToUse : "inherit");
                                                 border-width: @(PendingCharacter == i ? "3px": "2px")" alt=""/>
                                         </a>
                                         <p>@i.Name</p>
                                         <p class="stars">@(string.Concat(Enumerable.Repeat("\u2b50", i.RarityNum)))</p>
-                                        <p>Num @i.Number</p>
                                         <p>Lvl @i.Level</p>
                                         <button style="@(PendingCharacter == i ? "background-color: gray" : "")" class="char-button" @onclick="() => PendingCharacter = i">Add</button>
                                     </div>

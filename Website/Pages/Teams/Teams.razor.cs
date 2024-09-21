@@ -8,7 +8,7 @@ public partial class Teams : ComponentBase
     {
         public string? Name { get; set; }
         public long Id { get; set; }
-        public int Number { get; set; }
+
         public string? ImageUrl { get; set; }
         public int Level { get; set; }
         public int RarityNum { get; set; }

@@ -59,12 +59,11 @@
                     @foreach (var i in BlessingData.Characters)
                     {
                         <div>
-                            <a href='/inventory/characters/@i.Number?equipment=@CharacterInfo.WorkingWith.Blessing.ToString()' style="width: 100%">
+                            <a href='/inventory/characters/@i.Name?equipment=@CharacterInfo.WorkingWith.Blessing.ToString()' style="width: 100%">
                                 <img src='@($"{Information.CharactersImagesDirectory}/{i.TypeId}.png")'/>
                             </a>
                             <p>@i.Name</p>
                             <p>@(string.Concat(Enumerable.Repeat("\u2b50", i.RarityNum)))</p>
-                            <p>Num @i.Number</p>
                             <button @onclick="() => UnequipAsync(i)" class="unequip-button">Unequip</button>
                         </div>
                     }
@@ -88,7 +87,7 @@
                 StateHasChanged();
                 await SnackBarService.DisplaySnackBarAsync(
                     new SnackBar.SnackBarParams
-                        ($"{characterDto.Name} num {characterDto.Number} has successfully unequipped the blessing!"));
+                        ($"{characterDto.Name}  has successfully unequipped the blessing!"));
             }
             else
             {

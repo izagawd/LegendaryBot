@@ -14,7 +14,7 @@ public partial class CharacterInfo
         public int RarityNum { get; set; }
         public int TypeId { get; set; }
         public Dictionary<WorkingWith, long?> TheEquippedOnes { get; set; }
-        public int Number { get; set; }
+
         public string Name { get; set; }
         public int Level { get; set; }
         [JsonIgnore] public string ImageUrl => $"{Information.CharactersImagesDirectory}/{TypeId}.png";

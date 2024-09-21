@@ -31,7 +31,7 @@ public partial class CharacterCommand
 
     public static void UpdateEmbed(DiscordEmbedBuilder builder, Character character)
     {
-        var description = $"Character number: {character.Number}\n";
+        var description = $"";
         foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<CharacterExpMaterial>())
             description += $"{i.Name}: {character.UserData!.Items.GetItemStacks(i.GetType())}\n";
 
@@ -161,11 +161,12 @@ public partial class CharacterCommand
     [Description("used to level up a character. Also used to display stats and blessing")]
     [BotCommandCategory(BotCommandCategory.Character)]
     public async ValueTask ExecuteLevelUp(CommandContext ctx,
-        [Parameter("character-num")] int characterNumber)
+        [Parameter("character-name")] string characterName)
     {
+        var typeIdToLookFor = Character.LookFor(characterName);
         Expression<Func<UserData, IEnumerable<Character>>> includeLambda = i =>
             i.Characters.Where(j =>
-                j.Number == characterNumber);
+                j.TypeId == typeIdToLookFor);
 
         var gottenUserData = await DatabaseContext.Set<UserData>()
             .Include(includeLambda)
@@ -187,7 +188,7 @@ public partial class CharacterCommand
             .WithTitle("Hmm")
             .WithImageUrl("attachment://levelupimage.png")
             .WithColor(gottenUserData.Color)
-            .WithDescription($"Unable to find character with the number \"{characterNumber}\"");
+            .WithDescription($"Unable to find character with the number \"{characterName}\"");
 
         if (gottenUserData.IsOccupied)
         {

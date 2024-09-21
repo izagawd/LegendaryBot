@@ -77,12 +77,8 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
     {
         entity.HasKey(i => i.Id);
 
-        entity.HasIndex(i => new { i.Number, i.UserDataId })
+        entity.HasIndex(i => new { i.TypeId, i.UserDataId })
             .IsUnique();
-        // generated on add even though a trigger handles it, just in case the trigger doesn't work
-        entity.Property(i => i.Number)
-            .ValueGeneratedOnAdd();
-
         entity.HasMany(i => i.Gears)
             .WithOne(i => i.Character)
             .HasForeignKey(i => i.CharacterId);

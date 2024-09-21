@@ -217,19 +217,20 @@ public class DiscordBot
 
                     var localUser = result.Result.User;
                     await using var postgre = new PostgreSqlContext();
-                    var userData = await postgre.Set<UserData>().FirstOrDefaultAsync(i => i.DiscordId == localUser.Id);
+                    var userData = await postgre.Set<UserData>()
+                        .Include(i => i.Characters.Where(j => j.TypeId == created.TypeId))
+                        .FirstOrDefaultAsync(i => i.DiscordId == localUser.Id);
                     var isNew = userData is null || userData.Tier == Tier.Unranked;
                     if (userData is null)
                     {
                         userData = new UserData(localUser.Id);
                         await postgre.Set<UserData>().AddAsync(userData);
                     }
-
-                    userData.Characters.Add(created);
+                    var text =  userData.ReceiveRewards([new EntityReward([created])]);
                     await postgre.SaveChangesAsync();
-                    var text = $"{localUser.Mention} claimed {created.Name}!";
+                
                     if (isNew)
-                        text += "Seems like you dont battle. Consider joining!";
+                        text += "\nSeems like you dont battle. Consider joining!";
 
                     await message.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embed)
                         .AddComponents(claimCharacter));

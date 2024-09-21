@@ -29,7 +29,7 @@ public class CharactersPageController(PostgreSqlContext post) : ControllerBase
                 Name = i.Name,
                 Level = i.Level,
                 TypeId = i.TypeId,
-                Number = i.Number,
+         
                 RarityNum = (int)Character.GetDefaultFromTypeId(i.TypeId).Rarity
             })
             .ToArray();

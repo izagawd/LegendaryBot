@@ -66,7 +66,6 @@ public class BlessingInfoPageController : ControllerBase
             .Select(i => new BlessingInfo.CharacterDto
             {
                 Id = i.Id,
-                Number = i.Number,
                 RarityNum = (int)i.Rarity,
                 TypeId = i.TypeId,
                 Name = i.Name

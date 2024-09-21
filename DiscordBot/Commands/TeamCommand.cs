@@ -3,6 +3,7 @@ using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Entities.LegendaryBot;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -60,9 +61,11 @@ public class TeamCommand : GeneralCommandClass
     public async ValueTask ExecuteChangeTeamCharacter(CommandContext context,
         [Parameter("team-name")] [Description("Name of team you want to remove character from")]
         string teamName, [Parameter("team-slot")] int teamSlot,
-        [Parameter("character-num")] [Description("Number of the character. null if you are removng from slot")]
-        int? characterNumber = null)
+        [Parameter("character-name")] [Description("Name of the character. ignore if you are removng from slot")]
+        string? characterName = null)
     {
+        int typeIdToLookFor = Character.LookFor(characterName);
+       
         var userData = await DatabaseContext.Set<UserData>()
             .Include(i => i.PlayerTeams.Where(j => j.TeamName.ToLower()
                                                    == teamName.ToLower()))
@@ -71,8 +74,9 @@ public class TeamCommand : GeneralCommandClass
             .Include(i => i.EquippedPlayerTeam)
             .ThenInclude(i => i!.TeamMemberships)
             .ThenInclude(i => i.Character)
+            
             .Include(i => i.Characters.Where(j =>
-                j.Number == characterNumber))
+                typeIdToLookFor == j.TypeId))
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -119,11 +123,11 @@ public class TeamCommand : GeneralCommandClass
 
         var character = userData
             .Characters
-            .FirstOrDefault(i => i.Number == characterNumber);
+            .FirstOrDefault(i => i.TypeId == typeIdToLookFor);
 
-        if (character is null && characterNumber is not null)
+        if (character is null && characterName is not null)
         {
-            embed.WithDescription($"character with number {characterNumber} not found");
+            embed.WithDescription($"character with name {characterName} not found");
             await context.RespondAsync(embed);
             return;
         }
@@ -134,7 +138,7 @@ public class TeamCommand : GeneralCommandClass
 
         string text;
         if (character is null && prevChar is not null)
-            text = $"{prevChar} with number {prevChar.Number} has been removed from team {gottenTeam.TeamName}!";
+            text = $"{prevChar.Name} has been removed from team {gottenTeam.TeamName}!";
         else if (character is null)
             text = $"No character in slot {teamSlot} of team {gottenTeam.TeamName}";
         else

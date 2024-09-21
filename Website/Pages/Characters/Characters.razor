@@ -53,7 +53,7 @@
     {
         yield return string.Concat(Enumerable.Repeat("\u2b50", characterDto.RarityNum));
         yield return $"Lvl {characterDto.Level}";
-        yield return $"Num {characterDto.Number}";
+
     }
 
     private SortType SortTypeVal { get; set; } = SortType.Level;
@@ -64,7 +64,7 @@
 
 <InventoryEntitiesShower
 
-    LinkUrlDel='dto => $"/inventory/characters/{dto.Number}"' Additionals="AdditionalStuff" BackgroundCol="dto => dto.Color" ObjectsToRender="() => UsingCharacterCollection"
+    LinkUrlDel='dto => $"/inventory/characters/{dto.Name}"' Additionals="AdditionalStuff" BackgroundCol="dto => dto.Color" ObjectsToRender="() => UsingCharacterCollection"
     NameDelegate="dto => dto.Name"
     ImageUrlDelegate="dto => dto.ImageUrl"
     TObjectType="CharacterDto">

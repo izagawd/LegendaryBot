@@ -77,7 +77,7 @@ public class TeamPageController : ControllerBase
                 ImageUrl = k.ImageUrl,
                 Level = k.Level,
                 Name = k.Name,
-                Number = k.Number,
+            
                 RarityNum = (int)k.Rarity
             }).ToArray(),
             Teams = userData.PlayerTeams.Select(j => new Teams.TeamDto

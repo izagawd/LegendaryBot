@@ -158,12 +158,14 @@ public class CharacterInfoPageController : ControllerBase
 
     [Authorize]
     [HttpGet("get")]
-    public async Task<IActionResult> GetTeamDataAsync([FromQuery] int characterNumber)
+    public async Task<IActionResult> GetCharacterDataAsync([FromQuery] string characterName)
     {
+        var typeIdToLookFor
+            = Character.LookFor(characterName);
         var userDataId = User.GetDiscordUserId();
         var gotten = await postgreSqlContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
-            .Include(i => i.Characters.Where(j => j.Number == characterNumber))
+            .Include(i => i.Characters.Where(j => j.TypeId == typeIdToLookFor))
             .Include(i => i.Gears)
             .ThenInclude(i => i.Stats)
             .Include(i => i.Gears)
@@ -174,9 +176,10 @@ public class CharacterInfoPageController : ControllerBase
 
         if (gotten is null) return BadRequest("Your data was not found in database");
         if (gotten.IsOccupied) return BadRequest("You are occupied");
-        var character = gotten.Characters.FirstOrDefault(i => i.Number == characterNumber);
+        var character = gotten.Characters
+            .FirstOrDefault(i => i.TypeId == typeIdToLookFor);
 
-        if (character is null) return BadRequest($"Character with number {characterNumber} not found");
+        if (character is null) return BadRequest($"Character with name {characterName} not found");
 
         var dto = new CharacterInfo.CharacterInfoDto();
         dto.CharacterDto = new CharacterInfo.CharacterDto
@@ -186,7 +189,7 @@ public class CharacterInfoPageController : ControllerBase
             TypeId = character.TypeId,
             Level = character.Level,
             Name = character.Name,
-            Number = character.Number
+
         };
         var theDic = dto.CharacterDto.TheEquippedOnes = new Dictionary<CharacterInfo.WorkingWith, long?>();
         foreach (var i in character.Gears) theDic[GetWorkingWithValue(i.TypeId)] = i.Id;

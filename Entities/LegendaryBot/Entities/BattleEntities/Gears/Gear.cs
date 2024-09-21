@@ -50,7 +50,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public string DisplayString =>
         GetDisplayString(Name, Stats, Rarity,
             Number == 0 ? null : Number, Character?.Name,
-            Character?.Number, MainStat);
+            MainStat);
 
     public long Id { get; set; }
     public abstract int TypeId { get; protected init; }
@@ -71,7 +71,7 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
     public long UserDataId { get; set; }
 
     public static string GetDisplayString(string name, IEnumerable<GearStat> gearStats, Rarity rarity
-        , int? number, string? characterName, int? characterNumber, GearStat? mainStat = null)
+        , int? number, string? characterName,  GearStat? mainStat = null)
     {
         var enumerable = gearStats as GearStat[] ?? gearStats.ToArray();
         mainStat = mainStat ?? enumerable.First(i => i.IsMainStat is not null);
@@ -106,8 +106,6 @@ public abstract class Gear : IInventoryEntity, IGuidPrimaryIdHaver
             stringToUse.Append(zaString);
         }
 
-        if (characterName is not null && characterNumber is not null)
-            stringToUse.Append($"\nEquipped By: {characterName} [{characterNumber}]");
         stringToUse.Append("```");
         return stringToUse.ToString();
     }

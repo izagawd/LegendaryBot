@@ -10,7 +10,7 @@ public partial class Characters
     {
         [JsonPropertyName("1")] public string Name { get; set; } = null!;
 
-        [JsonPropertyName("2")] public int Number { get; set; }
+
 
         [JsonPropertyName("3")] public int RarityNum { get; set; }
 

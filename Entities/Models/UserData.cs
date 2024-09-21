@@ -86,6 +86,24 @@ public class UserData : ICanBeLeveledUp
     public List<Gear> Gears { get; } = new();
     public List<Character> Characters { get; } = new();
 
+    public void SortDupeCharacters()
+    {
+        foreach (var i in Characters.GroupBy(i => i.GetType()))
+        {
+            var totalCharacters = i.ToArray();
+            if (totalCharacters.Length > 1)
+            {
+                var mainCharacter = totalCharacters
+                    .MinBy(j => j.DateAcquired)!;
+                mainCharacter.DupeCount +=
+                    totalCharacters.Where(j => j != mainCharacter)
+                        .Select(j => j.DupeCount + 1)
+                        .Sum();
+            }
+        }
+      
+            
+    }
     public List<Blessing> Blessings { get; } = new();
 
 

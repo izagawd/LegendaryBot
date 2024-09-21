@@ -70,12 +70,13 @@ public class Display : GeneralCommandClass
     [Description("Displays a character's gears")]
     [BotCommandCategory(BotCommandCategory.Character)]
     public async ValueTask ExecuteDisplayCharacterGear(CommandContext context,
-        [Parameter("character-num")] int characterNumber)
+        [Parameter("character-name")] string characterName)
     {
+        var typeIdToLookFor = Character.LookFor(characterName);
         var userData = await DatabaseContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Characters
-                .Where(j => j.Number == characterNumber))
+                .Where(j => j.TypeId == typeIdToLookFor))
             .ThenInclude(j => j.Gears)
             .ThenInclude(j => j.Stats)
             .Include(i => i.Characters)
@@ -94,13 +95,13 @@ public class Display : GeneralCommandClass
         var character = userData.Characters.FirstOrDefault();
         if (character is null)
         {
-            embed.WithDescription($"Character with number {characterNumber} not found");
+            embed.WithDescription($"Character with number {characterName} not found");
             await context.RespondAsync(embed);
             return;
         }
 
         var count = 0;
-        embed.WithTitle($"{character.Name} [{character.Number}]'s gears");
+        embed.WithTitle($"{character.Name}'s gears");
         foreach (var i in character.Gears.OrderBy(i => i.Name))
         {
             embed.AddField(i.Name, i.DisplayString, true);
@@ -281,10 +282,10 @@ public class Display : GeneralCommandClass
 
         await ExecuteDisplayAsync(context, userData.Characters
                 .Where(i => i.Name.ToLower().Replace(" ", "").Contains(simplified))
-                .OrderBy(i => i.Number)
+                .OrderByDescending(i => i.Rarity)
                 .Select(i =>
                 {
-                    var toReturn = $"{i.Number} • {i.Name} • Lvl {i.Level}";
+                    var toReturn = $"{i.Name} • Lvl {i.Level}";
                     if (i.Blessing is not null)
                         toReturn += $" • {i.Blessing.Name}";
                     return toReturn;
@@ -391,7 +392,7 @@ public class Display : GeneralCommandClass
                     value += "EMPTY SLOT";
                 else
                     value +=
-                        $"{membership.Character.Number} • {membership.Character.Name} • Lvl {membership.Character.Level}";
+                        $"{membership.Character.Name} • Lvl {membership.Character.Level}";
 
                 value += "`\n";
             }
