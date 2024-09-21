@@ -56,7 +56,7 @@ public static class ImageFunctions
         catch (HttpRequestException e)
         {
             var alternateImage =
-                await GetImageFromUrlAsync($"{Information.ApiDomainName}/battle_images/moves/guilotine.png");
+                await GetImageFromUrlAsync($"{Information.BattleImagesDirectory}/dead_x.png");
             CachedImages.Set(url, alternateImage, EntryOptions);
             return alternateImage.Clone();
         }
