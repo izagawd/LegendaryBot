@@ -23,17 +23,16 @@ public class PostgreSqlContext : DbContext
     /// <summary>
     ///     this should be called before any query if u want to ever use this method
     /// </summary>
-    /// <param name="userId"> the user id u want  to refresh to a new day</param>
-    public async Task CheckForNewDayAsync(ulong userId)
+    /// <param name="discordUserId"> the user id u want  to refresh to a new day</param>
+    public async Task CheckForNewDayAsync(ulong discordUserId)
     {
         var user = await Set<UserData>()
             .Include(i => i.Quests)
-            .FirstOrDefaultAsync(i => i.DiscordId == userId);
+            .FirstOrDefaultAsync(i => i.DiscordId == discordUserId);
         if (user is null)
             return;
         var rightNowUtc = DateTime.UtcNow;
         if (user.LastTimeQuestWasChecked.Date == rightNowUtc.Date) return;
-
         user.Quests.Clear();
         var availableQuests = TypesFunction.GetDefaultObjectsAndSubclasses<Quest>()
             .Select(i => i.GetType())
@@ -42,8 +41,7 @@ public class PostgreSqlContext : DbContext
             .Take(4);
 
         foreach (var i in availableQuests) user.Quests.Add((Quest)Activator.CreateInstance(i)!);
-
-
+        
         user.LastTimeQuestWasChecked = DateTime.UtcNow;
     }
 
