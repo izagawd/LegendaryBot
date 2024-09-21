@@ -3,6 +3,7 @@ using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.LegendaryBot.Rewards;
 
 namespace DiscordBot.Commands.Region;
 
@@ -15,6 +16,11 @@ public class BurgsKingdom : Region
         typeof(RoyalKnight),
         typeof(Blast), typeof(Thana), typeof(Cheerleader)
     ];
+
+    public override IEnumerable<Reward> GetRewardsAfterBattle(Character main, Tier combatTier)
+    {
+        throw new NotImplementedException();
+    }
 
     public override Team GenerateCharacterTeamFor(Type type, out Character main, Tier combatTier)
     {

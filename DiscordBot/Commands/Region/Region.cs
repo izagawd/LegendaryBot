@@ -2,6 +2,7 @@ using BasicFunctionality;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.LegendaryBot.Rewards;
 
 namespace DiscordBot.Commands.Region;
 
@@ -44,6 +45,7 @@ public abstract class Region
         }
     }
 
+    public abstract IEnumerable<Reward> GetRewardsAfterBattle(Character main, Tier combatTier);
     public virtual Tier TierRequirement => Tier.Bronze;
     public abstract IEnumerable<Type> ObtainableCharacters { get; }
 

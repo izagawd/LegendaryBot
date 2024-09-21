@@ -129,71 +129,18 @@ public class Explore : GeneralCommandClass
 
 
             var expGainText = userTeam.IncreaseExp(expToGain);
-            character.Level = 1;
-            List<Reward> rewards =
-            [
-                new EntityReward([character, new Coin { Stacks = coinsToGain }]),
-                ..enemyTeam.SelectMany(i => i.DroppedRewards), new UserExperienceReward(250)
-            ];
-            if (character.Blessing is not null) rewards.Add(new EntityReward([character.Blessing]));
-
-            var otherChar = enemyTeam
-                .Where(i => i != character)
-                .MinBy(_ => BasicFunctions.GetRandomNumberInBetween(0, 100));
-            if (otherChar is not null)
-            {
-                otherChar.Level = 1;
-                rewards.Add(new EntityReward([otherChar]));
-            }
 
 
+
+
+
+
+            IEnumerable<Reward> rewards = [new EntityReward([new Coin { Stacks = 1000 * (int)userData.Tier }])];
             var rewardText = userData.ReceiveRewards(rewards);
-
-            rewardText += $"\nYou explored a bit more after recruiting {character.Name}\n";
-
-            rewards.Clear();
+            rewardText += $"\nYou explored a bit more after recruiting {character.Name}!\n";
 
 
-            var expMatCount = BasicFunctions.GetRandomNumberInBetween(3, 5);
-            var gearCount = BasicFunctions.GetRandomNumberInBetween(1, 2);
-
-            foreach (var _ in Enumerable.Range(0, gearCount))
-            {
-                var gear
-                    = (Gear)Activator.CreateInstance(BasicFunctions.RandomChoice(Gear.AllGearTypes))!;
-                Rarity gearRarityToGive;
-                switch (combatTier)
-                {
-                    case Tier.Unranked:
-                    case Tier.Bronze:
-                        gearRarityToGive = Rarity.OneStar;
-                        break;
-                    case Tier.Silver:
-                        gearRarityToGive = BasicFunctions.RandomChoice([Rarity.OneStar, Rarity.TwoStar]);
-                        break;
-                    case Tier.Gold:
-                        gearRarityToGive = BasicFunctions.RandomChoice([Rarity.TwoStar, Rarity.ThreeStar]);
-                        break;
-                    case Tier.Platinum:
-                        gearRarityToGive = BasicFunctions.RandomChoice([Rarity.ThreeStar, Rarity.FourStar]);
-                        break;
-                    case Tier.Diamond:
-                        gearRarityToGive = BasicFunctions.RandomChoice([Rarity.FourStar, Rarity.FiveStar]);
-                        break;
-                    case Tier.Divine:
-                        gearRarityToGive = Rarity.FiveStar;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-
-                gear.Initialize(gearRarityToGive);
-                rewards.Add(new EntityReward([gear]));
-            }
-
-            foreach (var _ in Enumerable.Range(0, expMatCount))
-                rewards.Add(new EntityReward([new HerosKnowledge { Stacks = 1 }]));
-            rewards.Add(new EntityReward([new Coin { Stacks = 5000 }]));
+            
 
 
             await DatabaseContext.Set<Item>()
