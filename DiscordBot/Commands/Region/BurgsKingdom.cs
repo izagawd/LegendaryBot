@@ -12,7 +12,7 @@ public class BurgsKingdom : Region
 {
     public override string Name => "Burgs Kingdom";
 
-    public override IEnumerable<Type> ObtainableCharacters =>
+    public override IEnumerable<Type> PossibleEnemies =>
     [
         typeof(RoyalKnight),
         typeof(Blast), typeof(Thana), typeof(Cheerleader)

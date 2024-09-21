@@ -92,24 +92,17 @@ public class Explore : GeneralCommandClass
         await MakeOccupiedAsync(userData);
 
 
-        var groups = region.ObtainableCharacters
+        var groups = region.PossibleEnemies
             .Select(i => (Character)TypesFunction.GetDefaultObject(i))
             .GroupBy(i => i.Rarity)
             .ToImmutableArray();
-        var characterGrouping = BasicFunctions.GetRandom(new Dictionary<IGrouping<Rarity, Character>, double>
-        {
-            { groups.First(i => i.Key == Rarity.ThreeStar), 85 },
-            { groups.First(i => i.Key == Rarity.FourStar), 14 },
-            { groups.First(i => i.Key == Rarity.FiveStar), 1 }
-        });
-        var characterType
-            = BasicFunctions.RandomChoice(characterGrouping.Select(i => i)).GetType();
+        var characterType = BasicFunctions.RandomChoice(region.PossibleEnemies);
 
         var combatTier = userData.Tier;
         var enemyTeam = region.GenerateCharacterTeamFor(characterType, out var mainEnemyCharacter, combatTier);
         embedToBuild
             .WithTitle("Keep your guard up!")
-            .WithDescription($"{mainEnemyCharacter.Name} {string.Concat(Enumerable.Repeat("\u2b50", (int) mainEnemyCharacter.Rarity))} has appeared!")
+            .WithDescription($"{mainEnemyCharacter.Name} has appeared!")
             .WithFooter($"Note: exploring costs {requiredStamina} stamina");
         await ctx.RespondAsync(embedToBuild);
         var message = await ctx.GetResponseAsync();

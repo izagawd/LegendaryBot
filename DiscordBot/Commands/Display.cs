@@ -212,6 +212,11 @@ public class Display : GeneralCommandClass
             return;
         }
 
+        foreach (var i in userData.Items.OfType<Energy>())
+        {
+            i.RefreshEnergyValue();
+        }
+
         await ExecuteDisplayAsync(context, userData.Items.Where(i => i.Name
                     .Replace(" ", "")
                     .Contains(simplified, StringComparison.CurrentCultureIgnoreCase))

@@ -12,7 +12,7 @@ public class RogueHaven : Region
 {
     public override string Name => "Rogue Haven";
 
-    public override IEnumerable<Type> ObtainableCharacters =>
+    public override IEnumerable<Type> PossibleEnemies =>
     [
         typeof(Roxy),
         typeof(Takeshi), typeof(CommanderJean)
