@@ -7,6 +7,7 @@ using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Commands.Trees;
 using DSharpPlus.Entities;
 using Entities.LegendaryBot;
+using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
@@ -29,11 +30,17 @@ public partial class CharacterCommand : GeneralCommandClass
         [Parameter("character-num")] int characterNumber,
         [Parameter("blessing-name")] string blessingName)
     {
+
+        var simplifiedName = blessingName.Replace(" ", "");
+        var possibleBlessingTypeIds = TypesFunction.GetDefaultObjectsAndSubclasses<Blessing>()
+            .Where(i => i.Name.Replace(" ", "").Equals(simplifiedName, StringComparison.CurrentCultureIgnoreCase))
+            .Select(i => i.TypeId)
+            .ToArray();
         var gotten = await DatabaseContext.Set<UserData>()
             .Include(i => i.Characters.Where(j =>
                 j.Number == characterNumber))
             .ThenInclude(i => i.Blessing)
-            .Include(i => i.Blessings)
+            .Include(i => i.Blessings.Where(j => possibleBlessingTypeIds.Contains(j.TypeId)))
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (gotten is null || gotten.Tier == Tier.Unranked)
         {
@@ -48,7 +55,6 @@ public partial class CharacterCommand : GeneralCommandClass
             return;
         }
 
-        var simplifiedName = blessingName.Replace(" ", "").ToLower();
         var possibleBlessings = gotten.Blessings
             .Where(i => i.Name.ToLower().Replace(" ", "") == simplifiedName)
             .ToArray();
