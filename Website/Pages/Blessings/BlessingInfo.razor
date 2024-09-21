@@ -59,7 +59,7 @@
                     @foreach (var i in BlessingData.Characters)
                     {
                         <div>
-                            <a href='/inventory/characters/@i.Name?equipment=@CharacterInfo.WorkingWith.Blessing.ToString()' style="width: 100%">
+                            <a href='/inventory/characters/@i.Name.Replace(" ","")?equipment=@CharacterInfo.WorkingWith.Blessing.ToString()' style="width: 100%">
                                 <img src='@($"{Information.CharactersImagesDirectory}/{i.TypeId}.png")'/>
                             </a>
                             <p>@i.Name</p>

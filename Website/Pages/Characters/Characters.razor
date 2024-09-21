@@ -64,7 +64,7 @@
 
 <InventoryEntitiesShower
 
-    LinkUrlDel='dto => $"/inventory/characters/{dto.Name}"' Additionals="AdditionalStuff" BackgroundCol="dto => dto.Color" ObjectsToRender="() => UsingCharacterCollection"
+    LinkUrlDel='dto => $"/inventory/characters/{dto.Name.Replace(" ","")}"' Additionals="AdditionalStuff" BackgroundCol="dto => dto.Color" ObjectsToRender="() => UsingCharacterCollection"
     NameDelegate="dto => dto.Name"
     ImageUrlDelegate="dto => dto.ImageUrl"
     TObjectType="CharacterDto">
