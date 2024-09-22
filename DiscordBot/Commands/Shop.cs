@@ -8,6 +8,7 @@ using Entities.LegendaryBot.Entities;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.LegendaryBot.Entities.Items;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -89,6 +90,7 @@ public class ShopCommand : GeneralCommandClass
         new ShopItem(new Takeshi())
     ];
   
+    
     [Command("shop")]
     [Description("Shop characters or items")]
     [BotCommandCategory(BotCommandCategory.Battle)]
@@ -120,8 +122,12 @@ public class ShopCommand : GeneralCommandClass
         }
         else
         {
+            int[] typeIdsToLookFor = ShopItems.Select(i => i.ItemSample)
+                .OfType<Character>().Select(i => i.TypeId).ToArray();
             var userData = await DatabaseContext.Set<UserData>()
-                
+                .Include(i => i.Items.Where(j => j is DivineShard || j is Coin))
+                .Include(i => 
+                    i.Characters.Where(j => typeIdsToLookFor.Contains(j.TypeId)))
                 .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
 
             if (userData is null)
