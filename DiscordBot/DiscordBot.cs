@@ -131,20 +131,14 @@ public class DiscordBot
                 {
                     spawnInfo.MessageCount = 0;
                     ChannelSpawnInfoDictionary[args.Channel.Id] = spawnInfo;
-                    var groups = TypesFunction
-                        .GetDefaultObjectsAndSubclasses<Character>()
-                        .Where(i => i.CanSpawnNormally)
-                        .GroupBy(i => i.Rarity)
-                        .ToImmutableArray();
-
-                    var groupToUse = BasicFunctions.GetRandom(new Dictionary<IGrouping<Rarity, Character>, double>
-                    {
-                        { groups.First(i => i.Key == Rarity.ThreeStar), 5 },
-                        { groups.First(i => i.Key == Rarity.FourStar), 95 },
-                    });
 
                     var randomCharacterType
-                        = BasicFunctions.RandomChoice(groupToUse.Select(i => i)).GetType();
+                        = BasicFunctions
+                            .RandomChoice(
+                                TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
+                                    .Where(i => i.CanSpawnNormally && i.Rarity == Rarity.FourStar)
+                                    .Select(i => i.GetType()));
+                        
                     var created = (Character)Activator.CreateInstance(randomCharacterType)!;
                     await using var stream = new MemoryStream();
                     using var image = await ImageFunctions.GetImageFromUrlAsync(created.ImageUrl);
