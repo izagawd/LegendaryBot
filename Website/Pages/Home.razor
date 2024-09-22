@@ -49,10 +49,10 @@
             <div>
                 <img style="border-color: @(Serv.WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" src="@_homePageData.FavoriteAvatarUrl" alt=""/>
                 <div>
-                    <p>Level: @_homePageData.AdventurerLevel</p>
-                    <p>Coins: @_homePageData.Coins</p>
-                    <p>Divine Shards: @_homePageData.DivineShards</p>
-                    <p>Stamina: @_homePageData.Stamina</p>
+                    <p>Level: @_homePageData.AdventurerLevel.ToString("N0")</p>
+                    <p>Coins: @_homePageData.Coins.ToString("N0")</p>
+                    <p>Divine Shards: @_homePageData.DivineShards.ToString("N0")</p>
+                    <p>Stamina: @_homePageData.Stamina.ToString("N0")</p>
                 </div>
             </div>
         </div>

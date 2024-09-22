@@ -221,7 +221,7 @@ public class Display : GeneralCommandClass
         await ExecuteDisplayAsync(context, userData.Items.Where(i => i.Name
                     .Replace(" ", "")
                     .Contains(simplified, StringComparison.CurrentCultureIgnoreCase))
-                .Select(i => $"Name • {i.Name} • Stacks • {i.Stacks}"), 20,
+                .Select(i => $"Name • {i.Name} • Stacks • {i.Stacks:N0}"), 20,
             "\n", "Items", userData.Color);
     }
 

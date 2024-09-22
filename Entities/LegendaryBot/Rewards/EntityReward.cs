@@ -42,7 +42,7 @@ public class EntityReward : Reward
             case Character chara:
                 return $"{chara.Name} • Lvl {chara.Level}";
             case Item item:
-                return $"{item.Name} • Stacks: {item.Stacks}";
+                return $"{item.Name} • Stacks: {item.Stacks:N0}";
             case Blessing blessing:
                 return $"{blessing.Name}";
             case Gear gear:

@@ -355,7 +355,7 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
                                     <p>@i.Name</p>
                                     <p>@(string.Concat(Enumerable.Repeat("\u2b50", i.RarityNum)))</p>
                                     <p>Remaining: @i.RemainingStacks</p>
-                                    <p>Stacks: @i.Stacks</p>
+                                    <p>Stacks: @(i.Stacks.ToString("N0"))</p>
                                     @if (i.RemainingStacks > 0)
                                     {
                                         <button @onclick="() => OnEquipItem(i)">Equip</button>

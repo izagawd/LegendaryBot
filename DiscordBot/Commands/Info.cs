@@ -90,8 +90,8 @@ public class Info : GeneralCommandClass
             .AddField("Tier", $"`{userData.Tier}`", true)
             .AddField("Date Started", $"`{userData.StartTime}`", true)
             .AddField("Time Till Next Day", $"`{BasicFunctions.TimeTillNextDay()}`", true)
-            .AddField("Stamina", $"`{stamina.Stacks}`", true)
-            .AddField("Divine Shards", $"`{userData.Items.GetItemStacks(typeof(DivineShard))}`")
+            .AddField("Stamina", $"`{stamina.Stacks:N0}`", true)
+            .AddField("Divine Shards", $"`{userData.Items.GetItemStacks(typeof(DivineShard)):N0}`")
             .WithImageUrl("attachment://info.png")
             .WithTimestamp(DateTime.Now);
         using var image = await GetInfoAsync(userData, author);
