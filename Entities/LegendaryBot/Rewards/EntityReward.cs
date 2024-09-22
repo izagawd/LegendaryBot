@@ -58,8 +58,10 @@ public class EntityReward : Reward
             .OfType<Item>()
             .Select(i => i.TypeId)
             .ToArray();
-        var gottenCharactersTypeIds = EntitiesToReward.OfType<Character>()
+        var gottenCharactersTypeIds = EntitiesToReward
+            .OfType<Character>()
             .Select(i => i.TypeId)
+            .Distinct()
             .ToArray();
         await userDataQueryable
             .Where(i => i.Id == userData.Id)
