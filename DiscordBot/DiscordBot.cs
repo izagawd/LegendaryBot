@@ -46,8 +46,8 @@ public class DiscordBot
     private const ulong SlenderId = 334412512919420928;
 
 
-    private const int MessagesTillExecution = 30;
-    private const float MessageCoolDown = 1.5f;
+    private const int MessagesTillExecution = 60;
+    private const float MessageCoolDown = 2f;
     private static readonly ConcurrentDictionary<ulong, ChannelSpawnInfo> ChannelSpawnInfoDictionary = new();
 
     private static readonly ConcurrentDictionary<ulong, CharacterExpGainInfo> ExpMatGive = new();
@@ -178,9 +178,8 @@ public class DiscordBot
 
                     var groupToUse = BasicFunctions.GetRandom(new Dictionary<IGrouping<Rarity, Character>, double>
                     {
-                        { groups.First(i => i.Key == Rarity.ThreeStar), 85 },
-                        { groups.First(i => i.Key == Rarity.FourStar), 14 },
-                        { groups.First(i => i.Key == Rarity.FiveStar), 1 }
+                        { groups.First(i => i.Key == Rarity.ThreeStar), 5 },
+                        { groups.First(i => i.Key == Rarity.FourStar), 95 },
                     });
 
                     var randomCharacterType
