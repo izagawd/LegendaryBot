@@ -242,7 +242,7 @@
                         var i1 = i;
                         <div class="team-character-div" style="border-color: @characterBor; background-color: @(WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgrey")">
                             <a style="border-color:  inherit"
-                               href="/inventory/characters/@(character?.Name?.Replace(" ","") ?? "nil")">
+                               href="/inventory/characters/@(character?.TypeId ?? 1)">
                                 <img style="border-color: inherit" src="@character?.ImageUrl" alt=""/>
                             </a>
                             <div class="paragraphs">
@@ -393,7 +393,7 @@
 
                                 {
                                     <div class="character-div">
-                                        <a  style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" href='/inventory/characters/@i.Name?.Replace(" ","")'>
+                                        <a  style="border-color: @(WebsiteTheme == WebsiteTheme.Dark ? "white" : "black")" href='/inventory/characters/@i.TypeId'>
                                             <img src="@i.ImageUrl" style="border-color: @(PendingCharacter== i ? TheBorderToUse : "inherit");
                                                 border-width: @(PendingCharacter == i ? "3px": "2px")" alt=""/>
                                         </a>

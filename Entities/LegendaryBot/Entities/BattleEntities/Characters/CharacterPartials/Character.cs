@@ -488,7 +488,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     }
 
 
-    public int DupeCount { get; set; }
     public static int GetCoinsBasedOnCharacters(IEnumerable<Character> characters)
     {
         return characters.Select(i => i.CoinsToGainWhenKilled).Sum();

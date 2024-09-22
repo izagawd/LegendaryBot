@@ -75,6 +75,7 @@ public class TeamPageController : ControllerBase
             {
                 Id = k.Id,
                 ImageUrl = k.ImageUrl,
+                TypeId = k.TypeId,
                 Level = k.Level,
                 Name = k.Name,
             

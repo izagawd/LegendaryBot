@@ -96,13 +96,7 @@ public class UserData : ICanBeLeveledUp
             {
                 var mainCharacter = totalCharacters
                     .MinBy(j => j.DateAcquired)!;
-                var dupes =
-                    totalCharacters.Where(j => j != mainCharacter).ToArray();
-                mainCharacter.DupeCount +=
-                        dupes
-                        .Select(j => j.DupeCount + 1)
-                        .Sum();
-                Characters.RemoveAll(j => dupes.Contains(j));
+                Characters.RemoveAll(j => j != mainCharacter);
             }
         }
       

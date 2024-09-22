@@ -6,6 +6,7 @@ public partial class Teams : ComponentBase
 {
     public class CharacterDto
     {
+        public int TypeId { get; set; }
         public string? Name { get; set; }
         public long Id { get; set; }
 

@@ -158,10 +158,9 @@ public class CharacterInfoPageController : ControllerBase
 
     [Authorize]
     [HttpGet("get")]
-    public async Task<IActionResult> GetCharacterDataAsync([FromQuery] string characterName)
+    public async Task<IActionResult> GetCharacterDataAsync([FromQuery] int characterTypeId)
     {
-        var typeIdToLookFor
-            = Character.LookFor(characterName);
+        var typeIdToLookFor = characterTypeId;
         var userDataId = User.GetDiscordUserId();
         var gotten = await postgreSqlContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
@@ -179,7 +178,7 @@ public class CharacterInfoPageController : ControllerBase
         var character = gotten.Characters
             .FirstOrDefault(i => i.TypeId == typeIdToLookFor);
 
-        if (character is null) return BadRequest($"Character with name {characterName} not found");
+        if (character is null) return BadRequest($"Character with type id {typeIdToLookFor} not found");
 
         var dto = new CharacterInfo.CharacterInfoDto();
         dto.CharacterDto = new CharacterInfo.CharacterDto

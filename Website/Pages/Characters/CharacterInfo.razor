@@ -1,4 +1,4 @@
-@page "/inventory/characters/{CharacterName}"
+@page "/inventory/characters/{CharacterTypeId:int}"
 @using System.Web
 @using Microsoft.AspNetCore.Authorization
 @using PublicInfo
@@ -40,7 +40,7 @@
         Boots
     }
 
-    [Parameter] public string CharacterName { get; set; }
+    [Parameter] public int CharacterTypeId { get; set; }
 
     private WorkingWith CurrentlyWorkingWith { get; set; } = WorkingWith.Armor;
     protected CharacterInfoDto? Dto { get; set; }
@@ -57,7 +57,7 @@
             CurrentlyWorkingWith = asParsed;
         }
 
-        var result = await Http.GetAsync($"CharacterInfoPage/get?characterName={CharacterName}");
+        var result = await Http.GetAsync($"CharacterInfoPage/get?characterTypeId={CharacterTypeId}");
         if (!result.IsSuccessStatusCode)
             ErrorMessage = await result.Content.ReadAsStringAsync();
         else
