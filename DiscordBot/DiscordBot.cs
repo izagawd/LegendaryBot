@@ -172,7 +172,6 @@ public class DiscordBot
                     var localUser = result.Result.User;
                     await using var postgre = new PostgreSqlContext();
                     var userData = await postgre.Set<UserData>()
-                        .Include(i => i.Characters.Where(j => j.TypeId == created.TypeId))
                         .FirstOrDefaultAsync(i => i.DiscordId == localUser.Id);
                     var isNew = userData is null || userData.Tier == Tier.Unranked;
                     if (userData is null)
