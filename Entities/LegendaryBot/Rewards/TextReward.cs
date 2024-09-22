@@ -17,8 +17,8 @@ public class TextReward : Reward
         return new TextReward($"{Text}\n{textReward.Text}\n");
     }
 
-    public override string GiveRewardTo(UserData userData)
+    public override Task<string> GiveRewardToAsync(UserData userData, IQueryable<UserData> userDataQueryable)
     {
-        return Text;
+        return Task.FromResult(Text);
     }
 }

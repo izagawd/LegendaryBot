@@ -3,12 +3,14 @@ using System.Text;
 using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity.Extensions;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.Items;
+using Entities.LegendaryBot.Rewards;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -148,8 +150,78 @@ public class ShopCommand : GeneralCommandClass
             }
 
             var itemToBuy = ShopItems[itemNumber.Value - 1];
-            await ctx.RespondAsync(itemToBuy.ItemSample.Name);
+            DiscordComponent[] buttons =
+            [
+                new DiscordButtonComponent(DiscordButtonStyle.Success, "yes", "YES"),
+                new DiscordButtonComponent(DiscordButtonStyle.Success, "no", "NO")
+            ];
+            embedToBuild.WithDescription(
+                $"Are you sure you want to buy {itemToBuy.ItemSample.TypeGroup.Name}: {itemToBuy.ItemSample.Name} for {itemToBuy.Cost:N0} {itemToBuy.CurrencyToBuyWith}?");
+            var discordMessageBuilder = new DiscordMessageBuilder()
+                .AddEmbed(embedToBuild)
+                .AddComponents(buttons);
+            await MakeOccupiedAsync(userData);
+            await ctx.RespondAsync(discordMessageBuilder);
+            var message = await ctx.GetResponseAsync();
+            var buttonResponse = 
+                await message!.WaitForButtonAsync(ctx.User);
 
+            if (buttonResponse.TimedOut)
+            {
+                discordMessageBuilder.ClearComponents();
+                discordMessageBuilder.RemoveEmbeds(0, 1);
+                embedToBuild.WithDescription("I see");
+                discordMessageBuilder.AddEmbed(embedToBuild);
+                await message!.ModifyAsync(discordMessageBuilder);
+                return;
+            }
+
+            var responseIsYes = buttonResponse.Result.Id == "yes";
+            if (responseIsYes)
+            {
+                Item itemToBuyWith;
+                if (itemToBuy.CurrencyToBuyWith == CurrencyToBuyWith.Coin)
+                {
+                    itemToBuyWith = userData.Items.GetOrCreateItem<Coin>();
+                } else if (itemToBuy.CurrencyToBuyWith == CurrencyToBuyWith.DivineShard)
+                {
+                    itemToBuyWith = userData.Items.GetOrCreateItem<DivineShard>();
+                }
+                else
+                {
+                    embedToBuild.WithDescription("Something went wrong");
+                    await buttonResponse.Result.Interaction.CreateResponseAsync(
+                        DiscordInteractionResponseType.UpdateMessage,
+                        new DiscordInteractionResponseBuilder()
+                            .AddEmbed(embedToBuild));
+                    return;
+                }
+
+                if (itemToBuyWith.Stacks < itemToBuy.Cost)
+                {
+                    embedToBuild.WithDescription(
+                        $"You don't have enough {itemToBuy.CurrencyToBuyWith} to buy {itemToBuy.ItemSample.Name}");
+                    await buttonResponse.Result.Interaction.CreateResponseAsync(
+                        DiscordInteractionResponseType.UpdateMessage,
+                        new DiscordInteractionResponseBuilder()
+                            .AddEmbed(embedToBuild));
+                    return;
+                }
+
+                var createdItem = (IInventoryEntity)Activator.CreateInstance(itemToBuy.ItemSample.GetType())!;
+                itemToBuyWith.Stacks -= itemToBuy.Cost;
+                var rewardText = userData.ReceiveRewardsAsync(DatabaseContext.Set<UserData>(), [
+                    new EntityReward(
+                        [createdItem])
+                ]);
+                embedToBuild.WithDescription(
+                    $"Success!\n{rewardText}");
+                await buttonResponse.Result.Interaction.CreateResponseAsync(
+                    DiscordInteractionResponseType.UpdateMessage,
+                    new DiscordInteractionResponseBuilder()
+                        .AddEmbed(embedToBuild));
+              
+            }
         }
     }
 }

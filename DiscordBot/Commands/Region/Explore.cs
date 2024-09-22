@@ -119,17 +119,10 @@ public class Explore : GeneralCommandClass
             var rewards = region.GetRewardsAfterBattle(mainEnemyCharacter, combatTier)
                 .Append(new EntityReward([new Coin() { Stacks = 1000 * (int)combatTier }]))
                 .ToArray();
-            var itemsToLoadTypeIdFormat  = rewards.OfType<EntityReward>()
-                .SelectMany(i => i.EntitiesToReward.OfType<Item>().Select(j => j.TypeId))
-                .Distinct()
-                .ToArray();
-            await DatabaseContext.Set<Item>()
-                .Where(i => itemsToLoadTypeIdFormat.Contains(i.TypeId) && i.UserDataId == userData.Id)
-                .LoadAsync();
 
          
             var rewardText = $"You defeated {mainEnemyCharacter.Name}, and found some loot!\n";
-            rewardText += userData.ReceiveRewards(rewards);
+            rewardText += await userData.ReceiveRewardsAsync(DatabaseContext.Set<UserData>(), rewards);
             embedToBuild
                 .WithTitle("Nice going bud!")
                 .WithDescription($"You won!\n{rewardText}")

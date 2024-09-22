@@ -130,10 +130,6 @@ public class DirectionHelping : Quest
             };
 
             await dialogue.LoadAsync(context.User, battleResult.Message);
-            await userDataQueryable
-                .Where(i => i.Id == userData.Id)
-                .Select(i => i.Items.Where(j => j is Coin))
-                .LoadAsync();
             QuestRewards =
             [
 

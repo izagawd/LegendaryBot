@@ -54,5 +54,5 @@ public abstract class Reward : IComparable<Reward>
     /// <returns></returns>
     public abstract Reward MergeWith(Reward reward);
 
-    public abstract string GiveRewardTo(UserData userData);
+    public abstract Task<string> GiveRewardToAsync(UserData userData, IQueryable<UserData> userDataQueryable);
 }

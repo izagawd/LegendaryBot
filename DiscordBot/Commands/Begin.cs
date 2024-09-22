@@ -349,7 +349,7 @@ public class Begin : GeneralCommandClass
 
         var rewardText = "";
         if (!userData.Characters.Any(i => i.GetType() == typeof(Lily)))
-            rewardText = userData.ReceiveRewards(new EntityReward([lily]));
+            rewardText = await userData.ReceiveRewardsAsync(DatabaseContext.Set<UserData>(), new EntityReward([lily]));
         message = result.Message;
         var stam = userData.Items.OfType<Stamina>().FirstOrDefault();
         if (stam is null)

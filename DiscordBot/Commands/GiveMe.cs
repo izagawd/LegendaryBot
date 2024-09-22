@@ -66,17 +66,11 @@ public class GiveMe : GeneralCommandClass
                     item.Stacks = 1;
                 if (createdType is Gear gear)
                     gear.Initialize(Rarity.FiveStar);
-                if (createdType is Character character)
-                {
-                    await DatabaseContext.Set<UserData>()
-                        .Where(j => j.Id == userData.Id)
-                        .Include(j => j.Characters.Where(k => k.TypeId == character.TypeId))
-                        .LoadAsync();
-                }
+
                 rewards.Add(new EntityReward([createdType]));
             }
 
-            var result = userData.ReceiveRewards(rewards);
+            var result = await userData.ReceiveRewardsAsync(DatabaseContext.Set<UserData>(), rewards);
 
             await DatabaseContext.SaveChangesAsync();
             var embed = new DiscordEmbedBuilder()

@@ -152,9 +152,10 @@ public class UserData : ICanBeLeveledUp
     /// <summary>
     ///     Receives rewards
     /// </summary>
+    /// <param name="userDataQueryable"></param>
     /// <param name="rewards">the rewards</param>
     /// <returns>the receive rewards text</returns>
-    public string ReceiveRewards(params Reward[] rewards)
+    public async  Task<string> ReceiveRewardsAsync(IQueryable<UserData> userDataQueryable, params Reward[] rewards)
     {
         var rewardStringBuilder = new StringBuilder("");
         var mergedRewards = Reward.MergeAllRewards(rewards)
@@ -163,7 +164,7 @@ public class UserData : ICanBeLeveledUp
         foreach (var i in mergedRewards)
         {
             if (!i.IsValid) continue;
-            rewardStringBuilder.Append($"{i.GiveRewardTo(this)}\n");
+            rewardStringBuilder.Append($"{await i.GiveRewardToAsync(this, userDataQueryable)}\n");
         }
 
         return rewardStringBuilder.ToString();
@@ -172,10 +173,11 @@ public class UserData : ICanBeLeveledUp
     /// <summary>
     ///     Receives rewards
     /// </summary>
+    /// <param name="userDataQueryable"></param>
     /// <param name="rewards">the rewards</param>
     /// <returns>the receive rewards text</returns>
-    public string ReceiveRewards(IEnumerable<Reward> rewards)
+    public Task<string> ReceiveRewardsAsync(IQueryable<UserData> userDataQueryable, IEnumerable<Reward> rewards)
     {
-        return ReceiveRewards(rewards.ToArray());
+        return ReceiveRewardsAsync(userDataQueryable, rewards.ToArray());
     }
 }

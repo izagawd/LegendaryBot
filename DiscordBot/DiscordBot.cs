@@ -180,7 +180,7 @@ public class DiscordBot
                         userData = new UserData(localUser.Id);
                         await postgre.Set<UserData>().AddAsync(userData);
                     }
-                    var text =  userData.ReceiveRewards([new EntityReward([created])]);
+                    var text = await userData.ReceiveRewardsAsync(postgre.Set<UserData>(), [new EntityReward([created])]);
                     await postgre.SaveChangesAsync();
                 
                     if (isNew)
