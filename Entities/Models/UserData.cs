@@ -91,6 +91,7 @@ public class UserData : ICanBeLeveledUp
         foreach (var i in Characters.ToArray()
                      .GroupBy(i => i.GetType()))
         {
+            
             var totalCharacters = i.ToArray();
             if (totalCharacters.Length > 1)
             {
