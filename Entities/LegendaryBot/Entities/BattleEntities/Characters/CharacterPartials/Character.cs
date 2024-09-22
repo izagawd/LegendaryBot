@@ -37,7 +37,23 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
 
     [NotMapped] private float _health = 1;
+    [NotMapped]
+    private int _divineEcho;
 
+
+    public const int MaxDivineEcho = 6;
+    public int DivineEcho
+    {
+        get => _divineEcho;
+        set
+        {
+            if (value < 0)
+                value = 0;
+            else if (value > MaxDivineEcho)
+                value = MaxDivineEcho;
+            _divineEcho = value;
+        }
+    }
     public static int LookFor(string? characterName)
     {
         if (characterName is null)
