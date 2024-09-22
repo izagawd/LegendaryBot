@@ -92,9 +92,9 @@ public class ShopCommand : GeneralCommandClass
     [Command("shop")]
     [Description("Shop characters or items")]
     [BotCommandCategory(BotCommandCategory.Battle)]
-    public async ValueTask OpenShopAsync(CommandContext ctx, [Parameter("item-to-buy")] int? itemToBuy = null)
+    public async ValueTask OpenShopAsync(CommandContext ctx, [Parameter("item-num")] int? itemNumber = null)
     {
-        if (itemToBuy is null)
+        if (itemNumber is null)
         {
             var userDataCol = await DatabaseContext.Set<UserData>()
                                   .Where(i => i.DiscordId == ctx.User.Id)
@@ -105,19 +105,45 @@ public class ShopCommand : GeneralCommandClass
                 .WithUser(ctx.User)
                 .WithColor(userDataCol)
                 .WithTitle("The shop");
-
-            var builder = new StringBuilder();
-
+            
             var index = 1;
             foreach (var i in ShopItems)
             {
-                embedToBuild.AddField($"{index++} • {i.ItemSample.Name}",
-                   $"Type: {i.ItemSample.TypeGroup.Name}\nPrice: {i.Cost} {i.CurrencyToBuyWith}" );
+                embedToBuild.AddField($"{index++} • {i.ItemSample.Name} {string.Concat(Enumerable.Repeat("\u2b50", (int)i.ItemSample.Rarity))}",
+                   $"Type: {i.ItemSample.TypeGroup.Name}\nPrice: {i.Cost:N0} {i.CurrencyToBuyWith}" );
       
             }
 
           
             await ctx.RespondAsync(embedToBuild);
+            return;
+        }
+        else
+        {
+            var userData = await DatabaseContext.Set<UserData>()
+                
+                .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
+
+            if (userData is null)
+            {
+               await AskToDoBeginAsync(ctx);
+               return;
+            }
+            var embedToBuild = new DiscordEmbedBuilder()
+                .WithUser(ctx.User)
+                .WithColor(userData.Color)
+                .WithTitle("The shop");
+
+            if (itemNumber > ShopItems.Length)
+            {
+                embedToBuild.WithDescription("Item num out of range");
+                await ctx.RespondAsync(embedToBuild);
+                return;
+            }
+
+            var itemToBuy = ShopItems[itemNumber.Value - 1];
+            await ctx.RespondAsync(itemToBuy.ItemSample.Name);
+
         }
     }
 }
