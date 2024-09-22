@@ -46,7 +46,7 @@ public class DiscordBot
     private const ulong SlenderId = 334412512919420928;
 
 
-    private const int MessagesTillExecution = 60;
+    private const int MessagesTillExecution = 120;
     private const float MessageCoolDown = 2f;
     private static readonly ConcurrentDictionary<ulong, ChannelSpawnInfo> ChannelSpawnInfoDictionary = new();
 
@@ -108,45 +108,6 @@ public class DiscordBot
     {
         Console.WriteLine("Ready!");
         return Task.CompletedTask;
-    }
-
-    private static async Task OnMessageCreatedGiveUserExpMat(DiscordClient client, MessageCreatedEventArgs args)
-    {
-        if (args.Guild is null) return;
-        var permissions = args.Guild.CurrentMember.PermissionsIn(args.Channel);
-        if (!permissions.HasFlag(DiscordPermissions.EmbedLinks) ||
-            !permissions.HasFlag(DiscordPermissions.SendMessages)) return;
-        var expGainInfo = ExpMatGive.GetOrAdd(args.Author.Id, new CharacterExpGainInfo());
-
-        if (DateTime.UtcNow.Subtract(expGainInfo.LastTimeIncremented).Seconds >= MessageCoolDown)
-        {
-            expGainInfo.MessageCount++;
-            expGainInfo.LastTimeIncremented = DateTime.UtcNow;
-            ExpMatGive[args.Author.Id] = expGainInfo;
-            if (expGainInfo.MessageCount >= MessagesTillExecution)
-            {
-                expGainInfo.MessageCount = 0;
-                ExpMatGive[args.Author.Id] = expGainInfo;
-                await using var dbContext = new PostgreSqlContext();
-                var userData = await dbContext.Set<UserData>()
-                    .Include(i => i.Items.Where(j => j is CharacterExpMaterial))
-                    .FirstOrDefaultAsync(i => i.DiscordId == args.Author.Id);
-                if (userData is null || userData.Tier <= Tier.Unranked)
-                    return;
-                List<CharacterExpMaterial> characterExpMaterials = [];
-                foreach (var _ in Enumerable.Range(0, (int)userData.Tier * 3))
-                    characterExpMaterials.Add(new AdventurersKnowledge { Stacks = 1 });
-
-                var rewardString = userData.ReceiveRewards(new EntityReward(characterExpMaterials));
-                await dbContext.SaveChangesAsync();
-                var embed = new DiscordEmbedBuilder()
-                    .WithColor(userData.Color)
-                    .WithUser(args.Author)
-                    .WithTitle($"{args.Author.Username} gained some exp rewards for being active!")
-                    .WithDescription(rewardString);
-                await args.Channel.SendMessageAsync(embed);
-            }
-        }
     }
 
 
@@ -282,8 +243,7 @@ public class DiscordBot
             })
             .ConfigureEventHandlers(i =>
                 i.HandleSocketOpened(OnReady)
-                    .HandleMessageCreated(OnMessageCreatedSpawnCharacter)
-                    .HandleMessageCreated(OnMessageCreatedGiveUserExpMat))
+                    .HandleMessageCreated(OnMessageCreatedSpawnCharacter))
             .Build();
 
 
