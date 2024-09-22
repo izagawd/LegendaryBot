@@ -12,7 +12,7 @@ public class InventoryEntityContainer : InventoryEntityContainer<IInventoryEntit
     public void MergeItems()
     {
         var items = List.OfType<Item>().ToArray();
-        List.RemoveAll(i => items.Contains(i));
+        List.RemoveAll(i => i is Item);
         foreach (var i in items)
         {
             var already = (Item?)List.FirstOrDefault(j => j.GetType() == i.GetType());

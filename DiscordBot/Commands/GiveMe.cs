@@ -41,10 +41,6 @@ public class GiveMe : GeneralCommandClass
         else
         {
             var userData = await DatabaseContext.Set<UserData>()
-                .Include(i => i.Gears)
-                .Include(i => i.Blessings)
-                .Include(i => i.Characters)
-                .Include(i => i.Items)
                 .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
             if (userData is null || userData.Tier == Tier.Unranked)
             {
