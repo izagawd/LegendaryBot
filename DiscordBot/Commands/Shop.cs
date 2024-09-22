@@ -1,10 +1,15 @@
 using System.ComponentModel;
+using System.Text;
+using BasicFunctionality;
 using DSharpPlus.Commands;
+using DSharpPlus.Entities;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBot.Commands;
 
@@ -72,7 +77,7 @@ public class ShopItem
 public class ShopCommand : GeneralCommandClass
 {
 
-    public static ShopItem[] ShopItems =
+    public static readonly ShopItem[] ShopItems =
     [
         new ShopItem(new CommanderJean()),
         new ShopItem(new PowerOfThePhoenix()),
@@ -87,8 +92,30 @@ public class ShopCommand : GeneralCommandClass
     [Command("shop")]
     [Description("Shop characters or items")]
     [BotCommandCategory(BotCommandCategory.Battle)]
-    public async ValueTask OpenShopAsync([Parameter("item-to-buy")] int? itemToBuy)
+    public async ValueTask OpenShopAsync(CommandContext ctx, [Parameter("item-to-buy")] int? itemToBuy = null)
     {
-        
+        if (itemToBuy is null)
+        {
+            var userDataCol = await DatabaseContext.Set<UserData>()
+                                  .Where(i => i.DiscordId == ctx.User.Id)
+                                  .Select(i => new DiscordColor?(i.Color))
+                                  .FirstOrDefaultAsync() ??
+                              TypesFunction.GetDefaultObject<UserData>().Color;
+            var embedToBuild = new DiscordEmbedBuilder()
+                .WithUser(ctx.User)
+                .WithColor(userDataCol)
+                .WithTitle("The shop");
+
+            var builder = new StringBuilder();
+                
+            foreach (var i in ShopItems)
+            {
+
+                builder.Append($"{i.ItemSample.TypeGroup.Name} • {i.ItemSample.Name} • {i.Cost} {i.CurrencyToBuyWith}");
+            }
+
+            embedToBuild.WithDescription(builder.ToString());
+            await ctx.RespondAsync(embedToBuild);
+        }
     }
 }
