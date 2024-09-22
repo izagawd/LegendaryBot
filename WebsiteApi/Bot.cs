@@ -30,10 +30,28 @@ public static class Bot
     {
     }
 
+    public static IEnumerable<int> Nigga()
+    {
+      
 
+        yield return 1;
+
+        yield return 1;
+        yield return 1;
+  
+        yield return 2;
+   
+        yield return 3;
+        
+    }
+
+    class Bitch
+    {
+        public int Bruh;
+    }
     private static async Task DoShitAsync()
     {
- 
+        
     }
 
     private static async Task Main(string[] args)

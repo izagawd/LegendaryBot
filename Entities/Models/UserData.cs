@@ -91,17 +91,15 @@ public class UserData : ICanBeLeveledUp
         foreach (var i in Characters.ToArray()
                      .GroupBy(i => i.GetType()))
         {
-            
             var totalCharacters = i.ToArray();
             if (totalCharacters.Length > 1)
             {
                 var mainCharacter = totalCharacters
                     .MinBy(j => j.DateAcquired)!;
-                Characters.RemoveAll(j => j != mainCharacter);
+                Characters.RemoveAll(j => j.TypeId == mainCharacter.TypeId 
+                && j != mainCharacter);
             }
         }
-      
-            
     }
     public List<Blessing> Blessings { get; } = new();
 
