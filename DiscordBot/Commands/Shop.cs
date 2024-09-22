@@ -107,14 +107,16 @@ public class ShopCommand : GeneralCommandClass
                 .WithTitle("The shop");
 
             var builder = new StringBuilder();
-                
+
+            var index = 1;
             foreach (var i in ShopItems)
             {
-
-                builder.Append($"{i.ItemSample.TypeGroup.Name} • {i.ItemSample.Name} • {i.Cost} {i.CurrencyToBuyWith}");
+                embedToBuild.AddField($"{index++} • {i.ItemSample.Name}",
+                   $"Type: {i.ItemSample.TypeGroup.Name}\nPrice: {i.Cost} {i.CurrencyToBuyWith}" );
+      
             }
 
-            embedToBuild.WithDescription(builder.ToString());
+          
             await ctx.RespondAsync(embedToBuild);
         }
     }
