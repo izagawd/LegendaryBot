@@ -11,7 +11,7 @@ public static class InventoryEntityExtensions
 /// </summary>
 public interface IInventoryEntity : INameHaver
 {
-    bool CanBeTraded { get; }
+
     int TypeId { get; }
 
     Type TypeGroup { get; }

@@ -145,7 +145,7 @@ public class Lily : Character
     protected override float BaseDefenseMultiplier => 1.05f;
 
     protected override float BaseAttackMultiplier => 0.9f;
-    public override bool CanSpawnNormally => false;
+    public override bool IsInStandardBanner => false;
 
     public override int TypeId
     {

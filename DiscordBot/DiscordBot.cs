@@ -136,7 +136,7 @@ public class DiscordBot
                         = BasicFunctions
                             .RandomChoice(
                                 TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
-                                    .Where(i => i.CanSpawnNormally && i.Rarity == Rarity.FourStar)
+                                    .Where(i => i.IsInStandardBanner && i.Rarity == Rarity.FourStar)
                                     .Select(i => i.GetType()));
                         
                     var created = (Character)Activator.CreateInstance(randomCharacterType)!;

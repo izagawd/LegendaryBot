@@ -37,7 +37,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     [NotMapped] public virtual int Attack => 20 + LevelMilestone * 40;
     [NotMapped] public virtual int Health => 70 + LevelMilestone * 80;
     public int LevelMilestone => Character?.LevelMilestone ?? 0;
-    public bool IsInStandardBanner => true;
+    public virtual bool IsInStandardBanner => true;
     public Character? Character { get; set; }
 
 
@@ -48,7 +48,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 
     public UserData? UserData { get; set; }
 
-    public bool CanBeTraded => true;
+    
 
 
     public abstract int TypeId { get; protected init; }

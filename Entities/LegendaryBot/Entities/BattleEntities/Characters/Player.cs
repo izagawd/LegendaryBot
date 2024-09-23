@@ -125,7 +125,7 @@ public abstract class Player : Character
     }
 
     public override DiscordColor Color => UserData?.Color ?? base.Color;
-    public override bool CanSpawnNormally => false;
+    public override bool IsInStandardBanner => false;
 
     protected override IEnumerable<StatType> LevelMilestoneStatIncrease =>
     [

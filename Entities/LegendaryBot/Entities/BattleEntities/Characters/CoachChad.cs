@@ -119,7 +119,7 @@ public class CoachChad : Character
         protected init { }
     }
 
-    public override bool CanSpawnNormally => false;
+    public override bool IsInStandardBanner => false;
 
     public override DiscordColor Color => DiscordColor.Purple;
 
