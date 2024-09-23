@@ -118,7 +118,7 @@ public class Cheerleader : Character
     }
 
     public override string Name => "Cheerleader";
-    public override Rarity Rarity => Rarity.FourStar;
+    public override Rarity Rarity => Rarity.FiveStar;
 
     public override int TypeId
     {

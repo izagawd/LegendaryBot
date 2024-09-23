@@ -53,15 +53,12 @@ public abstract class Move : INameHaver
     public abstract string Name { get; }
 
 
-
-
     /// <summary>
     ///     Gets the description of the Move, based on the MoveType
     /// </summary>
     /// <summary>
     ///     Gets description based on character. The description is mostly affected by the character's level
     /// </summary>
-    /// <param name="character"></param>
     public abstract string GetDescription(Character character);
 
     /// <summary>

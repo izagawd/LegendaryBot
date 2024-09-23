@@ -33,7 +33,13 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-        
+        foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
+                     .Where(i => i is not Player)
+                     .OrderByDescending(i => i.Rarity))
+        {
+            $"{i.Name}: {i.Rarity}".Print();
+        }
+        Process.GetCurrentProcess().Kill();
     }
 
     private static async Task Main(string[] args)

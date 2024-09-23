@@ -24,6 +24,7 @@ public class Skeleton : Character
 
     [NotMapped] public bool HasDied { get; private set; } = true;
 
+    public override Rarity Rarity => Rarity.TwoStar;
     public override string Name => "Skeleton";
 
     [BattleEventListenerMethod]

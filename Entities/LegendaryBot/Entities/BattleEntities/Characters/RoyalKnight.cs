@@ -144,5 +144,5 @@ public class RoyalKnight : Character
         protected init { }
     }
 
-    public override Rarity Rarity => Rarity.ThreeStar;
+    public override Rarity Rarity => Rarity.FourStar;
 }

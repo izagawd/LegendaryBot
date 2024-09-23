@@ -98,7 +98,7 @@ public class ExplosionBlast : Ultimate
     public override IEnumerable<Character> GetPossibleTargets()
     {
         return User.CurrentBattle?.Characters.Where(i => i.BattleTeam != User.BattleTeam && !i.IsDead) ??
-               throw Character.NoBattleExc;
+               [];
     }
 
     protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
@@ -132,7 +132,7 @@ public class Blast : Character
     }
 
     public override string Name => "Blast";
-    public override Rarity Rarity => Rarity.FourStar;
+    public override Rarity Rarity => Rarity.FiveStar;
     public override DiscordColor Color => DiscordColor.Brown;
 
     protected override float BaseSpeedMultiplier => 1.1f;

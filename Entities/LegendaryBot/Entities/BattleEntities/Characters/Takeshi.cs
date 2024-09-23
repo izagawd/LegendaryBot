@@ -113,7 +113,7 @@ public class Takeshi : Character
     }
 
     public override string Name => "Takeshi";
-    public override Rarity Rarity => Rarity.ThreeStar;
+    public override Rarity Rarity => Rarity.FourStar;
 
     protected override float BaseSpeedMultiplier => 1.05f;
 

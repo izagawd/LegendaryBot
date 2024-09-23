@@ -135,7 +135,7 @@ public class Slasher : Character
     }
 
     public override string Name => "Slasher";
-    public override Rarity Rarity => Rarity.FourStar;
+    public override Rarity Rarity => Rarity.FiveStar;
 
     public override DiscordColor Color => DiscordColor.Brown;
 
