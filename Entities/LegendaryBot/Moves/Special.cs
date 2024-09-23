@@ -1,12 +1,12 @@
 ﻿using Entities.LegendaryBot.Results;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.Moves;
 
 public abstract class Special : Move
 {
-    public Special(CharacterPartials_Character user) : base(user)
+    public Special(Character user) : base(user)
     {
     }
 
@@ -37,7 +37,7 @@ public abstract class Special : Move
         return base.ToString();
     }
 
-    public sealed override MoveUsageResult Utilize(CharacterPartials_Character target, MoveUsageType moveUsageType)
+    public sealed override MoveUsageResult Utilize(Character target, MoveUsageType moveUsageType)
     {
         if (moveUsageType == MoveUsageType.NormalUsage) Cooldown = MaxCooldown;
         return base.Utilize(target, moveUsageType);

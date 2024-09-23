@@ -1,12 +1,12 @@
 ﻿using Entities.LegendaryBot.BattleSimulatorStuff;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.StatusEffects;
 
 public class Stun : StatusEffect
 {
-    public Stun(CharacterPartials_Character caster) : base(caster)
+    public Stun(Character caster) : base(caster)
     {
     }
 
@@ -20,7 +20,7 @@ public class Stun : StatusEffect
     public override bool IsStackable => false;
     public override OverrideTurnType OverrideTurnType => OverrideTurnType.CannotMove;
 
-    public override string? OverridenUsage(ref CharacterPartials_Character target, ref BattleDecision decision,
+    public override string? OverridenUsage(ref Character target, ref BattleDecision decision,
         MoveUsageType moveUsageType)
     {
         decision = BattleDecision.Other;

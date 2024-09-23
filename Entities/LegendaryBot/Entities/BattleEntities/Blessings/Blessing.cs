@@ -7,8 +7,8 @@ using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PublicInfo;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 
@@ -38,7 +38,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     [NotMapped] public virtual int Health => 70 + LevelMilestone * 80;
     public int LevelMilestone => Character?.LevelMilestone ?? 0;
     public bool IsInStandardBanner => true;
-    public CharacterPartials_Character? Character { get; set; }
+    public Character? Character { get; set; }
 
 
     public long Id { get; set; }

@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using BasicFunctionality;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 
@@ -92,7 +92,7 @@ public abstract class GearStat
     public abstract int GetMainStatValue(Rarity rarity);
 
 
-    public abstract void AddStats(CharacterPartials_Character character);
+    public abstract void AddStats(Character character);
 
     public string AsNameAndValue()
     {

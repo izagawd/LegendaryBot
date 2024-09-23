@@ -1,6 +1,6 @@
 ﻿using Entities.LegendaryBot.Moves;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.Results;
 
@@ -21,7 +21,7 @@ public class MoveUsageResult
         Text = text;
     }
 
-    public CharacterPartials_Character User => Move.User;
+    public Character User => Move.User;
 
     /// <summary>
     ///     If not null, this text will be used as the main text

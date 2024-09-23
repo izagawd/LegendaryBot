@@ -1,7 +1,7 @@
 ﻿using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Results;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.StatusEffects;
 
@@ -9,7 +9,7 @@ public class Burn : StatusEffect, IDetonatable
 {
     private float _characterAttack;
 
-    public Burn(CharacterPartials_Character caster) : base(caster)
+    public Burn(Character caster) : base(caster)
     {
     }
 
@@ -24,7 +24,7 @@ public class Burn : StatusEffect, IDetonatable
 
     public override bool IsStackable => true;
 
-    public DamageResult? Detonate(CharacterPartials_Character detonator)
+    public DamageResult? Detonate(Character detonator)
     {
         Affected.RemoveStatusEffect(this);
         return DoDamage();

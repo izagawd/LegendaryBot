@@ -1,13 +1,13 @@
 ﻿using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Results;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.StatusEffects;
 
 public class Bomb : StatusEffect, IDetonatable
 {
-    public Bomb(CharacterPartials_Character caster) : base(caster)
+    public Bomb(Character caster) : base(caster)
     {
     }
 
@@ -23,7 +23,7 @@ public class Bomb : StatusEffect, IDetonatable
     public override bool IsStackable => true;
     public override bool ExecuteStatusEffectAfterTurn => false;
 
-    public DamageResult? Detonate(CharacterPartials_Character detonator)
+    public DamageResult? Detonate(Character detonator)
     {
         Affected.RemoveStatusEffect(this);
         Affected.AddStatusEffect(new Stun(detonator), detonator.Effectiveness);

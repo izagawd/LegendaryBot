@@ -1,11 +1,11 @@
-﻿using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+﻿using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.ModifierInterfaces;
 
 public class SpeedFlatModifierArgs : StatsModifierArgs
 {
-    public SpeedFlatModifierArgs(CharacterPartials_Character characterToAffect, float valueToChangeWith) : base(
+    public SpeedFlatModifierArgs(Character characterToAffect, float valueToChangeWith) : base(
         characterToAffect,
         valueToChangeWith)
     {

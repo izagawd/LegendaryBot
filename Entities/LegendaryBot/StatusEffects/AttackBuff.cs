@@ -1,12 +1,12 @@
 ﻿using Entities.LegendaryBot.ModifierInterfaces;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.StatusEffects;
 
 public class AttackBuff : StatusEffect, IStatsModifier
 {
-    public AttackBuff(CharacterPartials_Character caster) : base(caster)
+    public AttackBuff(Character caster) : base(caster)
     {
     }
 

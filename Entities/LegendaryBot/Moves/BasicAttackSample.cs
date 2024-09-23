@@ -1,7 +1,7 @@
 ﻿using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Results;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.Moves;
 
@@ -10,18 +10,18 @@ namespace Entities.LegendaryBot.Moves;
 /// </summary>
 public class BasicAttackSample : BasicAttack
 {
-    public BasicAttackSample(CharacterPartials_Character user) : base(user)
+    public BasicAttackSample(Character user) : base(user)
     {
     }
 
     public override string Name => "Basic Attack Sample";
 
-    public override string GetDescription(CharacterPartials_Character character)
+    public override string GetDescription(Character character)
     {
         return "Take that!";
     }
 
-    protected override void UtilizeImplementation(CharacterPartials_Character target, MoveUsageContext moveUsageContext,
+    protected override void UtilizeImplementation(Character target, MoveUsageContext moveUsageContext,
         out AttackTargetType attackTargetType,
         out string? text)
     {

@@ -1,11 +1,11 @@
-﻿using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+﻿using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.StatusEffects;
 
 public class Immortality : StatusEffect
 {
-    public Immortality(CharacterPartials_Character caster) : base(caster)
+    public Immortality(Character caster) : base(caster)
     {
     }
 

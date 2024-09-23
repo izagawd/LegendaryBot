@@ -1,11 +1,11 @@
-﻿using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+﻿using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.BattleEvents.EventArgs;
 
 public class CharacterDeathEventArgs : BattleEventArgs
 {
-    public CharacterDeathEventArgs(CharacterPartials_Character killed)
+    public CharacterDeathEventArgs(Character killed)
     {
         Killed = killed;
     }
@@ -13,5 +13,5 @@ public class CharacterDeathEventArgs : BattleEventArgs
     /// <summary>
     ///     The character that died
     /// </summary>
-    public CharacterPartials_Character Killed { get; }
+    public Character Killed { get; }
 }

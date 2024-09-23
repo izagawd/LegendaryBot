@@ -17,8 +17,8 @@ using SixLabors.ImageSharp.Drawing;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.BattleSimulatorStuff;
 
@@ -107,13 +107,13 @@ public partial class BattleSimulator
     /// <summary>
     ///     The character who is currently taking their turn
     /// </summary>
-    public CharacterPartials_Character ActiveCharacter { get; protected set; } = null!;
+    public Character ActiveCharacter { get; protected set; } = null!;
 
 
     /// <summary>
     ///     All the characters in the battle
     /// </summary>
-    public IEnumerable<CharacterPartials_Character> Characters => Team1.Union(Team2);
+    public IEnumerable<Character> Characters => Team1.Union(Team2);
 
     /// <summary>
     ///     Creates a new battle between two teams
@@ -518,7 +518,7 @@ public partial class BattleSimulator
         return StartAsync(null, null, channel);
     }
 
-    public Alphabet GetAlphabetIdentifier(CharacterPartials_Character character)
+    public Alphabet GetAlphabetIdentifier(Character character)
     {
         return (Alphabet)Characters.IndexOf(character);
     }
@@ -576,7 +576,7 @@ public partial class BattleSimulator
         Team? timedOut = null;
 
 
-        CharacterPartials_Character? target = null;
+        Character? target = null;
 
         // If you want the bot to update a message using an interactivity result instead of without, use this
         InvokeBattleEvent(new BattleBeginEventArgs());
@@ -810,7 +810,7 @@ public partial class BattleSimulator
 
 
                 List<DiscordSelectComponentOption> enemiesToSelect = [];
-                List<CharacterPartials_Character> possibleTargets = [];
+                List<Character> possibleTargets = [];
                 if (ActiveCharacter[battleDecision] is { } theMove)
                 {
                     possibleTargets.AddRange(theMove.GetPossibleTargets());

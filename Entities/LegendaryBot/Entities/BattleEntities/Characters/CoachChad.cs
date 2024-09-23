@@ -1,13 +1,13 @@
 ﻿using DSharpPlus.Entities;
 using Entities.LegendaryBot.BattleEvents.EventArgs;
 using Entities.LegendaryBot.BattleSimulatorStuff;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Moves;
 using Entities.LegendaryBot.Results;
-using Character = Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
 
 namespace Entities.LegendaryBot.Entities.BattleEntities.Characters;
 
-using Character = Character;
+
 
 public class GigaPunch : BasicAttack
 {

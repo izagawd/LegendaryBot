@@ -1,5 +1,5 @@
-﻿using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+﻿
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.Moves;
 
@@ -11,7 +11,7 @@ public abstract class Skill : Special
         return base.CanBeUsedNormally() && !IsPassive;
     }
 
-    public Skill(CharacterPartials_Character user) : base(user)
+    public Skill(Character user) : base(user)
     {
         
     }

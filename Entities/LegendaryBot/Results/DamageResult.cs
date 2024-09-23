@@ -1,6 +1,6 @@
 ﻿using Entities.LegendaryBot.Entities.BattleEntities.Characters;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.Results;
 
@@ -12,5 +12,5 @@ public class DamageResult
     public float DamageDealt { get; init; }
     public bool WasCrit { get; init; }
     public bool CanBeCountered { get; init; } = true;
-    public required CharacterPartials_Character DamageReceiver { get; init; }
+    public required Character DamageReceiver { get; init; }
 }

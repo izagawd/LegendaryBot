@@ -1,11 +1,11 @@
-﻿using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+﻿using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.BattleEvents.EventArgs;
 
 public class TurnStartEventArgs : BattleEventArgs
 {
-    public TurnStartEventArgs(CharacterPartials_Character character)
+    public TurnStartEventArgs(Character character)
     {
         Character = character;
     }
@@ -13,5 +13,5 @@ public class TurnStartEventArgs : BattleEventArgs
     /// <summary>
     ///     The character that the turn was started with
     /// </summary>
-    public CharacterPartials_Character Character { get; }
+    public Character Character { get; }
 }

@@ -1,5 +1,5 @@
-﻿using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+﻿using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 
@@ -19,7 +19,7 @@ public class SpeedPercentageGearStat : GearStat
         throw new Exception("Speed percentage should never be a mainstat");
     }
 
-    public override void AddStats(CharacterPartials_Character character)
+    public override void AddStats(Character character)
     {
         character.TotalSpeed += Value * 0.01f * character.BaseSpeed;
     }

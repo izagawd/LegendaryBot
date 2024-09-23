@@ -1,6 +1,6 @@
 ﻿using Entities.LegendaryBot.Results;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.StatusEffects;
 
@@ -11,5 +11,5 @@ public interface IDetonatable
     ///     It will be the character that inflicted the debuff if the detonation was triggered automatically
     /// </param>
     /// <returns>The damage result of the detonation</returns>
-    public DamageResult? Detonate(CharacterPartials_Character detonator);
+    public DamageResult? Detonate(Character detonator);
 }

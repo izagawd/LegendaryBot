@@ -1,14 +1,15 @@
 ﻿using BasicFunctionality;
 using DSharpPlus.Entities;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Moves;
 using Entities.LegendaryBot.Results;
 using Entities.LegendaryBot.StatusEffects;
-using Character = Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+
 using StatusEffects_Barrier = Entities.LegendaryBot.StatusEffects.Barrier;
 
 namespace Entities.LegendaryBot.Entities.BattleEntities.Characters;
 
-using Character = Character;
+
 
 public class ShieldBash : BasicAttack
 {

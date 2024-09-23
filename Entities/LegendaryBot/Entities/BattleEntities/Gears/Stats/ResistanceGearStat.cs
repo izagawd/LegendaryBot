@@ -1,5 +1,5 @@
-﻿using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+﻿using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;
 
@@ -20,7 +20,7 @@ public class ResistanceGearStat : GearStat
         return (int)rarity * 10 + 10;
     }
 
-    public override void AddStats(CharacterPartials_Character character)
+    public override void AddStats(Character character)
     {
         character.TotalResistance += Value;
     }

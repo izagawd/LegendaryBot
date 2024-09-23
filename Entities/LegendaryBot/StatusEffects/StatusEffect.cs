@@ -9,8 +9,8 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.StatusEffects;
 
@@ -22,7 +22,7 @@ public abstract class StatusEffect : INameHaver
     {
     }
 
-    public StatusEffect(CharacterPartials_Character caster)
+    public StatusEffect(Character caster)
     {
         Caster = caster;
     }
@@ -32,7 +32,7 @@ public abstract class StatusEffect : INameHaver
     /// <summary>
     ///     The character currently affected by the status effect
     /// </summary>
-    public CharacterPartials_Character Affected { get; set; } = null!;
+    public Character Affected { get; set; } = null!;
 
     public virtual string Description => "Does the bla bla bla of the bla bla bla";
 
@@ -70,7 +70,7 @@ public abstract class StatusEffect : INameHaver
     /// <summary>
     ///     The person who casted the status effect
     /// </summary>
-    public CharacterPartials_Character Caster { get; }
+    public Character Caster { get; }
 
     /// <summary>
     ///     The name of the status effect
@@ -136,7 +136,7 @@ public abstract class StatusEffect : INameHaver
         {
             var created = (StatusEffect)i.GetConstructor(
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null,
-                    [typeof(CharacterPartials_Character)], null)
+                    [typeof(Character)], null)
                 .Invoke(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
                     null, [new PlayerMale()],
                     null);
@@ -156,7 +156,7 @@ public abstract class StatusEffect : INameHaver
     }
 
 
-    public virtual string? OverridenUsage(ref CharacterPartials_Character target, ref BattleDecision decision,
+    public virtual string? OverridenUsage(ref Character target, ref BattleDecision decision,
         MoveUsageType moveUsageType) // the status effect might or might not replace the player's decision
     {
         return null;

@@ -1,13 +1,13 @@
 ﻿using Entities.LegendaryBot.BattleEvents.EventArgs;
 using Entities.LegendaryBot.BattleSimulatorStuff;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.StatusEffects;
 
 public class Sleep : StatusEffect
 {
-    public Sleep(CharacterPartials_Character caster) : base(caster)
+    public Sleep(Character caster) : base(caster)
     {
     }
 
@@ -32,7 +32,7 @@ public class Sleep : StatusEffect
                 $"{this} has been dispelled from {Affected.NameWithAlphabet} due to taking damage!");
     }
 
-    public override string? OverridenUsage(ref CharacterPartials_Character target, ref BattleDecision decision,
+    public override string? OverridenUsage(ref Character target, ref BattleDecision decision,
         MoveUsageType moveUsageType)
     {
         Affected.CurrentBattle.AddBattleText($"{Affected} is fast asleep");

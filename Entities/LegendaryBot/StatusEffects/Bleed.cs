@@ -1,13 +1,13 @@
 ﻿using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Results;
-using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.StatusEffects;
 
 public class Bleed : StatusEffect, IDetonatable
 {
-    public Bleed(CharacterPartials_Character caster) : base(caster)
+    public Bleed(Character caster) : base(caster)
     {
     }
 
@@ -22,7 +22,7 @@ public class Bleed : StatusEffect, IDetonatable
     public override bool ExecuteStatusEffectAfterTurn => false;
     public float Attack { get; private set; }
 
-    public DamageResult? Detonate(CharacterPartials_Character detonator)
+    public DamageResult? Detonate(Character detonator)
     {
         var removed = Affected.RemoveStatusEffect(this);
         if (removed) return DoDamage();

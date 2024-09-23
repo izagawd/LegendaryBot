@@ -1,5 +1,5 @@
-﻿using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+﻿using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.StatusEffects;
 
@@ -7,11 +7,11 @@ public class Barrier : StatusEffect
 {
     private float _shieldValue;
 
-    public Barrier(CharacterPartials_Character caster) : this(caster, 0)
+    public Barrier(Character caster) : this(caster, 0)
     {
     }
 
-    public Barrier(CharacterPartials_Character caster, int shieldValue) : base(caster)
+    public Barrier(Character caster, int shieldValue) : base(caster)
     {
         _shieldValue = shieldValue;
     }
@@ -26,7 +26,7 @@ public class Barrier : StatusEffect
     /// </summary>
     /// <param name="owner"></param>
     /// <returns></returns>
-    public float GetShieldValue(CharacterPartials_Character User)
+    public float GetShieldValue(Character User)
     {
         var maxHealth = User.MaxHealth;
         if (_shieldValue <= maxHealth) return _shieldValue;

@@ -1,11 +1,11 @@
-﻿using CharacterPartials_Character =
-    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials.Character;
+﻿using 
+    Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.ModifierInterfaces;
 
 public abstract class StatsModifierArgs
 {
-    public StatsModifierArgs(CharacterPartials_Character characterToAffect, float valueToChangeWith)
+    public StatsModifierArgs(Character characterToAffect, float valueToChangeWith)
     {
         CharacterToAffect = characterToAffect;
         ValueToChangeWith = valueToChangeWith;
@@ -16,5 +16,5 @@ public abstract class StatsModifierArgs
     /// </summary>
     public float ValueToChangeWith { get; }
 
-    public CharacterPartials_Character CharacterToAffect { get; }
+    public Character CharacterToAffect { get; }
 }
