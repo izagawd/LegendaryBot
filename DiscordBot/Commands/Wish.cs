@@ -3,13 +3,35 @@ using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.Models;
 
 namespace DiscordBot.Commands;
 
 
 public abstract class Banner
 {
-    
+    public bool IsValidFiveStarBlessing(Type type)
+    {
+        if (type is null || !type.IsAssignableTo(typeof(Blessing)) || type.IsAbstract)
+        {
+            return false;
+        }
+
+        var def =(Blessing) TypesFunction.GetDefaultObject(type);
+        return def.Rarity == Rarity.FiveStar;
+    }
+
+    public bool IsValidFiveStarCharacter(Type type)
+    {
+        if (type is null || !type.IsAssignableTo(typeof(Character)) || type.IsAbstract)
+        {
+            return false;
+        }
+
+        var def =(Character) TypesFunction.GetDefaultObject(type);
+        return def.Rarity == Rarity.FiveStar;
+    }
+    public abstract Type Pull(UserData userData);
     public abstract string Name { get; }
 
 }
@@ -19,20 +41,25 @@ public enum Choice
     FiveStarBlessing
 }
 
+
 public class LimitedBlessingBanner : CharacterBanner
 {
     public readonly Type CurrentLimited;
 
-    public Type Pull()
+    public override string Name => $"Limited Blessing Banner " +
+                                   $"({((Blessing)TypesFunction.GetDefaultObject(CurrentLimited)).Name})";
+
+    public override Type Pull(UserData userData)
     {
         return GetRandomBannerType(CurrentLimited);
     }
 
+    
     public LimitedBlessingBanner(Type limitedBless)
     {
-        if (limitedBless is null || !limitedBless.IsAssignableTo(typeof(Blessing)) || limitedBless.IsAbstract)
+        if (!IsValidFiveStarBlessing(limitedBless))
         {
-            throw new Exception("Invalid blessing type");
+            throw new Exception("Invalid blessing type. Needs to be non abstract 5 star blessing");
         }
         CurrentLimited = limitedBless;
     }
@@ -40,18 +67,20 @@ public class LimitedBlessingBanner : CharacterBanner
 
 public class LimitedCharacterBanner : CharacterBanner
 {
+    public override string Name => $"Limited Character Banner " +
+                                   $"({((Character)TypesFunction.GetDefaultObject(CurrentLimited)).Name})";
     public readonly Type CurrentLimited;
 
-    public Type Pull()
+    public override Type Pull(UserData userData)
     {
         return GetRandomBannerType(CurrentLimited);
     }
 
     public LimitedCharacterBanner(Type limitedChar)
     {
-        if (limitedChar is null || !limitedChar.IsAssignableTo(typeof(Character)) || limitedChar.IsAbstract)
+        if (!IsValidFiveStarCharacter(limitedChar))
         {
-            throw new Exception("Invalid character type");
+            throw new Exception("Invalid character type. Needs to be non abstract 5 star character");
         }
         CurrentLimited = limitedChar;
     }
@@ -60,9 +89,9 @@ public abstract class BlessingBanner : Banner
 {
         protected Type GetRandomBannerType(Type targetFiveStarBlessing)
     {
-        if (targetFiveStarBlessing is null || !targetFiveStarBlessing.IsAssignableTo(typeof(Blessing)) || targetFiveStarBlessing.IsAbstract)
+        if (!IsValidFiveStarBlessing(targetFiveStarBlessing))
         {
-            throw new Exception("Invalid blessing type");
+            throw new Exception("Invalid blessing type. Needs to be non abstract five star blessing");
         }
         var gotten = BasicFunctions.GetRandom( new Dictionary<Choice, double>()
             {
@@ -112,13 +141,13 @@ public abstract class BlessingBanner : Banner
 }
 public abstract class CharacterBanner : Banner
 {
-    public override string Name => "Standard Banner";
+  
 
     protected Type GetRandomBannerType(Type targetFiveStarCharacter)
     {
-        if (targetFiveStarCharacter is null || !targetFiveStarCharacter.IsAssignableTo(typeof(Character)) || targetFiveStarCharacter.IsAbstract)
+        if (!IsValidFiveStarCharacter(targetFiveStarCharacter))
         {
-            throw new Exception();
+            throw new Exception("Invalid character type. Needs to be non abstract 5 star character");
         }
         var gotten = BasicFunctions.GetRandom( new Dictionary<Choice, double>()
             {
@@ -168,5 +197,8 @@ public abstract class CharacterBanner : Banner
 }
 public class Wish : GeneralCommandClass
 {
-    
+    public readonly Banner[] CurrentBanners = [
+        new LimitedCharacterBanner(typeof(CommanderJean)),
+        new LimitedBlessingBanner(typeof(PowerOfThePhoenix)),
+    ];
 }
