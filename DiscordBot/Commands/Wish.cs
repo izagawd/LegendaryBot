@@ -225,9 +225,10 @@ public class Wish : GeneralCommandClass
                 .WithColor(userData.Color)
                 .WithTitle("Current Banners");
             var bannerString = "";
+            var count = 1;
             foreach (var i in CurrentBanners)
             {
-                bannerString += i.Name + '\n';
+                bannerString += $"{count++} • {i.Name}\n";
             }
 
             builder.WithDescription(bannerString);
