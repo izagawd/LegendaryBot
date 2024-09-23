@@ -4,45 +4,25 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPart
 
 public partial class Character
 {
-    public const int MilestoneFlatAttackIncrease = 30;
-    public const int MilestoneFlatHealthIncrease = 80;
+   
 
-    [NotMapped]
-    public int LevelMilestone
-    {
-        get
-        {
-            if (Level >= 60)
-                return 6;
-            if (Level >= 50)
-                return 5;
-            if (Level >= 40)
-                return 4;
-            if (Level >= 30)
-                return 3;
-            if (Level >= 20)
-                return 2;
-            if (Level >= 10)
-                return 1;
-            return 0;
-        }
-    }
 
-    [NotMapped] public float BaseAttack => GetBaseAttack(Level, LevelMilestone);
 
-    [NotMapped] public float BaseEffectiveness => GetBaseEffectiveness(Level, LevelMilestone);
+    [NotMapped] public float BaseAttack => GetBaseAttack(Level, DivineEcho);
 
-    [NotMapped] public float BaseSpeed => GetBaseSpeed(Level, LevelMilestone);
+    [NotMapped] public float BaseEffectiveness => GetBaseEffectiveness(Level, DivineEcho);
 
-    [NotMapped] public float BaseResistance => GetBaseResistance(Level, LevelMilestone);
+    [NotMapped] public float BaseSpeed => GetBaseSpeed(Level, DivineEcho);
 
-    [NotMapped] public float BaseCriticalChance => GetBaseCriticalChance(Level, LevelMilestone);
+    [NotMapped] public float BaseResistance => GetBaseResistance(Level, DivineEcho);
 
-    [NotMapped] public float BaseCriticalDamage => GetBaseCriticalDamage(Level, LevelMilestone);
+    [NotMapped] public float BaseCriticalChance => GetBaseCriticalChance(Level, DivineEcho);
 
-    [NotMapped] public float BaseDefense => GetBaseDefense(Level, LevelMilestone);
+    [NotMapped] public float BaseCriticalDamage => GetBaseCriticalDamage(Level, DivineEcho);
 
-    [NotMapped] public float BaseMaxHealth => GetBaseMaxHealth(Level, LevelMilestone);
+    [NotMapped] public float BaseDefense => GetBaseDefense(Level, DivineEcho);
+
+    [NotMapped] public float BaseMaxHealth => GetBaseMaxHealth(Level, DivineEcho);
 
 
     [NotMapped] protected virtual float BaseAttackMultiplier => 1.0f;
@@ -77,45 +57,45 @@ public partial class Character
         }
     }
 
-    public float GetBaseAttack(int level, int levelMilestone)
+    public float GetBaseAttack(int level, int divineEcho)
     {
         float toCompute = 89 + (level - 1) * 12;
 
 
-        var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Attack);
+        var count = GetStatsToIncreaseBasedOnDivineEcho(divineEcho).Count(i => i == StatType.Attack);
         var percentageToUse = count * GetStatIncreaseMilestoneValue(StatType.Attack);
 
         toCompute *= BaseAttackMultiplier;
         toCompute += toCompute * percentageToUse * 0.01f;
-        toCompute += MilestoneFlatAttackIncrease * levelMilestone;
+
         return toCompute;
     }
 
 
-    public float GetBaseEffectiveness(int level, int levelMilestone)
+    public float GetBaseEffectiveness(int level, int divineEcho)
     {
         float toCompute = 0;
 
-        var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Effectiveness);
+        var count = GetStatsToIncreaseBasedOnDivineEcho(divineEcho).Count(i => i == StatType.Effectiveness);
         toCompute += count * GetStatIncreaseMilestoneValue(StatType.Effectiveness);
         return toCompute;
     }
 
-    public float GetBaseSpeed(int level, int levelMilestone)
+    public float GetBaseSpeed(int level, int divineEcho)
     {
         float toCompute = 100;
 
-        var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Speed);
+        var count = GetStatsToIncreaseBasedOnDivineEcho(divineEcho).Count(i => i == StatType.Speed);
         toCompute *= BaseSpeedMultiplier;
         toCompute += count * GetStatIncreaseMilestoneValue(StatType.Speed);
         return toCompute;
     }
 
-    public float GetBaseResistance(int level, int levelMilestone)
+    public float GetBaseResistance(int level, int divineEcho)
     {
         float toCompute = 0;
 
-        var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Resistance);
+        var count = GetStatsToIncreaseBasedOnDivineEcho(divineEcho).Count(i => i == StatType.Resistance);
         toCompute += count * GetStatIncreaseMilestoneValue(StatType.Resistance);
         return toCompute;
     }
@@ -130,44 +110,43 @@ public partial class Character
         return asString;
     }
 
-    public float GetBaseCriticalChance(int level, int levelMilestone)
+    public float GetBaseCriticalChance(int level, int divineEcho)
     {
         float toCompute = 15;
 
-        var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.CriticalChance);
+        var count = GetStatsToIncreaseBasedOnDivineEcho(divineEcho).Count(i => i == StatType.CriticalChance);
         toCompute += count * GetStatIncreaseMilestoneValue(StatType.CriticalChance);
         return toCompute;
     }
 
-    public float GetBaseCriticalDamage(int level, int levelMilestone)
+    public float GetBaseCriticalDamage(int level, int divineEcho)
     {
         float toCompute = 150;
 
-        var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.CriticalDamage);
+        var count = GetStatsToIncreaseBasedOnDivineEcho(divineEcho).Count(i => i == StatType.CriticalDamage);
         toCompute += count * GetStatIncreaseMilestoneValue(StatType.CriticalDamage);
         return toCompute;
     }
 
-    public float GetBaseDefense(int level, int levelMilestone)
+    public float GetBaseDefense(int level, int divineEcho)
     {
         var toCompute = 70 + (level - 1) * 8.5f;
-        var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.Defense);
+        var count = GetStatsToIncreaseBasedOnDivineEcho(divineEcho).Count(i => i == StatType.Defense);
         var percentageToUse = count * GetStatIncreaseMilestoneValue(StatType.Defense);
 
         toCompute += toCompute * percentageToUse * 0.01f;
         return toCompute * BaseDefenseMultiplier;
     }
 
-    public float GetBaseMaxHealth(int level, int levelMilestone)
+    public float GetBaseMaxHealth(int level, int divineEcho)
     {
         float toCompute = 295 + (level - 1) * 75;
 
-        var count = GetStatsToIncreaseBasedOnLevelMilestone(levelMilestone).Count(i => i == StatType.MaxHealth);
+        var count = GetStatsToIncreaseBasedOnDivineEcho(divineEcho).Count(i => i == StatType.MaxHealth);
         var percentageToUse = count * GetStatIncreaseMilestoneValue(StatType.MaxHealth);
         toCompute *= BaseMaxHealthMultiplier;
         toCompute += toCompute * percentageToUse * 0.01f;
 
-        toCompute += MilestoneFlatHealthIncrease * levelMilestone;
         return toCompute;
     }
 }

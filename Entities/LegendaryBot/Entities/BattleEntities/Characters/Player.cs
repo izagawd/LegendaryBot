@@ -127,7 +127,7 @@ public abstract class Player : Character
     public override DiscordColor Color => UserData?.Color ?? base.Color;
     public override bool IsInStandardBanner => false;
 
-    protected override IEnumerable<StatType> LevelMilestoneStatIncrease =>
+    protected override IEnumerable<StatType> DivineEchoStatIncrease =>
     [
         StatType.Attack, StatType.Attack, StatType.Speed, StatType.CriticalChance, StatType.CriticalDamage,
         StatType.Speed

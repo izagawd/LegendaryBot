@@ -135,7 +135,7 @@ public class Lily : Character
 
     public override DiscordColor Color => DiscordColor.HotPink;
 
-    protected override IEnumerable<StatType> LevelMilestoneStatIncrease =>
+    protected override IEnumerable<StatType> DivineEchoStatIncrease =>
     [
         StatType.MaxHealth, StatType.Defense,
         StatType.Effectiveness, StatType.Effectiveness, StatType.MaxHealth, StatType.Defense

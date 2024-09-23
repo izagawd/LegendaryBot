@@ -57,15 +57,13 @@ public class ViewDescription : GeneralCommandClass
                 if (character.Ultimate is not null)
                     builder.AddField("Ultimate :zap:", character.Ultimate.GetDescription(character));
             
-                var statsToIncreasePerMilestone = character.GetStatsToIncreaseBasedOnLevelMilestone(6).ToArray();
+                var statsToIncreasePerMilestone = character.GetStatsToIncreaseBasedOnDivineEcho(6).ToArray();
                 var stringToUse = "";
                 for (var i = 0; i < statsToIncreasePerMilestone.Length; i++)
                     stringToUse +=
-                        $"After reaching level {(i + 1) * 10}, {statsToIncreasePerMilestone[i].GetShortName()} increases by {Character.GetStatIncreaseMilestoneValueString(statsToIncreasePerMilestone[i])} additionally!\n";
-
-                stringToUse +=
-                    $"\nAttack increases by {Character.MilestoneFlatAttackIncrease} and health increases by {Character.MilestoneFlatHealthIncrease} additionally for every 10 levels as well.";
-                builder.AddField("Level milestone stat increase", stringToUse);
+                        $"With Divine Echo Of {i + 1}, {statsToIncreasePerMilestone[i].GetShortName()} increases by {Character.GetStatIncreaseMilestoneValueString(statsToIncreasePerMilestone[i])} additionally!\n";
+                
+                builder.AddField("Divine Echo stat increase", stringToUse);
             }
         }
         else if (zaObject is StatusEffect statusEffect)

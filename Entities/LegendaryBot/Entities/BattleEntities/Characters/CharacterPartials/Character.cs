@@ -188,9 +188,9 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
 
     /// <summary>
-    ///     Stats to increase when reaching level milestone. order matters in this case, and it should be exactly 5
+    ///     Stats to increase when reaching a certain divine echo. order matters in this case, and it should be exactly 5
     /// </summary>
-    protected virtual IEnumerable<StatType> LevelMilestoneStatIncrease =>
+    protected virtual IEnumerable<StatType> DivineEchoStatIncrease =>
     [
         StatType.MaxHealth, StatType.CriticalChance,
         StatType.Attack, StatType.Effectiveness, StatType.Resistance, StatType.Speed
@@ -486,19 +486,19 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     }
 
 
-    public IEnumerable<StatType> GetStatsToIncreaseBasedOnLevelMilestone(int levelMilestone)
+    public IEnumerable<StatType> GetStatsToIncreaseBasedOnDivineEcho(int divineEcho)
     {
-        if (levelMilestone > 6)
+        if (divineEcho > 6)
         {
-            levelMilestone = 6;
+            divineEcho = 6;
             Console.WriteLine(
-                "level milestone cannot be more than 6, cuz max level for a players character is 60, and milestones are reached every 10 levels");
+                "divine echo cannot be more than 6, cuz max level for a players character is 60, and milestones are reached every 10 levels");
         }
 
-        foreach (var i in LevelMilestoneStatIncrease)
+        foreach (var i in DivineEchoStatIncrease)
         {
-            levelMilestone--;
-            if (levelMilestone < 0) yield break;
+            divineEcho--;
+            if (divineEcho < 0) yield break;
             yield return i;
         }
     }
