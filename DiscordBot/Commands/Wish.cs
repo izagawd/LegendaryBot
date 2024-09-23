@@ -1,9 +1,13 @@
+using System.ComponentModel;
 using BasicFunctionality;
+using DSharpPlus.Commands;
+using DSharpPlus.Entities;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscordBot.Commands;
 
@@ -201,4 +205,33 @@ public class Wish : GeneralCommandClass
         new LimitedCharacterBanner(typeof(CommanderJean)),
         new LimitedBlessingBanner(typeof(PowerOfThePhoenix)),
     ];
+
+    [Command("wish")]
+    [BotCommandCategory(BotCommandCategory.Battle)]
+    [Description("Use this command to pull for characters/blessings!")]
+    public async ValueTask WishCommand(CommandContext ctx, [Parameter("banner-number")] int? bannerNumber = null)
+    {
+        var userData = await DatabaseContext.Set<UserData>()
+            .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
+        if (userData is null || userData.Tier == Tier.Unranked)
+        {
+            await AskToDoBeginAsync(ctx);
+            return;
+        }
+        if (bannerNumber is null)
+        {
+            var builder = new DiscordEmbedBuilder()
+                .WithUser(ctx.User)
+                .WithColor(userData.Color)
+                .WithTitle("Current Banners");
+            var bannerString = "";
+            foreach (var i in CurrentBanners)
+            {
+                bannerString += i.Name + '\n';
+            }
+
+            builder.WithDescription(bannerString);
+            await ctx.RespondAsync(builder);
+        }
+    }
 }
