@@ -244,7 +244,7 @@ public class Wish : GeneralCommandClass
             {
 
                 builder.WithTitle("Hmm")
-                    .WithDescription($"Banner of numer {bannerNumber} does not exist");
+                    .WithDescription($"Banner of number {bannerNumber} does not exist");
                 await ctx.RespondAsync(builder);
                 return;
             }
