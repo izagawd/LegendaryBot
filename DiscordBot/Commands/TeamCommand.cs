@@ -61,7 +61,7 @@ public class TeamCommand : GeneralCommandClass
     public async ValueTask ExecuteChangeTeamCharacter(CommandContext context,
         [Parameter("team-name")] [Description("Name of team you want to remove character from")]
         string teamName, [Parameter("team-slot")] int teamSlot,
-        [Parameter("character-name")] [Description("Name of the character. ignore if you are removng from slot")]
+        [Parameter("character-name")] [Description("Name of the character. ignore if you are removing from slot")]
         string? characterName = null)
     {
         int typeIdToLookFor = Character.LookFor(characterName);

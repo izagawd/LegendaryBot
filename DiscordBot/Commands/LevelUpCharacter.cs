@@ -188,7 +188,7 @@ public partial class CharacterCommand
             .WithTitle("Hmm")
             .WithImageUrl("attachment://levelupimage.png")
             .WithColor(gottenUserData.Color)
-            .WithDescription($"Unable to find character with the number \"{characterName}\"");
+            .WithDescription($"Unable to find character with the name \"{characterName}\"");
 
         if (gottenUserData.IsOccupied)
         {

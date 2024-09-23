@@ -85,7 +85,7 @@ public partial class CharacterCommand : GeneralCommandClass
         var character = gotten.Characters.FirstOrDefault(i => i.TypeId == typeIdToLookFor);
         if (character is null)
         {
-            embed.WithDescription($"Character with number {characterName} not found");
+            embed.WithDescription($"Character with name {characterName} not found");
             await context.RespondAsync(embed);
             return;
         }
@@ -131,7 +131,7 @@ public partial class CharacterCommand : GeneralCommandClass
         var character = userData.Characters.FirstOrDefault();
         if (character is null)
         {
-            embed.WithDescription($"Character with number {characterName} not found");
+            embed.WithDescription($"Character with name {characterName} not found");
             await context.RespondAsync(embed);
             return;
         }

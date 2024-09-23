@@ -95,7 +95,7 @@ public class Display : GeneralCommandClass
         var character = userData.Characters.FirstOrDefault();
         if (character is null)
         {
-            embed.WithDescription($"Character with number {characterName} not found");
+            embed.WithDescription($"Character with name {characterName} not found");
             await context.RespondAsync(embed);
             return;
         }

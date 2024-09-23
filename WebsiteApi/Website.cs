@@ -28,6 +28,8 @@ public static class Website
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials();
+                    
+                    
                 });
         });
 
