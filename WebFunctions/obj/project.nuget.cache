@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "TyQljnKO/Vg8wjCNQasqlqYMKoZi764Rq3DkkYeCSFMs5Dj/x1mxzPB9zfmP3Ny/thakhXtAZvbno3Yf7z98AA==",
+  "dgSpecHash": "/e60i2ZWgg4=",
   "success": true,
   "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\WebFunctions.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-x64\\8.0.6\\microsoft.netcore.app.runtime.linux-x64.8.0.6.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-x64\\8.0.6\\microsoft.aspnetcore.app.runtime.linux-x64.8.0.6.nupkg.sha512"
+  ],
   "logs": []
 }
