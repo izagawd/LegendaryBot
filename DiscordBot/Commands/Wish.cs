@@ -218,12 +218,14 @@ public class Wish : GeneralCommandClass
             await AskToDoBeginAsync(ctx);
             return;
         }
+
+        var builder = new DiscordEmbedBuilder()
+            .WithUser(ctx.User)
+            .WithColor(userData.Color);
         if (bannerNumber is null)
         {
-            var builder = new DiscordEmbedBuilder()
-                .WithUser(ctx.User)
-                .WithColor(userData.Color)
-                .WithTitle("Current Banners");
+         
+                builder.WithTitle("Current Banners");
             var bannerString = "";
             var count = 1;
             foreach (var i in CurrentBanners)
@@ -233,6 +235,20 @@ public class Wish : GeneralCommandClass
 
             builder.WithDescription(bannerString);
             await ctx.RespondAsync(builder);
+        }
+        else
+        {
+            
+            var bannerIndex = bannerNumber - 1;
+            if (bannerIndex < 0 || bannerIndex >= CurrentBanners.Length)
+            {
+
+                builder.WithTitle("Hmm")
+                    .WithDescription($"Banner of numer {bannerNumber} does not exist");
+                await ctx.RespondAsync(builder);
+                return;
+            }
+            
         }
     }
 }
