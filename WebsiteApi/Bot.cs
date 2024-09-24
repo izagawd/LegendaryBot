@@ -8,6 +8,7 @@ using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
+using Entities.LegendaryBot.Entities.Items;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,7 +31,8 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-
+        TypesFunction.GetDefaultObjectsAndSubclasses<Item>()
+            .Select(i => i.TypeId).Max().Print();
     }
 
     private static async Task Main(string[] args)
