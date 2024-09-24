@@ -109,9 +109,7 @@ public static class BasicFunctions
     {
         if (chances.Count <= 0)
             throw new Exception("Dictionary must have at least one key");
-
-        if (chances.Select(i => i.Value).Sum() != 100.0)
-            throw new Exception("Sum of dictionary values must be 100");
+        
         var totalWeight = chances.Sum(kv => kv.Value);
 
         var randomValue = new Random().NextDouble() * totalWeight;

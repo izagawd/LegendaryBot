@@ -13,17 +13,7 @@ using SixLabors.ImageSharp.Processing;
 
 namespace Entities.LegendaryBot.Entities.Items;
 
-public class ItemDatabaseConfiguration : IEntityTypeConfiguration<Item>
-{
-    public void Configure(EntityTypeBuilder<Item> builder)
-    {
-        builder.HasKey(i => new { i.TypeId, i.UserDataId });
 
-        var starting = builder.HasDiscriminator(i => i.TypeId);
-        foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<Item>())
-            starting = starting.HasValue(i.GetType(), i.TypeId);
-    }
-}
 
 public abstract class Item : IInventoryEntity
 {

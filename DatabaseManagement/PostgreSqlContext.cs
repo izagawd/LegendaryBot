@@ -41,7 +41,7 @@ public class PostgreSqlContext : DbContext
             .Take(4);
 
         foreach (var i in availableQuests) user.Quests.Add((Quest)Activator.CreateInstance(i)!);
-        
+
         user.LastTimeQuestWasChecked = DateTime.UtcNow;
     }
 
@@ -124,17 +124,6 @@ EXECUTE FUNCTION {functionName}();
             modelBuilder.Entity(entityType);
         foreach (var i in TypesFunction.AllTypes.Where(i => i.IsAssignableTo(typeof(GearStat)))) modelBuilder.Entity(i);
 
-        modelBuilder
-            .ApplyConfiguration(new ItemDatabaseConfiguration())
-            .ApplyConfiguration(new UserDataDatabaseConfiguration())
-            .ApplyConfiguration(new QuoteDatabaseConfiguration())
-            .ApplyConfiguration(new PlayerTeamDatabaseConfiguration())
-            .ApplyConfiguration(new CharacterDatabaseConfiguration())
-            .ApplyConfiguration(new PlayerDatabaseConfiguration())
-            .ApplyConfiguration(new GearDatabaseConfiguration())
-            .ApplyConfiguration(new GearStatDatabaseConfiguration())
-            .ApplyConfiguration(new BlessingDatabaseConfiguration())
-            .ApplyConfiguration(new GuildDataDatabaseConfig())
-            .ApplyConfiguration(new QuestDatabaseSetup());
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PostgreSqlContext).Assembly);
     }
 }

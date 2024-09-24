@@ -5,6 +5,7 @@ using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;
+using Entities.LegendaryBot.Entities.Items;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -97,6 +98,24 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
     }
 }
 
+public class WishDetailsConfig : IEntityTypeConfiguration<WishDetails>
+{
+    public void Configure(EntityTypeBuilder<WishDetails> builder)
+    {
+        builder.HasKey(i => i.UserDataId);
+    }
+}
+public class ItemDatabaseConfiguration : IEntityTypeConfiguration<Item>
+{
+    public void Configure(EntityTypeBuilder<Item> builder)
+    {
+        builder.HasKey(i => new { i.TypeId, i.UserDataId });
+
+        var starting = builder.HasDiscriminator(i => i.TypeId);
+        foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<Item>())
+            starting = starting.HasValue(i.GetType(), i.TypeId);
+    }
+}
 public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
 {
     public void Configure(EntityTypeBuilder<UserData> builder)
@@ -109,6 +128,9 @@ public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
             .HasForeignKey(i => i.UserDataId)
             .OnDelete(DeleteBehavior.Cascade);
 
+        builder.HasOne(i => i.WishDetails)
+            .WithOne()
+            .HasForeignKey<WishDetails>(i => i.UserDataId);
         builder.HasIndex(i => i.DiscordId)
             .IsUnique();
         builder
