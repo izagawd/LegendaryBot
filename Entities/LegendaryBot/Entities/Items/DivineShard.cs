@@ -2,6 +2,8 @@ namespace Entities.LegendaryBot.Entities.Items;
 
 public class DivineShard : Item
 {
+    public override Rarity Rarity => Rarity.FiveStar;
+
     public override int TypeId
     {
         get => 6;

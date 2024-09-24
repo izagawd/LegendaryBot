@@ -40,11 +40,11 @@ public class EntityReward : Reward
         switch (entity)
         {
             case Character chara:
-                return $"{chara.Name} • Lvl {chara.Level}";
+                return $"{chara.Name} {"\u2b50".MultiplyString((int) entity.Rarity)} • Lvl {chara.Level}";
             case Item item:
-                return $"{item.Name} • Stacks: {item.Stacks:N0}";
+                return $"{item.Name} {"\u2b50".MultiplyString((int) entity.Rarity)} • Stacks: {item.Stacks:N0}";
             case Blessing blessing:
-                return $"{blessing.Name}";
+                return $"{blessing.Name} {"\u2b50".MultiplyString((int) entity.Rarity)}";
             case Gear gear:
                 return gear.DisplayString;
             default:

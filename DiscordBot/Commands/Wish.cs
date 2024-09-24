@@ -2,10 +2,14 @@ using System.ComponentModel;
 using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity.Extensions;
 using Entities.LegendaryBot;
+using Entities.LegendaryBot.Entities;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.LegendaryBot.Entities.Items;
+using Entities.LegendaryBot.Rewards;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,7 +50,7 @@ public enum Choice
 }
 
 
-public class LimitedBlessingBanner : CharacterBanner
+public class LimitedBlessingBanner : BlessingBanner
 {
     public readonly Type CurrentLimited;
 
@@ -209,9 +213,11 @@ public class Wish : GeneralCommandClass
     [Command("wish")]
     [BotCommandCategory(BotCommandCategory.Battle)]
     [Description("Use this command to pull for characters/blessings!")]
-    public async ValueTask WishCommand(CommandContext ctx, [Parameter("banner-number")] int? bannerNumber = null)
+    public async ValueTask WishCommand(CommandContext ctx, 
+        [Parameter("banner-number")] int? bannerNumber = null)
     {
         var userData = await DatabaseContext.Set<UserData>()
+            .Include(i => i.Items.Where(j => j is DivineShard))
             .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -219,9 +225,16 @@ public class Wish : GeneralCommandClass
             return;
         }
 
+        if (userData.IsOccupied)
+        {
+            await NotifyAboutOccupiedAsync(ctx);
+            return;
+        }
+
         var builder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
             .WithColor(userData.Color);
+        (bannerNumber ?? -1).Print();
         if (bannerNumber is null)
         {
          
@@ -238,8 +251,8 @@ public class Wish : GeneralCommandClass
         }
         else
         {
-            
-            var bannerIndex = bannerNumber - 1;
+            "yo".Print();
+            var bannerIndex = bannerNumber.Value - 1;
             if (bannerIndex < 0 || bannerIndex >= CurrentBanners.Length)
             {
 
@@ -248,7 +261,83 @@ public class Wish : GeneralCommandClass
                 await ctx.RespondAsync(builder);
                 return;
             }
+
+            var banner = CurrentBanners[bannerIndex];
+            const int DivineShardsNeeded = 100;
+            var divineShards = userData.Items.GetOrCreateItem<DivineShard>();
+            builder.WithDescription(
+                $"{DivineShardsNeeded} divine shards per pull" +
+                $"pull on {banner.Name}. Proceed?\nNote: you have {divineShards.Stacks} divine shards");
+
+            await MakeOccupiedAsync(userData);
+            await ctx.RespondAsync(new DiscordMessageBuilder()
+                .AddEmbed(builder)
+                .AddComponents([
+                    new DiscordButtonComponent(DiscordButtonStyle.Success,
+                        "1", "x1"),
+                    new DiscordButtonComponent(DiscordButtonStyle.Success,
+                        "10", "x10"),
+                    new DiscordButtonComponent(DiscordButtonStyle.Danger,
+                        "cancel", "CANCEL"),
+                ]));
             
+            var message = await ctx.GetResponseAsync();
+
+            var response= await message.WaitForButtonAsync(ctx.User);
+            if (response.TimedOut || response.Result.Id == "cancel")
+            {
+                await message.ModifyAsync(i => i.Components
+                    .SelectMany(j => j.Components)
+                    .ForEach(i => (i as DiscordButtonComponent)?.Disable()));
+                return;
+            }
+
+            var amount = 1;
+            switch (response.Result.Id)
+            {
+                case "1":
+                    amount = 1;
+                    break;
+                case "10":
+                    amount = 10;
+                    break;
+            }
+            
+            if (divineShards.Stacks < DivineShardsNeeded * amount)
+            {
+                builder
+                    .WithTitle("hmm")
+                    .WithDescription($"You need {DivineShardsNeeded * amount} to pull. You have {divineShards.Stacks}");
+                await response.Result.Interaction
+                    .CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+                        new DiscordInteractionResponseBuilder()
+                            .AddEmbed(builder));
+                    
+                return;
+            }
+
+            divineShards.Stacks -= DivineShardsNeeded * amount;
+            List<IInventoryEntity> pulledEntities = new List<IInventoryEntity>(amount);
+            foreach (var _ in Enumerable.Range(0,amount))
+            {
+                var gottenType =banner.Pull(userData);
+                IInventoryEntity pulled = (IInventoryEntity)Activator.CreateInstance(gottenType)!;
+                if (pulled is null)
+                    throw new Exception();
+                pulledEntities.Add(pulled);
+            }
+
+                
+           
+            var result =await userData.ReceiveRewardsAsync(DatabaseContext.Set<UserData>(),
+                [new EntityReward(pulledEntities)]);
+            builder.WithTitle("Nice!")
+                .WithDescription(result+$"{divineShards.Stacks} divine shards left");
+            await DatabaseContext.SaveChangesAsync(); 
+            await response.Result.Interaction
+                .CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+                    new DiscordInteractionResponseBuilder()
+                        .AddEmbed(builder));
         }
     }
 }

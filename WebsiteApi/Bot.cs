@@ -14,10 +14,6 @@ namespace WebsiteApi;
 
 public static class Bot
 {
-    private static Task FirstTimeSetupAsync()
-    {
-        return new PostgreSqlContext().ResetDatabaseAsync();
-    }
 
 
     public static void StopProgram()
@@ -53,7 +49,7 @@ public static class Bot
             stopwatch.Start();
             await ctx
                 .Set<UserData>()
-                .ExecuteUpdateAsync(i => i.SetProperty(j => j.IsOccupied, _ => false));
+                .ExecuteUpdateAsync(i => i.SetProperty(j => j.IsOccupied,  false));
             Console.WriteLine("made all users unoccupied!");
         }
 

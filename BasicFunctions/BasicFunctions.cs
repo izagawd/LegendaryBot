@@ -6,6 +6,10 @@ namespace BasicFunctionality;
 
 public static class BasicFunctions
 {
+    public static string MultiplyString(this string toMultiply, int num)
+    {
+        return string.Concat(Enumerable.Repeat(toMultiply, num));
+    }
     public static string CommaConcatenator(IEnumerable<string> values)
     {
         var valuesArray = values.ToArray();
