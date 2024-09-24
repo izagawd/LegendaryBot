@@ -19,6 +19,7 @@ namespace DiscordBot.Commands;
 
 public abstract class Banner
 {
+    public abstract ProbabilityDictionary<Choice> Rates { get; }
     public abstract int FiveStarPityCount { get; }
     public abstract Type SummonsTrackerType { get; }
     public const int FourStarPity = 10;
@@ -44,19 +45,13 @@ public abstract class Banner
             summonsTracker.FiveStarPity = 0;
             return targetFiveStar;
         }
-        var dic = new Dictionary<Choice, double>()
-        {
-            { Choice.FiveStar, 2 },
-            { Choice.FourStarCharacter, 5 },
-            { Choice.FourStarBlessing, 7.5 },
-            { Choice.ThreeStarBlessing, 85.5 }
-        };
+
+        var dic = Rates;
         if (summonsTracker.FourStarPity >= FourStarPity - 1)
         {
-            dic.Remove(Choice.ThreeStarBlessing);
+            dic.Redistribute(Choice.ThreeStarBlessing,[Choice.FourStarBlessing,Choice.FourStarCharacter]);
         }
-        var gotten = BasicFunctions.GetRandom( dic
-        );
+        var gotten = BasicFunctions.GetRandomFromProbabilities(dic);
      
         Type gottenType;
         var charactersToWorkWith = TypesFunction
@@ -177,13 +172,39 @@ public class LimitedCharacterBanner : CharacterBanner
 }
 public abstract class BlessingBanner : Banner
 {
+    public override ProbabilityDictionary<Choice> Rates
+    {
+        get
+        {
+            return new ProbabilityDictionary<Choice>()
+            {
+                { Choice.FiveStar, 2 },
+                { Choice.FourStarCharacter, 5 },
+                { Choice.FourStarBlessing, 7.5 },
+                { Choice.ThreeStarBlessing, 85.5 }
+            };
+        }
+    }
+
     public override int FiveStarPityCount => 60;
 
 
 }
 public abstract class CharacterBanner : Banner
 {
-
+    public override ProbabilityDictionary<Choice> Rates
+    {
+        get
+        {
+            return new ProbabilityDictionary<Choice>()
+            {
+                { Choice.FiveStar, 1 },
+                { Choice.FourStarCharacter, 5 },
+                { Choice.FourStarBlessing, 7.5 },
+                { Choice.ThreeStarBlessing, 86.5 }
+            };
+        }
+    }
 
     public sealed override int FiveStarPityCount => 70;
 

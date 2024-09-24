@@ -105,7 +105,7 @@ public static class BasicFunctions
     /// <summary>
     ///     Note: chances MUST add up to 100%. there must be at least one key
     /// </summary>
-    public static TValue GetRandom<TValue>(Dictionary<TValue, double> chances) where TValue : notnull
+    public static TValue GetRandomFromProbabilities<TValue>(IDictionary<TValue, double> chances) where TValue : notnull
     {
         if (chances.Count <= 0)
             throw new Exception("Dictionary must have at least one key");

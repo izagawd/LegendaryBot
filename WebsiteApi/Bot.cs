@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using BasicFunctionality;
 using DatabaseManagement;
+using DiscordBot;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
@@ -29,7 +30,19 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-   
+        var prob = new ProbabilityDictionary<Choice>()
+        {
+            { Choice.FiveStar, 2 },
+            { Choice.FourStarCharacter, 5 },
+            { Choice.FourStarBlessing, 7.5 },
+            { Choice.ThreeStarBlessing, 85.5 }
+        };
+        prob.Redistribute(Choice.ThreeStarBlessing,
+            [Choice.FourStarBlessing,Choice.FourStarCharacter]);
+        foreach (var  i in prob)
+        {
+            $"{i.Key} {i.Value}".Print();
+        }
     }
 
     private static async Task Main(string[] args)

@@ -75,7 +75,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
             .GroupBy(i => i.Rarity)
             .ToImmutableArray();
 
-        var rarityToUse = BasicFunctions.GetRandom(rates);
+        var rarityToUse = BasicFunctions.GetRandomFromProbabilities(rates);
         var randomBlessing
             = BasicFunctions.RandomChoice(
                 groups.First(i => i.Key == rarityToUse).Select(i => i)).GetType();
