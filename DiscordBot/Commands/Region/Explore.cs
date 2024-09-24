@@ -121,11 +121,11 @@ public class Explore : GeneralCommandClass
                 .ToArray();
 
          
-            var rewardText = $"You defeated {mainEnemyCharacter.Name}, and found some loot!\n";
+            var rewardText = $"**You defeated {mainEnemyCharacter.Name}, and found some loot!**\n\n";
             rewardText += await userData.ReceiveRewardsAsync(DatabaseContext.Set<UserData>(), rewards);
             embedToBuild
                 .WithTitle("Nice going bud!")
-                .WithDescription($"You won!\n{rewardText}")
+                .WithDescription($"**You won!**\n{rewardText}")
                 .WithImageUrl("");
             stamina!.Stacks -= requiredStamina;
             await DatabaseContext.SaveChangesAsync();

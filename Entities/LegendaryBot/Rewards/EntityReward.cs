@@ -56,7 +56,7 @@ public class EntityReward : Reward
     public override async Task<string> GiveRewardToAsync(UserData userData, IQueryable<UserData> userDataQueryable)
     {
         
-        var stringBuilder = new StringBuilder($"**{userData.Name} got:**\n\n ");
+        var stringBuilder = new StringBuilder();
         EntitiesToReward.MergeItemStacks();
         var gottenItemsTypeIds = EntitiesToReward
             .OfType<Item>()
