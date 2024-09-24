@@ -98,11 +98,16 @@ public class CharacterDatabaseConfiguration : IEntityTypeConfiguration<Character
     }
 }
 
-public class WishDetailsConfig : IEntityTypeConfiguration<WishDetails>
+public class SummonsTrackerConfig : IEntityTypeConfiguration<SummonsTracker>
 {
-    public void Configure(EntityTypeBuilder<WishDetails> builder)
+    public void Configure(EntityTypeBuilder<SummonsTracker> builder)
     {
-        builder.HasKey(i => i.UserDataId);
+        builder.HasKey(i => i.Id);
+        var toDo = builder.HasDiscriminator(i => i.TypeId);
+        foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<SummonsTracker>())
+        {
+            toDo = toDo.HasValue(i.GetType(), i.TypeId);
+        }
     }
 }
 public class ItemDatabaseConfiguration : IEntityTypeConfiguration<Item>
@@ -128,9 +133,9 @@ public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
             .HasForeignKey(i => i.UserDataId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasOne(i => i.WishDetails)
+        builder.HasMany(i => i.SummonsTrackers)
             .WithOne()
-            .HasForeignKey<WishDetails>(i => i.UserDataId);
+            .HasForeignKey(i => i.UserDataId);
         builder.HasIndex(i => i.DiscordId)
             .IsUnique();
         builder

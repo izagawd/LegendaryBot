@@ -19,6 +19,8 @@ namespace DiscordBot.Commands;
 
 public abstract class Banner
 {
+    public abstract int FiveStarPityCount { get; }
+    public abstract Type SummonsTrackerType { get; }
     public const int FourStarPity = 10;
     public bool IsValidFiveStarBlessing(Type type)
     {
@@ -30,107 +32,26 @@ public abstract class Banner
         var def =(Blessing) TypesFunction.GetDefaultObject(type);
         return def.Rarity == Rarity.FiveStar;
     }
-
-    public bool IsValidFiveStarCharacter(Type type)
+    protected Type GetRandomBannerType(Type targetFiveStar, SummonsTracker summonsTracker)
     {
-        if (type is null || !type.IsAssignableTo(typeof(Character)) || type.IsAbstract)
+        if ((this is BlessingBanner && !IsValidFiveStarBlessing(targetFiveStar))
+            || (this is CharacterBanner && !IsValidFiveStarCharacter(targetFiveStar)))
         {
-            return false;
+            throw new Exception($"Invalid type. Needs to be non abstract five star and must fit the banner (in this case, {GetType().Name})");
         }
-
-        var def =(Character) TypesFunction.GetDefaultObject(type);
-        return def.Rarity == Rarity.FiveStar;
-    }
-    public abstract Type Pull(UserData userData);
-    public abstract string Name { get; }
-
-}
-public enum Choice
-{
-    FourStarCharacter, FiveStarCharacter, ThreeStarBlessing, FourStarBlessing,
-    FiveStarBlessing
-}
-
-
-public class LimitedBlessingBanner : BlessingBanner
-{
-    public readonly Type CurrentLimited;
-
-    public override string Name => $"Limited Blessing Banner " +
-                                   $"({((Blessing)TypesFunction.GetDefaultObject(CurrentLimited)).Name})";
-
-    public override Type Pull(UserData userData)
-    {
-        int fourStarPity = userData.WishDetails.FourStarBlessingLimitedPity;
-        int fiveStarPity = userData.WishDetails.FiveStarBlessingLimitedPity;
-        var res = GetRandomBannerType(CurrentLimited, userData,ref fourStarPity, ref fiveStarPity);
-        userData.WishDetails.FourStarBlessingLimitedPity = fourStarPity;
-        userData.WishDetails.FiveStarBlessingLimitedPity = fiveStarPity;
-        return res;
-
-    }
-
-    
-    public LimitedBlessingBanner(Type limitedBless)
-    {
-        if (!IsValidFiveStarBlessing(limitedBless))
+        if (summonsTracker.FiveStarPity >= FiveStarPityCount -1)
         {
-            throw new Exception("Invalid blessing type. Needs to be non abstract 5 star blessing");
+            summonsTracker.FiveStarPity = 0;
+            return targetFiveStar;
         }
-        CurrentLimited = limitedBless;
-    }
-}
-
-public class LimitedCharacterBanner : CharacterBanner
-{
-    public override string Name => $"Limited Character Banner " +
-                                   $"({((Character)TypesFunction.GetDefaultObject(CurrentLimited)).Name})";
-    public readonly Type CurrentLimited;
-
-    public override Type Pull(UserData userData)
-    {
-        int fourStarPity = userData.WishDetails.FourStarCharacterLimitedPity;
-        int fiveStarPity = userData.WishDetails.FiveStarCharacterLimitedPity;
-        var res = GetRandomBannerType(CurrentLimited, userData,ref fourStarPity, ref fiveStarPity);
-        userData.WishDetails.FourStarCharacterLimitedPity = fourStarPity;
-        userData.WishDetails.FiveStarCharacterLimitedPity = fiveStarPity;
-        return res;
-    }
-
-    public LimitedCharacterBanner(Type limitedChar)
-    {
-        if (!IsValidFiveStarCharacter(limitedChar))
-        {
-            throw new Exception("Invalid character type. Needs to be non abstract 5 star character");
-        }
-        CurrentLimited = limitedChar;
-    }
-}
-public abstract class BlessingBanner : Banner
-{
-    public const int FiveStarBlessingPity = 60;
-        protected Type GetRandomBannerType(Type targetFiveStarBlessing, UserData userData,
-            ref int fourStarPity, ref int fiveStarBlessingPity)
-    {
-        if (!IsValidFiveStarBlessing(targetFiveStarBlessing))
-        {
-            throw new Exception("Invalid blessing type. Needs to be non abstract five star blessing");
-        }
-        if (fiveStarBlessingPity >= FiveStarBlessingPity -1)
-        {
-            fiveStarBlessingPity = 0;
-            return targetFiveStarBlessing;
-        }
-      
-
         var dic = new Dictionary<Choice, double>()
         {
-            { Choice.FiveStarBlessing, 2 },
+            { Choice.FiveStar, 2 },
             { Choice.FourStarCharacter, 5 },
             { Choice.FourStarBlessing, 7.5 },
             { Choice.ThreeStarBlessing, 85.5 }
         };
-        if (fourStarPity >= FourStarPity - 1)
+        if (summonsTracker.FourStarPity >= FourStarPity - 1)
         {
             dic.Remove(Choice.ThreeStarBlessing);
         }
@@ -165,114 +86,123 @@ public abstract class BlessingBanner : Banner
                         .Select(i => i.GetType()));
                 
                 break;
-            case Choice.FiveStarBlessing:
-                gottenType = targetFiveStarBlessing;
+            case Choice.FiveStar:
+                gottenType = targetFiveStar;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
         var zaObj =(IInventoryEntity) TypesFunction.GetDefaultObject(gottenType);
-        fourStarPity++;
-        fiveStarBlessingPity++;
+        summonsTracker.FourStarPity++;
+        summonsTracker.FiveStarPity++;
         if (zaObj.Rarity == Rarity.FourStar)
-            fourStarPity = 0;
+            summonsTracker.FourStarPity = 0;
         if (zaObj.Rarity == Rarity.FiveStar)
-            fiveStarBlessingPity = 0;
+            summonsTracker.FiveStarPity = 0;
         return gottenType;
     }
+    public bool IsValidFiveStarCharacter(Type type)
+    {
+        if (type is null || !type.IsAssignableTo(typeof(Character)) || type.IsAbstract)
+        {
+            return false;
+        }
+
+        var def =(Character) TypesFunction.GetDefaultObject(type);
+        return def.Rarity == Rarity.FiveStar;
+    }
+    public abstract Type Pull(SummonsTracker summonsTracker);
+    public abstract string Name { get; }
+
+}
+public enum Choice
+{
+    FourStarCharacter,  ThreeStarBlessing, FourStarBlessing,
+    FiveStar
+}
+
+
+public class LimitedBlessingBanner : BlessingBanner
+{
+    public readonly Type CurrentLimited;
+
+    public override Type SummonsTrackerType => typeof(LimitedBlessingSummonsTracker);
+
+    public override string Name => $"Limited Blessing Banner " +
+                                   $"({((Blessing)TypesFunction.GetDefaultObject(CurrentLimited)).Name})";
+
+    public override Type Pull(SummonsTracker summonsTracker)
+    {
+
+        return GetRandomBannerType(CurrentLimited, summonsTracker);
+     
+    }
+
+    
+    public LimitedBlessingBanner(Type limitedBless)
+    {
+        if (!IsValidFiveStarBlessing(limitedBless))
+        {
+            throw new Exception("Invalid blessing type. Needs to be non abstract 5 star blessing");
+        }
+        CurrentLimited = limitedBless;
+    }
+}
+
+public class LimitedCharacterBanner : CharacterBanner
+{
+
+
+    public override string Name => $"Limited Character Banner " +
+                                   $"({((Character)TypesFunction.GetDefaultObject(CurrentLimited)).Name})";
+    public readonly Type CurrentLimited;
+
+    public override Type SummonsTrackerType => typeof(LimitedCharacterSummonsTracker);
+
+    public override Type Pull(SummonsTracker summonsTracker)
+    {
+
+        return GetRandomBannerType(CurrentLimited, summonsTracker);
+   
+    }
+
+    public LimitedCharacterBanner(Type limitedChar)
+    {
+        if (!IsValidFiveStarCharacter(limitedChar))
+        {
+            throw new Exception("Invalid character type. Needs to be non abstract 5 star character");
+        }
+        CurrentLimited = limitedChar;
+    }
+}
+public abstract class BlessingBanner : Banner
+{
+    public override int FiveStarPityCount => 60;
+
+
 }
 public abstract class CharacterBanner : Banner
 {
 
 
-  
-    public const int FiveStarCharacterPity = 70;
-    protected Type GetRandomBannerType(Type targetFiveStarCharacter, UserData userData, 
-         ref int fourStarPity,ref int fiveStarCharacterPity)
-    {
-        if (!IsValidFiveStarCharacter(targetFiveStarCharacter))
-        {
-            throw new Exception("Invalid character type. Needs to be non abstract 5 star character");
-        }
-        if (fiveStarCharacterPity >= FiveStarCharacterPity -1)
-        {
-            fiveStarCharacterPity = 0;
-            return targetFiveStarCharacter;
-        }
-        
-        var dictionaryToUse = new Dictionary<Choice, double>()
-        {
-            { Choice.FiveStarCharacter, 1 },
-            { Choice.FourStarCharacter, 5 },
-            { Choice.FourStarBlessing, 7.5 },
-            { Choice.ThreeStarBlessing, 86.5 }
-        };
-        if (fourStarPity >= FourStarPity-1)
-        {
-            dictionaryToUse.Remove(Choice.ThreeStarBlessing);
-        }
+    public sealed override int FiveStarPityCount => 70;
 
-        var gotten = BasicFunctions.GetRandom( dictionaryToUse);
-        Type gottenType;
-        var charactersToWorkWith = TypesFunction
-            .GetDefaultObjectsAndSubclasses<Character>()
-            .Where(i => i.IsInStandardBanner && !i.GetType().IsAbstract)
-            .ToArray();
-        var blessingsToWorkWith = TypesFunction
-            .GetDefaultObjectsAndSubclasses<Blessing>()
-            .Where(i => i.IsInStandardBanner && !i.GetType().IsAbstract)
-            .ToArray();
-        switch (gotten)
-        {
-            case Choice.FourStarCharacter:
-                gottenType = BasicFunctions.RandomChoice(
-                    charactersToWorkWith.Where(i => i.Rarity == Rarity.FourStar)
-                        .Select(i => i.GetType()));
-                    
-                break;
-            case Choice.FiveStarCharacter:
-                gottenType = targetFiveStarCharacter;
-                break;
-            case Choice.ThreeStarBlessing:
-                gottenType = BasicFunctions.RandomChoice(
-                    blessingsToWorkWith.Where(i => i.Rarity == Rarity.ThreeStar)
-                        .Select(i => i.GetType()));
-                break;
-            case Choice.FourStarBlessing:
-                gottenType = BasicFunctions.RandomChoice(
-                    blessingsToWorkWith.Where(i => i.Rarity == Rarity.FourStar)
-                        .Select(i => i.GetType()));
-                
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-
-        var zaObj =(IInventoryEntity) TypesFunction.GetDefaultObject(gottenType);
-        fourStarPity++;
-        fiveStarCharacterPity++;
-        if (zaObj.Rarity == Rarity.FourStar)
-            fourStarPity = 0;
-        if (zaObj.Rarity == Rarity.FiveStar)
-            fiveStarCharacterPity = 0;
-        return gottenType;
-    }
 }
-public class Wish : GeneralCommandClass
+public class Summon : GeneralCommandClass
 {
     public readonly Banner[] CurrentBanners = [
         new LimitedCharacterBanner(typeof(CommanderJean)),
         new LimitedBlessingBanner(typeof(PowerOfThePhoenix)),
     ];
 
-    [Command("wish")]
+    [Command("summon")]
     [BotCommandCategory(BotCommandCategory.Battle)]
     [Description("Use this command to pull for characters/blessings!")]
     public async ValueTask WishCommand(CommandContext ctx, 
         [Parameter("banner-number")] int? bannerNumber = null)
     {
         var userData = await DatabaseContext.Set<UserData>()
-            .Include(i => i.WishDetails)
+            .Include(i => i.SummonsTrackers)
             .Include(i => i.Items.Where(j => j is DivineShard))
             .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
@@ -287,11 +217,7 @@ public class Wish : GeneralCommandClass
             return;
         }
 
-        if (userData.WishDetails is null)
-        {
-            userData.WishDetails = new WishDetails();
-            await DatabaseContext.SaveChangesAsync();
-        }
+       
 
         var builder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
@@ -398,9 +324,17 @@ public class Wish : GeneralCommandClass
 
             divineShards.Stacks -= DivineShardsNeeded * amount;
             List<IInventoryEntity> pulledEntities = new List<IInventoryEntity>(amount);
+            var typeToLookFor = banner.SummonsTrackerType;
+            var gotten =userData.SummonsTrackers.FirstOrDefault(i =>
+                i.GetType() == typeToLookFor);
+            if (gotten is null)
+            {
+                gotten =(SummonsTracker) Activator.CreateInstance(typeToLookFor)!;
+                userData.SummonsTrackers.Add(gotten);
+            }
             foreach (var _ in Enumerable.Range(0,amount))
             {
-                var gottenType =banner.Pull(userData);
+                var gottenType =banner.Pull(gotten);
                 IInventoryEntity pulled = (IInventoryEntity)Activator.CreateInstance(gottenType)!;
                 if (pulled is null)
                     throw new Exception();

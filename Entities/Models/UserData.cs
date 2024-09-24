@@ -97,7 +97,7 @@ public class UserData : ICanBeLeveledUp
         return BattleFunctionality.NextLevelFormula(level) * 10;
     }
 
-    public WishDetails WishDetails { get; set; }
+    public List<SummonsTracker> SummonsTrackers { get; set; }
     public int GetRequiredExperienceToNextLevel()
     {
         return GetRequiredExperienceToNextLevel(AdventurerLevel);

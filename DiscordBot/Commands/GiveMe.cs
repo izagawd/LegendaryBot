@@ -55,16 +55,24 @@ public class GiveMe : GeneralCommandClass
             }
 
             List<EntityReward> rewards = [];
-            foreach (var i in Enumerable.Range(0, amount))
+            if (type.IsAssignableTo(typeof(Item)))
             {
-                var createdType = (IInventoryEntity)Activator.CreateInstance(type)!;
-                if (createdType is Item item)
-                    item.Stacks = 1;
-                if (createdType is Gear gear)
-                    gear.Initialize(Rarity.FiveStar);
-
+                var createdType = (Item)Activator.CreateInstance(type)!;
+                createdType.Stacks = amount;
                 rewards.Add(new EntityReward([createdType]));
             }
+            else
+            {
+                foreach (var _ in Enumerable.Range(0, amount))
+                {
+                    var createdType = (IInventoryEntity)Activator.CreateInstance(type)!;
+                    if (createdType is Gear gear)
+                        gear.Initialize(Rarity.FiveStar);
+
+                    rewards.Add(new EntityReward([createdType]));
+                }
+            }
+
 
             var result = await userData.ReceiveRewardsAsync(DatabaseContext.Set<UserData>(), rewards);
 
