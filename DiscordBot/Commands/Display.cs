@@ -221,8 +221,8 @@ public class Display : GeneralCommandClass
         await ExecuteDisplayAsync(context, userData.Items.Where(i => i.Name
                     .Replace(" ", "")
                     .Contains(simplified, StringComparison.CurrentCultureIgnoreCase))
-                .Select(i => $"Name • {i.Name} • Stacks • {i.Stacks:N0}"), 20,
-            "\n", "Items", userData.Color);
+                .Select(i => $"**{i.Name} {"\u2b50".MultiplyString((int)i.Rarity)} • Stacks: {i.Stacks:N0}**"), 20,
+            "\n\n", "Items", userData.Color);
     }
 
     [Command("all-entities")]
@@ -285,12 +285,13 @@ public class Display : GeneralCommandClass
                 .OrderByDescending(i => i.Rarity)
                 .Select(i =>
                 {
-                    var toReturn = $"{i.Name} • Lvl {i.Level}";
+                    var toReturn = $"**{i.Name} {"\u2b50".MultiplyString((int) i.Rarity)} • Lvl {i.Level}";
                     if (i.Blessing is not null)
                         toReturn += $" • {i.Blessing.Name}";
+                    toReturn += "**";
                     return toReturn;
                 }), 10,
-            "\n", "Characters", userData.Color);
+            "\n\n", "Characters", userData.Color);
     }
 
     [Command("blessings")]
@@ -317,7 +318,7 @@ public class Display : GeneralCommandClass
                     var count = asArray.Length;
                     var countThatsFree = asArray.Count(j => j.CharacterId is null);
                     var sample = asArray[0];
-                    return $"`{sample.Name} • Count: {count} • Available: {countThatsFree}`";
+                    return $"**{sample.Name} {"\u2b50".MultiplyString((int)sample.Rarity)} • Count: {count} • Available: {countThatsFree}**";
                 }), 10,
             "\n\n", "Blessings", userData.Color);
     }

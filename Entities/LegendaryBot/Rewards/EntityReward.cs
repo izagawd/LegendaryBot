@@ -40,11 +40,11 @@ public class EntityReward : Reward
         switch (entity)
         {
             case Character chara:
-                return $"{chara.Name} {"\u2b50".MultiplyString((int) entity.Rarity)} • Lvl {chara.Level}";
+                return @$"**{chara.Name} {"\u2b50".MultiplyString((int) entity.Rarity)} • Lvl {chara.Level}**";
             case Item item:
-                return $"{item.Name} {"\u2b50".MultiplyString((int) entity.Rarity)} • Stacks: {item.Stacks:N0}";
+                return $"**{item.Name} {"\u2b50".MultiplyString((int) entity.Rarity)}  • Stacks: {item.Stacks:N0}**";
             case Blessing blessing:
-                return $"{blessing.Name} {"\u2b50".MultiplyString((int) entity.Rarity)}";
+                return $"**{blessing.Name} {"\u2b50".MultiplyString((int) entity.Rarity)}**";
             case Gear gear:
                 return gear.DisplayString;
             default:
@@ -56,7 +56,7 @@ public class EntityReward : Reward
     public override async Task<string> GiveRewardToAsync(UserData userData, IQueryable<UserData> userDataQueryable)
     {
         
-        var stringBuilder = new StringBuilder($"{userData.Name} got:\n ");
+        var stringBuilder = new StringBuilder($"**{userData.Name} got:**\n\n ");
         EntitiesToReward.MergeItemStacks();
         var gottenItemsTypeIds = EntitiesToReward
             .OfType<Item>()
@@ -110,11 +110,11 @@ public class EntityReward : Reward
             var usedDupes = dupeCounts - excess;
             if (usedDupes > 0)
             {
-                dupeExcessBuilder.Append($"{already.Name} x{usedDupes} (dupes)\n");
+                dupeExcessBuilder.Append($"**{already.Name} {"\u2b50".MultiplyString((int) already.Rarity)} x{usedDupes}  (dupes)**\n\n");
             }
             if (excess > 0)
             {
-                dupeExcessBuilder.Append($"{already.Name} x{excess} (excess)\n");
+                dupeExcessBuilder.Append($"**{already.Name} {"\u2b50".MultiplyString((int) already.Rarity)} x{excess}  (excess)**\n\n");
             }
             foreach (var j in EntitiesToReward
                          .OfType<Character>()
@@ -128,7 +128,7 @@ public class EntityReward : Reward
         userData.Inventory.AddRange(EntitiesToReward);
         userData.Inventory.MergeItemStacks();
         foreach (var i in EntitiesToReward)
-            stringBuilder.Append($"{GetDisplayString(i, userData)}\n");
+            stringBuilder.Append($"{GetDisplayString(i, userData)}\n\n");
         stringBuilder.Append(dupeExcessBuilder);
         return stringBuilder.ToString();
     }

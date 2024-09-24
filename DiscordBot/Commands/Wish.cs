@@ -12,6 +12,7 @@ using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Rewards;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace DiscordBot.Commands;
 
@@ -267,28 +268,43 @@ public class Wish : GeneralCommandClass
             var divineShards = userData.Items.GetOrCreateItem<DivineShard>();
             builder.WithDescription(
                 $"{DivineShardsNeeded} divine shards per pull" +
-                $"pull on {banner.Name}. Proceed?\nNote: you have {divineShards.Stacks} divine shards");
+                $"pull on {banner.Name}. Proceed?\nNote: you have {divineShards.Stacks:N0} divine shards");
 
             await MakeOccupiedAsync(userData);
+            DiscordComponent[] buttonComponents =
+            [
+                new DiscordButtonComponent(DiscordButtonStyle.Success,
+                    "1", "x1"),
+                new DiscordButtonComponent(DiscordButtonStyle.Success,
+                    "10", "x10"),
+                new DiscordButtonComponent(DiscordButtonStyle.Danger,
+                    "cancel", "CANCEL"),
+            ];
             await ctx.RespondAsync(new DiscordMessageBuilder()
                 .AddEmbed(builder)
-                .AddComponents([
-                    new DiscordButtonComponent(DiscordButtonStyle.Success,
-                        "1", "x1"),
-                    new DiscordButtonComponent(DiscordButtonStyle.Success,
-                        "10", "x10"),
-                    new DiscordButtonComponent(DiscordButtonStyle.Danger,
-                        "cancel", "CANCEL"),
-                ]));
+                .AddComponents(buttonComponents));
             
             var message = await ctx.GetResponseAsync();
 
             var response= await message.WaitForButtonAsync(ctx.User);
-            if (response.TimedOut || response.Result.Id == "cancel")
+            if (response.TimedOut)
             {
                 await message.ModifyAsync(i => i.Components
                     .SelectMany(j => j.Components)
                     .ForEach(i => (i as DiscordButtonComponent)?.Disable()));
+                return;
+            }
+
+            if (response.Result.Id == "cancel")
+            {
+                foreach (var i in buttonComponents)
+                {
+                    (i as DiscordButtonComponent)?.Disable();
+                }
+                await response.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+                    new DiscordInteractionResponseBuilder()
+                        .AddEmbed(builder)
+                        .AddComponents(buttonComponents));
                 return;
             }
 
@@ -307,7 +323,7 @@ public class Wish : GeneralCommandClass
             {
                 builder
                     .WithTitle("hmm")
-                    .WithDescription($"You need {DivineShardsNeeded * amount} to pull. You have {divineShards.Stacks}");
+                    .WithDescription($"You need {DivineShardsNeeded * amount} to pull. You have {divineShards.Stacks:N0}");
                 await response.Result.Interaction
                     .CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
                         new DiscordInteractionResponseBuilder()
@@ -332,7 +348,8 @@ public class Wish : GeneralCommandClass
             var result =await userData.ReceiveRewardsAsync(DatabaseContext.Set<UserData>(),
                 [new EntityReward(pulledEntities)]);
             builder.WithTitle("Nice!")
-                .WithDescription(result+$"{divineShards.Stacks} divine shards left");
+                .WithFooter($"{divineShards.Stacks:N0} divine shards left")
+                .WithDescription(result);
             await DatabaseContext.SaveChangesAsync(); 
             await response.Result.Interaction
                 .CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,

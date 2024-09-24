@@ -106,7 +106,7 @@ public class QuestCommand : GeneralCommandClass
 
             embed
                 .WithTitle("Nice!!")
-                .WithDescription("You completed the quest!\n" + rewardString);
+                .WithDescription("**You completed the quest!**\n\n" + rewardString);
             await DatabaseContext.SaveChangesAsync();
             await message.ModifyAsync(new DiscordMessageBuilder().AddEmbed(embed));
             return;

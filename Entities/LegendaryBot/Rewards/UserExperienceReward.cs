@@ -21,6 +21,6 @@ public class UserExperienceReward : Reward
 
     public override Task<string> GiveRewardToAsync(UserData userData, IQueryable<UserData> userDataQueryable)
     {
-        return Task.FromResult(userData.IncreaseExp(Experience).Text);
+        return Task.FromResult($"**{userData.IncreaseExp(Experience).Text}**\n\n");
     }
 }

@@ -14,11 +14,11 @@ public class TextReward : Reward
     public override Reward MergeWith(Reward reward)
     {
         if (reward is not TextReward textReward) throw new Exception("Invalid reward type to merge");
-        return new TextReward($"{Text}\n{textReward.Text}\n");
+        return new TextReward($"{Text}\n\n{textReward.Text}\n\n");
     }
 
     public override Task<string> GiveRewardToAsync(UserData userData, IQueryable<UserData> userDataQueryable)
     {
-        return Task.FromResult(Text);
+        return Task.FromResult($"**{Text}**");
     }
 }

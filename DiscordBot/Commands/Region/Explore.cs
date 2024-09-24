@@ -84,7 +84,7 @@ public class Explore : GeneralCommandClass
         if (staminaCount < requiredStamina)
         {
             embedToBuild.WithDescription(
-                $"You need at least {requiredStamina} stamina to explore. You have {staminaCount} stamina");
+                $"You need at least {requiredStamina} stamina to explore. You have {staminaCount:N0} stamina");
             await ctx.RespondAsync(embedToBuild);
             return;
         }
