@@ -70,24 +70,37 @@ public class QuestCommand : GeneralCommandClass
         var two = new DiscordButtonComponent(DiscordButtonStyle.Primary, "2", "2", questsShouldDisable[1]);
         var three = new DiscordButtonComponent(DiscordButtonStyle.Primary, "3", "3", questsShouldDisable[2]);
         var four = new DiscordButtonComponent(DiscordButtonStyle.Primary, "4", "4", questsShouldDisable[3]);
+        var cancel = new DiscordButtonComponent(DiscordButtonStyle.Danger, "cancel", "CANCEL");
         embed
             .WithTitle("These are your available quests. They refresh at midnight UTC")
             .WithDescription(questString);
+        DiscordComponent[] comps = [one, two, three, four, cancel];
         await ctx.RespondAsync(new DiscordInteractionResponseBuilder()
-            .AddComponents([one, two, three, four])
+            .AddComponents(comps)
             .AddEmbed(embed));
         IEnumerable<string> possibleCustomIds = ["1", "2", "3", "4"];
         var message = (await ctx.GetResponseAsync())!;
 
-        Quest quest = null!;
-        var buttonResult = await message.WaitForButtonAsync(i =>
+       
+        var buttonResult = await message.WaitForButtonAsync(ctx.User);
+        
+        if(buttonResult.TimedOut)
+            return;
+        if (buttonResult.Result.Id == "cancel")
         {
-            if (i.User.Id != ctx.User.Id) return false;
-            if (!possibleCustomIds.Contains(i.Id)) return false;
-            quest = userData.Quests[int.Parse(i.Id) - 1];
-            return true;
-        });
-        if (quest is null) return;
+            foreach (var i in comps.OfType<DiscordButtonComponent>())
+            {
+                i.Disable();
+            }
+            await buttonResult.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+                new DiscordInteractionResponseBuilder()
+                    .AddEmbed(embed)
+                    .AddComponents(comps));
+            return;
+        }
+
+        var clickedId = buttonResult.Result.Id;
+        var quest = userData.Quests[int.Parse(clickedId) - 1];
 
         await buttonResult.Result
             .Interaction
