@@ -267,8 +267,9 @@ public class Wish : GeneralCommandClass
             const int DivineShardsNeeded = 100;
             var divineShards = userData.Items.GetOrCreateItem<DivineShard>();
             builder.WithDescription(
-                $"{DivineShardsNeeded} divine shards per pull" +
-                $"pull on {banner.Name}. Proceed?\nNote: you have {divineShards.Stacks:N0} divine shards");
+                    $"{DivineShardsNeeded} divine shards per pull" +
+                    $" on {banner.Name}. Proceed?")
+                .WithFooter($"Note: you have {divineShards.Stacks:N0} divine shards");
 
             await MakeOccupiedAsync(userData);
             DiscordComponent[] buttonComponents =
@@ -286,7 +287,9 @@ public class Wish : GeneralCommandClass
             
             var message = await ctx.GetResponseAsync();
 
-            var response= await message.WaitForButtonAsync(ctx.User);
+            while (true)
+            {
+                var response= await message.WaitForButtonAsync(ctx.User);
             if (response.TimedOut)
             {
                 await message.ModifyAsync(i => i.Components
@@ -323,7 +326,7 @@ public class Wish : GeneralCommandClass
             {
                 builder
                     .WithTitle("hmm")
-                    .WithDescription($"You need {DivineShardsNeeded * amount} to pull. You have {divineShards.Stacks:N0}");
+                    .WithDescription($"You need {DivineShardsNeeded * amount} divine shards to pull x{amount}. You have {divineShards.Stacks:N0}");
                 await response.Result.Interaction
                     .CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
                         new DiscordInteractionResponseBuilder()
@@ -354,7 +357,10 @@ public class Wish : GeneralCommandClass
             await response.Result.Interaction
                 .CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
                     new DiscordInteractionResponseBuilder()
-                        .AddEmbed(builder));
+                        .AddEmbed(builder)
+                        .AddComponents(buttonComponents));
+            }
+
         }
     }
 }
