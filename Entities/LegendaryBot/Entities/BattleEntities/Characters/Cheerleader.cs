@@ -111,6 +111,8 @@ public class YouCanMakeItEveryone : Ultimate
 
 public class Cheerleader : Character
 {
+    public override bool IsInStandardBanner => true;
+
     public Cheerleader()
     {
         Skill = new YouCanDoIt(this);

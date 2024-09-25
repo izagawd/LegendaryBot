@@ -37,7 +37,7 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     [NotMapped] public virtual int Attack => 20 + (CharacterLevel / 10) * 40;
     [NotMapped] public virtual int Health => 70 + (CharacterLevel / 10) * 80;
     public int CharacterLevel => Character?.Level ?? 0;
-    public virtual bool IsInStandardBanner => true;
+    public virtual bool IsInStandardBanner => Rarity != Rarity.FiveStar;
     public Character? Character { get; set; }
 
 

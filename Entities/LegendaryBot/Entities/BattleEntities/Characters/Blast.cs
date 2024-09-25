@@ -124,6 +124,8 @@ public class ExplosionBlast : Ultimate
 
 public class Blast : Character
 {
+    public override bool IsInStandardBanner => true;
+
     public Blast()
     {
         Skill = new BlowAway(this);

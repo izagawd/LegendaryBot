@@ -31,8 +31,9 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-        TypesFunction.GetDefaultObjectsAndSubclasses<Item>()
-            .Select(i => i.TypeId).Max().Print();
+        TypesFunction.GetDefaultObjectsAndSubclasses<Blessing>()
+            .OrderByDescending(i => i.Rarity)
+            .ForEach(i =>$"{i.Name}: {i.IsInStandardBanner}".Print());
     }
 
     private static async Task Main(string[] args)

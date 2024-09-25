@@ -16,6 +16,7 @@ public abstract class SummonsTracker
 
 }
 
+
 public class LimitedBlessingSummonsTracker : SummonsTracker
 {
     public override int TypeId
@@ -27,4 +28,23 @@ public class LimitedCharacterSummonsTracker : SummonsTracker
     public override int TypeId
     {
         get => 2; protected init{} }
+}
+
+
+public abstract class StandardSummonsTracker : SummonsTracker
+{
+    public int TargetFiveStarTypeId { get; set; }
+}
+public class StandardCharacterSummonsTracker : StandardSummonsTracker
+{
+    public override int TypeId
+    {
+        get => 3; protected init{} }
+}
+public class StandardBlessingSummonsTracker : StandardSummonsTracker
+{
+
+    public override int TypeId
+    {
+        get => 4; protected init{} }
 }

@@ -2,6 +2,8 @@ using System.ComponentModel;
 using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
+using DSharpPlus.EventArgs;
+using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities;
@@ -144,6 +146,58 @@ public class LimitedBlessingBanner : BlessingBanner
     }
 }
 
+public class StandardCharacterBanner : CharacterBanner
+{
+    public IEnumerable<Type> ChoosableCharacters => TypesFunction.GetDefaultObjectsAndSubclasses<Character>()
+        .Where(i => i.IsInStandardBanner && i.Rarity == Rarity.FiveStar).Select(i => i.GetType());
+
+    public override Type SummonsTrackerType => typeof(StandardCharacterSummonsTracker);
+    public override Type Pull(SummonsTracker summonsTracker)
+    {
+        if (summonsTracker is not StandardCharacterSummonsTracker standardCharacterSummonsTracker)
+            throw new Exception("invalid summons tracker type");
+        
+        var firstOrDefault =
+            ChoosableCharacters
+                .FirstOrDefault(i => ((Character)
+                    TypesFunction.GetDefaultObject(i)).TypeId ==standardCharacterSummonsTracker.TargetFiveStarTypeId);
+        if (firstOrDefault is null)
+        {
+            throw new Exception(
+                $"Character with type id {standardCharacterSummonsTracker.TargetFiveStarTypeId} cannot be pulled in this banner");
+        }
+
+        return GetRandomBannerType(firstOrDefault, summonsTracker);
+    }
+
+    public override string Name => "Standard Character Banner";
+}
+public class StandardBlessingBanner : BlessingBanner
+{
+    public IEnumerable<Type> ChoosableBlessings => TypesFunction.GetDefaultObjectsAndSubclasses<Blessing>()
+        .Where(i => i.IsInStandardBanner && i.Rarity == Rarity.FiveStar).Select(i => i.GetType());
+
+    public override Type SummonsTrackerType => typeof(StandardBlessingSummonsTracker);
+    public override Type Pull(SummonsTracker summonsTracker)
+    {
+        if (summonsTracker is not StandardBlessingSummonsTracker standardBlessingSummonsTracker)
+            throw new Exception("invalid summons tracker type");
+        
+        var firstOrDefault =
+            ChoosableBlessings
+                .FirstOrDefault(i => ((Blessing) TypesFunction.GetDefaultObject(i)).TypeId
+                                     ==standardBlessingSummonsTracker.TargetFiveStarTypeId);
+        if (firstOrDefault is null)
+        {
+            throw new Exception(
+                $"Blessing with type id {standardBlessingSummonsTracker.TargetFiveStarTypeId} cannot be pulled in this banner");
+        }
+
+        return GetRandomBannerType(firstOrDefault, summonsTracker);
+    }
+
+    public override string Name => "Standard Blessing Banner";
+}
 public class LimitedCharacterBanner : CharacterBanner
 {
 
@@ -213,7 +267,9 @@ public class Summon : GeneralCommandClass
 {
     public readonly Banner[] CurrentBanners = [
         new LimitedCharacterBanner(typeof(CommanderJean)),
-        new LimitedBlessingBanner(typeof(PowerOfThePhoenix)),
+        new LimitedBlessingBanner(typeof(HeadStart)),
+        new StandardCharacterBanner(),
+        new StandardBlessingBanner()
     ];
 
     [Command("summon")]
@@ -289,24 +345,109 @@ public class Summon : GeneralCommandClass
                 new DiscordButtonComponent(DiscordButtonStyle.Danger,
                     "cancel", "CANCEL"),
             ];
-            await ctx.RespondAsync(new DiscordMessageBuilder()
+            var typeToLookFor = banner.SummonsTrackerType;
+            var gotten =userData.SummonsTrackers.FirstOrDefault(i =>
+                i.GetType() == typeToLookFor);
+            if (gotten is null)
+            {
+                gotten =(SummonsTracker) Activator.CreateInstance(typeToLookFor)!;
+                if (gotten is StandardCharacterSummonsTracker standardCharacterSummons)
+                {
+                    standardCharacterSummons.TargetFiveStarTypeId =
+                        TypesFunction.GetDefaultObject<StandardCharacterBanner>()
+                            .ChoosableCharacters.Select(i => ((Character)TypesFunction.GetDefaultObject(i)).TypeId)
+                            .First();
+                } else if (gotten is StandardBlessingSummonsTracker standardBlessingSummonsTracker)
+                {
+                    standardBlessingSummonsTracker.TargetFiveStarTypeId =
+                        TypesFunction.GetDefaultObject<StandardBlessingBanner>()
+                            .ChoosableBlessings.Select(i => ((Blessing)TypesFunction.GetDefaultObject(i)).TypeId)
+                            .First();
+                }
+                userData.SummonsTrackers.Add(gotten);
+            }
+
+       
+            const string selectorId = "standard-selector";
+
+            DiscordSelectComponent? createSelectComp()
+            {
+                if ((banner is StandardBlessingBanner ||banner is  StandardCharacterBanner) 
+                    && gotten is StandardSummonsTracker standardSummonsTracker)
+                {
+             
+                    IEnumerable<DiscordSelectComponentOption> options = null!;
+                    if (banner is StandardBlessingBanner standardBlessingBanner)
+                    {
+                        options = standardBlessingBanner.ChoosableBlessings.Select(i =>
+                            new DiscordSelectComponentOption(((Blessing)TypesFunction.GetDefaultObject(i)).Name,
+                                ((Blessing)TypesFunction.GetDefaultObject(i)).TypeId.ToString(), null,
+                                ((Blessing)TypesFunction.GetDefaultObject(i)).TypeId ==
+                                standardSummonsTracker.TargetFiveStarTypeId));
+                    } else if (banner is StandardCharacterBanner standardCharacterBanner)
+                    {
+                        options = standardCharacterBanner.ChoosableCharacters.Select(i =>
+                            new DiscordSelectComponentOption(((Character)TypesFunction.GetDefaultObject(i)).Name,
+                                ((Character)TypesFunction.GetDefaultObject(i)).TypeId.ToString(), null,
+                                ((Character)TypesFunction.GetDefaultObject(i)).TypeId ==
+                                standardSummonsTracker.TargetFiveStarTypeId));
+                    }
+                    return new DiscordSelectComponent(selectorId, "Select Target Five Star",options);
+
+                }
+
+                return null;
+            }
+            var messageBuilder = new DiscordMessageBuilder()
                 .AddEmbed(builder)
-                .AddComponents(buttonComponents));
-            
-            var message = await ctx.GetResponseAsync();
+                .AddComponents(buttonComponents);
+            var gottenSelect = createSelectComp();
+            if (gottenSelect is not null)
+                messageBuilder.AddComponents(gottenSelect);
+            await ctx.RespondAsync(messageBuilder);
+            var message = (await ctx.GetResponseAsync())!;
 
             while (true)
             {
-                var response= await message.WaitForButtonAsync(ctx.User);
-            if (response.TimedOut)
-            {
-                await message.ModifyAsync(i => i.Components
-                    .SelectMany(j => j.Components)
-                    .ForEach(i => (i as DiscordButtonComponent)?.Disable()));
-                return;
-            }
+                using var tok = new CancellationTokenSource(TimeSpan.FromMinutes(2));
+                Task<InteractivityResult<ComponentInteractionCreatedEventArgs>> selectTask = null;
+                List<Task<InteractivityResult<ComponentInteractionCreatedEventArgs>>> Tasks = [
+                    message.WaitForButtonAsync(ctx.User,tok.Token)];
 
-            if (response.Result.Id == "cancel")
+                if(gottenSelect is not null)
+                    Tasks.Add(selectTask = message.WaitForSelectAsync(ctx.User, selectorId, tok.Token));
+                var gottenResponse = await Task.WhenAny(Tasks);
+                    
+                var response = await gottenResponse;
+                await tok.CancelAsync();
+                if (response.TimedOut)
+                {
+                    await message.ModifyAsync(i => i.Components
+                        .SelectMany(j => j.Components)
+                        .ForEach(i => (i as DiscordButtonComponent)?.Disable()));
+                    return;
+                }
+
+                if (gottenResponse == selectTask)
+                {
+                    var selectedId = int.Parse(response.Result.Values[0]);
+                    if (gotten is StandardSummonsTracker standardSummonsTracker)
+                        standardSummonsTracker.TargetFiveStarTypeId = selectedId;
+                    await DatabaseContext.SaveChangesAsync();
+                    var responseBuilder = new DiscordInteractionResponseBuilder()
+                        .AddEmbed(builder)
+                        .AddComponents(buttonComponents);
+                    gottenSelect = createSelectComp();
+                    if (gottenSelect is not null)
+                        responseBuilder.AddComponents(gottenSelect);
+                    await response.Result.Interaction
+                        .CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+                            responseBuilder);
+                    
+                }
+                else
+                {
+                                if (response.Result.Id == "cancel")
             {
                 foreach (var i in buttonComponents)
                 {
@@ -345,14 +486,7 @@ public class Summon : GeneralCommandClass
 
             divineShards.Stacks -= DivineShardsNeeded * amount;
             List<IInventoryEntity> pulledEntities = new List<IInventoryEntity>(amount);
-            var typeToLookFor = banner.SummonsTrackerType;
-            var gotten =userData.SummonsTrackers.FirstOrDefault(i =>
-                i.GetType() == typeToLookFor);
-            if (gotten is null)
-            {
-                gotten =(SummonsTracker) Activator.CreateInstance(typeToLookFor)!;
-                userData.SummonsTrackers.Add(gotten);
-            }
+
             foreach (var _ in Enumerable.Range(0,amount))
             {
                 var gottenType =banner.Pull(gotten);
@@ -369,12 +503,19 @@ public class Summon : GeneralCommandClass
             builder.WithTitle("Nice!")
                 .WithFooter($"{divineShards.Stacks:N0} divine shards left")
                 .WithDescription(result);
-            await DatabaseContext.SaveChangesAsync(); 
+            await DatabaseContext.SaveChangesAsync();
+            var responseBuilder = new DiscordInteractionResponseBuilder()
+                .AddEmbed(builder)
+                .AddComponents(buttonComponents);
+            gottenSelect = createSelectComp();
+            if (gottenSelect is not null)
+                responseBuilder.AddComponents(gottenSelect);
             await response.Result.Interaction
                 .CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
-                    new DiscordInteractionResponseBuilder()
-                        .AddEmbed(builder)
-                        .AddComponents(buttonComponents));
+                    responseBuilder);
+                }
+
+
             }
 
         }

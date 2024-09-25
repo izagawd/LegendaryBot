@@ -128,6 +128,8 @@ public class ConsecutiveSlashesOfPrecision : Ultimate
 
 public class Slasher : Character
 {
+    public override bool IsInStandardBanner => true;
+
     public Slasher()
     {
         Ultimate = new ConsecutiveSlashesOfPrecision(this);

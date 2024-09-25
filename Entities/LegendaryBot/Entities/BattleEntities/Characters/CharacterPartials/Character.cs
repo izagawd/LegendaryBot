@@ -74,7 +74,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     [NotMapped] public int SuperPoints { get; set; }
 
-    public virtual bool IsInStandardBanner => true;
+    public virtual bool IsInStandardBanner => Rarity != Rarity.FiveStar;
     public bool CannotDoAnything => IsDead || HighestOverrideTurnType >= OverrideTurnType.CannotMove;
 
 

@@ -6,6 +6,7 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 
 public class PowerOfThePhoenix : Blessing
 {
+    public override bool IsInStandardBanner => true;
     private const int HealthPercentageRecovering = 5;
     public override string Name => "Power Of The Phoenix";
 

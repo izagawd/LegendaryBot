@@ -138,6 +138,7 @@ public class Thana : Character
         Skill = new YourLifeEnergyIsMine(this);
     }
 
+   
     public override string Name => "Thana";
     protected override float BaseSpeedMultiplier => 1.1f;
     public override Rarity Rarity => Rarity.FiveStar;
