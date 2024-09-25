@@ -102,13 +102,31 @@ public class GearCraft : GeneralCommandClass
         await MakeOccupiedAsync(userData);
         while (true)
         {
-                    var embed = new DiscordEmbedBuilder()
-                        .WithUser(commandContext.User)
-                        .WithColor(userData.Color)
-                        .WithTitle($"Gear crafting")
-                        .WithDescription($"Coins: {userData.Items.GetOrCreateItem<Coin>().Stacks:N0}\n"
-                                         + GenerateMetalStrings() +$"\n{additionalString}");
 
+            var embed = new DiscordEmbedBuilder()
+                .WithUser(commandContext.User)
+                .WithColor(userData.Color)
+                .WithTitle($"Gear crafting")
+                .WithDescription($"Coins: {userData.Items.GetOrCreateItem<Coin>().Stacks:N0}\n"
+                                 + GenerateMetalStrings() + $"\n{additionalString}");
+
+
+                    if (rarityToUse is not null)
+                    {
+                        embed.WithFooter($"Cost of crafting is {new MetalCost()
+                        {
+                            Rarity = rarityToUse.Value,
+                            MetalStacks = 10
+
+                        }.CoinsCost:N0} - {new MetalCost()
+                    {
+                        Rarity = rarityToUse.Value,
+                        MetalStacks = 15
+
+                    }.CoinsCost:N0} coins");
+                    }
+                      
+                            
                     if (rarityToUse is null)
                     {
                         foreach (var i in firstRow.Union(secondRow)
