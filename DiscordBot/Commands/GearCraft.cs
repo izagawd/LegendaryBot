@@ -1,4 +1,5 @@
 using System.Collections;
+using System.ComponentModel;
 using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
@@ -60,6 +61,8 @@ public class GearCraft : GeneralCommandClass
         throw new Exception();
     }
     [Command("craft-gear")]
+    [BotCommandCategory(BotCommandCategory.Battle)]
+    [Description("use this command to craft gear for your characters!")]
     public async ValueTask CraftGearAsync(CommandContext commandContext)
     {
         var userData = await DatabaseContext.Set<UserData>()
