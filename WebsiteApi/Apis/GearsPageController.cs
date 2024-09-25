@@ -22,6 +22,8 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
     {
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Gear>()
+            .AsNoTrackingWithIdentityResolution()
+            .AsSplitQuery()
             .Include(i => i.Stats)
             .Include(i => i.Character)
             .Where(i => i.UserData!.DiscordId == zaId)

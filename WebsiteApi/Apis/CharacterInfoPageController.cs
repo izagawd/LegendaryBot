@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Diagnostics;
 using BasicFunctionality;
 using DatabaseManagement;
 using Entities.LegendaryBot;
@@ -162,8 +163,10 @@ public class CharacterInfoPageController : ControllerBase
     {
         var typeIdToLookFor = characterTypeId;
         var userDataId = User.GetDiscordUserId();
+        var stop = new Stopwatch(); stop.Start();
         var gotten = await postgreSqlContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
+            .AsSplitQuery()
             .Include(i => i.Characters.Where(j => j.TypeId == typeIdToLookFor))
             .Include(i => i.Gears)
             .ThenInclude(i => i.Stats)
@@ -172,7 +175,8 @@ public class CharacterInfoPageController : ControllerBase
             .Include(i => i.Blessings)
             .FirstOrDefaultAsync(i => i.DiscordId == userDataId);
 
-
+        stop.Stop();
+        stop.Elapsed.TotalMilliseconds.Print();
         if (gotten is null) return BadRequest("Your data was not found in database");
         if (gotten.IsOccupied) return BadRequest("You are occupied");
         var character = gotten.Characters
