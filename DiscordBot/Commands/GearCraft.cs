@@ -201,7 +201,6 @@ public class GearCraft : GeneralCommandClass
                     var gottenTask = await Task.WhenAny(toWaitFor);
                     await zaToken.CancelAsync();
                     var gotten = await gottenTask;
-                    lastInteraction = gotten.Result.Interaction;
                     if (gotten.TimedOut)
                     {
                         foreach (var i in new[]{firstRow,secondRow}
@@ -214,7 +213,7 @@ public class GearCraft : GeneralCommandClass
                         await message.ModifyAsync(messageBuilder);
                         return;
                     }
-                    
+                    lastInteraction = gotten.Result.Interaction;
                     if (gottenTask == selectTask)
                     {
                         rarityToUse =(Rarity) int.Parse(gotten.Result.Interaction.Data.Values[0]);
