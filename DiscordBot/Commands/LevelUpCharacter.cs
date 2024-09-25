@@ -33,7 +33,7 @@ public partial class CharacterCommand
     {
         var description = $"";
         foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<CharacterExpMaterial>())
-            description += $"{i.Name}: {character.UserData!.Items.GetItemStacks(i.GetType())}\n";
+            description += $"{i.Name}: {character.UserData!.Items.GetItemStacks(i.GetType()):N0}\n";
 
         if (character.Blessing is not null) description += $"Blessing: {character.Blessing.Name}";
 
