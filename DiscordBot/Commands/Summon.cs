@@ -370,7 +370,7 @@ public class Summon : GeneralCommandClass
        
             const string selectorId = "standard-selector";
 
-            DiscordSelectComponent? createSelectComp()
+            DiscordSelectComponent? CreateSelectComp()
             {
                 if ((banner is StandardBlessingBanner ||banner is  StandardCharacterBanner) 
                     && gotten is StandardSummonsTracker standardSummonsTracker)
@@ -401,7 +401,7 @@ public class Summon : GeneralCommandClass
             var messageBuilder = new DiscordMessageBuilder()
                 .AddEmbed(builder)
                 .AddComponents(buttonComponents);
-            var gottenSelect = createSelectComp();
+            var gottenSelect = CreateSelectComp();
             if (gottenSelect is not null)
                 messageBuilder.AddComponents(gottenSelect);
             await ctx.RespondAsync(messageBuilder);
@@ -437,7 +437,7 @@ public class Summon : GeneralCommandClass
                     var responseBuilder = new DiscordInteractionResponseBuilder()
                         .AddEmbed(builder)
                         .AddComponents(buttonComponents);
-                    gottenSelect = createSelectComp();
+                    gottenSelect = CreateSelectComp();
                     if (gottenSelect is not null)
                         responseBuilder.AddComponents(gottenSelect);
                     await response.Result.Interaction
@@ -507,7 +507,7 @@ public class Summon : GeneralCommandClass
             var responseBuilder = new DiscordInteractionResponseBuilder()
                 .AddEmbed(builder)
                 .AddComponents(buttonComponents);
-            gottenSelect = createSelectComp();
+            gottenSelect = CreateSelectComp();
             if (gottenSelect is not null)
                 responseBuilder.AddComponents(gottenSelect);
             await response.Result.Interaction

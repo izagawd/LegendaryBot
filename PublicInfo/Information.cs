@@ -11,7 +11,7 @@ public class Information
     public const string CharactersImagesDirectory = BattleImagesDirectory + "/characters";
     public const string DiscordClientId = IsTesting ? "961405563881787392" : "340054610989416460";
     public const string GlobalFontName = "Arial";
-    public const bool IsTesting = true;
+    public const bool IsTesting = false;
     public const string ApiDomainName = IsTesting ? "https://localhost:5000" : "https://api.legendarygawds.com";
     public const string WebsiteDomainName = IsTesting ? "https://localhost" : "https://www.legendarygawds.com";
 }
