@@ -78,6 +78,8 @@ public partial class CharacterCommand
                     .DrawText($"{character.Experience}/{requiredExpNextLevel}", expFont,
                         SixLabors.ImageSharp.Color.Black,
                         new PointF(160, 85))
+                    .DrawText($"\nDivine Echoes: {character.DivineEcho}",font,
+                        SixLabors.ImageSharp.Color.Black,new Point(280,30))
                     .DrawText(statsStringBuilder.ToString(), statsFont, SixLabors.ImageSharp.Color.Black,
                         new PointF(10, 130));
             }
