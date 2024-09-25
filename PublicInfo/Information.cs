@@ -9,7 +9,7 @@ public class Information
     public const string StatusEffectsImagesDirectory = BattleImagesDirectory + "/status_effects";
     public const string MovesImagesDirectory = BattleImagesDirectory + "/moves";
     public const string CharactersImagesDirectory = BattleImagesDirectory + "/characters";
-    public const string DiscordClientId = "340054610989416460";
+    public const string DiscordClientId = IsTesting ? "961405563881787392" : "340054610989416460";
     public const string GlobalFontName = "Arial";
     public const bool IsTesting = true;
     public const string ApiDomainName = IsTesting ? "https://localhost:5000" : "https://api.legendarygawds.com";

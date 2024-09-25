@@ -8,6 +8,7 @@ using DSharpPlus.Interactivity.Extensions;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.Items;
+using Entities.LegendaryBot.Rewards;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,7 @@ public class GearCraft : GeneralCommandClass
 
         public Type MetalType => GetRequiredMetalType(Rarity);
         public int MetalStacks;
-        public int CoinsCost => MetalStacks * 5 * ((int) Rarity);
+        public int CoinsCost => MetalStacks * 1300 * ((int) Rarity);
     }
 
     public static Type GetRequiredMetalType(Rarity gearRarity)
@@ -29,9 +30,9 @@ public class GearCraft : GeneralCommandClass
         switch (gearRarity)
         {
             case Rarity.OneStar:
-                return typeof(UncommonMetal);
-            case Rarity.TwoStar:
                 return typeof(CommonMetal);
+            case Rarity.TwoStar:
+                return typeof(UncommonMetal);
             case Rarity.ThreeStar:
                 return typeof(RareMetal);
             case Rarity.FourStar:
@@ -62,7 +63,7 @@ public class GearCraft : GeneralCommandClass
     public async ValueTask CraftGearAsync(CommandContext commandContext)
     {
         var userData = await DatabaseContext.Set<UserData>()
-            .Include(i => i.Items.Where(j => j is Metal))
+            .Include(i => i.Items.Where(j => j is Metal || j is Coin))
             .FirstOrDefaultAsync(i => i.DiscordId == commandContext.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)
         {
@@ -93,16 +94,20 @@ public class GearCraft : GeneralCommandClass
             CreateButton<Ring>(),
             CreateButton<Boots>()
         ];
+        var cancelButton = new DiscordButtonComponent(DiscordButtonStyle.Danger, "cancel", "CANCEL");
         Rarity? rarityToUse = null;
         DiscordMessage message = null;
         DiscordInteraction? lastInteraction = null;
+        string additionalString = "";
+        await MakeOccupiedAsync(userData);
         while (true)
         {
                     var embed = new DiscordEmbedBuilder()
                         .WithUser(commandContext.User)
                         .WithColor(userData.Color)
                         .WithTitle($"Gear crafting")
-                        .WithDescription(GenerateMetalStrings());
+                        .WithDescription($"Coins: {userData.Items.GetOrCreateItem<Coin>().Stacks:N0}\n"
+                                         + GenerateMetalStrings() +$"\n{additionalString}");
 
                     if (rarityToUse is null)
                     {
@@ -126,7 +131,7 @@ public class GearCraft : GeneralCommandClass
                         var toUse = "";
                         foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<Metal>())
                         {
-                            toUse += $"{i.Name}: {userData.Items.GetItemStacks(i.GetType())}\n";
+                            toUse += $"{i.Name}: {userData.Items.GetItemStacks(i.GetType()):N0}\n";
                         }
             
                         return toUse;
@@ -138,11 +143,12 @@ public class GearCraft : GeneralCommandClass
                                 new DiscordSelectComponentOption("\u2b50".MultiplyString((int)i),
                                     ((int)i).ToString(),null,
                                     isDefault: rarityToUse ==i))
+       
                             .ToArray());
                     var messageBuilder = new DiscordMessageBuilder()
                         .AddEmbed(embed)
                         .AddComponents(firstRow)
-                        .AddComponents(secondRow)
+                        .AddComponents([..secondRow,cancelButton])
                         .AddComponents(select);
     
                     if (lastInteraction is null || message is null)
@@ -164,19 +170,22 @@ public class GearCraft : GeneralCommandClass
                         await lastInteraction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
                             new DiscordInteractionResponseBuilder(messageBuilder));
                     }
-                    
-                    var buttonTask = message.WaitForButtonAsync(commandContext.User);
-                    var selectTask = message.WaitForSelectAsync(commandContext.User, select.CustomId);
+
+                    using var zaToken = new CancellationTokenSource(TimeSpan.FromMinutes(2));
+                    var buttonTask = message.WaitForButtonAsync(commandContext.User,zaToken.Token);
+                    var selectTask = message.WaitForSelectAsync(commandContext.User, select.CustomId,zaToken.Token);
                     IEnumerable<Task<InteractivityResult<ComponentInteractionCreatedEventArgs>>> toWaitFor=
                         [buttonTask, 
                             selectTask];
                     var gottenTask = await Task.WhenAny(toWaitFor);
+                    await zaToken.CancelAsync();
                     var gotten = await gottenTask;
                     lastInteraction = gotten.Result.Interaction;
                     if (gotten.TimedOut)
                     {
                         foreach (var i in new[]{firstRow,secondRow}
                                      .SelectMany(i => i)
+                                     .Append(cancelButton)
                                      .OfType<DiscordButtonComponent>())
                         {
                             i.Disable();
@@ -184,16 +193,33 @@ public class GearCraft : GeneralCommandClass
                         await message.ModifyAsync(messageBuilder);
                         return;
                     }
-
+                    
                     if (gottenTask == selectTask)
                     {
                         rarityToUse =(Rarity) int.Parse(gotten.Result.Interaction.Data.Values[0]);
                     } else if (gottenTask == buttonTask)
                     {
+
+                        var buttonId = gotten.Result.Id;
+                        if (buttonId == "cancel")
+                        {
+                            foreach (var i in new[]{firstRow,secondRow}
+                                         .SelectMany(i => i)
+                                         .Append(cancelButton)
+                                         .OfType<DiscordButtonComponent>())
+                            {
+                                i.Disable();
+                            }
+                            await lastInteraction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage,
+                                new DiscordInteractionResponseBuilder(messageBuilder));
+                            
+                            return;
+                        }
+                        additionalString = "";
                         var desiredGearType = TypesFunction.GetDefaultObjectsAndSubclasses<Gear>()
                             .First(i =>
                                 i.Name
-                                    .Equals(gotten.Result.Id, StringComparison.CurrentCultureIgnoreCase)).GetType();
+                                    .Equals(buttonId, StringComparison.CurrentCultureIgnoreCase)).GetType();
 
                         var cost = GetMetalCost(desiredGearType, rarityToUse!.Value);
                         var coins = userData.Items.GetOrCreateItem<Coin>();
@@ -201,7 +227,31 @@ public class GearCraft : GeneralCommandClass
                         var metalToUse = (Metal)userData.Items.GetOrCreateItem(cost.MetalType);
                         if (metalToUse.Stacks < cost.MetalStacks || coins.Stacks < cost.CoinsCost)
                         {
-                     
+
+                            await lastInteraction.CreateResponseAsync(
+                                DiscordInteractionResponseType.ChannelMessageWithSource,
+                                new DiscordInteractionResponseBuilder()
+                                    .AsEphemeral()
+                                    .AddEmbed(new DiscordEmbedBuilder()
+                                        .WithColor(userData.Color)
+                                        .WithUser(commandContext.User)
+                                        .WithTitle("Hmm")
+                                        .WithDescription(
+                                            $"You need {cost.MetalStacks:N0} {metalToUse.Name}s and {cost.CoinsCost:N0} coins to craft a " +
+                                            $"{(int)rarityToUse} star" +
+                                            $" {((Gear)TypesFunction.GetDefaultObject(desiredGearType)).Name}")));
+                            lastInteraction = null;
+                        }
+                        else
+                        {
+                       
+                            coins.Stacks -= cost.CoinsCost;
+                            metalToUse.Stacks -= cost.MetalStacks;
+                            var created =(Gear) Activator.CreateInstance(desiredGearType)!;
+                            created.Initialize(rarityToUse.Value);
+                            additionalString = await userData.ReceiveRewardsAsync(DatabaseContext.Set<UserData>(),
+                                [new EntityReward([created])]);
+                            await DatabaseContext.SaveChangesAsync();
                         }
                     }
                     else
