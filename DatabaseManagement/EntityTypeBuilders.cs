@@ -102,6 +102,7 @@ public class SummonsTrackerConfig : IEntityTypeConfiguration<SummonsTracker>
 {
     public void Configure(EntityTypeBuilder<SummonsTracker> builder)
     {
+        builder.HasIndex(i => new{i.TypeId, i.UserDataId}).IsUnique();
         builder.HasKey(i => i.Id);
         var toDo = builder.HasDiscriminator(i => i.TypeId);
         foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<SummonsTracker>())
