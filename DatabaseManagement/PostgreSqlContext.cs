@@ -123,7 +123,7 @@ EXECUTE FUNCTION {functionName}();
                      .Where(i => i.IsClass && i.IsAssignableTo(typeof(IInventoryEntity))))
             modelBuilder.Entity(entityType);
         foreach (var i in TypesFunction.AllTypes.Where(i => i.IsAssignableTo(typeof(GearStat)))) modelBuilder.Entity(i);
-
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserData).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(PostgreSqlContext).Assembly);
     }
 }
