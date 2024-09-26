@@ -249,8 +249,8 @@ public class Begin : GeneralCommandClass
 
         _ = result.Message.ModifyAsync(new DiscordMessageBuilder()
             .AddEmbed(embedToBuild));
-        var battleResult = await new BattleSimulator(userTeam.LoadTeamStats(),
-            new NonPlayerTeam(characters: coachChad)).StartAsync(ctx.Channel);
+        var battleResult = await new BattleSimulator(userTeam.LoadTeamStats().SetEveryoneToMaxHealth(),
+            new NonPlayerTeam(characters: coachChad).SetEveryoneToMaxHealth()).StartAsync(ctx.Channel);
 
         if (battleResult.TimedOut is not null)
         {

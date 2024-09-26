@@ -112,7 +112,7 @@ public class Explore : GeneralCommandClass
         await Task.Delay(2500);
         var userTeam = (PlayerTeam)userData.EquippedPlayerTeam!.LoadTeamStats();
 
-        var simulator = new BattleSimulator(userTeam, enemyTeam);
+        var simulator = new BattleSimulator(userTeam.SetEveryoneToMaxHealth(), enemyTeam.SetEveryoneToMaxHealth());
 
 
         var battleResult = await simulator.StartAsync(message!);

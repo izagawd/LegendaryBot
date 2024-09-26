@@ -10,6 +10,16 @@ namespace Entities.LegendaryBot.Entities.BattleEntities.Characters;
 
 public abstract class Team : IList<Character>
 {
+
+    public Team SetEveryoneToMaxHealth()
+    {
+        foreach (var i in this)
+        {
+            i.Health = i.MaxHealth;
+        }
+
+        return this;
+    }
     [NotMapped] public BattleSimulator? CurrentBattle { get; set; }
 
     [NotMapped] public abstract int MaxCharacters { get; set; }

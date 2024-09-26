@@ -45,8 +45,8 @@ public class KillSlimesQuest : Quest
         await Task.Delay(2000);
 
         var playerTeam = userData.EquippedPlayerTeam!;
-        playerTeam.LoadTeamStats();
-        var battleSimulator = new BattleSimulator(playerTeam, slimeTeam);
+        ;
+        var battleSimulator = new BattleSimulator(playerTeam.LoadTeamStats().SetEveryoneToMaxHealth(), slimeTeam.SetEveryoneToMaxHealth());
         var result = await battleSimulator.StartAsync(message);
         return result.Winners == playerTeam;
     }

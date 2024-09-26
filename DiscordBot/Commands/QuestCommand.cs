@@ -113,7 +113,7 @@ public class QuestCommand : GeneralCommandClass
             var expToAdd = 1000;
             
             var rewardString =await userData.ReceiveRewardsAsync(DatabaseContext.Set<UserData>(), [
-                ..quest.QuestRewards, new UserExperienceReward(expToAdd),
+                ..(quest.QuestRewards ?? []), new UserExperienceReward(expToAdd),
                 new EntityReward([new DivineShard { Stacks = 25 }])
             ]);
 

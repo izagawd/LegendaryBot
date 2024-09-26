@@ -55,8 +55,8 @@ public class FightCharacter : GeneralCommandClass
         var playerTeam = userData.EquippedPlayerTeam!;
         playerTeam.LoadTeamStats();
         await MakeOccupiedAsync(userData);
-        var battleSim = new BattleSimulator(playerTeam,
-            new NonPlayerTeam(created).LoadTeamStats());
+        var battleSim = new BattleSimulator(playerTeam.SetEveryoneToMaxHealth(),
+            new NonPlayerTeam(created).LoadTeamStats().SetEveryoneToMaxHealth());
         var interaction = (context as SlashCommandContext)?.Interaction;
         if (interaction is not null) await context.RespondAsync("hol up");
 

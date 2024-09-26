@@ -86,11 +86,11 @@ public partial class BattleSimulator
     {
         SetupBattleEventDelegatorStuff();
     }
-
+    /// <summary>
+    ///     Creates a new battle between two teams
+    /// </summary>
     public BattleSimulator(Team team1, Team team2)
     {
-        if (team1.Count == 0 || team2.Count == 0) throw new Exception("one of the teams has no fighters");
-
         Team1 = team1;
         Team2 = team2;
     }
@@ -115,17 +115,40 @@ public partial class BattleSimulator
     /// </summary>
     public IEnumerable<Character> Characters => Team1.Union(Team2);
 
-    /// <summary>
-    ///     Creates a new battle between two teams
-    /// </summary>
-    public Team Team1 { get; }
+    private Team _team1;
 
-    public Team Team2 { get; }
+    public Team Team1
+    {
+        get => _team1;
+        set
+        {
+            if(value.Count == 0)
+                throw new Exception("team has no fighters");
+            _team1 = value;
+        } 
+    }
 
-    /// <summary>
-    ///     whether or not to set health to max health for all characters at start of battle
-    /// </summary>
-    public bool SetToMaxHealthAtStart { get; set; } = true;
+    private Team _team2;
+    public Team Team2
+    {
+        get => _team2;
+         set
+        {
+            if(value.Count == 0)
+                throw new Exception("team has no fighters");
+            _team2 = value;
+        } 
+    }
+ 
+
+    
+    public void SetTeams(Team team1, Team team2)
+    {
+        if (team1.Count == 0 || team2.Count == 0) throw new Exception("one of the teams has no fighters");
+
+        Team1 = team1;
+        Team2 = team2;
+    }
 
     public int Turn { get; set; }
 
@@ -464,6 +487,10 @@ public partial class BattleSimulator
         }
     }
 
+    public BattleSimulator()
+    {
+        
+    }
     private void CheckForForfeitOrInfoTillEndOfBattle(DiscordMessage message, CancellationToken token)
     {
         _ = message.WaitForSelectAsync(args =>
@@ -554,6 +581,10 @@ public partial class BattleSimulator
         DiscordMessage? message = null, DiscordInteraction? interaction = null,
         DiscordChannel? channel = null)
     {
+        if (Team1 is null || Team2 is null)
+        {
+            throw new Exception("One of the teams is invalid");
+        }
         // its possible that there was a cancellation token not disposed of at the start of the battle. rare, but i drop
         //this code just in case
         if (_gameCancellationTokenSource is not null)
@@ -564,14 +595,17 @@ public partial class BattleSimulator
             _gameCancellationTokenSource.Dispose();
         }
 
+        _forfeited = null;
+        _winners = null;
         _gameCancellationTokenSource = new CancellationTokenSource();
         var firstLoop = true;
         _stopped = false;
 
-        foreach (var i in Teams) PrepareTeamForBattle(i);
-        foreach (var i in Characters)
-            if (SetToMaxHealthAtStart)
-                i.Health = i.MaxHealth;
+        foreach (var i in Teams)
+        {
+            PrepareTeamForBattle(i);
+
+        }
 
         Team? timedOut = null;
 

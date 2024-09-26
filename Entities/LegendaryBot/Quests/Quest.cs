@@ -34,7 +34,7 @@ public abstract class Quest
     public bool Completed { get; set; }
     public long Id { get; set; }
 
-    [NotMapped] public abstract IEnumerable<Reward> QuestRewards { get; protected set; }
+    [NotMapped] public abstract IEnumerable<Reward>? QuestRewards { get; protected set; }
 
     public long UserDataId { get; set; }
 

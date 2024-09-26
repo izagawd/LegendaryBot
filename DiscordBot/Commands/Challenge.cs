@@ -126,8 +126,8 @@ public class Challenge : GeneralCommandClass
         await interactivityResult.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType
             .DeferredMessageUpdate);
         await MakeOccupiedAsync(player2User);
-        var player1Team = player1User.EquippedPlayerTeam!.LoadTeamStats();
-        var player2Team = player2User.EquippedPlayerTeam!.LoadTeamStats();
+        var player1Team = player1User.EquippedPlayerTeam!.LoadTeamStats().SetEveryoneToMaxHealth();
+        var player2Team = player2User.EquippedPlayerTeam!.LoadTeamStats().SetEveryoneToMaxHealth();
         var simulator = new BattleSimulator(player1Team, player2Team);
         var battleResult = await simulator.StartAsync(message);
         DiscordUser winnerDiscord;

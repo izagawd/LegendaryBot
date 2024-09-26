@@ -132,8 +132,6 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         get => _health;
         set
         {
-            if (CurrentBattle is null)
-                throw NoBattleExc;
             if (_health <= 0) return;
             var tempMaxHealth = MaxHealth;
 
@@ -145,10 +143,10 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             {
                 _health = 0;
 
-                CurrentBattle.AddBattleText(new DeathBattleText(this));
+                CurrentBattle?.AddBattleText(new DeathBattleText(this));
                 ShouldTakeExtraTurn = false;
                 _statusEffects.Clear();
-                CurrentBattle.InvokeBattleEvent(new CharacterDeathEventArgs(this));
+                CurrentBattle?.InvokeBattleEvent(new CharacterDeathEventArgs(this));
             }
 
             if (_health > tempMaxHealth) _health = tempMaxHealth;

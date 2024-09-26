@@ -41,8 +41,34 @@ public class TakeshiTest : Quest
             return false;
         }
 
-        var battle = new BattleSimulator(userData.EquippedPlayerTeam, takeshiTeam);
+        var battle = new BattleSimulator(userData.EquippedPlayerTeam.LoadTeamStats()
+                .SetEveryoneToMaxHealth(),
+            takeshiTeam.SetEveryoneToMaxHealth());
         var battleResult = await battle.StartAsync(result.Message);
+        if (battleResult.Winners == userData.EquippedPlayerTeam)
+        {
+            dialogue = new Dialogue
+            {
+                Title = Title,
+                NormalArguments = [new DialogueNormalArgument
+                {
+                    DialogueProfile = takeshi.DialogueProfile,
+                    DialogueTexts = ["Good. You are strong"]
+                }]
+            };
+            await dialogue.LoadAsync(context.User, battleResult.Message);
+            return true;
+        }
+        dialogue = new Dialogue
+        {
+            Title = Title,
+            NormalArguments = [new DialogueNormalArgument
+            {
+                DialogueProfile = takeshi.DialogueProfile,
+                DialogueTexts = ["You have gotten rustier","Train more, then come fight me again"]
+            }]
+        };
+        await dialogue.LoadAsync(context.User, battleResult.Message);
         return false;
     }
 }

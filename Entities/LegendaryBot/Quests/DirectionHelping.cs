@@ -106,7 +106,7 @@ public class DirectionHelping : Quest
 
         var userTeam = userData.EquippedPlayerTeam;
         userTeam.LoadTeamStats();
-        var battle = new BattleSimulator(userTeam, blastTeam);
+        var battle = new BattleSimulator(userTeam.SetEveryoneToMaxHealth(), blastTeam.SetEveryoneToMaxHealth());
 
         var battleResult = await battle.StartAsync(dialogueResult.Message);
 
