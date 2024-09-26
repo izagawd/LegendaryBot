@@ -22,9 +22,9 @@ public class KillSlimesQuest : Quest
     public override string Title => "Kill Slimes";
     public override string Description => "Simple quest. Defeat the slimes that are attacking a village";
 
-    public override IEnumerable<Reward> QuestRewards { get; protected set; } = [];
 
-    public override async Task<bool> StartQuest(IQueryable<UserData> userDataQueryable, CommandContext context,
+
+    public override async Task<QuestResult> StartQuest(IQueryable<UserData> userDataQueryable, CommandContext context,
         DiscordMessage message)
     {
         var slimeTeam = new NonPlayerTeam([new Slime(), new Slime()]);
@@ -48,6 +48,12 @@ public class KillSlimesQuest : Quest
         ;
         var battleSimulator = new BattleSimulator(playerTeam.LoadTeamStats().SetEveryoneToMaxHealth(), slimeTeam.SetEveryoneToMaxHealth());
         var result = await battleSimulator.StartAsync(message);
-        return result.Winners == playerTeam;
+        if (result.Winners == playerTeam)
+        {
+            return QuestResult.Success();
+        }
+
+        return QuestResult.Fail();
+   
     }
 }

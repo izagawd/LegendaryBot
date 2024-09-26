@@ -107,13 +107,13 @@ public class QuestCommand : GeneralCommandClass
             .CreateResponseAsync(DiscordInteractionResponseType.DeferredMessageUpdate);
         var succeeded = await quest.StartQuest(DatabaseContext.Set<UserData>(), ctx, message);
 
-        if (succeeded)
+        if (succeeded.IsSuccess)
         {
             quest.Completed = true;
             var expToAdd = 1000;
             
             var rewardString =await userData.ReceiveRewardsAsync(DatabaseContext.Set<UserData>(), [
-                ..(quest.QuestRewards ?? []), new UserExperienceReward(expToAdd),
+                ..(succeeded.Rewards ?? []), new UserExperienceReward(expToAdd),
                 new EntityReward([new DivineShard { Stacks = 25 }])
             ]);
 

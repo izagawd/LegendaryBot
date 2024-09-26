@@ -17,8 +17,8 @@ public class TakeshiTest : Quest
 
     public override string Description => "Takeshi Combat Test";
     public override string Title => "Takeshi Combat Test";
-    public override IEnumerable<Reward> QuestRewards { get; protected set; }
-    public override async Task<bool> StartQuest(IQueryable<UserData> userDataQueryable, CommandContext context, DiscordMessage messageToEdit)
+    public override async Task<QuestResult> StartQuest(IQueryable<UserData> userDataQueryable, CommandContext context,
+        DiscordMessage messageToEdit)
     {
         var userData = await userDataQueryable
             .IncludeTeamWithAllEquipments()
@@ -38,7 +38,7 @@ public class TakeshiTest : Quest
         var result =await dialogue.LoadAsync(context.User, messageToEdit);
         if (result.TimedOut)
         {
-            return false;
+            return QuestResult.Fail();
         }
 
         var battle = new BattleSimulator(userData.EquippedPlayerTeam.LoadTeamStats()
@@ -57,7 +57,7 @@ public class TakeshiTest : Quest
                 }]
             };
             await dialogue.LoadAsync(context.User, battleResult.Message);
-            return true;
+            return QuestResult.Success();
         }
         dialogue = new Dialogue
         {
@@ -69,6 +69,6 @@ public class TakeshiTest : Quest
             }]
         };
         await dialogue.LoadAsync(context.User, battleResult.Message);
-        return false;
+        return QuestResult.Fail();
     }
 }

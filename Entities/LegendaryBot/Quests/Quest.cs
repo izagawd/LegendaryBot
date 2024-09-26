@@ -20,6 +20,32 @@ public class QuestDatabaseSetup : IEntityTypeConfiguration<Quest>
     }
 }
 
+public  class QuestResult
+{
+    public Reward[]? Rewards { get; private set; }
+
+    public bool IsSuccess => Rewards is not null;
+
+    public static QuestResult Success()
+    {
+        return Success([]);
+    }
+    public static QuestResult Success(IEnumerable<Reward> rewards)
+    {
+        var res = new QuestResult();
+        res.Rewards = rewards?.ToArray() ?? [];
+        return res;
+    }
+
+    public static QuestResult Fail()
+    {
+        return new QuestResult();
+    }
+    protected QuestResult()
+    {
+        
+    }
+}
 public abstract class Quest
 {
     private static List<Type> _questTypes = [];
@@ -34,7 +60,7 @@ public abstract class Quest
     public bool Completed { get; set; }
     public long Id { get; set; }
 
-    [NotMapped] public abstract IEnumerable<Reward>? QuestRewards { get; protected set; }
+
 
     public long UserDataId { get; set; }
 
@@ -43,6 +69,6 @@ public abstract class Quest
     /// <param name="context"></param>
     /// <param name="messageToEdit"> if not null, should edit that message instead of adding a new message to the channel</param>
     /// <returns>True if quest was successfully completed</returns>
-    public abstract Task<bool> StartQuest(IQueryable<UserData> userDataQueryable, CommandContext context,
+    public abstract Task<QuestResult> StartQuest(IQueryable<UserData> userDataQueryable, CommandContext context,
         DiscordMessage messageToEdit);
 }

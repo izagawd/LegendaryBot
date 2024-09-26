@@ -19,9 +19,9 @@ public class SkeletonAttack : Quest
     }
     public override string Description => "Defeat many skeletons";
     public override string Title => "Skeleton Attack";
-    public override IEnumerable<Reward>? QuestRewards { get; protected set; }
+   
   
-    public override async Task<bool> StartQuest(IQueryable<UserData> userDataQueryable, CommandContext context,
+    public override async Task<QuestResult> StartQuest(IQueryable<UserData> userDataQueryable, CommandContext context,
         DiscordMessage message)
     {
         var slimeTeam = new NonPlayerTeam([new Slime(), new Slime()]);
@@ -79,9 +79,8 @@ public class SkeletonAttack : Quest
                 await Task.Delay(3000);
             }
         }
-     
-
-        return battleResult.Winners == userData.EquippedPlayerTeam;
+ 
+        return battleResult.Winners == userData.EquippedPlayerTeam? QuestResult.Success() : QuestResult.Fail();
     }
     
 }

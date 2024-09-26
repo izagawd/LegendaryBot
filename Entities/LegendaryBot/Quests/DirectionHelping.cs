@@ -23,9 +23,8 @@ public class DirectionHelping : Quest
     public override string Title => "Direction Helping";
     public override string Description => "You are tasked with giving people directions";
 
-    public override IEnumerable<Reward> QuestRewards { get; protected set; } = [];
 
-    public override async Task<bool> StartQuest(IQueryable<UserData> userDataQueryable, CommandContext context,
+    public override async Task<QuestResult> StartQuest(IQueryable<UserData> userDataQueryable, CommandContext context,
         DiscordMessage messageToEdit)
     {
         var blast = new Blast();
@@ -82,7 +81,7 @@ public class DirectionHelping : Quest
                 ]
             };
             await dialogue.LoadAsync(context.User, dialogueResult.Message);
-            return true;
+            return QuestResult.Success();
         }
 
         dialogue = new Dialogue
@@ -130,13 +129,10 @@ public class DirectionHelping : Quest
             };
 
             await dialogue.LoadAsync(context.User, battleResult.Message);
-            QuestRewards =
-            [
 
+            return QuestResult.Success([
                 new EntityReward([new Coin { Stacks = Character.GetCoinsBasedOnCharacters(blastTeam) }])
-            ];
-
-            return true;
+            ]);
         }
 
         dialogue = new Dialogue
@@ -157,6 +153,6 @@ public class DirectionHelping : Quest
         await dialogue.LoadAsync(context.User, battleResult.Message);
 
 
-        return false;
+        return QuestResult.Fail();
     }
 }
