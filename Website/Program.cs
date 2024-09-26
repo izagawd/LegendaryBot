@@ -24,7 +24,6 @@ public class Program
             .AddScoped(sp =>
             {
                 var dep = sp.GetRequiredService<DiscordTokenService>();
-
                 var client = new HttpClient
                 {
                     BaseAddress =

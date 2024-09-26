@@ -22,7 +22,7 @@ public class Explore : GeneralCommandClass
     [Command("explore")]
     [Description("Use this command to encounter enemies while exploring a region, and get rewards for defeating them!")]
     [BotCommandCategory(BotCommandCategory.Battle)]
-    public async ValueTask Execute(CommandContext ctx, string regionName)
+    public async ValueTask Execute(CommandContext ctx, string regionName = "")
     {
         var author = ctx.User;
         var userData = await DatabaseContext.Set<UserData>()
@@ -60,7 +60,10 @@ public class Explore : GeneralCommandClass
         var region = Region.GetRegion(regionName);
         if (region is null)
         {
-            var regionString = $"Region with name `{regionName}` not found\nThese are the following existing regions:";
+            
+            var regionString = $"These are the following existing regions:";
+            if (regionName.Length > 0)
+                regionString = $"Region with name `{regionName}` not found\n" + regionString;
             foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<Region>())
                 embedToBuild.AddField(i.Name,
                     $"Required Tier: **{i.TierRequirement}**\nRewards: **{i.WhatYouGain}**");
