@@ -18,7 +18,11 @@ public class FightCharacter : GeneralCommandClass
     public async ValueTask FightCommand(CommandContext context, string enemyName,
         int count = 1)
     {
-        if (context.User.Id != DiscordBot.Izasid) await context.RespondAsync("Only izagawd can use this command");
+        if (context.User.Id != DiscordBot.Izasid && context.User.Id != DiscordBot.Testersid)
+        {
+            await context.RespondAsync("Only izagawd can use this command");
+            return;
+        }
         var userData = await DatabaseContext.Set<UserData>().IncludeTeamWithAllEquipments()
             .FirstOrDefaultAsync(i => i.DiscordId == context.User.Id);
         if (userData is null || userData.Tier == Tier.Unranked)

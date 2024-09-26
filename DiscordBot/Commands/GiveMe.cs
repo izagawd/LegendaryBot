@@ -15,18 +15,26 @@ namespace DiscordBot.Commands;
 
 public class GiveMe : GeneralCommandClass
 {
-    [Command("give-me")]
-    [Description("Use this to obtain anything that can be in inventory. Only available for izagawds use for testing")]
+    [Command("give-someone")]
+    [Description("Use this to give anything to someone")]
     [BotCommandCategory(BotCommandCategory.Battle)]
-    public async ValueTask Execute(CommandContext ctx, [Parameter("entity-name")] string entityName,
+    public  ValueTask ExecuteGiveSomeone(CommandContext ctx,[Parameter("user-to-give")] DiscordUser toGive, [Parameter("entity-name")] string entityName,
         [Parameter("entity-amount")] [Description("The amount you want of the supplied item")]
         int amount = 1)
     {
-        var simplifiedEntityName = entityName.ToLower().Replace(" ", "");
+        return GiveSomeone(ctx, toGive, entityName, amount);
+    }
+
+    public async ValueTask GiveSomeone(
+        CommandContext ctx, DiscordUser userToGive, string entityName, int amount)
+    {
+        
+                var simplifiedEntityName = entityName.ToLower().Replace(" ", "");
+                var caller = userToGive.Id;
         var type = TypesFunction
             .GetDefaultObjectsAndSubclasses<IInventoryEntity>()
             .FirstOrDefault(i => i.Name.ToLower().Replace(" ", "") == simplifiedEntityName)?.GetType();
-        if (ctx.User.Id != DiscordBot.Izasid && ctx.User.Id != DiscordBot.Testersid)
+        if (caller != DiscordBot.Izasid && caller != DiscordBot.Testersid)
         {
             await ctx.RespondAsync("Only izagawd can use this command");
         }
@@ -41,16 +49,15 @@ public class GiveMe : GeneralCommandClass
         else
         {
             var userData = await DatabaseContext.Set<UserData>()
-                .FirstOrDefaultAsync(i => i.DiscordId == ctx.User.Id);
-            if (userData is null || userData.Tier == Tier.Unranked)
+                .FirstOrDefaultAsync(i => i.DiscordId == userToGive.Id);
+            if (userData is null)
             {
-                await AskToDoBeginAsync(ctx);
-                return;
+                userData = await DatabaseContext.CreateNonExistantUserdataAsync(userToGive.Id);
             }
 
             if (userData.IsOccupied)
             {
-                await NotifyAboutOccupiedAsync(ctx);
+                await ctx.RespondAsync($"{userToGive.Username} is occupied");
                 return;
             }
 
@@ -74,15 +81,25 @@ public class GiveMe : GeneralCommandClass
             }
 
 
-            var result = await userData.ReceiveRewardsAsync(DatabaseContext.Set<UserData>(), rewards);
+            var result = await userData
+                .ReceiveRewardsAsync(DatabaseContext.Set<UserData>(), rewards);
 
             await DatabaseContext.SaveChangesAsync();
             var embed = new DiscordEmbedBuilder()
-                .WithUser(ctx.User)
+                .WithUser(userToGive)
                 .WithColor(userData.Color)
                 .WithTitle("Success!")
                 .WithDescription(result);
             await ctx.RespondAsync(embed);
         }
+    }
+    [Command("give-me")]
+    [Description("Use this to obtain anything that can be in inventory. Only available for izagawds use for testing")]
+    [BotCommandCategory(BotCommandCategory.Battle)]
+    public ValueTask Execute(CommandContext ctx, [Parameter("entity-name")] string entityName,
+        [Parameter("entity-amount")] [Description("The amount you want of the supplied item")]
+        int amount = 1)
+    {
+        return GiveSomeone(ctx, ctx.User, entityName, amount);
     }
 }
