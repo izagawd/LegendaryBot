@@ -166,7 +166,7 @@ public class CharacterInfoPageController : ControllerBase
     
         var gotten = await postgreSqlContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
-            
+            .AsSplitQuery()
             .Include(i => i.Characters.Where(j => j.TypeId == typeIdToLookFor))
             .Include(i => i.Gears)
             .ThenInclude(i => i.Stats)

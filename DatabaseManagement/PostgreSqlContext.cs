@@ -56,8 +56,7 @@ public class PostgreSqlContext : DbContext
     {
         // Configure the database provider and connection string
         optionsBuilder
-            .UseNpgsql(ConfigurationManager.AppSettings[DatabaseUrlPathToUse], npgBuilder=>
-               npgBuilder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
+            .UseNpgsql(ConfigurationManager.AppSettings[DatabaseUrlPathToUse])
             .EnableSensitiveDataLogging();
     }
 
