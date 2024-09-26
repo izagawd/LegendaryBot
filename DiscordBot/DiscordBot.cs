@@ -104,11 +104,11 @@ public class DiscordBot
     }
 
 
-    private static async Task OnReady(DiscordClient client, SessionCreatedEventArgs e)
+    private static Task OnReady(DiscordClient client, SessionCreatedEventArgs e)
     {
 
         Console.WriteLine("Ready!!");
-
+        return Task.CompletedTask;
     }
 
 
