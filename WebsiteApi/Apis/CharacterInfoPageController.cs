@@ -163,7 +163,7 @@ public class CharacterInfoPageController : ControllerBase
     {
         var typeIdToLookFor = characterTypeId;
         var userDataId = User.GetDiscordUserId();
-        var stop = new Stopwatch(); stop.Start();
+    
         var gotten = await postgreSqlContext.Set<UserData>()
             .AsNoTrackingWithIdentityResolution()
             
@@ -175,8 +175,6 @@ public class CharacterInfoPageController : ControllerBase
             .Include(i => i.Blessings)
             .FirstOrDefaultAsync(i => i.DiscordId == userDataId);
 
-        stop.Stop();
-        stop.Elapsed.TotalMilliseconds.Print();
         if (gotten is null) return BadRequest("Your data was not found in database");
         if (gotten.IsOccupied) return BadRequest("You are occupied");
         var character = gotten.Characters
