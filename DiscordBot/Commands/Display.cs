@@ -238,7 +238,7 @@ public class Display : GeneralCommandClass
         await ExecuteDisplayAsync(context, entitiesList, 15,
             "\n", "All entities", color);
     }
-
+ 
     [Command("gears")]
     [Description("Displays all the gears you have")]
     [BotCommandCategory(BotCommandCategory.Inventory)]
