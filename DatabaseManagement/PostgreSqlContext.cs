@@ -56,7 +56,7 @@ public class PostgreSqlContext : DbContext
     {
         // Configure the database provider and connection string
         optionsBuilder
-            .UseNpgsql(ConfigurationManager.AppSettings["ConnectionString"])
+            .UseNpgsql(ConfigurationManager.AppSettings[DatabaseUrlPathToUse])
             .EnableSensitiveDataLogging();
     }
 

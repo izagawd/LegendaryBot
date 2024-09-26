@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Diagnostics;
 using BasicFunctionality;
 using DatabaseManagement;
 using Entities.LegendaryBot;
@@ -22,6 +23,7 @@ public class GearsPageController(PostgreSqlContext post) : ControllerBase
     {
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Gear>()
+            
             .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Stats)
             .Include(i => i.Character)
