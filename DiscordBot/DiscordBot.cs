@@ -104,10 +104,11 @@ public class DiscordBot
     }
 
 
-    private static Task OnReady(DiscordClient client, SocketEventArgs e)
+    private static async Task OnReady(DiscordClient client, SessionCreatedEventArgs e)
     {
-        Console.WriteLine("Ready!");
-        return Task.CompletedTask;
+        await client.UpdateStatusAsync(new DiscordActivity("&help",DiscordActivityType.Playing));
+        Console.WriteLine("Ready!!");
+
     }
 
 
@@ -235,7 +236,7 @@ public class DiscordBot
                 UseDefaultCommandErrorHandler = false
             })
             .ConfigureEventHandlers(i =>
-                i.HandleSocketOpened(OnReady)
+                i.HandleSessionCreated(OnReady)
                     .HandleMessageCreated(OnMessageCreatedSpawnCharacter))
             .Build();
 

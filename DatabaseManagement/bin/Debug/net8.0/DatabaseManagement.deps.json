@@ -33,7 +33,7 @@
           }
         }
       },
-      "DSharpPlus/5.0.0-nightly-02356": {
+      "DSharpPlus/5.0.0-nightly-02361": {
         "dependencies": {
           "CommunityToolkit.HighPerformance": "8.2.2",
           "Microsoft.Extensions.Caching.Memory": "8.0.0",
@@ -50,9 +50,9 @@
           }
         }
       },
-      "DSharpPlus.Commands/5.0.0-nightly-02356": {
+      "DSharpPlus.Commands/5.0.0-nightly-02361": {
         "dependencies": {
-          "DSharpPlus": "5.0.0-nightly-02356",
+          "DSharpPlus": "5.0.0-nightly-02361",
           "Microsoft.Extensions.Logging": "8.0.0",
           "Ulid": "1.3.4"
         },
@@ -63,10 +63,10 @@
           }
         }
       },
-      "DSharpPlus.Interactivity/5.0.0-nightly-02356": {
+      "DSharpPlus.Interactivity/5.0.0-nightly-02361": {
         "dependencies": {
           "ConcurrentHashSet": "1.3.0",
-          "DSharpPlus": "5.0.0-nightly-02356"
+          "DSharpPlus": "5.0.0-nightly-02361"
         },
         "runtime": {
           "lib/net8.0/DSharpPlus.Interactivity.dll": {
@@ -331,7 +331,7 @@
       },
       "BasicFunctions/1.0.0": {
         "dependencies": {
-          "DSharpPlus": "5.0.0-nightly-02356",
+          "DSharpPlus": "5.0.0-nightly-02361",
           "PublicInfo": "1.0.0",
           "SixLabors.ImageSharp": "3.1.5",
           "SixLabors.ImageSharp.Drawing": "2.1.4"
@@ -343,9 +343,9 @@
       "Entities/1.0.0": {
         "dependencies": {
           "BasicFunctions": "1.0.0",
-          "DSharpPlus": "5.0.0-nightly-02356",
-          "DSharpPlus.Commands": "5.0.0-nightly-02356",
-          "DSharpPlus.Interactivity": "5.0.0-nightly-02356",
+          "DSharpPlus": "5.0.0-nightly-02361",
+          "DSharpPlus.Commands": "5.0.0-nightly-02361",
+          "DSharpPlus.Interactivity": "5.0.0-nightly-02361",
           "Microsoft.EntityFrameworkCore": "8.0.8",
           "PublicInfo": "1.0.0",
           "SixLabors.ImageSharp": "3.1.5"
@@ -381,26 +381,26 @@
       "path": "concurrenthashset/1.3.0",
       "hashPath": "concurrenthashset.1.3.0.nupkg.sha512"
     },
-    "DSharpPlus/5.0.0-nightly-02356": {
+    "DSharpPlus/5.0.0-nightly-02361": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ouANwswCevVDVYJriNUQdVIhAmYrA+WCAfvhVFLeujFBy5PXXaqiD6CVSDH+GeP2i/D4zFfKyS0D2NjIXHBUVg==",
-      "path": "dsharpplus/5.0.0-nightly-02356",
-      "hashPath": "dsharpplus.5.0.0-nightly-02356.nupkg.sha512"
+      "sha512": "sha512-5/6qwJ12a8cgow2LocNCUxgrvU0wm2RJRFfisittHLCT44GKv20WBq2SJ+EdTc64TPH9ZzL9YhnFJO0+Akd+UQ==",
+      "path": "dsharpplus/5.0.0-nightly-02361",
+      "hashPath": "dsharpplus.5.0.0-nightly-02361.nupkg.sha512"
     },
-    "DSharpPlus.Commands/5.0.0-nightly-02356": {
+    "DSharpPlus.Commands/5.0.0-nightly-02361": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-s1pw6HcpOT2MoAdHQH0eS131rEFvEUITs3vparRH59HFtRCa9lee3hYAGg/RD9a5nmnZjms2smiMRlK0YByUgA==",
-      "path": "dsharpplus.commands/5.0.0-nightly-02356",
-      "hashPath": "dsharpplus.commands.5.0.0-nightly-02356.nupkg.sha512"
+      "sha512": "sha512-GmJ3zc3cyTZXrfq5+A+ltju8Ng6AuoR1AqdebYfhVCA8VcgyWT66OEsvAVC3T3KvUeDtS3i4FW1pdFxjgvRxzQ==",
+      "path": "dsharpplus.commands/5.0.0-nightly-02361",
+      "hashPath": "dsharpplus.commands.5.0.0-nightly-02361.nupkg.sha512"
     },
-    "DSharpPlus.Interactivity/5.0.0-nightly-02356": {
+    "DSharpPlus.Interactivity/5.0.0-nightly-02361": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-LZYdM+PI6OkZhGiF9CwtyeSOMdR8DRZwH42+XLk5+K3MaIW42ehOY3hpv+4WqZg40ScraPD0R8WjlY6mK2qMxg==",
-      "path": "dsharpplus.interactivity/5.0.0-nightly-02356",
-      "hashPath": "dsharpplus.interactivity.5.0.0-nightly-02356.nupkg.sha512"
+      "sha512": "sha512-Jp8iIJbDFQHnx7vu8h8UAz7p10ra8qlgiaehNE+YW820Tn3EB5/oONmfrXDxJM+iK4STwSM4KYKHe2FtntJW9Q==",
+      "path": "dsharpplus.interactivity/5.0.0-nightly-02361",
+      "hashPath": "dsharpplus.interactivity.5.0.0-nightly-02361.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore/8.0.8": {
       "type": "package",
