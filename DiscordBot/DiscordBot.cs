@@ -106,7 +106,7 @@ public class DiscordBot
 
     private static async Task OnReady(DiscordClient client, SessionCreatedEventArgs e)
     {
-        await client.UpdateStatusAsync(new DiscordActivity("&help",DiscordActivityType.Playing));
+
         Console.WriteLine("Ready!!");
 
     }
