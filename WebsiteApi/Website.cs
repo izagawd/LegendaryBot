@@ -80,18 +80,7 @@ public static class Website
             Args = args
         });
         builder.WebHost.UseStaticWebAssets();
-        if (!Information.IsTesting)
-            builder.WebHost.UseKestrel(serverOptions =>
-            {
-                serverOptions.ListenAnyIP(5000);
 
-                serverOptions.ListenAnyIP(5001,
-                    listenOptions =>
-                    {
-                        listenOptions.UseHttps(ConfigurationManager.AppSettings["CertificatePath"]!.Print(),
-                            ConfigurationManager.AppSettings["CertificatePassword"]!);
-                    });
-            });
 
         ConfigureServices(builder.Services);
 
@@ -108,7 +97,7 @@ public static class Website
             app.UseHsts();
         }
 
-        app.UseHttpsRedirection();
+      
 
         app.UseStaticFiles();
 
@@ -119,6 +108,8 @@ public static class Website
         app.MapControllers();
 
 
-        await app.RunAsync(Information.ApiDomainName);
+        var stringToUse = Information.IsTesting ? Information.ApiDomainName : "http://localhost:5000";
+        
+        await app.RunAsync(stringToUse);
     }
 }
