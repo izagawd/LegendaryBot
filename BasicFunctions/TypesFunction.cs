@@ -2,11 +2,11 @@ using System.Collections.Concurrent;
 using System.Reflection;
 
 namespace BasicFunctionality;
-
+/// <summary>
+/// Will only work on static methods
+/// </summary>
 [AttributeUsage(AttributeTargets.Method)]
-/**
- * Will only work on static methods
- */
+
 public class DefaultObjectRegistererAttribute : Attribute
 {
 }
