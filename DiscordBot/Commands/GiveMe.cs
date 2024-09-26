@@ -30,7 +30,7 @@ public class GiveMe : GeneralCommandClass
     {
         
                 var simplifiedEntityName = entityName.ToLower().Replace(" ", "");
-                var caller = userToGive.Id;
+                var caller = ctx.User.Id;
         var type = TypesFunction
             .GetDefaultObjectsAndSubclasses<IInventoryEntity>()
             .FirstOrDefault(i => i.Name.ToLower().Replace(" ", "") == simplifiedEntityName)?.GetType();

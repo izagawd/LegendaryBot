@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ces18Z7mcyiYM6HQvV8Bf2qksCo/NMxEMRwPnLD9GZycBztcpqANSWpq7QgRxI74Uwki8nGYUOaQghNOF8LEsQ==",
+  "dgSpecHash": "A73BjsLi0qs=",
   "success": true,
   "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DiscordBot\\DiscordBot.csproj",
   "expectedPackageFiles": [
@@ -32,7 +32,9 @@
     "C:\\Users\\theiz\\.nuget\\packages\\system.configuration.configurationmanager\\8.0.0\\system.configuration.configurationmanager.8.0.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\system.diagnostics.eventlog\\8.0.0\\system.diagnostics.eventlog.8.0.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\system.security.cryptography.protecteddata\\8.0.0\\system.security.cryptography.protecteddata.8.0.0.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\ulid\\1.3.4\\ulid.1.3.4.nupkg.sha512"
+    "C:\\Users\\theiz\\.nuget\\packages\\ulid\\1.3.4\\ulid.1.3.4.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-x64\\8.0.6\\microsoft.netcore.app.runtime.linux-x64.8.0.6.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-x64\\8.0.6\\microsoft.aspnetcore.app.runtime.linux-x64.8.0.6.nupkg.sha512"
   ],
   "logs": []
 }
