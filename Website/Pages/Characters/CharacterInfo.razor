@@ -246,9 +246,12 @@ opacity: @(HoveredObject == theObject && theObject is not null ? "100%" : "0")">
     {
         <div class="parent">
             <div class="equipment-navigator equipment-navigator-@(Theme.ToString().ToLower())">
+                @{
+                    var bgColToUse = Theme == WebsiteTheme.Dark ? "gray" : "lightgrey";
+                }
                 @foreach (var i in Enum.GetValues<WorkingWith>())
                 {
-                    <div @onclick="() => CurrentlyWorkingWith = i">
+                    <div style="@(CurrentlyWorkingWith == i ? $"background-color: {bgColToUse}" : "")" @onclick="() => CurrentlyWorkingWith = i">
                         <img style="border: none; width: 35px; height: 35px;" src="@GetNavImage(i)"/>
                     </div>
                 }
