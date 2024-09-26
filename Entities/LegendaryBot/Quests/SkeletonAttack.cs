@@ -63,7 +63,7 @@ public class SkeletonAttack : Quest
                 skeleTeam.Add(skele);
             }
 
-            simu.Team2 = skeleTeam.LoadTeamStats();
+            simu.Team2 = skeleTeam.SetEveryoneToMaxHealth();
           battleResult = await simu.StartAsync(message);
             if (battleResult.Winners != userData.EquippedPlayerTeam)
                 break;
