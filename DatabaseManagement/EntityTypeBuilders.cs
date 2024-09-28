@@ -136,7 +136,8 @@ public class UserDataDatabaseConfiguration : IEntityTypeConfiguration<UserData>
 
         builder.HasMany(i => i.SummonsTrackers)
             .WithOne()
-            .HasForeignKey(i => i.UserDataId);
+            .HasForeignKey(i => i.UserDataId)
+            .OnDelete(DeleteBehavior.Cascade);
         builder.HasIndex(i => i.DiscordId)
             .IsUnique();
         builder
