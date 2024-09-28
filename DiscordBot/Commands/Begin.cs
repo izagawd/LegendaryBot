@@ -56,7 +56,6 @@ public class Begin : GeneralCommandClass
         }
 
         await DatabaseContext.Set<UserData>()
-            .AsSplitQuery()
             .Include(i => i.Items.Where(j => j is Stamina))
             .Include(j => j.Characters)
             .ThenInclude(j => j.Blessing)

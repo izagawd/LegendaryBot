@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1RKIbpPPYto=",
+  "dgSpecHash": "Tu0wWCzxfqU=",
   "success": true,
   "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-x64\\8.0.6\\microsoft.netcore.app.runtime.linux-x64.8.0.6.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-x64\\8.0.6\\microsoft.aspnetcore.app.runtime.linux-x64.8.0.6.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
