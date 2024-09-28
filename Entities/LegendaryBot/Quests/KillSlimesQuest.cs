@@ -3,8 +3,6 @@ using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Entities.LegendaryBot.BattleSimulatorStuff;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
-using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-using Entities.LegendaryBot.Rewards;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 

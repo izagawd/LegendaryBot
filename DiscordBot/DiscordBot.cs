@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using System.Collections.Immutable;
 using System.Configuration;
 using BasicFunctionality;
 using DatabaseManagement;
@@ -17,7 +16,6 @@ using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
-using Entities.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using Entities.LegendaryBot.Rewards;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;

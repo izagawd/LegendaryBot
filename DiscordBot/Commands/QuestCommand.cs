@@ -5,7 +5,6 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.Items;
-using Entities.LegendaryBot.Quests;
 using Entities.LegendaryBot.Rewards;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;

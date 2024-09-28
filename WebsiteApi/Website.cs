@@ -1,8 +1,6 @@
-using BasicFunctionality;
 using DatabaseManagement;
 using Microsoft.AspNetCore.Authentication;
 using PublicInfo;
-using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace WebsiteApi;
 

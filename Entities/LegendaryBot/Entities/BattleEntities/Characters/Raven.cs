@@ -4,7 +4,6 @@ using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 using Entities.LegendaryBot.Moves;
 using Entities.LegendaryBot.Results;
 using Entities.LegendaryBot.StatusEffects;
-using  Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 namespace Entities.LegendaryBot.Entities.BattleEntities.Characters;
 

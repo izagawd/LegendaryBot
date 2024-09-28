@@ -1,11 +1,7 @@
 ﻿using BasicFunctionality;
-using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities;
-using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
-using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears.Stats;
-using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Quests;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;

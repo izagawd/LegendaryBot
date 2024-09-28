@@ -4,7 +4,6 @@ using DSharpPlus.Entities;
 using Entities.LegendaryBot.BattleSimulatorStuff;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Results;
-using Entities.LegendaryBot.Rewards;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 

@@ -14,7 +14,6 @@ using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Rewards;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 
 namespace DiscordBot.Commands;
 

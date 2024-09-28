@@ -1,4 +1,3 @@
-using System.Collections;
 using System.ComponentModel;
 using BasicFunctionality;
 using DSharpPlus.Commands;

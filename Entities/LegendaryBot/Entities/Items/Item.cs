@@ -2,14 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using BasicFunctionality;
 using Entities.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PublicInfo;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Drawing.Processing;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
 
 namespace Entities.LegendaryBot.Entities.Items;
 

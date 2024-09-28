@@ -5,7 +5,6 @@ using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Entities.BattleEntities.Gears;
 using Entities.LegendaryBot.Entities.Items;
-using Entities.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,4 +1,3 @@
-using BasicFunctionality;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Blessings;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
