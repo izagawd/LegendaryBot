@@ -8,7 +8,6 @@ using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Primitives;
 
 namespace Entities.LegendaryBot.Rewards;
 
