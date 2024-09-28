@@ -31,7 +31,6 @@ public static class Website
                 });
         });
 
-        services.AddSignalR();
         services.AddControllers();
         services.AddAuthentication(options =>
             {
