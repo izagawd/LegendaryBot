@@ -35,6 +35,10 @@
         <None Include="..\PrivateInfo\App.config">
             <Link>App.config</Link>
         </None>
+        <None Remove="BenchmarkDotNet.Artifacts\WebsiteApi.Bot.ToBench-20240928-150956.log" />
+        <None Remove="BenchmarkDotNet.Artifacts\WebsiteApi.Bot.ToBench-20240928-150935.log" />
+        <None Remove="BenchmarkDotNet.Artifacts\WebsiteApi.Bot.ToBench-20240928-150651.log" />
+        <None Remove="BenchmarkDotNet.Artifacts\WebsiteApi.Bot.ToBench-20240928-150632.log" />
     </ItemGroup>
 
     <ItemGroup>
