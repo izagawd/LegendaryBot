@@ -541,8 +541,7 @@
           "DSharpPlus.Commands": "5.0.0-nightly-02361",
           "DSharpPlus.Interactivity": "5.0.0-nightly-02361",
           "Microsoft.EntityFrameworkCore": "8.0.8",
-          "PublicInfo": "1.0.0",
-          "SixLabors.ImageSharp": "3.1.5"
+          "PublicInfo": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Entities.dll": {}
@@ -1347,7 +1346,6 @@
       "DSharpPlus >= 5.0.0-nightly-02361",
       "DSharpPlus.Commands >= 5.0.0-nightly-02361",
       "DatabaseManagement >= 1.0.0",
-      "Microsoft.EntityFrameworkCore >= 8.0.8",
       "PublicInfo >= 1.0.0",
       "System.Configuration.ConfigurationManager >= 8.0.0"
     ]
@@ -1408,10 +1406,6 @@
           "DSharpPlus.Commands": {
             "target": "Package",
             "version": "[5.0.0-nightly-02361, )"
-          },
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[8.0.8, )"
           },
           "System.Configuration.ConfigurationManager": {
             "target": "Package",

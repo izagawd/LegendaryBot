@@ -334,7 +334,7 @@
           }
         },
         "build": {
-          "build/SixLabors.ImageSharp.props": {}
+          "build/_._": {}
         }
       },
       "SixLabors.ImageSharp.Drawing/2.1.4": {
@@ -983,8 +983,7 @@
       "DSharpPlus.Commands >= 5.0.0-nightly-02361",
       "DSharpPlus.Interactivity >= 5.0.0-nightly-02361",
       "Microsoft.EntityFrameworkCore >= 8.0.8",
-      "PublicInfo >= 1.0.0",
-      "SixLabors.ImageSharp >= 3.1.5"
+      "PublicInfo >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1051,10 +1050,6 @@
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[8.0.8, )"
-          },
-          "SixLabors.ImageSharp": {
-            "target": "Package",
-            "version": "[3.1.5, )"
           }
         },
         "imports": [

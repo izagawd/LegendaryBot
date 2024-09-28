@@ -525,8 +525,7 @@
           "DSharpPlus.Commands": "5.0.0-nightly-02361",
           "DSharpPlus.Interactivity": "5.0.0-nightly-02361",
           "Microsoft.EntityFrameworkCore": "8.0.8",
-          "PublicInfo": "1.0.0",
-          "SixLabors.ImageSharp": "3.1.5"
+          "PublicInfo": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Entities.dll": {}

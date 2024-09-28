@@ -9,6 +9,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using Entities.LegendaryBot;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
+using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,37 @@ namespace DiscordBot.Commands;
 public partial class CharacterCommand
 {
     private static readonly ConcurrentDictionary<string, Image<Rgba32>> _cachedLevelUpCroppedImages = new();
+    public static  async Task<Image<Rgba32>> GetImageAsync(Item item)
+    {
+       
+          var  stacks = item. Stacks;
+        var url =item. ImageUrl;
 
+
+        var image = await ImageFunctions.GetImageFromUrlAsync(url);
+
+        var theMin = Math.Min(image.Width, image.Height);
+        image.Mutate(i => i.Resize(new Size(theMin, theMin)));
+        image.Mutate(ctx =>
+        {
+            var size = 9 * (theMin / 25.0f);
+            var x = 1 * (theMin / 25.0f);
+            float xOffset = 0;
+            var stacksString = stacks.ToString();
+            if (stacksString.Length > 1)
+            {
+                x = 0;
+                xOffset = (stacksString.Length - 1) * 3 * (theMin / 25.0f);
+            }
+
+            ctx.Fill(SixLabors.ImageSharp.Color.Black, new RectangleF(0, 0, size + xOffset, size));
+            var font = SystemFonts.CreateFont(Information.GlobalFontName, size, FontStyle.Bold);
+
+            ctx.DrawText(stacksString, font,SixLabors.ImageSharp.Color.White, new PointF(x, 0));
+        });
+
+        return image;
+    }
 
     private static readonly ConcurrentDictionary<string, Image<Rgba32>> _resizedBlessingsLevelUpImageCache = new();
 
@@ -109,7 +140,7 @@ public partial class CharacterCommand
             var xOffset = 200;
             foreach (var i in expUpgradeMat)
             {
-                using var imageToDraw = await i.GetImageAsync();
+                using var imageToDraw = await GetImageAsync(i);
                 imageToDraw.Mutate(j => j.Resize(new Size(60, 60)));
                 image
                     .Mutate(j => { j.DrawImage(imageToDraw, new Point(xOffset, 130), new GraphicsOptions()); });
