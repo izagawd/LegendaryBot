@@ -98,7 +98,7 @@ public class GearCraft : GeneralCommandClass
         ];
         var cancelButton = new DiscordButtonComponent(DiscordButtonStyle.Danger, "cancel", "CANCEL");
         Rarity? rarityToUse = null;
-        DiscordMessage message = null;
+        DiscordMessage? message = null;
         DiscordInteraction? lastInteraction = null;
         string additionalString = "";
         await MakeOccupiedAsync(userData);
@@ -161,7 +161,7 @@ public class GearCraft : GeneralCommandClass
                         Enum.GetValues<Rarity>()
                             .Select(i => 
                                 new DiscordSelectComponentOption("\u2b50".MultiplyString((int)i),
-                                    ((int)i).ToString(),null,
+                                    ((int)i).ToString(),
                                     isDefault: rarityToUse ==i))
        
                             .ToArray());

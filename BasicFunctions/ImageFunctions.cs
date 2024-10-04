@@ -53,7 +53,7 @@ public static class ImageFunctions
             CachedImages.Set(url, characterImage, entryOptions);
             return characterImage.Clone();
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException)
         {
             var alternateImage =
                 await GetImageFromUrlAsync($"{Information.BattleImagesDirectory}/dead_x.png");

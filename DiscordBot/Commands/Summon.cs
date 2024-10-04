@@ -380,14 +380,14 @@ public class Summon : GeneralCommandClass
                     {
                         options = standardBlessingBanner.ChoosableBlessings.Select(i =>
                             new DiscordSelectComponentOption(((Blessing)TypesFunction.GetDefaultObject(i)).Name,
-                                ((Blessing)TypesFunction.GetDefaultObject(i)).TypeId.ToString(), null,
+                                ((Blessing)TypesFunction.GetDefaultObject(i)).TypeId.ToString(), null!,
                                 ((Blessing)TypesFunction.GetDefaultObject(i)).TypeId ==
                                 standardSummonsTracker.TargetFiveStarTypeId));
                     } else if (banner is StandardCharacterBanner standardCharacterBanner)
                     {
                         options = standardCharacterBanner.ChoosableCharacters.Select(i =>
                             new DiscordSelectComponentOption(((Character)TypesFunction.GetDefaultObject(i)).Name,
-                                ((Character)TypesFunction.GetDefaultObject(i)).TypeId.ToString(), null,
+                                ((Character)TypesFunction.GetDefaultObject(i)).TypeId.ToString(), null!,
                                 ((Character)TypesFunction.GetDefaultObject(i)).TypeId ==
                                 standardSummonsTracker.TargetFiveStarTypeId));
                     }
@@ -409,13 +409,13 @@ public class Summon : GeneralCommandClass
             while (true)
             {
                 using var tok = new CancellationTokenSource(TimeSpan.FromMinutes(2));
-                Task<InteractivityResult<ComponentInteractionCreatedEventArgs>> selectTask = null;
-                List<Task<InteractivityResult<ComponentInteractionCreatedEventArgs>>> Tasks = [
+                Task<InteractivityResult<ComponentInteractionCreatedEventArgs>>? selectTask = null;
+                List<Task<InteractivityResult<ComponentInteractionCreatedEventArgs>>> tasks = [
                     message.WaitForButtonAsync(ctx.User,tok.Token)];
 
                 if(gottenSelect is not null)
-                    Tasks.Add(selectTask = message.WaitForSelectAsync(ctx.User, selectorId, tok.Token));
-                var gottenResponse = await Task.WhenAny(Tasks);
+                    tasks.Add(selectTask = message.WaitForSelectAsync(ctx.User, selectorId, tok.Token));
+                var gottenResponse = await Task.WhenAny(tasks);
                     
                 var response = await gottenResponse;
                 await tok.CancelAsync();

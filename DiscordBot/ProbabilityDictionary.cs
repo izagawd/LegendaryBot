@@ -13,9 +13,9 @@ public enum Choice
     ThreeStarBlessing
 }
 
-public class ProbabilityDictionary<T> : IDictionary<T, double>
+public class ProbabilityDictionary<T> : IDictionary<T, double> where T : notnull
 {
-    private readonly Dictionary<T, double> _internalDictionary = new Dictionary<T, double>();
+    private readonly Dictionary<T, double> _internalDictionary = new();
 
     public void Redistribute(T itemToRemove, IEnumerable<T> items)
     {

@@ -67,7 +67,7 @@ public static class BasicFunctions
                     var marshal = Marshal.SizeOf(field.FieldType);
                     size += marshal;
                 }
-                catch (Exception e)
+                catch
                 {
                     size += SizeOf(field.FieldType);
                 }

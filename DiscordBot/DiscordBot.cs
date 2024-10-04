@@ -48,7 +48,6 @@ public class DiscordBot
     private const float MessageCoolDown = 2f;
     private static readonly ConcurrentDictionary<ulong, ChannelSpawnInfo> ChannelSpawnInfoDictionary = new();
 
-    private static readonly ConcurrentDictionary<ulong, CharacterExpGainInfo> ExpMatGive = new();
 
 
     public static DiscordClient Client { get; private set; } = null!;
@@ -269,13 +268,4 @@ public class DiscordBot
         }
     }
 
-    private struct CharacterExpGainInfo
-    {
-        public int MessageCount;
-        public DateTime LastTimeIncremented = DateTime.UtcNow.AddDays(-1);
-
-        public CharacterExpGainInfo()
-        {
-        }
-    }
 }
