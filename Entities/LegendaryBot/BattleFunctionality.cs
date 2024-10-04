@@ -71,7 +71,7 @@ public static class BattleFunctionality
     /// <returns>
     ///     The total amount of EXP a character has used based on their level
     /// </returns>
-    public static long TotalExp(int level)
+    public static int TotalExp(int level)
     {
         var totalExperience = 0;
         while (level > 1)
