@@ -113,8 +113,10 @@ public class UserData : ICanBeLeveledUp
         var expGainText = "";
 
         var levelBefore = AdventurerLevel;
-        Experience += experienceToGain;
-
+        checked
+        {
+            Experience += experienceToGain;
+        }
 
         var nextLevelEXP = GetRequiredExperienceToNextLevel(AdventurerLevel);
         while (Experience >= nextLevelEXP && AdventurerLevel < maxLevel)

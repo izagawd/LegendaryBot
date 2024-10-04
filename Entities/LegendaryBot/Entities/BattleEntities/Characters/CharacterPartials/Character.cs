@@ -324,7 +324,11 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         var expGainText = "";
 
         var levelBefore = Level;
-        Experience += experienceToGain;
+        checked
+        {
+            Experience += experienceToGain;
+        }
+   
         var nextLevelExp = GetRequiredExperienceToNextLevel(Level);
         while (Experience >= nextLevelExp && Level < MaxLevel)
         {
