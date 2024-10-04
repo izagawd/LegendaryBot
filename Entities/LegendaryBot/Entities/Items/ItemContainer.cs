@@ -38,7 +38,14 @@ public class ItemContainer : InventoryEntityContainer<Item>
         {
             var already = List.FirstOrDefault(j => j.GetType() == i.GetType());
             if (already is not null)
-                already.Stacks += i.Stacks;
+            {
+                checked
+                {
+                    already.Stacks += i.Stacks;
+                }
+               
+            }
+            
             else
                 Add(i);
         }
@@ -73,8 +80,10 @@ public class ItemContainer : InventoryEntityContainer<Item>
             first = (Item)Activator.CreateInstance(itemType)!;
             first.Stacks = 0;
         }
-
-        first.Stacks += stacksToAdd;
+        checked
+        {
+            first.Stacks += stacksToAdd;
+        }
     }
 
     public void AddItemStacks<TItem>(int stacksToAdd) where TItem : Item

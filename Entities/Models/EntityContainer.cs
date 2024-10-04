@@ -15,9 +15,16 @@ public class InventoryEntityContainer : InventoryEntityContainer<IInventoryEntit
         List.RemoveAll(i => i is Item);
         foreach (var i in items)
         {
+            
             var already = (Item?)List.FirstOrDefault(j => j.GetType() == i.GetType());
             if (already is not null)
-                already.Stacks += i.Stacks;
+            {
+                checked
+                {
+                    already.Stacks += i.Stacks; 
+                }
+            }
+          
             else
                 Add(i);
         }

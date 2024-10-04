@@ -21,8 +21,9 @@ public abstract class Energy : Item
         // Determine how much energy has accumulated based on the rate of 1 energy every 6 minutes
         var newEnergy = (int)(elapsedTime / EnergyIncreaseInterval);
 
+        
         // Update the Value with the new energy amount
-        Stacks += newEnergy;
+        checked{ Stacks += newEnergy;}
         if (Stacks >= MaxEnergyValue)
             Stacks = MaxEnergyValue;
         // Update LastTimeAccessed to the current time, minus the remaining minutes that didn't add up to a full energy point
