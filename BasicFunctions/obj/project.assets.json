@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {
+    "net9.0": {
       "CommunityToolkit.HighPerformance/8.2.2": {
         "type": "package",
         "compile": {
@@ -15,7 +15,7 @@
           }
         }
       },
-      "DSharpPlus/5.0.0-nightly-02361": {
+      "DSharpPlus/5.0.0-nightly-02365": {
         "type": "package",
         "dependencies": {
           "CommunityToolkit.HighPerformance": "8.2.2",
@@ -277,7 +277,7 @@
       },
       "PublicInfo/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
+        "framework": ".NETCoreApp,Version=v9.0",
         "compile": {
           "bin/placeholder/PublicInfo.dll": {}
         },
@@ -314,16 +314,16 @@
         "lib/netstandard2.1/CommunityToolkit.HighPerformance.xml"
       ]
     },
-    "DSharpPlus/5.0.0-nightly-02361": {
-      "sha512": "5/6qwJ12a8cgow2LocNCUxgrvU0wm2RJRFfisittHLCT44GKv20WBq2SJ+EdTc64TPH9ZzL9YhnFJO0+Akd+UQ==",
+    "DSharpPlus/5.0.0-nightly-02365": {
+      "sha512": "CHaT4/2ekniSQDbA6cx1KFsrUzTHIDb/qYwSbCAgCP46vpgbmAsSOo6z9ey9bRt4oKb6ggFCuj9i5Dz+1MXedg==",
       "type": "package",
-      "path": "dsharpplus/5.0.0-nightly-02361",
+      "path": "dsharpplus/5.0.0-nightly-02365",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.5.0.0-nightly-02361.nupkg.sha512",
+        "dsharpplus.5.0.0-nightly-02365.nupkg.sha512",
         "dsharpplus.nuspec",
         "dsharpplus.png",
         "lib/net8.0/DSharpPlus.dll",
@@ -769,8 +769,8 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net8.0": [
-      "DSharpPlus >= 5.0.0-nightly-02361",
+    "net9.0": [
+      "DSharpPlus >= 5.0.0-nightly-02365",
       "PublicInfo >= 1.0.0",
       "SixLabors.ImageSharp >= 3.1.5",
       "SixLabors.ImageSharp.Drawing >= 2.1.4"
@@ -792,14 +792,14 @@
         "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net8.0"
+        "net9.0"
       ],
       "sources": {
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "projectReferences": {
             "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj": {
               "projectPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\PublicInfo.csproj"
@@ -815,16 +815,16 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "direct"
+        "auditMode": "all"
       }
     },
     "frameworks": {
-      "net8.0": {
-        "targetAlias": "net8.0",
+      "net9.0": {
+        "targetAlias": "net9.0",
         "dependencies": {
           "DSharpPlus": {
             "target": "Package",
-            "version": "[5.0.0-nightly-02361, )"
+            "version": "[5.0.0-nightly-02365, )"
           },
           "SixLabors.ImageSharp": {
             "target": "Package",
@@ -851,7 +851,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100-rc.1.24452.12/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

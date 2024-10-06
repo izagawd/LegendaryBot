@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "WQ5/S9zog94=",
+  "dgSpecHash": "MXZFwY2yY4A=",
   "success": true,
   "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BasicFunctions\\BasicFunctions.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theiz\\.nuget\\packages\\communitytoolkit.highperformance\\8.2.2\\communitytoolkit.highperformance.8.2.2.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\dsharpplus\\5.0.0-nightly-02361\\dsharpplus.5.0.0-nightly-02361.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\dsharpplus\\5.0.0-nightly-02365\\dsharpplus.5.0.0-nightly-02365.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.extensions.caching.memory\\8.0.0\\microsoft.extensions.caching.memory.8.0.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",

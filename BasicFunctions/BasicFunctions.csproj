@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>BasicFunctionality</RootNamespace>
+        <LangVersion>13</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02361" />
+        <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02365" />
         <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5"/>
         <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.4"/>
     </ItemGroup>
