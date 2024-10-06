@@ -1,3 +1,4 @@
+using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 using Entities.LegendaryBot.Moves;
 using Entities.LegendaryBot.Results;
 using Entities.LegendaryBot.StatusEffects;
@@ -26,6 +27,7 @@ public class StatusEffectDamageSource : DamageSource
 
 public class MoveDamageSource : DamageSource
 {
+    public Character Character => MoveUsageContext.Move.User;
     public MoveDamageSource(MoveUsageContext moveUsageContext)
     {
         MoveUsageContext = moveUsageContext;

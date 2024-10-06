@@ -90,7 +90,7 @@ public partial class Character
                 };
             }
 
-        CurrentBattle.InvokeBattleEvent(new CharacterPreDamageEventArgs(damageArgs));
+        CurrentBattle.InvokeBattleEvent(new CharacterPreDamageEventArgs(damageArgs,this));
         var damageText = damageArgs.DamageText;
         if (damageText is null) damageText = $"{NameWithAlphabet} took $ damage!";
 
