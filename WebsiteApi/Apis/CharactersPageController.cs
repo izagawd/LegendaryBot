@@ -19,6 +19,7 @@ public class CharactersPageController(PostgreSqlContext post) : ControllerBase
     {
         var zaId = User.GetDiscordUserId();
         var userData = await post.Set<UserData>()
+            .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Characters)
             .FirstOrDefaultAsync(i => i.DiscordId == zaId);
 

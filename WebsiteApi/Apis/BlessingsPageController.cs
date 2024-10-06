@@ -18,6 +18,7 @@ public class BlessingsPageController(PostgreSqlContext post) : ControllerBase
     {
         var zaId = User.GetDiscordUserId();
         var gottenCollectionTypeIds = await post.Set<Blessing>()
+            .AsNoTrackingWithIdentityResolution()
             .Where(i => i.UserData!.DiscordId == zaId)
             .ToArrayAsync();
 

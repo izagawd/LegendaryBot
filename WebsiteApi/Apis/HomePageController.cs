@@ -22,6 +22,7 @@ public class HomePageController(PostgreSqlContext context) : ControllerBase
     {
         var discordId = User.GetDiscordUserId();
         var userData = await context.Set<UserData>()
+            .AsNoTrackingWithIdentityResolution()
             .Include(i => i.Characters.Where(j => j is Player))
             .Include(i => i.Items.Where(j => j is Coin || j is DivineShard || j is Stamina))
             .FirstOrDefaultAsync(i => i.DiscordId == discordId);

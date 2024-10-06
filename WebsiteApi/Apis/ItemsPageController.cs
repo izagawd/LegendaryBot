@@ -18,6 +18,7 @@ public class ItemsPageController(PostgreSqlContext post) : ControllerBase
     {
         var zaId = User.GetDiscordUserId();
         var gottenCollection = await post.Set<Item>()
+            .AsNoTrackingWithIdentityResolution()
             .Where(i => i.UserData!.DiscordId == zaId)
             .ToArrayAsync();
 
