@@ -83,14 +83,17 @@ public partial class CharacterInfo
 
     public class CharacterInfoDto
     {
+        [JsonPropertyName("1")]
         public ImmutableDictionary<int, string> GearStatNameByTypeId { get; set; }
+        [JsonPropertyName("2")]
         public ImmutableDictionary<int, string> GearNameByTypeId { get; set; }
-
+        [JsonPropertyName("3")]
         public Dictionary<WorkingWith, int> WorkingWithToTypeIdHelper { get; set; }
-
+        [JsonPropertyName("4")]
         public CharacterDto CharacterDto { get; set; }
+        [JsonPropertyName("5")]
         public GearDto[] AllGears { get; set; }
-
+        [JsonPropertyName("6")]
         public BlessingDto[] AllBlessings { get; set; }
 
         [JsonIgnore]
