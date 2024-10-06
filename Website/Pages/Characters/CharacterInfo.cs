@@ -93,6 +93,7 @@ public partial class CharacterInfo
 
         public BlessingDto[] AllBlessings { get; set; }
 
+        [JsonIgnore]
         public BlessingDto? EquippedBlessing =>
             AllBlessings.FirstOrDefault(i =>
                 i.TypeId == CharacterDto.TheEquippedOnes.GetValueOrDefault(WorkingWith.Blessing));
