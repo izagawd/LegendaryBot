@@ -51,7 +51,7 @@
     {
         var parsed = HttpUtility.ParseQueryString(new Uri(NavManager.Uri).Query);
         var gotten = parsed["equipment"];
-        Console.WriteLine(gotten ?? "bruh");
+
         if (gotten is not null && Enum.TryParse<WorkingWith>(gotten, out var asParsed))
         {
             CurrentlyWorkingWith = asParsed;

@@ -493,8 +493,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         if (divineEcho > 6)
         {
             divineEcho = 6;
-            Console.WriteLine(
-                "divine echo cannot be more than 6, cuz max level for a players character is 60, and milestones are reached every 10 levels");
+
         }
 
         foreach (var i in DivineEchoStatIncrease)

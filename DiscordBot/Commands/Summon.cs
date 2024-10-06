@@ -298,7 +298,7 @@ public class Summon : GeneralCommandClass
         var builder = new DiscordEmbedBuilder()
             .WithUser(ctx.User)
             .WithColor(userData.Color);
-        (bannerNumber ?? -1).Print();
+
         if (bannerNumber is null)
         {
          
@@ -315,7 +315,7 @@ public class Summon : GeneralCommandClass
         }
         else
         {
-            "yo".Print();
+   
             var bannerIndex = bannerNumber.Value - 1;
             if (bannerIndex < 0 || bannerIndex >= CurrentBanners.Length)
             {
