@@ -33,6 +33,11 @@ public class GiveMe : GeneralCommandClass
         var type = TypesFunction
             .GetDefaultObjectsAndSubclasses<IInventoryEntity>()
             .FirstOrDefault(i => i.Name.ToLower().Replace(" ", "") == simplifiedEntityName)?.GetType();
+        if (type is null)
+        {
+            await ctx.RespondAsync($"{simplifiedEntityName} not found");
+            return;
+        }
         if (caller != DiscordBot.Izasid && caller != DiscordBot.Testersid)
         {
             await ctx.RespondAsync("Only izagawd can use this command");
