@@ -242,8 +242,8 @@
                         var i1 = i;
                         <div class="team-character-div" style="border-color: @characterBor; background-color: @(WebsiteTheme == WebsiteTheme.Dark ? "gray" : "lightgrey")">
                             <a style="border-color:  inherit"
-                               href="/inventory/characters/@(character?.TypeId ?? 1)">
-                                <img style="border-color: inherit" src="@character?.ImageUrl" alt=""/>
+                               href="@(character is not null ? $"/inventory/characters/{character.TypeId}" : "javascript:void(0);")">
+                                <img style="border-color: inherit" src="@(character?.ImageUrl ?? "")" alt=""/>
                             </a>
                             <div class="paragraphs">
                                 <p>@(character?.Name ?? "EMPTY SLOT")</p>
