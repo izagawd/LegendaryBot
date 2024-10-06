@@ -1,4 +1,5 @@
 using Entities.LegendaryBot.BattleEvents.EventArgs;
+using Entities.LegendaryBot.BattleSimulatorStuff;
 using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 
 namespace Entities.LegendaryBot.Entities.BattleEntities.Blessings;
@@ -14,7 +15,7 @@ public class ThresholdStrike : Blessing
     {
         get => 5; protected init{} }
 
-    
+    [BattleEventListenerMethod]
     public void IncreaseDamage(CharacterPreDamageEventArgs damageEventArgs)
     {
         if (damageEventArgs.DamageArgs.DamageSource is MoveDamageSource moveDamageSource
@@ -22,10 +23,10 @@ public class ThresholdStrike : Blessing
             && moveDamageSource.Character == Character
             && damageEventArgs.DamageReceiver.Health / damageEventArgs.DamageReceiver.MaxHealth >= 0.5f)
         {
-            Console.WriteLine($"Strike initiated for {moveDamageSource.Character.NameWithAlphabet}\nPrevious dmg: {damageEventArgs.DamageArgs.Damage}");
+
             
             damageEventArgs.DamageArgs.Damage += (PercentageDmgIncrease / 100.0f) * damageEventArgs.DamageArgs.Damage;
-            Console.WriteLine($"Current dmg: {damageEventArgs.DamageArgs.Damage}");
+
         }
     }
     public override string Name => "Threshold Strike";
