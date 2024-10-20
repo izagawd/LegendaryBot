@@ -45,30 +45,7 @@ public static class Website
     }
 
 
-    public static async Task<bool> IsLoadedAsync()
-    {
-        try
-        {
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    if (cert is not null && !cert.Verify())
-                        return httpRequestMessage.RequestUri is not null
-                               && httpRequestMessage.RequestUri.ToString().Contains(Information.ApiDomainName);
-                    return cert is not null;
-                };
-            using var webClient = new HttpClient(handler);
 
-            var checkingResponse = await webClient.GetAsync(Information.ApiDomainName);
-            return checkingResponse.IsSuccessStatusCode;
-        }
-        catch
-        {
-            return false;
-        }
-    }
 
     public static async Task StartAsync(string[] args)
     {
