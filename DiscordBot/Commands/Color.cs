@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.Collections.Immutable;
+using System.ComponentModel;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Commands.Trees;
@@ -78,18 +80,17 @@ public class Color : GeneralCommandClass
 
     private class ColorChoice : IChoiceProvider
     {
-        private static readonly IReadOnlyDictionary<string, object> _choices = new Dictionary<string, object>
-        {
-            ["Blue"] = "blue",
-            ["Red"] = "red",
-            ["Green"] = "green",
-            ["Orange"] = "orange",
-            ["Purple"] = "purple"
-        };
+        private static readonly ImmutableArray<DiscordApplicationCommandOptionChoice> _colorChoices = [
+            new("Blue", "blue"),
+            new("Red", "red"),
+            new("Green", "green"),
+            new("Orange", "orange"),
+            new("Purple", "purple")
+        ];
 
-        public ValueTask<IReadOnlyDictionary<string, object>> ProvideAsync(CommandParameter parameter)
+        public ValueTask<IEnumerable<DiscordApplicationCommandOptionChoice>> ProvideAsync(CommandParameter parameter)
         {
-            return ValueTask.FromResult(_choices);
+            return ValueTask.FromResult(_colorChoices.AsEnumerable());
         }
     }
 }

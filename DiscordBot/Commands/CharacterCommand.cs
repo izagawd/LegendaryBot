@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Text;
@@ -285,19 +286,19 @@ public partial class CharacterCommand : GeneralCommandClass
 
     private class GearTypeProvider : IChoiceProvider
     {
-        private static readonly IReadOnlyDictionary<string, object> _daysOfTheWeek = new Dictionary<string, object>
-        {
-            { "Armor", "armor" },
-            { "Weapon", "weapon" },
-            { "Ring", "ring" },
-            { "Necklace", "necklace" },
-            { "Boots", "boots" },
-            { "Helmet", "helmet" }
-        }.AsReadOnly();
+        private static readonly ImmutableArray<DiscordApplicationCommandOptionChoice> _itemOptions = [
+            new("Armor", "armor"),
+            new("Weapon", "weapon"),
+            new("Ring", "ring"),
+            new("Necklace", "necklace"),
+            new("Boots", "boots"),
+            new("Helmet", "helmet")
+        ];
 
-        public ValueTask<IReadOnlyDictionary<string, object>> ProvideAsync(CommandParameter parameter)
+
+        public ValueTask<IEnumerable<DiscordApplicationCommandOptionChoice>> ProvideAsync(CommandParameter parameter)
         {
-            return ValueTask.FromResult(_daysOfTheWeek);
+           return  ValueTask.FromResult<IEnumerable<DiscordApplicationCommandOptionChoice>>(_itemOptions);
         }
     }
 }

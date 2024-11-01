@@ -175,7 +175,7 @@ public class Begin : GeneralCommandClass
 
         DialogueNormalArgument[] dialogueArguments =
         [
-            new DialogueNormalArgument
+            new()
             {
                 DialogueProfile = coachChadProfile,
                 DialogueTexts =
@@ -185,7 +185,7 @@ public class Begin : GeneralCommandClass
                     "Lily will accompany you just for this fight. When you feel like you have gotten the hang of **BATTLE**, click on **FORFEIT!**"
                 ]
             },
-            new DialogueNormalArgument
+            new()
             {
                 DialogueProfile = lilyDialogueProfile,
                 DialogueTexts = [$"Let's give it our all {userData.Name}!"]

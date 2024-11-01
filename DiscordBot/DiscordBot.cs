@@ -209,7 +209,7 @@ public class DiscordBot
             {
                 Timeout = TimeSpan.FromMinutes(2)
             })
-            .UseCommands(commandsExtension =>
+            .UseCommands((serviceProv, commandsExtension) =>
             {
                 var slashCommandProcessor = new SlashCommandProcessor();
                 slashCommandProcessor.AddConverters(typeof(DiscordBot).Assembly);

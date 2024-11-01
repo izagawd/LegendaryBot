@@ -111,7 +111,7 @@ public abstract class Banner
     public abstract string Name { get; }
 
 }
-public enum Choice
+public enum Choice : byte
 {
     FourStarCharacter,  ThreeStarBlessing, FourStarBlessing,
     FiveStar
@@ -484,7 +484,7 @@ public class Summon : GeneralCommandClass
             }
 
             divineShards.Stacks -= DivineShardsNeeded * amount;
-            List<IInventoryEntity> pulledEntities = new List<IInventoryEntity>(amount);
+            List<IInventoryEntity> pulledEntities = new(amount);
 
             foreach (var _ in Enumerable.Range(0,amount))
             {
