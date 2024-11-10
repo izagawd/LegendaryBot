@@ -596,14 +596,14 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     /// <param name="decision"></param>
     public virtual void NonPlayerCharacterAi(ref Character target, ref BattleDecision decision)
     {
-        if ((Ultimate?.CanBeUsedNormally()).GetValueOrDefault(false))
+        if (Ultimate?.CanBeUsedNormally() ?? false)
         {
             decision = BattleDecision.Ultimate;
             target = BasicFunctions.RandomChoice(Ultimate!.GetPossibleTargets());
             return;
         }
 
-        if ((Skill?.CanBeUsedNormally()).GetValueOrDefault(false))
+        if (Skill?.CanBeUsedNormally() ?? false)
         {
             decision = BattleDecision.Skill;
             target = BasicFunctions.RandomChoice(Skill!.GetPossibleTargets());
