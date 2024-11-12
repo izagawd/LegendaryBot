@@ -16,12 +16,4 @@ public class PlayerTeam : Team<PlayerTeamMembership>
         set { }
     }
 
-    public string IncreaseExp(int expToGain)
-    {
-        expToGain = expToGain / Count;
-        var str = "";
-        foreach (var i in this) str += $"{i.IncreaseExp(expToGain)}\n";
-
-        return str;
-    }
 }
