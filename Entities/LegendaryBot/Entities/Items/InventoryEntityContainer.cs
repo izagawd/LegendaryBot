@@ -24,11 +24,12 @@ public abstract class InventoryEntityContainer<TInventoryEntity> : IInventoryEnt
     protected List<TInventoryEntity> List { get; }
     public abstract void MergeItemStacks();
 
-    public virtual IEnumerator<TInventoryEntity> GetEnumerator()
+    public virtual List<TInventoryEntity>.Enumerator GetEnumerator()
     {
         return List.GetEnumerator();
     }
-
+    IEnumerator<TInventoryEntity> IEnumerable<TInventoryEntity>.GetEnumerator() =>
+            GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
