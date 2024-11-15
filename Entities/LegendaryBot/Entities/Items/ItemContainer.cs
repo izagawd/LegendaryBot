@@ -79,6 +79,7 @@ public class ItemContainer : InventoryEntityContainer<Item>
         {
             first = (Item)Activator.CreateInstance(itemType)!;
             first.Stacks = 0;
+            List.Add(first);
         }
         checked
         {
