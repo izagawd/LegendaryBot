@@ -201,7 +201,7 @@ public class DiscordBot
     }
 
 
-    public static async Task StartDiscordBotAsync()
+    public static  Task StartDiscordBotAsync()
     {
         Client = DiscordClientBuilder.CreateDefault(ConfigurationManager.AppSettings[BotTokenToPathUse]!,
                 DiscordIntents.All)
@@ -238,7 +238,7 @@ public class DiscordBot
             .Build();
 
 
-        await Client.ConnectAsync();
+        return Client.ConnectAsync();
         
     }
 
