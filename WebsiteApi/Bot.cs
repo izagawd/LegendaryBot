@@ -32,7 +32,7 @@ public static class Bot
     private static async Task Main(string[] args)
     {
         await DoShitAsync();
-        return;
+        
         if (args.Length > 0 && args[0] == "test-website")
         {
             await Website.StartAsync(args);
