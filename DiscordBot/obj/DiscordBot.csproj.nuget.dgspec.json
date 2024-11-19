@@ -127,15 +127,15 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.0-rc.2.24474.1, )"
+              "version": "[9.0.0, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[9.0.0-rc.2, )"
+              "version": "[9.0.0, )"
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
-              "version": "[9.0.0-rc.2.24473.5, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
@@ -215,7 +215,7 @@
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
-              "version": "[9.0.0-rc.2.24473.5, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
@@ -299,7 +299,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.0-rc.2.24474.1, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
