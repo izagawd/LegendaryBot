@@ -229,7 +229,7 @@
           }
         }
       },
-      "SixLabors.ImageSharp/3.1.5": {
+      "SixLabors.ImageSharp/3.1.6": {
         "type": "package",
         "compile": {
           "lib/net6.0/SixLabors.ImageSharp.dll": {
@@ -712,10 +712,10 @@
         "sixlabors.fonts.nuspec"
       ]
     },
-    "SixLabors.ImageSharp/3.1.5": {
-      "sha512": "lNtlq7dSI/QEbYey+A0xn48z5w4XHSffF8222cC4F4YwTXfEImuiBavQcWjr49LThT/pRmtWJRcqA/PlL+eJ6g==",
+    "SixLabors.ImageSharp/3.1.6": {
+      "sha512": "dHQ5jugF9v+5/LCVHCWVzaaIL6WOehqJy6eju/0VFYFPEj2WtqkGPoEV9EVQP83dHsdoqYaTuWpZdwAd37UwfA==",
       "type": "package",
-      "path": "sixlabors.imagesharp/3.1.5",
+      "path": "sixlabors.imagesharp/3.1.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -724,7 +724,7 @@
         "lib/net6.0/SixLabors.ImageSharp.dll",
         "lib/net6.0/SixLabors.ImageSharp.xml",
         "sixlabors.imagesharp.128.png",
-        "sixlabors.imagesharp.3.1.5.nupkg.sha512",
+        "sixlabors.imagesharp.3.1.6.nupkg.sha512",
         "sixlabors.imagesharp.nuspec"
       ]
     },
@@ -775,7 +775,7 @@
     "net9.0": [
       "DSharpPlus >= 5.0.0-nightly-02402",
       "PublicInfo >= 1.0.0",
-      "SixLabors.ImageSharp >= 3.1.5",
+      "SixLabors.ImageSharp >= 3.1.6",
       "SixLabors.ImageSharp.Drawing >= 2.1.4"
     ]
   },
@@ -832,7 +832,7 @@
           },
           "SixLabors.ImageSharp": {
             "target": "Package",
-            "version": "[3.1.5, )"
+            "version": "[3.1.6, )"
           },
           "SixLabors.ImageSharp.Drawing": {
             "target": "Package",

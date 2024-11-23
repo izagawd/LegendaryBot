@@ -35,10 +35,6 @@
         Success
     }
 
-    ~SnackBar()
-    {
-        _cancellationTokenSource?.Dispose();
-    }
 
 
     // Task to track the currently displaying snackbar
@@ -56,8 +52,12 @@
     public async Task DisplaySnackBarAsync(SnackBarParams @params)
     {
         // Cancel the current snackbar if one is being displayed
-        _cancellationTokenSource?.Cancel();
-        _cancellationTokenSource?.Dispose();
+        if (_cancellationTokenSource is not null)
+        {
+            await _cancellationTokenSource.CancelAsync();
+            _cancellationTokenSource.Dispose();
+        }
+   
         // Create a new cancellation token source for the new snackbar
         _cancellationTokenSource = new CancellationTokenSource();
 

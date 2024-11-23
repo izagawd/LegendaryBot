@@ -11,7 +11,7 @@ namespace DiscordBot.Commands;
 
 public abstract class GeneralCommandClass
 {
-    private static readonly ParameterExpression _userDataParamExpr = Expression.Parameter(typeof(UserData), "j");
+
     private readonly List<long> _occupiedUserDatasIds = new();
 
 
@@ -20,14 +20,6 @@ public abstract class GeneralCommandClass
         DatabaseContext = new PostgreSqlContext();
     }
 
-
-    public IEnumerable<long> OccupiedUserDataIds
-    {
-        get
-        {
-            foreach (var i in _occupiedUserDatasIds) yield return i;
-        }
-    }
 
 
     /// <summary>
@@ -85,21 +77,21 @@ public abstract class GeneralCommandClass
                     .ExecuteUpdateAsync(i
                         => i.SetProperty(j => j.IsOccupied, false));
             }
-
-            await DatabaseContext.DisposeAsync();
-            DatabaseContext = null!;
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw;
         }
+        finally
+        {
+     
+            await DatabaseContext.DisposeAsync();
+        }
+ 
+   
     }
 
-    ~GeneralCommandClass()
-    {
-        DatabaseContext?.Dispose();
-    }
 
 
     /// <summary>
@@ -134,4 +126,6 @@ public abstract class GeneralCommandClass
                     .OriginalValue = gotten.i.Version;
             }
     }
+
+
 }

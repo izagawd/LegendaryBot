@@ -61,7 +61,7 @@ public class DiscordBot
         var text = $"Send this error to my creator\n```{args.Exception}```";
         if (args.CommandObject is GeneralCommandClass commandClass)
             await commandClass.AfterExecutionAsync(args.Context);
-
+    
         DiscordEmbedBuilder? embedBuilder = null;
         await using var dbContext = new PostgreSqlContext();
         var color = (await dbContext.Set<UserData>()
@@ -86,8 +86,8 @@ public class DiscordBot
 
             embedBuilder = Help.GenerateEmbedForCommandFailure(nameToUse);
 
-            embedBuilder?.WithTitle($"You didnt properly use command `{nameToUse}`.\nDetails of `{nameToUse}`\n"
-                                    + embedBuilder.Title);
+            embedBuilder?
+                .WithTitle($"You didnt properly use command `{nameToUse}`.\nDetails of `{nameToUse}`\n{embedBuilder.Title}");
         }
 
 

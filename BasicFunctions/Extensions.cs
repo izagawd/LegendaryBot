@@ -43,16 +43,7 @@ public static class Extensions
         return Color.ParseHex(color.ToString());
     }
 
-    public static void CancelIfNotDisposed(this CancellationTokenSource cancellationTokenSource)
-    {
-        try
-        {
-            cancellationTokenSource.Cancel();
-        }
-        catch (ObjectDisposedException)
-        {
-        }
-    }
+
 
     public static Task CancelIfNotDisposedAsync(this CancellationTokenSource cancellationTokenSource)
     {
@@ -63,7 +54,6 @@ public static class Extensions
         catch (ObjectDisposedException)
         {
             return Task.CompletedTask;
-            ;
         }
     }
 

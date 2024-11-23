@@ -551,18 +551,7 @@ public partial class BattleSimulator
     }
 
 
-    ~BattleSimulator()
-    {
-        // done just in case the game cancellation token source was still here
-        // so it won't be chilling in the heap
-        if (_gameCancellationTokenSource is not null)
-        {
-            _gameCancellationTokenSource.CancelIfNotDisposed();
 
-
-            _gameCancellationTokenSource.Dispose();
-        }
-    }
 
     public void PrepareTeamForBattle(Team team)
     {
