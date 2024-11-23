@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text;
 using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
@@ -36,7 +37,7 @@ public class QuestCommand : GeneralCommandClass
             return;
         }
 
-        var questString = "";
+        var questStringBuilder = new StringBuilder();
         var embed = new DiscordEmbedBuilder()
             .WithUser(author)
             .WithColor(userData.Color)
@@ -57,10 +58,10 @@ public class QuestCommand : GeneralCommandClass
             var preparedString = $"{count}. {i.Title}: {i.Description}.";
             if (i.Completed)
                 preparedString += " (Completed)";
-            questString += $"{preparedString}\n";
+            questStringBuilder.Append($"{preparedString}\n");
             count++;
         }
-
+        
         var questsShouldDisable = userData.Quests.Select(i => i.Completed).ToList();
         while (questsShouldDisable.Count < 4)
             questsShouldDisable.Add(true);
@@ -72,7 +73,7 @@ public class QuestCommand : GeneralCommandClass
         var cancel = new DiscordButtonComponent(DiscordButtonStyle.Danger, "cancel", "CANCEL");
         embed
             .WithTitle("These are your available quests. They refresh at midnight UTC")
-            .WithDescription(questString);
+            .WithDescription(questStringBuilder.ToString());
         DiscordComponent[] comps = [one, two, three, four, cancel];
         await ctx.RespondAsync(new DiscordInteractionResponseBuilder()
             .AddComponents(comps)
