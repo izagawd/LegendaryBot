@@ -1,5 +1,7 @@
 using System.Collections.Concurrent;
 using System.Reflection;
+using System.Text;
+using Microsoft.Extensions.Primitives;
 
 namespace BasicFunctionality;
 /// <summary>
@@ -61,11 +63,12 @@ public static class TypesFunction
 
         if (failedMethods.Any())
         {
-            var zaString =
+            var zaStringBuilder = new StringBuilder(
                 $"Methods should be static, have no parameter, and should return {typeof(IEnumerable<object>)}. objects in the enumerable will be registered as the default of their type.\n" +
-                $"these are the following methods that did not follow the rules: ";
-            foreach (var i in failedMethods) zaString += $"\n{i.Name} from class {i.DeclaringType}";
-            throw new Exception(zaString);
+                $"these are the following methods that did not follow the rules: ");
+                
+            foreach (var i in failedMethods) zaStringBuilder.Append($"\n{i.Name} from class {i.DeclaringType}");
+            throw new Exception(zaStringBuilder.ToString());
         }
     }
 

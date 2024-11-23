@@ -321,7 +321,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
         if (Level >= MaxLevel)
             return new ExperienceGainResult
                 { ExcessExperience = experienceToGain, Text = $"{this} has already reached their max level!" };
-        var expGainText = "";
+  
 
         var levelBefore = Level;
         checked
@@ -337,7 +337,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
             nextLevelExp = GetRequiredExperienceToNextLevel(Level);
         }
 
-        expGainText += $"{Name} gained {experienceToGain} exp";
+        var expGainText = $"{Name} gained {experienceToGain} exp";
         if (levelBefore != Level) expGainText += $", and moved from level {levelBefore} to level {Level}";
         var excessExp = 0;
         if (Experience > nextLevelExp)

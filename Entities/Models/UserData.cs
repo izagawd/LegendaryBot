@@ -110,7 +110,7 @@ public class UserData : ICanBeLeveledUp
         if (AdventurerLevel >= maxLevel)
             return new ExperienceGainResult
                 { ExcessExperience = experienceToGain, Text = "you have already reached max level!" };
-        var expGainText = "";
+        
 
         var levelBefore = AdventurerLevel;
         checked
@@ -126,7 +126,7 @@ public class UserData : ICanBeLeveledUp
             nextLevelEXP = GetRequiredExperienceToNextLevel(AdventurerLevel);
         }
 
-        expGainText += $"you gained {experienceToGain} exp for your adventurer level";
+        var expGainText = $"you gained {experienceToGain} exp for your adventurer level";
         if (levelBefore != AdventurerLevel)
             expGainText += $", and moved from level {levelBefore} to level {AdventurerLevel}";
         var excessExp = 0;

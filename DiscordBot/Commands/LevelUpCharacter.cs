@@ -62,14 +62,13 @@ public partial class CharacterCommand
 
     public static void UpdateEmbed(DiscordEmbedBuilder builder, Character character)
     {
-        var description = $"";
+        var descriptionBuilder = new StringBuilder();
         foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<CharacterExpMaterial>())
-            description += $"{i.Name}: {character.UserData!.Items.GetItemStacks(i.GetType()):N0}\n";
+            descriptionBuilder.Append($"{i.Name}: {character.UserData!.Items.GetItemStacks(i.GetType()):N0}\n");
 
-        if (character.Blessing is not null) description += $"Blessing: {character.Blessing.Name}";
-
-
-        builder.WithDescription(description);
+        if (character.Blessing is not null) descriptionBuilder.Append($"Blessing: {character.Blessing.Name}");
+        
+        builder.WithDescription(descriptionBuilder.ToString());
     }
 
     public static async Task<Image<Rgba32>> GetImageForLevelUpAndAscensionAsync(Character character)

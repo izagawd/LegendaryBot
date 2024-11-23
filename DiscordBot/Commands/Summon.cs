@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Text;
 using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
@@ -303,14 +304,15 @@ public class Summon : GeneralCommandClass
         {
          
                 builder.WithTitle("Current Banners");
-            var bannerString = "";
+            var bannerStringBuilder = new StringBuilder();
             var count = 1;
             foreach (var i in CurrentBanners)
             {
-                bannerString += $"{count++} • {i.Name}\n";
+                bannerStringBuilder
+                    .Append($"{count++} • {i.Name}\n");
             }
 
-            builder.WithDescription(bannerString);
+            builder.WithDescription(bannerStringBuilder.ToString());
             await ctx.RespondAsync(builder);
         }
         else

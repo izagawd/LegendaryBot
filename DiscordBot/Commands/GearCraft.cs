@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Text;
 using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
@@ -148,13 +149,13 @@ public class GearCraft : GeneralCommandClass
   
                     string GenerateMetalStrings()
                     {
-                        var toUse = "";
+                        var toUse = new StringBuilder();
                         foreach (var i in TypesFunction.GetDefaultObjectsAndSubclasses<Metal>())
                         {
-                            toUse += $"{i.Name}: {userData.Items.GetItemStacks(i.GetType()):N0}\n";
+                            toUse.Append($"{i.Name}: {userData.Items.GetItemStacks(i.GetType()):N0}\n");
                         }
             
-                        return toUse;
+                        return toUse.ToString();
                     }
             
                     var select = new DiscordSelectComponent("rarity-select", "SELECT-RARITY",

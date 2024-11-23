@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text;
 using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
@@ -13,6 +14,7 @@ using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
@@ -288,10 +290,14 @@ public class Display : GeneralCommandClass
                 .OrderByDescending(i => i.Rarity)
                 .Select(i =>
                 {
-                    var toReturn = $"**{i.Name} {"\u2b50".MultiplyString((int) i.Rarity)} • Lvl {i.Level}";
+                    var toReturn =
+                        $"**{i.Name} {"\u2b50".MultiplyString((int) i.Rarity)} • Lvl {i.Level}";
                     if (i.Blessing is not null)
-                        toReturn += $" • {i.Blessing.Name}";
-                    toReturn += "**";
+                        toReturn += $" • {i.Blessing.Name}**";
+                    else
+                    {
+                        toReturn += "**";
+                    }
                     return toReturn;
                 }), 10,
             "\n\n", "Characters", userData.Color);
@@ -385,28 +391,25 @@ public class Display : GeneralCommandClass
         foreach (var i in userData.PlayerTeams)
         {
             var equipped = "";
-            var value = "NO TEAM MEMBER";
+            
             if (userData.EquippedPlayerTeam == i)
                 equipped = " (equipped)";
 
-            value = "";
+            var value = new StringBuilder();
             var maxChar = TypesFunction.GetDefaultObject<PlayerTeam>().MaxCharacters;
             for (var j = 1; j <= maxChar; j++)
             {
-                value += $"`Slot {j}: ";
+                value.Append($"`Slot {j}: ");
                 var membership = i.TeamMemberships.FirstOrDefault(k => k.Slot == j);
                 if (membership is null)
-                    value += "EMPTY SLOT";
+                    value.Append("EMPTY SLOT\n");
                 else
-                    value +=
-                        $"{membership.Character.Name} • Lvl {membership.Character.Level}";
-
-                value += "`\n";
+                    value.Append($"{membership.Character.Name} • Lvl {membership.Character.Level}\n");
             }
 
 
             embed.AddField(i.TeamName + equipped,
-                value);
+                value.ToString());
         }
 
 

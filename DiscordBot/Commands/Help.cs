@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text;
 using BasicFunctionality;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Trees;
@@ -127,17 +128,17 @@ public class Help : GeneralCommandClass
             embedToBuild.ClearFields();
             foreach (var j in CommandsThatDoesShit[i])
             {
-                var nameToUse = (j.Parent?.Name ?? "") + $" {j.Name}";
+                var nameToUseBuilder = new StringBuilder((j.Parent?.Name ?? "") + $" {j.Name}") ;
 
                 foreach (var k in j.Parameters)
                 {
                     var questionMark = k.DefaultValue.HasValue ? "?" : "";
-                    nameToUse += $" <{k.Name}{questionMark}>";
+                    nameToUseBuilder.Append($" <{k.Name}{questionMark}>");
                 }
 
                 var otherInfo = j.Description ?? "No Description";
 
-                embedToBuild.AddField(nameToUse, otherInfo);
+                embedToBuild.AddField(nameToUseBuilder.ToString(), otherInfo);
             }
 
             embedsToUse[i] = embedToBuild.Build();
