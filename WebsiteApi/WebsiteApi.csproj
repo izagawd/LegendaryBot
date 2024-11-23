@@ -36,6 +36,10 @@
         <None Remove="BenchmarkDotNet.Artifacts\WebsiteApi.Bot.ToBench-20240928-150935.log" />
         <None Remove="BenchmarkDotNet.Artifacts\WebsiteApi.Bot.ToBench-20240928-150651.log" />
         <None Remove="BenchmarkDotNet.Artifacts\WebsiteApi.Bot.ToBench-20240928-150632.log" />
+        <None Remove="BenchmarkDotNet.Artifacts\WebsiteApi.Bot.Idk-20241118-230857.log" />
+        <None Remove="BenchmarkDotNet.Artifacts\WebsiteApi.Bot.Hey-20241123-022242.log" />
+        <None Remove="BenchmarkDotNet.Artifacts\WebsiteApi.Bot.Hey-20241123-022046.log" />
+        <None Remove="BenchmarkDotNet.Artifacts\WebsiteApi.Bot.Bencher-20241115-030820.log" />
     </ItemGroup>
 
     <ItemGroup>
