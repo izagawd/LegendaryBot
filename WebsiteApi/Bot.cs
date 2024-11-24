@@ -26,9 +26,7 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-        TypesFunction
-            .GetDefaultObjectsAndSubclasses<StatusEffect>()
-            .ForEach(i => i.GetType().Name.Print());
+
 
     }
 
