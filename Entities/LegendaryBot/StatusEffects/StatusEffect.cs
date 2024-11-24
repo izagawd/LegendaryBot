@@ -134,13 +134,14 @@ public abstract class StatusEffect : INameHaver
     {
         foreach (var i in TypesFunction.AllTypes.Where(i => i.IsAssignableTo(typeof(StatusEffect)) && !i.IsAbstract))
         {
-            var created = (StatusEffect)i.GetConstructor(
+            var created = (StatusEffect?)i.GetConstructor(
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null,
-                    [typeof(Character)], null)
+                    [typeof(Character)], null)?
                 .Invoke(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
                     null, [new PlayerMale()],
                     null);
-            yield return created;
+            if(created is not null)
+                yield return created;
         }
     }
 

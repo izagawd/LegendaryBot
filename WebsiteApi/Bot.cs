@@ -3,6 +3,7 @@ using BasicFunctionality;
 using DatabaseManagement;
 using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
+using Entities.LegendaryBot.StatusEffects;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +26,9 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-
+        TypesFunction
+            .GetDefaultObjectsAndSubclasses<StatusEffect>()
+            .ForEach(i => i.GetType().Name.Print());
 
     }
 

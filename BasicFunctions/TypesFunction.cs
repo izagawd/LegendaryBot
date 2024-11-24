@@ -46,8 +46,7 @@ public static class TypesFunction
     {
         List<MethodInfo> failedMethods = [];
         foreach (var i in assembly.GetTypes())
-        foreach (var j in i.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic |
-                                       BindingFlags.Instance)
+        foreach (var j in i.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
                      .Where(j => j.GetCustomAttribute<DefaultObjectRegistererAttribute>() is not null))
         {
             if (j.ReturnType != typeof(IEnumerable<object>) || j.GetParameters().Length > 0 || !j.IsStatic)
