@@ -113,8 +113,8 @@ public class DiscordBot
     {
         if (args.Guild is null) return;
         var permissions = args.Guild.CurrentMember.PermissionsIn(args.Channel);
-        if (!permissions.HasFlag(DiscordPermissions.EmbedLinks) ||
-            !permissions.HasFlag(DiscordPermissions.SendMessages)) return;
+        if (!permissions.HasFlag(DiscordPermission.EmbedLinks) ||
+            !permissions.HasFlag(DiscordPermission.SendMessages)) return;
         if (!args.Author.IsBot)
         {
             var spawnInfo = ChannelSpawnInfoDictionary.GetOrAdd(args.Channel.Id,

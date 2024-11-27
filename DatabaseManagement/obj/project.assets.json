@@ -28,59 +28,60 @@
           }
         }
       },
-      "DSharpPlus/5.0.0-nightly-02402": {
+      "DSharpPlus/5.0.0-nightly-02426": {
         "type": "package",
         "dependencies": {
           "CommunityToolkit.HighPerformance": "8.3.2",
-          "Microsoft.Extensions.Caching.Memory": "8.0.1",
-          "Microsoft.Extensions.Logging": "8.0.1",
-          "Microsoft.Extensions.Logging.Abstractions": "8.0.2",
+          "Microsoft.Extensions.Caching.Memory": "9.0.0",
+          "Microsoft.Extensions.Logging": "9.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.0",
+          "NetEscapades.EnumGenerators": "1.0.0-beta11",
           "Newtonsoft.Json": "13.0.3",
-          "Polly.Core": "8.4.2",
+          "Polly.Core": "8.5.0",
           "Ulid": "1.3.4"
         },
         "compile": {
-          "lib/net8.0/DSharpPlus.dll": {
+          "lib/net9.0/DSharpPlus.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/DSharpPlus.dll": {
+          "lib/net9.0/DSharpPlus.dll": {
             "related": ".xml"
           }
         }
       },
-      "DSharpPlus.Commands/5.0.0-nightly-02402": {
+      "DSharpPlus.Commands/5.0.0-nightly-02426": {
         "type": "package",
         "dependencies": {
-          "DSharpPlus": "5.0.0-nightly-02402",
-          "Microsoft.Extensions.Logging": "8.0.1",
+          "DSharpPlus": "5.0.0-nightly-02426",
+          "Microsoft.Extensions.Logging": "9.0.0",
           "Ulid": "1.3.4"
         },
         "compile": {
-          "lib/net8.0/DSharpPlus.Commands.dll": {
+          "lib/net9.0/DSharpPlus.Commands.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/DSharpPlus.Commands.dll": {
+          "lib/net9.0/DSharpPlus.Commands.dll": {
             "related": ".xml"
           }
         }
       },
-      "DSharpPlus.Interactivity/5.0.0-nightly-02402": {
+      "DSharpPlus.Interactivity/5.0.0-nightly-02426": {
         "type": "package",
         "dependencies": {
           "ConcurrentHashSet": "1.3.0",
-          "DSharpPlus": "5.0.0-nightly-02402"
+          "DSharpPlus": "5.0.0-nightly-02426"
         },
         "compile": {
-          "lib/net8.0/DSharpPlus.Interactivity.dll": {
+          "lib/net9.0/DSharpPlus.Interactivity.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/DSharpPlus.Interactivity.dll": {
+          "lib/net9.0/DSharpPlus.Interactivity.dll": {
             "related": ".xml"
           }
         }
@@ -314,6 +315,22 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
+      "NetEscapades.EnumGenerators/1.0.0-beta11": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/NetEscapades.EnumGenerators.Attributes.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/NetEscapades.EnumGenerators.Attributes.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/_._": {}
+        }
+      },
       "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
@@ -361,7 +378,7 @@
           }
         }
       },
-      "Polly.Core/8.4.2": {
+      "Polly.Core/8.5.0": {
         "type": "package",
         "compile": {
           "lib/net8.0/Polly.Core.dll": {
@@ -499,7 +516,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "DSharpPlus": "5.0.0-nightly-02402",
+          "DSharpPlus": "5.0.0-nightly-02426",
           "PublicInfo": "1.0.0",
           "SixLabors.ImageSharp": "3.1.6",
           "SixLabors.ImageSharp.Drawing": "2.1.4"
@@ -516,9 +533,9 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "BasicFunctions": "1.0.0",
-          "DSharpPlus": "5.0.0-nightly-02402",
-          "DSharpPlus.Commands": "5.0.0-nightly-02402",
-          "DSharpPlus.Interactivity": "5.0.0-nightly-02402",
+          "DSharpPlus": "5.0.0-nightly-02426",
+          "DSharpPlus.Commands": "5.0.0-nightly-02426",
+          "DSharpPlus.Interactivity": "5.0.0-nightly-02426",
           "Microsoft.EntityFrameworkCore": "9.0.0",
           "PublicInfo": "1.0.0"
         },
@@ -588,52 +605,52 @@
         "lib/netstandard2.0/ConcurrentCollections.xml"
       ]
     },
-    "DSharpPlus/5.0.0-nightly-02402": {
-      "sha512": "62Q4V27XJrLjw3i13eW+jiW6zWzLKDL94kIic7Wlbp+30NudWXMy1PV3ao7UBOoESAZ+I0HsBFUXeqKAtOsflw==",
+    "DSharpPlus/5.0.0-nightly-02426": {
+      "sha512": "f/X1djFcCQshrR6vB0ZV/47vnNgzyjk+xYrtCYdOmhYNuQUN4rbvWRCQX/LpxQhO6WUGNtEF12sylFIb3sUFNg==",
       "type": "package",
-      "path": "dsharpplus/5.0.0-nightly-02402",
+      "path": "dsharpplus/5.0.0-nightly-02426",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.5.0.0-nightly-02402.nupkg.sha512",
+        "dsharpplus.5.0.0-nightly-02426.nupkg.sha512",
         "dsharpplus.nuspec",
         "dsharpplus.png",
-        "lib/net8.0/DSharpPlus.dll",
-        "lib/net8.0/DSharpPlus.xml"
+        "lib/net9.0/DSharpPlus.dll",
+        "lib/net9.0/DSharpPlus.xml"
       ]
     },
-    "DSharpPlus.Commands/5.0.0-nightly-02402": {
-      "sha512": "NvPj/67AJEbm3VH6J3qhADthZhUW8Ph0P+lOjWkH7lHNe80WXcj/0m86ykFbd1h9AMftXWjZ67/rx6KylpauIQ==",
+    "DSharpPlus.Commands/5.0.0-nightly-02426": {
+      "sha512": "n4B8ZVZCFHpWt+OOZV53RRc0y8H9XWU0zWGgKEsy/UE3AJKtISSllhpAuHzD4jhrBbcCRSH4C0eqswBSu8wZAg==",
       "type": "package",
-      "path": "dsharpplus.commands/5.0.0-nightly-02402",
+      "path": "dsharpplus.commands/5.0.0-nightly-02426",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.commands.5.0.0-nightly-02402.nupkg.sha512",
+        "dsharpplus.commands.5.0.0-nightly-02426.nupkg.sha512",
         "dsharpplus.commands.nuspec",
         "dsharpplus.png",
-        "lib/net8.0/DSharpPlus.Commands.dll",
-        "lib/net8.0/DSharpPlus.Commands.xml"
+        "lib/net9.0/DSharpPlus.Commands.dll",
+        "lib/net9.0/DSharpPlus.Commands.xml"
       ]
     },
-    "DSharpPlus.Interactivity/5.0.0-nightly-02402": {
-      "sha512": "MWqMVlv0srbWXO0VGXvqgAjBw6q3lsPAeONO7kJOQ4DUKhDbSdrRL3qPg8bt8ZNJc7FjC1oe6RK26ZSjehR7kA==",
+    "DSharpPlus.Interactivity/5.0.0-nightly-02426": {
+      "sha512": "3D5dnaTLFWt+RHfRjVuApofhwyiRB1zSqNfRIBRXTZwiVA+7TrykmYMOUoY+jDnjqtoKeTe5zwPf1BiKNdCGlQ==",
       "type": "package",
-      "path": "dsharpplus.interactivity/5.0.0-nightly-02402",
+      "path": "dsharpplus.interactivity/5.0.0-nightly-02426",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.interactivity.5.0.0-nightly-02402.nupkg.sha512",
+        "dsharpplus.interactivity.5.0.0-nightly-02426.nupkg.sha512",
         "dsharpplus.interactivity.nuspec",
         "dsharpplus.png",
-        "lib/net8.0/DSharpPlus.Interactivity.dll",
-        "lib/net8.0/DSharpPlus.Interactivity.xml"
+        "lib/net9.0/DSharpPlus.Interactivity.dll",
+        "lib/net9.0/DSharpPlus.Interactivity.xml"
       ]
     },
     "Microsoft.EntityFrameworkCore/9.0.0": {
@@ -1014,6 +1031,28 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "NetEscapades.EnumGenerators/1.0.0-beta11": {
+      "sha512": "37btDZQX5OzwUmF6xvqxDb0mRTXi3O/h3nVKjvri2XEwyUnHsY5g43jbPJo8Sp2gxbfJd2lto7fLLQujw5aT5Q==",
+      "type": "package",
+      "path": "netescapades.enumgenerators/1.0.0-beta11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "analyzers/dotnet/roslyn4.11/cs/NetEscapades.EnumGenerators.Attributes.dll",
+        "analyzers/dotnet/roslyn4.11/cs/NetEscapades.EnumGenerators.dll",
+        "analyzers/dotnet/roslyn4.4/cs/NetEscapades.EnumGenerators.Attributes.dll",
+        "analyzers/dotnet/roslyn4.4/cs/NetEscapades.EnumGenerators.dll",
+        "build/NetEscapades.EnumGenerators.props",
+        "build/NetEscapades.EnumGenerators.targets",
+        "lib/net451/NetEscapades.EnumGenerators.Attributes.dll",
+        "lib/net451/NetEscapades.EnumGenerators.Attributes.xml",
+        "lib/netstandard2.0/NetEscapades.EnumGenerators.Attributes.dll",
+        "lib/netstandard2.0/NetEscapades.EnumGenerators.Attributes.xml",
+        "netescapades.enumgenerators.1.0.0-beta11.nupkg.sha512",
+        "netescapades.enumgenerators.nuspec"
+      ]
+    },
     "Newtonsoft.Json/13.0.3": {
       "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
       "type": "package",
@@ -1076,10 +1115,10 @@
         "postgresql.png"
       ]
     },
-    "Polly.Core/8.4.2": {
-      "sha512": "BpE2I6HBYYA5tF0Vn4eoQOGYTYIK1BlF5EXVgkWGn3mqUUjbXAr13J6fZVbp7Q3epRR8yshacBMlsHMhpOiV3g==",
+    "Polly.Core/8.5.0": {
+      "sha512": "VYYMZNitZ85UEhwOKkTQI63WEMvzUqwQc74I2mm8h/DBVAMcBBxqYPni4DmuRtbCwngmuONuK2yBJfWNRKzI+A==",
       "type": "package",
-      "path": "polly.core/8.4.2",
+      "path": "polly.core/8.5.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1100,7 +1139,7 @@
         "lib/netstandard2.0/Polly.Core.xml",
         "package-icon.png",
         "package-readme.md",
-        "polly.core.8.4.2.nupkg.sha512",
+        "polly.core.8.5.0.nupkg.sha512",
         "polly.core.nuspec"
       ]
     },

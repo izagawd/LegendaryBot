@@ -50,7 +50,7 @@
           "dependencies": {
             "DSharpPlus": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02402, )"
+              "version": "[5.0.0-nightly-02426, )"
             },
             "SixLabors.ImageSharp": {
               "target": "Package",
