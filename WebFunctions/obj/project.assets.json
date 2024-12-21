@@ -19,6 +19,7 @@
       "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\WebFunctions\\obj\\",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
         "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],

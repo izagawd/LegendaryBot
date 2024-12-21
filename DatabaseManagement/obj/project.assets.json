@@ -28,7 +28,7 @@
           }
         }
       },
-      "DSharpPlus/5.0.0-nightly-02426": {
+      "DSharpPlus/5.0.0-nightly-02437": {
         "type": "package",
         "dependencies": {
           "CommunityToolkit.HighPerformance": "8.3.2",
@@ -51,10 +51,10 @@
           }
         }
       },
-      "DSharpPlus.Commands/5.0.0-nightly-02426": {
+      "DSharpPlus.Commands/5.0.0-nightly-02437": {
         "type": "package",
         "dependencies": {
-          "DSharpPlus": "5.0.0-nightly-02426",
+          "DSharpPlus": "5.0.0-nightly-02437",
           "Microsoft.Extensions.Logging": "9.0.0",
           "Ulid": "1.3.4"
         },
@@ -69,11 +69,11 @@
           }
         }
       },
-      "DSharpPlus.Interactivity/5.0.0-nightly-02426": {
+      "DSharpPlus.Interactivity/5.0.0-nightly-02437": {
         "type": "package",
         "dependencies": {
           "ConcurrentHashSet": "1.3.0",
-          "DSharpPlus": "5.0.0-nightly-02426"
+          "DSharpPlus": "5.0.0-nightly-02437"
         },
         "compile": {
           "lib/net9.0/DSharpPlus.Interactivity.dll": {
@@ -344,7 +344,7 @@
           }
         }
       },
-      "Npgsql/9.0.1": {
+      "Npgsql/9.0.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
@@ -360,12 +360,12 @@
           }
         }
       },
-      "Npgsql.EntityFrameworkCore.PostgreSQL/9.0.1": {
+      "Npgsql.EntityFrameworkCore.PostgreSQL/9.0.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "[9.0.0, 10.0.0)",
           "Microsoft.EntityFrameworkCore.Relational": "[9.0.0, 10.0.0)",
-          "Npgsql": "9.0.1"
+          "Npgsql": "9.0.2"
         },
         "compile": {
           "lib/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {
@@ -516,7 +516,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "DSharpPlus": "5.0.0-nightly-02426",
+          "DSharpPlus": "5.0.0-nightly-02437",
           "PublicInfo": "1.0.0",
           "SixLabors.ImageSharp": "3.1.6",
           "SixLabors.ImageSharp.Drawing": "2.1.4"
@@ -533,9 +533,9 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "BasicFunctions": "1.0.0",
-          "DSharpPlus": "5.0.0-nightly-02426",
-          "DSharpPlus.Commands": "5.0.0-nightly-02426",
-          "DSharpPlus.Interactivity": "5.0.0-nightly-02426",
+          "DSharpPlus": "5.0.0-nightly-02437",
+          "DSharpPlus.Commands": "5.0.0-nightly-02437",
+          "DSharpPlus.Interactivity": "5.0.0-nightly-02437",
           "Microsoft.EntityFrameworkCore": "9.0.0",
           "PublicInfo": "1.0.0"
         },
@@ -605,48 +605,48 @@
         "lib/netstandard2.0/ConcurrentCollections.xml"
       ]
     },
-    "DSharpPlus/5.0.0-nightly-02426": {
-      "sha512": "f/X1djFcCQshrR6vB0ZV/47vnNgzyjk+xYrtCYdOmhYNuQUN4rbvWRCQX/LpxQhO6WUGNtEF12sylFIb3sUFNg==",
+    "DSharpPlus/5.0.0-nightly-02437": {
+      "sha512": "28PZPXR1rutw3TxHHlSgn5hmgJvigbcqQtQsGlYuhEsA93xWY2/LD99Ghq9e+ZeL/UwZ2xOFDHwCJXkI67b/GQ==",
       "type": "package",
-      "path": "dsharpplus/5.0.0-nightly-02426",
+      "path": "dsharpplus/5.0.0-nightly-02437",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.5.0.0-nightly-02426.nupkg.sha512",
+        "dsharpplus.5.0.0-nightly-02437.nupkg.sha512",
         "dsharpplus.nuspec",
         "dsharpplus.png",
         "lib/net9.0/DSharpPlus.dll",
         "lib/net9.0/DSharpPlus.xml"
       ]
     },
-    "DSharpPlus.Commands/5.0.0-nightly-02426": {
-      "sha512": "n4B8ZVZCFHpWt+OOZV53RRc0y8H9XWU0zWGgKEsy/UE3AJKtISSllhpAuHzD4jhrBbcCRSH4C0eqswBSu8wZAg==",
+    "DSharpPlus.Commands/5.0.0-nightly-02437": {
+      "sha512": "A2u06Q5rP/lq08MA5GMChLFuEIHWw7udgw37Ss78vOKG+EJ/M7TE9ZTC52/mLyfkQsrQxtXwEXOuf1Fu7NbGIA==",
       "type": "package",
-      "path": "dsharpplus.commands/5.0.0-nightly-02426",
+      "path": "dsharpplus.commands/5.0.0-nightly-02437",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.commands.5.0.0-nightly-02426.nupkg.sha512",
+        "dsharpplus.commands.5.0.0-nightly-02437.nupkg.sha512",
         "dsharpplus.commands.nuspec",
         "dsharpplus.png",
         "lib/net9.0/DSharpPlus.Commands.dll",
         "lib/net9.0/DSharpPlus.Commands.xml"
       ]
     },
-    "DSharpPlus.Interactivity/5.0.0-nightly-02426": {
-      "sha512": "3D5dnaTLFWt+RHfRjVuApofhwyiRB1zSqNfRIBRXTZwiVA+7TrykmYMOUoY+jDnjqtoKeTe5zwPf1BiKNdCGlQ==",
+    "DSharpPlus.Interactivity/5.0.0-nightly-02437": {
+      "sha512": "CvpsDnBX0KTPdvGIcoSebdGjcCwr0c79WAbhAB+tBcdA3LdrY3yTDFA0ojAdYcUvIBkYIgQfcRjBeV6jJY+urg==",
       "type": "package",
-      "path": "dsharpplus.interactivity/5.0.0-nightly-02426",
+      "path": "dsharpplus.interactivity/5.0.0-nightly-02437",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.interactivity.5.0.0-nightly-02426.nupkg.sha512",
+        "dsharpplus.interactivity.5.0.0-nightly-02437.nupkg.sha512",
         "dsharpplus.interactivity.nuspec",
         "dsharpplus.png",
         "lib/net9.0/DSharpPlus.Interactivity.dll",
@@ -1083,10 +1083,10 @@
         "packageIcon.png"
       ]
     },
-    "Npgsql/9.0.1": {
-      "sha512": "aZrXuBUUjRnvjoS4Lq0ZPYe3pnzAfK7TroGNGVpo4FCMBW1ypD/XfTTYjXpeRI8xcX5Otiv535Dy2jQWi98oeA==",
+    "Npgsql/9.0.2": {
+      "sha512": "hCbO8box7i/XXiTFqCJ3GoowyLqx3JXxyrbOJ6om7dr+eAknvBNhhUHeJVGAQo44sySZTfdVffp4BrtPeLZOAA==",
       "type": "package",
-      "path": "npgsql/9.0.1",
+      "path": "npgsql/9.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1095,22 +1095,22 @@
         "lib/net6.0/Npgsql.xml",
         "lib/net8.0/Npgsql.dll",
         "lib/net8.0/Npgsql.xml",
-        "npgsql.9.0.1.nupkg.sha512",
+        "npgsql.9.0.2.nupkg.sha512",
         "npgsql.nuspec",
         "postgresql.png"
       ]
     },
-    "Npgsql.EntityFrameworkCore.PostgreSQL/9.0.1": {
-      "sha512": "nN9Tjg73Edr4oBhNkBsfHBduNUlDFty1gIX0Ztp0np82ElSCiEcwRuN11Kv4kx2H9VDQaEeMwWAIym5aVsgVyg==",
+    "Npgsql.EntityFrameworkCore.PostgreSQL/9.0.2": {
+      "sha512": "cYdOGplIvr9KgsG8nJ8xnzBTImeircbgetlzS1OmepS5dAQW6PuGpVrLOKBNEwEvGYZPsV8037X5vZ/Dmpwz7Q==",
       "type": "package",
-      "path": "npgsql.entityframeworkcore.postgresql/9.0.1",
+      "path": "npgsql.entityframeworkcore.postgresql/9.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
         "lib/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll",
         "lib/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.xml",
-        "npgsql.entityframeworkcore.postgresql.9.0.1.nupkg.sha512",
+        "npgsql.entityframeworkcore.postgresql.9.0.2.nupkg.sha512",
         "npgsql.entityframeworkcore.postgresql.nuspec",
         "postgresql.png"
       ]
@@ -1327,7 +1327,7 @@
     "net9.0": [
       "Entities >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 9.0.0",
-      "Npgsql.EntityFrameworkCore.PostgreSQL >= 9.0.1",
+      "Npgsql.EntityFrameworkCore.PostgreSQL >= 9.0.2",
       "System.Configuration.ConfigurationManager >= 9.0.0"
     ]
   },
@@ -1343,6 +1343,7 @@
       "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DatabaseManagement\\obj\\",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
         "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
@@ -1384,7 +1385,7 @@
           },
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
-            "version": "[9.0.1, )"
+            "version": "[9.0.2, )"
           },
           "System.Configuration.ConfigurationManager": {
             "target": "Package",

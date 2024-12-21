@@ -13,6 +13,7 @@
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BasicFunctions\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
@@ -50,7 +51,7 @@
           "dependencies": {
             "DSharpPlus": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02426, )"
+              "version": "[5.0.0-nightly-02437, )"
             },
             "SixLabors.ImageSharp": {
               "target": "Package",
@@ -90,6 +91,7 @@
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],

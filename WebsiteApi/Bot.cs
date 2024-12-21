@@ -1,6 +1,9 @@
 ﻿using System.Diagnostics;
 using BasicFunctionality;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
 using DatabaseManagement;
+using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 using Entities.LegendaryBot.Entities.Items;
 using Entities.LegendaryBot.Entities.Items.ExpIncreaseMaterial;
 using Entities.LegendaryBot.StatusEffects;
@@ -18,6 +21,28 @@ public static class Bot
         Process.GetCurrentProcess().Kill();
     }
 
+    
+
+    [MemoryDiagnoser(false)]
+    public class ToBench
+    {
+        public static object kk;
+
+        struct kk2
+        {
+            public unsafe fixed byte kk[30];
+        }
+        class Bruh
+        {
+            private kk2 k;
+        }
+        [Benchmark]
+        public void ToBenchh()
+        {
+            kk = new Bruh();
+        }
+    }
+
 
     public static void DbLog(string zaLog)
     {
@@ -26,7 +51,7 @@ public static class Bot
 
     private static async Task DoShitAsync()
     {
-
+        
 
     }
 

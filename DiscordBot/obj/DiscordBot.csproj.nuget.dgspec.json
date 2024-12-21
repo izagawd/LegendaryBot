@@ -13,6 +13,7 @@
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\BasicFunctions\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
@@ -50,7 +51,7 @@
           "dependencies": {
             "DSharpPlus": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02426, )"
+              "version": "[5.0.0-nightly-02437, )"
             },
             "SixLabors.ImageSharp": {
               "target": "Package",
@@ -90,6 +91,7 @@
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DatabaseManagement\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
@@ -131,7 +133,7 @@
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.2, )"
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
@@ -167,6 +169,7 @@
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\DiscordBot\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
@@ -207,11 +210,11 @@
           "dependencies": {
             "DSharpPlus": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02426, )"
+              "version": "[5.0.0-nightly-02437, )"
             },
             "DSharpPlus.Commands": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02426, )"
+              "version": "[5.0.0-nightly-02437, )"
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
@@ -247,6 +250,7 @@
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\Entities\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
@@ -287,15 +291,15 @@
           "dependencies": {
             "DSharpPlus": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02426, )"
+              "version": "[5.0.0-nightly-02437, )"
             },
             "DSharpPlus.Commands": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02426, )"
+              "version": "[5.0.0-nightly-02437, )"
             },
             "DSharpPlus.Interactivity": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02426, )"
+              "version": "[5.0.0-nightly-02437, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -331,6 +335,7 @@
         "packagesPath": "C:\\Users\\theiz\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\PublicInfo\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\theiz\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
