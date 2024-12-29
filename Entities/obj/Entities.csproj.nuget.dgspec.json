@@ -51,7 +51,7 @@
           "dependencies": {
             "DSharpPlus": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02437, )"
+              "version": "[5.0.0-nightly-02439, )"
             },
             "SixLabors.ImageSharp": {
               "target": "Package",
@@ -132,15 +132,15 @@
           "dependencies": {
             "DSharpPlus": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02437, )"
+              "version": "[5.0.0-nightly-02439, )"
             },
             "DSharpPlus.Commands": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02437, )"
+              "version": "[5.0.0-nightly-02439, )"
             },
             "DSharpPlus.Interactivity": {
               "target": "Package",
-              "version": "[5.0.0-nightly-02437, )"
+              "version": "[5.0.0-nightly-02439, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

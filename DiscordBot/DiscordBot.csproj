@@ -13,8 +13,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02437" />
-        <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02437" />
+        <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02439" />
+        <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02439" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.0" />
     </ItemGroup>
 

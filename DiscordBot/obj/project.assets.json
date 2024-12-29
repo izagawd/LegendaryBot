@@ -28,7 +28,7 @@
           }
         }
       },
-      "DSharpPlus/5.0.0-nightly-02437": {
+      "DSharpPlus/5.0.0-nightly-02439": {
         "type": "package",
         "dependencies": {
           "CommunityToolkit.HighPerformance": "8.3.2",
@@ -51,10 +51,10 @@
           }
         }
       },
-      "DSharpPlus.Commands/5.0.0-nightly-02437": {
+      "DSharpPlus.Commands/5.0.0-nightly-02439": {
         "type": "package",
         "dependencies": {
-          "DSharpPlus": "5.0.0-nightly-02437",
+          "DSharpPlus": "5.0.0-nightly-02439",
           "Microsoft.Extensions.Logging": "9.0.0",
           "Ulid": "1.3.4"
         },
@@ -69,11 +69,11 @@
           }
         }
       },
-      "DSharpPlus.Interactivity/5.0.0-nightly-02437": {
+      "DSharpPlus.Interactivity/5.0.0-nightly-02439": {
         "type": "package",
         "dependencies": {
           "ConcurrentHashSet": "1.3.0",
-          "DSharpPlus": "5.0.0-nightly-02437"
+          "DSharpPlus": "5.0.0-nightly-02439"
         },
         "compile": {
           "lib/net9.0/DSharpPlus.Interactivity.dll": {
@@ -516,7 +516,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "DSharpPlus": "5.0.0-nightly-02437",
+          "DSharpPlus": "5.0.0-nightly-02439",
           "PublicInfo": "1.0.0",
           "SixLabors.ImageSharp": "3.1.6",
           "SixLabors.ImageSharp.Drawing": "2.1.4"
@@ -549,9 +549,9 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "BasicFunctions": "1.0.0",
-          "DSharpPlus": "5.0.0-nightly-02437",
-          "DSharpPlus.Commands": "5.0.0-nightly-02437",
-          "DSharpPlus.Interactivity": "5.0.0-nightly-02437",
+          "DSharpPlus": "5.0.0-nightly-02439",
+          "DSharpPlus.Commands": "5.0.0-nightly-02439",
+          "DSharpPlus.Interactivity": "5.0.0-nightly-02439",
           "Microsoft.EntityFrameworkCore": "9.0.0",
           "PublicInfo": "1.0.0"
         },
@@ -621,48 +621,48 @@
         "lib/netstandard2.0/ConcurrentCollections.xml"
       ]
     },
-    "DSharpPlus/5.0.0-nightly-02437": {
-      "sha512": "28PZPXR1rutw3TxHHlSgn5hmgJvigbcqQtQsGlYuhEsA93xWY2/LD99Ghq9e+ZeL/UwZ2xOFDHwCJXkI67b/GQ==",
+    "DSharpPlus/5.0.0-nightly-02439": {
+      "sha512": "IZ3utLQkwgNd0kOSEDZMSidSiGMt01puQ7HGQBqfeJf1V1IHt96DvEqQqwmT5f4I7O5biKSkMfUPu08GbovsuA==",
       "type": "package",
-      "path": "dsharpplus/5.0.0-nightly-02437",
+      "path": "dsharpplus/5.0.0-nightly-02439",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.5.0.0-nightly-02437.nupkg.sha512",
+        "dsharpplus.5.0.0-nightly-02439.nupkg.sha512",
         "dsharpplus.nuspec",
         "dsharpplus.png",
         "lib/net9.0/DSharpPlus.dll",
         "lib/net9.0/DSharpPlus.xml"
       ]
     },
-    "DSharpPlus.Commands/5.0.0-nightly-02437": {
-      "sha512": "A2u06Q5rP/lq08MA5GMChLFuEIHWw7udgw37Ss78vOKG+EJ/M7TE9ZTC52/mLyfkQsrQxtXwEXOuf1Fu7NbGIA==",
+    "DSharpPlus.Commands/5.0.0-nightly-02439": {
+      "sha512": "ko5tkPCk+aTsqpZgqZ7k5rAbLoiC+WcxPnz2deAjdNEMvIPVTWXqRm+C7TVbL+YEb400mJgETdOqbkaKebIKhw==",
       "type": "package",
-      "path": "dsharpplus.commands/5.0.0-nightly-02437",
+      "path": "dsharpplus.commands/5.0.0-nightly-02439",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.commands.5.0.0-nightly-02437.nupkg.sha512",
+        "dsharpplus.commands.5.0.0-nightly-02439.nupkg.sha512",
         "dsharpplus.commands.nuspec",
         "dsharpplus.png",
         "lib/net9.0/DSharpPlus.Commands.dll",
         "lib/net9.0/DSharpPlus.Commands.xml"
       ]
     },
-    "DSharpPlus.Interactivity/5.0.0-nightly-02437": {
-      "sha512": "CvpsDnBX0KTPdvGIcoSebdGjcCwr0c79WAbhAB+tBcdA3LdrY3yTDFA0ojAdYcUvIBkYIgQfcRjBeV6jJY+urg==",
+    "DSharpPlus.Interactivity/5.0.0-nightly-02439": {
+      "sha512": "5dpp1LgQ3DDqBy7k1iK1uw4rn0KibCANStcxvTK4otMiyDjC9YikXzrXVT6k05fs/WZnr0UBgL0PwDLsH1n0Ow==",
       "type": "package",
-      "path": "dsharpplus.interactivity/5.0.0-nightly-02437",
+      "path": "dsharpplus.interactivity/5.0.0-nightly-02439",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.interactivity.5.0.0-nightly-02437.nupkg.sha512",
+        "dsharpplus.interactivity.5.0.0-nightly-02439.nupkg.sha512",
         "dsharpplus.interactivity.nuspec",
         "dsharpplus.png",
         "lib/net9.0/DSharpPlus.Interactivity.dll",
@@ -1346,8 +1346,8 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "DSharpPlus >= 5.0.0-nightly-02437",
-      "DSharpPlus.Commands >= 5.0.0-nightly-02437",
+      "DSharpPlus >= 5.0.0-nightly-02439",
+      "DSharpPlus.Commands >= 5.0.0-nightly-02439",
       "DatabaseManagement >= 1.0.0",
       "PublicInfo >= 1.0.0",
       "System.Configuration.ConfigurationManager >= 9.0.0"
@@ -1406,11 +1406,11 @@
         "dependencies": {
           "DSharpPlus": {
             "target": "Package",
-            "version": "[5.0.0-nightly-02437, )"
+            "version": "[5.0.0-nightly-02439, )"
           },
           "DSharpPlus.Commands": {
             "target": "Package",
-            "version": "[5.0.0-nightly-02437, )"
+            "version": "[5.0.0-nightly-02439, )"
           },
           "System.Configuration.ConfigurationManager": {
             "target": "Package",

@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "djpgAwOcUWs=",
+  "dgSpecHash": "bi/qsU9D67A=",
   "success": true,
   "projectFilePath": "C:\\Users\\theiz\\Documents\\coding\\LegendaryBot\\Entities\\Entities.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theiz\\.nuget\\packages\\communitytoolkit.highperformance\\8.3.2\\communitytoolkit.highperformance.8.3.2.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\concurrenthashset\\1.3.0\\concurrenthashset.1.3.0.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\dsharpplus\\5.0.0-nightly-02437\\dsharpplus.5.0.0-nightly-02437.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\dsharpplus.commands\\5.0.0-nightly-02437\\dsharpplus.commands.5.0.0-nightly-02437.nupkg.sha512",
-    "C:\\Users\\theiz\\.nuget\\packages\\dsharpplus.interactivity\\5.0.0-nightly-02437\\dsharpplus.interactivity.5.0.0-nightly-02437.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\dsharpplus\\5.0.0-nightly-02439\\dsharpplus.5.0.0-nightly-02439.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\dsharpplus.commands\\5.0.0-nightly-02439\\dsharpplus.commands.5.0.0-nightly-02439.nupkg.sha512",
+    "C:\\Users\\theiz\\.nuget\\packages\\dsharpplus.interactivity\\5.0.0-nightly-02439\\dsharpplus.interactivity.5.0.0-nightly-02439.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.0\\microsoft.entityframeworkcore.9.0.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.0\\microsoft.entityframeworkcore.abstractions.9.0.0.nupkg.sha512",
     "C:\\Users\\theiz\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\9.0.0\\microsoft.entityframeworkcore.analyzers.9.0.0.nupkg.sha512",
