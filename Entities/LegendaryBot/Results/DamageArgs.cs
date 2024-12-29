@@ -15,6 +15,10 @@ public class DamageArgs
     }
 
     public DamageSource DamageSource { get; }
+    /// <summary>
+    /// Fixed damahge means that the damag ewill be done exactly as it is. eg if the damage is 2000, it will do exactly 2000.
+    /// It will ignore defense and stuff
+    /// </summary>
     public bool IsFixedDamage { get; init; } = false;
 
     /// <summary>
