@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Entities.LegendaryBot;
 
+
+/// <summary>
+/// A reaction to a quote by a user (it is either a like or dislike)
+/// </summary>
 public class QuoteReaction
 {
     public long Id { get; set; }
@@ -42,6 +46,9 @@ public class QuoteDatabaseConfiguration : IEntityTypeConfiguration<Quote>
     }
 }
 
+/// <summary>
+/// A quote sent by a user
+/// </summary>
 public class Quote
 {
     public Quote(string quote) : this()

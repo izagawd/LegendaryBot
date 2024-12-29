@@ -13,6 +13,9 @@ public enum Tier : byte
 
 public static class TierExtensions
 {
+    /// <summary>
+    /// Converts tier into rarity
+    /// </summary>
     public static Rarity ToRarity(this Tier tier)
     {
         if (tier == Tier.Divine)

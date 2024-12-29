@@ -3,6 +3,9 @@ using Entities.LegendaryBot.Entities.BattleEntities.Characters;
 
 namespace Entities.LegendaryBot.Results;
 
+/// <summary>
+/// Result returned after a battle has concluded
+/// </summary>
 public class BattleResult
 {
     public bool Stopped { get; init; }

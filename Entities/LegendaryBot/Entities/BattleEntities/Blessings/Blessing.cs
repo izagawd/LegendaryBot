@@ -23,6 +23,11 @@ public class BlessingDatabaseConfiguration : IEntityTypeConfiguration<Blessing>
     }
 }
 
+
+
+/// <summary>
+/// An equipment that can grant a character special effects
+/// </summary>
 public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
 {
     private static readonly ConcurrentDictionary<int, Blessing> _cachedDefaultBlessingsTypeIds = [];
@@ -51,6 +56,9 @@ public abstract class Blessing : IInventoryEntity, IGuidPrimaryIdHaver
     
 
 
+    /// <summary>
+    /// A discriminator used for the database
+    /// </summary>
     public abstract int TypeId { get; protected init; }
     public Type TypeGroup => typeof(Blessing);
     public DateTime DateAcquired { get; set; } = DateTime.UtcNow;

@@ -7,7 +7,7 @@ namespace Entities.LegendaryBot.BattleSimulatorStuff;
 public partial class BattleSimulator
 {
     /// <summary>
-    ///     Compiles possible battle event methods and caches them, so calling them will not take much performance cost
+    /// Compiles possible battle event methods and caches them, so calling them will not take much performance cost
     /// </summary>
     private static void SetupBattleEventDelegatorStuff()
     {

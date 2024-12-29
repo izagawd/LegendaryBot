@@ -2,6 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entities.Models;
 
+/// <summary>
+/// A class used to keep track of how many summons the user has made
+/// </summary>
 public abstract class SummonsTracker
 {
     [Timestamp] public uint Version { get; private set; }

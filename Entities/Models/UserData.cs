@@ -20,8 +20,14 @@ public enum Gender : byte
     Female
 }
 
+/// <summary>
+/// Class representing the data of a user
+/// </summary>
 public class UserData : ICanBeLeveledUp
 {
+    /// <summary>
+    /// The quotes the user has posted
+    /// </summary>
     [NotMapped] private List<Quote>? _quotes;
 
     public UserData(ulong discordId) : this()
@@ -35,16 +41,34 @@ public class UserData : ICanBeLeveledUp
     }
 
 
+    /// <summary>
+    /// The gender of the user (this will affect how their player class looks like)
+    /// </summary>
     public Gender Gender { get; set; }
+    
+    
+    /// <summary>
+    /// The name of the player
+    /// </summary>
     public string Name { get; set; } = "Aether";
 
 
     public long Id { get; set; }
 
+    /// <summary>
+    /// The team the user has currently equipped. This team will be used everytime the user
+    /// enters combat
+    /// </summary>
     public PlayerTeam? EquippedPlayerTeam { get; set; }
 
+    /// <summary>
+    /// All the teams the player has
+    /// </summary>
     public List<PlayerTeam> PlayerTeams { get; set; } = [];
 
+    /// <summary>
+    /// The reactions a player has given to quates (it is either a like or a dislike)
+    /// </summary>
     public List<QuoteReaction> QuoteReactions { get; set; } = [];
 
     /// <summary>
@@ -60,43 +84,82 @@ public class UserData : ICanBeLeveledUp
     public List<Quest> Quests { get; } = new();
 
     /// <summary>
-    ///     This is used to refresh quest
+    /// This is used to refresh quest
     /// </summary>
     public DateTime LastTimeQuestWasChecked { get; set; } = DateTime.UtcNow.AddDays(-1);
 
     public List<Quote> Quotes => _quotes ??= new List<Quote>();
+    
+    
+    /// <summary>
+    /// Whether or not the user is occupied. Will be true if EG: the user is fighting or
+    /// editing equipment
+    /// </summary>
     public bool IsOccupied { get; set; }
 
 
     public Tier Tier { get; set; } = Tier.Unranked;
 
+    /// <summary>
+    /// The discord id of the user
+    /// </summary>
     public ulong DiscordId { get; set; }
 
+    /// <summary>
+    /// This can be seen as their overall level in the game
+    /// </summary>
     public int AdventurerLevel { get; set; } = 1;
+    
+    /// <summary>
+    /// This color will be used for the embed messages the discord bot sends relating
+    /// to this user
+    /// </summary>
     public DiscordColor Color { get; set; } = DiscordColor.Green;
     public string Language { get; set; } = "english";
 
+    
+    
+    /// <summary>
+    /// Abstraction that combines eberything the user has (eg items, blessings, characters, etc)
+    /// </summary>
     [NotMapped] public UserDataInventoryCombined Inventory { get; }
 
+    
+    
+    /// <summary>
+    /// A collection of all the items the user has
+    /// </summary>
     public ItemContainer Items { get; } = new();
 
 
     [Timestamp] public uint Version { get; set; }
-
+    
+    /// <summary>
+    /// A collection of all the gears the user has
+    /// </summary>
     public List<Gear> Gears { get; } = new();
+    /// <summary>
+    /// A collection of all the characters the user has
+    /// </summary>
     public List<Character> Characters { get; } = new();
-
+    /// <summary>
+    /// A collection of all the bkessings the user has
+    /// </summary>
 
     public List<Blessing> Blessings { get; } = new();
 
-
+    /// <summary>
+    /// The experience that would be used to increase their game level
+    /// </summary>
     public int Experience { get; protected set; }
 
     public int GetRequiredExperienceToNextLevel(int level)
     {
         return BattleFunctionality.NextLevelFormula(level) * 10;
     }
-
+    /// <summary>
+    /// Collection of trackers that would help in keeping track fo all the summons the user has done
+    /// </summary>
     public List<SummonsTracker> SummonsTrackers { get; set; }
     public int GetRequiredExperienceToNextLevel()
     {
@@ -139,7 +202,7 @@ public class UserData : ICanBeLeveledUp
 
 
     /// <summary>
-    ///     Receives rewards
+    /// Receives rewards
     /// </summary>
     /// <param name="userDataQueryable"></param>
     /// <param name="rewards">the rewards</param>
@@ -160,7 +223,7 @@ public class UserData : ICanBeLeveledUp
     }
 
     /// <summary>
-    ///     Receives rewards
+    ///  Receives rewards
     /// </summary>
     /// <param name="userDataQueryable"></param>
     /// <param name="rewards">the rewards</param>

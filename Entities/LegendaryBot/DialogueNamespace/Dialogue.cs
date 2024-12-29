@@ -7,7 +7,7 @@ using Entities.LegendaryBot.Results;
 namespace Entities.LegendaryBot.DialogueNamespace;
 
 /// <summary>
-///     Creates dialogue of a character
+/// Creates dialogue, like  mini story
 /// </summary>
 public class Dialogue
 {

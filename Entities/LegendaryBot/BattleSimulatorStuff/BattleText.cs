@@ -1,5 +1,8 @@
 ﻿namespace Entities.LegendaryBot.BattleSimulatorStuff;
 
+/// <summary>
+/// Class that will represent text that would be sent for battle
+/// </summary>
 public class BattleText
 {
     public BattleText(string text)
@@ -11,6 +14,9 @@ public class BattleText
     {
     }
 
+    /// <summary>
+    /// The battle text that will be shown
+    /// </summary>
     public virtual string Text { get; } = null!;
 
     public static implicit operator BattleText(string text)
@@ -44,7 +50,7 @@ public class BattleText
     }
 
     /// <summary>
-    ///     This comes before the argument in the slot
+    /// This comes before the argument in the slot. it is intended to reduce the amoint of text sent on discord
     /// </summary>
     public virtual BattleText? Merge(BattleText battleTextInstance)
     {

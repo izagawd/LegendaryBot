@@ -7,6 +7,10 @@ using Entities.LegendaryBot.Entities.Items;
 
 namespace Entities.Models;
 
+/// <summary>
+/// An abstraction to combine all entities a user has (items, character, blessings, etc)
+/// for easier coding
+/// </summary>
 public class UserDataInventoryCombined : IInventoryEntityContainer<IInventoryEntity>
 {
     private readonly UserData _userData;

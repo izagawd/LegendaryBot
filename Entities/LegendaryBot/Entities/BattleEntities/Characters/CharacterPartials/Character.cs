@@ -19,9 +19,7 @@ using StatusEffects_Barrier = Entities.LegendaryBot.StatusEffects.Barrier;
 namespace Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials;
 
 /// <summary>
-///     Don't forget to load the character with LoadTeamGearWithPlayerDataAsync before using it in combat.
-///     Characters can also be loaded at once if they are in a CharacterTeam and LoadTeamGearWithPlayerDataAsync is called
-///     from the CharacterTeam
+/// An entity that is used for combat
 /// </summary>
 public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGuidPrimaryIdHaver
 {
@@ -29,6 +27,9 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     public static readonly Exception NoBattleExc = new("Character is not in battle");
 
+    /// <summary>
+    /// Status effects currently applied to the character
+    /// </summary>
 
     private readonly HashSet<StatusEffect> _statusEffects = [];
 
@@ -42,6 +43,11 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
 
     public const int MaxDivineEcho = 6;
+    
+    
+    /// <summary>
+    /// Gotten by getting duplicate characters. the higher this is, the more some stats of the character
+    /// </summary>
     public int DivineEcho
     {
         get => _divineEcho;
@@ -72,6 +78,9 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     [NotMapped]
     public virtual bool UsesSuperPoints => false;
 
+    /// <summary>
+    /// Super points can be used for many things. it depends on the character
+    /// </summary>
     [NotMapped] public int SuperPoints { get; set; }
 
     public virtual bool IsInStandardBanner => Rarity != Rarity.FiveStar;
@@ -114,6 +123,12 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     [NotMapped] public Team? BattleTeam { get; set; }
 
+    
+    
+    /// <summary>
+    /// once combat readiness reaches 100%, the character can take their turn. it increases
+    /// every turn absed on their speed
+    /// </summary>
     [NotMapped]
     public float CombatReadiness
     {
@@ -270,7 +285,7 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
 
     [NotMapped] public Ultimate? Ultimate { get; protected set; }
 
-
+    
     [NotMapped] public Skill? Skill { get; protected set; }
 
     /// <summary>
@@ -360,9 +375,15 @@ public abstract partial class Character : IInventoryEntity, ICanBeLeveledUp, IGu
     public long Id { get; set; }
 
 
+    /// <summary>
+    /// A discriminator used by the database
+    /// </summary>
     public abstract int TypeId { get; protected init; }
 
 
+    /// <summary>
+    /// User that owns the character
+    /// </summary>
     public UserData? UserData { get; set; }
     public long UserDataId { get; set; }
 

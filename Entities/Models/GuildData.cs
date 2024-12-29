@@ -12,6 +12,9 @@ public class GuildDataDatabaseConfig : IEntityTypeConfiguration<GuildData>
     }
 }
 
+/// <summary>
+/// For now, this class has no use
+/// </summary>
 public class GuildData
 {
     [Timestamp] public uint Version { get; private set; }

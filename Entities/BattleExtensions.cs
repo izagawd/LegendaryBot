@@ -18,7 +18,7 @@ public static class BattleExtensions
     }
 
     /// <summary>
-    ///     Note: this also includes their gear stats
+    /// Note: this also includes their gear stats
     /// </summary>
     public static IQueryable<UserData> IncludeTeamWithGears
         (this IQueryable<UserData> queryable)

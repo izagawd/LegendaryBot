@@ -3,6 +3,9 @@ using Entities.LegendaryBot.Results;
 
 namespace Entities.LegendaryBot.Moves;
 
+/// <summary>
+/// A move that can be used as long as the character wants
+/// </summary>
 public abstract class BasicAttack : Move
 {
     protected BasicAttack(Character user) : base(user)

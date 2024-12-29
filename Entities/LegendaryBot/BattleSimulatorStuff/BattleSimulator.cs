@@ -87,7 +87,7 @@ public partial class BattleSimulator
         SetupBattleEventDelegatorStuff();
     }
     /// <summary>
-    ///     Creates a new battle between two teams
+    /// Creates a new battle between two teams
     /// </summary>
     public BattleSimulator(Team team1, Team team2)
     {
@@ -95,6 +95,9 @@ public partial class BattleSimulator
         Team2 = team2;
     }
 
+    /// <summary>
+    /// Gets all the teams involved in the battle
+    /// </summary>
     public IEnumerable<Team> Teams
     {
         get
@@ -105,13 +108,13 @@ public partial class BattleSimulator
     }
 
     /// <summary>
-    ///     The character who is currently taking their turn
+    /// The character who is currently taking their turn
     /// </summary>
     public Character ActiveCharacter { get; protected set; } = null!;
 
 
     /// <summary>
-    ///     All the characters in the battle
+    /// All the characters in the battle
     /// </summary>
     public IEnumerable<Character> Characters => Team1.Union(Team2);
 
@@ -150,13 +153,19 @@ public partial class BattleSimulator
         Team2 = team2;
     }
 
+    /// <summary>
+    /// How many turns have passed in the battle
+    /// </summary>
     public int Turn { get; set; }
 
+    /// <summary>
+    /// How long battle should wait for player input before making them instantly lose
+    /// </summary>
     public TimeSpan TimeOutTimeSpan { get; set; } = TimeSpan.FromMinutes(1.5);
 
     /// <summary>
-    ///     How long it will take for AI to perform their attack when its their turn, and for some other stuff,
-    ///     <br /> like when a character cant move, it will be the delay until the next turn is processed, probably
+    ///  How long it will take for AI to perform their attack when its their turn, and also
+    ///  the delay until the next turn  if the current turn taker can't do anything (E.G they are stunned)
     /// </summary>
     public int WaitDelay { get; set; } = 5000;
 
@@ -250,6 +259,10 @@ public partial class BattleSimulator
     }
 
 
+    /// <summary>
+    /// Gets all entities conneted to the battle
+    /// </summary>
+    /// <returns></returns>
     public IEnumerable<object> GetConnectedEntities()
     {
         yield return this;
@@ -262,7 +275,7 @@ public partial class BattleSimulator
     }
 
     /// <summary>
-    ///     Used to get entities connected to this battle simulator
+    ///  Used to get entities connected to this battle simulator
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
@@ -308,7 +321,7 @@ public partial class BattleSimulator
 
 
     /// <summary>
-    ///     Sets the winning team by checking if all the characters in a team are dead
+    /// Sets the winning team by checking if all the characters in a team are dead
     /// </summary>
     public void CheckForWinnerIfTeamIsDead()
     {
@@ -439,6 +452,10 @@ public partial class BattleSimulator
         }
     }
 
+    /// <summary>
+    /// Called when a player wants to forfeit a game
+    /// </summary>
+    /// <param name="interaction"></param>
     private async Task HandleForfeitAsync(DiscordInteraction interaction)
     {
         try
@@ -491,6 +508,11 @@ public partial class BattleSimulator
     {
         
     }
+    /// <summary>
+    /// Listens for info or forfeit inputs asynchorously for the duration of the battle
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="token"></param>
     private void CheckForForfeitOrInfoTillEndOfBattle(DiscordMessage message, CancellationToken token)
     {
         _ = message.WaitForSelectAsync(args =>
@@ -530,6 +552,11 @@ public partial class BattleSimulator
             interaction);
     }
 
+    /// <summary>
+    /// Adds a battle text
+    /// </summary>
+    /// <param name="battleTextInstance">The battle text instance added</param>
+    /// <exception cref="ArgumentNullException">If  input is null</exception>
     public void AddBattleText(BattleText battleTextInstance)
     {
         if (battleTextInstance is null) throw new ArgumentNullException(nameof(battleTextInstance));
@@ -552,7 +579,10 @@ public partial class BattleSimulator
 
 
 
-
+/// <summary>
+/// Sets necessary things on a team before battle starts
+/// </summary>
+/// <param name="team"></param>
     public void PrepareTeamForBattle(Team team)
     {
         team.CurrentBattle = this;

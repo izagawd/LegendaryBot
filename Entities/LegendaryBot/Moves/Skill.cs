@@ -3,6 +3,7 @@ using Entities.LegendaryBot.Entities.BattleEntities.Characters.CharacterPartials
 
 namespace Entities.LegendaryBot.Moves;
 
+
 public abstract class Skill : Special
 {
     public virtual bool IsPassive => false;

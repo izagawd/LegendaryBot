@@ -4,6 +4,9 @@ using
 
 namespace Entities.LegendaryBot.Moves;
 
+/// <summary>
+/// A move with cooldowns
+/// </summary>
 public abstract class Special : Move
 {
     public Special(Character user) : base(user)

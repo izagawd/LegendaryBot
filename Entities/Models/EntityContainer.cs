@@ -2,7 +2,10 @@ using Entities.LegendaryBot.Entities;
 using Entities.LegendaryBot.Entities.Items;
 
 namespace Entities.Models;
-
+/// <summary>
+/// An abstraction to combine all entities (items, character, blessings, etc)
+/// for easier coding
+/// </summary>
 public class InventoryEntityContainer : InventoryEntityContainer<IInventoryEntity>
 {
     public InventoryEntityContainer(IEnumerable<IInventoryEntity> entities) : base(entities)
