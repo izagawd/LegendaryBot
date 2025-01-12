@@ -15,10 +15,44 @@ namespace WebsiteApi;
 public static class Bot
 {
 
+
+    public static void StopProgram()
+    {
+        Process.GetCurrentProcess().Kill();
+    }
+
+    
+
+    [MemoryDiagnoser(false)]
+    public class ToBench
+    {
+        public static object kk;
+
+        struct kk2
+        {
+            public unsafe fixed byte kk[30];
+        }
+        class Bruh
+        {
+            private kk2 k;
+        }
+        [Benchmark]
+        public void ToBenchh()
+        {
+            kk = new Bruh();
+        }
+    }
+
+
+    public static void DbLog(string zaLog)
+    {
+    }
+
+
     private static async Task DoShitAsync()
     {
         
-        
+
     }
 
     private static async Task Main(string[] args)
