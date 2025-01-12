@@ -18,7 +18,7 @@ public static class Bot
     private static async Task DoShitAsync()
     {
         
-        
+        Console.WriteLine("yoo");
     }
 
     private static async Task Main(string[] args)
