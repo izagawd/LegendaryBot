@@ -9,9 +9,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02439" />
+        <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02448" />
         <PackageReference Include="SixLabors.ImageSharp" Version="3.1.6" />
-        <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.4"/>
+        <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.5" />
     </ItemGroup>
 
     <ItemGroup>

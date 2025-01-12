@@ -28,7 +28,7 @@
           }
         }
       },
-      "DSharpPlus/5.0.0-nightly-02439": {
+      "DSharpPlus/5.0.0-nightly-02448": {
         "type": "package",
         "dependencies": {
           "CommunityToolkit.HighPerformance": "8.3.2",
@@ -51,10 +51,10 @@
           }
         }
       },
-      "DSharpPlus.Commands/5.0.0-nightly-02439": {
+      "DSharpPlus.Commands/5.0.0-nightly-02448": {
         "type": "package",
         "dependencies": {
-          "DSharpPlus": "5.0.0-nightly-02439",
+          "DSharpPlus": "5.0.0-nightly-02448",
           "Microsoft.Extensions.Logging": "9.0.0",
           "Ulid": "1.3.4"
         },
@@ -69,11 +69,11 @@
           }
         }
       },
-      "DSharpPlus.Interactivity/5.0.0-nightly-02439": {
+      "DSharpPlus.Interactivity/5.0.0-nightly-02448": {
         "type": "package",
         "dependencies": {
           "ConcurrentHashSet": "1.3.0",
-          "DSharpPlus": "5.0.0-nightly-02439"
+          "DSharpPlus": "5.0.0-nightly-02448"
         },
         "compile": {
           "lib/net9.0/DSharpPlus.Interactivity.dll": {
@@ -391,7 +391,7 @@
           }
         }
       },
-      "SixLabors.Fonts/2.0.4": {
+      "SixLabors.Fonts/2.0.8": {
         "type": "package",
         "compile": {
           "lib/net6.0/SixLabors.Fonts.dll": {
@@ -420,11 +420,11 @@
           "build/_._": {}
         }
       },
-      "SixLabors.ImageSharp.Drawing/2.1.4": {
+      "SixLabors.ImageSharp.Drawing/2.1.5": {
         "type": "package",
         "dependencies": {
-          "SixLabors.Fonts": "2.0.4",
-          "SixLabors.ImageSharp": "3.1.5"
+          "SixLabors.Fonts": "2.0.8",
+          "SixLabors.ImageSharp": "3.1.6"
         },
         "compile": {
           "lib/net6.0/SixLabors.ImageSharp.Drawing.dll": {
@@ -516,10 +516,10 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "DSharpPlus": "5.0.0-nightly-02439",
+          "DSharpPlus": "5.0.0-nightly-02448",
           "PublicInfo": "1.0.0",
           "SixLabors.ImageSharp": "3.1.6",
-          "SixLabors.ImageSharp.Drawing": "2.1.4"
+          "SixLabors.ImageSharp.Drawing": "2.1.5"
         },
         "compile": {
           "bin/placeholder/BasicFunctions.dll": {}
@@ -533,9 +533,9 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "BasicFunctions": "1.0.0",
-          "DSharpPlus": "5.0.0-nightly-02439",
-          "DSharpPlus.Commands": "5.0.0-nightly-02439",
-          "DSharpPlus.Interactivity": "5.0.0-nightly-02439",
+          "DSharpPlus": "5.0.0-nightly-02448",
+          "DSharpPlus.Commands": "5.0.0-nightly-02448",
+          "DSharpPlus.Interactivity": "5.0.0-nightly-02448",
           "Microsoft.EntityFrameworkCore": "9.0.0",
           "PublicInfo": "1.0.0"
         },
@@ -605,48 +605,48 @@
         "lib/netstandard2.0/ConcurrentCollections.xml"
       ]
     },
-    "DSharpPlus/5.0.0-nightly-02439": {
-      "sha512": "IZ3utLQkwgNd0kOSEDZMSidSiGMt01puQ7HGQBqfeJf1V1IHt96DvEqQqwmT5f4I7O5biKSkMfUPu08GbovsuA==",
+    "DSharpPlus/5.0.0-nightly-02448": {
+      "sha512": "jaHqjgNUzl785JUAyMgrQAnqU89LAEDqXxgqe3ZRQVSEGbW+nwe1L7Ohs4/iPYIacCGpSIwX3+QAtTr42/QPTg==",
       "type": "package",
-      "path": "dsharpplus/5.0.0-nightly-02439",
+      "path": "dsharpplus/5.0.0-nightly-02448",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.5.0.0-nightly-02439.nupkg.sha512",
+        "dsharpplus.5.0.0-nightly-02448.nupkg.sha512",
         "dsharpplus.nuspec",
         "dsharpplus.png",
         "lib/net9.0/DSharpPlus.dll",
         "lib/net9.0/DSharpPlus.xml"
       ]
     },
-    "DSharpPlus.Commands/5.0.0-nightly-02439": {
-      "sha512": "ko5tkPCk+aTsqpZgqZ7k5rAbLoiC+WcxPnz2deAjdNEMvIPVTWXqRm+C7TVbL+YEb400mJgETdOqbkaKebIKhw==",
+    "DSharpPlus.Commands/5.0.0-nightly-02448": {
+      "sha512": "mKshhLAZ4f9qxmumZoOxt8rF7/f9sZXuIx7kL4eWK09CbxglKqqD3K/gc5KSk+wJ6rC88ukwsPf+K0E6YIUBKw==",
       "type": "package",
-      "path": "dsharpplus.commands/5.0.0-nightly-02439",
+      "path": "dsharpplus.commands/5.0.0-nightly-02448",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.commands.5.0.0-nightly-02439.nupkg.sha512",
+        "dsharpplus.commands.5.0.0-nightly-02448.nupkg.sha512",
         "dsharpplus.commands.nuspec",
         "dsharpplus.png",
         "lib/net9.0/DSharpPlus.Commands.dll",
         "lib/net9.0/DSharpPlus.Commands.xml"
       ]
     },
-    "DSharpPlus.Interactivity/5.0.0-nightly-02439": {
-      "sha512": "5dpp1LgQ3DDqBy7k1iK1uw4rn0KibCANStcxvTK4otMiyDjC9YikXzrXVT6k05fs/WZnr0UBgL0PwDLsH1n0Ow==",
+    "DSharpPlus.Interactivity/5.0.0-nightly-02448": {
+      "sha512": "GEm/E2vZ7JlnqE5dIMkFcxE/JpetuAjvxN7SHjsTSLnC6QnJkXZrBL9b6n0plxBKh1VWy65f17Z0BmBTihbtRg==",
       "type": "package",
-      "path": "dsharpplus.interactivity/5.0.0-nightly-02439",
+      "path": "dsharpplus.interactivity/5.0.0-nightly-02448",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "README.md",
-        "dsharpplus.interactivity.5.0.0-nightly-02439.nupkg.sha512",
+        "dsharpplus.interactivity.5.0.0-nightly-02448.nupkg.sha512",
         "dsharpplus.interactivity.nuspec",
         "dsharpplus.png",
         "lib/net9.0/DSharpPlus.Interactivity.dll",
@@ -1143,10 +1143,10 @@
         "polly.core.nuspec"
       ]
     },
-    "SixLabors.Fonts/2.0.4": {
-      "sha512": "4+NKz8W36injp98lmmM07ncp08HAK8c6FZz8vLoKxRPfJeEVWpBHlLYEbQa5rcqKKYqxUv/RVCrb8XcPhfMKUQ==",
+    "SixLabors.Fonts/2.0.8": {
+      "sha512": "psTLKJVKaD8PKm+Bz/mSSNo4m0VCTYoJ97TF/ynxEWkn4sFUipI0rzE2V/KBtfU0TOn/gF/+1XBOEvusGZZMhA==",
       "type": "package",
-      "path": "sixlabors.fonts/2.0.4",
+      "path": "sixlabors.fonts/2.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1154,7 +1154,7 @@
         "lib/net6.0/SixLabors.Fonts.dll",
         "lib/net6.0/SixLabors.Fonts.xml",
         "sixlabors.fonts.128.png",
-        "sixlabors.fonts.2.0.4.nupkg.sha512",
+        "sixlabors.fonts.2.0.8.nupkg.sha512",
         "sixlabors.fonts.nuspec"
       ]
     },
@@ -1174,10 +1174,10 @@
         "sixlabors.imagesharp.nuspec"
       ]
     },
-    "SixLabors.ImageSharp.Drawing/2.1.4": {
-      "sha512": "p4VwtAABggDUhUS5zXldCZHVGfjJl76+SrBHY4biNQ8+890igFK6RL87qIv9GqvEjMcYOar1sPkf2iMQ6uq9/g==",
+    "SixLabors.ImageSharp.Drawing/2.1.5": {
+      "sha512": "cER1JfvshYDmTxw+gUy/x5e1xoNWhrD6s3AFf8rRUx9hWSXYdOFreQfUrM/QooMj0rF7+hkVtvGnV3EdMx4dxA==",
       "type": "package",
-      "path": "sixlabors.imagesharp.drawing/2.1.4",
+      "path": "sixlabors.imagesharp.drawing/2.1.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1185,7 +1185,7 @@
         "lib/net6.0/SixLabors.ImageSharp.Drawing.dll",
         "lib/net6.0/SixLabors.ImageSharp.Drawing.xml",
         "sixlabors.imagesharp.drawing.128.png",
-        "sixlabors.imagesharp.drawing.2.1.4.nupkg.sha512",
+        "sixlabors.imagesharp.drawing.2.1.5.nupkg.sha512",
         "sixlabors.imagesharp.drawing.nuspec"
       ]
     },
